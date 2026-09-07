@@ -4757,23 +4757,23 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   <aside class="sidebar">
     <div class="logo">
       <div class="name">资金智算 <span>CashFlow AI</span></div>
-      <div class="sub">供应链资金预测与预警 · 原型演示</div>
+      <div class="sub">供应链资金预测与预警工作台</div>
     </div>
     <nav class="nav">
-      <div class="nav-item active" data-page="forecast"><span class="icon">📊</span>资金预测总览</div>
-      <div class="nav-item" data-page="warning"><span class="icon">🚨</span>三级预警中心<span class="badge">15</span></div>
-      <div class="nav-item" data-page="receivable"><span class="icon">💰</span>回款计划表</div>
-      <div class="nav-item" data-page="pooling"><span class="icon">🏦</span>资金归集看板</div>
-      <div class="nav-item" data-page="model"><span class="icon">🧠</span>AI 预测配置</div>
-      <div class="nav-item" data-page="chat"><span class="icon">💬</span>Agent 对话</div>
+      <div class="nav-item active" data-page="forecast"><span class="nav-ic">◆</span>资金预测总览</div>
+      <div class="nav-item" data-page="warning"><span class="nav-ic">◆</span>三级预警中心<span class="badge">15</span></div>
+      <div class="nav-item" data-page="receivable"><span class="nav-ic">◆</span>回款计划表</div>
+      <div class="nav-item" data-page="pooling"><span class="nav-ic">◆</span>资金归集看板</div>
+      <div class="nav-item" data-page="model"><span class="nav-ic">◆</span>AI 预测配置</div>
+      <div class="nav-item" data-page="chat"><span class="nav-ic">◆</span>Agent 对话</div>
     </nav>
-    <div class="sidebar-footer">V1.0 · 产品原型<br>演示数据为模拟数据</div>
+    <div class="sidebar-footer">V2.0 · 产品原型<br>演示数据 · 集团合并口径</div>
   </aside>
 
   <!-- ===== 主区域 ===== -->
   <div class="main">
     <div class="topbar">
-      <a class="back-btn" href="javascript:void(0)" onclick="window.parent.showHome();return false;">&#8592; 返回作品集</a>
+      <a class="back-btn" href="javascript:void(0)" onclick="window.parent.showHome();return false;">← 返回作品集</a>
       <div class="page-title" id="proto2Title">资金预测总览</div>
       <div class="filters">
         <select class="select"><option>集团合并口径</option><option>整车制造公司</option><option>销售公司</option></select>
@@ -4788,37 +4788,37 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
       <div class="page active" id="page-forecast">
         <div class="kpi-grid">
           <div class="kpi">
-            <div class="label">未来 3 个月资金缺口</div>
-            <div class="value">-4,520<small> 万元</small></div>
-            <div class="trend down">▼ 11 月委贷还款高峰集中到期</div>
+            <div class="label">未来 3 个月综合资金缺口</div>
+            <div class="value neg">-4,520<small> 万元</small></div>
+            <div class="trend down">含 11 月委贷还款 ¥1.86 亿</div>
           </div>
           <div class="kpi">
-            <div class="label">集团现金余额</div>
+            <div class="label">可动用现金余额</div>
             <div class="value">8,600<small> 万元</small></div>
-            <div class="trend up">▲ 较上月 +6.2%</div>
+            <div class="trend up">较上月 +6.2%</div>
           </div>
           <div class="kpi accent">
             <div class="label">安全垫覆盖率</div>
-            <div class="value">1.7<small> 倍</small></div>
-            <div class="trend">安全垫 = 月均支出 20% · 需 ≥1.0</div>
+            <div class="value">1.8<small> 倍</small></div>
+            <div class="trend">安全垫 = 月均支出 20% · 阈值 ≥1.0</div>
           </div>
           <div class="kpi">
-            <div class="label">AI 回款偏差率</div>
-            <div class="value">6.8<small>%</small></div>
-            <div class="trend up">▲ 预测准确率 88.5%</div>
+            <div class="label">AI 回款预测准确率</div>
+            <div class="value">88.5<small>%</small></div>
+            <div class="trend up">较传统方法 +17.3%</div>
           </div>
         </div>
 
         <div class="callout proto2-alert">
-          <span class="alert-ic">🚨</span>
+          <span class="alert-ic">!</span>
           <div>
             <strong>红色预警：11 月委贷还款高峰</strong>
-            <div class="alert-desc">未来 12 个月预测现金最低点出现在 11 月（¥1.86 亿委贷到期 + 回款淡季），低于安全垫 1.2 倍阈值。<span class="alert-act">建议行动：提前 60 天启动续贷安排 · 压缩非核心支出 ¥800 万/月</span></div>
+            <div class="alert-desc">未来 12 个月预测现金最低点出现在 11 月（¥1.86 亿委贷集中到期 + 回款淡季），低于安全垫 1.2 倍阈值。<span class="alert-act">建议行动：提前 60 天启动续贷安排 · 压缩非核心支出 ¥800 万/月</span></div>
           </div>
         </div>
 
         <div class="card">
-          <div class="card-title">未来 12 个月资金流预测<span class="more">口径：集团合并 · 已含季节性因子</span></div>
+          <div class="card-title">未来 12 个月资金流预测<span class="more">口径：集团合并 · 含季节性因子 · 单位：万元</span></div>
           <div id="chartP1" class="proto2-chart" style="height:300px"></div>
           <div class="legend">
             <span><span class="dot" style="background:#6d7cff"></span>资金流入</span>
@@ -4830,7 +4830,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
         <div class="row-2">
           <div class="card">
-            <div class="card-title">资金归集进度<span class="more">本月</span></div>
+            <div class="card-title">资金归集进度<span class="more">本月 · 单位：万元</span></div>
             <div class="progress-wrap">
               <div class="progress-head"><span>整车制造公司 盈余上划</span><span class="pct">¥1,860万</span></div>
               <div class="bar"><div style="width:100%"></div></div>
@@ -4849,7 +4849,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
             </div>
           </div>
           <div class="card">
-            <div class="card-title">委贷还款日历<span class="more">未来 4 月</span></div>
+            <div class="card-title">委贷还款日历<span class="more">未来 4 个月</span></div>
             <table>
               <tr><th>到期日</th><th>委贷通道</th><th>金额</th><th>状态</th></tr>
               <tr><td>2026-09-15</td><td>建设银行 · 美元户</td><td class="amount">¥2,800万</td><td><span class="tag low">已排期</span></td></tr>
@@ -4857,7 +4857,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
               <tr><td>2026-11-20</td><td>工商银行 · 基本户</td><td class="amount neg">¥1.86亿</td><td><span class="tag high">红色预警</span></td></tr>
               <tr><td>2026-12-05</td><td>中信银行 · 银团</td><td class="amount">¥4,200万</td><td><span class="tag done">续贷谈判中</span></td></tr>
             </table>
-            <div class="proto2-tip">AI 提示：11 月还款高峰建议拆分为「提前续贷 ¥1.2亿 + 盈余补足 ¥4,600万 + 外部融资 ¥2,000万」。</div>
+            <div class="proto2-tip">AI 提示：11 月还款高峰建议拆分为「提前续贷 ¥1.2亿 + 盈余补足 ¥4,600万 + 外部融资 ¥2,000万」，平滑流动性压力。</div>
           </div>
         </div>
       </div>
@@ -4868,7 +4868,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
           <div class="kpi"><div class="label">红色预警（需紧急决策）</div><div class="value" style="color:#f87171">2<small> 项</small></div><div class="trend">安全现金垫 · 委贷逾期风险</div></div>
           <div class="kpi"><div class="label">橙色预警（需专项跟进）</div><div class="value" style="color:#fb923c">5<small> 项</small></div><div class="trend">账期错配率 · 回款偏差</div></div>
           <div class="kpi"><div class="label">黄色预警（需持续监测）</div><div class="value" style="color:#fbbf24">8<small> 项</small></div><div class="trend">付款履约 · 汇率波动</div></div>
-          <div class="kpi accent"><div class="label">本月已处置</div><div class="value">11<small> 项</small></div><div class="trend">AI 生成处置建议采纳率 82%</div></div>
+          <div class="kpi accent"><div class="label">本月已处置</div><div class="value">11<small> 项</small></div><div class="trend">AI 建议采纳率 82%</div></div>
         </div>
 
         <div class="card">
@@ -4886,7 +4886,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
         </div>
 
         <div class="card">
-          <div class="card-title">预警规则与自动触发机制<span class="more">规则引擎</span></div>
+          <div class="card-title">预警规则与自动触发机制<span class="more">规则引擎 · 4 条核心规则</span></div>
           <table>
             <tr><th>规则</th><th>计算逻辑</th><th>数据来源</th><th>自动动作</th></tr>
             <tr><td>安全垫规则</td><td>未来 3 月预测现金最低值 vs 月均支出 20%</td><td>资金预测模型（滚动预测）</td><td>生成资金委员会决策议程</td></tr>
@@ -4900,19 +4900,19 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
       <!-- ===== 页面3：回款计划表 ===== -->
       <div class="page" id="page-receivable">
         <div class="kpi-grid">
-          <div class="kpi"><div class="label">未来 6 个月预计回款</div><div class="value">5,960<small> 万元</small></div><div class="trend up">▲ AI 加权回款率 84.5%</div></div>
+          <div class="kpi"><div class="label">未来 6 个月预计回款</div><div class="value">5,960<small> 万元</small></div><div class="trend up">AI 加权回款率 86.3%</div></div>
           <div class="kpi"><div class="label">逾期风险客户</div><div class="value" style="color:#f87171">1<small> 家</small></div><div class="trend">客户 C · 回款率降至 61%</div></div>
-          <div class="kpi"><div class="label">预测准确率</div><div class="value">88.5<small>%</small></div><div class="trend up">▲ 较传统方法 +17.3%</div></div>
+          <div class="kpi"><div class="label">预测准确率</div><div class="value">88.5<small>%</small></div><div class="trend up">较传统方法 +17.3%</div></div>
           <div class="kpi accent"><div class="label">催收建议采纳率</div><div class="value">82<small>%</small></div><div class="trend">AI 建议 → 人工确认闭环</div></div>
         </div>
 
         <div class="card">
-          <div class="card-title">客户回款预测<span class="more">按月滚动 · AI 回款率模型</span></div>
+          <div class="card-title">客户回款预测 vs 实际<span class="more">按月滚动 · AI 回款率模型 · 单位：万元</span></div>
           <div id="chartP2" class="proto2-chart" style="height:260px"></div>
         </div>
 
         <div class="card">
-          <div class="card-title">回款计划明细<span class="more">点击行查看详情</span></div>
+          <div class="card-title">回款计划明细<span class="more">点击行查看详情 · 加权回款率 86.3%</span></div>
           <table>
             <tr><th>客户</th><th>应收金额</th><th>账期</th><th>预计回款月</th><th>AI 回款率</th><th>风险标记</th><th>AI 建议</th></tr>
             <tr><td>客户 A · 主机厂</td><td class="amount">¥2,400万</td><td>75 天</td><td>2026-12</td><td><span class="tag auto">92%</span></td><td><span class="tag low">正常</span></td><td>正常回款节奏</td></tr>
@@ -4920,26 +4920,26 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
             <tr><td>客户 C · 海外市场</td><td class="amount">¥980万</td><td>90 天</td><td>2027-01</td><td><span class="tag high">61%</span></td><td><span class="tag high">逾期风险</span></td><td>专项催收 + 担保处置预案</td></tr>
             <tr><td>客户 D · 出行平台</td><td class="amount">¥720万</td><td>45 天</td><td>2026-10</td><td><span class="tag auto">97%</span></td><td><span class="tag low">正常</span></td><td>正常回款节奏</td></tr>
           </table>
-          <div class="proto2-tip">AI 逻辑：客户 C 近 6 个月 3 次逾期 15 天+，回款概率模型自动下调至 61%，并建议纳入催收重点清单。</div>
+          <div class="proto2-tip">AI 逻辑：客户 C 近 6 个月 3 次逾期 15 天+，回款概率模型自动下调至 61%，并建议纳入催收重点清单。加权回款率 = Σ(应收金额 × 回款率) / Σ应收金额 = 86.3%。</div>
         </div>
       </div>
 
       <!-- ===== 页面4：资金归集看板 ===== -->
       <div class="page" id="page-pooling">
         <div class="kpi-grid">
-          <div class="kpi"><div class="label">资金池余额</div><div class="value">2.8<small> 亿元</small></div><div class="trend up">▲ 本月归集净增 ¥700万</div></div>
+          <div class="kpi"><div class="label">资金池余额</div><div class="value">2.8<small> 亿元</small></div><div class="trend up">本月归集净增 ¥700万</div></div>
           <div class="kpi"><div class="label">本月盈余上划</div><div class="value">4,300<small> 万元</small></div><div class="trend">3 家成员单位 · 归集率 96%</div></div>
-          <div class="kpi"><div class="label">委贷投放</div><div class="value">3,600<small> 万元</small></div><div class="trend">2 笔 · 加权利率 4.2%</div></div>
+          <div class="kpi"><div class="label">委贷投放余额</div><div class="value">3,600<small> 万元</small></div><div class="trend">2 笔 · 加权利率 4.2%</div></div>
           <div class="kpi accent"><div class="label">闲置资金</div><div class="value">1,200<small> 万元</small></div><div class="trend">AI 建议转入委贷池提升收益</div></div>
         </div>
 
         <div class="card">
-          <div class="card-title">成员单位归集 / 委贷投放对比<span class="more">2026 年 8 月</span></div>
+          <div class="card-title">成员单位归集 / 委贷投放对比<span class="more">2026 年 8 月 · 单位：万元</span></div>
           <div id="chartP3" class="proto2-chart" style="height:280px"></div>
         </div>
 
         <div class="card">
-          <div class="card-title">委贷通道状态<span class="more">4 条通道</span></div>
+          <div class="card-title">委贷通道状态<span class="more">4 条通道 · 余额合计 ¥3.24亿</span></div>
           <table>
             <tr><th>通道</th><th>余额</th><th>年利率</th><th>到期日</th><th>状态</th></tr>
             <tr><td>工商银行 · 基本户</td><td class="amount">¥1.86亿</td><td>3.85%</td><td>2026-11-20</td><td><span class="tag high">集中到期</span></td></tr>
@@ -4955,26 +4955,23 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
         <div class="kpi-grid">
           <div class="kpi"><div class="label">预测窗口</div><div class="value">12<small> 个月</small></div><div class="trend">滚动预测 · 每周校准</div></div>
           <div class="kpi"><div class="label">回款概率阈值</div><div class="value">60<small>%</small></div><div class="trend">低于阈值自动标记风险</div></div>
-          <div class="kpi"><div class="label">安全垫倍数</div><div class="value">20<small>%</small></div><div class="trend">月均支出基准</div></div>
+          <div class="kpi"><div class="label">安全垫比例</div><div class="value">20<small>%</small></div><div class="trend">月均支出基准</div></div>
           <div class="kpi accent"><div class="label">模型版本</div><div class="value">v3.2<small></small></div><div class="trend">基于 24 个月历史数据训练</div></div>
         </div>
 
         <div class="row-2">
           <div class="card">
-            <div class="card-title">预测准确率趋势<span class="more">逐月校准</span></div>
+            <div class="card-title">预测准确率趋势<span class="more">逐月校准 · 单位：%</span></div>
             <div id="chartP4" class="proto2-chart" style="height:240px"></div>
           </div>
           <div class="card">
-            <div class="card-title">特征重要性<span class="more">回款概率模型</span></div>
+            <div class="card-title">特征重要性<span class="more">回款概率模型 · Top 5</span></div>
             <div id="chartP5" class="proto2-chart" style="height:240px"></div>
-            <div class="legend">
-              <span><span class="dot" style="background:#6d7cff"></span>回款概率模型</span>
-            </div>
           </div>
         </div>
 
         <div class="card">
-          <div class="card-title">预测 vs 实际 · 最近 6 个月<span class="more">偏差校准 ±10% 自动触发重训</span></div>
+          <div class="card-title">预测 vs 实际 · 最近 6 个月<span class="more">偏差校准 ±10% 自动触发重训 · 单位：万元</span></div>
           <div id="chartP6" class="proto2-chart" style="height:240px"></div>
           <div class="legend">
             <span><span class="dot" style="background:#6d7cff"></span>AI 预测</span>
@@ -4987,25 +4984,30 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
       <!-- ===== 页面6：Agent 对话 ===== -->
       <div class="page" id="page-chat">
         <div class="card">
-          <div class="card-title">资金 AI 顾问<span class="more">演示模式 · 模拟 Agent 响应</span></div>
+          <div class="card-title">资金 AI 顾问<span class="more">演示模式 · 可接入真实大模型</span></div>
           <div class="chat-box" id="proto2Chat">
-            <div class="msg user"><div class="who">👤</div><div class="bubble">11 月的资金缺口预测是多少？我们什么时候需要启动续贷？</div></div>
-            <div class="msg agent"><div class="who">🤖</div><div class="bubble">已为您生成未来 12 个月资金流预测。11 月为资金低谷：预测现金最低值 = 月均支出 14%，触发红色预警。<br><br>建议：11 月 20 日工商银行 ¥1.86 亿委贷集中到期，建议 <strong>提前 60 天启动续贷谈判</strong>，分拆为「提前续贷 ¥1.2 亿 + 盈余补足 ¥4,600 万 + 外部融资 ¥2,000 万」可平滑度过。
+            <div class="msg user"><div class="who">我</div><div class="bubble">11 月的资金缺口预测是多少？我们什么时候需要启动续贷？</div></div>
+            <div class="msg agent"><div class="who">AI</div><div class="bubble">已为您生成未来 12 个月资金流预测。11 月为资金低谷：预测现金最低值 = 月均支出 14%，触发红色预警。<br><br>建议：11 月 20 日工商银行 ¥1.86 亿委贷集中到期，建议 <strong>提前 60 天启动续贷谈判</strong>，分拆为「提前续贷 ¥1.2 亿 + 盈余补足 ¥4,600 万 + 外部融资 ¥2,000 万」可平滑度过。
               <div class="tool-call">Agent 已执行：查询资金预测模型 → 定位委贷到期日历 → 生成缺口预案（演示）✓</div>
             </div></div>
-            <div class="msg user"><div class="who">👤</div><div class="bubble">客户 C 的回款风险如何？要提前做什么？</div></div>
-            <div class="msg agent"><div class="who">🤖</div><div class="bubble">客户 C（海外市场）AI 回款率已下调至 61%（近 6 个月 3 次逾期 15 天+）。建议：① 升级为专项催收 ② 启动担保处置预案 ③ 将账期政策从 90 天调整为 60 天（对新订单生效）。
+            <div class="msg user"><div class="who">我</div><div class="bubble">客户 C 的回款风险如何？要提前做什么？</div></div>
+            <div class="msg agent"><div class="who">AI</div><div class="bubble">客户 C（海外市场）AI 回款率已下调至 61%（近 6 个月 3 次逾期 15 天+）。建议：① 升级为专项催收 ② 启动担保处置预案 ③ 将账期政策从 90 天调整为 60 天（对新订单生效）。
               <div class="tool-call">Agent 已执行：读取回款预测表 → 调用信用评级接口 → 生成风险处置建议（演示）✓</div>
             </div></div>
           </div>
+          <div class="chat-quick">
+            <button class="quick-btn" onclick="proto2QuickAsk('下季度资金是否安全？')">下季度资金是否安全？</button>
+            <button class="quick-btn" onclick="proto2QuickAsk('有哪些预警需要处理？')">有哪些预警需要处理？</button>
+            <button class="quick-btn" onclick="proto2QuickAsk('闲置资金如何配置？')">闲置资金如何配置？</button>
+          </div>
           <div class="chat-input">
-            <input id="proto2Input" placeholder="问问资金顾问，例如：下季度资金是否安全？" />
+            <input id="proto2Input" placeholder="问问资金顾问，例如：11月缺口怎么解决？" />
             <button id="proto2Send">发送</button>
           </div>
         </div>
 
         <div class="card">
-          <div class="card-title">Agent 能力边界<span class="more">产品设计说明</span></div>
+          <div class="card-title">Agent 能力边界<span class="more">产品设计说明 · 人机协作原则</span></div>
           <table>
             <tr><th>能力</th><th>说明</th><th>人机协作</th></tr>
             <tr><td>资金流预测</td><td>四表一警模型 · 滚动预测 12 个月</td><td>AI 预测 · 人校准参数</td></tr>
@@ -5023,13 +5025,19 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 <style>
 /* ===== 供应链原型专属覆盖 ===== */
 .proto2 .proto2-chart{width:100%}
+.proto2 .nav-ic{display:inline-block;width:14px;text-align:center;color:rgba(255,255,255,0.4);font-size:10px;margin-right:8px}
+.proto2 .nav-item.active .nav-ic{color:#6d7cff}
 .proto2-alert{
   display:flex;gap:14px;align-items:flex-start;
   background:linear-gradient(90deg,rgba(248,113,113,0.12),rgba(248,113,113,0.03));
   border:1px solid rgba(248,113,113,0.3);border-left:4px solid #f87171;
   border-radius:12px;padding:16px 20px;margin-bottom:16px;
 }
-.proto2-alert .alert-ic{font-size:20px}
+.proto2-alert .alert-ic{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:28px;height:28px;border-radius:50%;background:#f87171;color:#fff;
+  font-size:16px;font-weight:700;flex-shrink:0;
+}
 .proto2-alert strong{color:#f87171;font-size:14px}
 .proto2-alert .alert-desc{font-size:13px;color:var(--muted);line-height:1.7;margin-top:6px}
 .proto2-alert .alert-act{color:var(--hk-primary-300);font-family:var(--mono);font-size:12px}
@@ -5039,6 +5047,20 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   font-size:12px;color:var(--muted);line-height:1.7;
 }
 .proto2-tip strong{color:var(--hk-primary-300)}
+.proto2 .value.neg{color:#f87171}
+.proto2 .chat-quick{display:flex;gap:8px;flex-wrap:wrap;padding:10px 16px;border-top:1px solid rgba(255,255,255,0.06)}
+.proto2 .quick-btn{
+  background:rgba(109,124,255,0.1);border:1px solid rgba(109,124,255,0.25);
+  color:#a5b0ff;font-size:11.5px;padding:6px 14px;border-radius:16px;
+  cursor:pointer;transition:all .2s;font-family:inherit;
+}
+.proto2 .quick-btn:hover{background:rgba(109,124,255,0.2);border-color:rgba(109,124,255,0.5)}
+.proto2 .msg .who{
+  width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:600;flex-shrink:0;
+}
+.proto2 .msg.user .who{background:rgba(109,124,255,0.2);color:#a5b0ff}
+.proto2 .msg.agent .who{background:rgba(52,211,153,0.2);color:#34d399}
 </style>
 
 <script>
@@ -5054,7 +5076,6 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     if (pg) pg.classList.add('active');
     var t = document.getElementById('proto2Title');
     if (t) t.textContent = titles[name] || name;
-    // 修复：隐藏容器中初始化的图表在切换后尺寸异常（canvas 宽度仅 100px）
     setTimeout(function(){
       var cur = document.getElementById('page-'+name);
       if (!cur) return;
@@ -5070,12 +5091,17 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
           try { inst.resize(); } catch(e) {}
         }
       }
-    }, 60);
+    }, 80);
   }
   window.openPage = openPage;
   document.querySelectorAll('.nav-item').forEach(function(item){
     if (item) item.addEventListener('click', function(){ openPage(item.dataset.page); });
   });
+  // 快捷提问
+  window.proto2QuickAsk = function(q) {
+    var input = document.getElementById('proto2Input');
+    if (input) { input.value = q; document.getElementById('proto2Send').click(); }
+  };
   // Agent 对话
   function bindChat(){
     var input = document.getElementById('proto2Input');
@@ -5090,13 +5116,13 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     function send(){
       var text = input.value.trim();
       if (!text) return;
-      box.insertAdjacentHTML('beforeend', '<div class="msg user"><div class="who">👤</div><div class="bubble">'+escapeHtml(text)+'</div></div>');
+      box.insertAdjacentHTML('beforeend', '<div class="msg user"><div class="who">我</div><div class="bubble">'+escapeHtml(text)+'</div></div>');
       input.value = '';
       var thinkId = 'th-' + Date.now();
-      box.insertAdjacentHTML('beforeend', '<div class="msg agent"><div class="who">🤖</div><div class="bubble" id="'+thinkId+'">正在分析…</div></div>');
+      box.insertAdjacentHTML('beforeend', '<div class="msg agent"><div class="who">AI</div><div class="bubble" id="'+thinkId+'">正在分析…</div></div>');
       box.scrollTop = box.scrollHeight;
       var thinkEl = document.getElementById(thinkId);
-      var persona = '你是"资金智算 CashFlow AI"资金预测与预警 Agent，服务企业资金运营专员。回答专业、简洁、结构化，中文回复。功能：资金预测、三级预警、回款计划、资金归集、风险分析。核心原则：AI 负责做、人负责定——资金操作指令只给建议不执行，预警必须人工确认。控制在 200 字以内，可用换行分点。\n\n【当前时间：2026 年 8 月，问"本月"指 7 月（最近结账月），问"下月"指 8 月。演示数据·2026Q3，用户问数据直接引用，不要索要】月度资金流预测(万元，9月为首个预测月，未来12个月)：资金流入[9月5200,10月5600,11月3800,12月4700,1月4300,2月4500,3月4900,4月5200,5月5000,6月5300,7月5100,8月5400]，资金流出[9月4600,10月5100,11月6200,12月4800,1月4200,2月4400,3月4700,4月5000,5月4800,6月5100,7月4900,8月5200]，净现金流[9月600,10月500,11月-2400,12月-100,其余月100-200]，安全垫线900。资金缺口-4,520万（11月委贷还款高峰）；现金余额8,600万(+6.2%)；安全垫覆盖率1.7倍(阈值≥1.0)；红色预警：11月委贷¥1.86亿到期+回款淡季，现金最低点低于安全垫1.2倍，建议提前60天续贷+压缩支出¥800万/月；三级预警共15项(红2/橙5/黄8)，本月已处置11项，AI建议采纳率82%；回款：未来6月预计5,960万(加权回款率84.5%)，预测准确率88.5%(较传统+17.3%)，逾期风险客户1家(客户C回款率61%)；11月还款建议：提前续贷¥1.2亿+盈余补足¥4,600万+外部融资¥2,000万；闲置资金1,200万建议转入委贷池；归集看板：整车制造上划1,860万/销售公司1,240万/研发中心720万，委贷通道投放2,200万+1,400万。范围外数据可说"该明细需在完整版查看"，不编造。';
+      var persona = '你是"资金智算 CashFlow AI"资金预测与预警 Agent，服务企业资金运营专员。回答专业、简洁、结构化，中文回复。功能：资金预测、三级预警、回款计划、资金归集、风险分析。核心原则：AI 负责做、人负责定——资金操作指令只给建议不执行，预警必须人工确认。控制在 200 字以内，可用换行分点。\n\n【当前时间：2026 年 8 月，问"本月"指 8 月，问"下月"指 9 月。演示数据·2026Q3，用户问数据直接引用，不要索要】月度资金流预测(万元，9月为首个预测月，未来12个月)：资金流入[9月5200,10月5600,11月3800,12月4700,1月4300,2月4500,3月4900,4月5200,5月5000,6月5300,7月5100,8月5400]，资金流出[9月4600,10月5100,11月6200,12月4800,1月4200,2月4400,3月4700,4月5000,5月4800,6月5100,7月4900,8月5200]，净现金流[9月600,10月500,11月-2400,12月-100,其余月100-200]，安全垫线980(月均支出4900×20%)。综合资金缺口-4,520万(含11月委贷还款1.86亿)；可动用现金余额8,600万(+6.2%)；安全垫覆盖率1.8倍(阈值≥1.0)；红色预警：11月委贷1.86亿到期+回款淡季，现金最低点低于安全垫1.2倍，建议提前60天续贷+压缩支出800万/月；三级预警共15项(红2/橙5/黄8)，本月已处置11项，AI建议采纳率82%；回款：未来6月预计5,960万(加权回款率86.3%)，预测准确率88.5%(较传统+17.3%)，逾期风险客户1家(客户C回款率61%)；11月还款建议：提前续贷1.2亿+盈余补足4,600万+外部融资2,000万；闲置资金1,200万建议转入委贷池；归集看板：整车制造上划1,860万/销售公司1,240万/研发中心720万，委贷通道投放2,200万+1,400万；资金池余额2.8亿(含委贷投放3,600万)。范围外数据可说"该明细需在完整版查看"，不编造。';
       var fallback = '已收到您的指令。当前为离线演示模式，已模拟完成资金预测查询与风险分析。配置 API Key 后可接入真实大模型。您可以切换到其他页面查看：三级预警中心 / 回款计划表 / 资金归集看板。<div class="tool-call">Agent 已执行：资金预测模型 → 预警规则匹配 → 结果交付（演示）✓</div>';
       window.SmartReconAI.ask(text, persona, fallback, function(reply, isAI){
         if (thinkEl) {
@@ -5141,7 +5167,7 @@ var chartP1 = safeInit('chartP1', {
     { name:'资金流入', type:'bar', data:[5200,5600,3800,4700,4300,4500,4900,5200,5000,5300,5100,5400], itemStyle:{color:'#6d7cff'}, barWidth:16 },
     { name:'资金流出', type:'bar', data:[4600,5100,6200,4800,4200,4400,4700,5000,4800,5100,4900,5200], itemStyle:{color:'#3e8bff'}, barWidth:16 },
     { name:'净现金流', type:'line', data:[600,500,-2400,-100,100,100,200,200,200,200,200,200], itemStyle:{color:'#fbbf24'}, lineStyle:{width:3}, symbol:'circle', symbolSize:6 },
-    { name:'安全垫线', type:'line', data:[900,900,900,900,900,900,900,900,900,900,900,900], itemStyle:{color:'#f87171'}, lineStyle:{type:'dashed',width:2}, symbol:'none' }
+    { name:'安全垫线', type:'line', data:[980,980,980,980,980,980,980,980,980,980,980,980], itemStyle:{color:'#f87171'}, lineStyle:{type:'dashed',width:2}, symbol:'none' }
   ]
 });
 
@@ -5206,6 +5232,7 @@ window.addEventListener('resize', function(){
 
 </section>
 </script>
+
 
 
 <script type="text/html" id="page-07">
