@@ -1564,10 +1564,32 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
 
 <!-- 迭代历程 -->
 <div class="sec reveal" id="iteration">
-  <div class="sec-head"><span class="idx">00.5</span><h2>迭代历程</h2><span class="en">ITERATION · 从原型到产品</span></div>
-  <p style="font-size:13.5px;color:#9ba3b7;line-height:1.9;margin-bottom:28px;">作品集不是一次性产出，而是持续打磨的产品。6个版本、5个月迭代，从静态原型到可交互系统——每一步都有明确的改进方向。</p>
+  <div class="sec-head"><span class="idx">00.5</span><h2>迭代历程</h2><span class="en">ITERATION · 持续打磨</span></div>
+  
+  <!-- 统计栏 -->
+  <div class="iter-stats">
+    <div class="iter-stat">
+      <div class="iter-stat-v">6</div>
+      <div class="iter-stat-l">主版本</div>
+    </div>
+    <div class="iter-stat">
+      <div class="iter-stat-v">∞</div>
+      <div class="iter-stat-l">持续迭代</div>
+    </div>
+    <div class="iter-stat">
+      <div class="iter-stat-v">2</div>
+      <div class="iter-stat-l">在线Demo</div>
+    </div>
+    <div class="iter-stat">
+      <div class="iter-stat-v">4</div>
+      <div class="iter-stat-l">AI协作角色</div>
+    </div>
+  </div>
+
+  <p style="font-size:13.5px;color:#9ba3b7;line-height:1.9;margin:24px 0 28px;text-align:center;">作品集不是一次性产出，而是持续打磨的产品。多个版本迭代，从静态原型到可交互系统——每一步都有明确的改进方向，未来仍在继续。</p>
+  
   <div class="timeline">
-    <div class="tl-item">
+    <div class="tl-item tl-v1">
       <div class="tl-dot"></div>
       <div class="tl-content">
         <div class="tl-head"><span class="tl-ver">v1.0</span><span class="tl-date">2026.04</span></div>
@@ -1575,7 +1597,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
         <div class="tl-desc">5个财务作品 + 静态原型，完成从0到1的搭建</div>
       </div>
     </div>
-    <div class="tl-item">
+    <div class="tl-item tl-v2">
       <div class="tl-dot"></div>
       <div class="tl-content">
         <div class="tl-head"><span class="tl-ver">v2.x</span><span class="tl-date">2026.05</span></div>
@@ -1584,7 +1606,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
         <div class="tl-tags"><span>体积 -21%</span><span>AI助手上线</span></div>
       </div>
     </div>
-    <div class="tl-item">
+    <div class="tl-item tl-v3">
       <div class="tl-dot"></div>
       <div class="tl-content">
         <div class="tl-head"><span class="tl-ver">v3.x</span><span class="tl-date">2026.06</span></div>
@@ -1593,7 +1615,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
         <div class="tl-tags"><span>3个核心作品</span><span>真实业务场景</span></div>
       </div>
     </div>
-    <div class="tl-item">
+    <div class="tl-item tl-v4">
       <div class="tl-dot"></div>
       <div class="tl-content">
         <div class="tl-head"><span class="tl-ver">v4.x</span><span class="tl-date">2026.07</span></div>
@@ -1602,7 +1624,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
         <div class="tl-tags"><span>移动端适配</span><span>知识库同步</span></div>
       </div>
     </div>
-    <div class="tl-item">
+    <div class="tl-item tl-v5">
       <div class="tl-dot"></div>
       <div class="tl-content">
         <div class="tl-head"><span class="tl-ver">v5.0</span><span class="tl-date">2026.08</span></div>
@@ -1614,40 +1636,73 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     <div class="tl-item tl-latest">
       <div class="tl-dot"></div>
       <div class="tl-content">
-        <div class="tl-head"><span class="tl-ver">v5.2</span><span class="tl-date">2026.09</span><span class="tl-badge">当前版本</span></div>
+        <div class="tl-head"><span class="tl-ver">v5.2</span><span class="tl-date">2026.09</span><span class="tl-badge">当前版本</span><span class="tl-pulse"></span></div>
         <div class="tl-title">可交互Demo</div>
         <div class="tl-desc">新增LPR蒙特卡洛预测模拟器、现金流压力测试模拟器；部署GitHub Pages，扫码即玩</div>
         <div class="tl-tags"><span>2个在线模拟器</span><span>GitHub Pages</span><span>扫码即玩</span></div>
+      </div>
+    </div>
+    <!-- 未来迭代占位 -->
+    <div class="tl-item tl-future">
+      <div class="tl-dot"></div>
+      <div class="tl-content tl-future-content">
+        <div class="tl-head"><span class="tl-ver">v6.0</span><span class="tl-date">未来</span><span class="tl-badge tl-badge-future">规划中</span></div>
+        <div class="tl-title">更多可能</div>
+        <div class="tl-desc">持续迭代中... 根据实习和秋招反馈不断优化</div>
       </div>
     </div>
   </div>
 </div>
 
 <style>
+.iter-stats{display:flex;justify-content:center;gap:40px;margin-bottom:8px;flex-wrap:wrap}
+.iter-stat{text-align:center}
+.iter-stat-v{font-size:32px;font-weight:800;background:linear-gradient(135deg,#6d7cff,#a5b0ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family:var(--mono)}
+.iter-stat-l{font-size:11px;color:#6b7390;margin-top:2px}
 .timeline{position:relative;padding-left:32px;margin-top:8px}
-.timeline::before{content:'';position:absolute;left:8px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,rgba(109,124,255,0.5),rgba(109,124,255,0.1))}
-.tl-item{position:relative;margin-bottom:24px}
+.timeline::before{content:'';position:absolute;left:8px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,rgba(109,124,255,0.15),rgba(109,124,255,0.4),rgba(109,124,255,0.7),rgba(34,211,238,0.5))}
+.tl-item{position:relative;margin-bottom:20px}
 .tl-item:last-child{margin-bottom:0}
-.tl-dot{position:absolute;left:-32px;top:6px;width:18px;height:18px;border-radius:50%;background:#0f1322;border:2px solid #6d7cff;z-index:1}
-.tl-latest .tl-dot{background:#6d7cff;box-shadow:0 0 12px rgba(109,124,255,0.6)}
-.tl-content{background:rgba(255,255,255,0.03);border:1px solid rgba(109,124,255,0.12);border-radius:12px;padding:16px 20px;transition:all .3s}
-.tl-content:hover{border-color:rgba(109,124,255,0.3);background:rgba(109,124,255,0.05)}
+.tl-dot{position:absolute;left:-32px;top:6px;width:18px;height:18px;border-radius:50%;background:#0f1322;border:2px solid rgba(109,124,255,0.4);z-index:1;transition:all .3s}
+.tl-v2 .tl-dot{border-color:rgba(109,124,255,0.5)}
+.tl-v3 .tl-dot{border-color:rgba(109,124,255,0.6)}
+.tl-v4 .tl-dot{border-color:rgba(109,124,255,0.75)}
+.tl-v5 .tl-dot{border-color:rgba(109,124,255,0.9);background:rgba(109,124,255,0.1)}
+.tl-latest .tl-dot{background:#6d7cff;border-color:#6d7cff;box-shadow:0 0 16px rgba(109,124,255,0.7)}
+.tl-future .tl-dot{border-color:rgba(34,211,238,0.4);border-style:dashed;background:transparent}
+.tl-content{background:rgba(255,255,255,0.02);border:1px solid rgba(109,124,255,0.08);border-radius:12px;padding:16px 20px;transition:all .3s}
+.tl-content:hover{border-color:rgba(109,124,255,0.25);background:rgba(109,124,255,0.04);transform:translateX(4px)}
+.tl-v2 .tl-content{border-color:rgba(109,124,255,0.1)}
+.tl-v3 .tl-content{border-color:rgba(109,124,255,0.14)}
+.tl-v4 .tl-content{border-color:rgba(109,124,255,0.18)}
+.tl-v5 .tl-content{border-color:rgba(109,124,255,0.25);background:rgba(109,124,255,0.03)}
+.tl-latest .tl-content{border-color:rgba(109,124,255,0.5);background:linear-gradient(135deg,rgba(109,124,255,0.08),rgba(109,124,255,0.02));box-shadow:0 4px 24px rgba(109,124,255,0.15)}
+.tl-future-content{border-style:dashed !important;border-color:rgba(34,211,238,0.2) !important;background:rgba(34,211,238,0.02) !important;opacity:0.7}
 .tl-head{display:flex;align-items:center;gap:12px;margin-bottom:6px}
 .tl-ver{font-family:var(--mono);font-size:14px;font-weight:700;color:#6d7cff}
+.tl-v1 .tl-ver{color:rgba(109,124,255,0.5)}
+.tl-v2 .tl-ver{color:rgba(109,124,255,0.65)}
+.tl-v3 .tl-ver{color:rgba(109,124,255,0.8)}
+.tl-v4 .tl-ver{color:rgba(109,124,255,0.9)}
 .tl-date{font-size:11px;color:#6b7390;font-family:var(--mono)}
 .tl-badge{font-size:10px;padding:2px 10px;border-radius:20px;background:linear-gradient(135deg,#6d7cff,#4f5bd5);color:#fff;font-weight:600}
+.tl-badge-future{background:rgba(34,211,238,0.15);color:#22d3ee;border:1px solid rgba(34,211,238,0.3)}
+.tl-pulse{width:8px;height:8px;border-radius:50%;background:#22d3ee;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(34,211,238,0.5)}50%{opacity:0.6;box-shadow:0 0 0 6px rgba(34,211,238,0)}}
 .tl-title{font-size:15px;font-weight:700;color:#e8ecf5;margin-bottom:4px}
 .tl-desc{font-size:12.5px;color:#9ba3b7;line-height:1.7;margin-bottom:8px}
 .tl-tags{display:flex;gap:8px;flex-wrap:wrap}
 .tl-tags span{font-size:10.5px;padding:3px 10px;border-radius:6px;background:rgba(109,124,255,0.1);color:#a5b0ff;border:1px solid rgba(109,124,255,0.15)}
 @media(max-width:768px){
+  .iter-stats{gap:24px}
+  .iter-stat-v{font-size:24px}
   .timeline{padding-left:24px}
   .tl-dot{left:-26px;width:14px;height:14px}
   .tl-content{padding:12px 14px}
 }
 </style>
 
-<!-- 作品 -->
+<!-- 作品 --><!-- 作品 -->
 <div class="sec reveal" id="works">
   <div class="sec-head"><span class="idx">01</span><h2>作品矩阵</h2><span class="en">RESEARCH → AI SYSTEM → AUDIT → ACTUARIAL RISK</span></div>
   <p class="work-lead" style="margin:0 0 18px;font-size:13.5px;color:#9ba3b7;line-height:1.9;"><b style="color:#fbbf24;">核心作品</b>展示 AI 系统构建与财务实务落地能力；<b style="color:#6d7cff;">研究·产品</b>体现行业认知与方案思维——从看懂到做对到落地，五件作品构成完整能力链路。</p>
