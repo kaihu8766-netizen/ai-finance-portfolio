@@ -133,30 +133,36 @@ function runSim(){
   const rate = parseFloat(document.getElementById('rate').value)/100;
   const buffer = parseInt(document.getElementById('buffer').value);
 
-  const months = 6;
-  const monthlyPay = purchase; // 每月采购额
-  const monthlyRevenue = purchase * 1.15; // 假设销售收入比采购高15%
+  const months = 12;
+  const monthlyPay = purchase;
+  const monthlyRevenue = purchase * 1.15;
 
-  // 现金流模拟
-  let cash = buffer * 2; // 初始现金
+  // 初始现金 = 安全垫的1.5倍
+  let cash = buffer * 1.5;
+  let receivable = 0; // 应收账款滚动余额
   const cashFlow = [];
   const inflow = [];
   const outflow = [];
   const gap = [];
+  const payDelay = Math.round(ap/30); // 账期（月）
 
   for(let m=0;m<months;m++){
-    // 流入：当月销售的collection比例回款 + 前一个月的(1-collection)回款
-    const currentIn = monthlyRevenue * collection + monthlyRevenue * (1-collection) * (m>0?1:0);
-    // 流出：ap天前的采购额到期支付（简化为ap/30个月前的采购）
-    const payDelay = Math.round(ap/30);
-    const currentOut = (m >= payDelay) ? monthlyPay : monthlyPay * 0.3; // 前几个月只付30%
-    // 委贷利息支出
+    // 当月销售
+    const sales = monthlyRevenue;
+    // 回款：当月销售×回款率 + 历史应收×40%回收（剩余60%继续滚动）
+    const currentIn = sales * collection + receivable * 0.4;
+    receivable = receivable * 0.6 + sales * (1 - collection);
+    // 付款：账期内不支付，账期后支付对应月份采购
+    const currentOut = (m >= payDelay) ? monthlyPay : 0;
+    // 委贷利息
     const interest = loan * rate / 12;
+    // 委贷本金第6个月到期
+    const loanPrincipal = (m === 5) ? loan : 0;
 
-    cash += currentIn - currentOut - interest;
+    cash += currentIn - currentOut - interest - loanPrincipal;
     cashFlow.push(Math.round(cash));
     inflow.push(Math.round(currentIn));
-    outflow.push(Math.round(currentOut + interest));
+    outflow.push(Math.round(currentOut + interest + loanPrincipal));
     gap.push(Math.max(0, buffer - cash));
   }
 
@@ -164,16 +170,17 @@ function runSim(){
   const maxGap = Math.max(...gap);
   const minCash = Math.min(...cashFlow);
   const avgCash = Math.round(cashFlow.reduce((a,b)=>a+b,0)/months);
-  const riskLevel = maxGap > 0 ? (maxGap > buffer*0.5 ? 'red' : 'orange') : 'green';
+  // 风险等级：基于最低现金余额 vs 安全垫
+  const riskLevel = minCash > buffer ? 'green' : (minCash > 0 ? 'orange' : 'red');
 
   // 预警
   const alertBox = document.getElementById('alertBox');
   if(riskLevel === 'green'){
-    alertBox.innerHTML = `<div class="alert green">✅ <b>风险等级：绿色（安全）</b> —— 未来6个月现金余额始终高于安全垫，资金充裕。建议：可适当提高委贷规模获取利息收入，或缩短供应商账期改善供应链关系。</div>`;
+    alertBox.innerHTML = `<div class="alert green">✅ <b>风险等级：绿色（安全）</b> —— 未来12个月现金余额始终高于安全垫（${buffer.toLocaleString()}万），最低 ${minCash.toLocaleString()} 万。建议：可适当提高委贷规模获取利息收入，或缩短供应商账期改善供应链关系。</div>`;
   } else if(riskLevel === 'orange'){
-    alertBox.innerHTML = `<div class="alert orange">⚠️ <b>风险等级：橙色（关注）</b> —— 最大资金缺口约 ${maxGap.toLocaleString()} 万，接近安全垫。建议：提前安排委贷额度，关注下游回款情况，必要时延长部分供应商账期。</div>`;
+    alertBox.innerHTML = `<div class="alert orange">⚠️ <b>风险等级：橙色（关注）</b> —— 最低现金余额 ${minCash.toLocaleString()} 万，低于安全垫但未断裂，最大缺口 ${maxGap.toLocaleString()} 万。建议：提前安排委贷续贷，关注下游回款情况，必要时延长部分供应商账期。</div>`;
   } else {
-    alertBox.innerHTML = `<div class="alert red">🚨 <b>风险等级：红色（预警）</b> —— 最大资金缺口约 ${maxGap.toLocaleString()} 万，超过安全垫50%。建议：立即调度委贷资金，与银行沟通授信额度，考虑应收账款保理融资。</div>`;
+    alertBox.innerHTML = `<div class="alert red">🚨 <b>风险等级：红色（预警）</b> —— 现金余额最低 ${minCash.toLocaleString()} 万，出现资金断裂风险，最大缺口 ${maxGap.toLocaleString()} 万。建议：立即调度委贷资金，与银行沟通授信额度，考虑应收账款保理融资，压缩非核心支出。</div>`;
   }
 
   // KPI
@@ -208,18 +215,21 @@ function runSim(){
   let heatMaxGap = 0;
   apRange.forEach((apVal,ai)=>{
     colRange.forEach((colVal,ci)=>{
-      let c = buffer*2;
+      let c = buffer*1.5;
+      let recv = 0;
       let g = 0;
       const delay = Math.round(apVal/30);
       for(let m=0;m<months;m++){
-        // 流入：当月销售×回款率 + 上月销售×(1-回款率)
-        const cin = monthlyRevenue * colVal/100 + (m>0 ? monthlyRevenue * (1-colVal/100) : 0);
-        // 流出：账期到期后全额支付，账期内按比例支付
-        const cout = (m >= delay) ? monthlyPay : monthlyPay * (m+1)/delay;
-        c += cin - cout - loan*rate/12;
+        const sales = monthlyRevenue;
+        const cin = sales * colVal/100 + recv * 0.4;
+        recv = recv * 0.6 + sales * (1 - colVal/100);
+        const cout = (m >= delay) ? monthlyPay : 0;
+        const interest = loan * rate / 12;
+        const principal = (m === 5) ? loan : 0;
+        c += cin - cout - interest - principal;
         g = Math.max(g, buffer - c);
       }
-      const gap = Math.round(g);
+      const gap = Math.round(Math.max(0, g));
       heatMaxGap = Math.max(heatMaxGap, gap);
       heatData.push([ci, ai, gap]);
     });
@@ -236,7 +246,7 @@ function runSim(){
     backgroundColor:'transparent',
     tooltip:{formatter:p=>{
       const gap = p.value[2];
-      const level = gap === 0 ? '🟢 安全' : (gap < buffer*0.5 ? '🟡 关注' : '🔴 预警');
+      const level = gap === 0 ? '🟢 安全' : (gap < buffer ? '🟡 关注' : '🔴 预警');
       return `账期 ${apRange[p.value[1]]}天 / 回款率 ${colRange[p.value[0]]}%<br/>最大缺口: <b>${gap.toLocaleString()}万</b><br/>风险等级: ${level}`;
     }},
     grid:{left:60,right:20,top:30,bottom:60},
