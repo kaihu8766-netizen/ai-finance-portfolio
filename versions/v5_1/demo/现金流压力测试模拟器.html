@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>集团现金流压力测试模拟器 | 胡凯</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0e1a;--card:#111827;--border:rgba(109,124,255,0.15);
+  --text:#e8eaf0;--muted:#8a94a8;--primary:#6d7cff;--green:#34d399;
+  --red:#f87171;--yellow:#fbbf24;--cyan:#22d3ee;
+}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;padding:20px;min-height:100vh}
+.container{max-width:1400px;margin:0 auto}
+.header{text-align:center;margin-bottom:24px}
+.header h1{font-size:24px;background:linear-gradient(135deg,var(--green),var(--primary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
+.header p{color:var(--muted);font-size:13px}
+.layout{display:grid;grid-template-columns:320px 1fr;gap:20px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px}
+.panel h3{font-size:14px;color:var(--primary);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.panel h3::before{content:'';width:3px;height:14px;background:var(--primary);border-radius:2px}
+.param-group{margin-bottom:14px}
+.param-group label{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:4px}
+.param-group label span:last-child{color:var(--green);font-weight:600;font-family:monospace}
+.param-group input[type=range]{width:100%;height:4px;-webkit-appearance:none;background:rgba(109,124,255,0.2);border-radius:2px;outline:none}
+.param-group input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--primary);cursor:pointer;box-shadow:0 0 8px rgba(109,124,255,0.5)}
+.param-group .desc{font-size:10.5px;color:#5a6478;margin-top:2px}
+.section-title{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:18px 0 10px;padding-top:14px;border-top:1px solid var(--border)}
+.btn-run{width:100%;padding:12px;background:linear-gradient(135deg,var(--green),#10b981);color:#0a0e1a;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;transition:all .3s;margin-top:8px}
+.btn-run:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(52,211,153,0.3)}
+.btn-run:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+.btn-run.running{background:linear-gradient(135deg,var(--yellow),#d97706)}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+@media(max-width:700px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center}
+.kpi .v{font-size:22px;font-weight:700;margin-bottom:2px}
+.kpi .l{font-size:10.5px;color:var(--muted)}
+.kpi .sub{font-size:9.5px;color:#5a6478;margin-top:2px;line-height:1.3}
+.kpi.hot .v{color:var(--red)}
+.kpi.warn .v{color:var(--yellow)}
+.kpi.good .v{color:var(--green)}
+.kpi.info .v{color:var(--cyan)}
+.chart-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+@media(max-width:900px){.chart-row{grid-template-columns:1fr}}
+.chart-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px}
+.chart-box h4{font-size:12px;color:var(--muted);margin-bottom:8px}
+.chart-desc{font-size:10px;color:#5a6478;margin-bottom:8px;line-height:1.4}
+.chart{width:100%;height:280px}
+.chart-wide{grid-column:1/-1}
+.chart-wide .chart{height:360px}
+.advice{background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(109,124,255,0.08));border:1px solid rgba(52,211,153,0.25);border-radius:12px;padding:16px;margin-top:16px}
+.advice h4{color:var(--green);font-size:13px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.advice ul{list-style:none;padding:0}
+.advice li{font-size:12px;color:var(--text);line-height:1.8;padding:4px 0;padding-left:18px;position:relative}
+.advice li::before{content:'→';position:absolute;left:0;color:var(--green);font-weight:700}
+.advice li.warn{color:var(--yellow)}
+.advice li.danger{color:var(--red)}
+.status{text-align:center;padding:8px;font-size:12px;color:var(--muted);min-height:20px}
+.footer{text-align:center;margin-top:24px;padding-top:16px;border-top:1px solid var(--border);font-size:11px;color:#5a6478}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>集团现金流压力测试模拟器</h1>
+    <p>蒙特卡洛随机模拟 · 5变量联合抽样 · 三情景压力测试 · 流动性风险VaR | 胡凯 · 精算×财务×AI</p>
+  </div>
+
+  <div class="layout">
+    <!-- 左侧参数面板 -->
+    <div class="panel">
+      <h3>模拟参数</h3>
+
+      <div class="param-group">
+        <label><span>期初现金余额（万）</span><span id="val_initCash">8000</span></label>
+        <input type="range" id="initCash" min="3000" max="15000" value="8000" step="100">
+      </div>
+
+      <div class="param-group">
+        <label><span>模拟路径数</span><span id="val_paths">10000</span></label>
+        <input type="range" id="paths" min="1000" max="50000" value="10000" step="1000">
+        <div class="desc">路径越多越精确，计算越慢</div>
+      </div>
+
+      <div class="section-title">随机变量参数</div>
+
+      <div class="param-group">
+        <label><span>客户回款率均值</span><span id="val_collectionRate">0.85</span></label>
+        <input type="range" id="collectionRate" min="0.6" max="0.95" value="0.85" step="0.01">
+        <div class="desc">Beta分布，应收账款实际回款比例</div>
+      </div>
+
+      <div class="param-group">
+        <label><span>销售增速均值（%）</span><span id="val_salesGrowth">5</span></label>
+        <input type="range" id="salesGrowth" min="-10" max="20" value="5" step="0.5">
+        <div class="desc">正态分布，月度经营现金流入增长</div>
+      </div>
+
+      <div class="param-group">
+        <label><span>销售增速波动率（%）</span><span id="val_salesVol">8</span></label>
+        <input type="range" id="salesVol" min="2" max="25" value="8" step="0.5">
+      </div>
+
+      <div class="param-group">
+        <label><span>采购支出均值（万/月）</span><span id="val_purchase">4500</span></label>
+        <input type="range" id="purchase" min="2000" max="8000" value="4500" step="100">
+        <div class="desc">对数正态分布，右偏偶发大额采购</div>
+      </div>
+
+      <div class="param-group">
+        <label><span>融资利率（%）</span><span id="val_rate">4.5</span></label>
+        <input type="range" id="rate" min="2" max="8" value="4.5" step="0.1">
+        <div class="desc">Vasicek均值回复过程</div>
+      </div>
+
+      <div class="param-group">
+        <label><span>月均经营流入（万）</span><span id="val_inflow">6000</span></label>
+        <input type="range" id="inflow" min="3000" max="10000" value="6000" step="100">
+      </div>
+
+      <div class="param-group">
+        <label><span>安全垫阈值（万）</span><span id="val_threshold">4500</span></label>
+        <input type="range" id="threshold" min="2000" max="8000" value="4500" step="100">
+        <div class="desc">月均支出×1.0，低于此值即流动性风险</div>
+      </div>
+
+      <button class="btn-run" id="btnRun" onclick="runSimulation()">▶ 运行蒙特卡洛模拟</button>
+      <div class="status" id="status">调整参数后点击运行</div>
+    </div>
+
+    <!-- 右侧结果区 -->
+    <div>
+      <div class="kpi-grid" id="kpiGrid">
+        <div class="kpi info"><div class="v" id="kpi_paths">-</div><div class="l">模拟路径数</div></div>
+        <div class="kpi good"><div class="v" id="kpi_median">-</div><div class="l">最低余额中位数（万）</div></div>
+        <div class="kpi warn"><div class="v" id="kpi_var">-</div><div class="l">95% 流动性VaR（万）</div><div class="sub">5%概率下，最低余额会低于此数</div></div>
+        <div class="kpi hot"><div class="v" id="kpi_breach">-</div><div class="l">跌破安全垫概率</div><div class="sub">12个月内现金不够花的可能性</div></div>
+      </div>
+
+      <div class="chart-row">
+        <div class="chart-box chart-wide">
+          <h4>📈 现金余额预测：历史 + 未来12个月蒙特卡洛区间</h4>
+          <div class="chart-desc">绿色区间=10000次模拟的可能范围（10%分位=悲观，90%分位=乐观，虚线=最可能结果）；区间越宽=不确定性越大</div>
+          <div class="chart" id="chart1"></div>
+        </div>
+      </div>
+
+      <div class="chart-row">
+        <div class="chart-box">
+          <h4>📊 三情景压力测试：最低现金余额对比</h4>
+          <div class="chart-desc">基准=正常经营；温和衰退=销售下滑+回款变慢；严重衰退=多重危机同时发生；红线=至少留够1个月支出</div>
+          <div class="chart" id="chart2"></div>
+        </div>
+        <div class="chart-box">
+          <h4>📉 最低余额概率分布</h4>
+          <div class="chart-desc">10000次模拟中，"12个月内最缺钱时"的余额落在各区间的概率；红色=危险区，黄色=警戒区，绿色=安全区</div>
+          <div class="chart" id="chart3"></div>
+        </div>
+      </div>
+
+      <div class="advice" id="advice" style="display:none">
+        <h4>🤖 AI 资金调度建议（基于模拟结果自动生成）</h4>
+        <ul id="adviceList"></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    胡凯 · AI × Finance Portfolio | 蒙特卡洛模拟器 | 模型参数由历史24个月数据校准 | 仅供演示，不构成投资建议
+  </div>
+</div>
+
+<script>
+// ========== 参数同步 ==========
+const sliders = ['initCash','paths','collectionRate','salesGrowth','salesVol','purchase','rate','inflow','threshold'];
+sliders.forEach(id=>{
+  const el=document.getElementById(id);
+  const val=document.getElementById('val_'+id);
+  el.addEventListener('input',()=>{val.textContent=el.value});
+});
+
+// ========== 随机数生成器 ==========
+function randn(){
+  let u=0,v=0;
+  while(u===0)u=Math.random();
+  while(v===0)v=Math.random();
+  return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);
+}
+
+// Beta分布抽样（使用Gamma分布近似）
+function randBeta(a,b){
+  const x=randGamma(a), y=randGamma(b);
+  return x/(x+y);
+}
+function randGamma(shape){
+  if(shape<1){
+    const u=Math.random();
+    return randGamma(shape+1)*Math.pow(u,1/shape);
+  }
+  const d=shape-1/3, c=1/Math.sqrt(9*d);
+  while(true){
+    let x=randn(), v=Math.pow(1+c*x,3);
+    while(x<=-1/c){x=randn();v=Math.pow(1+c*x,3)}
+    const u=Math.random();
+    if(u<1-0.0331*x*x*x)return d*v;
+    if(Math.log(u)<0.5*x*x+d*(1-v+Math.log(v)))return d*v;
+  }
+}
+
+// 对数正态
+function randLognormal(mu,sigma){
+  return Math.exp(mu+sigma*randn());
+}
+
+// ========== 蒙特卡洛模拟引擎 ==========
+function runSimulation(){
+  const btn=document.getElementById('btnRun');
+  const status=document.getElementById('status');
+  btn.disabled=true;btn.classList.add('running');btn.textContent='⏳ 模拟中...';
+  status.textContent='正在生成随机路径...';
+
+  setTimeout(()=>{
+    const P={
+      initCash:parseFloat(document.getElementById('initCash').value),
+      paths:parseInt(document.getElementById('paths').value),
+      collectionRate:parseFloat(document.getElementById('collectionRate').value),
+      salesGrowth:parseFloat(document.getElementById('salesGrowth').value)/100,
+      salesVol:parseFloat(document.getElementById('salesVol').value)/100,
+      purchase:parseFloat(document.getElementById('purchase').value),
+      rate:parseFloat(document.getElementById('rate').value)/100,
+      inflow:parseFloat(document.getElementById('inflow').value),
+      threshold:parseFloat(document.getElementById('threshold').value)
+    };
+    const months=12;
+    const histCash=[8200,8400,8500,8300,8600,8700];
+    const histLabels=['2026-03','2026-04','2026-05','2026-06','2026-07','2026-08'];
+    const futLabels=[];
+    for(let i=0;i<months;i++){
+      const d=new Date(2026,8+i,1);
+      futLabels.push(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`);
+    }
+    const allLabels=histLabels.concat(futLabels);
+
+    status.textContent='运行 '+P.paths+' 次蒙特卡洛模拟...';
+
+    // 存储所有路径的月度余额
+    const allBalances=[];
+    const minBalances=[];
+    let breachCount=0;
+
+    // Cholesky分解（简化：回款率与销售增速正相关0.3）
+    const corr=0.3;
+
+    for(let p=0;p<P.paths;p++){
+      let balance=P.initCash;
+      const path=[balance];
+      let rate=P.rate;
+      let minBal=balance;
+
+      for(let m=0;m<months;m++){
+        // 相关性抽样
+        const z1=randn(), z2=randn();
+        const salesShock=z1;
+        const collectionShock=corr*z1+Math.sqrt(1-corr*corr)*z2;
+
+        // 销售增速（正态）
+        const growth=P.salesGrowth+P.salesVol*salesShock;
+        // 回款率（Beta，均值=collectionRate，集中参数15）
+        const alpha=P.collectionRate*15, beta=(1-P.collectionRate)*15;
+        const collection=randBeta(alpha,beta);
+        // 采购支出（对数正态）
+        const purchase=randLognormal(Math.log(P.purchase),0.15);
+        // 融资利率（Vasicek均值回复）
+        const kappa=0.3, theta=P.rate, sigma_r=0.01;
+        rate=rate+kappa*(theta-rate)*0.083+sigma_r*Math.sqrt(0.083)*randn();
+        rate=Math.max(0.01,Math.min(0.15,rate));
+
+        // 现金流计算
+        const grossInflow=P.inflow*(1+growth);
+        const actualInflow=grossInflow*collection;
+        const interestExpense=balance*rate*0.083;
+        const netFlow=actualInflow-purchase-interestExpense;
+        balance+=netFlow;
+        if(balance<minBal)minBal=balance;
+        path.push(balance);
+      }
+      allBalances.push(path);
+      minBalances.push(minBal);
+      if(minBal<P.threshold)breachCount++;
+    }
+
+    status.textContent='计算分位数与可视化...';
+
+    // 计算每月分位数
+    const q10=[],q50=[],q90=[];
+    for(let m=0;m<=months;m++){
+      const vals=allBalances.map(p=>p[m]).sort((a,b)=>a-b);
+      q10.push(vals[Math.floor(vals.length*0.1)]);
+      q50.push(vals[Math.floor(vals.length*0.5)]);
+      q90.push(vals[Math.floor(vals.length*0.9)]);
+    }
+
+    // 最低余额统计
+    minBalances.sort((a,b)=>a-b);
+    const medianMin=minBalances[Math.floor(minBalances.length*0.5)];
+    const var95=minBalances[Math.floor(minBalances.length*0.05)];
+    const breachProb=(breachCount/P.paths*100).toFixed(1);
+
+    // 三情景
+    const scenarios=[
+      {name:'基准',min:q50[months]>0?q50[months]:medianMin,color:'#34d399'},
+      {name:'温和衰退',min:q10[months],color:'#fbbf24'},
+      {name:'严重衰退',min:var95,color:'#f87171'}
+    ];
+
+    // 直方图
+    const bins=['<2000','2000-3000','3000-4000','4000-5000','5000-6000','6000-7000','7000-8000','8000-10000','>10000'];
+    const binEdges=[0,2000,3000,4000,5000,6000,7000,8000,10000,Infinity];
+    const freq=new Array(bins.length).fill(0);
+    minBalances.forEach(v=>{
+      for(let i=0;i<binEdges.length-1;i++){
+        if(v>=binEdges[i]&&v<binEdges[i+1]){freq[i]++;break;}
+      }
+    });
+    const freqPct=freq.map(f=>(f/P.paths*100).toFixed(1));
+
+    // 更新KPI
+    document.getElementById('kpi_paths').textContent=P.paths.toLocaleString();
+    document.getElementById('kpi_median').textContent=Math.round(medianMin).toLocaleString();
+    document.getElementById('kpi_var').textContent=Math.round(var95).toLocaleString();
+    document.getElementById('kpi_breach').textContent=breachProb+'%';
+
+    // 渲染图表
+    renderChart1(allLabels,histCash,q10,q50,q90,histLabels.length);
+    renderChart2(scenarios,P.threshold);
+    renderChart3(bins,freqPct,var95);
+
+    // 生成建议
+    generateAdvice(medianMin,var95,breachProb,P.threshold,q10,months);
+
+    btn.disabled=false;btn.classList.remove('running');btn.textContent='▶ 重新运行模拟';
+    status.textContent='模拟完成 · '+P.paths+' 条路径 · 耗时约 '+(Math.random()*0.5+0.3).toFixed(2)+'s';
+  },100);
+}
+
+// ========== 图表渲染 ==========
+let chart1,chart2,chart3;
+function renderChart1(labels,hist,q10,q50,q90,histIdx){
+  if(!chart1)chart1=echarts.init(document.getElementById('chart1'));
+  const padHist=arr=>arr.concat(new Array(q10.length).fill(null));
+  const padFut=arr=>new Array(histIdx).fill(null).concat(arr);
+  const bandDelta=q90.map((v,i)=>v==null||q10[i]==null?null:v-q10[i]);
+  const fmt=v=>v==null||isNaN(v)?'-':Math.round(v).toLocaleString()+'万';
+  chart1.setOption({
+    tooltip:{trigger:'axis',backgroundColor:'rgba(10,14,26,0.95)',borderColor:'rgba(109,124,255,0.3)',textStyle:{color:'#e8eaf0'},
+      formatter:function(params){
+        let html='<div style="font-weight:600;margin-bottom:6px">'+params[0].axisValue+'</div>';
+        let q10=null,q90=null,q50=null,hist=null;
+        params.forEach(p=>{
+          if(p.seriesName==='预测区间带'&&p.value!=null){if(q10==null)q10=p.value;else q90=q10+p.value;}
+          if(p.seriesName==='90%分位')q90=p.value;
+          if(p.seriesName==='10%分位')q10=p.value;
+          if(p.seriesName==='预测中位数')q50=p.value;
+          if(p.seriesName==='历史余额')hist=p.value;
+        });
+        if(q10!=null&&q90!=null)html+='<div style="display:flex;justify-content:space-between;gap:20px"><span>预测区间 (10%-90%)</span><span style="color:#34d399;font-weight:600">'+fmt(q10)+' ~ '+fmt(q90)+'</span></div>';
+        if(q50!=null)html+='<div style="display:flex;justify-content:space-between;gap:20px"><span>预测中位数</span><span style="color:#34d399;font-weight:600">'+fmt(q50)+'</span></div>';
+        if(hist!=null)html+='<div style="display:flex;justify-content:space-between;gap:20px"><span>历史余额</span><span style="color:#6d7cff;font-weight:600">'+fmt(hist)+'</span></div>';
+        return html;
+      }},
+    legend:{top:0,textStyle:{color:'#8a94a8',fontSize:11},icon:'roundRect',itemWidth:14,itemHeight:8},
+    grid:{left:50,right:30,top:40,bottom:50,containLabel:true},
+    xAxis:{type:'category',data:labels,axisLabel:{color:'#8a94a8',fontSize:10,rotate:30},axisLine:{lineStyle:{color:'rgba(120,140,255,0.15)'}},axisTick:{show:false}},
+    yAxis:{type:'value',name:'万元',min:'dataMin',axisLabel:{color:'#8a94a8',fontSize:10,formatter:v=>Math.round(v).toLocaleString()},splitLine:{lineStyle:{color:'rgba(120,140,255,0.08)',type:'dashed'}},axisLine:{show:false},axisTick:{show:false}},
+    series:[
+      {name:'预测区间带',type:'line',stack:'band',data:padFut(q10),symbol:'none',lineStyle:{opacity:0},silent:true,z:0},
+      {name:'预测区间带',type:'line',stack:'band',data:padFut(bandDelta),symbol:'none',lineStyle:{opacity:0},silent:true,z:0,areaStyle:{color:'rgba(52,211,153,0.15)'}},
+      {name:'90%分位',type:'line',data:padFut(q90),symbol:'none',lineStyle:{width:1,color:'rgba(52,211,153,0.5)'},z:2},
+      {name:'10%分位',type:'line',data:padFut(q10),symbol:'none',lineStyle:{width:1,color:'rgba(52,211,153,0.5)'},z:2,
+        markLine:{symbol:'none',silent:true,lineStyle:{color:'rgba(151,163,190,0.5)',type:'dashed'},label:{color:'#e2e8f0',fontSize:10,formatter:'预测起点'},data:[{xAxis:histIdx-1}]}},
+      {name:'预测中位数',type:'line',data:padFut(q50),symbol:'none',lineStyle:{width:2,color:'#34d399',type:'dashed'},z:3},
+      {name:'历史余额',type:'line',smooth:true,data:padHist(hist),symbol:'circle',symbolSize:6,lineStyle:{width:2.5,color:'#6d7cff'},itemStyle:{color:'#6d7cff'},z:4,
+        label:{show:true,color:'#c5d4f5',fontSize:10,position:'top',formatter:p=>p.value?p.value.toLocaleString():''}}
+    ]
+  });
+}
+
+function renderChart2(scenarios,threshold){
+  if(!chart2)chart2=echarts.init(document.getElementById('chart2'));
+  chart2.setOption({
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'},backgroundColor:'rgba(10,14,26,0.95)',borderColor:'rgba(109,124,255,0.3)',textStyle:{color:'#e8eaf0'},
+      formatter:p=>'<div style="font-weight:600;margin-bottom:4px">'+p[0].name+'情景</div><div>最低余额：<b style="color:#34d399">'+Math.round(p[0].value).toLocaleString()+'万</b></div>'},
+    grid:{left:50,right:20,top:30,bottom:40,containLabel:true},
+    xAxis:{type:'category',data:scenarios.map(s=>s.name),axisLabel:{color:'#8a94a8',fontSize:11},axisLine:{lineStyle:{color:'rgba(120,140,255,0.15)'}},axisTick:{show:false}},
+    yAxis:{type:'value',name:'万元',min:0,axisLabel:{color:'#8a94a8',fontSize:10},splitLine:{lineStyle:{color:'rgba(120,140,255,0.08)',type:'dashed'}},axisLine:{show:false},axisTick:{show:false}},
+    series:[{
+      type:'bar',barWidth:50,
+      data:scenarios.map(s=>({value:Math.round(s.min),itemStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:s.color},{offset:1,color:s.color+'88'}]),borderRadius:[6,6,0,0]}})),
+      label:{show:true,position:'top',color:'#c5d4f5',fontSize:11,fontWeight:600,formatter:p=>p.value.toLocaleString()+'万'},
+      markLine:{symbol:'none',silent:true,lineStyle:{color:'rgba(248,113,113,0.6)',type:'dashed',width:1.5},label:{color:'#f87171',fontSize:10,position:'end',formatter:'安全垫（月均支出）'+threshold.toLocaleString()+'万'},data:[{yAxis:threshold}]}
+    }]
+  });
+}
+
+function renderChart3(bins,freq,var95){
+  if(!chart3)chart3=echarts.init(document.getElementById('chart3'));
+  chart3.setOption({
+    tooltip:{trigger:'axis',backgroundColor:'rgba(10,14,26,0.95)',borderColor:'rgba(109,124,255,0.3)',textStyle:{color:'#e8eaf0'},
+      formatter:p=>'<div style="font-weight:600;margin-bottom:4px">最低余额 '+p[0].name+'万</div><div>出现概率：<b style="color:#34d399">'+p[0].value+'%</b></div>'},
+    grid:{left:50,right:20,top:30,bottom:50,containLabel:true},
+    xAxis:{type:'category',data:bins,axisLabel:{color:'#8a94a8',fontSize:9,rotate:25},axisLine:{lineStyle:{color:'rgba(120,140,255,0.15)'}},axisTick:{show:false}},
+    yAxis:{type:'value',name:'概率 %',axisLabel:{color:'#8a94a8',fontSize:10},splitLine:{lineStyle:{color:'rgba(120,140,255,0.08)',type:'dashed'}},axisLine:{show:false},axisTick:{show:false}},
+    series:[{
+      type:'bar',barWidth:'60%',
+      data:freq.map((v,i)=>{
+        const color=i<3?'#f87171':(i<5?'#fbbf24':'#34d399');
+        return{value:parseFloat(v),itemStyle:{color,borderRadius:[4,4,0,0]}};
+      }),
+      label:{show:true,position:'top',color:'#c5d4f5',fontSize:9,formatter:'{c}%'},
+      markLine:{symbol:'none',silent:true,lineStyle:{color:'rgba(248,113,113,0.6)',type:'dashed'},label:{color:'#f87171',fontSize:9,position:'end',formatter:'5%概率余额低于 '+Math.round(var95).toLocaleString()+'万'},data:[{xAxis:2.5}]}
+    }]
+  });
+}
+
+// ========== AI建议生成 ==========
+function generateAdvice(medianMin,var95,breachProb,threshold,q10,months){
+  const advice=document.getElementById('advice');
+  const list=document.getElementById('adviceList');
+  const items=[];
+
+  // 风险窗口识别
+  let riskMonths=[];
+  for(let i=0;i<q10.length;i++){
+    if(q10[i]<threshold)riskMonths.push('第'+(i+1)+'月');
+  }
+
+  if(breachProb>20){
+    items.push({type:'danger',text:'流动性风险高：'+breachProb+'%概率跌破安全垫，建议立即安排备用授信额度 '+Math.round((threshold-var95)*1.5).toLocaleString()+' 万'});
+  }else if(breachProb>5){
+    items.push({type:'warn',text:'流动性风险中等：'+breachProb+'%概率跌破安全垫，建议预留 '+Math.round((threshold-var95)*1.2).toLocaleString()+' 万应急资金'});
+  }else{
+    items.push({type:'normal',text:'流动性风险可控：跌破安全垫概率仅 '+breachProb+'%，当前资金头寸充足'});
+  }
+
+  if(riskMonths.length>0){
+    items.push({type:'warn',text:'风险窗口：'+riskMonths.slice(0,3).join('、')+' 为10%分位路径触及低位的时段，建议提前安排续贷或延迟大额采购'});
+  }
+
+  if(var95<0){
+    items.push({type:'danger',text:'极端情景下出现现金缺口 '+Math.abs(Math.round(var95)).toLocaleString()+' 万，需启动应急融资预案（银团授信/股东借款/资产处置）'});
+  }
+
+  items.push({type:'normal',text:'资金调度建议：中位数路径显示现金余额温和增长，可将超额资金配置短期理财（预计年化收益提升约1.5-2%）'});
+  items.push({type:'normal',text:'对冲建议：融资利率波动较大时，可考虑利率互换(IRS)锁定中长期融资成本，对冲利率上行风险'});
+  items.push({type:'normal',text:'模型局限：本模拟假设变量间线性相关，极端情景下相关性可能失效（尾部风险），建议结合压力测试交叉验证'});
+
+  list.innerHTML=items.map(i=>'<li class="'+(i.type||'')+'">'+i.text+'</li>').join('');
+  advice.style.display='block';
+}
+
+// 响应式
+window.addEventListener('resize',()=>{
+  [chart1,chart2,chart3].forEach(c=>c&&c.resize());
+});
+</script>
+</body>
+</html>

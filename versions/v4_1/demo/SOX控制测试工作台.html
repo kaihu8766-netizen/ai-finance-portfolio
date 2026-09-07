@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOX 控制测试工作台 · 胡凯</title>
+<style>
+:root{
+  --bg:#f4f6fa; --card:#fff; --border:#e2e6ee; --text:#1f2530; --muted:#5d6572; --dim:#8b93a3;
+  --primary:#185fa5; --primary-light:#e7f0fa; --accent:#0e7a5f; --accent-light:#e3f5ee;
+  --warn:#9a6208; --warn-light:#fdf3e0; --danger:#b23a3a; --danger-light:#fdeaea;
+  --purple:#5b4bb5; --purple-light:#efedfc;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.7}
+.header{background:linear-gradient(135deg,#185fa5,#0e7a5f);color:#fff;padding:20px 0 16px}
+.header .in{max-width:1120px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.header h1{font-size:19px;font-weight:600;letter-spacing:.5px}
+.header .sub{font-size:12.5px;opacity:.9;margin-top:3px}
+.header .stats{display:flex;gap:14px;font-size:12.5px}
+.header .stats b{font-size:16px;display:block}
+.tabs{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}
+.tabs .in{max-width:1120px;margin:0 auto;padding:0 20px;display:flex;gap:4px;overflow-x:auto}
+.tab{padding:12px 20px;font-size:13.5px;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;user-select:none}
+.tab:hover{color:var(--primary)}
+.tab.active{color:var(--primary);border-bottom-color:var(--primary);font-weight:600}
+.main{max-width:1120px;margin:0 auto;padding:24px 20px 60px}
+.panel{display:none}
+.panel.active{display:block}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin-bottom:18px}
+.card h2{font-size:15.5px;color:var(--primary);margin-bottom:4px;border-left:4px solid var(--primary);padding-left:10px}
+.card .desc{font-size:12.5px;color:var(--muted);margin:4px 0 14px 14px}
+table{width:100%;border-collapse:collapse;font-size:12.8px}
+th{background:var(--primary-light);color:var(--primary);text-align:left;padding:8px 10px;font-weight:600;border:1px solid var(--border)}
+td{padding:8px 10px;border:1px solid var(--border);vertical-align:top}
+tr:hover td{background:#f8fafc}
+.badge{display:inline-block;border-radius:6px;padding:1px 8px;font-size:11.5px;font-weight:600}
+.b-blue{background:var(--primary-light);color:var(--primary)}
+.b-green{background:var(--accent-light);color:var(--accent)}
+.b-red{background:var(--danger-light);color:var(--danger)}
+.b-yellow{background:var(--warn-light);color:var(--warn)}
+.b-purple{background:var(--purple-light);color:var(--purple)}
+.sel{padding:3px 8px;border:1px solid var(--border);border-radius:6px;font-size:12px;background:#fff;color:var(--text)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center}
+.kpi .v{font-size:26px;font-weight:700;color:var(--primary)}
+.kpi .l{font-size:12px;color:var(--muted);margin-top:4px}
+.progress{height:8px;background:#e9edf3;border-radius:6px;overflow:hidden;margin-top:6px}
+.progress .fill{height:100%;background:linear-gradient(90deg,#185fa5,#0e7a5f);border-radius:6px;transition:width .4s}
+.bar-wrap{margin:8px 0}
+.bar-label{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:3px}
+.bar{height:10px;background:#e9edf3;border-radius:6px;overflow:hidden}
+.bar .f{height:100%;border-radius:6px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+.flow{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 12px}
+.flow .s{background:var(--primary-light);color:var(--primary);border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600}
+.flow .a{color:var(--dim);align-self:center}
+.btn{display:inline-block;background:var(--primary);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:13px;cursor:pointer;margin:6px 6px 0 0}
+.btn:hover{opacity:.9}
+.btn.green{background:var(--accent)}
+.btn.gray{background:#9aa3b2}
+.btn.sm{padding:4px 12px;font-size:12px}
+input[type=number],input[type=text]{border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-size:13px;width:110px}
+.result-box{background:var(--accent-light);border:1px solid #bfe6d4;border-radius:10px;padding:14px 18px;margin-top:12px;font-size:13px;color:var(--accent)}
+.sample-out{font-family:monospace;background:#f2f4f8;border-radius:8px;padding:10px 14px;font-size:12px;margin-top:8px;line-height:1.9;max-height:180px;overflow-y:auto}
+.note{background:var(--warn-light);border:1px solid #eed9ab;border-radius:10px;padding:12px 16px;font-size:12.5px;color:var(--warn);margin-top:10px}
+.footer{max-width:1120px;margin:0 auto;padding:20px;color:var(--dim);font-size:12px;text-align:center}
+.workflow-bar{display:flex;align-items:center;gap:0;padding:14px 20px;max-width:1120px;margin:0 auto}
+.wf-step{flex:1;text-align:center;position:relative;font-size:11.5px;color:var(--dim);padding-top:20px;cursor:pointer;transition:color .3s}
+.wf-step::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:#d6dce6;border:2px solid #fff;box-shadow:0 0 0 2px #d6dce6;transition:.3s}
+.wf-step::after{content:'';position:absolute;top:5px;left:calc(50% + 8px);width:calc(100% - 16px);height:2px;background:#e2e6ee}
+.wf-step:last-child::after{display:none}
+.wf-step.active{color:var(--primary);font-weight:600}
+.wf-step.active::before{background:var(--primary);box-shadow:0 0 0 3px rgba(24,95,165,0.2)}
+.wf-step.done{color:var(--accent)}
+.wf-step.done::before{background:var(--accent);box-shadow:0 0 0 3px rgba(14,122,95,0.2)}
+.wf-step.done::after{background:var(--accent-light)}
+/* Tab 切换淡入 */
+@keyframes tabIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.panel.active.animate-in{animation:tabIn .35s ease}
+/* 发现卡片入场 */
+@keyframes slideIn{from{opacity:0;transform:translateX(-12px);max-height:0}to{opacity:1;transform:none;max-height:300px}}
+.issue-card-new{animation:slideIn .4s cubic-bezier(.4,0,.2,1)}
+/* 控制矩阵分区色 */
+.cm-flow-vd{background:rgba(24,95,165,0.03)}
+.cm-flow-ch{background:rgba(52,211,153,0.03)}
+.cm-flow-vb{background:rgba(91,75,181,0.03)}
+.cm-flow-pr{background:rgba(154,98,8,0.03)}
+.cm-flow-fd{background:rgba(178,58,58,0.03)}
+.cm-flow-it{background:rgba(14,122,95,0.03)}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="in">
+    <div>
+      <h1>🛡️ SOX 控制测试工作台</h1>
+      <div class="sub">网易游戏业务模拟场景 · SOX 404 内控测试全流程 · 胡凯制作 v4.0</div>
+    <div style="font-size:12px;opacity:.75;margin-top:6px;max-width:900px">本工具模拟 SOX 404 内控测试完整闭环：识别控制点 → 执行测试 → 记录发现 → 整改追踪，覆盖网易游戏 5 大业务流程 + ITGC，共 18 个控制点。</div>
+    </div>
+    <div class="stats">
+      <div><b id="stTotal">0</b>控制点</div>
+      <div><b id="stDone">0</b>已测试</div>
+      <div><b id="stExcept">0</b>例外</div>
+      <div><b id="stOpen">0</b>未闭环</div>
+    </div>
+  </div>
+</div>
+
+<div class="workflow-bar">
+  <div class="wf-step active" data-p="p1">① 识别控制</div>
+  <div class="wf-step" data-p="p2">② 执行测试</div>
+  <div class="wf-step" data-p="p3">③ 记录发现</div>
+  <div class="wf-step" data-p="p4">④ 追踪闭环</div>
+  <div class="wf-step" data-p="p5">⑤ 统计抽样</div>
+</div>
+
+<div class="tabs"><div class="in">
+  <div class="tab active" data-p="p1">① 控制矩阵</div>
+  <div class="tab" data-p="p2">② 测试执行</div>
+  <div class="tab" data-p="p3">③ 发现跟踪</div>
+  <div class="tab" data-p="p4">④ 状态看板</div>
+  <div class="tab" data-p="p5">⑤ 抽样计算器</div>
+</div></div>
+
+<div class="main">
+
+<!-- ══════════ ① 控制矩阵 ══════════ -->
+<div class="panel active" id="p1">
+  <div class="card">
+    <h2>控制矩阵 Control Matrix</h2>
+    <div class="desc">SOX 项目起点：识别流程 → 分析风险 → 确定控制点。模拟网易游戏业务 5 大业务流程 + ITGC，每流程配风险与控制。</div>
+    <table>
+      <thead><tr><th style="width:60px">编号</th><th style="width:130px">流程</th><th style="width:170px">风险描述</th><th>控制点</th><th style="width:70px">类型</th></tr></thead>
+      <tbody id="cmBody"></tbody>
+    </table>
+    <div class="note">💡 类型说明：<b>预防性控制</b> = 事前阻止错误发生（如审批、权限）；<b>发现性控制</b> = 事后发现错误（如对账、复核）。SOX 测试通常以发现性+预防性组合评估。</div>
+  </div>
+</div>
+
+<!-- ══════════ ② 测试执行 ══════════ -->
+<div class="panel" id="p2">
+  <div class="card">
+    <h2>测试执行 Test of Controls</h2>
+    <div class="desc">对每个控制点执行测试：标记测试步骤 → 记录抽样结果 → 判定通过/例外。状态变更自动联动看板与发现跟踪。<b style="color:var(--warn)">抽样量说明：</b>测试页抽样量为实务经验值（大所常见口径，如高重要性控制 25 笔）；精确统计样本量请用「⑤ 抽样计算器」按置信度/容忍偏差计算——两者适用场景不同，测试页为快速执行口径，计算器为统计严谨口径。</div>
+    <table>
+      <thead><tr><th style="width:46px">控制</th><th style="width:160px">测试步骤（示例）</th><th style="width:100px">抽样建议</th><th style="width:90px">抽样量</th><th style="width:80px">状态</th><th style="width:90px">结果说明</th></tr></thead>
+      <tbody id="tcBody"></tbody>
+    </table>
+    <button class="btn sm gray" onclick="resetTests()">↺ 重置测试状态</button>
+  </div>
+</div>
+
+<!-- ══════════ ③ 发现跟踪 ══════════ -->
+<div class="panel" id="p3">
+  <div class="card">
+    <h2>发现跟踪 Issue Tracker</h2>
+    <div class="desc">测试发现例外 → 登记 → 整改跟踪 → 闭环关闭。体现 SOX"发现问题到整改"的闭环管理。</div>
+    <div id="issueList"></div>
+    <div class="note">💡 操作：在「② 测试执行」中把某控制标记为 <b>例外</b>，会自动在此生成一条待处理发现；点击「整改完成」即闭环。</div>
+  </div>
+</div>
+
+<!-- ══════════ ④ 状态看板 ══════════ -->
+<div class="panel" id="p4">
+  <div class="card">
+    <h2>项目状态看板 Dashboard</h2>
+    <div class="desc">全项目完成度、例外率、风险热力——SOX 项目的"驾驶舱"。</div>
+    <div class="kpis">
+      <div class="kpi"><div class="v" id="kTotal">0</div><div class="l">控制点总数</div></div>
+      <div class="kpi"><div class="v" id="kDone">0</div><div class="l">已完成测试</div></div>
+      <div class="kpi"><div class="v" id="kPass">0</div><div class="l">通过</div></div>
+      <div class="kpi"><div class="v" id="kExcept">0</div><div class="l">例外</div></div>
+      <div class="kpi"><div class="v" id="kRate">0%</div><div class="l">测试完成率</div></div>
+    </div>
+    <div class="card" style="box-shadow:none;border:1px dashed var(--border)">
+      <h2>流程完成度</h2>
+      <div id="flowBars"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ ⑤ 抽样计算器 ══════════ -->
+<div class="panel" id="p5">
+  <div class="card">
+    <h2>审计抽样计算器（控制测试 · 属性抽样）</h2>
+    <div class="desc">实习生最常被问"样本量怎么定"——按置信度/可容忍偏差/预期偏差自动计算样本量，并可一键随机抽样。</div>
+    <div class="grid2">
+      <div>
+        <div class="bar-label"><span>置信度水平 Confidence Level</span></div>
+        <input type="number" id="sCl" value="95" min="50" max="99" style="width:80px"> %（常用 90 / 95）<br><br>
+        <div class="bar-label"><span>可容忍偏差率 Tolerable Deviation</span></div>
+        <input type="number" id="sTd" value="5" min="1" max="20" step="0.5" style="width:80px"> %（常用 5%）<br><br>
+        <div class="bar-label"><span>预期偏差率 Expected Deviation</span></div>
+        <input type="number" id="sEd" value="1" min="0" max="10" step="0.5" style="width:80px"> %（0-2% 常见）<br><br>
+        <div class="bar-label"><span>总体规模 Population</span></div>
+        <input type="number" id="sPop" value="2000" min="50" style="width:110px"> 笔 <span style="font-size:11px;color:var(--dim)">例：月交易量</span><br><br>
+        <button class="btn" onclick="calcSample()">计算样本量</button>
+      </div>
+      <div>
+        <div class="result-box" id="sampleResult">点击「计算样本量」得到结果</div>
+        种子：<input type="number" id="sSeed" value="42" style="width:70px;margin-top:12px;vertical-align:middle">
+<button class="btn green" style="margin-top:12px" onclick="doSample()">🎲 随机抽样</button>
+        <button class="btn gray" onclick="clearSample()">清空</button>
+        <div class="sample-out" id="sampleOut"></div>
+      </div>
+    </div>
+    <div class="note">📐 方法说明：采用<b>泊松近似公式</b>（预期偏差=0 时）：n = ln(1-CL) ÷ ln(1-TD)；预期偏差&gt;0 时用统计展开近似并乘膨胀系数。结果与 AICPA 审计抽样表（95% 置信度 / 5% 容忍偏差 → 59 笔）一致，可作为控制测试抽样的实务参考口径。</div>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">SOX 控制测试工作台 · WorkBuddy 制作（执行方）· Claude 评审（评审方）· 胡凯决策 · 模拟数据仅供学习演示</div>
+
+<script>
+// ══════════ 数据：网易游戏业务场景 ══════════
+const CONTROLS = [
+  // 流程1 虚拟道具销售与收入确认
+  {id:'C1.1', flow:'虚拟道具销售', risk:'未授权发货 / 收入确认时点错误', ctrl:'道具发货需系统自动校验订单状态+支付成功，发货与订单分离', type:'预防'},
+  {id:'C1.2', flow:'虚拟道具销售', risk:'道具发放与实际收款不匹配', ctrl:'每日订单-发货-收款三方数据对账，差异自动报警', type:'发现'},
+  {id:'C1.3', flow:'虚拟道具销售', risk:'收入确认金额计算错误 / 递延收入与使用寿命估计不当', ctrl:'收入确认规则（即时/分摊）与递延收入结转、虚拟币使用寿命估计由系统配置并定期复核，变更需审批', type:'预防'},
+  // 流程2 渠道分成结算
+  {id:'C2.1', flow:'渠道分成结算', risk:'渠道对账单与内部数据不一致', ctrl:'渠道结算单与充值流水自动对账，差异超阈值人工复核', type:'发现'},
+  {id:'C2.2', flow:'渠道分成结算', risk:'分成比例配置错误', ctrl:'分成比例参数维护需财务经理审批，变更留痕', type:'预防'},
+  {id:'C2.3', flow:'渠道分成结算', risk:'渠道返点/奖励政策滥用', ctrl:'返点政策需合同审批+财务复核，实际返点与协议核对', type:'发现'},
+  // 流程3 虚拟币充值消费
+  {id:'C3.1', flow:'虚拟币业务', risk:'虚拟币超发（充值未到账或虚增）', ctrl:'虚拟币发行与充值流水一一对应，库存余额每日核对', type:'发现'},
+  {id:'C3.2', flow:'虚拟币业务', risk:'异常充值/刷单欺诈', ctrl:'异常充值检测规则（频次/金额/设备），命中即风控冻结', type:'预防'},
+  {id:'C3.3', flow:'虚拟币业务', risk:'道具/币消费记录缺失', ctrl:'消费流水实时记录，与库存变动对账', type:'发现'},
+  // 流程4 采购付款
+  {id:'C4.1', flow:'采购付款', risk:'无审批采购或超授权付款', ctrl:'采购申请-审批-付款按权限分级，超限额需更高审批', type:'预防'},
+  {id:'C4.2', flow:'采购付款', risk:'重复付款', ctrl:'三单匹配（PO/收货/发票）+ 重复付款检测（同供应商同金额短期多次）', type:'发现'},
+  {id:'C4.3', flow:'采购付款', risk:'供应商主数据篡改', ctrl:'供应商新增/变更需双人审批，系统权限分离', type:'预防'},
+  // 流程5 资金循环
+  {id:'C5.1', flow:'资金收付', risk:'未授权资金支出', ctrl:'资金收付审批权限分级+网银双人复核', type:'预防'},
+  {id:'C5.2', flow:'资金收付', risk:'银行流水与账面不一致', ctrl:'银行对账每月执行，未达账项逐笔核实留痕', type:'发现'},
+  {id:'C5.3', flow:'资金收付', risk:'印鉴/密钥管理失控', ctrl:'印鉴与网银 UK 分人保管，使用登记', type:'预防'},
+  {id:'C6.1', flow:'IT系统控制（ITGC）', risk:'系统访问权限失控（越权/离职未回收）', ctrl:'访问权限按最小权限原则，申请-审批-开通职责分离，权限季度复核+离职即时回收', type:'预防'},
+  {id:'C6.2', flow:'IT系统控制（ITGC）', risk:'未经测试的变更上线导致数据错误', ctrl:'系统变更遵循开发-测试-生产环境分离，变更需审批+测试+上线留痕', type:'预防'},
+  {id:'C6.3', flow:'IT系统控制（ITGC）', risk:'关键批处理/接口作业失败未被发现', ctrl:'批处理与接口作业监控，失败自动告警并记录，隔日复核', type:'发现'}
+];
+// 测试步骤
+const TEST_STEPS = {
+  'C1.1':['抽取 25 笔道具订单，核对订单状态与发货记录','验证发货仅可由订单状态触发（系统控制）','检查异常发货是否有告警'],
+  'C1.2':['抽取 30 天对账报告，核对订单-发货-收款三方一致','检查差异报警的响应记录','验证月末差异清零'],
+  'C1.3':['检查收入确认规则配置与变更审批记录','抽取道具抽样验证确认逻辑（即时/分摊）','核验递延收入摊销与虚拟币使用寿命估计（系统计算 vs 人工核算）'],
+  'C2.1':['抽取 3 个渠道结算单，与充值流水核对','检查差异超阈值的人工复核记录','验证对账频率符合制度'],
+  'C2.2':['检查分成比例配置的审批记录','抽取 3 个渠道核对协议约定比例','验证变更留痕完整'],
+  'C2.3':['抽取返点政策与实际返点核对','检查返点申请审批流','验证异常返点有预警'],
+  'C3.1':['核对虚拟币库存余额与充值流水','抽取 3 天充值明细验证发行准确','检查余额差异调整记录'],
+  'C3.2':['检查异常充值检测规则的配置','抽取风控冻结记录验证处置','验证规则覆盖高频/大额场景'],
+  'C3.3':['抽取消费流水与库存变动对账','检查消费记录的完整性','验证道具扣减与流水一致'],
+  'C4.1':['抽取 20 笔采购单核对审批权限','验证超限额是否触发更高审批','检查紧急采购的特例审批'],
+  'C4.2':['运行三单匹配检查，抽取不匹配样本','运行重复付款检测脚本','验证异常付款是否人工复核'],
+  'C4.3':['检查供应商新增/变更的双人审批记录','抽取供应商主数据核对审批流','验证权限分离配置'],
+  'C5.1':['抽取 20 笔付款核对审批权限','验证网银双人复核是否执行','检查大额付款特批流程'],
+  'C5.2':['抽取月度银行对账报告','核对未达账项逐笔处理记录','验证差异处理闭环'],
+  'C5.3':['检查印鉴/UK 保管登记','验证分人保管配置','检查使用登记完整性'],
+  'C6.1':['抽取 15 个系统账号核对申请-审批记录','验证离职账号是否及时回收','检查权限季度复核记录'],
+  'C6.2':['抽取 10 个变更单核对审批与测试记录','验证生产变更留痕完整','检查紧急变更的特批流程'],
+  'C6.3':['检查批处理/接口监控告警记录','抽取 3 天作业日志核对成功率','验证失败后的处置与复核']
+};
+// 状态: 未测 / 通过 / 例外
+let testState = {};
+CONTROLS.forEach(c => testState[c.id] = '未测');
+// 发现
+let issues = {};
+
+// ══════════ 渲染：控制矩阵 ══════════
+function renderCM(){
+  const tb = document.getElementById('cmBody');
+  const flowMap = {C1:'vd',C2:'ch',C3:'vb',C4:'pr',C5:'fd',C6:'it'};
+  tb.innerHTML = CONTROLS.map(c => {
+    const cls = c.type === '预防' ? 'b-blue' : 'b-green';
+    const flowCls = 'cm-flow-' + (flowMap[c.id.slice(0,2)] || 'vd');
+    return `<tr class="${flowCls}">
+      <td><b>${c.id}</b></td>
+      <td>${c.flow}</td>
+      <td style="color:var(--danger);font-size:12px">${c.risk}</td>
+      <td>${c.ctrl}</td>
+      <td><span class="badge ${cls}">${c.type}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+// ══════════ 渲染：测试执行 ══════════
+function renderTC(){
+  const tb = document.getElementById('tcBody');
+  tb.innerHTML = CONTROLS.map(c => {
+    const st = testState[c.id];
+    const cls = st==='通过'?'b-green':(st==='例外'?'b-red':'b-yellow');
+    const steps = TEST_STEPS[c.id].join('；');
+    const sMap = {'C2.x':'3 渠道','C5.x':'20 笔','C6.1':'15 账号','C6.2':'10 变更','C6.3':'3 天作业'};
+    const nMap = {'C2.1':'3','C2.2':'3','C2.3':'3','C5.1':'20','C5.2':'20','C5.3':'20','C6.1':'15','C6.2':'10','C6.3':'3'};
+    const flowType = c.id.startsWith('C2') ? 'C2.x' : (c.id.startsWith('C5') ? 'C5.x' : null);
+    const sample = sMap[flowType] || sMap[c.id] || '25 笔';
+    const sn = nMap[c.id] || '25';
+    return `<tr>
+      <td><b>${c.id}</b></td>
+      <td style="font-size:12px">${steps}</td>
+      <td><span class="badge b-purple">${sample}</span></td>
+      <td>${sn}</td>
+      <td><select class="sel" data-id="${c.id}" onchange="setState('${c.id}',this.value)">
+        <option value="未测" ${st==='未测'?'selected':''}>未测</option>
+        <option value="通过" ${st==='通过'?'selected':''}>✓ 通过</option>
+        <option value="例外" ${st==='例外'?'selected':''}>⚠ 例外</option>
+      </select></td>
+      <td style="font-size:12px;color:var(--muted)" id="rs-${c.id}">${st==='例外'?'已生成发现':'—'}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ══════════ 状态切换 ══════════
+function setState(id, v){
+  testState[id] = v;
+  if(v === '例外'){
+    if(!issues[id]){
+      const c = CONTROLS.find(x=>x.id===id);
+      issues[id] = {id, flow:c.flow, ctrl:c.ctrl, status:'整改中', created: new Date().toLocaleDateString()};
+      window._newIssueId = id;
+    } else if(issues[id].status === '已闭环'){
+      // 已闭环发现被再次标记为例外 → 重新开启为整改中
+      issues[id].status = '整改中';
+      window._newIssueId = id;
+    }
+  } else {
+    delete issues[id];
+  }
+  saveState();
+  renderTC(); renderIssues(); renderDash();
+}
+
+// ══════════ 渲染：发现跟踪 ══════════
+function renderIssues(){
+  const wrap = document.getElementById('issueList');
+  const list = Object.values(issues);
+  if(!list.length){
+    wrap.innerHTML = '<div style="padding:20px;text-align:center;color:var(--dim)">暂无发现 · 在「② 测试执行」标记例外后自动生成</div>';
+    return;
+  }
+  wrap.innerHTML = list.map(iss => {
+    const isNew = window._newIssueId === iss.id;
+    return `
+    <div class="card${isNew?' issue-card-new':''}" style="border-left:4px solid var(--danger)">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+        <div><b style="color:var(--danger)">${iss.id}</b> · ${iss.flow}</div>
+        <span class="badge ${iss.status==='已闭环'?'b-green':'b-yellow'}">${iss.status}</span>
+      </div>
+      <div style="font-size:12.5px;color:var(--muted);margin-top:6px">控制点：${iss.ctrl}</div>
+      <div style="font-size:12px;color:var(--dim);margin-top:4px">发现日期：${iss.created}</div>
+      <div style="margin-top:8px">
+        ${iss.status==='整改中' ? `<button class="btn sm green" onclick="closeIssue('${iss.id}')">✓ 整改完成</button>` : '<span style="font-size:12px;color:var(--accent)">✅ 已闭环（整改完成+管理层确认）</span>'}
+      </div>
+    </div>`;
+  }).join('');
+  window._newIssueId = null;
+}
+
+function closeIssue(id){
+  issues[id].status = '已闭环';
+  saveState();
+  renderIssues(); renderDash();
+}
+
+// ══════════ 渲染：看板 ══════════
+function renderDash(){
+  const total = CONTROLS.length;
+  const done = CONTROLS.filter(c=>testState[c.id]!=='未测').length;
+  const pass = CONTROLS.filter(c=>testState[c.id]==='通过').length;
+  const exc = CONTROLS.filter(c=>testState[c.id]==='例外').length;
+  const open = Object.values(issues).filter(i=>i.status!=='已闭环').length;
+  const rate = total? Math.round(done/total*100):0;
+  document.getElementById('stTotal').textContent = total;
+  document.getElementById('stDone').textContent = done;
+  document.getElementById('stExcept').textContent = exc;
+  document.getElementById('stOpen').textContent = open;
+  // KPI 计数动画
+  const kpiData = [
+    {id:'kTotal', val:total, suffix:''},
+    {id:'kDone', val:done, suffix:''},
+    {id:'kPass', val:pass, suffix:''},
+    {id:'kExcept', val:exc, suffix:''},
+    {id:'kRate', val:rate, suffix:'%'}
+  ];
+  kpiData.forEach(k => {
+    const el = document.getElementById(k.id);
+    el.dataset.target = k.val;
+    el.dataset.suffix = k.suffix;
+  });
+  // 看板可见则触发计数动画，否则显示 0
+  if(document.getElementById('p4').classList.contains('active')) animateKPIs();
+  else kpiData.forEach(k => document.getElementById(k.id).textContent = '0' + k.suffix);
+  // 流程完成度
+  const flows = {};
+  CONTROLS.forEach(c=>{
+    if(!flows[c.flow]) flows[c.flow] = {t:0,d:0};
+    flows[c.flow].t++;
+    if(testState[c.id]!=='未测') flows[c.flow].d++;
+  });
+  document.getElementById('flowBars').innerHTML = Object.entries(flows).map(([f,v])=>{
+    const p = Math.round(v.d/v.t*100);
+    return `<div class="bar-wrap">
+      <div class="bar-label"><span>${f}</span><span>${v.d}/${v.t} 控制点 · ${p}%</span></div>
+      <div class="bar"><div class="f" data-tw="${p}" style="width:0%;background:${p===100?'var(--accent)':'var(--primary)'}"></div></div>
+    </div>`;
+  }).join('');
+  // stagger 波浪填充
+  document.querySelectorAll('#flowBars .bar .f').forEach((el,i)=>{
+    el.style.transitionDelay = (i * 0.1) + 's';
+    requestAnimationFrame(()=>{ el.style.width = el.dataset.tw + '%'; });
+  });
+  // workflow bar done 状态
+  const wfSteps = document.querySelectorAll('.wf-step');
+  const hasIssues = Object.keys(issues).length > 0;
+  const hasClosed = Object.values(issues).some(i=>i.status==='已闭环');
+  wfSteps.forEach(s => s.classList.remove('done'));
+  if(wfSteps[0]) wfSteps[0].classList.add('done');
+  if(done > 0 && wfSteps[1]) wfSteps[1].classList.add('done');
+  if(hasIssues && wfSteps[2]) wfSteps[2].classList.add('done');
+  if(hasClosed && wfSteps[3]) wfSteps[3].classList.add('done');
+}
+
+// KPI 计数动画
+function animateKPIs(){
+  const els = document.querySelectorAll('#p4 .kpi .v');
+  els.forEach(el => {
+    const target = parseInt(el.dataset.target) || 0;
+    const suffix = el.dataset.suffix || '';
+    if(target === 0){ el.textContent = '0' + suffix; return; }
+    const duration = 1000;
+    const start = performance.now();
+    function step(now){
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(target * eased);
+      el.textContent = current + suffix;
+      if(progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  });
+}
+
+function resetTests(){
+  CONTROLS.forEach(c=>testState[c.id]='未测');
+  issues = {};
+  localStorage.removeItem('soxWorkbench_v2');
+  renderTC(); renderIssues(); renderDash();
+}
+
+// ══════════ 抽样计算器 ══════════
+let lastN = 59;
+function calcSample(){
+  const CL = parseFloat(document.getElementById('sCl').value)/100;
+  const TD = parseFloat(document.getElementById('sTd').value)/100;
+  const ED = parseFloat(document.getElementById('sEd').value)/100;
+  const N  = parseInt(document.getElementById('sPop').value);
+  if(!CL||!TD||!N){ document.getElementById('sampleResult').innerHTML='请输入有效参数'; return; }
+  if(ED >= TD){
+    document.getElementById('sampleResult').innerHTML = `<b style="color:var(--danger)">⚠️ 参数错误：预期偏差率（${ED*100}%）必须小于可容忍偏差率（${TD*100}%）</b><br><span style="font-size:12px">否则样本量无意义（无法区分预期偏差与容忍偏差）。请调整后重试。</span>`;
+    lastN = 0;  // 报错时禁止抽样
+    return;
+  }
+  // 泊松近似（ED=0）：n = ln(1-CL)/ln(1-TD)
+  let n0 = Math.log(1-CL)/Math.log(1-TD);
+  let n = Math.ceil(n0);
+  if(ED>0){
+    // 统计展开近似：n = n0 * (1 + (1+ED*n0)/(n0*(TD-ED))) 简化处理，并向上取整
+    const adjust = 1 + (1 + ED*n0)/(n0*(TD-ED||0.0001));
+    n = Math.ceil(n0 * adjust);
+  }
+  // 样本量上限约束（总体规模截断）
+  let capped = false;
+  if(N>0 && n>N){ n=N; capped=true; }
+  const txt = `✅ 样本量计算结果<br><br>
+  <b>${n} 笔</b>（置信度 ${CL*100}% / 可容忍偏差 ${TD*100}% / 预期偏差 ${ED*100}%）<br>
+  总体规模 ${N} 笔，按近似公式：n = ln(1-CL) ÷ ln(1-TD)${ED>0?'（含预期偏差调整）':''}${capped?'<br>⚠️ 已应用<b>样本量上限约束</b>（n>总体 → 取全部总体）':''}<br><br>
+  📌 实务解读：抽取 ${n} 笔执行控制测试，若发现 ≤${Math.floor(ED*n)} 笔例外，可在 ${CL*100}% 置信水平下认为该控制有效运行。<br>
+  <span style="font-size:11.5px;color:var(--warn)">⚠️ 演示口径：与 AICPA 抽样表 95%/5% → 59 笔对照验证；实际项目以事务所方法为准。</span>`;
+  document.getElementById('sampleResult').innerHTML = txt;
+  lastN = n;
+}
+
+// 可复现种子随机（mulberry32）
+function mulberry32(seed){
+  return function(){
+    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+    let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+function doSample(){
+  if(!lastN){
+    document.getElementById('sampleOut').innerHTML = `<span style="color:var(--danger)">⚠️ 请先点击「计算样本量」得到有效样本量（当前参数报错或未计算）。</span>`;
+    return;
+  }
+  const N = parseInt(document.getElementById('sPop').value);
+  const n = lastN;
+  const nn = n;
+  const seed = parseInt(document.getElementById('sSeed').value) || 42;
+  const rnd = mulberry32(seed);
+  const set = new Set();
+  while(set.size < nn && set.size < N){ set.add(Math.floor(rnd()*N)+1); }
+  const arr = [...set].sort((a,b)=>a-b);
+  document.getElementById('sampleOut').innerHTML = `随机抽取 ${arr.length} 笔（从 1-${N}，种子 ${seed} 可复现）：<br>` + arr.join('、') + `<br><br><span style="color:var(--dim)">→ 将这 ${arr.length} 笔编号对应到总体明细，逐笔执行控制测试并记录结果。审计留痕：记录种子号即可复现抽样。</span>`;
+}
+
+function clearSample(){
+  document.getElementById('sampleOut').innerHTML = '';
+  document.getElementById('sampleResult').innerHTML = '点击「计算样本量」得到结果';
+}
+
+// ══════════ Tab 切换 ══════════
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(x=>{x.classList.remove('active');x.classList.remove('animate-in')});
+    t.classList.add('active');
+    const panel = document.getElementById(t.dataset.p);
+    panel.classList.add('active');
+    panel.classList.add('animate-in');
+    // workflow bar 同步
+    document.querySelectorAll('.wf-step').forEach(s=>s.classList.remove('active'));
+    const wf = document.querySelector('.wf-step[data-p="'+t.dataset.p+'"]');
+    if(wf) wf.classList.add('active');
+    // 切到看板时重新触发 KPI 计数
+    if(t.dataset.p === 'p4') animateKPIs();
+  });
+});
+// workflow bar 点击切换 Tab
+document.querySelectorAll('.wf-step').forEach(s=>{
+  s.addEventListener('click', ()=>{
+    const tab = document.querySelector('.tab[data-p="'+s.dataset.p+'"]');
+    if(tab) tab.click();
+  });
+});
+
+// ══════════ 状态持久化（localStorage）══════════
+function saveState(){
+  try{
+    localStorage.setItem('soxWorkbench_v2', JSON.stringify({testState, issues}));
+  }catch(e){}
+}
+function loadState(){
+  try{
+    const raw = localStorage.getItem('soxWorkbench_v2');
+    if(!raw) return;
+    const d = JSON.parse(raw);
+    if(d.testState) testState = Object.assign(testState, d.testState);
+    if(d.issues) issues = d.issues;
+  }catch(e){}
+}
+
+// ══════════ 初始化 ══════════
+loadState();
+renderCM(); renderTC(); renderIssues(); renderDash();
+</script>
+</body>
+</html>

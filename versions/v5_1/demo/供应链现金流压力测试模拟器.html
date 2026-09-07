@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>供应链现金流压力测试模拟器 | 胡凯作品集</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0d16;color:#e8eaf0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;padding:20px;min-height:100vh}
+.container{max-width:1100px;margin:0 auto}
+.header{text-align:center;margin-bottom:24px}
+.header h1{font-size:22px;background:linear-gradient(135deg,#fff,#6d7cff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.header p{font-size:13px;color:#8fa3c0;line-height:1.6}
+.panel{background:linear-gradient(145deg,rgba(20,24,38,0.9),rgba(14,17,26,0.95));border:1px solid rgba(109,124,255,0.18);border-radius:16px;padding:24px;margin-bottom:20px}
+.panel h3{font-size:15px;color:#6d7cff;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.control{background:rgba(109,124,255,0.05);border:1px solid rgba(109,124,255,0.12);border-radius:10px;padding:14px}
+.control label{display:block;font-size:12px;color:#8fa3c0;margin-bottom:8px;font-weight:500}
+.control .val{float:right;color:#6d7cff;font-weight:700;font-family:monospace}
+.control input[type=range]{width:100%;height:6px;-webkit-appearance:none;background:rgba(109,124,255,0.15);border-radius:3px;outline:none}
+.control input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#6d7cff,#4f5bd5);cursor:pointer;box-shadow:0 2px 8px rgba(109,124,255,0.4)}
+.control .hint{font-size:10.5px;color:#5b6070;margin-top:6px;line-height:1.5}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:20px}
+.kpi{background:rgba(109,124,255,0.06);border:1px solid rgba(109,124,255,0.15);border-radius:10px;padding:14px;text-align:center}
+.kpi .v{font-size:22px;font-weight:700;color:#6d7cff;font-family:monospace}
+.kpi .l{font-size:11px;color:#8fa3c0;margin-top:4px}
+.kpi.green .v{color:#34d399}
+.kpi.orange .v{color:#fbbf24}
+.kpi.red .v{color:#f87171}
+.alert{padding:14px 18px;border-radius:10px;margin-bottom:16px;font-size:13px;line-height:1.7}
+.alert.green{background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.3);color:#34d399}
+.alert.orange{background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);color:#fbbf24}
+.alert.red{background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.3);color:#f87171}
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.chart-box{background:rgba(109,124,255,0.04);border:1px solid rgba(109,124,255,0.1);border-radius:12px;padding:16px}
+.chart-box h4{font-size:13px;color:#a5b0ff;margin-bottom:10px}
+.chart{width:100%;height:300px}
+.btn{display:inline-block;background:linear-gradient(135deg,#6d7cff,#4f5bd5);color:#fff;padding:10px 24px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .2s;margin-top:12px}
+.btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(109,124,255,0.35)}
+.glossary{margin-top:20px}
+.glossary h4{font-size:13px;color:#a5b0ff;margin-bottom:10px}
+.glossary-item{font-size:11.5px;color:#8fa3c0;line-height:1.8;margin-bottom:6px;padding-left:14px;position:relative}
+.glossary-item::before{content:'';position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:#6d7cff}
+.glossary-item b{color:#c9d1e8}
+@media(max-width:768px){.charts{grid-template-columns:1fr}.chart{height:250px}}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>🏭 供应链现金流压力测试模拟器</h1>
+    <p>基于汽车供应链"账期错配+委托贷款"场景，调整账期、回款概率、委贷规模等参数，实时观察集团资金缺口与风险预警等级</p>
+  </div>
+
+  <div class="panel">
+    <h3>⚙️ 参数设置</h3>
+    <div class="controls">
+      <div class="control">
+        <label>供应商账期（天） <span class="val" id="apVal">90</span></label>
+        <input type="range" id="ap" min="30" max="180" step="10" value="90">
+        <div class="hint">整车厂对上游的付款账期</div>
+      </div>
+      <div class="control">
+        <label>月均采购额（万） <span class="val" id="purchaseVal">5000</span></label>
+        <input type="range" id="purchase" min="1000" max="20000" step="500" value="5000">
+        <div class="hint">集团每月向上游采购金额</div>
+      </div>
+      <div class="control">
+        <label>回款及时率 <span class="val" id="collectionVal">85%</span></label>
+        <input type="range" id="collection" min="50" max="100" step="5" value="85">
+        <div class="hint">下游经销商按期回款比例</div>
+      </div>
+      <div class="control">
+        <label>委托贷款规模（万） <span class="val" id="loanVal">20000</span></label>
+        <input type="range" id="loan" min="0" max="50000" step="2000" value="20000">
+        <div class="hint">集团资金池可调度的委贷额度</div>
+      </div>
+      <div class="control">
+        <label>委贷年利率 <span class="val" id="rateVal">4.5%</span></label>
+        <input type="range" id="rate" min="2.0" max="8.0" step="0.5" value="4.5">
+        <div class="hint">委托贷款的资金成本</div>
+      </div>
+      <div class="control">
+        <label>安全现金垫（万） <span class="val" id="bufferVal">5000</span></label>
+        <input type="range" id="buffer" min="1000" max="20000" step="1000" value="5000">
+        <div class="hint">集团需保留的最低现金余额</div>
+      </div>
+    </div>
+    <button class="btn" onclick="runSim()">🔄 重新模拟</button>
+  </div>
+
+  <div id="alertBox"></div>
+  <div class="kpis" id="kpis"></div>
+
+  <div class="charts">
+    <div class="chart-box">
+      <h4>📊 未来6个月现金流预测</h4>
+      <div class="chart" id="chart1"></div>
+    </div>
+    <div class="chart-box">
+      <h4>⚠️ 资金缺口敏感性分析</h4>
+      <div class="chart" id="chart2"></div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:20px">
+    <h3>💡 术语解释</h3>
+    <div class="glossary">
+      <div class="glossary-item"><b>账期错配</b>：上游供应商账期（3-6个月）与下游经销商回款周期不匹配，导致集团资金被占用</div>
+      <div class="glossary-item"><b>委托贷款</b>：集团通过银行通道向成员单位发放贷款，银行仅做通道不担风险，是集团资金调度的合规方式</div>
+      <div class="glossary-item"><b>资金缺口</b>：特定时点现金余额低于安全垫的部分，需要通过委贷或外部融资弥补</div>
+      <div class="glossary-item"><b>三级风险预警</b>：绿色（资金充裕）→ 橙色（接近安全垫，需关注）→ 红色（资金缺口，需立即调度）</div>
+      <div class="glossary-item"><b>诚实标注</b>：本模拟器数据为基于行业基准的模拟数据，用于展示分析框架，不代表任何公司真实经营数据</div>
+    </div>
+  </div>
+</div>
+
+<script>
+let chart1, chart2;
+
+function initCharts(){
+  chart1 = echarts.init(document.getElementById('chart1'));
+  chart2 = echarts.init(document.getElementById('chart2'));
+  window.addEventListener('resize', ()=>{chart1.resize();chart2.resize()});
+}
+
+function runSim(){
+  const ap = parseInt(document.getElementById('ap').value);
+  const purchase = parseInt(document.getElementById('purchase').value);
+  const collection = parseInt(document.getElementById('collection').value)/100;
+  const loan = parseInt(document.getElementById('loan').value);
+  const rate = parseFloat(document.getElementById('rate').value)/100;
+  const buffer = parseInt(document.getElementById('buffer').value);
+
+  const months = 6;
+  const monthlyPay = purchase; // 每月采购额
+  const monthlyRevenue = purchase * 1.15; // 假设销售收入比采购高15%
+
+  // 现金流模拟
+  let cash = buffer * 2; // 初始现金
+  const cashFlow = [];
+  const inflow = [];
+  const outflow = [];
+  const gap = [];
+
+  for(let m=0;m<months;m++){
+    // 流入：当月销售的collection比例回款 + 前一个月的(1-collection)回款
+    const currentIn = monthlyRevenue * collection + monthlyRevenue * (1-collection) * (m>0?1:0);
+    // 流出：ap天前的采购额到期支付（简化为ap/30个月前的采购）
+    const payDelay = Math.round(ap/30);
+    const currentOut = (m >= payDelay) ? monthlyPay : monthlyPay * 0.3; // 前几个月只付30%
+    // 委贷利息支出
+    const interest = loan * rate / 12;
+
+    cash += currentIn - currentOut - interest;
+    cashFlow.push(Math.round(cash));
+    inflow.push(Math.round(currentIn));
+    outflow.push(Math.round(currentOut + interest));
+    gap.push(Math.max(0, buffer - cash));
+  }
+
+  // 最大缺口
+  const maxGap = Math.max(...gap);
+  const minCash = Math.min(...cashFlow);
+  const avgCash = Math.round(cashFlow.reduce((a,b)=>a+b,0)/months);
+  const riskLevel = maxGap > 0 ? (maxGap > buffer*0.5 ? 'red' : 'orange') : 'green';
+
+  // 预警
+  const alertBox = document.getElementById('alertBox');
+  if(riskLevel === 'green'){
+    alertBox.innerHTML = `<div class="alert green">✅ <b>风险等级：绿色（安全）</b> —— 未来6个月现金余额始终高于安全垫，资金充裕。建议：可适当提高委贷规模获取利息收入，或缩短供应商账期改善供应链关系。</div>`;
+  } else if(riskLevel === 'orange'){
+    alertBox.innerHTML = `<div class="alert orange">⚠️ <b>风险等级：橙色（关注）</b> —— 最大资金缺口约 ${maxGap.toLocaleString()} 万，接近安全垫。建议：提前安排委贷额度，关注下游回款情况，必要时延长部分供应商账期。</div>`;
+  } else {
+    alertBox.innerHTML = `<div class="alert red">🚨 <b>风险等级：红色（预警）</b> —— 最大资金缺口约 ${maxGap.toLocaleString()} 万，超过安全垫50%。建议：立即调度委贷资金，与银行沟通授信额度，考虑应收账款保理融资。</div>`;
+  }
+
+  // KPI
+  document.getElementById('kpis').innerHTML = `
+    <div class="kpi"><div class="v">${minCash.toLocaleString()}</div><div class="l">最低现金余额（万）</div></div>
+    <div class="kpi ${maxGap>0?'orange':'green'}"><div class="v">${maxGap.toLocaleString()}</div><div class="l">最大资金缺口（万）</div></div>
+    <div class="kpi"><div class="v">${avgCash.toLocaleString()}</div><div class="l">平均现金余额（万）</div></div>
+    <div class="kpi ${riskLevel==='green'?'green':riskLevel==='orange'?'orange':'red'}"><div class="v">${riskLevel==='green'?'安全':riskLevel==='orange'?'关注':'预警'}</div><div class="l">风险等级</div></div>
+  `;
+
+  // 现金流图
+  const monthsLabel = Array.from({length:months},(_,i)=>`第${i+1}月`);
+  chart1.setOption({
+    backgroundColor:'transparent',
+    tooltip:{trigger:'axis',formatter:p=>{let s=p[0].axisValue+'<br/>';p.forEach(item=>{s+=item.marker+item.seriesName+': '+item.value.toLocaleString()+'万<br/>'});return s}},
+    legend:{data:['现金余额','现金流入','现金流出','安全垫'],textStyle:{color:'#8fa3c0',fontSize:11},top:0},
+    grid:{left:60,right:20,top:40,bottom:40},
+    xAxis:{type:'category',data:monthsLabel,axisLine:{lineStyle:{color:'#2a3045'}},axisLabel:{color:'#5b6070'}},
+    yAxis:{type:'value',name:'万元',nameTextStyle:{color:'#5b6070'},axisLine:{lineStyle:{color:'#2a3045'}},axisLabel:{color:'#5b6070'},splitLine:{lineStyle:{color:'rgba(42,48,69,0.5)'}}},
+    series:[
+      {name:'现金余额',type:'line',data:cashFlow,smooth:true,lineStyle:{width:2.5,color:'#6d7cff'},itemStyle:{color:'#6d7cff'},areaStyle:{color:'rgba(109,124,255,0.15)'}},
+      {name:'现金流入',type:'bar',data:inflow,itemStyle:{color:'rgba(52,211,153,0.7)'},barWidth:'30%'},
+      {name:'现金流出',type:'bar',data:outflow,itemStyle:{color:'rgba(248,113,113,0.7)'},barWidth:'30%'},
+      {name:'安全垫',type:'line',data:Array(months).fill(buffer),lineStyle:{type:'dashed',color:'#fbbf24',width:1.5},symbol:'none'}
+    ]
+  });
+
+  // 敏感性分析：账期vs回款率对缺口的影响
+  const apRange = [30,60,90,120,150,180];
+  const colRange = [50,60,70,80,90,100];
+  const heatData = [];
+  apRange.forEach((apVal,ai)=>{
+    colRange.forEach((colVal,ci)=>{
+      let c = buffer*2;
+      let g = 0;
+      const delay = Math.round(apVal/30);
+      for(let m=0;m<months;m++){
+        const cin = monthlyRevenue * colVal/100 + monthlyRevenue * (1-colVal/100) * (m>0?1:0);
+        const cout = (m >= delay) ? monthlyPay : monthlyPay * 0.3;
+        c += cin - cout - loan*rate/12;
+        g = Math.max(g, buffer - c);
+      }
+      heatData.push([ci, ai, Math.round(g)]);
+    });
+  });
+
+  chart2.setOption({
+    backgroundColor:'transparent',
+    tooltip:{formatter:p=>`账期${apRange[p.value[1]]}天 / 回款率${colRange[p.value[0]]}%<br/>最大缺口: ${p.value[2].toLocaleString()}万`},
+    grid:{left:60,right:20,top:20,bottom:40},
+    xAxis:{type:'category',data:colRange.map(v=>v+'%'),name:'回款率',nameTextStyle:{color:'#5b6070'},axisLine:{lineStyle:{color:'#2a3045'}},axisLabel:{color:'#5b6070'}},
+    yAxis:{type:'category',data:apRange.map(v=>v+'天'),name:'账期',nameTextStyle:{color:'#5b6070'},axisLine:{lineStyle:{color:'#2a3045'}},axisLabel:{color:'#5b6070'}},
+    visualMap:{min:0,max:buffer*2,calculable:true,orient:'horizontal',left:'center',bottom:0,textStyle:{color:'#8fa3c0'},inRange:{color:['#34d399','#fbbf24','#f87171']}},
+    series:[{type:'heatmap',data:heatData,label:{show:true,color:'#fff',fontSize:9},emphasis:{itemStyle:{shadowBlur:10,shadowColor:'rgba(0,0,0,0.5)'}}}]
+  });
+}
+
+// 滑块实时更新
+['ap','purchase','collection','loan','rate','buffer'].forEach(id=>{
+  document.getElementById(id).addEventListener('input',function(){
+    const v = this.value;
+    const suffix = id==='collection'||id==='rate'?'%':(id==='ap'?'天':'');
+    const prefix = (id==='purchase'||id==='loan'||id==='buffer') ? '' : '';
+    document.getElementById(id+'Val').textContent = (id==='purchase'||id==='loan'||id==='buffer') ? parseInt(v).toLocaleString() : v + suffix;
+  });
+});
+
+let debounce;
+['ap','purchase','collection','loan','rate','buffer'].forEach(id=>{
+  document.getElementById(id).addEventListener('change',()=>{
+    clearTimeout(debounce);
+    debounce = setTimeout(runSim, 300);
+  });
+});
+
+initCharts();
+runSim();
+</script>
+</body>
+</html>

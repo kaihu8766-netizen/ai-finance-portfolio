@@ -1,0 +1,4 @@
+# LPR 蒙特卡洛 Demo 依赖（一键运行蒙特卡洛.bat 会自检并可选自动安装）
+# 安装：pip install -r requirements.txt
+numpy>=1.24
+matplotlib>=3.7
