@@ -5629,7 +5629,7 @@ function showWork(id){
   if(appStyle) styleHtml+='<style>'+appStyle.textContent+'</style>';
   if(pageStyle) styleHtml+='<style>'+pageStyle.textContent+'/* Mobile: moved to app-style for iframe injection */</style>';
   // echarts loaded via external script in iframe
-  styleHtml+='<script src="echarts.min.js"></script>';
+  styleHtml+='<script>var echarts=window.parent.echarts;<\/script>';
   var aiEngine=document.getElementById('ai-engine');
   if(aiEngine) styleHtml+='<script>'+aiEngine.textContent.replace(/<\/script>/g,'<\\/script>')+'<\/script>';
   styleHtml+='<\/head><body style="margin:0;padding:0;">';
