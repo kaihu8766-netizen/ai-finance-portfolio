@@ -103,6 +103,47 @@
 
 ---
 
+## 8.1 协作流程（复核AI必读）
+
+### 工作目录
+`C:\Users\ROG\WorkBuddy\2026-08-02-03-41-55\outputs\作品集\github-deploy\`
+
+主力AI（豆包/WorkBuddy）和复核AI（DeepSeek Harness）共用此目录。
+
+### 文件交接方式
+复核AI将复核报告写成 `REVIEW_REPORT.md` 放在工作目录根目录，主力AI读取此文件获取意见。不需要用户逐字转发。
+
+### 分工
+| 角色 | 负责什么 | 不负责什么 |
+|------|---------|-----------|
+| 复核AI（DeepSeek） | 业务逻辑、数据一致性、文案风格、代码质量、专业准确性 | 渲染效果（排版/配色/UI）、交互体验 |
+| 主力AI（豆包） | 修改代码、视觉效果、交互体验、部署 | 独立复核（自己审自己有盲区） |
+| 作者（人） | 最终拍板、判断性问题决策、查看渲染效果 | — |
+
+### 标准工作流
+```
+1. 作者提需求 → 主力AI做修改 → git commit（本地即可，不一定要push）
+2. 作者通知复核AI："开始复核"
+3. 复核AI执行：git diff HEAD~1 看本次修改了什么 → 读相关文件 → 按REVIEW_CHECKLIST审查
+4. 复核AI写 REVIEW_REPORT.md（按REVIEW_CHECKLIST里的格式）
+5. 作者通知主力AI："读REVIEW_REPORT.md，根据意见修改"
+6. 主力AI读报告 → 修改 → commit
+7. 重复直到无严重问题 → 主力AI push到GitHub → 部署
+```
+
+### Git权限
+- 复核AI可以执行：git pull / fetch / diff / log / status / add / commit
+- 复核AI**不要执行**：git push（push由主力AI统一做，避免凭证问题和冲突）
+- 如果复核AI需要提交报告文件，可以git add + git commit REVIEW_REPORT.md
+
+### 能力边界（复核AI须知）
+- 你不能看HTML渲染效果，只能读源码——排版/配色问题请标注"需人工确认渲染效果"
+- 你不能创建GitHub Issue/PR——有问题写进REVIEW_REPORT.md即可
+- 你不能给主力AI发消息——通过REVIEW_REPORT.md文件交接
+- 你可以执行Python/JS/PowerShell脚本做自动化校验
+
+---
+
 ## 9. 已知的坑和教训
 
 1. **改内容前先搜全文件**：同一个内容可能在卡片版和详情页都出现，只改一处会遗漏
