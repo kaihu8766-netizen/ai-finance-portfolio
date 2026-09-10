@@ -35,6 +35,7 @@
 ├── index.html              # 最新版作品集
 ├── echarts.min.js          # ECharts库
 ├── README.md               # 本文件
+├── .gitignore              # Git忽略规则
 ├── AUTHOR_PROFILE.md       # 作者画像（复核AI必读）
 ├── PROJECT_BRIEF.md        # 项目档案（复核AI必读）
 ├── REVIEW_CHECKLIST.md     # 复核清单（标准化复核流程）
@@ -45,7 +46,11 @@
 │   ├── LPR蒙特卡洛预测模拟器.html
 │   ├── 供应链现金流压力测试模拟器.html
 │   ├── SOX控制测试工作台.html
-│   └── 现金流压力测试模拟器.html
+│   ├── 现金流压力测试模拟器.html
+│   ├── lpr_monte_carlo.py  # LPR蒙特卡洛Python源码
+│   ├── lpr_mc_paths.png    # 蒙特卡洛路径图
+│   ├── lpr_mc_quantiles.csv # 分位数数据
+│   └── requirements.txt    # Python依赖
 ├── versions/               # 历史版本归档
 └── .github/workflows/      # GitHub Pages 自动部署
 ```

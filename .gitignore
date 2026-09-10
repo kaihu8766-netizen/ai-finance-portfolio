@@ -1,0 +1,23 @@
+# 临时文件
+*.tmp
+*.bak
+*.pyc
+__pycache__/
+*.log
+
+# 系统文件
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# 编辑器文件
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 复核报告（本地生成，不提交）
+REVIEW_REPORT.md
+
+# 本地预览
+*.local.html
