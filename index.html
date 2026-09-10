@@ -3404,6 +3404,34 @@ window.addEventListener("resize", function(){
     
 
 </div>
+
+<div class="sec reveal">
+  <div class="sec-head"><span class="num">07</span><h2>局限与诚实披露</h2><span class="en">LIMITATIONS</span></div>
+  <div class="verify-box">
+    <h4>⚠️ 行业研究，非投资建议</h4>
+    <ul>
+      <li>市场份额数据存在多口径差异（笔数/金额/活跃用户），不同机构统计结果不一致——本研究已标注口径，但仍可能存在统计偏差</li>
+      <li>抖音支付相关数据多来自公开报道与高管发言，非官方完整披露——收单资质、交易规模等核心数据尚未完全公开</li>
+      <li>费率与结算时效为行业一般水平，具体机构间存在商务谈判差异，不代表实际签约价格</li>
+      <li>"入职90天工作地图"为基于岗位理解的个人规划，非支付机构官方培训体系</li>
+      <li>本研究不构成任何投资建议或商业决策依据</li>
+    </ul>
+  </div>
+</div>
+
+<div class="sec reveal">
+  <div class="sec-head"><span class="num">08</span><h2>数据来源与假设说明</h2><span class="en">DATA SOURCES</span></div>
+  <table>
+    <tr><th>数据类型</th><th>具体内容</th><th>来源/性质</th><th>说明</th></tr>
+    <tr><td><b>网络支付总量</b></td><td>2025年网络支付金额337.81万亿</td><td><span style="color:#34d399">公开数据</span></td><td>中国人民银行《支付体系运行总体情况》，可直接核验</td></tr>
+    <tr><td><b>市场份额</b></td><td>微信59.7%（笔数）、支付宝54.6%（金额）</td><td><span style="color:#34d399">第三方研究</span></td><td>易观分析2026Q1监测数据，不同机构口径可能存在差异</td></tr>
+    <tr><td><b>备付金政策</b></td><td>客户备付金集中存管要求</td><td><span style="color:#34d399">监管规定</span></td><td>中国人民银行关于支付机构客户备付金集中存管的相关规定</td></tr>
+    <tr><td><b>抖音支付动态</b></td><td>牌照获取、高管变更、豆包扫码支付上线</td><td><span style="color:#34d399">公开报道</span></td><td>来自公司公告、高管公开发言与权威媒体报道</td></tr>
+    <tr><td><b>费率与时效</b></td><td>支付费率区间、结算时效一般水平</td><td><span style="color:#fbbf24">行业估算</span></td><td>基于公开信息与行业一般水平估算，具体以实际签约为准</td></tr>
+  </table>
+  <div class="quote" style="margin-top:14px"><b>数据时效：</b>所有公开数据截至2026年8月，支付行业监管政策与市场格局变化较快，后续数据发布可能改变分析结论。</div>
+</div>
+
 </section>
 </script>
 <script type="text/html" id="page-03">
@@ -3544,7 +3572,21 @@ window.addEventListener("resize", function(){
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">07</span><h2>可交互 Demo：LPR 蒙特卡洛模拟器</h2><span class="en">INTERACTIVE DEMO</span></div>
+  <div class="sec-head"><span class="num">07</span><h2>数据来源与假设说明</h2><span class="en">DATA SOURCES</span></div>
+  <table>
+    <tr><th>数据类型</th><th>具体内容</th><th>来源/性质</th><th>说明</th></tr>
+    <tr><td><b>LPR历史数据</b></td><td>2019年8月改革以来1Y/5Y LPR报价序列</td><td><span style="color:#34d399">公开数据</span></td><td>中国人民银行官网每月20日公布，可直接核验</td></tr>
+    <tr><td><b>MLF利率</b></td><td>中期借贷便利操作利率</td><td><span style="color:#34d399">公开数据</span></td><td>央行公开市场操作公告，月度数据</td></tr>
+    <tr><td><b>银行净息差</b></td><td>商业银行净息差季度数据</td><td><span style="color:#34d399">公开数据</span></td><td>国家金融监督管理总局季度统计报告</td></tr>
+    <tr><td><b>社融/CPI</b></td><td>社会融资规模增量、CPI同比</td><td><span style="color:#34d399">公开数据</span></td><td>国家统计局月度发布</td></tr>
+    <tr><td><b>模型参数</b></td><td>Vasicek模型θ/κ/σ</td><td><span style="color:#fbbf24">演示设定</span></td><td>θ/κ为演示假设，σ由历史LPR序列近似估计，非市场校准</td></tr>
+    <tr><td><b>预测结果</b></td><td>未来LPR概率分布</td><td><span style="color:#fbbf24">模型输出</span></td><td>基于演示参数的模拟结果，不构成投资建议</td></tr>
+  </table>
+  <div class="quote" style="margin-top:14px"><b>数据时效：</b>所有公开数据截至2026年8月（含8月LPR报价与2026Q2净息差），后续数据发布可能改变分析结论。</div>
+</div>
+
+<div class="sec reveal">
+  <div class="sec-head"><span class="num">08</span><h2>可交互 Demo：LPR 蒙特卡洛模拟器</h2><span class="en">INTERACTIVE DEMO</span></div>
   <div style="background:linear-gradient(145deg,rgba(20,24,38,0.9),rgba(14,17,26,0.95));border:1px solid rgba(109,124,255,0.18);border-radius:14px;padding:24px;text-align:center">
     <div style="font-size:36px;margin-bottom:12px">📈</div>
     <h4 style="font-size:15px;color:#fff;margin-bottom:8px">LPR 蒙特卡洛预测模拟器</h4>
@@ -4626,6 +4668,34 @@ window.addEventListener('resize', function() {
 });
 <\/script>
 </div>
+
+<div class="sec reveal">
+  <div class="sec-head"><span class="num">09</span><h2>局限与诚实披露</h2><span class="en">LIMITATIONS</span></div>
+  <div class="verify-box">
+    <h4>⚠️ 分析框架演示，非实际业务系统</h4>
+    <ul>
+      <li>资金流数据为基于汽车行业基准的模拟数据，非某集团真实财务数据——框架可复用，参数需按实际业务校准</li>
+      <li>账期错配模型假设账期固定，实际业务中账期谈判存在季节性波动与个别客户例外</li>
+      <li>委贷定价仅考虑资金成本，未纳入信用风险溢价、监管成本与银行通道费用</li>
+      <li>AI预测模型基于历史规律外推，遇到行业政策突变（如新能源补贴退坡）时预测偏差会显著增大</li>
+      <li>三级预警阈值为演示设定，实际应用需结合企业风险偏好与流动性储备动态调整</li>
+    </ul>
+  </div>
+</div>
+
+<div class="sec reveal">
+  <div class="sec-head"><span class="num">10</span><h2>数据来源与假设说明</h2><span class="en">DATA SOURCES</span></div>
+  <table>
+    <tr><th>数据类型</th><th>具体内容</th><th>来源/性质</th><th>说明</th></tr>
+    <tr><td><b>资金流数据</b></td><td>月均采购5,000万、委贷规模20,000万、账期90天等</td><td><span style="color:#fbbf24">模拟数据</span></td><td>参考汽车制造行业平均水平设定，非真实企业数据</td></tr>
+    <tr><td><b>行业基准</b></td><td>汽车行业应收账款周转天数、供应链金融模式</td><td><span style="color:#34d399">公开研究</span></td><td>基于行业公开报告与一般认知，未引用特定机构数据</td></tr>
+    <tr><td><b>委贷机制</b></td><td>委托贷款的法律结构、银行通道角色</td><td><span style="color:#34d399">监管规定</span></td><td>依据《商业银行委托贷款管理办法》（银监发〔2018〕2号）</td></tr>
+    <tr><td><b>预测模型</b></td><td>四表一警框架、趋势外推+因果分析+回归三层方法</td><td><span style="color:#34d399">方法论</span></td><td>参考企业现金流预测标准实践，为个人设计的分析框架</td></tr>
+    <tr><td><b>预警阈值</b></td><td>绿色/橙色/红色三级预警的资金缺口阈值</td><td><span style="color:#fbbf24">演示设定</span></td><td>基于安全垫倍数设定，需按企业实际风险偏好调整</td></tr>
+  </table>
+  <div class="quote" style="margin-top:14px"><b>使用说明：</b>本作品的核心价值在于<b>分析框架</b>（资金归集建模→账期错配诊断→现金流预测→三级预警），而非具体数字。实际应用需替换为企业真实数据，并根据行业特性调整模型假设。</div>
+</div>
+
 </section>
 </script>
 <script type="text/html" id="page-06">
@@ -5273,6 +5343,34 @@ window.addEventListener('resize', function(){
 });
 <\/script>
 
+
+<div class="sec reveal">
+  <div class="sec-head"><span class="num">05</span><h2>局限与诚实披露</h2><span class="en">LIMITATIONS</span></div>
+  <div class="verify-box">
+    <h4>⚠️ 工具演示，非审计执业工具</h4>
+    <ul>
+      <li>网易游戏为模拟场景，控制点设计基于公开信息与一般行业认知，非网易真实内控流程——方法论可复用，具体控制点需按企业实际梳理</li>
+      <li>属性抽样计算器的参数（置信水平95%、可容忍偏差率5%）为审计准则常用值，实际应用需根据重要性水平与审计风险评估调整</li>
+      <li>Agent执行部分为概念演示，未接入真实企业ERP/财务系统——实际落地需解决数据接口、权限管理、审计轨迹留存等合规问题</li>
+      <li>ITGC三大控制域为COBIT框架标准分类，具体控制活动需结合企业IT治理成熟度细化</li>
+      <li>本工具不构成审计意见，不能替代注册会计师的职业判断</li>
+    </ul>
+  </div>
+</div>
+
+<div class="sec reveal">
+  <div class="sec-head"><span class="num">06</span><h2>数据来源与假设说明</h2><span class="en">DATA SOURCES</span></div>
+  <table>
+    <tr><th>数据类型</th><th>具体内容</th><th>来源/性质</th><th>说明</th></tr>
+    <tr><td><b>控制矩阵</b></td><td>6大流程18个控制点的设计</td><td><span style="color:#fbbf24">模拟设计</span></td><td>基于网易游戏公开业务模式与互联网行业内控一般实践设计，非真实企业内控文档</td></tr>
+    <tr><td><b>审计准则</b></td><td>SOX 404、PCAOB AS 2201、AICPA审计准则第1314号</td><td><span style="color:#34d399">公开准则</span></td><td>美国公众公司会计监督委员会与美国注册会计师协会公开发布的执业准则</td></tr>
+    <tr><td><b>ITGC框架</b></td><td>COBIT框架的访问安全、变更管理、批处理三大域</td><td><span style="color:#34d399">公开框架</span></td><td>ISACA发布的COBIT 2019框架，为IT治理国际标准</td></tr>
+    <tr><td><b>抽样参数</b></td><td>置信水平95%、可容忍偏差率5%、预计偏差率1%</td><td><span style="color:#34d399">准则常用值</span></td><td>AICPA审计抽样指南中的典型参数，实际应用需按审计计划调整</td></tr>
+    <tr><td><b>测试数据</b></td><td>控制测试的例外项、缺陷分级</td><td><span style="color:#fbbf24">演示数据</span></td><td>为展示工具功能构造的示例数据，非真实审计发现</td></tr>
+  </table>
+  <div class="quote" style="margin-top:14px"><b>使用说明：</b>本工具的核心价值在于<b>将审计方法论转化为可操作的工作模板</b>（控制矩阵→执行测试→缺陷跟踪→抽样计算），而非具体控制点设计。实际应用需按企业真实业务流程重新梳理控制点，并由注册会计师审核确认。</div>
+</div>
+
 </section>
 </script>
 
@@ -5443,6 +5541,19 @@ window.addEventListener('resize', function(){
       <li>AI 调度建议基于 LLM 生成，需资金经理人工审核后执行——涉及资金调拨的操作 AI 一律不直接执行</li>
     </ul>
   </div>
+</div>
+
+<div class="sec reveal">
+  <div class="sec-head"><span class="num">08</span><h2>数据来源与假设说明</h2><span class="en">DATA SOURCES</span></div>
+  <table>
+    <tr><th>数据类型</th><th>具体内容</th><th>来源/性质</th><th>说明</th></tr>
+    <tr><td><b>财务数据</b></td><td>期初现金8,000万、月均流入6,000万、月均支出4,500万、回款率均值0.85等</td><td><span style="color:#fbbf24">模拟数据</span></td><td>基于汽车制造行业平均水平设定的演示参数，非某公司真实财务数据</td></tr>
+    <tr><td><b>历史现金流</b></td><td>2026-03 ~ 2026-08 月度现金余额</td><td><span style="color:#fbbf24">模拟数据</span></td><td>为展示模型效果构造的历史序列，实际应用需替换为真实财务数据</td></tr>
+    <tr><td><b>模型方法</b></td><td>蒙特卡洛模拟、VaR、Cholesky分解、Vasicek均值回复、GBM几何布朗运动</td><td><span style="color:#34d399">专业方法论</span></td><td>精算与金融风险管理标准方法，参考《风险管理与金融机构》（John C. Hull）</td></tr>
+    <tr><td><b>压力测试情景</b></td><td>基准/温和衰退/严重衰退三情景的参数设定</td><td><span style="color:#fbbf24">演示设定</span></td><td>参考美联储CCAR压力测试框架的思路，但具体参数为演示用途</td></tr>
+    <tr><td><b>行业基准</b></td><td>汽车行业应收账款周转天数、季节性因子</td><td><span style="color:#34d399">行业常识</span></td><td>基于公开行业研究的一般性认知，未引用特定机构报告</td></tr>
+  </table>
+  <div class="quote" style="margin-top:14px"><b>使用说明：</b>本模型的核心价值在于<b>方法论框架</b>（随机建模→压力测试→VaR度量→调度建议），而非具体数字。实际应用时，需用企业真实财务数据重新校准所有参数，并根据行业特性调整变量分布假设。</div>
 </div>
 
 <a class="core-link" href="javascript:void(0)" onclick="window.parent.showWork('03');return false;">
