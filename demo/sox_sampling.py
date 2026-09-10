@@ -1,0 +1,113 @@
+"""
+SOX审计属性抽样计算器
+对应作品：w06 SOX审计Agent：网易游戏内控测试工具
+方法：属性抽样、样本量计算、偏差率评估
+参考：AICPA审计准则第1314号（审计抽样）
+"""
+
+import math
+from dataclasses import dataclass
+from typing import Tuple
+
+
+@dataclass
+class SamplingParams:
+    """属性抽样参数"""
+    confidence_level: float = 0.95  # 置信水平
+    tolerable_deviation_rate: float = 0.05  # 可容忍偏差率
+    expected_deviation_rate: float = 0.01  # 预计偏差率
+    population_size: int = 1000  # 总体规模
+
+
+def calculate_sample_size(params: SamplingParams) -> int:
+    """
+    计算属性抽样样本量
+    使用公式：n = (Z^2 * p * (1-p)) / e^2
+    其中Z为置信水平对应的z值，p为预计偏差率，e为可容忍偏差率
+    """
+    # 置信水平对应的Z值
+    z_values = {0.90: 1.645, 0.95: 1.96, 0.99: 2.576}
+    z = z_values.get(params.confidence_level, 1.96)
+
+    p = params.expected_deviation_rate
+    e = params.tolerable_deviation_rate
+
+    # 初始样本量
+    n = (z**2 * p * (1 - p)) / (e**2)
+
+    # 有限总体修正
+    n_adj = n / (1 + (n - 1) / params.population_size)
+
+    return math.ceil(n_adj)
+
+
+def evaluate_sample(deviations: int, sample_size: int, params: SamplingParams) -> dict:
+    """
+    评估样本结果
+    计算上偏差率上限（Upper Deviation Rate）
+    """
+    # 使用泊松近似计算上偏差率
+    confidence_factor = {
+        0.90: {0: 2.31, 1: 3.89, 2: 5.33, 3: 6.69},
+        0.95: {0: 3.00, 1: 4.75, 2: 6.30, 3: 7.76},
+        0.99: {0: 4.61, 1: 6.64, 2: 8.41, 3: 10.05}
+    }
+
+    cf = confidence_factor.get(params.confidence_level, {}).get(deviations, None)
+
+    if cf is None:
+        # 如果偏差数超过表中范围，用公式近似
+        cf = deviations + 1 + math.sqrt(deviations + 1)
+
+    upper_deviation_rate = cf / sample_size
+
+    result = {
+        'sample_size': sample_size,
+        'deviations_found': deviations,
+        'sample_deviation_rate': deviations / sample_size,
+        'upper_deviation_rate': upper_deviation_rate,
+        'tolerable_deviation_rate': params.tolerable_deviation_rate,
+        'control_effective': upper_deviation_rate <= params.tolerable_deviation_rate
+    }
+
+    return result
+
+
+def generate_audit_program() -> list:
+    """生成审计程序清单"""
+    return [
+        {'cycle': '收入循环', 'control': '信用审批', 'frequency': '每笔', 'sample_size': 25},
+        {'cycle': '收入循环', 'control': '发货单匹配', 'frequency': '每日', 'sample_size': 25},
+        {'cycle': '采购循环', 'control': '三方匹配', 'frequency': '每笔', 'sample_size': 30},
+        {'cycle': '采购循环', 'control': '付款审批', 'frequency': '每笔', 'sample_size': 30},
+        {'cycle': '资金循环', 'control': '银行对账', 'frequency': '每月', 'sample_size': 12},
+        {'cycle': '资金循环', 'control': '印章管理', 'frequency': '每次', 'sample_size': 20},
+        {'cycle': 'ITGC', 'control': '权限变更审批', 'frequency': '每次', 'sample_size': 15},
+        {'cycle': 'ITGC', 'control': '程序变更管理', 'frequency': '每次', 'sample_size': 15},
+    ]
+
+
+if __name__ == '__main__':
+    print("=" * 60)
+    print("SOX属性抽样计算器")
+    print("=" * 60)
+
+    params = SamplingParams()
+    sample_size = calculate_sample_size(params)
+
+    print(f"\n抽样参数:")
+    print(f"  置信水平: {params.confidence_level*100:.0f}%")
+    print(f"  可容忍偏差率: {params.tolerable_deviation_rate*100:.1f}%")
+    print(f"  预计偏差率: {params.expected_deviation_rate*100:.1f}%")
+    print(f"  总体规模: {params.population_size}")
+    print(f"  计算样本量: {sample_size}")
+
+    print(f"\n样本结果评估（不同偏差数）:")
+    for deviations in [0, 1, 2, 3]:
+        result = evaluate_sample(deviations, sample_size, params)
+        status = "✓ 控制有效" if result['control_effective'] else "✗ 控制无效"
+        print(f"  发现{deviations}个偏差: 上偏差率={result['upper_deviation_rate']*100:.2f}% {status}")
+
+    print(f"\n审计程序清单:")
+    for program in generate_audit_program():
+        print(f"  [{program['cycle']}] {program['control']} - 样本量{program['sample_size']}")

@@ -1,0 +1,11 @@
+# 第三方库，不计入语言统计
+echarts.min.js linguist-vendored
+
+# HTML文件计入统计（作品集主体）
+*.html linguist-detectable
+
+# Python脚本计入统计
+*.py linguist-detectable
+
+# SQL文件计入统计
+*.sql linguist-detectable

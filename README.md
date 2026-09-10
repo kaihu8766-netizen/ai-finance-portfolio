@@ -42,15 +42,19 @@
 ├── DECISIONS.md            # 决策记录（争议和最终决定）
 ├── CHANGELOG.md            # 版本更新日志
 ├── assets/                 # 图片资源（logo、图标）
-├── demo/                   # 可交互Demo
+├── demo/                   # 可交互Demo与源码
 │   ├── LPR蒙特卡洛预测模拟器.html
 │   ├── 供应链现金流压力测试模拟器.html
 │   ├── SOX控制测试工作台.html
 │   ├── 现金流压力测试模拟器.html
-│   ├── lpr_monte_carlo.py  # LPR蒙特卡洛Python源码
-│   ├── lpr_mc_paths.png    # 蒙特卡洛路径图
-│   ├── lpr_mc_quantiles.csv # 分位数数据
-│   └── requirements.txt    # Python依赖
+│   ├── lpr_monte_carlo.py      # LPR蒙特卡洛Python源码
+│   ├── cashflow_pressure_test.py # 现金流压力测试Python源码
+│   ├── sox_sampling.py         # SOX属性抽样Python源码
+│   ├── supply_chain_analysis.py # 供应链金融分析Python源码
+│   ├── audit_queries.sql       # 财务审计SQL查询示例
+│   ├── lpr_mc_paths.png        # 蒙特卡洛路径图
+│   ├── lpr_mc_quantiles.csv    # 分位数数据
+│   └── requirements.txt        # Python依赖
 ├── versions/               # 历史版本归档
 └── .github/workflows/      # GitHub Pages 自动部署
 ```
