@@ -14,11 +14,12 @@
 
 **快速上手步骤**：
 
-1. **先读项目档案** → [`PROJECT_BRIEF.md`](./PROJECT_BRIEF.md) — 了解这是什么、目标是什么、约束是什么
-2. **再读复核清单** → [`REVIEW_CHECKLIST.md`](./REVIEW_CHECKLIST.md) — 按清单逐项检查
-3. **看决策记录** → [`DECISIONS.md`](./DECISIONS.md) — 了解之前争议过什么、最终怎么定的，避免重复讨论
-4. **看最近commit** — 了解本次修改了什么
-5. **输出复核报告** — 按REVIEW_CHECKLIST.md里的格式
+1. **先读作者画像** → [`AUTHOR_PROFILE.md`](./AUTHOR_PROFILE.md) — 了解作者是谁、专业背景、工作风格、核心价值观
+2. **再读项目档案** → [`PROJECT_BRIEF.md`](./PROJECT_BRIEF.md) — 了解这是什么、目标是什么、约束是什么
+3. **再读复核清单** → [`REVIEW_CHECKLIST.md`](./REVIEW_CHECKLIST.md) — 按清单逐项检查
+4. **看决策记录** → [`DECISIONS.md`](./DECISIONS.md) — 了解之前争议过什么、最终怎么定的，避免重复讨论
+5. **看最近commit** — 了解本次修改了什么
+6. **输出复核报告** — 按REVIEW_CHECKLIST.md里的格式
 
 **重要原则**：
 - 你是独立第三方，不要预设立场，也不要附和主力AI
@@ -34,6 +35,7 @@
 ├── index.html              # 最新版作品集
 ├── echarts.min.js          # ECharts库
 ├── README.md               # 本文件
+├── AUTHOR_PROFILE.md       # 作者画像（复核AI必读）
 ├── PROJECT_BRIEF.md        # 项目档案（复核AI必读）
 ├── REVIEW_CHECKLIST.md     # 复核清单（标准化复核流程）
 ├── DECISIONS.md            # 决策记录（争议和最终决定）
