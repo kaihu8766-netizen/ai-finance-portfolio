@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LPR 蒙特卡洛预测模拟器 | 胡凯作品集</title>
-<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<title>LPR 钂欑壒鍗℃礇棰勬祴妯℃嫙鍣?| 鑳″嚡浣滃搧闆?/title>
+<script src="../echarts.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0a0d16;color:#e8eaf0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;padding:20px;min-height:100vh}
@@ -45,68 +45,68 @@ body{background:#0a0d16;color:#e8eaf0;font-family:-apple-system,BlinkMacSystemFo
 <body>
 <div class="container">
   <div class="header">
-    <h1>📈 LPR 蒙特卡洛预测模拟器</h1>
-    <p>基于 Vasicek 均值回复模型：r<sub>t+1</sub> = r<sub>t</sub> + κ(θ - r<sub>t</sub>)Δt + σ√Δt · ε<br>调整参数，实时观察未来利率走势的概率分布</p>
+    <h1>馃搱 LPR 钂欑壒鍗℃礇棰勬祴妯℃嫙鍣?/h1>
+    <p>鍩轰簬 Vasicek 鍧囧€煎洖澶嶆ā鍨嬶細r<sub>t+1</sub> = r<sub>t</sub> + 魏(胃 - r<sub>t</sub>)螖t + 蟽鈭毼攖 路 蔚<br>璋冩暣鍙傛暟锛屽疄鏃惰瀵熸湭鏉ュ埄鐜囪蛋鍔跨殑姒傜巼鍒嗗竷</p>
   </div>
 
   <div class="panel">
-    <h3>⚙️ 参数设置</h3>
+    <h3>鈿欙笍 鍙傛暟璁剧疆</h3>
     <div class="controls">
       <div class="control">
-        <label>1Y 长期中枢 θ <span class="val" id="thetaVal">2.7%</span></label>
+        <label>1Y 闀挎湡涓灑 胃 <span class="val" id="thetaVal">2.7%</span></label>
         <input type="range" id="theta" min="1.5" max="4.0" step="0.1" value="2.7">
-        <div class="hint">利率长期回归的中心水平</div>
+        <div class="hint">鍒╃巼闀挎湡鍥炲綊鐨勪腑蹇冩按骞?/div>
       </div>
       <div class="control">
-        <label>均值回复速度 κ <span class="val" id="kappaVal">0.10</span></label>
+        <label>鍧囧€煎洖澶嶉€熷害 魏 <span class="val" id="kappaVal">0.10</span></label>
         <input type="range" id="kappa" min="0.02" max="0.50" step="0.01" value="0.10">
-        <div class="hint">越大→回归越快，利率越稳定</div>
+        <div class="hint">瓒婂ぇ鈫掑洖褰掕秺蹇紝鍒╃巼瓒婄ǔ瀹?/div>
       </div>
       <div class="control">
-        <label>1Y 波动率 σ <span class="val" id="sigmaVal">0.35%</span></label>
+        <label>1Y 娉㈠姩鐜?蟽 <span class="val" id="sigmaVal">0.35%</span></label>
         <input type="range" id="sigma" min="0.05" max="1.00" step="0.05" value="0.35">
-        <div class="hint">由2019改革后1Y LPR历史调整估计</div>
+        <div class="hint">鐢?019鏀归潻鍚?Y LPR鍘嗗彶璋冩暣浼拌</div>
       </div>
       <div class="control">
-        <label>模拟年数 <span class="val" id="yearsVal">5年</span></label>
+        <label>妯℃嫙骞存暟 <span class="val" id="yearsVal">5骞?/span></label>
         <input type="range" id="years" min="1" max="10" step="1" value="5">
-        <div class="hint">预测时间跨度</div>
+        <div class="hint">棰勬祴鏃堕棿璺ㄥ害</div>
       </div>
       <div class="control">
-        <label>模拟路径数 <span class="val" id="pathsVal">3000</span></label>
+        <label>妯℃嫙璺緞鏁?<span class="val" id="pathsVal">3000</span></label>
         <input type="range" id="paths" min="500" max="10000" step="500" value="3000">
-        <div class="hint">越多越精确，计算越慢</div>
+        <div class="hint">瓒婂瓒婄簿纭紝璁＄畻瓒婃參</div>
       </div>
       <div class="control">
-        <label>5Y 利差假设 <span class="val" id="spreadVal">0.3%</span></label>
+        <label>5Y 鍒╁樊鍋囪 <span class="val" id="spreadVal">0.3%</span></label>
         <input type="range" id="spread" min="0.0" max="1.0" step="0.05" value="0.3">
-        <div class="hint">5Y LPR 与 1Y 的长期利差</div>
+        <div class="hint">5Y LPR 涓?1Y 鐨勯暱鏈熷埄宸?/div>
       </div>
     </div>
-    <button class="btn" onclick="runSim()">🔄 重新模拟</button>
+    <button class="btn" onclick="runSim()">馃攧 閲嶆柊妯℃嫙</button>
   </div>
 
   <div class="kpis" id="kpis"></div>
 
   <div class="charts">
     <div class="chart-box">
-      <h4>📊 利率路径模拟（抽样100条）</h4>
+      <h4>馃搳 鍒╃巼璺緞妯℃嫙锛堟娊鏍?00鏉★級</h4>
       <div class="chart" id="chart1"></div>
     </div>
     <div class="chart-box">
-      <h4>📉 期末概率分布</h4>
+      <h4>馃搲 鏈熸湯姒傜巼鍒嗗竷</h4>
       <div class="chart" id="chart2"></div>
     </div>
   </div>
 
   <div class="panel" style="margin-top:20px">
-    <h3>💡 术语解释</h3>
+    <h3>馃挕 鏈瑙ｉ噴</h3>
     <div class="glossary">
-      <div class="glossary-item"><b>Vasicek 模型</b>：经典的均值回复利率模型，假设利率会围绕长期中枢θ波动，偏离越远回归力越强</div>
-      <div class="glossary-item"><b>均值回复（Mean Reversion）</b>：利率不会无限上涨或下跌，长期会回到合理水平——这是利率模型与股票模型的核心区别</div>
-      <div class="glossary-item"><b>蒙特卡洛模拟</b>：通过随机生成几千条可能的利率路径，用统计方法估计未来利率的概率分布，而不是给一个单点预测</div>
-      <div class="glossary-item"><b>分位数区间</b>：10%分位表示"有10%的概率利率低于这个值"，90%分位表示"有90%的概率低于这个值"——区间越宽，不确定性越大</div>
-      <div class="glossary-item"><b>诚实标注</b>：本模拟器的θ/κ为演示设定参数，非市场校准结果；σ由历史LPR调整序列近似估计。结果仅演示精算方法，不构成投资建议</div>
+      <div class="glossary-item"><b>Vasicek 妯″瀷</b>锛氱粡鍏哥殑鍧囧€煎洖澶嶅埄鐜囨ā鍨嬶紝鍋囪鍒╃巼浼氬洿缁曢暱鏈熶腑鏋⑽告尝鍔紝鍋忕瓒婅繙鍥炲綊鍔涜秺寮?/div>
+      <div class="glossary-item"><b>鍧囧€煎洖澶嶏紙Mean Reversion锛?/b>锛氬埄鐜囦笉浼氭棤闄愪笂娑ㄦ垨涓嬭穼锛岄暱鏈熶細鍥炲埌鍚堢悊姘村钩鈥斺€旇繖鏄埄鐜囨ā鍨嬩笌鑲＄エ妯″瀷鐨勬牳蹇冨尯鍒?/div>
+      <div class="glossary-item"><b>钂欑壒鍗℃礇妯℃嫙</b>锛氶€氳繃闅忔満鐢熸垚鍑犲崈鏉″彲鑳界殑鍒╃巼璺緞锛岀敤缁熻鏂规硶浼拌鏈潵鍒╃巼鐨勬鐜囧垎甯冿紝鑰屼笉鏄粰涓€涓崟鐐归娴?/div>
+      <div class="glossary-item"><b>鍒嗕綅鏁板尯闂?/b>锛?0%鍒嗕綅琛ㄧず"鏈?0%鐨勬鐜囧埄鐜囦綆浜庤繖涓€?锛?0%鍒嗕綅琛ㄧず"鏈?0%鐨勬鐜囦綆浜庤繖涓€?鈥斺€斿尯闂磋秺瀹斤紝涓嶇‘瀹氭€ц秺澶?/div>
+      <div class="glossary-item"><b>璇氬疄鏍囨敞</b>锛氭湰妯℃嫙鍣ㄧ殑胃/魏涓烘紨绀鸿瀹氬弬鏁帮紝闈炲競鍦烘牎鍑嗙粨鏋滐紱蟽鐢卞巻鍙睱PR璋冩暣搴忓垪杩戜技浼拌銆傜粨鏋滀粎婕旂ず绮剧畻鏂规硶锛屼笉鏋勬垚鎶曡祫寤鸿</div>
     </div>
   </div>
 </div>
@@ -135,15 +135,15 @@ function runSim(){
   const N = parseInt(document.getElementById('paths').value);
   const spread = parseFloat(document.getElementById('spread').value);
 
-  const r0 = 3.0; // 当前1Y LPR
-  const r0_5 = 3.5; // 当前5Y LPR
+  const r0 = 3.0; // 褰撳墠1Y LPR
+  const r0_5 = 3.5; // 褰撳墠5Y LPR
   const theta5 = theta + spread;
-  const kappa5 = kappa * 1.5; // 5Y回复更快
-  const sigma5 = sigma * 0.8; // 5Y波动略小
+  const kappa5 = kappa * 1.5; // 5Y鍥炲鏇村揩
+  const sigma5 = sigma * 0.8; // 5Y娉㈠姩鐣ュ皬
   const dt = 1/12;
   const steps = years * 12;
 
-  // 1Y模拟
+  // 1Y妯℃嫙
   const r1 = Array.from({length:N},()=>[r0]);
   const r5 = Array.from({length:N},()=>[r0_5]);
   for(let t=0;t<steps;t++){
@@ -155,8 +155,7 @@ function runSim(){
     }
   }
 
-  // 计算分位数
-  const months = Array.from({length:steps+1},(_,i)=>i);
+  // 璁＄畻鍒嗕綅鏁?  const months = Array.from({length:steps+1},(_,i)=>i);
   const q10_1=[],q50_1=[],q90_1=[],q10_5=[],q50_5=[],q90_5=[];
   for(let t=0;t<=steps;t++){
     const col1 = r1.map(p=>p[t]).sort((a,b)=>a-b);
@@ -169,7 +168,7 @@ function runSim(){
     q90_5.push(col5[Math.floor(N*0.9)]);
   }
 
-  // 期末分布
+  // 鏈熸湯鍒嗗竷
   const final1 = r1.map(p=>p[steps]);
   const final5 = r5.map(p=>p[steps]);
   const mean1 = final1.reduce((a,b)=>a+b,0)/N;
@@ -180,33 +179,31 @@ function runSim(){
 
   // KPI
   document.getElementById('kpis').innerHTML = `
-    <div class="kpi"><div class="v">${mean1.toFixed(2)}%</div><div class="l">${years}年后1Y期望</div></div>
-    <div class="kpi green"><div class="v">${mean5.toFixed(2)}%</div><div class="l">${years}年后5Y期望</div></div>
+    <div class="kpi"><div class="v">${mean1.toFixed(2)}%</div><div class="l">${years}骞村悗1Y鏈熸湜</div></div>
+    <div class="kpi green"><div class="v">${mean5.toFixed(2)}%</div><div class="l">${years}骞村悗5Y鏈熸湜</div></div>
     <div class="kpi orange"><div class="v">${p_lt25.toFixed(1)}%</div><div class="l">P(1Y < 2.5%)</div></div>
-    <div class="kpi"><div class="v">${p_gt30.toFixed(1)}%</div><div class="l">P(1Y ≥ 3.0%)</div></div>
+    <div class="kpi"><div class="v">${p_gt30.toFixed(1)}%</div><div class="l">P(1Y 鈮?3.0%)</div></div>
   `;
 
-  // 路径图
-  const sampleIdx = Array.from({length:100},()=>Math.floor(Math.random()*N));
+  // 璺緞鍥?  const sampleIdx = Array.from({length:100},()=>Math.floor(Math.random()*N));
   const samplePaths = sampleIdx.map(i=>r1[i].map((v,j)=>[j/12,v]));
   chart1.setOption({
     backgroundColor:'transparent',
-    tooltip:{trigger:'axis',formatter:p=>`第${p[0].data[0].toFixed(1)}年<br/>1Y LPR: ${p[0].data[1].toFixed(2)}%`},
-    legend:{data:['抽样路径','中位数','10-90%区间','长期中枢'],textStyle:{color:'#8fa3c0',fontSize:11},top:0},
+    tooltip:{trigger:'axis',formatter:p=>`绗?{p[0].data[0].toFixed(1)}骞?br/>1Y LPR: ${p[0].data[1].toFixed(2)}%`},
+    legend:{data:['鎶芥牱璺緞','涓綅鏁?,'10-90%鍖洪棿','闀挎湡涓灑'],textStyle:{color:'#8fa3c0',fontSize:11},top:0},
     grid:{left:50,right:20,top:40,bottom:40},
-    xAxis:{type:'value',name:'年份',nameTextStyle:{color:'#5b6070'},axisLine:{lineStyle:{color:'#2a3045'}},axisLabel:{color:'#5b6070'}},
+    xAxis:{type:'value',name:'骞翠唤',nameTextStyle:{color:'#5b6070'},axisLine:{lineStyle:{color:'#2a3045'}},axisLabel:{color:'#5b6070'}},
     yAxis:{type:'value',name:'1Y LPR(%)',nameTextStyle:{color:'#5b6070'},min:1,max:4.5,axisLine:{lineStyle:{color:'#2a3045'}},axisLabel:{color:'#5b6070'},splitLine:{lineStyle:{color:'rgba(42,48,69,0.5)'}}},
     series:[
       ...samplePaths.map((p,i)=>({type:'line',data:p,showSymbol:false,lineStyle:{width:0.5,color:'rgba(109,124,255,0.15)'},silent:true})),
-      {name:'中位数',type:'line',data:q50_1.map((v,i)=>[i/12,v]),showSymbol:false,lineStyle:{width:2,color:'#6d7cff'}},
-      {name:'10-90%区间',type:'line',data:q90_1.map((v,i)=>[i/12,v]),showSymbol:false,lineStyle:{opacity:0},stack:'band1',areaStyle:{color:'rgba(109,124,255,0.1)'}},
-      {name:'10-90%区间',type:'line',data:q10_1.map((v,i)=>[i/12,v]),showSymbol:false,lineStyle:{opacity:0},stack:'band1'},
-      {name:'长期中枢',type:'line',data:[[0,theta],[years,theta]],showSymbol:false,lineStyle:{type:'dashed',color:'#f87171',width:1.5}}
+      {name:'涓綅鏁?,type:'line',data:q50_1.map((v,i)=>[i/12,v]),showSymbol:false,lineStyle:{width:2,color:'#6d7cff'}},
+      {name:'10-90%鍖洪棿',type:'line',data:q90_1.map((v,i)=>[i/12,v]),showSymbol:false,lineStyle:{opacity:0},stack:'band1',areaStyle:{color:'rgba(109,124,255,0.1)'}},
+      {name:'10-90%鍖洪棿',type:'line',data:q10_1.map((v,i)=>[i/12,v]),showSymbol:false,lineStyle:{opacity:0},stack:'band1'},
+      {name:'闀挎湡涓灑',type:'line',data:[[0,theta],[years,theta]],showSymbol:false,lineStyle:{type:'dashed',color:'#f87171',width:1.5}}
     ]
   });
 
-  // 分布直方图
-  const bins = 40;
+  // 鍒嗗竷鐩存柟鍥?  const bins = 40;
   const min = Math.min(...final1,...final5)-0.1;
   const max = Math.max(...final1,...final5)+0.1;
   const binW = (max-min)/bins;
@@ -218,11 +215,11 @@ function runSim(){
 
   chart2.setOption({
     backgroundColor:'transparent',
-    tooltip:{trigger:'axis',formatter:p=>`LPR=${p[0].name}%<br/>1Y: ${p[0].value}条<br/>5Y: ${p[1].value}条`},
+    tooltip:{trigger:'axis',formatter:p=>`LPR=${p[0].name}%<br/>1Y: ${p[0].value}鏉?br/>5Y: ${p[1].value}鏉},
     legend:{data:['1Y LPR','5Y LPR'],textStyle:{color:'#8fa3c0',fontSize:11},top:0},
     grid:{left:50,right:20,top:40,bottom:40},
     xAxis:{type:'category',data:xData,name:'LPR(%)',nameTextStyle:{color:'#5b6070'},axisLine:{lineStyle:{color:'#2a3045'}},axisLabel:{color:'#5b6070',interval:4}},
-    yAxis:{type:'value',name:'路径数',nameTextStyle:{color:'#5b6070'},axisLine:{lineStyle:{color:'#2a3045'}},axisLabel:{color:'#5b6070'},splitLine:{lineStyle:{color:'rgba(42,48,69,0.5)'}}},
+    yAxis:{type:'value',name:'璺緞鏁?,nameTextStyle:{color:'#5b6070'},axisLine:{lineStyle:{color:'#2a3045'}},axisLabel:{color:'#5b6070'},splitLine:{lineStyle:{color:'rgba(42,48,69,0.5)'}}},
     series:[
       {name:'1Y LPR',type:'bar',data:hist1,itemStyle:{color:'rgba(109,124,255,0.7)'},barWidth:'60%'},
       {name:'5Y LPR',type:'bar',data:hist5,itemStyle:{color:'rgba(52,211,153,0.6)'},barWidth:'60%'}
@@ -230,17 +227,15 @@ function runSim(){
   });
 }
 
-// 滑块实时更新数值
-['theta','kappa','sigma','years','paths','spread'].forEach(id=>{
+// 婊戝潡瀹炴椂鏇存柊鏁板€?['theta','kappa','sigma','years','paths','spread'].forEach(id=>{
   document.getElementById(id).addEventListener('input',function(){
     const v = this.value;
-    const suffix = id==='theta'||id==='sigma'||id==='spread'?'%':(id==='years'?'年':'');
+    const suffix = id==='theta'||id==='sigma'||id==='spread'?'%':(id==='years'?'骞?:'');
     document.getElementById(id+'Val').textContent = v + suffix;
   });
 });
 
-// 滑块改变后自动重新模拟（防抖）
-let debounce;
+// 婊戝潡鏀瑰彉鍚庤嚜鍔ㄩ噸鏂版ā鎷燂紙闃叉姈锛?let debounce;
 ['theta','kappa','sigma','years','paths','spread'].forEach(id=>{
   document.getElementById(id).addEventListener('change',()=>{
     clearTimeout(debounce);
@@ -253,3 +248,4 @@ runSim();
 </script>
 </body>
 </html>
+

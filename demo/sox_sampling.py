@@ -22,18 +22,30 @@ class SamplingParams:
 def calculate_sample_size(params: SamplingParams) -> int:
     """
     计算属性抽样样本量
-    使用公式：n = (Z^2 * p * (1-p)) / e^2
-    其中Z为置信水平对应的z值，p为预计偏差率，e为可容忍偏差率
+    使用泊松置信因子法（AICPA审计抽样指南）：
+    n = 置信因子(0偏差) / 可容忍偏差率
+    置信因子：90%→2.31, 95%→3.00, 99%→4.61
     """
-    # 置信水平对应的Z值
-    z_values = {0.90: 1.645, 0.95: 1.96, 0.99: 2.576}
-    z = z_values.get(params.confidence_level, 1.96)
+    # 置信水平对应的0偏差置信因子
+    confidence_factors = {0.90: 2.31, 0.95: 3.00, 0.99: 4.61}
+    cf = confidence_factors.get(params.confidence_level, 3.00)
 
-    p = params.expected_deviation_rate
-    e = params.tolerable_deviation_rate
+    # 样本量 = 置信因子 / 可容忍偏差率
+    n = cf / params.tolerable_deviation_rate
 
-    # 初始样本量
-    n = (z**2 * p * (1 - p)) / (e**2)
+    # 如果预计偏差率>0，需要调整（预计偏差率每增加1%，样本量约增加置信因子对应的偏差数）
+    if params.expected_deviation_rate > 0:
+        # 预计偏差数 = 预计偏差率 × 样本量
+        expected_deviations = params.expected_deviation_rate * n
+        # 找到对应的置信因子
+        deviation_factors = {
+            0.90: {0: 2.31, 1: 3.89, 2: 5.33, 3: 6.69},
+            0.95: {0: 3.00, 1: 4.75, 2: 6.30, 3: 7.76},
+            0.99: {0: 4.61, 1: 6.64, 2: 8.41, 3: 10.05}
+        }
+        dev_count = int(expected_deviations) + 1
+        cf_adj = deviation_factors.get(params.confidence_level, {}).get(dev_count, cf + dev_count * 1.5)
+        n = cf_adj / params.tolerable_deviation_rate
 
     # 有限总体修正
     n_adj = n / (1 + (n - 1) / params.population_size)

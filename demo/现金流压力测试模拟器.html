@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>集团现金流压力测试模拟器 | 胡凯</title>
-<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<title>闆嗗洟鐜伴噾娴佸帇鍔涙祴璇曟ā鎷熷櫒 | 鑳″嚡</title>
+<script src="../echarts.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -55,7 +55,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .advice h4{color:var(--green);font-size:13px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
 .advice ul{list-style:none;padding:0}
 .advice li{font-size:12px;color:var(--text);line-height:1.8;padding:4px 0;padding-left:18px;position:relative}
-.advice li::before{content:'→';position:absolute;left:0;color:var(--green);font-weight:700}
+.advice li::before{content:'鈫?;position:absolute;left:0;color:var(--green);font-weight:700}
 .advice li.warn{color:var(--yellow)}
 .advice li.danger{color:var(--red)}
 .status{text-align:center;padding:8px;font-size:12px;color:var(--muted);min-height:20px}
@@ -65,116 +65,116 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 <body>
 <div class="container">
   <div class="header">
-    <h1>集团现金流压力测试模拟器</h1>
-    <p>蒙特卡洛随机模拟 · 5变量联合抽样 · 三情景压力测试 · 流动性风险VaR | 胡凯 · 精算×财务×AI</p>
+    <h1>闆嗗洟鐜伴噾娴佸帇鍔涙祴璇曟ā鎷熷櫒</h1>
+    <p>钂欑壒鍗℃礇闅忔満妯℃嫙 路 5鍙橀噺鑱斿悎鎶芥牱 路 涓夋儏鏅帇鍔涙祴璇?路 娴佸姩鎬ч闄￢aR | 鑳″嚡 路 绮剧畻脳璐㈠姟脳AI</p>
   </div>
 
   <div class="layout">
-    <!-- 左侧参数面板 -->
+    <!-- 宸︿晶鍙傛暟闈㈡澘 -->
     <div class="panel">
-      <h3>模拟参数</h3>
+      <h3>妯℃嫙鍙傛暟</h3>
 
       <div class="param-group">
-        <label><span>期初现金余额（万）</span><span id="val_initCash">8000</span></label>
+        <label><span>鏈熷垵鐜伴噾浣欓锛堜竾锛?/span><span id="val_initCash">8000</span></label>
         <input type="range" id="initCash" min="3000" max="15000" value="8000" step="100">
       </div>
 
       <div class="param-group">
-        <label><span>模拟路径数</span><span id="val_paths">10000</span></label>
+        <label><span>妯℃嫙璺緞鏁?/span><span id="val_paths">10000</span></label>
         <input type="range" id="paths" min="1000" max="50000" value="10000" step="1000">
-        <div class="desc">路径越多越精确，计算越慢</div>
+        <div class="desc">璺緞瓒婂瓒婄簿纭紝璁＄畻瓒婃參</div>
       </div>
 
-      <div class="section-title">随机变量参数</div>
+      <div class="section-title">闅忔満鍙橀噺鍙傛暟</div>
 
       <div class="param-group">
-        <label><span>客户回款率均值</span><span id="val_collectionRate">0.85</span></label>
+        <label><span>瀹㈡埛鍥炴鐜囧潎鍊?/span><span id="val_collectionRate">0.85</span></label>
         <input type="range" id="collectionRate" min="0.6" max="0.95" value="0.85" step="0.01">
-        <div class="desc">Beta分布，应收账款实际回款比例</div>
+        <div class="desc">Beta鍒嗗竷锛屽簲鏀惰处娆惧疄闄呭洖娆炬瘮渚?/div>
       </div>
 
       <div class="param-group">
-        <label><span>销售增速均值（%）</span><span id="val_salesGrowth">5</span></label>
+        <label><span>閿€鍞閫熷潎鍊硷紙%锛?/span><span id="val_salesGrowth">5</span></label>
         <input type="range" id="salesGrowth" min="-10" max="20" value="5" step="0.5">
-        <div class="desc">正态分布，月度经营现金流入增长</div>
+        <div class="desc">姝ｆ€佸垎甯冿紝鏈堝害缁忚惀鐜伴噾娴佸叆澧為暱</div>
       </div>
 
       <div class="param-group">
-        <label><span>销售增速波动率（%）</span><span id="val_salesVol">8</span></label>
+        <label><span>閿€鍞閫熸尝鍔ㄧ巼锛?锛?/span><span id="val_salesVol">8</span></label>
         <input type="range" id="salesVol" min="2" max="25" value="8" step="0.5">
       </div>
 
       <div class="param-group">
-        <label><span>采购支出均值（万/月）</span><span id="val_purchase">4500</span></label>
+        <label><span>閲囪喘鏀嚭鍧囧€硷紙涓?鏈堬級</span><span id="val_purchase">4500</span></label>
         <input type="range" id="purchase" min="2000" max="8000" value="4500" step="100">
-        <div class="desc">对数正态分布，右偏偶发大额采购</div>
+        <div class="desc">瀵规暟姝ｆ€佸垎甯冿紝鍙冲亸鍋跺彂澶ч閲囪喘</div>
       </div>
 
       <div class="param-group">
-        <label><span>融资利率（%）</span><span id="val_rate">4.5</span></label>
+        <label><span>铻嶈祫鍒╃巼锛?锛?/span><span id="val_rate">4.5</span></label>
         <input type="range" id="rate" min="2" max="8" value="4.5" step="0.1">
-        <div class="desc">Vasicek均值回复过程</div>
+        <div class="desc">Vasicek鍧囧€煎洖澶嶈繃绋?/div>
       </div>
 
       <div class="param-group">
-        <label><span>月均经营流入（万）</span><span id="val_inflow">6000</span></label>
+        <label><span>鏈堝潎缁忚惀娴佸叆锛堜竾锛?/span><span id="val_inflow">6000</span></label>
         <input type="range" id="inflow" min="3000" max="10000" value="6000" step="100">
       </div>
 
       <div class="param-group">
-        <label><span>安全垫阈值（万）</span><span id="val_threshold">4500</span></label>
+        <label><span>瀹夊叏鍨槇鍊硷紙涓囷級</span><span id="val_threshold">4500</span></label>
         <input type="range" id="threshold" min="2000" max="8000" value="4500" step="100">
-        <div class="desc">月均支出×1.0，低于此值即流动性风险</div>
+        <div class="desc">鏈堝潎鏀嚭脳1.0锛屼綆浜庢鍊煎嵆娴佸姩鎬ч闄?/div>
       </div>
 
-      <button class="btn-run" id="btnRun" onclick="runSimulation()">▶ 运行蒙特卡洛模拟</button>
-      <div class="status" id="status">调整参数后点击运行</div>
+      <button class="btn-run" id="btnRun" onclick="runSimulation()">鈻?杩愯钂欑壒鍗℃礇妯℃嫙</button>
+      <div class="status" id="status">璋冩暣鍙傛暟鍚庣偣鍑昏繍琛?/div>
     </div>
 
-    <!-- 右侧结果区 -->
+    <!-- 鍙充晶缁撴灉鍖?-->
     <div>
       <div class="kpi-grid" id="kpiGrid">
-        <div class="kpi info"><div class="v" id="kpi_paths">-</div><div class="l">模拟路径数</div></div>
-        <div class="kpi good"><div class="v" id="kpi_median">-</div><div class="l">最低余额中位数（万）</div></div>
-        <div class="kpi warn"><div class="v" id="kpi_var">-</div><div class="l">95% 流动性VaR（万）</div><div class="sub">5%概率下，最低余额会低于此数</div></div>
-        <div class="kpi hot"><div class="v" id="kpi_breach">-</div><div class="l">跌破安全垫概率</div><div class="sub">12个月内现金不够花的可能性</div></div>
+        <div class="kpi info"><div class="v" id="kpi_paths">-</div><div class="l">妯℃嫙璺緞鏁?/div></div>
+        <div class="kpi good"><div class="v" id="kpi_median">-</div><div class="l">鏈€浣庝綑棰濅腑浣嶆暟锛堜竾锛?/div></div>
+        <div class="kpi warn"><div class="v" id="kpi_var">-</div><div class="l">95% 娴佸姩鎬aR锛堜竾锛?/div><div class="sub">5%姒傜巼涓嬶紝鏈€浣庝綑棰濅細浣庝簬姝ゆ暟</div></div>
+        <div class="kpi hot"><div class="v" id="kpi_breach">-</div><div class="l">璺岀牬瀹夊叏鍨鐜?/div><div class="sub">12涓湀鍐呯幇閲戜笉澶熻姳鐨勫彲鑳芥€?/div></div>
       </div>
 
       <div class="chart-row">
         <div class="chart-box chart-wide">
-          <h4>📈 现金余额预测：历史 + 未来12个月蒙特卡洛区间</h4>
-          <div class="chart-desc">绿色区间=10000次模拟的可能范围（10%分位=悲观，90%分位=乐观，虚线=最可能结果）；区间越宽=不确定性越大</div>
+          <h4>馃搱 鐜伴噾浣欓棰勬祴锛氬巻鍙?+ 鏈潵12涓湀钂欑壒鍗℃礇鍖洪棿</h4>
+          <div class="chart-desc">缁胯壊鍖洪棿=10000娆℃ā鎷熺殑鍙兘鑼冨洿锛?0%鍒嗕綅=鎮茶锛?0%鍒嗕綅=涔愯锛岃櫄绾?鏈€鍙兘缁撴灉锛夛紱鍖洪棿瓒婂=涓嶇‘瀹氭€ц秺澶?/div>
           <div class="chart" id="chart1"></div>
         </div>
       </div>
 
       <div class="chart-row">
         <div class="chart-box">
-          <h4>📊 三情景压力测试：最低现金余额对比</h4>
-          <div class="chart-desc">基准=正常经营；温和衰退=销售下滑+回款变慢；严重衰退=多重危机同时发生；红线=至少留够1个月支出</div>
+          <h4>馃搳 涓夋儏鏅帇鍔涙祴璇曪細鏈€浣庣幇閲戜綑棰濆姣?/h4>
+          <div class="chart-desc">鍩哄噯=姝ｅ父缁忚惀锛涙俯鍜岃“閫€=閿€鍞笅婊?鍥炴鍙樻參锛涗弗閲嶈“閫€=澶氶噸鍗辨満鍚屾椂鍙戠敓锛涚孩绾?鑷冲皯鐣欏1涓湀鏀嚭</div>
           <div class="chart" id="chart2"></div>
         </div>
         <div class="chart-box">
-          <h4>📉 最低余额概率分布</h4>
-          <div class="chart-desc">10000次模拟中，"12个月内最缺钱时"的余额落在各区间的概率；红色=危险区，黄色=警戒区，绿色=安全区</div>
+          <h4>馃搲 鏈€浣庝綑棰濇鐜囧垎甯?/h4>
+          <div class="chart-desc">10000娆℃ā鎷熶腑锛?12涓湀鍐呮渶缂洪挶鏃?鐨勪綑棰濊惤鍦ㄥ悇鍖洪棿鐨勬鐜囷紱绾㈣壊=鍗遍櫓鍖猴紝榛勮壊=璀︽垝鍖猴紝缁胯壊=瀹夊叏鍖?/div>
           <div class="chart" id="chart3"></div>
         </div>
       </div>
 
       <div class="advice" id="advice" style="display:none">
-        <h4>🤖 AI 资金调度建议（基于模拟结果自动生成）</h4>
+        <h4>馃 AI 璧勯噾璋冨害寤鸿锛堝熀浜庢ā鎷熺粨鏋滆嚜鍔ㄧ敓鎴愶級</h4>
         <ul id="adviceList"></ul>
       </div>
     </div>
   </div>
 
   <div class="footer">
-    胡凯 · AI × Finance Portfolio | 蒙特卡洛模拟器 | 模型参数由历史24个月数据校准 | 仅供演示，不构成投资建议
+    鑳″嚡 路 AI 脳 Finance Portfolio | 钂欑壒鍗℃礇妯℃嫙鍣?| 妯″瀷鍙傛暟鐢卞巻鍙?4涓湀鏁版嵁鏍″噯 | 浠呬緵婕旂ず锛屼笉鏋勬垚鎶曡祫寤鸿
   </div>
 </div>
 
 <script>
-// ========== 参数同步 ==========
+// ========== 鍙傛暟鍚屾 ==========
 const sliders = ['initCash','paths','collectionRate','salesGrowth','salesVol','purchase','rate','inflow','threshold'];
 sliders.forEach(id=>{
   const el=document.getElementById(id);
@@ -182,7 +182,7 @@ sliders.forEach(id=>{
   el.addEventListener('input',()=>{val.textContent=el.value});
 });
 
-// ========== 随机数生成器 ==========
+// ========== 闅忔満鏁扮敓鎴愬櫒 ==========
 function randn(){
   let u=0,v=0;
   while(u===0)u=Math.random();
@@ -190,8 +190,7 @@ function randn(){
   return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);
 }
 
-// Beta分布抽样（使用Gamma分布近似）
-function randBeta(a,b){
+// Beta鍒嗗竷鎶芥牱锛堜娇鐢℅amma鍒嗗竷杩戜技锛?function randBeta(a,b){
   const x=randGamma(a), y=randGamma(b);
   return x/(x+y);
 }
@@ -210,17 +209,16 @@ function randGamma(shape){
   }
 }
 
-// 对数正态
-function randLognormal(mu,sigma){
+// 瀵规暟姝ｆ€?function randLognormal(mu,sigma){
   return Math.exp(mu+sigma*randn());
 }
 
-// ========== 蒙特卡洛模拟引擎 ==========
+// ========== 钂欑壒鍗℃礇妯℃嫙寮曟搸 ==========
 function runSimulation(){
   const btn=document.getElementById('btnRun');
   const status=document.getElementById('status');
-  btn.disabled=true;btn.classList.add('running');btn.textContent='⏳ 模拟中...';
-  status.textContent='正在生成随机路径...';
+  btn.disabled=true;btn.classList.add('running');btn.textContent='鈴?妯℃嫙涓?..';
+  status.textContent='姝ｅ湪鐢熸垚闅忔満璺緞...';
 
   setTimeout(()=>{
     const P={
@@ -244,15 +242,14 @@ function runSimulation(){
     }
     const allLabels=histLabels.concat(futLabels);
 
-    status.textContent='运行 '+P.paths+' 次蒙特卡洛模拟...';
+    status.textContent='杩愯 '+P.paths+' 娆¤挋鐗瑰崱娲涙ā鎷?..';
 
-    // 存储所有路径的月度余额
+    // 瀛樺偍鎵€鏈夎矾寰勭殑鏈堝害浣欓
     const allBalances=[];
     const minBalances=[];
     let breachCount=0;
 
-    // Cholesky分解（简化：回款率与销售增速正相关0.3）
-    const corr=0.3;
+    // Cholesky鍒嗚В锛堢畝鍖栵細鍥炴鐜囦笌閿€鍞閫熸鐩稿叧0.3锛?    const corr=0.3;
 
     for(let p=0;p<P.paths;p++){
       let balance=P.initCash;
@@ -261,25 +258,22 @@ function runSimulation(){
       let minBal=balance;
 
       for(let m=0;m<months;m++){
-        // 相关性抽样
-        const z1=randn(), z2=randn();
+        // 鐩稿叧鎬ф娊鏍?        const z1=randn(), z2=randn();
         const salesShock=z1;
         const collectionShock=corr*z1+Math.sqrt(1-corr*corr)*z2;
 
-        // 销售增速（正态）
+        // 閿€鍞閫燂紙姝ｆ€侊級
         const growth=P.salesGrowth+P.salesVol*salesShock;
-        // 回款率（Beta，均值=collectionRate，集中参数15）
-        const alpha=P.collectionRate*15, beta=(1-P.collectionRate)*15;
+        // 鍥炴鐜囷紙Beta锛屽潎鍊?collectionRate锛岄泦涓弬鏁?5锛?        const alpha=P.collectionRate*15, beta=(1-P.collectionRate)*15;
         const collection=randBeta(alpha,beta);
-        // 采购支出（对数正态）
+        // 閲囪喘鏀嚭锛堝鏁版鎬侊級
         const purchase=randLognormal(Math.log(P.purchase),0.15);
-        // 融资利率（Vasicek均值回复）
+        // 铻嶈祫鍒╃巼锛圴asicek鍧囧€煎洖澶嶏級
         const kappa=0.3, theta=P.rate, sigma_r=0.01;
         rate=rate+kappa*(theta-rate)*0.083+sigma_r*Math.sqrt(0.083)*randn();
         rate=Math.max(0.01,Math.min(0.15,rate));
 
-        // 现金流计算
-        const grossInflow=P.inflow*(1+growth);
+        // 鐜伴噾娴佽绠?        const grossInflow=P.inflow*(1+growth);
         const actualInflow=grossInflow*collection;
         const interestExpense=balance*rate*0.083;
         const netFlow=actualInflow-purchase-interestExpense;
@@ -292,10 +286,9 @@ function runSimulation(){
       if(minBal<P.threshold)breachCount++;
     }
 
-    status.textContent='计算分位数与可视化...';
+    status.textContent='璁＄畻鍒嗕綅鏁颁笌鍙鍖?..';
 
-    // 计算每月分位数
-    const q10=[],q50=[],q90=[];
+    // 璁＄畻姣忔湀鍒嗕綅鏁?    const q10=[],q50=[],q90=[];
     for(let m=0;m<=months;m++){
       const vals=allBalances.map(p=>p[m]).sort((a,b)=>a-b);
       q10.push(vals[Math.floor(vals.length*0.1)]);
@@ -303,21 +296,18 @@ function runSimulation(){
       q90.push(vals[Math.floor(vals.length*0.9)]);
     }
 
-    // 最低余额统计
-    minBalances.sort((a,b)=>a-b);
+    // 鏈€浣庝綑棰濈粺璁?    minBalances.sort((a,b)=>a-b);
     const medianMin=minBalances[Math.floor(minBalances.length*0.5)];
     const var95=minBalances[Math.floor(minBalances.length*0.05)];
     const breachProb=(breachCount/P.paths*100).toFixed(1);
 
-    // 三情景
-    const scenarios=[
-      {name:'基准',min:q50[months]>0?q50[months]:medianMin,color:'#34d399'},
-      {name:'温和衰退',min:q10[months],color:'#fbbf24'},
-      {name:'严重衰退',min:var95,color:'#f87171'}
+    // 涓夋儏鏅?    const scenarios=[
+      {name:'鍩哄噯',min:q50[months]>0?q50[months]:medianMin,color:'#34d399'},
+      {name:'娓╁拰琛伴€€',min:q10[months],color:'#fbbf24'},
+      {name:'涓ラ噸琛伴€€',min:var95,color:'#f87171'}
     ];
 
-    // 直方图
-    const bins=['<2000','2000-3000','3000-4000','4000-5000','5000-6000','6000-7000','7000-8000','8000-10000','>10000'];
+    // 鐩存柟鍥?    const bins=['<2000','2000-3000','3000-4000','4000-5000','5000-6000','6000-7000','7000-8000','8000-10000','>10000'];
     const binEdges=[0,2000,3000,4000,5000,6000,7000,8000,10000,Infinity];
     const freq=new Array(bins.length).fill(0);
     minBalances.forEach(v=>{
@@ -327,62 +317,62 @@ function runSimulation(){
     });
     const freqPct=freq.map(f=>(f/P.paths*100).toFixed(1));
 
-    // 更新KPI
+    // 鏇存柊KPI
     document.getElementById('kpi_paths').textContent=P.paths.toLocaleString();
     document.getElementById('kpi_median').textContent=Math.round(medianMin).toLocaleString();
     document.getElementById('kpi_var').textContent=Math.round(var95).toLocaleString();
     document.getElementById('kpi_breach').textContent=breachProb+'%';
 
-    // 渲染图表
+    // 娓叉煋鍥捐〃
     renderChart1(allLabels,histCash,q10,q50,q90,histLabels.length);
     renderChart2(scenarios,P.threshold);
     renderChart3(bins,freqPct,var95);
 
-    // 生成建议
+    // 鐢熸垚寤鸿
     generateAdvice(medianMin,var95,breachProb,P.threshold,q10,months);
 
-    btn.disabled=false;btn.classList.remove('running');btn.textContent='▶ 重新运行模拟';
-    status.textContent='模拟完成 · '+P.paths+' 条路径 · 耗时约 '+(Math.random()*0.5+0.3).toFixed(2)+'s';
+    btn.disabled=false;btn.classList.remove('running');btn.textContent='鈻?閲嶆柊杩愯妯℃嫙';
+    status.textContent='妯℃嫙瀹屾垚 路 '+P.paths+' 鏉¤矾寰?路 鑰楁椂绾?'+(Math.random()*0.5+0.3).toFixed(2)+'s';
   },100);
 }
 
-// ========== 图表渲染 ==========
+// ========== 鍥捐〃娓叉煋 ==========
 let chart1,chart2,chart3;
 function renderChart1(labels,hist,q10,q50,q90,histIdx){
   if(!chart1)chart1=echarts.init(document.getElementById('chart1'));
   const padHist=arr=>arr.concat(new Array(q10.length).fill(null));
   const padFut=arr=>new Array(histIdx).fill(null).concat(arr);
   const bandDelta=q90.map((v,i)=>v==null||q10[i]==null?null:v-q10[i]);
-  const fmt=v=>v==null||isNaN(v)?'-':Math.round(v).toLocaleString()+'万';
+  const fmt=v=>v==null||isNaN(v)?'-':Math.round(v).toLocaleString()+'涓?;
   chart1.setOption({
     tooltip:{trigger:'axis',backgroundColor:'rgba(10,14,26,0.95)',borderColor:'rgba(109,124,255,0.3)',textStyle:{color:'#e8eaf0'},
       formatter:function(params){
         let html='<div style="font-weight:600;margin-bottom:6px">'+params[0].axisValue+'</div>';
         let q10=null,q90=null,q50=null,hist=null;
         params.forEach(p=>{
-          if(p.seriesName==='预测区间带'&&p.value!=null){if(q10==null)q10=p.value;else q90=q10+p.value;}
-          if(p.seriesName==='90%分位')q90=p.value;
-          if(p.seriesName==='10%分位')q10=p.value;
-          if(p.seriesName==='预测中位数')q50=p.value;
-          if(p.seriesName==='历史余额')hist=p.value;
+          if(p.seriesName==='棰勬祴鍖洪棿甯?&&p.value!=null){if(q10==null)q10=p.value;else q90=q10+p.value;}
+          if(p.seriesName==='90%鍒嗕綅')q90=p.value;
+          if(p.seriesName==='10%鍒嗕綅')q10=p.value;
+          if(p.seriesName==='棰勬祴涓綅鏁?)q50=p.value;
+          if(p.seriesName==='鍘嗗彶浣欓')hist=p.value;
         });
-        if(q10!=null&&q90!=null)html+='<div style="display:flex;justify-content:space-between;gap:20px"><span>预测区间 (10%-90%)</span><span style="color:#34d399;font-weight:600">'+fmt(q10)+' ~ '+fmt(q90)+'</span></div>';
-        if(q50!=null)html+='<div style="display:flex;justify-content:space-between;gap:20px"><span>预测中位数</span><span style="color:#34d399;font-weight:600">'+fmt(q50)+'</span></div>';
-        if(hist!=null)html+='<div style="display:flex;justify-content:space-between;gap:20px"><span>历史余额</span><span style="color:#6d7cff;font-weight:600">'+fmt(hist)+'</span></div>';
+        if(q10!=null&&q90!=null)html+='<div style="display:flex;justify-content:space-between;gap:20px"><span>棰勬祴鍖洪棿 (10%-90%)</span><span style="color:#34d399;font-weight:600">'+fmt(q10)+' ~ '+fmt(q90)+'</span></div>';
+        if(q50!=null)html+='<div style="display:flex;justify-content:space-between;gap:20px"><span>棰勬祴涓綅鏁?/span><span style="color:#34d399;font-weight:600">'+fmt(q50)+'</span></div>';
+        if(hist!=null)html+='<div style="display:flex;justify-content:space-between;gap:20px"><span>鍘嗗彶浣欓</span><span style="color:#6d7cff;font-weight:600">'+fmt(hist)+'</span></div>';
         return html;
       }},
     legend:{top:0,textStyle:{color:'#8a94a8',fontSize:11},icon:'roundRect',itemWidth:14,itemHeight:8},
     grid:{left:50,right:30,top:40,bottom:50,containLabel:true},
     xAxis:{type:'category',data:labels,axisLabel:{color:'#8a94a8',fontSize:10,rotate:30},axisLine:{lineStyle:{color:'rgba(120,140,255,0.15)'}},axisTick:{show:false}},
-    yAxis:{type:'value',name:'万元',min:'dataMin',axisLabel:{color:'#8a94a8',fontSize:10,formatter:v=>Math.round(v).toLocaleString()},splitLine:{lineStyle:{color:'rgba(120,140,255,0.08)',type:'dashed'}},axisLine:{show:false},axisTick:{show:false}},
+    yAxis:{type:'value',name:'涓囧厓',min:'dataMin',axisLabel:{color:'#8a94a8',fontSize:10,formatter:v=>Math.round(v).toLocaleString()},splitLine:{lineStyle:{color:'rgba(120,140,255,0.08)',type:'dashed'}},axisLine:{show:false},axisTick:{show:false}},
     series:[
-      {name:'预测区间带',type:'line',stack:'band',data:padFut(q10),symbol:'none',lineStyle:{opacity:0},silent:true,z:0},
-      {name:'预测区间带',type:'line',stack:'band',data:padFut(bandDelta),symbol:'none',lineStyle:{opacity:0},silent:true,z:0,areaStyle:{color:'rgba(52,211,153,0.15)'}},
-      {name:'90%分位',type:'line',data:padFut(q90),symbol:'none',lineStyle:{width:1,color:'rgba(52,211,153,0.5)'},z:2},
-      {name:'10%分位',type:'line',data:padFut(q10),symbol:'none',lineStyle:{width:1,color:'rgba(52,211,153,0.5)'},z:2,
-        markLine:{symbol:'none',silent:true,lineStyle:{color:'rgba(151,163,190,0.5)',type:'dashed'},label:{color:'#e2e8f0',fontSize:10,formatter:'预测起点'},data:[{xAxis:histIdx-1}]}},
-      {name:'预测中位数',type:'line',data:padFut(q50),symbol:'none',lineStyle:{width:2,color:'#34d399',type:'dashed'},z:3},
-      {name:'历史余额',type:'line',smooth:true,data:padHist(hist),symbol:'circle',symbolSize:6,lineStyle:{width:2.5,color:'#6d7cff'},itemStyle:{color:'#6d7cff'},z:4,
+      {name:'棰勬祴鍖洪棿甯?,type:'line',stack:'band',data:padFut(q10),symbol:'none',lineStyle:{opacity:0},silent:true,z:0},
+      {name:'棰勬祴鍖洪棿甯?,type:'line',stack:'band',data:padFut(bandDelta),symbol:'none',lineStyle:{opacity:0},silent:true,z:0,areaStyle:{color:'rgba(52,211,153,0.15)'}},
+      {name:'90%鍒嗕綅',type:'line',data:padFut(q90),symbol:'none',lineStyle:{width:1,color:'rgba(52,211,153,0.5)'},z:2},
+      {name:'10%鍒嗕綅',type:'line',data:padFut(q10),symbol:'none',lineStyle:{width:1,color:'rgba(52,211,153,0.5)'},z:2,
+        markLine:{symbol:'none',silent:true,lineStyle:{color:'rgba(151,163,190,0.5)',type:'dashed'},label:{color:'#e2e8f0',fontSize:10,formatter:'棰勬祴璧风偣'},data:[{xAxis:histIdx-1}]}},
+      {name:'棰勬祴涓綅鏁?,type:'line',data:padFut(q50),symbol:'none',lineStyle:{width:2,color:'#34d399',type:'dashed'},z:3},
+      {name:'鍘嗗彶浣欓',type:'line',smooth:true,data:padHist(hist),symbol:'circle',symbolSize:6,lineStyle:{width:2.5,color:'#6d7cff'},itemStyle:{color:'#6d7cff'},z:4,
         label:{show:true,color:'#c5d4f5',fontSize:10,position:'top',formatter:p=>p.value?p.value.toLocaleString():''}}
     ]
   });
@@ -392,15 +382,15 @@ function renderChart2(scenarios,threshold){
   if(!chart2)chart2=echarts.init(document.getElementById('chart2'));
   chart2.setOption({
     tooltip:{trigger:'axis',axisPointer:{type:'shadow'},backgroundColor:'rgba(10,14,26,0.95)',borderColor:'rgba(109,124,255,0.3)',textStyle:{color:'#e8eaf0'},
-      formatter:p=>'<div style="font-weight:600;margin-bottom:4px">'+p[0].name+'情景</div><div>最低余额：<b style="color:#34d399">'+Math.round(p[0].value).toLocaleString()+'万</b></div>'},
+      formatter:p=>'<div style="font-weight:600;margin-bottom:4px">'+p[0].name+'鎯呮櫙</div><div>鏈€浣庝綑棰濓細<b style="color:#34d399">'+Math.round(p[0].value).toLocaleString()+'涓?/b></div>'},
     grid:{left:50,right:20,top:30,bottom:40,containLabel:true},
     xAxis:{type:'category',data:scenarios.map(s=>s.name),axisLabel:{color:'#8a94a8',fontSize:11},axisLine:{lineStyle:{color:'rgba(120,140,255,0.15)'}},axisTick:{show:false}},
-    yAxis:{type:'value',name:'万元',min:0,axisLabel:{color:'#8a94a8',fontSize:10},splitLine:{lineStyle:{color:'rgba(120,140,255,0.08)',type:'dashed'}},axisLine:{show:false},axisTick:{show:false}},
+    yAxis:{type:'value',name:'涓囧厓',min:0,axisLabel:{color:'#8a94a8',fontSize:10},splitLine:{lineStyle:{color:'rgba(120,140,255,0.08)',type:'dashed'}},axisLine:{show:false},axisTick:{show:false}},
     series:[{
       type:'bar',barWidth:50,
       data:scenarios.map(s=>({value:Math.round(s.min),itemStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:s.color},{offset:1,color:s.color+'88'}]),borderRadius:[6,6,0,0]}})),
-      label:{show:true,position:'top',color:'#c5d4f5',fontSize:11,fontWeight:600,formatter:p=>p.value.toLocaleString()+'万'},
-      markLine:{symbol:'none',silent:true,lineStyle:{color:'rgba(248,113,113,0.6)',type:'dashed',width:1.5},label:{color:'#f87171',fontSize:10,position:'end',formatter:'安全垫（月均支出）'+threshold.toLocaleString()+'万'},data:[{yAxis:threshold}]}
+      label:{show:true,position:'top',color:'#c5d4f5',fontSize:11,fontWeight:600,formatter:p=>p.value.toLocaleString()+'涓?},
+      markLine:{symbol:'none',silent:true,lineStyle:{color:'rgba(248,113,113,0.6)',type:'dashed',width:1.5},label:{color:'#f87171',fontSize:10,position:'end',formatter:'瀹夊叏鍨紙鏈堝潎鏀嚭锛?+threshold.toLocaleString()+'涓?},data:[{yAxis:threshold}]}
     }]
   });
 }
@@ -409,10 +399,10 @@ function renderChart3(bins,freq,var95){
   if(!chart3)chart3=echarts.init(document.getElementById('chart3'));
   chart3.setOption({
     tooltip:{trigger:'axis',backgroundColor:'rgba(10,14,26,0.95)',borderColor:'rgba(109,124,255,0.3)',textStyle:{color:'#e8eaf0'},
-      formatter:p=>'<div style="font-weight:600;margin-bottom:4px">最低余额 '+p[0].name+'万</div><div>出现概率：<b style="color:#34d399">'+p[0].value+'%</b></div>'},
+      formatter:p=>'<div style="font-weight:600;margin-bottom:4px">鏈€浣庝綑棰?'+p[0].name+'涓?/div><div>鍑虹幇姒傜巼锛?b style="color:#34d399">'+p[0].value+'%</b></div>'},
     grid:{left:50,right:20,top:30,bottom:50,containLabel:true},
     xAxis:{type:'category',data:bins,axisLabel:{color:'#8a94a8',fontSize:9,rotate:25},axisLine:{lineStyle:{color:'rgba(120,140,255,0.15)'}},axisTick:{show:false}},
-    yAxis:{type:'value',name:'概率 %',axisLabel:{color:'#8a94a8',fontSize:10},splitLine:{lineStyle:{color:'rgba(120,140,255,0.08)',type:'dashed'}},axisLine:{show:false},axisTick:{show:false}},
+    yAxis:{type:'value',name:'姒傜巼 %',axisLabel:{color:'#8a94a8',fontSize:10},splitLine:{lineStyle:{color:'rgba(120,140,255,0.08)',type:'dashed'}},axisLine:{show:false},axisTick:{show:false}},
     series:[{
       type:'bar',barWidth:'60%',
       data:freq.map((v,i)=>{
@@ -420,51 +410,51 @@ function renderChart3(bins,freq,var95){
         return{value:parseFloat(v),itemStyle:{color,borderRadius:[4,4,0,0]}};
       }),
       label:{show:true,position:'top',color:'#c5d4f5',fontSize:9,formatter:'{c}%'},
-      markLine:{symbol:'none',silent:true,lineStyle:{color:'rgba(248,113,113,0.6)',type:'dashed'},label:{color:'#f87171',fontSize:9,position:'end',formatter:'5%概率余额低于 '+Math.round(var95).toLocaleString()+'万'},data:[{xAxis:2.5}]}
+      markLine:{symbol:'none',silent:true,lineStyle:{color:'rgba(248,113,113,0.6)',type:'dashed'},label:{color:'#f87171',fontSize:9,position:'end',formatter:'5%姒傜巼浣欓浣庝簬 '+Math.round(var95).toLocaleString()+'涓?},data:[{xAxis:2.5}]}
     }]
   });
 }
 
-// ========== AI建议生成 ==========
+// ========== AI寤鸿鐢熸垚 ==========
 function generateAdvice(medianMin,var95,breachProb,threshold,q10,months){
   const advice=document.getElementById('advice');
   const list=document.getElementById('adviceList');
   const items=[];
 
-  // 风险窗口识别
+  // 椋庨櫓绐楀彛璇嗗埆
   let riskMonths=[];
   for(let i=0;i<q10.length;i++){
-    if(q10[i]<threshold)riskMonths.push('第'+(i+1)+'月');
+    if(q10[i]<threshold)riskMonths.push('绗?+(i+1)+'鏈?);
   }
 
   if(breachProb>20){
-    items.push({type:'danger',text:'流动性风险高：'+breachProb+'%概率跌破安全垫，建议立即安排备用授信额度 '+Math.round((threshold-var95)*1.5).toLocaleString()+' 万'});
+    items.push({type:'danger',text:'娴佸姩鎬ч闄╅珮锛?+breachProb+'%姒傜巼璺岀牬瀹夊叏鍨紝寤鸿绔嬪嵆瀹夋帓澶囩敤鎺堜俊棰濆害 '+Math.round((threshold-var95)*1.5).toLocaleString()+' 涓?});
   }else if(breachProb>5){
-    items.push({type:'warn',text:'流动性风险中等：'+breachProb+'%概率跌破安全垫，建议预留 '+Math.round((threshold-var95)*1.2).toLocaleString()+' 万应急资金'});
+    items.push({type:'warn',text:'娴佸姩鎬ч闄╀腑绛夛細'+breachProb+'%姒傜巼璺岀牬瀹夊叏鍨紝寤鸿棰勭暀 '+Math.round((threshold-var95)*1.2).toLocaleString()+' 涓囧簲鎬ヨ祫閲?});
   }else{
-    items.push({type:'normal',text:'流动性风险可控：跌破安全垫概率仅 '+breachProb+'%，当前资金头寸充足'});
+    items.push({type:'normal',text:'娴佸姩鎬ч闄╁彲鎺э細璺岀牬瀹夊叏鍨鐜囦粎 '+breachProb+'%锛屽綋鍓嶈祫閲戝ご瀵稿厖瓒?});
   }
 
   if(riskMonths.length>0){
-    items.push({type:'warn',text:'风险窗口：'+riskMonths.slice(0,3).join('、')+' 为10%分位路径触及低位的时段，建议提前安排续贷或延迟大额采购'});
+    items.push({type:'warn',text:'椋庨櫓绐楀彛锛?+riskMonths.slice(0,3).join('銆?)+' 涓?0%鍒嗕綅璺緞瑙﹀強浣庝綅鐨勬椂娈碉紝寤鸿鎻愬墠瀹夋帓缁捶鎴栧欢杩熷ぇ棰濋噰璐?});
   }
 
   if(var95<0){
-    items.push({type:'danger',text:'极端情景下出现现金缺口 '+Math.abs(Math.round(var95)).toLocaleString()+' 万，需启动应急融资预案（银团授信/股东借款/资产处置）'});
+    items.push({type:'danger',text:'鏋佺鎯呮櫙涓嬪嚭鐜扮幇閲戠己鍙?'+Math.abs(Math.round(var95)).toLocaleString()+' 涓囷紝闇€鍚姩搴旀€ヨ瀺璧勯妗堬紙閾跺洟鎺堜俊/鑲′笢鍊熸/璧勪骇澶勭疆锛?});
   }
 
-  items.push({type:'normal',text:'资金调度建议：中位数路径显示现金余额温和增长，可将超额资金配置短期理财（预计年化收益提升约1.5-2%）'});
-  items.push({type:'normal',text:'对冲建议：融资利率波动较大时，可考虑利率互换(IRS)锁定中长期融资成本，对冲利率上行风险'});
-  items.push({type:'normal',text:'模型局限：本模拟假设变量间线性相关，极端情景下相关性可能失效（尾部风险），建议结合压力测试交叉验证'});
+  items.push({type:'normal',text:'璧勯噾璋冨害寤鸿锛氫腑浣嶆暟璺緞鏄剧ず鐜伴噾浣欓娓╁拰澧為暱锛屽彲灏嗚秴棰濊祫閲戦厤缃煭鏈熺悊璐紙棰勮骞村寲鏀剁泭鎻愬崌绾?.5-2%锛?});
+  items.push({type:'normal',text:'瀵瑰啿寤鸿锛氳瀺璧勫埄鐜囨尝鍔ㄨ緝澶ф椂锛屽彲鑰冭檻鍒╃巼浜掓崲(IRS)閿佸畾涓暱鏈熻瀺璧勬垚鏈紝瀵瑰啿鍒╃巼涓婅椋庨櫓'});
+  items.push({type:'normal',text:'妯″瀷灞€闄愶細鏈ā鎷熷亣璁惧彉閲忛棿绾挎€х浉鍏筹紝鏋佺鎯呮櫙涓嬬浉鍏虫€у彲鑳藉け鏁堬紙灏鹃儴椋庨櫓锛夛紝寤鸿缁撳悎鍘嬪姏娴嬭瘯浜ゅ弶楠岃瘉'});
 
   list.innerHTML=items.map(i=>'<li class="'+(i.type||'')+'">'+i.text+'</li>').join('');
   advice.style.display='block';
 }
 
-// 响应式
-window.addEventListener('resize',()=>{
+// 鍝嶅簲寮?window.addEventListener('resize',()=>{
   [chart1,chart2,chart3].forEach(c=>c&&c.resize());
 });
 </script>
 </body>
 </html>
+
