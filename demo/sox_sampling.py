@@ -47,10 +47,11 @@ def calculate_sample_size(params: SamplingParams) -> int:
         cf_adj = deviation_factors.get(params.confidence_level, {}).get(dev_count, cf + dev_count * 1.5)
         n = cf_adj / params.tolerable_deviation_rate
 
-    # 有限总体修正
-    n_adj = n / (1 + (n - 1) / params.population_size)
-
-    return math.ceil(n_adj)
+    # 属性抽样中，当总体规模较大（>500）时，通常不做有限总体修正（FPC）
+    # 原因：属性抽样关注的是偏差率，而非均值估计，FPC对样本量影响极小
+    # AICPA审计抽样指南中的样本量表也不做FPC
+    # 此处与在线计算器口径保持一致：不做FPC
+    return math.ceil(n)
 
 
 def evaluate_sample(deviations: int, sample_size: int, params: SamplingParams) -> dict:

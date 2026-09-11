@@ -1,5 +1,25 @@
 ﻿# 胡凯 · AI × 财务 作品集 更新日志
 
+## v5.3.3（2026-09-11）
+
+### 修复
+- **iframe内容叠加**：快速切换作品时新旧内容叠加，改为先清空srcdoc再延迟50ms设置新内容
+- **打开作品滚动位置**：iframe加载后滚动到顶部，避免显示上一个作品的滚动位置
+- **page-06 reveal时序**：修SOX模块位置时把"局限与数据来源"放在了IO脚本之后，导致永久不可见，已将IO脚本移到</section>之前
+- **手机端适配地雷拆除**：删除page-01模板内的getMobileChartOption/isMobile/applyMobileOption三个函数，以及5个模板里注释掉的调用点，避免以后误取消注释导致isMobile未定义错误
+- **iframe竞态修复**：加_pendingWork模块级变量，showWork/showHome时先clearTimeout，防止快速切换时的setTimeout竞态
+- **AI助手重复调用**：jump-btn按钮点击会触发两次showWork（AI助手自身监听+全局委托），已加e.stopPropagation()
+
+### 文档
+- 新增LESSONS_2026-09-11.md，记录手机端适配失败的5个问题根因和6条深度反思
+- DECISIONS.md新增D007-D010（手机端适配暂时禁用、回退到稳定版本、iframe内容更新方式、手机端适配用ECharts原生media query）
+
+### 已知问题
+- 手机端图表适配暂时禁用，待使用ECharts原生media query重做
+- API Key明文存在于代码中（用户确认暂不处理）
+
+---
+
 ## v5.3.2（2026-09-09）
 
 ### 优化

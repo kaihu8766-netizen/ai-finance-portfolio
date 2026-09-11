@@ -285,6 +285,8 @@ a,button,.card,.tag,.nav a,.btn{transition:color .16s cubic-bezier(.2,.8,.2,1), 
 }
 .sec-head h2{font-size:clamp(20px,2.4vw,24px);font-weight:600;letter-spacing:1px}
 .sec-head .en{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:2.5px;margin-left:auto}
+.sec-title{font-size:clamp(18px,2.2vw,22px);font-weight:700;letter-spacing:1px;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid rgba(130,150,255,0.07);display:flex;align-items:baseline;gap:12px}
+.sec-title::before{content:'';display:inline-block;width:4px;height:20px;background:linear-gradient(180deg,#6d7cff,#22d3ee);border-radius:2px}
 
 /* ===== About ===== */
 .about-hero{display:grid;grid-template-columns:230px 1fr;gap:24px;align-items:start}
@@ -619,8 +621,8 @@ a,button,.card,.tag,.nav a,.btn{transition:color .16s cubic-bezier(.2,.8,.2,1), 
   .portfolio-page .chart-grid{grid-template-columns:1fr !important;gap:10px !important;padding:12px !important}
   .portfolio-page .chart-box{padding:10px !important;border-radius:10px !important}
   .portfolio-page .chart-box h4{font-size:13px !important;margin-bottom:8px !important}
-  .portfolio-page .chart-echarts{height:220px !important}
-  .portfolio-page .chart-box.big-chart .chart-echarts{height:320px !important}
+  .portfolio-page .chart-echarts{height:290px !important}
+  .portfolio-page .chart-box.big-chart .chart-echarts{height:360px !important}
   .portfolio-page .chart-note{font-size:10.5px !important;line-height:1.5 !important;padding:8px !important}
   
   /* ---- Tables (mobile: 横向滚动 + 更紧凑) ---- */
@@ -887,6 +889,11 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
   border-radius:12px;padding:16px 20px;margin:14px 0;
   box-shadow:0 2px 12px rgba(0,0,0,0.25);
 }
+.portfolio-page .steps{display:flex;flex-direction:column;gap:12px}
+.portfolio-page .stp{display:flex;align-items:flex-start;gap:14px;padding:12px 16px;background:rgba(109,124,255,0.05);border-left:3px solid #6d7cff;border-radius:0 8px 8px 0}
+.portfolio-page .stp .n{font-family:var(--mono);font-size:10px;color:#6d7cff;background:rgba(109,124,255,0.15);padding:3px 8px;border-radius:4px;white-space:nowrap;margin-top:2px}
+.portfolio-page .stp b{font-size:13px;color:var(--text);margin-bottom:4px;display:block}
+.portfolio-page .stp span{font-size:12px;color:var(--muted);line-height:1.7}
 .portfolio-page .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .portfolio-page .grid2 > div{margin:0}
 .portfolio-page .phase{padding:0;overflow:hidden}
@@ -1153,7 +1160,10 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
 .wrap .sec:hover{border-color:rgba(130,160,255,0.26);box-shadow:0 4px 20px rgba(0,0,0,0.2)}
 .wrap .sec .sec-head{margin-bottom:18px}
 .wrap .sec p{color:var(--muted);line-height:1.8;font-size:13.5px}
-.wrap .sec table{margin:10px 0;border-radius:10px;overflow:hidden}
+.wrap .sec table{margin:10px 0;border-radius:10px;overflow:hidden;min-width:640px}
+.wrap .sec{overflow-x:auto}
+.wrap .sec::-webkit-scrollbar{height:4px}
+.wrap .sec::-webkit-scrollbar-thumb{background:rgba(109,124,255,0.3);border-radius:2px}
 .wrap .sec .callout{border-radius:12px;margin:10px 0}
 .wrap .sec .quote{border-radius:10px;margin:10px 0}
 .wrap .sec .chart-grid{margin:14px 0 4px}
@@ -2159,6 +2169,7 @@ window.SmartReconAI = {
   // 作品集助手 persona（基于知识库动态生成）
   portfolioPersona: function() {
     var kb = this.portfolioKB;
+    if(!kb){ return {works:[],prototypes:[],structure:[]}; }
     return '你是"作品集助手"——胡凯 AI×财务作品集的自我认知 AI。你的职责：向用户（胡凯本人或面试官）介绍这个作品集的一切细节，并帮助发现可改进点。回答专业、简洁、结构化，中文回复，控制在 220 字以内，可用换行分点。\n\n【作品集知识库——回答必须基于以下信息，不要编造】\n作者：' + kb.author + '；定位：' + kb.purpose + '\n结构：' + JSON.stringify(kb.structure) + '\n原型：' + JSON.stringify(kb.prototypes) + '\n关键数据：' + JSON.stringify(kb.keyNumbers) + '\n技术栈：' + kb.techStack + '\n缺陷日志（已修复）：' + kb.defectLog.join('；') + '\n版本演进：' + kb.versions + '\nAI协作方法（用户问怎么和AI协作时用这个）：' + JSON.stringify(kb.fourRoleCollab) + '\n\n【行为准则】①用户问"四角色协作体系/怎么运作/多智能体团队"→必须用fourRoleCollab信息回答，明确是胡凯(Decision Maker)+WorkBuddy(Architect)+TRAE(Builder)+Claude(Independent Auditor)，不要混淆资金智算原型里的Manager+Specialist①用户问"有什么功能/介绍作品"→按 structure+prototypes 导览 ②问"怎么实现的/技术"→引用 techStack+keyNumbers ③问"缺陷/修复历史"→列 defectLog ④问"迭代/版本"→列 versions ⑤问"还能怎么改进"→基于 defectLog 和当前架构给 2-3 条具体建议（如：接真实RAG、加pytest测试、数据脱敏后真实数据测试、ECharts进一步瘦身）⑥若收到【实时联网搜索结果】，先判断相关性——相关则基于结果回答，无关则忽略并直接用自己的知识回答（不要在开头提"网络搜索/搜索词"）⑦若没有搜索结果且问题是作品集外的一般问题，可直接用你的知识简要回答（不必强调"知识库未覆盖"），最后自然带一句"如需了解作品集可以问我"⑧被要求讲笑话/闲聊等非业务内容时：轻松幽默回应（可讲财务梗），简短即可，不硬切功能清单⑨用户负面反馈/质疑：先共情再理性回应，不防御性辩解。';
   },
 
@@ -2206,8 +2217,9 @@ window.SmartReconAI = {
     var q = String(query || '').toLowerCase();
     var hits = [];
     var self = this;
+    if(!this.portfolioKB){ return []; }
     // 通道 A：作品级知识检索（structure + prototypes 的 tags/summary/highlights）
-    var works = (this.portfolioKB && (this.portfolioKB.structure || []).concat(this.portfolioKB.prototypes || [])) || [];
+    var works = (this.portfolioKB.structure || []).concat(this.portfolioKB.prototypes || []);
     works.forEach(function(w){
       var score = 0;
       var haystack = [w.name, w.desc, w.summary, (w.tags||[]).join(' '), (w.highlights||[]).join(' ')].join(' ').toLowerCase();
@@ -2674,6 +2686,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     var t=e.target;
     while(t&&t!==body&&!(t.classList&&t.classList.contains('jump-btn'))) t=t.parentNode;
     if(t&&t!==body&&t.dataset&&t.dataset.work){
+      e.stopPropagation(); // 阻止冒泡，避免全局委托重复调用showWork
       if(window.showWork) window.showWork(t.dataset.work);
       panel.classList.remove('open');
     }
@@ -3090,98 +3103,27 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 <script>
 // ===== 安全初始化：单图失败不影响整体 =====
 
-// 手机端图表适配配置
-function getMobileChartOption() {
-  return {
-    legend: {
-      bottom: 0,
-      left: 'center',
-      textStyle: { fontSize: 9, color: '#8a8fa0' },
-      itemWidth: 12,
-      itemHeight: 8,
-      itemGap: 8
-    },
-    grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '18%',
-      top: '10%',
-      containLabel: true
-    },
-    xAxis: {
-      axisLabel: {
-        fontSize: 9,
-        interval: 'auto',
-        rotate: 30
-      }
-    },
-    yAxis: {
-      axisLabel: { fontSize: 9 },
-      nameTextStyle: { fontSize: 9 }
-    },
-    tooltip: {
-      textStyle: { fontSize: 10 }
-    }
-  };
-}
-
-function isMobile() {
-  return window.innerWidth < 768;
-}
-
-function applyMobileOption(option) {
-  try {
-    var m = getMobileChartOption();
-    if (option.legend && typeof option.legend === 'object' && !Array.isArray(option.legend)) {
-      option.legend = Object.assign({}, m.legend, option.legend);
-    } else if (!option.legend) {
-      option.legend = m.legend;
-    }
-    if (option.grid) {
-      if (Array.isArray(option.grid)) {
-        option.grid.forEach(function(g, i) {
-          if (g && typeof g === 'object') {
-            option.grid[i] = Object.assign({}, m.grid, g);
-          }
-        });
-      } else if (typeof option.grid === 'object') {
-        option.grid = Object.assign({}, m.grid, option.grid);
-      }
-    } else {
-      option.grid = m.grid;
-    }
-    if (option.xAxis) {
-      var xa = Array.isArray(option.xAxis) ? option.xAxis : [option.xAxis];
-      xa.forEach(function(x) {
-        if (x && typeof x === 'object') {
-          x.axisLabel = x.axisLabel ? Object.assign({}, m.xAxis.axisLabel, x.axisLabel) : m.xAxis.axisLabel;
-        }
-      });
-    }
-    if (option.yAxis) {
-      var ya = Array.isArray(option.yAxis) ? option.yAxis : [option.yAxis];
-      ya.forEach(function(y) {
-        if (y && typeof y === 'object') {
-          y.axisLabel = y.axisLabel ? Object.assign({}, m.yAxis.axisLabel, y.axisLabel) : m.yAxis.axisLabel;
-        }
-      });
-    }
-  } catch (e) {
-    console.warn('Mobile option adaptation failed, using original option', e);
-  }
-  return option;
-}
-
 
 function safeInit(chartId, option) {
   try {
     var el = document.getElementById(chartId);
     if (!el) { console.warn('Chart element not found: ' + chartId); return null; }
     var chart = echarts.init(el);
-    // 手机端适配暂时禁用，先用原始配置确保图表显示
-    // if (isMobile()) {
-    //   option = applyMobileOption(option);
-    // }
+    // 自动添加ECharts原生media query手机端适配（D010决策）
+    if (!option.baseOption) {
+      option = {
+        baseOption: option,
+        media: [{
+          query: { maxWidth: 768 },
+          option: {
+            grid: { left: 8, right: 8, top: 56, bottom: 64, containLabel: true },
+            legend: { bottom: 0, top: 'auto', itemWidth: 10, itemHeight: 6, textStyle: { fontSize: 9 }, type: 'scroll' },
+            xAxis: { axisLabel: { fontSize: 9, rotate: 45, interval: 'auto' } },
+            yAxis: { axisLabel: { fontSize: 9 }, nameTextStyle: { fontSize: 9 } }
+          }
+        }]
+      };
+    }
     chart.setOption(option);
     return chart;
   } catch (e) {
@@ -3755,10 +3697,21 @@ function safeInit(chartId, option) {
     var el = document.getElementById(chartId);
     if (!el) { console.warn('Chart element not found: ' + chartId); return null; }
     var chart = echarts.init(el);
-    // 手机端适配暂时禁用，先用原始配置确保图表显示
-    // if (isMobile()) {
-    //   option = applyMobileOption(option);
-    // }
+    // 自动添加ECharts原生media query手机端适配（D010决策）
+    if (!option.baseOption) {
+      option = {
+        baseOption: option,
+        media: [{
+          query: { maxWidth: 768 },
+          option: {
+            grid: { left: 8, right: 8, top: 56, bottom: 64, containLabel: true },
+            legend: { bottom: 0, top: 'auto', itemWidth: 10, itemHeight: 6, textStyle: { fontSize: 9 }, type: 'scroll' },
+            xAxis: { axisLabel: { fontSize: 9, rotate: 45, interval: 'auto' } },
+            yAxis: { axisLabel: { fontSize: 9 }, nameTextStyle: { fontSize: 9 } }
+          }
+        }]
+      };
+    }
     chart.setOption(option);
     return chart;
   } catch (e) {
@@ -4522,10 +4475,21 @@ function safeInit(chartId, option) {
     var el = document.getElementById(chartId);
     if (!el) { console.warn('Chart element not found: ' + chartId); return null; }
     var chart = echarts.init(el);
-    // 手机端适配暂时禁用，先用原始配置确保图表显示
-    // if (isMobile()) {
-    //   option = applyMobileOption(option);
-    // }
+    // 自动添加ECharts原生media query手机端适配（D010决策）
+    if (!option.baseOption) {
+      option = {
+        baseOption: option,
+        media: [{
+          query: { maxWidth: 768 },
+          option: {
+            grid: { left: 8, right: 8, top: 56, bottom: 64, containLabel: true },
+            legend: { bottom: 0, top: 'auto', itemWidth: 10, itemHeight: 6, textStyle: { fontSize: 9 }, type: 'scroll' },
+            xAxis: { axisLabel: { fontSize: 9, rotate: 45, interval: 'auto' } },
+            yAxis: { axisLabel: { fontSize: 9 }, nameTextStyle: { fontSize: 9 } }
+          }
+        }]
+      };
+    }
     chart.setOption(option);
     return chart;
   } catch (e) {
@@ -4981,10 +4945,6 @@ window.addEventListener('resize', function() {
 
 </div>
 
-<script>
-const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-<\/script>
 
 <div class="sec reveal">
   <div class="sec-head"><span class="num">05</span><h2>局限与诚实披露</h2><span class="en">LIMITATIONS</span></div>
@@ -5012,6 +4972,10 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   </table>
   <div class="quote" style="margin-top:14px"><b>使用说明：</b>本工具的核心价值在于<b>将审计方法论转化为可操作的工作模板</b>（控制矩阵→执行测试→缺陷跟踪→抽样计算），而非具体控制点设计。实际应用需按企业真实业务流程重新梳理控制点，并由注册会计师审核确认。</div>
 
+<script>
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+<\/script>
 </section>
 </script>
 
@@ -5413,10 +5377,21 @@ function safeInit(chartId, option) {
     var el = document.getElementById(chartId);
     if (!el) { console.warn('Chart element not found: ' + chartId); return null; }
     var chart = echarts.init(el);
-    // 手机端适配暂时禁用，先用原始配置确保图表显示
-    // if (isMobile()) {
-    //   option = applyMobileOption(option);
-    // }
+    // 自动添加ECharts原生media query手机端适配（D010决策）
+    if (!option.baseOption) {
+      option = {
+        baseOption: option,
+        media: [{
+          query: { maxWidth: 768 },
+          option: {
+            grid: { left: 8, right: 8, top: 56, bottom: 64, containLabel: true },
+            legend: { bottom: 0, top: 'auto', itemWidth: 10, itemHeight: 6, textStyle: { fontSize: 9 }, type: 'scroll' },
+            xAxis: { axisLabel: { fontSize: 9, rotate: 45, interval: 'auto' } },
+            yAxis: { axisLabel: { fontSize: 9 }, nameTextStyle: { fontSize: 9 } }
+          }
+        }]
+      };
+    }
     chart.setOption(option);
     return chart;
   } catch (e) {
@@ -5721,10 +5696,21 @@ function safeInit7(chartId, option) {
     var el = document.getElementById(chartId);
     if (!el) { console.warn('Chart element not found: ' + chartId); return null; }
     var chart = echarts.init(el);
-    // 手机端适配暂时禁用，先用原始配置确保图表显示
-    // if (isMobile()) {
-    //   option = applyMobileOption(option);
-    // }
+    // 自动添加ECharts原生media query手机端适配（D010决策）
+    if (!option.baseOption) {
+      option = {
+        baseOption: option,
+        media: [{
+          query: { maxWidth: 768 },
+          option: {
+            grid: { left: 8, right: 8, top: 56, bottom: 64, containLabel: true },
+            legend: { bottom: 0, top: 'auto', itemWidth: 10, itemHeight: 6, textStyle: { fontSize: 9 }, type: 'scroll' },
+            xAxis: { axisLabel: { fontSize: 9, rotate: 45, interval: 'auto' } },
+            yAxis: { axisLabel: { fontSize: 9 }, nameTextStyle: { fontSize: 9 } }
+          }
+        }]
+      };
+    }
     chart.setOption(option);
     return chart;
   } catch (e) {
@@ -5862,7 +5848,12 @@ window.addEventListener('resize', function() {
 <iframe id="workIframe" style="width:100%;height:100%;border:0" title="作品详情"></iframe>
 </div>
 <script>
+// 模块级变量：防止快速切换作品时的setTimeout竞态
+var _pendingWork = null;
+
 function showWork(id){
+  // 取消上一次未完成的延迟加载
+  if(_pendingWork){ clearTimeout(_pendingWork); _pendingWork = null; }
   var tpl=document.getElementById('page-'+id);
   if(!tpl)return;
   // 加载反馈：避免弱网下"点了没反应"的错觉
@@ -5894,14 +5885,17 @@ function showWork(id){
   // 先清空旧内容，再延迟设置新内容，避免新旧内容叠加
   var iframe = document.getElementById('workIframe');
   iframe.srcdoc = '';
-  setTimeout(function(){
+  _pendingWork = setTimeout(function(){
     iframe.srcdoc = html;
+    _pendingWork = null;
   }, 50);
   document.getElementById('workFrame').style.display='block';
   document.body.style.overflow='hidden';
   window.scrollTo(0,0);
 }
 function showHome(){
+  // 取消未完成的作品加载
+  if(_pendingWork){ clearTimeout(_pendingWork); _pendingWork = null; }
   // v3.9.2 显式释放 iframe 内 ECharts 实例（Gemini 建议：避免频繁切换时内存累积）
   try {
     var iw = document.getElementById('workIframe');

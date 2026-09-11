@@ -18,8 +18,9 @@
 2. **再读项目档案** → [`PROJECT_BRIEF.md`](./PROJECT_BRIEF.md) — 了解这是什么、目标是什么、约束是什么
 3. **再读复核清单** → [`REVIEW_CHECKLIST.md`](./REVIEW_CHECKLIST.md) — 按清单逐项检查
 4. **看决策记录** → [`DECISIONS.md`](./DECISIONS.md) — 了解之前争议过什么、最终怎么定的，避免重复讨论
-5. **看最近commit** — 了解本次修改了什么
-6. **输出复核报告** — 按REVIEW_CHECKLIST.md里的格式
+5. **看教训记录** → [`LESSONS_2026-09-11.md`](./LESSONS_2026-09-11.md) — 了解之前踩过什么坑、根因是什么，避免重蹈覆辙
+6. **看最近commit** — 了解本次修改了什么
+7. **输出复核报告** — 按REVIEW_CHECKLIST.md里的格式
 
 **重要原则**：
 - 你是独立第三方，不要预设立场，也不要附和主力AI
