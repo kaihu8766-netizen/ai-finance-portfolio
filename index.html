@@ -3129,48 +3129,57 @@ function isMobile() {
   return window.innerWidth < 768;
 }
 
+function applyMobileOption(option) {
+  try {
+    var m = getMobileChartOption();
+    if (option.legend && typeof option.legend === 'object' && !Array.isArray(option.legend)) {
+      option.legend = Object.assign({}, m.legend, option.legend);
+    } else if (!option.legend) {
+      option.legend = m.legend;
+    }
+    if (option.grid) {
+      if (Array.isArray(option.grid)) {
+        option.grid.forEach(function(g, i) {
+          if (g && typeof g === 'object') {
+            option.grid[i] = Object.assign({}, m.grid, g);
+          }
+        });
+      } else if (typeof option.grid === 'object') {
+        option.grid = Object.assign({}, m.grid, option.grid);
+      }
+    } else {
+      option.grid = m.grid;
+    }
+    if (option.xAxis) {
+      var xa = Array.isArray(option.xAxis) ? option.xAxis : [option.xAxis];
+      xa.forEach(function(x) {
+        if (x && typeof x === 'object') {
+          x.axisLabel = x.axisLabel ? Object.assign({}, m.xAxis.axisLabel, x.axisLabel) : m.xAxis.axisLabel;
+        }
+      });
+    }
+    if (option.yAxis) {
+      var ya = Array.isArray(option.yAxis) ? option.yAxis : [option.yAxis];
+      ya.forEach(function(y) {
+        if (y && typeof y === 'object') {
+          y.axisLabel = y.axisLabel ? Object.assign({}, m.yAxis.axisLabel, y.axisLabel) : m.yAxis.axisLabel;
+        }
+      });
+    }
+  } catch (e) {
+    console.warn('Mobile option adaptation failed, using original option', e);
+  }
+  return option;
+}
+
+
 function safeInit(chartId, option) {
   try {
     var el = document.getElementById(chartId);
     if (!el) { console.warn('Chart element not found: ' + chartId); return null; }
     var chart = echarts.init(el);
-    // 手机端适配：合并通用手机端配置
     if (isMobile()) {
-      var mobileOpt = getMobileChartOption();
-      // 深合并，保留原配置的具体值
-      if (option.legend && typeof option.legend === 'object' && !Array.isArray(option.legend)) {
-        option.legend = Object.assign({}, mobileOpt.legend, option.legend);
-      } else if (!option.legend) {
-        option.legend = mobileOpt.legend;
-      }
-      if (option.grid && typeof option.grid === 'object') {
-        option.grid = Object.assign({}, mobileOpt.grid, option.grid);
-      } else if (!option.grid) {
-        option.grid = mobileOpt.grid;
-      }
-      if (option.xAxis) {
-        var xArr = Array.isArray(option.xAxis) ? option.xAxis : [option.xAxis];
-        xArr.forEach(function(x, i) {
-          if (x.axisLabel) {
-            x.axisLabel = Object.assign({}, mobileOpt.xAxis.axisLabel, x.axisLabel);
-          } else {
-            x.axisLabel = mobileOpt.xAxis.axisLabel;
-          }
-        });
-      }
-      if (option.yAxis) {
-        var yArr = Array.isArray(option.yAxis) ? option.yAxis : [option.yAxis];
-        yArr.forEach(function(y) {
-          if (y.axisLabel) {
-            y.axisLabel = Object.assign({}, mobileOpt.yAxis.axisLabel, y.axisLabel);
-          } else {
-            y.axisLabel = mobileOpt.yAxis.axisLabel;
-          }
-          if (y.nameTextStyle) {
-            y.nameTextStyle = Object.assign({}, mobileOpt.yAxis.nameTextStyle, y.nameTextStyle);
-          }
-        });
-      }
+      option = applyMobileOption(option);
     }
     chart.setOption(option);
     return chart;
@@ -3746,25 +3755,7 @@ function safeInit(chartId, option) {
     if (!el) { console.warn('Chart element not found: ' + chartId); return null; }
     var chart = echarts.init(el);
     if (isMobile()) {
-      var mOpt = getMobileChartOption();
-      if (option.legend && typeof option.legend === 'object' && !Array.isArray(option.legend)) {
-        option.legend = Object.assign({}, mOpt.legend, option.legend);
-      } else if (!option.legend) { option.legend = mOpt.legend; }
-      if (option.grid && typeof option.grid === 'object') {
-        option.grid = Object.assign({}, mOpt.grid, option.grid);
-      } else if (!option.grid) { option.grid = mOpt.grid; }
-      if (option.xAxis) {
-        var xa = Array.isArray(option.xAxis) ? option.xAxis : [option.xAxis];
-        xa.forEach(function(x) {
-          x.axisLabel = x.axisLabel ? Object.assign({}, mOpt.xAxis.axisLabel, x.axisLabel) : mOpt.xAxis.axisLabel;
-        });
-      }
-      if (option.yAxis) {
-        var ya = Array.isArray(option.yAxis) ? option.yAxis : [option.yAxis];
-        ya.forEach(function(y) {
-          y.axisLabel = y.axisLabel ? Object.assign({}, mOpt.yAxis.axisLabel, y.axisLabel) : mOpt.yAxis.axisLabel;
-        });
-      }
+      option = applyMobileOption(option);
     }
     chart.setOption(option);
     return chart;
@@ -4529,43 +4520,8 @@ function safeInit(chartId, option) {
     var el = document.getElementById(chartId);
     if (!el) { console.warn('Chart element not found: ' + chartId); return null; }
     var chart = echarts.init(el);
-    // 手机端适配：合并通用手机端配置
     if (isMobile()) {
-      var mobileOpt = getMobileChartOption();
-      // 深合并，保留原配置的具体值
-      if (option.legend && typeof option.legend === 'object' && !Array.isArray(option.legend)) {
-        option.legend = Object.assign({}, mobileOpt.legend, option.legend);
-      } else if (!option.legend) {
-        option.legend = mobileOpt.legend;
-      }
-      if (option.grid && typeof option.grid === 'object') {
-        option.grid = Object.assign({}, mobileOpt.grid, option.grid);
-      } else if (!option.grid) {
-        option.grid = mobileOpt.grid;
-      }
-      if (option.xAxis) {
-        var xArr = Array.isArray(option.xAxis) ? option.xAxis : [option.xAxis];
-        xArr.forEach(function(x, i) {
-          if (x.axisLabel) {
-            x.axisLabel = Object.assign({}, mobileOpt.xAxis.axisLabel, x.axisLabel);
-          } else {
-            x.axisLabel = mobileOpt.xAxis.axisLabel;
-          }
-        });
-      }
-      if (option.yAxis) {
-        var yArr = Array.isArray(option.yAxis) ? option.yAxis : [option.yAxis];
-        yArr.forEach(function(y) {
-          if (y.axisLabel) {
-            y.axisLabel = Object.assign({}, mobileOpt.yAxis.axisLabel, y.axisLabel);
-          } else {
-            y.axisLabel = mobileOpt.yAxis.axisLabel;
-          }
-          if (y.nameTextStyle) {
-            y.nameTextStyle = Object.assign({}, mobileOpt.yAxis.nameTextStyle, y.nameTextStyle);
-          }
-        });
-      }
+      option = applyMobileOption(option);
     }
     chart.setOption(option);
     return chart;
@@ -5455,25 +5411,7 @@ function safeInit(chartId, option) {
     if (!el) { console.warn('Chart element not found: ' + chartId); return null; }
     var chart = echarts.init(el);
     if (isMobile()) {
-      var mOpt = getMobileChartOption();
-      if (option.legend && typeof option.legend === 'object' && !Array.isArray(option.legend)) {
-        option.legend = Object.assign({}, mOpt.legend, option.legend);
-      } else if (!option.legend) { option.legend = mOpt.legend; }
-      if (option.grid && typeof option.grid === 'object') {
-        option.grid = Object.assign({}, mOpt.grid, option.grid);
-      } else if (!option.grid) { option.grid = mOpt.grid; }
-      if (option.xAxis) {
-        var xa = Array.isArray(option.xAxis) ? option.xAxis : [option.xAxis];
-        xa.forEach(function(x) {
-          x.axisLabel = x.axisLabel ? Object.assign({}, mOpt.xAxis.axisLabel, x.axisLabel) : mOpt.xAxis.axisLabel;
-        });
-      }
-      if (option.yAxis) {
-        var ya = Array.isArray(option.yAxis) ? option.yAxis : [option.yAxis];
-        ya.forEach(function(y) {
-          y.axisLabel = y.axisLabel ? Object.assign({}, mOpt.yAxis.axisLabel, y.axisLabel) : mOpt.yAxis.axisLabel;
-        });
-      }
+      option = applyMobileOption(option);
     }
     chart.setOption(option);
     return chart;
@@ -5780,25 +5718,7 @@ function safeInit7(chartId, option) {
     if (!el) { console.warn('Chart element not found: ' + chartId); return null; }
     var chart = echarts.init(el);
     if (isMobile()) {
-      var mOpt = getMobileChartOption();
-      if (option.legend && typeof option.legend === 'object' && !Array.isArray(option.legend)) {
-        option.legend = Object.assign({}, mOpt.legend, option.legend);
-      } else if (!option.legend) { option.legend = mOpt.legend; }
-      if (option.grid && typeof option.grid === 'object') {
-        option.grid = Object.assign({}, mOpt.grid, option.grid);
-      } else if (!option.grid) { option.grid = mOpt.grid; }
-      if (option.xAxis) {
-        var xa = Array.isArray(option.xAxis) ? option.xAxis : [option.xAxis];
-        xa.forEach(function(x) {
-          x.axisLabel = x.axisLabel ? Object.assign({}, mOpt.xAxis.axisLabel, x.axisLabel) : mOpt.xAxis.axisLabel;
-        });
-      }
-      if (option.yAxis) {
-        var ya = Array.isArray(option.yAxis) ? option.yAxis : [option.yAxis];
-        ya.forEach(function(y) {
-          y.axisLabel = y.axisLabel ? Object.assign({}, mOpt.yAxis.axisLabel, y.axisLabel) : mOpt.yAxis.axisLabel;
-        });
-      }
+      option = applyMobileOption(option);
     }
     chart.setOption(option);
     return chart;
