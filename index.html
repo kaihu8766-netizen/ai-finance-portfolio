@@ -3762,7 +3762,7 @@ function safeInit(chartId, option) {
   } catch (e) {
     console.error('Chart init failed: ' + chartId, e);
     var el = document.getElementById(chartId);
-    if (el) el.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-dim);font-size:9pt;">图表加载失败，请刷新重试</div>';
+    if (el) el.innerHTML = '<div style="padding:20px;color:#f87171;font-size:11px;word-break:break-all;">错误: ' + (e && e.message ? e.message : String(e)) + '</div>';
     return null;
   }
 }
@@ -5725,7 +5725,7 @@ function safeInit7(chartId, option) {
   } catch (e) {
     console.error('Chart init failed: ' + chartId, e);
     var el = document.getElementById(chartId);
-    if (el) el.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-dim);font-size:9pt;">图表加载失败，请刷新重试</div>';
+    if (el) el.innerHTML = '<div style="padding:20px;color:#f87171;font-size:11px;word-break:break-all;">错误: ' + (e && e.message ? e.message : String(e)) + '</div>';
     return null;
   }
 }
