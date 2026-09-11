@@ -1750,6 +1750,10 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
   .timeline{padding-left:24px}
   .tl-dot{left:-26px;width:14px;height:14px}
   .tl-content{padding:12px 14px}
+  .chart-echarts{min-height:280px !important;height:280px !important}
+  .chart-grid{grid-template-columns:1fr !important;gap:16px !important}
+  .chart-box{padding:12px !important}
+  .chart-note{font-size:10px !important;line-height:1.6 !important}
 }
 </style>
 
@@ -3085,11 +3089,89 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 <script>
 // ===== 安全初始化：单图失败不影响整体 =====
+
+// 手机端图表适配配置
+function getMobileChartOption() {
+  return {
+    legend: {
+      bottom: 0,
+      left: 'center',
+      textStyle: { fontSize: 9, color: '#8a8fa0' },
+      itemWidth: 12,
+      itemHeight: 8,
+      itemGap: 8
+    },
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '18%',
+      top: '10%',
+      containLabel: true
+    },
+    xAxis: {
+      axisLabel: {
+        fontSize: 9,
+        interval: 'auto',
+        rotate: 30
+      }
+    },
+    yAxis: {
+      axisLabel: { fontSize: 9 },
+      nameTextStyle: { fontSize: 9 }
+    },
+    tooltip: {
+      textStyle: { fontSize: 10 }
+    }
+  };
+}
+
+function isMobile() {
+  return window.innerWidth < 768;
+}
+
 function safeInit(chartId, option) {
   try {
     var el = document.getElementById(chartId);
     if (!el) { console.warn('Chart element not found: ' + chartId); return null; }
     var chart = echarts.init(el);
+    // 手机端适配：合并通用手机端配置
+    if (isMobile()) {
+      var mobileOpt = getMobileChartOption();
+      // 深合并，保留原配置的具体值
+      if (option.legend && typeof option.legend === 'object' && !Array.isArray(option.legend)) {
+        option.legend = Object.assign({}, mobileOpt.legend, option.legend);
+      } else if (!option.legend) {
+        option.legend = mobileOpt.legend;
+      }
+      if (option.grid && typeof option.grid === 'object') {
+        option.grid = Object.assign({}, mobileOpt.grid, option.grid);
+      } else if (!option.grid) {
+        option.grid = mobileOpt.grid;
+      }
+      if (option.xAxis) {
+        var xArr = Array.isArray(option.xAxis) ? option.xAxis : [option.xAxis];
+        xArr.forEach(function(x, i) {
+          if (x.axisLabel) {
+            x.axisLabel = Object.assign({}, mobileOpt.xAxis.axisLabel, x.axisLabel);
+          } else {
+            x.axisLabel = mobileOpt.xAxis.axisLabel;
+          }
+        });
+      }
+      if (option.yAxis) {
+        var yArr = Array.isArray(option.yAxis) ? option.yAxis : [option.yAxis];
+        yArr.forEach(function(y) {
+          if (y.axisLabel) {
+            y.axisLabel = Object.assign({}, mobileOpt.yAxis.axisLabel, y.axisLabel);
+          } else {
+            y.axisLabel = mobileOpt.yAxis.axisLabel;
+          }
+          if (y.nameTextStyle) {
+            y.nameTextStyle = Object.assign({}, mobileOpt.yAxis.nameTextStyle, y.nameTextStyle);
+          }
+        });
+      }
+    }
     chart.setOption(option);
     return chart;
   } catch (e) {
@@ -3663,6 +3745,27 @@ function safeInit(chartId, option) {
     var el = document.getElementById(chartId);
     if (!el) { console.warn('Chart element not found: ' + chartId); return null; }
     var chart = echarts.init(el);
+    if (isMobile()) {
+      var mOpt = getMobileChartOption();
+      if (option.legend && typeof option.legend === 'object' && !Array.isArray(option.legend)) {
+        option.legend = Object.assign({}, mOpt.legend, option.legend);
+      } else if (!option.legend) { option.legend = mOpt.legend; }
+      if (option.grid && typeof option.grid === 'object') {
+        option.grid = Object.assign({}, mOpt.grid, option.grid);
+      } else if (!option.grid) { option.grid = mOpt.grid; }
+      if (option.xAxis) {
+        var xa = Array.isArray(option.xAxis) ? option.xAxis : [option.xAxis];
+        xa.forEach(function(x) {
+          x.axisLabel = x.axisLabel ? Object.assign({}, mOpt.xAxis.axisLabel, x.axisLabel) : mOpt.xAxis.axisLabel;
+        });
+      }
+      if (option.yAxis) {
+        var ya = Array.isArray(option.yAxis) ? option.yAxis : [option.yAxis];
+        ya.forEach(function(y) {
+          y.axisLabel = y.axisLabel ? Object.assign({}, mOpt.yAxis.axisLabel, y.axisLabel) : mOpt.yAxis.axisLabel;
+        });
+      }
+    }
     chart.setOption(option);
     return chart;
   } catch (e) {
@@ -4426,6 +4529,44 @@ function safeInit(chartId, option) {
     var el = document.getElementById(chartId);
     if (!el) { console.warn('Chart element not found: ' + chartId); return null; }
     var chart = echarts.init(el);
+    // 手机端适配：合并通用手机端配置
+    if (isMobile()) {
+      var mobileOpt = getMobileChartOption();
+      // 深合并，保留原配置的具体值
+      if (option.legend && typeof option.legend === 'object' && !Array.isArray(option.legend)) {
+        option.legend = Object.assign({}, mobileOpt.legend, option.legend);
+      } else if (!option.legend) {
+        option.legend = mobileOpt.legend;
+      }
+      if (option.grid && typeof option.grid === 'object') {
+        option.grid = Object.assign({}, mobileOpt.grid, option.grid);
+      } else if (!option.grid) {
+        option.grid = mobileOpt.grid;
+      }
+      if (option.xAxis) {
+        var xArr = Array.isArray(option.xAxis) ? option.xAxis : [option.xAxis];
+        xArr.forEach(function(x, i) {
+          if (x.axisLabel) {
+            x.axisLabel = Object.assign({}, mobileOpt.xAxis.axisLabel, x.axisLabel);
+          } else {
+            x.axisLabel = mobileOpt.xAxis.axisLabel;
+          }
+        });
+      }
+      if (option.yAxis) {
+        var yArr = Array.isArray(option.yAxis) ? option.yAxis : [option.yAxis];
+        yArr.forEach(function(y) {
+          if (y.axisLabel) {
+            y.axisLabel = Object.assign({}, mobileOpt.yAxis.axisLabel, y.axisLabel);
+          } else {
+            y.axisLabel = mobileOpt.yAxis.axisLabel;
+          }
+          if (y.nameTextStyle) {
+            y.nameTextStyle = Object.assign({}, mobileOpt.yAxis.nameTextStyle, y.nameTextStyle);
+          }
+        });
+      }
+    }
     chart.setOption(option);
     return chart;
   } catch (e) {
@@ -5313,6 +5454,27 @@ function safeInit(chartId, option) {
     var el = document.getElementById(chartId);
     if (!el) { console.warn('Chart element not found: ' + chartId); return null; }
     var chart = echarts.init(el);
+    if (isMobile()) {
+      var mOpt = getMobileChartOption();
+      if (option.legend && typeof option.legend === 'object' && !Array.isArray(option.legend)) {
+        option.legend = Object.assign({}, mOpt.legend, option.legend);
+      } else if (!option.legend) { option.legend = mOpt.legend; }
+      if (option.grid && typeof option.grid === 'object') {
+        option.grid = Object.assign({}, mOpt.grid, option.grid);
+      } else if (!option.grid) { option.grid = mOpt.grid; }
+      if (option.xAxis) {
+        var xa = Array.isArray(option.xAxis) ? option.xAxis : [option.xAxis];
+        xa.forEach(function(x) {
+          x.axisLabel = x.axisLabel ? Object.assign({}, mOpt.xAxis.axisLabel, x.axisLabel) : mOpt.xAxis.axisLabel;
+        });
+      }
+      if (option.yAxis) {
+        var ya = Array.isArray(option.yAxis) ? option.yAxis : [option.yAxis];
+        ya.forEach(function(y) {
+          y.axisLabel = y.axisLabel ? Object.assign({}, mOpt.yAxis.axisLabel, y.axisLabel) : mOpt.yAxis.axisLabel;
+        });
+      }
+    }
     chart.setOption(option);
     return chart;
   } catch (e) {
@@ -5617,6 +5779,27 @@ function safeInit7(chartId, option) {
     var el = document.getElementById(chartId);
     if (!el) { console.warn('Chart element not found: ' + chartId); return null; }
     var chart = echarts.init(el);
+    if (isMobile()) {
+      var mOpt = getMobileChartOption();
+      if (option.legend && typeof option.legend === 'object' && !Array.isArray(option.legend)) {
+        option.legend = Object.assign({}, mOpt.legend, option.legend);
+      } else if (!option.legend) { option.legend = mOpt.legend; }
+      if (option.grid && typeof option.grid === 'object') {
+        option.grid = Object.assign({}, mOpt.grid, option.grid);
+      } else if (!option.grid) { option.grid = mOpt.grid; }
+      if (option.xAxis) {
+        var xa = Array.isArray(option.xAxis) ? option.xAxis : [option.xAxis];
+        xa.forEach(function(x) {
+          x.axisLabel = x.axisLabel ? Object.assign({}, mOpt.xAxis.axisLabel, x.axisLabel) : mOpt.xAxis.axisLabel;
+        });
+      }
+      if (option.yAxis) {
+        var ya = Array.isArray(option.yAxis) ? option.yAxis : [option.yAxis];
+        ya.forEach(function(y) {
+          y.axisLabel = y.axisLabel ? Object.assign({}, mOpt.yAxis.axisLabel, y.axisLabel) : mOpt.yAxis.axisLabel;
+        });
+      }
+    }
     chart.setOption(option);
     return chart;
   } catch (e) {
