@@ -1,6 +1,9 @@
 # 第三方库，不计入语言统计
 echarts.min.js linguist-vendored
 
+# 历史版本归档，不计入语言统计
+versions/* linguist-vendored
+
 # HTML文件计入统计（作品集主体）
 *.html linguist-detectable
 
