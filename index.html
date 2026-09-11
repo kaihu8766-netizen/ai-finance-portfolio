@@ -5887,11 +5887,16 @@ function showWork(id){
   styleHtml+='<script src="'+baseUrl+'echarts.min.js"><\/script>';
   var aiEngine=document.getElementById('ai-engine');
   if(aiEngine) styleHtml+='<script>'+aiEngine.textContent.replace(/<\/script>/g,'<\\/script>')+'<\/script>';
-  styleHtml+='<\/head><body style="margin:0;padding:0;">';
+  styleHtml+='<\/head><body style="margin:0;padding:0;" onload="window.scrollTo(0,0);">';
   var html=styleHtml+(tpl.textContent||tpl.innerHTML);
   html=html.replace(/<\\\/script>/g,'<\/script>');
   html+='<\/body><\/html>';
-  document.getElementById('workIframe').srcdoc=html;
+  // 先清空旧内容，再延迟设置新内容，避免新旧内容叠加
+  var iframe = document.getElementById('workIframe');
+  iframe.srcdoc = '';
+  setTimeout(function(){
+    iframe.srcdoc = html;
+  }, 50);
   document.getElementById('workFrame').style.display='block';
   document.body.style.overflow='hidden';
   window.scrollTo(0,0);
