@@ -3178,9 +3178,10 @@ function safeInit(chartId, option) {
     var el = document.getElementById(chartId);
     if (!el) { console.warn('Chart element not found: ' + chartId); return null; }
     var chart = echarts.init(el);
-    if (isMobile()) {
-      option = applyMobileOption(option);
-    }
+    // 手机端适配暂时禁用，先用原始配置确保图表显示
+    // if (isMobile()) {
+    //   option = applyMobileOption(option);
+    // }
     chart.setOption(option);
     return chart;
   } catch (e) {
@@ -3754,9 +3755,10 @@ function safeInit(chartId, option) {
     var el = document.getElementById(chartId);
     if (!el) { console.warn('Chart element not found: ' + chartId); return null; }
     var chart = echarts.init(el);
-    if (isMobile()) {
-      option = applyMobileOption(option);
-    }
+    // 手机端适配暂时禁用，先用原始配置确保图表显示
+    // if (isMobile()) {
+    //   option = applyMobileOption(option);
+    // }
     chart.setOption(option);
     return chart;
   } catch (e) {
@@ -4520,9 +4522,10 @@ function safeInit(chartId, option) {
     var el = document.getElementById(chartId);
     if (!el) { console.warn('Chart element not found: ' + chartId); return null; }
     var chart = echarts.init(el);
-    if (isMobile()) {
-      option = applyMobileOption(option);
-    }
+    // 手机端适配暂时禁用，先用原始配置确保图表显示
+    // if (isMobile()) {
+    //   option = applyMobileOption(option);
+    // }
     chart.setOption(option);
     return chart;
   } catch (e) {
@@ -5410,9 +5413,10 @@ function safeInit(chartId, option) {
     var el = document.getElementById(chartId);
     if (!el) { console.warn('Chart element not found: ' + chartId); return null; }
     var chart = echarts.init(el);
-    if (isMobile()) {
-      option = applyMobileOption(option);
-    }
+    // 手机端适配暂时禁用，先用原始配置确保图表显示
+    // if (isMobile()) {
+    //   option = applyMobileOption(option);
+    // }
     chart.setOption(option);
     return chart;
   } catch (e) {
@@ -5717,9 +5721,10 @@ function safeInit7(chartId, option) {
     var el = document.getElementById(chartId);
     if (!el) { console.warn('Chart element not found: ' + chartId); return null; }
     var chart = echarts.init(el);
-    if (isMobile()) {
-      option = applyMobileOption(option);
-    }
+    // 手机端适配暂时禁用，先用原始配置确保图表显示
+    // if (isMobile()) {
+    //   option = applyMobileOption(option);
+    // }
     chart.setOption(option);
     return chart;
   } catch (e) {
