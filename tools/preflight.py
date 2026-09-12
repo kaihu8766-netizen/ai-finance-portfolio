@@ -7,6 +7,7 @@
 
 import re
 import sys
+import subprocess
 from pathlib import Path
 
 HTML_FILE = Path(__file__).parent.parent / 'index.html'
@@ -170,6 +171,31 @@ def main():
         for err in e: print(err)
     else:
         print("  ✅ 通过")
+    
+    print("\n🔍 检查7：离线助手覆盖率回归（Node跑真JS）")
+    try:
+        result = subprocess.run(
+            ['node', 'tools/coverage_test.js'],
+            cwd=str(HTML_FILE.parent),
+            capture_output=True, text=True, timeout=30
+        )
+        if result.returncode == 0:
+            # 提取覆盖率数字
+            for line in result.stdout.split('\n'):
+                if '覆盖率' in line and '%' in line:
+                    print(f"  ✅ {line.strip()}")
+                    break
+            else:
+                print("  ✅ 通过")
+        else:
+            all_errors.append("  ❌ 覆盖率测试失败")
+            print(result.stdout[-500:] if len(result.stdout) > 500 else result.stdout)
+            if result.stderr:
+                print(result.stderr[-300:])
+    except FileNotFoundError:
+        all_errors.append("  ❌ Node.js未安装，无法运行覆盖率测试")
+    except subprocess.TimeoutExpired:
+        all_errors.append("  ❌ 覆盖率测试超时")
     
     print("\n" + "=" * 60)
     if all_errors:
