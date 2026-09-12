@@ -1997,6 +1997,17 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
 .ai-send:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(109,124,255,0.35)}
 .ai-send:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
 .ai-footer-hint{font-size:10px;color:#4a5268;padding:6px 14px 10px;text-align:center;letter-spacing:.3px}
+.ai-head-gear{background:none;border:none;color:#8a8fa0;font-size:16px;cursor:pointer;padding:4px 8px;border-radius:6px;transition:all .2s}
+.ai-head-gear:hover{color:#6d7cff;background:rgba(109,124,255,0.1)}
+.ai-settings{display:none;padding:14px 16px;background:rgba(14,18,28,0.95);border-bottom:1px solid rgba(130,150,255,0.1)}
+.ai-settings.open{display:block}
+.ai-settings-title{font-size:13px;font-weight:600;color:#e8eaf0;margin-bottom:6px}
+.ai-settings-desc{font-size:11px;color:#8a8fa0;line-height:1.6;margin-bottom:10px}
+.ai-key-input{width:100%;padding:8px 12px;background:rgba(0,0,0,0.3);border:1px solid rgba(130,150,255,0.2);border-radius:8px;color:#e8eaf0;font-size:12px;font-family:monospace;outline:none;box-sizing:border-box;margin-bottom:8px}
+.ai-key-input:focus{border-color:#6d7cff}
+.ai-key-save{width:100%;padding:8px;background:linear-gradient(135deg,#6d7cff,#4fd1c5);border:none;border-radius:8px;color:#fff;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s}
+.ai-key-save:hover{opacity:0.9}
+.ai-settings-tip{font-size:10px;color:#6b7280;margin-top:8px;text-align:center}
 .interview-badge{font-size:10px;padding:3px 9px;border-radius:8px;border:1px solid rgba(250,204,21,0.4);background:rgba(250,204,21,0.1);color:#fbbf24;cursor:pointer;flex-shrink:0;font-weight:500;transition:all .2s}
 .interview-badge:hover{background:rgba(250,204,21,0.2)}
 @media(max-width:600px){
@@ -2019,7 +2030,15 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
       <div class="ai-head-sub"><span class="online-dot"></span>在线 · 了解全部5个作品与作者背景</div>
     </div>
     <span class="interview-badge" id="assistantInterviewBadge" style="display:none" title="点击退出面试模式">面试模式</span>
+    <button class="ai-head-gear" id="assistantGear" title="设置">⚙</button>
     <button class="ai-head-close" id="assistantClose">✕</button>
+  </div>
+  <div class="ai-settings" id="assistantSettings">
+    <div class="ai-settings-title">AI 设置</div>
+    <div class="ai-settings-desc">输入你的 DeepSeek API Key，体验真实 AI 回答（Key 仅存于本地浏览器，刷新即清）</div>
+    <input type="password" class="ai-key-input" id="assistantKeyInput" placeholder="sk-xxxxxxxxxxxxxxxx" autocomplete="off">
+    <button class="ai-key-save" id="assistantKeySave">保存并启用</button>
+    <div class="ai-settings-tip">获取 Key：<a href="https://platform.deepseek.com/" target="_blank" style="color:#6d7cff">platform.deepseek.com</a></div>
   </div>
   <div class="ai-body" id="assistantBody">
     <div class="ai-welcome" id="assistantWelcome">
@@ -2119,8 +2138,8 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
 <script id="ai-engine">
 /* ===== 作品集 AI 引擎（混合模式：真实 API + 离线兜底） ===== */
 window.SmartReconAI = {
-  // ⚠️ API Key：面试演示后请在 platform.deepseek.com 作废此 Key（HTML 外发会暴露）
-  apiKey: 'sk-e46307ffee254b49824dfc1da723fdb0',
+  // API Key：默认空，使用离线模式；用户可在设置中输入自己的 DeepSeek Key 体验真实 AI
+  apiKey: '',
   model: 'deepseek-v4-flash',
   apiUrl: 'https://api.deepseek.com/chat/completions',
   timeoutMs: 40000,
@@ -2268,6 +2287,11 @@ window.SmartReconAI = {
   // 调用真实 DeepSeek API（v3.11 支持 SSE 流式：onDelta 增量回调；无 ReadableStream 自动回退非流式）
   callAPI: function(messagesOrText, persona, callback, onDelta) {
     var self = this;
+    // 没有 API Key 时直接走离线兜底，不发起网络请求
+    if (!this.apiKey) {
+      setTimeout(function(){ callback(new Error('No API key'), null, null); }, 0);
+      return;
+    }
     var controller = (typeof AbortController !== 'undefined') ? new AbortController() : null;
     var timer = setTimeout(function(){ if (controller) controller.abort(); }, this.timeoutMs);
     // 兼容两种调用：callAPI(text, persona, cb) 或 callAPI(messagesArray, persona, cb)
@@ -2607,7 +2631,11 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     interviewMode=false;
     interviewQIndex=0;
     if(interviewBadge) interviewBadge.style.display='none';
-    setState('#34d399','真实 AI 模式');
+    if(window.SmartReconAI && window.SmartReconAI.apiKey){
+      setState('#34d399','真实 AI 模式');
+    } else {
+      setState('#f59e0b','离线模式 · 点⚙输入Key');
+    }
     setTitle('作品集助手');
   }
   if(interviewBadge){
@@ -2726,6 +2754,12 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     var savedKey=sessionStorage.getItem('smartrecon_custom_key');
     if(savedKey&&window.SmartReconAI){ window.SmartReconAI.apiKey=savedKey; }
   }catch(e){}
+  // 设置初始状态：有Key显示真实AI模式，无Key显示离线模式
+  if(window.SmartReconAI && window.SmartReconAI.apiKey){
+    setState('#34d399','真实 AI 模式');
+  } else {
+    setState('#f59e0b','离线模式 · 点⚙输入Key');
+  }
   if(gear){
     gear.addEventListener('click',function(){ settings.classList.toggle('open'); });
   }
