@@ -12,6 +12,13 @@ import urllib.parse
 import subprocess
 import re
 
+# 修复Windows GBK控制台输出emoji崩溃（输出侧编码）
+for _s in (sys.stdout, sys.stderr):
+    try:
+        _s.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 BASE_URL = "https://kaihu8766-netizen.github.io/ai-finance-portfolio"
 REPO_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 

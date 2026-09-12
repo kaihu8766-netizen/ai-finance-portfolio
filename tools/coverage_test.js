@@ -70,6 +70,9 @@ const TESTS = [
   { q: '四角色AI协作体系是怎么运作的', type: 'assert', expected: 'canned' },
   { q: '你的GPA是多少', type: 'assert', expected: 'canned' },
   { q: '你会不会算错', type: 'assert', expected: 'canned' },
+  { q: '这些作品落地了吗', type: 'assert', expected: 'canned' },
+  { q: '供应链的资金缺口怎么算', type: 'assert', expected: 'canned' },
+  { q: '资金缺口分析那个作品怎么做的', type: 'assert', expected: 'canned' },
 
   // --- 截胡探针（必须不是out_of_scope，且回答应包含作品相关内容）---
   { q: 'LPR那个作品的研究结论是什么', type: 'coverage' },

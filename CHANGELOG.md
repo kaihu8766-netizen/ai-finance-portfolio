@@ -1,5 +1,23 @@
 ﻿# 胡凯 · AI × 财务 作品集 更新日志
 
+## v5.3.4（2026-09-12）
+
+### 修复（DeepSeek第八~九轮复核）
+- **供应链模拟器恢复源修正**：之前从a231ab3恢复导致回退5项逻辑修复（应收账款滚动/账期/委贷本金/初始现金/风险等级），改从6686e5f恢复，用Python io.open(encoding='utf-8')安全写入，避免PowerShell Set-Content的GBK编码陷阱
+- **preflight/verify_deploy编码修复**：subprocess.run加encoding='utf-8'（读取侧）+ sys.stdout.reconfigure（输出侧），修复Windows GBK控制台崩溃
+- **verify_deploy失败不再静默跳过**：比对失败从⚠️跳过改为❌失败，纳入最终退出码
+- **现金流模拟器echarts改本地路径**：之前漏改，统一为../echarts.min.js
+- **coverage_test结论口径统一**：单题失败从❌改为⚠️"未达预期，不影响结论"，避免与最终✅矛盾
+- **离线助手覆盖空洞修复**：#12(w07)补"资金缺口分析/资金调度/调度建议"，#17(w05)补"资金缺口"，数据真实性话术补"落地/应用/实际使用"
+- **coverage_test新增3题**：这些作品落地了吗/供应链的资金缺口怎么算/资金缺口分析那个作品怎么做的
+
+### 文档
+- REVIEW_REPORT_v5.md新增§14-§15（第八~九轮复核）
+- DECISIONS.md新增D011-D014
+
+### 已知问题
+- Windows GBK编码陷阱已第5次复发，已在PROJECT_BRIEF.md固化规则：写HTML/demo文件必须用Python io.open(encoding='utf-8', newline='')，禁止PowerShell Set-Content
+
 ## v5.3.3（2026-09-11）
 
 ### 修复

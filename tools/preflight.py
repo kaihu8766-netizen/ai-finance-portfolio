@@ -10,6 +10,13 @@ import sys
 import subprocess
 from pathlib import Path
 
+# 修复Windows GBK控制台输出emoji崩溃（输出侧编码）
+for _s in (sys.stdout, sys.stderr):
+    try:
+        _s.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 HTML_FILE = Path(__file__).parent.parent / 'index.html'
 
 def load_html():
