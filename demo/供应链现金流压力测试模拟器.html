@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>渚涘簲閾剧幇閲戞祦鍘嬪姏娴嬭瘯妯℃嫙鍣?| 鑳″嚡浣滃搧闆?/title>
+<title>供应链现金流压力测试模拟器 | 胡凯作品集</title>
 <script src="../echarts.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -49,45 +49,45 @@ body{background:#0a0d16;color:#e8eaf0;font-family:-apple-system,BlinkMacSystemFo
 <body>
 <div class="container">
   <div class="header">
-    <h1>馃彮 渚涘簲閾剧幇閲戞祦鍘嬪姏娴嬭瘯妯℃嫙鍣?/h1>
-    <p>鍩轰簬姹借溅渚涘簲閾?璐︽湡閿欓厤+濮旀墭璐锋"鍦烘櫙锛岃皟鏁磋处鏈熴€佸洖娆炬鐜囥€佸璐疯妯＄瓑鍙傛暟锛屽疄鏃惰瀵熼泦鍥㈣祫閲戠己鍙ｄ笌椋庨櫓棰勮绛夌骇</p>
+    <h1>🏭 供应链现金流压力测试模拟器</h1>
+    <p>基于汽车供应链"账期错配+委托贷款"场景，调整账期、回款概率、委贷规模等参数，实时观察集团资金缺口与风险预警等级</p>
   </div>
 
   <div class="panel">
-    <h3>鈿欙笍 鍙傛暟璁剧疆</h3>
+    <h3>⚙️ 参数设置</h3>
     <div class="controls">
       <div class="control">
-        <label>渚涘簲鍟嗚处鏈燂紙澶╋級 <span class="val" id="apVal">90</span></label>
+        <label>供应商账期（天） <span class="val" id="apVal">90</span></label>
         <input type="range" id="ap" min="30" max="180" step="10" value="90">
-        <div class="hint">鏁磋溅鍘傚涓婃父鐨勪粯娆捐处鏈?/div>
+        <div class="hint">整车厂对上游的付款账期</div>
       </div>
       <div class="control">
-        <label>鏈堝潎閲囪喘棰濓紙涓囷級 <span class="val" id="purchaseVal">5000</span></label>
+        <label>月均采购额（万） <span class="val" id="purchaseVal">5000</span></label>
         <input type="range" id="purchase" min="1000" max="20000" step="500" value="5000">
-        <div class="hint">闆嗗洟姣忔湀鍚戜笂娓搁噰璐噾棰?/div>
+        <div class="hint">集团每月向上游采购金额</div>
       </div>
       <div class="control">
-        <label>鍥炴鍙婃椂鐜?<span class="val" id="collectionVal">85%</span></label>
+        <label>回款及时率 <span class="val" id="collectionVal">85%</span></label>
         <input type="range" id="collection" min="50" max="100" step="5" value="85">
-        <div class="hint">涓嬫父缁忛攢鍟嗘寜鏈熷洖娆炬瘮渚?/div>
+        <div class="hint">下游经销商按期回款比例</div>
       </div>
       <div class="control">
-        <label>濮旀墭璐锋瑙勬ā锛堜竾锛?<span class="val" id="loanVal">20000</span></label>
+        <label>委托贷款规模（万） <span class="val" id="loanVal">20000</span></label>
         <input type="range" id="loan" min="0" max="50000" step="2000" value="20000">
-        <div class="hint">闆嗗洟璧勯噾姹犲彲璋冨害鐨勫璐烽搴?/div>
+        <div class="hint">集团资金池可调度的委贷额度</div>
       </div>
       <div class="control">
-        <label>濮旇捶骞村埄鐜?<span class="val" id="rateVal">4.5%</span></label>
+        <label>委贷年利率 <span class="val" id="rateVal">4.5%</span></label>
         <input type="range" id="rate" min="2.0" max="8.0" step="0.5" value="4.5">
-        <div class="hint">濮旀墭璐锋鐨勮祫閲戞垚鏈?/div>
+        <div class="hint">委托贷款的资金成本</div>
       </div>
       <div class="control">
-        <label>瀹夊叏鐜伴噾鍨紙涓囷級 <span class="val" id="bufferVal">5000</span></label>
+        <label>安全现金垫（万） <span class="val" id="bufferVal">5000</span></label>
         <input type="range" id="buffer" min="1000" max="20000" step="1000" value="5000">
-        <div class="hint">闆嗗洟闇€淇濈暀鐨勬渶浣庣幇閲戜綑棰?/div>
+        <div class="hint">集团需保留的最低现金余额</div>
       </div>
     </div>
-    <button class="btn" onclick="runSim()">馃攧 閲嶆柊妯℃嫙</button>
+    <button class="btn" onclick="runSim()">🔄 重新模拟</button>
   </div>
 
   <div id="alertBox"></div>
@@ -95,23 +95,23 @@ body{background:#0a0d16;color:#e8eaf0;font-family:-apple-system,BlinkMacSystemFo
 
   <div class="charts">
     <div class="chart-box">
-      <h4>馃搳 鏈潵6涓湀鐜伴噾娴侀娴?/h4>
+      <h4>📊 未来6个月现金流预测</h4>
       <div class="chart" id="chart1"></div>
     </div>
     <div class="chart-box">
-      <h4>鈿狅笍 璧勯噾缂哄彛鏁忔劅鎬у垎鏋?/h4>
+      <h4>⚠️ 资金缺口敏感性分析</h4>
       <div class="chart" id="chart2"></div>
     </div>
   </div>
 
   <div class="panel" style="margin-top:20px">
-    <h3>馃挕 鏈瑙ｉ噴</h3>
+    <h3>💡 术语解释</h3>
     <div class="glossary">
-      <div class="glossary-item"><b>璐︽湡閿欓厤</b>锛氫笂娓镐緵搴斿晢璐︽湡锛?-6涓湀锛変笌涓嬫父缁忛攢鍟嗗洖娆惧懆鏈熶笉鍖归厤锛屽鑷撮泦鍥㈣祫閲戣鍗犵敤</div>
-      <div class="glossary-item"><b>濮旀墭璐锋</b>锛氶泦鍥㈤€氳繃閾惰閫氶亾鍚戞垚鍛樺崟浣嶅彂鏀捐捶娆撅紝閾惰浠呭仛閫氶亾涓嶆媴椋庨櫓锛屾槸闆嗗洟璧勯噾璋冨害鐨勫悎瑙勬柟寮?/div>
-      <div class="glossary-item"><b>璧勯噾缂哄彛</b>锛氱壒瀹氭椂鐐圭幇閲戜綑棰濅綆浜庡畨鍏ㄥ灚鐨勯儴鍒嗭紝闇€瑕侀€氳繃濮旇捶鎴栧閮ㄨ瀺璧勫讥琛?/div>
-      <div class="glossary-item"><b>涓夌骇椋庨櫓棰勮</b>锛氱豢鑹诧紙璧勯噾鍏呰锛夆啋 姗欒壊锛堟帴杩戝畨鍏ㄥ灚锛岄渶鍏虫敞锛夆啋 绾㈣壊锛堣祫閲戠己鍙ｏ紝闇€绔嬪嵆璋冨害锛?/div>
-      <div class="glossary-item"><b>璇氬疄鏍囨敞</b>锛氭湰妯℃嫙鍣ㄦ暟鎹负鍩轰簬琛屼笟鍩哄噯鐨勬ā鎷熸暟鎹紝鐢ㄤ簬灞曠ず鍒嗘瀽妗嗘灦锛屼笉浠ｈ〃浠讳綍鍏徃鐪熷疄缁忚惀鏁版嵁</div>
+      <div class="glossary-item"><b>账期错配</b>：上游供应商账期（3-6个月）与下游经销商回款周期不匹配，导致集团资金被占用</div>
+      <div class="glossary-item"><b>委托贷款</b>：集团通过银行通道向成员单位发放贷款，银行仅做通道不担风险，是集团资金调度的合规方式</div>
+      <div class="glossary-item"><b>资金缺口</b>：特定时点现金余额低于安全垫的部分，需要通过委贷或外部融资弥补</div>
+      <div class="glossary-item"><b>三级风险预警</b>：绿色（资金充裕）→ 橙色（接近安全垫，需关注）→ 红色（资金缺口，需立即调度）</div>
+      <div class="glossary-item"><b>诚实标注</b>：本模拟器数据为基于行业基准的模拟数据，用于展示分析框架，不代表任何公司真实经营数据</div>
     </div>
   </div>
 </div>
@@ -133,103 +133,101 @@ function runSim(){
   const rate = parseFloat(document.getElementById('rate').value)/100;
   const buffer = parseInt(document.getElementById('buffer').value);
 
-  const months = 12;
-  const monthlyPay = purchase;
-  const monthlyRevenue = purchase * 1.15;
+  const months = 6;
+  const monthlyPay = purchase; // 每月采购额
+  const monthlyRevenue = purchase * 1.15; // 假设销售收入比采购高15%
 
-  // 鍒濆鐜伴噾 = 瀹夊叏鍨殑1.5鍊?  let cash = buffer * 1.5;
-  let receivable = 0; // 搴旀敹璐︽婊氬姩浣欓
+  // 现金流模拟
+  let cash = buffer * 2; // 初始现金
   const cashFlow = [];
   const inflow = [];
   const outflow = [];
   const gap = [];
-  const payDelay = Math.round(ap/30); // 璐︽湡锛堟湀锛?
-  for(let m=0;m<months;m++){
-    // 褰撴湀閿€鍞?    const sales = monthlyRevenue;
-    // 鍥炴锛氬綋鏈堥攢鍞楀洖娆剧巼 + 鍘嗗彶搴旀敹脳40%鍥炴敹锛堝墿浣?0%缁х画婊氬姩锛?    const currentIn = sales * collection + receivable * 0.4;
-    receivable = receivable * 0.6 + sales * (1 - collection);
-    // 浠樻锛氳处鏈熷唴涓嶆敮浠橈紝璐︽湡鍚庢敮浠樺搴旀湀浠介噰璐?    const currentOut = (m >= payDelay) ? monthlyPay : 0;
-    // 濮旇捶鍒╂伅
-    const interest = loan * rate / 12;
-    // 濮旇捶鏈噾绗?涓湀鍒版湡
-    const loanPrincipal = (m === 5) ? loan : 0;
 
-    cash += currentIn - currentOut - interest - loanPrincipal;
+  for(let m=0;m<months;m++){
+    // 流入：当月销售的collection比例回款 + 前一个月的(1-collection)回款
+    const currentIn = monthlyRevenue * collection + monthlyRevenue * (1-collection) * (m>0?1:0);
+    // 流出：ap天前的采购额到期支付（简化为ap/30个月前的采购）
+    const payDelay = Math.round(ap/30);
+    const currentOut = (m >= payDelay) ? monthlyPay : monthlyPay * 0.3; // 前几个月只付30%
+    // 委贷利息支出
+    const interest = loan * rate / 12;
+
+    cash += currentIn - currentOut - interest;
     cashFlow.push(Math.round(cash));
     inflow.push(Math.round(currentIn));
-    outflow.push(Math.round(currentOut + interest + loanPrincipal));
+    outflow.push(Math.round(currentOut + interest));
     gap.push(Math.max(0, buffer - cash));
   }
 
-  // 鏈€澶х己鍙?  const maxGap = Math.max(...gap);
+  // 最大缺口
+  const maxGap = Math.max(...gap);
   const minCash = Math.min(...cashFlow);
   const avgCash = Math.round(cashFlow.reduce((a,b)=>a+b,0)/months);
-  // 椋庨櫓绛夌骇锛氬熀浜庢渶浣庣幇閲戜綑棰?vs 瀹夊叏鍨?  const riskLevel = minCash > buffer ? 'green' : (minCash > 0 ? 'orange' : 'red');
+  const riskLevel = maxGap > 0 ? (maxGap > buffer*0.5 ? 'red' : 'orange') : 'green';
 
-  // 棰勮
+  // 预警
   const alertBox = document.getElementById('alertBox');
   if(riskLevel === 'green'){
-    alertBox.innerHTML = `<div class="alert green">鉁?<b>椋庨櫓绛夌骇锛氱豢鑹诧紙瀹夊叏锛?/b> 鈥斺€?鏈潵12涓湀鐜伴噾浣欓濮嬬粓楂樹簬瀹夊叏鍨紙${buffer.toLocaleString()}涓囷級锛屾渶浣?${minCash.toLocaleString()} 涓囥€傚缓璁細鍙€傚綋鎻愰珮濮旇捶瑙勬ā鑾峰彇鍒╂伅鏀跺叆锛屾垨缂╃煭渚涘簲鍟嗚处鏈熸敼鍠勪緵搴旈摼鍏崇郴銆?/div>`;
+    alertBox.innerHTML = `<div class="alert green">✅ <b>风险等级：绿色（安全）</b> —— 未来6个月现金余额始终高于安全垫，资金充裕。建议：可适当提高委贷规模获取利息收入，或缩短供应商账期改善供应链关系。</div>`;
   } else if(riskLevel === 'orange'){
-    alertBox.innerHTML = `<div class="alert orange">鈿狅笍 <b>椋庨櫓绛夌骇锛氭鑹诧紙鍏虫敞锛?/b> 鈥斺€?鏈€浣庣幇閲戜綑棰?${minCash.toLocaleString()} 涓囷紝浣庝簬瀹夊叏鍨絾鏈柇瑁傦紝鏈€澶х己鍙?${maxGap.toLocaleString()} 涓囥€傚缓璁細鎻愬墠瀹夋帓濮旇捶缁捶锛屽叧娉ㄤ笅娓稿洖娆炬儏鍐碉紝蹇呰鏃跺欢闀块儴鍒嗕緵搴斿晢璐︽湡銆?/div>`;
+    alertBox.innerHTML = `<div class="alert orange">⚠️ <b>风险等级：橙色（关注）</b> —— 最大资金缺口约 ${maxGap.toLocaleString()} 万，接近安全垫。建议：提前安排委贷额度，关注下游回款情况，必要时延长部分供应商账期。</div>`;
   } else {
-    alertBox.innerHTML = `<div class="alert red">馃毃 <b>椋庨櫓绛夌骇锛氱孩鑹诧紙棰勮锛?/b> 鈥斺€?鐜伴噾浣欓鏈€浣?${minCash.toLocaleString()} 涓囷紝鍑虹幇璧勯噾鏂椋庨櫓锛屾渶澶х己鍙?${maxGap.toLocaleString()} 涓囥€傚缓璁細绔嬪嵆璋冨害濮旇捶璧勯噾锛屼笌閾惰娌熼€氭巿淇￠搴︼紝鑰冭檻搴旀敹璐︽淇濈悊铻嶈祫锛屽帇缂╅潪鏍稿績鏀嚭銆?/div>`;
+    alertBox.innerHTML = `<div class="alert red">🚨 <b>风险等级：红色（预警）</b> —— 最大资金缺口约 ${maxGap.toLocaleString()} 万，超过安全垫50%。建议：立即调度委贷资金，与银行沟通授信额度，考虑应收账款保理融资。</div>`;
   }
 
   // KPI
   document.getElementById('kpis').innerHTML = `
-    <div class="kpi"><div class="v">${minCash.toLocaleString()}</div><div class="l">鏈€浣庣幇閲戜綑棰濓紙涓囷級</div></div>
-    <div class="kpi ${maxGap>0?'orange':'green'}"><div class="v">${maxGap.toLocaleString()}</div><div class="l">鏈€澶ц祫閲戠己鍙ｏ紙涓囷級</div></div>
-    <div class="kpi"><div class="v">${avgCash.toLocaleString()}</div><div class="l">骞冲潎鐜伴噾浣欓锛堜竾锛?/div></div>
-    <div class="kpi ${riskLevel==='green'?'green':riskLevel==='orange'?'orange':'red'}"><div class="v">${riskLevel==='green'?'瀹夊叏':riskLevel==='orange'?'鍏虫敞':'棰勮'}</div><div class="l">椋庨櫓绛夌骇</div></div>
+    <div class="kpi"><div class="v">${minCash.toLocaleString()}</div><div class="l">最低现金余额（万）</div></div>
+    <div class="kpi ${maxGap>0?'orange':'green'}"><div class="v">${maxGap.toLocaleString()}</div><div class="l">最大资金缺口（万）</div></div>
+    <div class="kpi"><div class="v">${avgCash.toLocaleString()}</div><div class="l">平均现金余额（万）</div></div>
+    <div class="kpi ${riskLevel==='green'?'green':riskLevel==='orange'?'orange':'red'}"><div class="v">${riskLevel==='green'?'安全':riskLevel==='orange'?'关注':'预警'}</div><div class="l">风险等级</div></div>
   `;
 
-  // 鐜伴噾娴佸浘
-  const monthsLabel = Array.from({length:months},(_,i)=>`绗?{i+1}鏈坄);
+  // 现金流图
+  const monthsLabel = Array.from({length:months},(_,i)=>`第${i+1}月`);
   chart1.setOption({
     backgroundColor:'transparent',
-    tooltip:{trigger:'axis',formatter:p=>{let s=p[0].axisValue+'<br/>';p.forEach(item=>{s+=item.marker+item.seriesName+': '+item.value.toLocaleString()+'涓?br/>'});return s}},
-    legend:{data:['鐜伴噾浣欓','鐜伴噾娴佸叆','鐜伴噾娴佸嚭','瀹夊叏鍨?],textStyle:{color:'#8fa3c0',fontSize:11},top:0},
+    tooltip:{trigger:'axis',formatter:p=>{let s=p[0].axisValue+'<br/>';p.forEach(item=>{s+=item.marker+item.seriesName+': '+item.value.toLocaleString()+'万<br/>'});return s}},
+    legend:{data:['现金余额','现金流入','现金流出','安全垫'],textStyle:{color:'#8fa3c0',fontSize:11},top:0},
     grid:{left:60,right:20,top:40,bottom:40},
     xAxis:{type:'category',data:monthsLabel,axisLine:{lineStyle:{color:'#2a3045'}},axisLabel:{color:'#5b6070'}},
-    yAxis:{type:'value',name:'涓囧厓',nameTextStyle:{color:'#5b6070'},axisLine:{lineStyle:{color:'#2a3045'}},axisLabel:{color:'#5b6070'},splitLine:{lineStyle:{color:'rgba(42,48,69,0.5)'}}},
+    yAxis:{type:'value',name:'万元',nameTextStyle:{color:'#5b6070'},axisLine:{lineStyle:{color:'#2a3045'}},axisLabel:{color:'#5b6070'},splitLine:{lineStyle:{color:'rgba(42,48,69,0.5)'}}},
     series:[
-      {name:'鐜伴噾浣欓',type:'line',data:cashFlow,smooth:true,lineStyle:{width:2.5,color:'#6d7cff'},itemStyle:{color:'#6d7cff'},areaStyle:{color:'rgba(109,124,255,0.15)'}},
-      {name:'鐜伴噾娴佸叆',type:'bar',data:inflow,itemStyle:{color:'rgba(52,211,153,0.7)'},barWidth:'30%'},
-      {name:'鐜伴噾娴佸嚭',type:'bar',data:outflow,itemStyle:{color:'rgba(248,113,113,0.7)'},barWidth:'30%'},
-      {name:'瀹夊叏鍨?,type:'line',data:Array(months).fill(buffer),lineStyle:{type:'dashed',color:'#fbbf24',width:1.5},symbol:'none'}
+      {name:'现金余额',type:'line',data:cashFlow,smooth:true,lineStyle:{width:2.5,color:'#6d7cff'},itemStyle:{color:'#6d7cff'},areaStyle:{color:'rgba(109,124,255,0.15)'}},
+      {name:'现金流入',type:'bar',data:inflow,itemStyle:{color:'rgba(52,211,153,0.7)'},barWidth:'30%'},
+      {name:'现金流出',type:'bar',data:outflow,itemStyle:{color:'rgba(248,113,113,0.7)'},barWidth:'30%'},
+      {name:'安全垫',type:'line',data:Array(months).fill(buffer),lineStyle:{type:'dashed',color:'#fbbf24',width:1.5},symbol:'none'}
     ]
   });
 
-  // 鏁忔劅鎬у垎鏋愶細璐︽湡vs鍥炴鐜囧缂哄彛鐨勫奖鍝?  const apRange = [30,60,90,120,150,180];
+  // 敏感性分析：账期vs回款率对缺口的影响
+  const apRange = [30,60,90,120,150,180];
   const colRange = [50,60,70,80,90,100];
   const heatData = [];
   let heatMaxGap = 0;
   apRange.forEach((apVal,ai)=>{
     colRange.forEach((colVal,ci)=>{
-      let c = buffer*1.5;
-      let recv = 0;
+      let c = buffer*2;
       let g = 0;
       const delay = Math.round(apVal/30);
       for(let m=0;m<months;m++){
-        const sales = monthlyRevenue;
-        const cin = sales * colVal/100 + recv * 0.4;
-        recv = recv * 0.6 + sales * (1 - colVal/100);
-        const cout = (m >= delay) ? monthlyPay : 0;
-        const interest = loan * rate / 12;
-        const principal = (m === 5) ? loan : 0;
-        c += cin - cout - interest - principal;
+        // 流入：当月销售×回款率 + 上月销售×(1-回款率)
+        const cin = monthlyRevenue * colVal/100 + (m>0 ? monthlyRevenue * (1-colVal/100) : 0);
+        // 流出：账期到期后全额支付，账期内按比例支付
+        const cout = (m >= delay) ? monthlyPay : monthlyPay * (m+1)/delay;
+        c += cin - cout - loan*rate/12;
         g = Math.max(g, buffer - c);
       }
-      const gap = Math.round(Math.max(0, g));
+      const gap = Math.round(g);
       heatMaxGap = Math.max(heatMaxGap, gap);
       heatData.push([ci, ai, gap]);
     });
   });
 
-  // 鏁板瓧鏍煎紡鍖栵細澶ф暟瀛楃敤"涓?
+  // 数字格式化：大数字用"万"
   function fmtGap(v){
-    if(v >= 10000) return (v/10000).toFixed(1)+'涓?;
+    if(v >= 10000) return (v/10000).toFixed(1)+'万';
     if(v >= 1000) return (v/1000).toFixed(1)+'k';
     return v.toString();
   }
@@ -238,18 +236,18 @@ function runSim(){
     backgroundColor:'transparent',
     tooltip:{formatter:p=>{
       const gap = p.value[2];
-      const level = gap === 0 ? '馃煝 瀹夊叏' : (gap < buffer ? '馃煛 鍏虫敞' : '馃敶 棰勮');
-      return `璐︽湡 ${apRange[p.value[1]]}澶?/ 鍥炴鐜?${colRange[p.value[0]]}%<br/>鏈€澶х己鍙? <b>${gap.toLocaleString()}涓?/b><br/>椋庨櫓绛夌骇: ${level}`;
+      const level = gap === 0 ? '🟢 安全' : (gap < buffer*0.5 ? '🟡 关注' : '🔴 预警');
+      return `账期 ${apRange[p.value[1]]}天 / 回款率 ${colRange[p.value[0]]}%<br/>最大缺口: <b>${gap.toLocaleString()}万</b><br/>风险等级: ${level}`;
     }},
     grid:{left:60,right:20,top:30,bottom:60},
-    title:{text:'璐︽湡瓒婇暱銆佸洖娆剧巼瓒婁綆 鈫?璧勯噾缂哄彛瓒婂ぇ',left:'center',top:0,textStyle:{color:'#8fa3c0',fontSize:11,fontWeight:'normal'}},
-    xAxis:{type:'category',data:colRange.map(v=>v+'%'),name:'鍥炴鐜?,nameTextStyle:{color:'#5b6070'},axisLine:{lineStyle:{color:'#2a3045'}},axisLabel:{color:'#5b6070'}},
-    yAxis:{type:'category',data:apRange.map(v=>v+'澶?),name:'璐︽湡',nameTextStyle:{color:'#5b6070'},axisLine:{lineStyle:{color:'#2a3045'}},axisLabel:{color:'#5b6070'}},
+    title:{text:'账期越长、回款率越低 → 资金缺口越大',left:'center',top:0,textStyle:{color:'#8fa3c0',fontSize:11,fontWeight:'normal'}},
+    xAxis:{type:'category',data:colRange.map(v=>v+'%'),name:'回款率',nameTextStyle:{color:'#5b6070'},axisLine:{lineStyle:{color:'#2a3045'}},axisLabel:{color:'#5b6070'}},
+    yAxis:{type:'category',data:apRange.map(v=>v+'天'),name:'账期',nameTextStyle:{color:'#5b6070'},axisLine:{lineStyle:{color:'#2a3045'}},axisLabel:{color:'#5b6070'}},
     visualMap:{
       min:0, max:Math.max(heatMaxGap, buffer*0.5),
       calculable:true, orient:'horizontal', left:'center', bottom:0,
       textStyle:{color:'#8fa3c0',fontSize:10},
-      text:['缂哄彛澶?,'缂哄彛灏?],
+      text:['缺口大','缺口小'],
       inRange:{color:['#34d399','#fbbf24','#f87171']}
     },
     series:[{
@@ -267,11 +265,11 @@ function runSim(){
   });
 }
 
-// 婊戝潡瀹炴椂鏇存柊
+// 滑块实时更新
 ['ap','purchase','collection','loan','rate','buffer'].forEach(id=>{
   document.getElementById(id).addEventListener('input',function(){
     const v = this.value;
-    const suffix = id==='collection'||id==='rate'?'%':(id==='ap'?'澶?:'');
+    const suffix = id==='collection'||id==='rate'?'%':(id==='ap'?'天':'');
     const prefix = (id==='purchase'||id==='loan'||id==='buffer') ? '' : '';
     document.getElementById(id+'Val').textContent = (id==='purchase'||id==='loan'||id==='buffer') ? parseInt(v).toLocaleString() : v + suffix;
   });
