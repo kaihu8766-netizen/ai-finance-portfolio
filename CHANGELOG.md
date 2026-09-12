@@ -36,6 +36,13 @@
 ### 文档
 - PROJECT_BRIEF.md新增"先核实再动手"强制规则：主力AI根据复核报告修改前必须先用Grep/Read核实报告真实性
 
+### 修复（DeepSeek第四轮复核 - P1）
+- **media按需生成**：5处safeInit的固定media块改成按需生成，只覆盖该图真正拥有的组件，消除4张非笛卡尔图（pie/radar/sankey/gauge）被注入坐标系、7张无图例图被注入图例、双y轴只覆盖首个轴的问题
+- **safeInit catch分支统一**：5份safeInit的3种catch行为统一为显示具体错误信息（e.message），proto2出图失败时不再是空白
+- **preflight改进**：检查1补"有reveal但无IO脚本"分支（正是上一轮page-05/page-proto2永久不可见的成因）；检查4扩正则支持7种Key格式；新增检查6防media覆盖自定义interval
+- **R4正确修复**：删掉助手jump-btn监听里的showWork调用和e.stopPropagation()，只保留关闭面板，showWork由全局捕获委托统一处理（原stopPropagation在冒泡阶段无法阻止捕获阶段的全局委托）
+- **断点统一**：CSS的767px断点统一为768px，与ECharts media的maxWidth:768一致，避免768px设备错位
+
 ---
 
 ## v5.3.2（2026-09-09）

@@ -564,7 +564,7 @@ a,button,.card,.tag,.nav a,.btn{transition:color .16s cubic-bezier(.2,.8,.2,1), 
 /* ========================================================
    MOBILE RESPONSIVE (max-width: 767px)
    ======================================================== */
-@media (max-width: 767px){
+@media (max-width: 768px){
   /* ---- Global ---- */
   html,body{overflow-x:hidden;min-width:100%}
   .wrap{padding:20px 14px 60px !important;max-width:100% !important}
@@ -2709,13 +2709,11 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     }catch(e){}
     return null;
   }
-  // 点击委托：跳转按钮
+  // 点击委托：跳转按钮（showWork由全局捕获委托统一处理，这里只负责关闭助手面板）
   body.addEventListener('click',function(e){
     var t=e.target;
     while(t&&t!==body&&!(t.classList&&t.classList.contains('jump-btn'))) t=t.parentNode;
     if(t&&t!==body&&t.dataset&&t.dataset.work){
-      e.stopPropagation(); // 阻止冒泡，避免全局委托重复调用showWork
-      if(window.showWork) window.showWork(t.dataset.work);
       panel.classList.remove('open');
     }
   });
@@ -3143,27 +3141,25 @@ function safeInit(chartId, option) {
     var el = document.getElementById(chartId);
     if (!el) { console.warn('Chart element not found: ' + chartId); return null; }
     var chart = echarts.init(el);
-    // 自动添加ECharts原生media query手机端适配（D010决策）
+    // 手机端适配：按需生成media，只覆盖该图真正拥有的组件
     if (!option.baseOption) {
-      option = {
-        baseOption: option,
-        media: [{
-          query: { maxWidth: 768 },
-          option: {
-            grid: { left: 8, right: 8, top: 56, bottom: 64, containLabel: true },
-            legend: { bottom: 0, top: 'auto', itemWidth: 10, itemHeight: 6, textStyle: { fontSize: 9 }, type: 'scroll' },
-            xAxis: { axisLabel: { fontSize: 9, rotate: 45 } },
-            yAxis: { axisLabel: { fontSize: 9 }, nameTextStyle: { fontSize: 9 } }
-          }
-        }]
-      };
+      var mob = {};
+      if (option.grid)   mob.grid   = { left: 8, right: 8, top: 56, bottom: 64, containLabel: true };
+      if (option.legend) mob.legend = { bottom: 0, top: 'auto', itemWidth: 10, itemHeight: 6, textStyle: { fontSize: 9 }, type: 'scroll' };
+      if (option.xAxis)  mob.xAxis  = { axisLabel: { fontSize: 9, rotate: 45 } };
+      if (option.yAxis)  mob.yAxis  = Array.isArray(option.yAxis)
+          ? option.yAxis.map(function(){ return { axisLabel: { fontSize: 9 }, nameTextStyle: { fontSize: 9 } }; })
+          : { axisLabel: { fontSize: 9 }, nameTextStyle: { fontSize: 9 } };
+      if (Object.keys(mob).length > 0) {
+        option = { baseOption: option, media: [{ query: { maxWidth: 768 }, option: mob }] };
+      }
     }
     chart.setOption(option);
     return chart;
   } catch (e) {
     console.error('Chart init failed: ' + chartId, e);
     var el = document.getElementById(chartId);
-    if (el) el.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;font-size:9pt;">图表加载失败，请刷新重试</div>';
+    if (el) el.innerHTML = '<div style="padding:20px;color:#f87171;font-size:11px;word-break:break-all;">错误: ' + (e && e.message ? e.message : String(e)) + '</div>';
     return null;
   }
 }
@@ -3731,20 +3727,18 @@ function safeInit(chartId, option) {
     var el = document.getElementById(chartId);
     if (!el) { console.warn('Chart element not found: ' + chartId); return null; }
     var chart = echarts.init(el);
-    // 自动添加ECharts原生media query手机端适配（D010决策）
+    // 手机端适配：按需生成media，只覆盖该图真正拥有的组件
     if (!option.baseOption) {
-      option = {
-        baseOption: option,
-        media: [{
-          query: { maxWidth: 768 },
-          option: {
-            grid: { left: 8, right: 8, top: 56, bottom: 64, containLabel: true },
-            legend: { bottom: 0, top: 'auto', itemWidth: 10, itemHeight: 6, textStyle: { fontSize: 9 }, type: 'scroll' },
-            xAxis: { axisLabel: { fontSize: 9, rotate: 45 } },
-            yAxis: { axisLabel: { fontSize: 9 }, nameTextStyle: { fontSize: 9 } }
-          }
-        }]
-      };
+      var mob = {};
+      if (option.grid)   mob.grid   = { left: 8, right: 8, top: 56, bottom: 64, containLabel: true };
+      if (option.legend) mob.legend = { bottom: 0, top: 'auto', itemWidth: 10, itemHeight: 6, textStyle: { fontSize: 9 }, type: 'scroll' };
+      if (option.xAxis)  mob.xAxis  = { axisLabel: { fontSize: 9, rotate: 45 } };
+      if (option.yAxis)  mob.yAxis  = Array.isArray(option.yAxis)
+          ? option.yAxis.map(function(){ return { axisLabel: { fontSize: 9 }, nameTextStyle: { fontSize: 9 } }; })
+          : { axisLabel: { fontSize: 9 }, nameTextStyle: { fontSize: 9 } };
+      if (Object.keys(mob).length > 0) {
+        option = { baseOption: option, media: [{ query: { maxWidth: 768 }, option: mob }] };
+      }
     }
     chart.setOption(option);
     return chart;
@@ -4151,7 +4145,7 @@ window.addEventListener('resize', function() {
 .page05 .footer{text-align:center;font-size:7.5pt;color:var(--dim);padding:20px 0 30px;font-family:var(--mono);line-height:2}
 
 /* 移动端 */
-@media(max-width:767px){
+@media(max-width:768px){
   .page05 .two-col,.page05 .chart-grid{grid-template-columns:1fr !important}
   .page05 .glass{padding:16px 14px !important;border-radius:12px !important}
   .page05 .hero{padding:28px 16px 32px !important}
@@ -4509,27 +4503,25 @@ function safeInit(chartId, option) {
     var el = document.getElementById(chartId);
     if (!el) { console.warn('Chart element not found: ' + chartId); return null; }
     var chart = echarts.init(el);
-    // 自动添加ECharts原生media query手机端适配（D010决策）
+    // 手机端适配：按需生成media，只覆盖该图真正拥有的组件
     if (!option.baseOption) {
-      option = {
-        baseOption: option,
-        media: [{
-          query: { maxWidth: 768 },
-          option: {
-            grid: { left: 8, right: 8, top: 56, bottom: 64, containLabel: true },
-            legend: { bottom: 0, top: 'auto', itemWidth: 10, itemHeight: 6, textStyle: { fontSize: 9 }, type: 'scroll' },
-            xAxis: { axisLabel: { fontSize: 9, rotate: 45 } },
-            yAxis: { axisLabel: { fontSize: 9 }, nameTextStyle: { fontSize: 9 } }
-          }
-        }]
-      };
+      var mob = {};
+      if (option.grid)   mob.grid   = { left: 8, right: 8, top: 56, bottom: 64, containLabel: true };
+      if (option.legend) mob.legend = { bottom: 0, top: 'auto', itemWidth: 10, itemHeight: 6, textStyle: { fontSize: 9 }, type: 'scroll' };
+      if (option.xAxis)  mob.xAxis  = { axisLabel: { fontSize: 9, rotate: 45 } };
+      if (option.yAxis)  mob.yAxis  = Array.isArray(option.yAxis)
+          ? option.yAxis.map(function(){ return { axisLabel: { fontSize: 9 }, nameTextStyle: { fontSize: 9 } }; })
+          : { axisLabel: { fontSize: 9 }, nameTextStyle: { fontSize: 9 } };
+      if (Object.keys(mob).length > 0) {
+        option = { baseOption: option, media: [{ query: { maxWidth: 768 }, option: mob }] };
+      }
     }
     chart.setOption(option);
     return chart;
   } catch (e) {
     console.error('Chart init failed: ' + chartId, e);
     var el = document.getElementById(chartId);
-    if (el) el.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;font-size:9pt;">图表加载失败，请刷新重试</div>';
+    if (el) el.innerHTML = '<div style="padding:20px;color:#f87171;font-size:11px;word-break:break-all;">错误: ' + (e && e.message ? e.message : String(e)) + '</div>';
     return null;
   }
 }
@@ -5411,25 +5403,25 @@ function safeInit(chartId, option) {
     var el = document.getElementById(chartId);
     if (!el) { console.warn('Chart element not found: ' + chartId); return null; }
     var chart = echarts.init(el);
-    // 自动添加ECharts原生media query手机端适配（D010决策）
+    // 手机端适配：按需生成media，只覆盖该图真正拥有的组件
     if (!option.baseOption) {
-      option = {
-        baseOption: option,
-        media: [{
-          query: { maxWidth: 768 },
-          option: {
-            grid: { left: 8, right: 8, top: 56, bottom: 64, containLabel: true },
-            legend: { bottom: 0, top: 'auto', itemWidth: 10, itemHeight: 6, textStyle: { fontSize: 9 }, type: 'scroll' },
-            xAxis: { axisLabel: { fontSize: 9, rotate: 45 } },
-            yAxis: { axisLabel: { fontSize: 9 }, nameTextStyle: { fontSize: 9 } }
-          }
-        }]
-      };
+      var mob = {};
+      if (option.grid)   mob.grid   = { left: 8, right: 8, top: 56, bottom: 64, containLabel: true };
+      if (option.legend) mob.legend = { bottom: 0, top: 'auto', itemWidth: 10, itemHeight: 6, textStyle: { fontSize: 9 }, type: 'scroll' };
+      if (option.xAxis)  mob.xAxis  = { axisLabel: { fontSize: 9, rotate: 45 } };
+      if (option.yAxis)  mob.yAxis  = Array.isArray(option.yAxis)
+          ? option.yAxis.map(function(){ return { axisLabel: { fontSize: 9 }, nameTextStyle: { fontSize: 9 } }; })
+          : { axisLabel: { fontSize: 9 }, nameTextStyle: { fontSize: 9 } };
+      if (Object.keys(mob).length > 0) {
+        option = { baseOption: option, media: [{ query: { maxWidth: 768 }, option: mob }] };
+      }
     }
     chart.setOption(option);
     return chart;
   } catch (e) {
     console.error('Chart init failed: ' + chartId, e);
+    var el = document.getElementById(chartId);
+    if (el) el.innerHTML = '<div style="padding:20px;color:#f87171;font-size:11px;word-break:break-all;">错误: ' + (e && e.message ? e.message : String(e)) + '</div>';
     return null;
   }
 }
@@ -5730,20 +5722,18 @@ function safeInit7(chartId, option) {
     var el = document.getElementById(chartId);
     if (!el) { console.warn('Chart element not found: ' + chartId); return null; }
     var chart = echarts.init(el);
-    // 自动添加ECharts原生media query手机端适配（D010决策）
+    // 手机端适配：按需生成media，只覆盖该图真正拥有的组件
     if (!option.baseOption) {
-      option = {
-        baseOption: option,
-        media: [{
-          query: { maxWidth: 768 },
-          option: {
-            grid: { left: 8, right: 8, top: 56, bottom: 64, containLabel: true },
-            legend: { bottom: 0, top: 'auto', itemWidth: 10, itemHeight: 6, textStyle: { fontSize: 9 }, type: 'scroll' },
-            xAxis: { axisLabel: { fontSize: 9, rotate: 45 } },
-            yAxis: { axisLabel: { fontSize: 9 }, nameTextStyle: { fontSize: 9 } }
-          }
-        }]
-      };
+      var mob = {};
+      if (option.grid)   mob.grid   = { left: 8, right: 8, top: 56, bottom: 64, containLabel: true };
+      if (option.legend) mob.legend = { bottom: 0, top: 'auto', itemWidth: 10, itemHeight: 6, textStyle: { fontSize: 9 }, type: 'scroll' };
+      if (option.xAxis)  mob.xAxis  = { axisLabel: { fontSize: 9, rotate: 45 } };
+      if (option.yAxis)  mob.yAxis  = Array.isArray(option.yAxis)
+          ? option.yAxis.map(function(){ return { axisLabel: { fontSize: 9 }, nameTextStyle: { fontSize: 9 } }; })
+          : { axisLabel: { fontSize: 9 }, nameTextStyle: { fontSize: 9 } };
+      if (Object.keys(mob).length > 0) {
+        option = { baseOption: option, media: [{ query: { maxWidth: 768 }, option: mob }] };
+      }
     }
     chart.setOption(option);
     return chart;

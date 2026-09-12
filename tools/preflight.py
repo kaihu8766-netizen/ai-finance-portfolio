@@ -2,7 +2,7 @@
 """
 作品集提交前自动化体检脚本
 用法：python tools/preflight.py
-覆盖：reveal时序、函数作用域、CSS类名、敏感串、baseOption/media配对
+覆盖：reveal时序、函数作用域、CSS类名、敏感串、baseOption/media配对、media覆盖自定义interval
 """
 
 import re
@@ -24,16 +24,21 @@ def extract_templates(html):
     return templates
 
 def check_reveal_timing(templates):
-    """检查1：每个模板的.reveal是否出现在IO脚本之后（会导致不可见）"""
+    """检查1：每个模板的.reveal是否出现在IO脚本之后（会导致不可见），以及有reveal但无IO脚本"""
     errors = []
     for name, content in templates.items():
         io_match = re.search(r'IntersectionObserver', content)
         reveal_matches = list(re.finditer(r'class="[^"]*reveal[^"]*"', content))
+        # 形态B：有reveal但完全没有IO脚本 -> 全部永久不可见
+        if reveal_matches and not io_match:
+            errors.append(f"  [{name}] 模板内有 {len(reveal_matches)} 个 .reveal 但没有任何 IntersectionObserver -> 全部永久不可见")
+            continue
+        # 形态A：有IO脚本，但reveal排在它之后
         if io_match and reveal_matches:
             io_pos = io_match.start()
             for rm in reveal_matches:
                 if rm.start() > io_pos:
-                    errors.append(f"  [{name}] .reveal在IO脚本之后（行约{content[:rm.start()].count(chr(10))+1}），会导致永久不可见")
+                    errors.append(f"  [{name}] .reveal在IO脚本之后（模板内第{content[:rm.start()].count(chr(10))+1}行），会导致永久不可见")
     return errors
 
 def check_function_scope(templates):
@@ -42,9 +47,11 @@ def check_function_scope(templates):
     dangerous_funcs = ['isMobile', 'applyMobileOption', 'getMobileChartOption']
     for name, content in templates.items():
         for func in dangerous_funcs:
-            # 检查是否有调用（不是定义）
-            calls = re.findall(r'(?<!function\s)' + re.escape(func) + r'\s*\(', content)
-            defs = re.findall(r'function\s+' + re.escape(func), content)
+            # 检查是否有调用（不是定义），先剥离注释避免误报
+            content_no_comment = re.sub(r'//.*', '', content)
+            content_no_comment = re.sub(r'/\*.*?\*/', '', content_no_comment, flags=re.DOTALL)
+            calls = re.findall(r'(?<!function\s)' + re.escape(func) + r'\s*\(', content_no_comment)
+            defs = re.findall(r'function\s+' + re.escape(func), content_no_comment)
             if calls and not defs:
                 errors.append(f"  [{name}] 调用了{func}()但未在模板内定义")
     return errors
@@ -58,17 +65,26 @@ def check_css_classes(html):
     all_css = '\n'.join(css_blocks)
     for cls in known_issues:
         used_in_html = bool(re.search(r'class="[^"]*\b' + re.escape(cls) + r'\b[^"]*"', html))
-        defined_in_css = bool(re.search(r'\.' + re.escape(cls) + r'[\s:{]', all_css))
+        defined_in_css = bool(re.search(r'\.' + re.escape(cls) + r'(?=[\s,{:>+~])', all_css))
         if used_in_html and not defined_in_css:
             errors.append(f"  HTML使用了.{cls}但CSS未定义")
     return errors
 
 def check_sensitive_strings(html):
-    """检查4：敏感串扫描（API Key等）"""
+    """检查4：敏感串扫描（API Key等，多种格式）"""
     errors = []
-    # OpenAI style key
-    if re.search(r'sk-[A-Za-z0-9]{20,}', html):
-        errors.append("  发现疑似API Key（sk-开头）")
+    patterns = [
+        (r'sk-[A-Za-z0-9]{20,}', 'DeepSeek/OpenAI API Key（sk-开头）'),
+        (r'sk-ant-[A-Za-z0-9\-_]{20,}', 'Anthropic API Key'),
+        (r'ghp_[A-Za-z0-9]{20,}', 'GitHub Personal Access Token'),
+        (r'github_pat_[A-Za-z0-9_]{20,}', 'GitHub Fine-grained Token'),
+        (r'AIza[0-9A-Za-z\-_]{30,}', 'Google API Key'),
+        (r'AKIA[0-9A-Z]{16}', 'AWS Access Key ID'),
+        (r'-----BEGIN [A-Z ]*PRIVATE KEY-----', '私钥文件'),
+    ]
+    for pattern, desc in patterns:
+        if re.search(pattern, html):
+            errors.append(f"  发现疑似敏感信息：{desc}")
     return errors
 
 def check_baseoption_media(html):
@@ -79,6 +95,20 @@ def check_baseoption_media(html):
     media_count = len(re.findall(r'media\s*:\s*\[', html))
     if media_count > 0 and baseoption_count == 0:
         errors.append("  出现media配置但缺少baseOption")
+    return errors
+
+def check_media_covers_custom_interval(html):
+    """检查6：media是否覆盖了自定义interval函数（会导致x轴标签消失）"""
+    errors = []
+    # 提取所有safeInit调用的option对象
+    # 简化检查：如果某段代码同时有 interval: function 和 media 里的 interval: 'auto'
+    # 更精确：检查每个safeInit块内是否有自定义interval函数，以及media块是否有interval
+    safeinit_pattern = r'safeInit\w*\s*\([^,]+,\s*(\{.*?\})\s*\)'
+    # 由于option对象可能很复杂，用更简单的方法：检查文件中是否同时存在
+    has_custom_interval = bool(re.search(r'interval\s*:\s*function', html))
+    has_media_interval_auto = bool(re.search(r"interval\s*:\s*'auto'", html))
+    if has_custom_interval and has_media_interval_auto:
+        errors.append("  存在自定义interval函数，同时media里有interval:'auto' -> 自定义会被覆盖，x轴标签可能消失")
     return errors
 
 def main():
@@ -127,6 +157,14 @@ def main():
     
     print("\n🔍 检查5：baseOption/media配对")
     e = check_baseoption_media(html)
+    if e:
+        all_errors.extend(e)
+        for err in e: print(err)
+    else:
+        print("  ✅ 通过")
+    
+    print("\n🔍 检查6：media覆盖自定义interval")
+    e = check_media_covers_custom_interval(html)
     if e:
         all_errors.extend(e)
         for err in e: print(err)
