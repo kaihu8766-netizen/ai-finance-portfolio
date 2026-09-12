@@ -21,3 +21,11 @@ REVIEW_REPORT*.md
 
 # 本地预览
 *.local.html
+
+# 版本归档中的过程产物（QA截图、浏览器缓存、测试结果等）
+versions/**/playwright_temp_*/
+versions/**/qa_shots/
+versions/**/test-results/
+versions/**/_tmp_*.js
+versions/**/_verify_*.png
+versions/**/chrome_debug.log
