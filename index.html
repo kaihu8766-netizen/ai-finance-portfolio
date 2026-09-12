@@ -2052,6 +2052,14 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     <input type="password" class="ai-key-input" id="assistantKeyInput" placeholder="sk-xxxxxxxxxxxxxxxx" autocomplete="off">
     <button class="ai-key-save" id="assistantKeySave">保存并启用</button>
     <div class="ai-settings-tip">获取 Key：<a href="https://platform.deepseek.com/" target="_blank" style="color:#6d7cff">platform.deepseek.com</a> · 新用户赠送免费额度</div>
+    <div style="border-top:1px solid rgba(130,150,255,0.1);margin:10px 0 8px"></div>
+    <div class="ai-settings-title" style="font-size:12px">📝 未命中问题（仅本地记录）</div>
+    <div class="ai-settings-desc" style="margin-bottom:8px">助手答不上来的问题会自动记录在你的浏览器本地，不上传任何服务器。可导出用于后续优化话术库。</div>
+    <div style="display:flex;gap:8px">
+      <button class="ai-key-save" id="exportMisses" style="flex:1;font-size:11px;padding:6px">导出未命中</button>
+      <button class="ai-key-save" id="clearMisses" style="flex:1;font-size:11px;padding:6px;background:rgba(239,68,68,0.15);color:#f87171;border-color:rgba(239,68,68,0.3)">清除记录</button>
+    </div>
+    <div class="ai-settings-tip" id="missesCount" style="margin-top:6px">当前记录：0 条</div>
   </div>
   <div class="ai-body" id="assistantBody">
     <div class="ai-welcome" id="assistantWelcome">
@@ -2234,7 +2242,13 @@ window.SmartReconAI = {
       return '你的问题可能和 **' + top.name + '** 有关，要不要先看看这个作品？' +
              '\n\n如果你问的是别的方面，可以换个说法——比如"数据从哪来""有什么局限"。';
     }
-    // 越界模板
+    // 越界模板：记录未命中问法到localStorage（仅本地，不上传）
+    try {
+      var misses = JSON.parse(localStorage.getItem('portfolio_ai_misses') || '[]');
+      misses.push({ q: text, t: Date.now() });
+      if (misses.length > 100) misses = misses.slice(-100);
+      localStorage.setItem('portfolio_ai_misses', JSON.stringify(misses));
+    } catch(e) {}
     return '这个问题超出了作品集的范围 🙂 我是本地知识库模式的导览助手，只回答与作品、背景、方法论相关的内容——这样能保证每句话都有出处、不编造。\n\n你可以问我：某个作品是怎么做的 / 数据从哪来 / 有什么局限 / 和岗位的匹配度。';
   },
 
@@ -2831,6 +2845,43 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
       keyInput.value='';
       setState('#34d399','自定义模型');
       addMsg('assistant','<div style="font-size:12px;color:#34d399;">已切换自定义模型 Key（仅存内存，刷新即清）✓</div>',false);
+    });
+  }
+
+  // 未命中问题管理
+  function updateMissesCount(){
+    try{
+      var misses=JSON.parse(localStorage.getItem('portfolio_ai_misses')||'[]');
+      var el=document.getElementById('missesCount');
+      if(el) el.textContent='当前记录：'+misses.length+' 条';
+    }catch(e){}
+  }
+  updateMissesCount();
+  var exportBtn=document.getElementById('exportMisses');
+  if(exportBtn){
+    exportBtn.addEventListener('click',function(){
+      try{
+        var misses=JSON.parse(localStorage.getItem('portfolio_ai_misses')||'[]');
+        if(misses.length===0){ alert('暂无未命中记录'); return; }
+        var lines=misses.map(function(m,i){
+          var d=new Date(m.t);
+          return (i+1)+'. ['+d.toLocaleString()+'] '+m.q;
+        });
+        var blob=new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'});
+        var url=URL.createObjectURL(blob);
+        var a=document.createElement('a');
+        a.href=url; a.download='未命中问题_'+new Date().toISOString().slice(0,10)+'.txt';
+        a.click(); URL.revokeObjectURL(url);
+      }catch(e){ alert('导出失败：'+e.message); }
+    });
+  }
+  var clearBtn=document.getElementById('clearMisses');
+  if(clearBtn){
+    clearBtn.addEventListener('click',function(){
+      if(confirm('确定清除所有未命中记录吗？此操作不可恢复。')){
+        try{ localStorage.removeItem('portfolio_ai_misses'); }catch(e){}
+        updateMissesCount();
+      }
     });
   }
 
