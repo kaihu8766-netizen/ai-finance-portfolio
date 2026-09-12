@@ -56,6 +56,8 @@
 │   ├── lpr_mc_paths.png        # 蒙特卡洛路径图
 │   ├── lpr_mc_quantiles.csv    # 分位数数据
 │   └── requirements.txt        # Python依赖
+├── tools/                  # 开发工具
+│   └── preflight.py            # 提交前自动化体检（6项检查）
 ├── versions/               # 历史版本归档
 └── .github/workflows/      # GitHub Pages 自动部署
 ```

@@ -17,7 +17,7 @@ desktop.ini
 *.swo
 
 # 复核报告（本地生成，不提交）
-REVIEW_REPORT.md
+REVIEW_REPORT*.md
 
 # 本地预览
 *.local.html

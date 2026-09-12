@@ -2,8 +2,9 @@
 """
 LPR Monte Carlo Path Simulation — Actuarial Method Demo
 =======================================================
-Inspired by mean-reverting stochastic interest rate models (CIR / Vasicek family):
+Inspired by the Vasicek (Ornstein-Uhlenbeck) mean-reverting short-rate model:
     r_{t+1} = r_t + kappa(theta - r_t) * dt + sigma * sqrt(dt) * epsilon
+(The CIR family differs by its square-root diffusion term, sigma*sqrt(r_t).)
 
 - theta: long-term rate mean (demo setting 2.7%, based on Japan/Korea low-rate trajectory + domestic institution 2026 consensus extrapolation)
 - kappa: mean-reversion speed (demo setting, not market-calibrated)
@@ -51,7 +52,7 @@ lpr_hist = [4.25, 3.85, 3.80, 3.70, 3.70, 3.65, 3.55, 3.45, 3.35, 3.10, 3.00, 3.
 
 # sigma estimation: sample std of historical adjustment magnitudes (approximate)
 diffs = np.diff(lpr_hist)              # absolute change per adjustment
-sigma = float(np.std(diffs))           # annualized volatility approximation (%)
+sigma = float(np.std(diffs))           # dispersion of per-adjustment changes (proxy only; NOT annualized)
 sigma = max(sigma, 0.05)               # floor protection, avoid zero
 
 theta = 2.7        # long-term mean (%): demo setting
@@ -73,7 +74,7 @@ final = r[:, -1]  # 5000 LPR values at year 5
 
 # ===== 2.1 Monte Carlo Simulation (5Y) =====
 # Narrative assumption (not market-calibrated): property policy targeted guidance for 5Y faster decline — reflected in "further from mean + faster reversion",
-# long-term mean theta5=3.0% preserves term premium (5Y always above 1Y), spread converges but does not invert (Architect 2026-08-15 ruling, decision record)
+# long-term mean theta5=3.0% preserves term premium (5Y always above 1Y), spread converges but does not invert
 theta5 = 3.0       # long-term mean (%): narrative assumption, > theta1 ensures positive term premium
 kappa5 = 0.25      # mean-reversion speed: narrative assumption (faster than 1Y's 0.10 -> faster decline)
 sigma5 = 0.22      # volatility (%): narrative assumption
