@@ -114,6 +114,8 @@ if __name__ == '__main__':
     print(f"  预计偏差率: {params.expected_deviation_rate*100:.1f}%")
     print(f"  总体规模: {params.population_size}")
     print(f"  计算样本量: {sample_size}")
+    print(f"\n  注: 若预计偏差率为0%，样本量=60笔（与在线计算器59笔同为AICPA表口径，差异来自表版本舍入）")
+    print(f"      当前默认预计偏差率1%对应95笔，预计偏差率越高所需样本量越大")
 
     print(f"\n样本结果评估（不同偏差数）:")
     for deviations in [0, 1, 2, 3]:
