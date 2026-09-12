@@ -177,7 +177,7 @@ def main():
         result = subprocess.run(
             ['node', 'tools/coverage_test.js'],
             cwd=str(HTML_FILE.parent),
-            capture_output=True, text=True, timeout=30
+            capture_output=True, text=True, timeout=30, encoding='utf-8', errors='replace'
         )
         if result.returncode == 0:
             # 提取覆盖率数字

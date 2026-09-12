@@ -62,7 +62,7 @@ def get_local_head():
     try:
         result = subprocess.run(
             ["git", "show", "HEAD:index.html"],
-            cwd=REPO_DIR, capture_output=True, text=True
+            cwd=REPO_DIR, capture_output=True, text=True, encoding='utf-8', errors='replace'
         )
         if result.returncode == 0:
             return result.stdout
@@ -93,17 +93,19 @@ def check_content_match(online_body):
     print("2. 线上与本地HEAD内容比对")
     local = get_local_head()
     if local is None:
-        print("   ⚠️  无法获取本地HEAD，跳过比对")
-        return
+        print("   ❌ 无法获取本地HEAD，比对失败")
+        return False
     local_norm = normalize(local)
     online_norm = normalize(online_body)
     if local_norm == online_norm:
         print("   ✅ 完全一致（线上 = 最新版）")
+        return True
     else:
         local_hash = hashlib.sha256(local_norm.encode()).hexdigest()[:12]
         online_hash = hashlib.sha256(online_norm.encode()).hexdigest()[:12]
-        print(f"   ⚠️  不一致（本地={local_hash}，线上={online_hash}）")
+        print(f"   ❌ 不一致（本地={local_hash}，线上={online_hash}）")
         print(f"       可能是GitHub Pages还在部署中，等1-2分钟再试")
+        return False
 
 def check_keywords(online_body):
     """检查关键内容和旧文案"""
@@ -154,12 +156,12 @@ def main():
         print("\n❌ 首页无法访问，终止校验")
         sys.exit(1)
 
-    check_content_match(online_body)
+    match_ok = check_content_match(online_body)
     kw_ok = check_keywords(online_body)
     res_ok = check_resources()
 
     print("=" * 60)
-    if kw_ok and res_ok:
+    if match_ok and kw_ok and res_ok:
         print("✅ 全部通过，线上部署正常")
         sys.exit(0)
     else:
