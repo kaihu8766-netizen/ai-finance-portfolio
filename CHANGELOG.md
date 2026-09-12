@@ -43,6 +43,20 @@
 - **R4正确修复**：删掉助手jump-btn监听里的showWork调用和e.stopPropagation()，只保留关闭面板，showWork由全局捕获委托统一处理（原stopPropagation在冒泡阶段无法阻止捕获阶段的全局委托）
 - **断点统一**：CSS的767px断点统一为768px，与ECharts media的maxWidth:768一致，避免768px设备错位
 
+### 修复（DeepSeek第五/六轮复核 - 离线转正）
+- **助手头部文案对齐隐私模式**：从"在线 · 了解全部5个作品"改为"隐私保护模式 · 基于作品集知识库作答"，状态点加id让三态指示器复活，颜色改琥珀色
+- **proto2文案修正**："可接入真实大模型"改为"本地演示模式 · 基于作品集知识库"，与实际能力一致
+- **offlineMatch recon场景bug**：默认场景'recon'不存在会抛TypeError，改为'portfolio'
+- **preflight接入CI**：pages.yml的Checkout后加`run: python tools/preflight.py`，部署前自动体检
+- **L1检索式离线**：新增buildOfflineAnswer函数，三级策略（KB强相关→人工话术→KB弱相关引导→越界模板），离线回答优先用KB原文而非固定话术
+- **L2内容补全**：新增数据真实性、质疑类（承认算错过）、GPA三条必修话术；w01合并结论/口径/局限
+- **第六轮复核修复**：调整档位顺序（人工话术优先于弱相关引导）；数据真实性关键词从伪关键词改为短片段；w01三条不可达话术合并进基础条目
+- **仓库瘦身**：清理versions/下567个临时文件（playwright缓存、QA截图、test-results），部署产物从~300MB降到~23MB
+
+### 文档
+- DECISIONS.md新增D013（AI助手以离线为正式模式）
+- PROJECT_BRIEF.md工作流新增强制规则：主力AI完成修改后必须主动触发DeepSeek复核，复核通过前禁止push
+
 ---
 
 ## v5.3.2（2026-09-09）
