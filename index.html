@@ -2040,7 +2040,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     </div>
     <div class="ai-head-info">
       <div class="ai-head-title">作品集导览助手</div>
-      <div class="ai-head-sub"><span class="online-dot"></span>在线 · 了解全部5个作品与作者背景</div>
+      <div class="ai-head-sub"><span class="online-dot" id="assistantStateDot" style="background:#f59e0b;box-shadow:0 0 6px #f59e0b"></span>隐私保护模式 · 基于作品集知识库作答（点 ⚙ 接入真实 AI）</div>
     </div>
     <span class="interview-badge" id="assistantInterviewBadge" style="display:none" title="点击退出面试模式">面试模式</span>
     <button class="ai-head-gear" id="assistantGear" title="设置">⚙</button>
@@ -2172,7 +2172,7 @@ window.SmartReconAI = {
     // 作品集助手场景（portfolio-assistant）
     portfolio: [
       { kw: ['功能','结构','有哪些','作品','导览','介绍'], reply: '这个作品集包含：①主页（个人介绍+四层递进主线）②作品01 第三方支付资金渠道研究 ③作品03 LPR走势预测分析（含融资成本压力测试）④作品05 供应链金融资金流分析 ⑤作品06 SOX审计Agent工作流（四角色协作·1人+3AI）⑥作品07 集团现金流压力测试（精算建模·核心）⑦资金智算CashFlow AI原型。<div class="tool-call">portfolio_kb → structure ✓</div>' },
-      { kw: ['缺陷','问题','修复','bug','历史'], reply: '已修复的缺陷（共10项）：①聊天输入XSS ②ECharts全量1004KB→按需打包691KB ③证据链元素用br无法显示→改div ④证据链浅底浅字看不清→改深色文字 ⑤Agent只回固定话术→接入真实DeepSeek API ⑥API失败直接降级→加重试 ⑦数据底座缺月度资金流→补12个月数据 ⑧离线关键词跨场景劫持→场景分离 ⑨人设漂移/逻辑缺陷→persona增强+资金全景 ⑩异常中心按钮无状态流转→完整全流程。<div class="tool-call">portfolio_kb → defect_log ✓</div>' },
+      { kw: ['缺陷','问题','修复','bug','历史'], reply: '已修复的缺陷（列举）：①聊天输入XSS ②ECharts全量1004KB→按需打包691KB ③证据链元素用br无法显示→改div ④证据链浅底浅字看不清→改深色文字 ⑤Agent只回固定话术→接入真实DeepSeek API ⑥API失败直接降级→加重试 ⑦数据底座缺月度资金流→补12个月数据 ⑧离线关键词跨场景劫持→场景分离 ⑨人设漂移/逻辑缺陷→persona增强+资金全景 ⑩异常中心按钮无状态流转→完整全流程。<div class="tool-call">portfolio_kb → defect_log ✓</div>' },
       { kw: ['迭代','版本','更新','演进'], reply: '作品集演进历史：v1 基础版→v2.1 ECharts按需打包→v2.2 安全修复→v2.3 接入真实DeepSeek AI→v2.4 数据底座升级→v2.5 AI拷问测试修复→v2.6 异常处理全流程→v2.7 内置作品集助手→v3.2 整合SOX工作台→v3.3 协作实战展示→v3.4 作品矩阵分级→v5.0 四角色协作体系→v5.3 手机端适配+preflight体检→v5.3.4 DeepSeek第四轮复核全量修复。<div class="tool-call">portfolio_kb → versions ✓</div>' },
       { kw: ['四角色','协作体系','怎么运作','如何运作','multi-agent','多智能体','团队'], reply: '做这些作品的时候，我摸索了一套和AI协作的方法：<br><br>① <b>任务写清楚</b>：重要的事都写下来，AI动手前先复述一遍，确认没理解错<br>② <b>分工明确</b>：一个AI负责想方案、拆任务，一个负责具体执行，需要时再找第三个独立复核<br>③ <b>做完有人查</b>：AI做完不能自己说完成，必须有人检查<br>④ <b>每步留记录</b>：所有决定和改动都记下来，能回溯<br><br>比如SOX工作台改了5轮，中间发现过抽样公式错误、抽样量矛盾，都是靠这套方法查出来的。核心想法就一句话：AI干重复活，人做判断。<div class="tool-call">portfolio_kb → four_role_collab ✓</div>' },
       { kw: ['作者','你是谁','胡凯','背景','个人','介绍'], reply: '作者胡凯，2001年生，浙江宁波人。教育：精算本科（惠灵顿维多利亚大学）+ 金融与投资学（专业会计方向）硕士（宁波诺丁汉大学，2025.09-2027.07）。实习：Smart Automobile财务资金部（2026.05-至今）+ 中审众环审计（2025.12-2026.03）。定位：懂业务+懂数据+懂AI的复合型财务人才。<div class="tool-call">portfolio_kb → author ✓</div>' },
@@ -2192,7 +2192,7 @@ window.SmartReconAI = {
   // 匹配离线回复（按场景）
   offlineMatch: function(text, scene) {
     var t = text.toLowerCase();
-    var lib = this.offlineReplies[scene] || this.offlineReplies.recon;
+    var lib = this.offlineReplies[scene] || this.offlineReplies.portfolio || [];
     for (var i = 0; i < lib.length; i++) {
       var r = lib[i];
       for (var j = 0; j < r.kw.length; j++) {
@@ -2413,7 +2413,7 @@ window.SmartReconAI = {
           setTimeout(tryCall, 300);
         } else {
           // 二次失败：降级（先试关键词，再试兜底话术）
-          var offline = self.offlineMatch(text, scene || 'recon');
+          var offline = self.offlineMatch(text, scene || 'portfolio');
           callback(offline || fallbackMsg, false);
         }
       });
@@ -2515,7 +2515,7 @@ window.SmartReconAI = {
           for (var i = history.length - 1; i >= 0; i--) {
             if (history[i] && history[i].role === 'user') { lastUser = history[i].content; break; }
           }
-          var offline = self.offlineMatch(lastUser, scene || 'recon');
+          var offline = self.offlineMatch(lastUser, scene || 'portfolio');
           callback(offline || fallbackMsg, false);
         }
       }, onDelta);
@@ -4515,7 +4515,7 @@ window.addEventListener('resize', function() {
 </div>
 
 <div class="footer">
-  胡凯 · AI Portfolio v1.0 · 由 DeepSeek / Auto / Claude / Kimi / WorkBuddy / Trae 真实工具链辅助完成<br>
+  胡凯 · AI Portfolio v5.3.4 · 由 DeepSeek / Auto / Claude / Kimi / WorkBuddy / Trae 真实工具链辅助完成<br>
   行业数据均经人工核验并标注来源 · 资金流数据为模拟数据（已标注） · 数据时点：2026.08
 </div>
 
@@ -5264,7 +5264,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
       <!-- ===== 页面6：Agent 对话 ===== -->
       <div class="page" id="page-chat">
         <div class="card">
-          <div class="card-title">资金 AI 顾问<span class="more">演示模式 · 可接入真实大模型</span></div>
+          <div class="card-title">资金 AI 顾问<span class="more">本地演示模式 · 基于作品集知识库</span></div>
           <div class="chat-box" id="proto2Chat">
             <div class="msg user"><div class="who">我</div><div class="bubble">11 月的资金缺口预测是多少？我们什么时候需要启动续贷？</div></div>
             <div class="msg agent"><div class="who">AI</div><div class="bubble">已为您生成未来 12 个月资金流预测。11 月为资金低谷：预测现金最低值 = 月均支出 14%，触发红色预警。<br><br>建议：11 月 20 日工商银行 ¥1.86 亿委贷集中到期，建议 <strong>提前 60 天启动续贷谈判</strong>，分拆为「提前续贷 ¥1.2 亿 + 盈余补足 ¥4,600 万 + 外部融资 ¥2,000 万」可平滑度过。
@@ -5403,7 +5403,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
       box.scrollTop = box.scrollHeight;
       var thinkEl = document.getElementById(thinkId);
       var persona = '你是"资金智算 CashFlow AI"资金预测与预警 Agent，服务企业资金运营专员。回答专业、简洁、结构化，中文回复。功能：资金预测、三级预警、回款计划、资金归集、风险分析。核心原则：AI 负责做、人负责定——资金操作指令只给建议不执行，预警必须人工确认。控制在 200 字以内，可用换行分点。\n\n【当前时间：2026 年 8 月，问"本月"指 8 月，问"下月"指 9 月。演示数据·2026Q3，用户问数据直接引用，不要索要】月度资金流预测(万元，9月为首个预测月，未来12个月)：资金流入[9月5200,10月5600,11月3800,12月4700,1月4300,2月4500,3月4900,4月5200,5月5000,6月5300,7月5100,8月5400]，资金流出[9月4600,10月5100,11月6200,12月4800,1月4200,2月4400,3月4700,4月5000,5月4800,6月5100,7月4900,8月5200]，净现金流[9月600,10月500,11月-2400,12月-100,其余月100-200]，安全垫线980(月均支出4900×20%)。综合资金缺口-4,520万(含11月委贷还款1.86亿)；可动用现金余额8,600万(+6.2%)；安全垫覆盖率1.8倍(阈值≥1.0)；红色预警：11月委贷1.86亿到期+回款淡季，现金最低点低于安全垫1.2倍，建议提前60天续贷+压缩支出800万/月；三级预警共15项(红2/橙5/黄8)，本月已处置11项，AI建议采纳率82%；回款：未来6月预计5,960万(加权回款率86.3%)，预测准确率88.5%(较传统+17.3%)，逾期风险客户1家(客户C回款率61%)；11月还款建议：提前续贷1.2亿+盈余补足4,600万+外部融资2,000万；闲置资金1,200万建议转入委贷池；归集看板：整车制造上划1,860万/销售公司1,240万/研发中心720万，委贷通道投放2,200万+1,400万；资金池余额2.8亿(含委贷投放3,600万)。范围外数据可说"该明细需在完整版查看"，不编造。';
-      var fallback = '已收到您的指令。当前为离线演示模式，已模拟完成资金预测查询与风险分析。配置 API Key 后可接入真实大模型。您可以切换到其他页面查看：三级预警中心 / 回款计划表 / 资金归集看板。<div class="tool-call">Agent 已执行：资金预测模型 → 预警规则匹配 → 结果交付（演示）✓</div>';
+      var fallback = '已收到您的指令。当前为本地演示模式，回复来自作品集知识库，已模拟完成资金预测查询与风险分析。您可以切换到其他页面查看：三级预警中心 / 回款计划表 / 资金归集看板。<div class="tool-call">Agent 已执行：资金预测模型 → 预警规则匹配 → 结果交付（演示）✓</div>';
       window.SmartReconAI.ask(text, persona, fallback, function(reply, isAI){
         if (thinkEl) {
           thinkEl.innerHTML = escapeHtml(reply) + (isAI ? '<div class="tool-call">真实 AI 模式 · deepseek-v4-flash ✓</div>' : '');
