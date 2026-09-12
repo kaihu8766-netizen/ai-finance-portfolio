@@ -9,14 +9,32 @@
 - **手机端适配地雷拆除**：删除page-01模板内的getMobileChartOption/isMobile/applyMobileOption三个函数，以及5个模板里注释掉的调用点，避免以后误取消注释导致isMobile未定义错误
 - **iframe竞态修复**：加_pendingWork模块级变量，showWork/showHome时先clearTimeout，防止快速切换时的setTimeout竞态
 - **AI助手重复调用**：jump-btn按钮点击会触发两次showWork（AI助手自身监听+全局委托），已加e.stopPropagation()
+- **手机端media适配**：5处safeInit自动注入baseOption+media，21张图表全部生效，图表高度从220px调到290px（大图360px）
+- **preflight体检工具**：新增tools/preflight.py，5项检查（reveal时序/函数作用域/CSS类名/敏感串/baseOption配对）
 
 ### 文档
 - 新增LESSONS_2026-09-11.md，记录手机端适配失败的5个问题根因和6条深度反思
 - DECISIONS.md新增D007-D010（手机端适配暂时禁用、回退到稳定版本、iframe内容更新方式、手机端适配用ECharts原生media query）
 
 ### 已知问题
-- 手机端图表适配暂时禁用，待使用ECharts原生media query重做
+- 手机端media适配已上线；待实测确认：4张非笛卡尔图是否被注入多余坐标系、双y轴是否只覆盖首个轴、w03两图x轴标签是否消失
 - API Key明文存在于代码中（用户确认暂不处理）
+
+---
+
+## v5.3.4（2026-09-12）
+
+### 修复（DeepSeek第四轮复核 - P0）
+- **w03两图x轴标签消失**：删掉media里的`interval:'auto'`（5处），保留各图自定义interval函数，避免与白名单formatter冲突导致标签只剩0-2个
+- **portfolioPersona返回类型错误**：防御分支从返回对象`{works:[],...}`改为返回字符串`'你是作品集助手。'`，避免系统提示词变成`[object Object]`
+- **requirements.txt缺依赖**：补上pandas>=2.0和scipy>=1.10，确保cashflow_pressure_test.py和supply_chain_analysis.py可运行
+- **CHANGELOG与代码矛盾**：v5.3.3补上P2/P3两条工作记录，"已知问题"从"待重做"改为"已上线待实测"
+
+### 安全
+- **AI助手默认离线模式**：移除明文API Key，添加设置面板，用户可自行输入DeepSeek Key（存sessionStorage，刷新即清）
+
+### 文档
+- PROJECT_BRIEF.md新增"先核实再动手"强制规则：主力AI根据复核报告修改前必须先用Grep/Read核实报告真实性
 
 ---
 

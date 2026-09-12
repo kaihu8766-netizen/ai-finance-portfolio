@@ -127,9 +127,15 @@
 3. 复核AI执行：git diff HEAD~1 看本次修改了什么 → 读相关文件 → 按REVIEW_CHECKLIST审查
 4. 复核AI写 REVIEW_REPORT.md（按REVIEW_CHECKLIST里的格式）
 5. 作者通知主力AI："读REVIEW_REPORT.md，根据意见修改"
-6. 主力AI读报告 → 修改 → commit
+6. 主力AI读报告 → **【强制】先用Grep/Read核实报告中每个问题的真实性和行号** → 确认属实后再修改 → commit
 7. 重复直到无严重问题 → 主力AI push到GitHub → 部署
 ```
+
+**【强制规则】主力AI根据复核报告修改前，必须先核实：**
+- 用Grep确认报告中提到的代码确实存在、行号准确
+- 用Read确认上下文理解正确
+- 不允许"报告说什么就改什么"，必须自己验证
+- 核实结果要在回复中明确告知用户：哪些属实、哪些有偏差
 
 ### Git权限
 - 复核AI可以执行：git pull / fetch / diff / log / status / add / commit
