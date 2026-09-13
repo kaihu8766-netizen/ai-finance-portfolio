@@ -1,6 +1,6 @@
 ﻿# 胡凯 · AI × 财务 作品集 更新日志
 
-## v5.3.4（2026-09-12）
+## v5.3.4（2026-09-12 ~ 09-13）
 
 ### 修复（DeepSeek第四轮复核 - P0）
 - **w03两图x轴标签消失**：删掉media里的`interval:'auto'`（5处），保留各图自定义interval函数，避免与白名单formatter冲突导致标签只剩0-2个
@@ -53,7 +53,7 @@
 - **离线助手覆盖空洞修复**：#12(w07)补"资金缺口分析/资金调度/调度建议"，#17(w05)补"资金缺口"，数据真实性话术补"落地/应用/实际使用"
 - **coverage_test新增3题**：这些作品落地了吗/供应链的资金缺口怎么算/资金缺口分析那个作品怎么做的
 
-### 修复（DeepSeek第十~十二轮复核 - 布局与工程基建）
+### 修复（DeepSeek第十~十六轮复核 - 布局与工程基建）
 - **作品01/05/06的.wrap容器修复**：3个作品的"局限与诚实披露"和"数据来源"section落在.wrap外，导致移动端失去卡片样式、占满屏幕宽度。同类扫描发现5个作品中有3个有此bug，全部修复
 - **preflight新增检查8（全仓乱码扫描）**：从只扫index.html改为git ls-files枚举所有被跟踪文本文件（含demo/*.html），覆盖标签形态+特征字+非法UTF-8检测三层防护
 - **preflight新增检查9（wrap容器结构v2）**：.wrap闭合后不允许再有任何div（不限类名），模板内div必须完全闭合
@@ -64,6 +64,28 @@
 - PROJECT_BRIEF.md新增Windows GBK编码陷阱强制规则（写文件用io.open、读子进程用encoding='utf-8'、stdout用reconfigure）
 - REVIEW_REPORT_v6.md新增§11-§14（第十~十五轮复核）
 - DECISIONS.md新增D011-D014
+
+---
+
+## v5.3.3（2026-09-11）
+
+### 修复
+- **iframe内容叠加**：快速切换作品时新旧内容叠加，改为先清空srcdoc再延迟50ms设置新内容
+- **打开作品滚动位置**：iframe加载后滚动到顶部，避免显示上一个作品的滚动位置
+- **page-06 reveal时序**：修SOX模块位置时把"局限与数据来源"放在了IO脚本之后，导致永久不可见，已将IO脚本移到</section>之前
+- **手机端适配地雷拆除**：删除page-01模板内的getMobileChartOption/isMobile/applyMobileOption三个函数，以及5个模板里注释掉的调用点，避免以后误取消注释导致isMobile未定义错误
+- **iframe竞态修复**：加_pendingWork模块级变量，showWork/showHome时先clearTimeout，防止快速切换时的setTimeout竞态
+- **AI助手重复调用**：jump-btn按钮点击会触发两次showWork（AI助手自身监听+全局委托），已加e.stopPropagation()
+- **手机端media适配**：5处safeInit自动注入baseOption+media，21张图表全部生效，图表高度从220px调到290px（大图360px）
+- **preflight体检工具**：新增tools/preflight.py，5项检查（reveal时序/函数作用域/CSS类名/敏感串/baseOption配对）
+
+### 文档
+- 新增LESSONS_2026-09-11.md，记录手机端适配失败的5个问题根因和6条深度反思
+- DECISIONS.md新增D007-D010（手机端适配暂时禁用、回退到稳定版本、iframe内容更新方式、手机端适配用ECharts原生media query）
+
+### 已知问题
+- 手机端media适配已上线；待实测确认：4张非笛卡尔图是否被注入多余坐标系、双y轴是否只覆盖首个轴、w03两图x轴标签是否消失
+- ~~API Key明文存在于代码中~~ 已于v5.3.4移除并作废
 
 ---
 
