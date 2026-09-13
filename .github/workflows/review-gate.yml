@@ -1,0 +1,20 @@
+name: Review gate
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 需要完整历史算merge-base
+
+      - name: Run preflight checks
+        run: python tools/preflight.py
+
+      - name: Verify review stamp
+        run: python tools/check_review_stamp.py

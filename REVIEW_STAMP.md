@@ -1,14 +1,14 @@
 # 复核凭证 (Review Stamp)
 
-> 本文件记录每次通过DeepSeek复核、允许合并到master的commit。
-> pre-push hook和CI会校验待推送的commit是否在此文件的批准范围内。
-> 格式：每行一个已批准的commit SHA，后面跟复核信息。
+> 本文件记录每次通过DeepSeek复核、允许合并到master的内容基线。
+> pre-push hook会校验待推送的commit是否在此文件的批准范围内。
+> CI校验（check_review_stamp.py）使用「内容相等」判据：HEAD的内容必须等于最新一条批准记录所指的内容（忽略本文件自身）。
+> CI校验已接入，见 `.github/workflows/review-gate.yml`。
 
-## 已批准的commit
+## 已批准的内容基线
 
 | Commit SHA | 复核轮次 | 复核日期 | 复核报告章节 | 状态 |
 |------------|----------|----------|--------------|------|
-| 293dbb4 | 第十八轮 | 2026-09-13 | REVIEW_REPORT_v6.md §17 | ✅ 已批准 |
 | a79b385 | 第十八轮 | 2026-09-13 | REVIEW_REPORT_v6.md §17 | ✅ 已批准 |
 | f7264f4 | 第十七轮 | 2026-09-13 | REVIEW_REPORT_v6.md §16 | ✅ 已批准 |
 | e522c34 | 第十六轮 | 2026-09-13 | REVIEW_REPORT_v6.md §15 | ✅ 已批准 |
@@ -16,15 +16,36 @@
 | a9ad5c8 | 第十四轮 | 2026-09-13 | REVIEW_REPORT_v6.md §13 | ✅ 已批准 |
 | 80990c8 | 第十三轮 | 2026-09-13 | REVIEW_REPORT_v6.md §12 | ✅ 已批准 |
 | 7fd8841 | 第十二轮 | 2026-09-13 | REVIEW_REPORT_v6.md §11 | ✅ 已批准 |
-| ec94b0e | 第十一轮 | 2026-09-13 | REVIEW_REPORT_v6.md §10 | ✅ 已批准（事后复核，流程违规记录） |
-| 700c01a | 第十轮 | 2026-09-13 | REVIEW_REPORT_v6.md §9 | ✅ 已批准 |
+| ec94b0e | 第十一轮 | 2026-09-13 | REVIEW_REPORT_v6.md §1 | ✅ 已批准（事后复核，流程违规记录） |
+| 700c01a | 第十轮 | 2026-09-13 | REVIEW_REPORT_v5.md §16 | ✅ 已批准 |
+
+## 待复核
+
+| Commit SHA | 说明 | 状态 |
+|------------|------|------|
+| 293dbb4 | 依§17建议的2行文字修改（hotfix-A：CHANGELOG轮次去掉区间 + 强制规则3摘要同步） | ⏳ 待批准 |
 
 ## 使用说明
 
 1. **主力AI完成修改后**：commit到新分支，push新分支，创建PR
-2. **DeepSeek复核**：检查PR中的commit，通过后在本文件添加批准记录
-3. **合并PR**：只有在本文件中有批准记录的commit才能合并到master
-4. **pre-push hook**：本地拦截直接push到master的尝试，检查commit是否在批准列表中
+2. **DeepSeek复核**：检查PR中的内容，通过后在本文件添加批准记录（只动本文件）
+3. **合并PR**：CI校验通过（内容=最新批准基线）后合并到master
+4. **pre-push hook**：本地拦截直接push到master的尝试
+
+## 重要运营规则
+
+**批准之后不要再提交任何东西**（哪怕只是CHANGELOG加一行），否则需要重新复核。
+正确顺序：所有内容都提交完 → DeepSeek写批准记录（只动REVIEW_STAMP.md）→ 立刻合并。
+
+## 为什么用「内容相等」判据而不是「逐条sha列表」
+
+用"逐条commit sha必须都在表里"当闸门会导致死锁：
+- 批准动作本身产生新commit，其hash不可能写在自己里面
+- 永远有未批准的commit → 最后只能靠--no-verify绕过 → 机制自己死掉
+
+「内容相等」判据：拿最新一条批准记录所指的提交当基线，比对`git diff <基线> HEAD`，忽略本文件自身。
+- 追加批准记录不会改变内容 → 判据收敛
+- 批准之后又改了任何文件 → 立刻被拦
 
 ## 违规记录
 

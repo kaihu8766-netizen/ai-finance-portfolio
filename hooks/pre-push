@@ -1,9 +1,10 @@
 #!/bin/bash
 # pre-push hook: 拦截直接push到master的未复核commit
-# 检查待推送的commit是否在REVIEW_STAMP.md的批准列表中
+# 从被推送的commit中读取REVIEW_STAMP.md（而非工作区），防止自我批准
+# 匹配锚定为表格行，防止违规记录中的hash被误判为批准
 
 protected_branch="refs/heads/master"
-stamp_file="REVIEW_STAMP.md"
+zero="0000000000000000000000000000000000000000"
 
 # 读取标准输入获取push信息
 while read local_ref local_sha remote_ref remote_sha; do
@@ -14,12 +15,30 @@ while read local_ref local_sha remote_ref remote_sha; do
 
     echo "🔒 检测到push到master分支，正在校验复核凭证..."
 
-    # 获取待推送的commit列表（从remote_sha到local_sha）
-    if [ "$remote_sha" = "0000000000000000000000000000000000000000" ]; then
-        # 新分支推送，检查所有commit
-        commits=$(git log --format="%h" "$local_sha" --not --remotes)
+    # 拦截删除master分支
+    if [ "$local_sha" = "$zero" ]; then
+        echo "🚫 拒绝删除受保护的master分支"
+        exit 1
+    fi
+
+    # 拦截非快进推送（force-push回退）
+    if [ "$remote_sha" != "$zero" ] && ! git merge-base --is-ancestor "$remote_sha" "$local_sha" 2>/dev/null; then
+        echo "🚫 拒绝非快进推送master（会丢失已批准的历史）"
+        exit 1
+    fi
+
+    # 从被推送的commit中读取REVIEW_STAMP.md（而非工作区）
+    stamp="$(git show "$local_sha:REVIEW_STAMP.md" 2>/dev/null)"
+    if [ -z "$stamp" ]; then
+        echo "🚫 被推送的commit中没有REVIEW_STAMP.md"
+        exit 1
+    fi
+
+    # 获取待推送的commit列表
+    if [ "$remote_sha" = "$zero" ]; then
+        commits=$(git log --format="%h" "$local_sha" --not --remotes 2>/dev/null)
     else
-        commits=$(git log --format="%h" "$remote_sha..$local_sha")
+        commits=$(git log --format="%h" "$remote_sha..$local_sha" 2>/dev/null)
     fi
 
     if [ -z "$commits" ]; then
@@ -27,11 +46,11 @@ while read local_ref local_sha remote_ref remote_sha; do
         continue
     fi
 
-    # 检查每个commit是否在REVIEW_STAMP.md中
+    # 检查每个commit是否在REVIEW_STAMP.md的批准表格中（锚定匹配）
     all_approved=true
     for commit in $commits; do
-        if ! grep -q "$commit" "$stamp_file" 2>/dev/null; then
-            echo "❌ Commit $commit 未在REVIEW_STAMP.md中找到复核记录"
+        if ! echo "$stamp" | grep -qE "^\| *${commit} *\|.*✅" 2>/dev/null; then
+            echo "❌ Commit $commit 未在REVIEW_STAMP.md中找到批准记录"
             all_approved=false
         fi
     done
