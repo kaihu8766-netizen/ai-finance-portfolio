@@ -23,12 +23,12 @@ def main():
         print("❌ HEAD里没有REVIEW_STAMP.md")
         sys.exit(1)
 
-    # 提取已批准表格中的commit SHA（最新一条在最上面）
+    # 提取已批准表格中的commit SHA，按提交时间取最新（免除书写顺序依赖）
     rows = re.findall(r"^\|\s*([0-9a-f]{7,40})\s*\|.*✅\s*已批准", stamp, re.M)
     if not rows:
         print("❌ REVIEW_STAMP.md里没有已批准记录")
         sys.exit(1)
-    approved = rows[0]  # 最新一条批准记录 = 被复核的内容基线
+    approved = max(rows, key=lambda r: int(sh("git", "log", "-1", "--format=%ct", r) or 0))
 
     # 验证commit存在
     if subprocess.run(["git", "cat-file", "-e", approved + "^{commit}"]).returncode != 0:
