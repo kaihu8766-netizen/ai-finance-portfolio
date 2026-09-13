@@ -2,46 +2,6 @@
 
 ## v5.3.4（2026-09-12）
 
-### 修复（DeepSeek第八~九轮复核）
-- **供应链模拟器恢复源修正**：之前从a231ab3恢复导致回退5项逻辑修复（应收账款滚动/账期/委贷本金/初始现金/风险等级），改从6686e5f恢复，用Python io.open(encoding='utf-8')安全写入，避免PowerShell Set-Content的GBK编码陷阱
-- **preflight/verify_deploy编码修复**：subprocess.run加encoding='utf-8'（读取侧）+ sys.stdout.reconfigure（输出侧），修复Windows GBK控制台崩溃
-- **verify_deploy失败不再静默跳过**：比对失败从⚠️跳过改为❌失败，纳入最终退出码
-- **现金流模拟器echarts改本地路径**：之前漏改，统一为../echarts.min.js
-- **coverage_test结论口径统一**：单题失败从❌改为⚠️"未达预期，不影响结论"，避免与最终✅矛盾
-- **离线助手覆盖空洞修复**：#12(w07)补"资金缺口分析/资金调度/调度建议"，#17(w05)补"资金缺口"，数据真实性话术补"落地/应用/实际使用"
-- **coverage_test新增3题**：这些作品落地了吗/供应链的资金缺口怎么算/资金缺口分析那个作品怎么做的
-
-### 文档
-- REVIEW_REPORT_v5.md新增§14-§15（第八~九轮复核）
-- DECISIONS.md新增D011-D014
-
-### 已知问题
-- Windows GBK编码陷阱已第5次复发，已在PROJECT_BRIEF.md固化规则：写HTML/demo文件必须用Python io.open(encoding='utf-8', newline='')，禁止PowerShell Set-Content
-
-## v5.3.3（2026-09-11）
-
-### 修复
-- **iframe内容叠加**：快速切换作品时新旧内容叠加，改为先清空srcdoc再延迟50ms设置新内容
-- **打开作品滚动位置**：iframe加载后滚动到顶部，避免显示上一个作品的滚动位置
-- **page-06 reveal时序**：修SOX模块位置时把"局限与数据来源"放在了IO脚本之后，导致永久不可见，已将IO脚本移到</section>之前
-- **手机端适配地雷拆除**：删除page-01模板内的getMobileChartOption/isMobile/applyMobileOption三个函数，以及5个模板里注释掉的调用点，避免以后误取消注释导致isMobile未定义错误
-- **iframe竞态修复**：加_pendingWork模块级变量，showWork/showHome时先clearTimeout，防止快速切换时的setTimeout竞态
-- **AI助手重复调用**：jump-btn按钮点击会触发两次showWork（AI助手自身监听+全局委托），已加e.stopPropagation()
-- **手机端media适配**：5处safeInit自动注入baseOption+media，21张图表全部生效，图表高度从220px调到290px（大图360px）
-- **preflight体检工具**：新增tools/preflight.py，5项检查（reveal时序/函数作用域/CSS类名/敏感串/baseOption配对）
-
-### 文档
-- 新增LESSONS_2026-09-11.md，记录手机端适配失败的5个问题根因和6条深度反思
-- DECISIONS.md新增D007-D010（手机端适配暂时禁用、回退到稳定版本、iframe内容更新方式、手机端适配用ECharts原生media query）
-
-### 已知问题
-- 手机端media适配已上线；待实测确认：4张非笛卡尔图是否被注入多余坐标系、双y轴是否只覆盖首个轴、w03两图x轴标签是否消失
-- API Key明文存在于代码中（用户确认暂不处理）
-
----
-
-## v5.3.4（2026-09-12）
-
 ### 修复（DeepSeek第四轮复核 - P0）
 - **w03两图x轴标签消失**：删掉media里的`interval:'auto'`（5处），保留各图自定义interval函数，避免与白名单formatter冲突导致标签只剩0-2个
 - **portfolioPersona返回类型错误**：防御分支从返回对象`{works:[],...}`改为返回字符串`'你是作品集助手。'`，避免系统提示词变成`[object Object]`
@@ -83,6 +43,27 @@
 - **新增tools/verify_deploy.py**：线上部署校验脚本，比对GitHub Pages线上版本与本地HEAD，检查关键内容存在、旧文案残留、资源文件200，解决"为什么线上还是旧版本"的困惑
 - **新增tools/coverage_test.js**：离线助手覆盖率回归测试，用Node跑真JS（从index.html抽出引擎+DOM stub），34题测试集带档位断言，在范围内有效作答率96%
 - **preflight新增检查7**：自动运行coverage_test.js，改KB/话术后自动拦住覆盖率回退
+
+### 修复（DeepSeek第八~九轮复核）
+- **供应链模拟器恢复源修正**：之前从a231ab3恢复导致回退5项逻辑修复（应收账款滚动/账期/委贷本金/初始现金/风险等级），改从6686e5f恢复，用Python io.open(encoding='utf-8')安全写入，避免PowerShell Set-Content的GBK编码陷阱
+- **preflight/verify_deploy编码修复**：subprocess.run加encoding='utf-8'（读取侧）+ sys.stdout.reconfigure（输出侧），修复Windows GBK控制台崩溃
+- **verify_deploy失败不再静默跳过**：比对失败从⚠️跳过改为❌失败，纳入最终退出码
+- **现金流模拟器echarts改本地路径**：之前漏改，统一为../echarts.min.js
+- **coverage_test结论口径统一**：单题失败从❌改为⚠️"未达预期，不影响结论"，避免与最终✅矛盾
+- **离线助手覆盖空洞修复**：#12(w07)补"资金缺口分析/资金调度/调度建议"，#17(w05)补"资金缺口"，数据真实性话术补"落地/应用/实际使用"
+- **coverage_test新增3题**：这些作品落地了吗/供应链的资金缺口怎么算/资金缺口分析那个作品怎么做的
+
+### 修复（DeepSeek第十~十二轮复核 - 布局与工程基建）
+- **作品01/05/06的.wrap容器修复**：3个作品的"局限与诚实披露"和"数据来源"section落在.wrap外，导致移动端失去卡片样式、占满屏幕宽度。同类扫描发现5个作品中有3个有此bug，全部修复
+- **preflight新增检查8（全仓乱码扫描）**：从只扫index.html改为git ls-files枚举所有被跟踪文本文件（含demo/*.html），覆盖标签形态+特征字+非法UTF-8检测三层防护
+- **preflight新增检查9（wrap容器结构v2）**：.wrap闭合后不允许再有任何div（不限类名），模板内div必须完全闭合
+- **verify_deploy实现--local-only参数**：仅本地检查关键内容和旧文案，不联网；修复本地领先远端时的误导提示
+- **检查8异常处理细化**：except Exception拆分为except UnicodeDecodeError→报错（防止GBK存盘文件被静默跳过）+ except Exception→continue
+
+### 文档
+- PROJECT_BRIEF.md新增Windows GBK编码陷阱强制规则（写文件用io.open、读子进程用encoding='utf-8'、stdout用reconfigure）
+- REVIEW_REPORT_v6.md新增§11-§14（第十~十五轮复核）
+- DECISIONS.md新增D011-D014
 
 ---
 

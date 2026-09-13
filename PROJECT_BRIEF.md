@@ -164,6 +164,13 @@
 4. **图表加载**：ECharts在iframe中可能加载失败，需要用safeInit包装
 5. **数据标注**：模拟数据和真实数据必须明确区分，真实数据要可验证
 6. **版本号管理**：大版本更新要归档到versions/，更新CHANGELOG
+7. **Windows GBK编码陷阱（已复发5次，强制规则）**：
+   - **写HTML/demo文件必须用** `Python io.open(path, 'w', encoding='utf-8', newline='')`
+   - **禁止用** PowerShell `Set-Content -Encoding utf8`（会写坏含中文+ASCII混合的文件，闭标签`<`被吃掉）
+   - **读子进程输出必须用** `encoding='utf-8', errors='replace'`
+   - **脚本stdout必须用** `sys.stdout.reconfigure(encoding='utf-8', errors='replace')`
+   - **恢复类操作必须同时验内容与编码**（乱码特征0 + 坏闭标签0 + 逻辑功能存在）
+   - preflight检查8已覆盖：全仓乱码扫描（标签形态+特征字+非法UTF-8检测）
 
 ---
 
