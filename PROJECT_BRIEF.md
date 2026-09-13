@@ -143,6 +143,11 @@
 - 不允许"报告说什么就改什么"，必须自己验证
 - 核实结果要在回复中明确告知用户：哪些属实、哪些有偏差
 
+**【强制规则3】Windows文本编码——详见§9.7**
+- 写HTML/demo文件必须用Python `io.open(encoding='utf-8', newline='')`
+- 禁止用PowerShell任何形式回写文本文件（`Set-Content`、`Out-File`、`>`重定向、管道回写）
+- 读文本文件必须用`open(path, encoding='utf-8')`
+
 ### Git权限
 - 复核AI可以执行：git pull / fetch / diff / log / status / add / commit
 - 复核AI**不要执行**：git push（push由主力AI统一做，避免凭证问题和冲突）
@@ -165,9 +170,9 @@
 5. **数据标注**：模拟数据和真实数据必须明确区分，真实数据要可验证
 6. **版本号管理**：大版本更新要归档到versions/，更新CHANGELOG
 7. **Windows GBK编码陷阱（已复发5次，强制规则）**：
-   - **写HTML/demo文件必须用** `Python io.open(path, 'w', encoding='utf-8', newline='')`
+   - **写任何文本文件必须用** `Python io.open(path, 'w', encoding='utf-8', newline='')`
    - **读文本文件必须用** `open(path, encoding='utf-8')`（不带encoding会按cp936读，中文内容会出错）
-   - **禁止用 PowerShell 任何形式回写 HTML/JS/demo 文件**（`Set-Content`、`Get-Content | Set-Content`管道、`(Get-Content …) -replace … | Set-Content`）。原因：Windows PowerShell 5.1的`Set-Content`不带`-Encoding`时默认按ANSI/GBK写（实测落盘字节`d6 d0 ce c4…`，非UTF-8）——这就是历次"闭标签`<`被吃掉"的成因；而`-Encoding utf8`反而会写成UTF-8+BOM（内容不坏，但会平白引入BOM差异）。**要改文本一律用 Python `io.open`**
+   - **禁止用 PowerShell 任何形式回写仓库内文本文件**（`Set-Content`、`Out-File`、`>`重定向、`Get-Content | Set-Content`管道、`(Get-Content …) -replace … | Set-Content`）。原因：Windows PowerShell 5.1的`Set-Content`/`Out-File`/`>`不带`-Encoding`时默认按ANSI/GBK或UTF-16LE写（实测落盘字节`d6 d0 ce c4…`或`ff fe…`，非UTF-8）——这就是历次"闭标签`<`被吃掉"和整页乱码的成因；而`-Encoding utf8`反而会写成UTF-8+BOM（内容不坏，但会平白引入BOM差异）。**要改文本一律用 Python `io.open`**
    - **读子进程输出必须用** `encoding='utf-8', errors='replace'`
    - **脚本stdout必须用** `sys.stdout.reconfigure(encoding='utf-8', errors='replace')`
    - **恢复类操作必须同时验内容与编码**（乱码特征0 + 坏闭标签0 + 逻辑功能存在）
