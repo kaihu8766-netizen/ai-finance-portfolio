@@ -144,6 +144,10 @@ def check_encoding_garbled():
             continue
         try:
             text = open(HTML_FILE.parent / f, encoding="utf-8").read()
+        except UnicodeDecodeError as ex:
+            # 非 UTF-8 的文本文件本身就是缺陷（例如被 Set-Content 按 GBK 存盘）→ 必须报错，不能静默跳过
+            errors.append(f"  {f}: 不是合法 UTF-8（{ex}）→ 浏览器会整页乱码")
+            continue
         except Exception:
             continue
         hits = re.findall(TAG, text)
