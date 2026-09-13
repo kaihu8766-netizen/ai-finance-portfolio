@@ -1,0 +1,58 @@
+#!/bin/bash
+# pre-push hook: 拦截直接push到master的未复核commit
+# 检查待推送的commit是否在REVIEW_STAMP.md的批准列表中
+
+protected_branch="refs/heads/master"
+stamp_file="REVIEW_STAMP.md"
+
+# 读取标准输入获取push信息
+while read local_ref local_sha remote_ref remote_sha; do
+    # 只检查push到master的情况
+    if [ "$remote_ref" != "$protected_branch" ]; then
+        continue
+    fi
+
+    echo "🔒 检测到push到master分支，正在校验复核凭证..."
+
+    # 获取待推送的commit列表（从remote_sha到local_sha）
+    if [ "$remote_sha" = "0000000000000000000000000000000000000000" ]; then
+        # 新分支推送，检查所有commit
+        commits=$(git log --format="%h" "$local_sha" --not --remotes)
+    else
+        commits=$(git log --format="%h" "$remote_sha..$local_sha")
+    fi
+
+    if [ -z "$commits" ]; then
+        echo "✅ 没有新的commit需要推送"
+        continue
+    fi
+
+    # 检查每个commit是否在REVIEW_STAMP.md中
+    all_approved=true
+    for commit in $commits; do
+        if ! grep -q "$commit" "$stamp_file" 2>/dev/null; then
+            echo "❌ Commit $commit 未在REVIEW_STAMP.md中找到复核记录"
+            all_approved=false
+        fi
+    done
+
+    if [ "$all_approved" = false ]; then
+        echo ""
+        echo "🚫 Push被拒绝：存在未经过DeepSeek复核的commit"
+        echo ""
+        echo "正确流程："
+        echo "  1. 创建新分支: git checkout -b fix/xxx"
+        echo "  2. commit修改"
+        echo "  3. push新分支: git push origin fix/xxx"
+        echo "  4. 创建PR"
+        echo "  5. DeepSeek复核通过后，在REVIEW_STAMP.md添加批准记录"
+        echo "  6. 合并PR到master"
+        echo ""
+        echo "如需紧急hotfix（纯恢复/单行纯文本），请使用: git push --no-verify"
+        exit 1
+    fi
+
+    echo "✅ 所有commit均已通过复核，允许push"
+done
+
+exit 0
