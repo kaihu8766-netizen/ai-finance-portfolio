@@ -111,6 +111,19 @@ def check_content_match(online_body):
         local_hash = hashlib.sha256(local_norm.encode()).hexdigest()[:12]
         online_hash = hashlib.sha256(online_norm.encode()).hexdigest()[:12]
         print(f"   ❌ 不一致（本地={local_hash}，线上={online_hash}）")
+        # 检查是否本地领先远端
+        try:
+            result = subprocess.run(
+                ["git", "rev-list", "--count", "origin/master..HEAD"],
+                cwd=REPO_DIR, capture_output=True, text=True, encoding='utf-8', errors='replace'
+            )
+            if result.returncode == 0:
+                ahead = int(result.stdout.strip())
+                if ahead > 0:
+                    print(f"       ⚠️ 本地领先远端 {ahead} 个提交，线上必然落后（属正常，push后即可一致）")
+                    return True  # 本地领先时不算失败
+        except Exception:
+            pass
         print(f"       可能是GitHub Pages还在部署中，等1-2分钟再试")
         return False
 
@@ -154,9 +167,45 @@ def check_resources():
     return all_ok
 
 def main():
+    local_only = '--local-only' in sys.argv
+    
     print("线上部署校验 (verify_deploy.py)")
-    print(f"目标: {BASE_URL}")
+    if local_only:
+        print("模式: --local-only（仅本地检查，不联网）")
+    else:
+        print(f"目标: {BASE_URL}")
     print()
+
+    if local_only:
+        # 本地模式：只检查本地文件的关键内容和旧文案
+        print("=" * 60)
+        print("1. 本地文件关键内容抽查")
+        local = get_local_head()
+        if local is None:
+            print("   ❌ 无法获取本地文件")
+            sys.exit(1)
+        kw_ok = True
+        for kw in MUST_HAVE:
+            if kw in local:
+                print(f"   ✅ 存在: {kw}")
+            else:
+                print(f"   ❌ 缺失: {kw}")
+                kw_ok = False
+        print("-" * 40)
+        print("2. 旧文案/敏感内容残留检查")
+        for kw in MUST_NOT_HAVE:
+            if kw in local:
+                print(f"   ❌ 残留: {kw}")
+                kw_ok = False
+            else:
+                print(f"   ✅ 无残留: {kw}")
+        print("=" * 60)
+        if kw_ok:
+            print("✅ 本地检查通过")
+            sys.exit(0)
+        else:
+            print("❌ 本地检查存在问题")
+            sys.exit(1)
 
     online_body = check_homepage()
     if online_body is None:

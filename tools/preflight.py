@@ -119,6 +119,58 @@ def check_media_covers_custom_interval(html):
         errors.append("  存在自定义interval函数，同时media里有interval:'auto' -> 自定义会被覆盖，x轴标签可能消失")
     return errors
 
+def check_encoding_garbled(html):
+    """检查8：编码乱码扫描（标签形态 + 乱码特征字）"""
+    errors = []
+    # 标签形态：闭标签被吃掉的特征（?/div>、?/span>等）
+    tag_pattern = r'\?/(?:div|span|section|h1|h2|h3|h4|p|b|table|tr|td|title|label|button|script|style|body|html)>'
+    tag_matches = re.findall(tag_pattern, html)
+    if tag_matches:
+        errors.append(f"  发现 {len(tag_matches)} 处闭标签被吃掉的乱码特征：{tag_matches[:3]}")
+    # 乱码特征字表（GBK解码UTF-8的典型乱码）
+    garbled_chars = ['锛', '銆', '鈥', '鐨', '鏄', '浣', '涓', '鐢', '鑳', '鍦', '鏈', '涓嶅', '鍙�', '鎴戜滑']
+    for ch in garbled_chars:
+        count = html.count(ch)
+        if count > 0:
+            errors.append(f"  发现乱码特征字 '{ch}' 出现 {count} 次")
+            break  # 发现一个就够了，避免刷屏
+    return errors
+
+def check_page_wrap_structure(html):
+    """检查9（v2）：每个作品模板里
+       ① .wrap 闭合之后不允许再出现任何 div（不限类名）
+       ② 模板内 div 必须完全闭合
+       ③ 模板里必须存在 .wrap"""
+    errors = []
+    for m in re.finditer(r'<script type="text/html" id="(page-[^"]+)">(.*?)</script>', html, re.S):
+        name, body = m.group(1), m.group(2)
+        if name == "page-proto2":
+            continue
+        body = re.sub(r'<script[^>]*>.*?<\\/script>', '\n', body, flags=re.S)
+        body = re.sub(r'<!--.*?-->', '', body, flags=re.S)
+        depth, wrap_depth, closed_at = 0, None, None
+        for i, line in enumerate(body.split('\n'), 1):
+            for tok in re.findall(r'<div\b[^>]*>|</div>', line):
+                if tok.startswith('</'):
+                    if depth:
+                        depth -= 1
+                    if wrap_depth and depth < wrap_depth and closed_at is None:
+                        closed_at = i
+                    continue
+                depth += 1
+                if 'class="wrap' in tok and wrap_depth is None:
+                    wrap_depth = depth
+                elif closed_at is not None:
+                    cls = re.search(r'class="([^"]*)"', tok)
+                    errors.append("%s: 第 %d 行有 div（class=%s）落在 .wrap 之外"
+                                  "（.wrap 已在第 %d 行闭合）→ 移动端会失去卡片样式、占满屏幕宽度"
+                                  % (name, i, cls.group(1) if cls else "无", closed_at))
+        if wrap_depth is None:
+            errors.append("%s: 模板里找不到 .wrap" % name)
+        elif depth != 0:
+            errors.append("%s: 模板内 div 未完全闭合（结束时仍有 %d 个未闭合）" % (name, depth))
+    return errors
+
 def main():
     print("=" * 60)
     print("作品集提交前自动化体检")
@@ -203,6 +255,22 @@ def main():
         all_errors.append("  ❌ Node.js未安装，无法运行覆盖率测试")
     except subprocess.TimeoutExpired:
         all_errors.append("  ❌ 覆盖率测试超时")
+    
+    print("\n🔍 检查8：编码乱码扫描")
+    e = check_encoding_garbled(html)
+    if e:
+        all_errors.extend(e)
+        for err in e: print(err)
+    else:
+        print("  ✅ 通过")
+    
+    print("\n🔍 检查9：作品模板.wrap容器结构")
+    e = check_page_wrap_structure(html)
+    if e:
+        all_errors.extend(e)
+        for err in e: print(err)
+    else:
+        print("  ✅ 通过")
     
     print("\n" + "=" * 60)
     if all_errors:
