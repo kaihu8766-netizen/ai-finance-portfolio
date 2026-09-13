@@ -119,21 +119,40 @@ def check_media_covers_custom_interval(html):
         errors.append("  存在自定义interval函数，同时media里有interval:'auto' -> 自定义会被覆盖，x轴标签可能消失")
     return errors
 
-def check_encoding_garbled(html):
-    """检查8：编码乱码扫描（标签形态 + 乱码特征字）"""
+def check_encoding_garbled():
+    """检查8（v2·全仓）：扫描所有被 git 跟踪的文本文件，发现乱码即报错。
+       为什么要全仓：历史上乱码事故全部发生在 demo/*.html，只扫 index.html 拦不住。
+       四个要点（均已实测）：
+         ① 必须带 -c core.quotepath=false：否则中文文件名会被转义成 "demo/\344..."，
+            不以 .html 结尾 → 被 endswith 静默漏掉（实测：默认模式只能扫到 105/147 个文件，
+            漏掉的 42 个恰好是 demo/ 与 versions/ 里的中文名文件——本检查的主要目标）
+         ② 用 git ls-files 枚举 → 天然排除未跟踪的复核报告（它们也含特征字表）
+         ③ 排除本文件自身 → 本文件含特征字表字面量与 ?/div> 注释，否则必然自命中
+         ④ 多字序列必须整串匹配，不能拆成单字（会误报，如『滑』）
+    """
+    import subprocess
+    TAG = r'\?/(?:div|span|section|h1|h2|h3|h4|p|b|table|tr|td|title|label|button|script|style|body|html)>'
+    SINGLE = "\u951b\u9286\u9225\u9428\u93c4\u6d63\u6d93\u9422\u9473\u9366\u93c8\u9359"
+    SEQS = ["\u6d93\u5d85", "\u93b4\u621c\u6ed1", "\u9359\ufffd"]
+    exts = (".html", ".js", ".py", ".md", ".css", ".sql", ".txt", ".csv", ".yml", ".json")
+    listing = subprocess.run(["git", "-c", "core.quotepath=false", "ls-files"],
+                             cwd=str(HTML_FILE.parent), capture_output=True,
+                             text=True, encoding="utf-8", errors="replace").stdout.split("\n")
     errors = []
-    # 标签形态：闭标签被吃掉的特征（?/div>、?/span>等）
-    tag_pattern = r'\?/(?:div|span|section|h1|h2|h3|h4|p|b|table|tr|td|title|label|button|script|style|body|html)>'
-    tag_matches = re.findall(tag_pattern, html)
-    if tag_matches:
-        errors.append(f"  发现 {len(tag_matches)} 处闭标签被吃掉的乱码特征：{tag_matches[:3]}")
-    # 乱码特征字表（GBK解码UTF-8的典型乱码）
-    garbled_chars = ['锛', '銆', '鈥', '鐨', '鏄', '浣', '涓', '鐢', '鑳', '鍦', '鏈', '涓嶅', '鍙�', '鎴戜滑']
-    for ch in garbled_chars:
-        count = html.count(ch)
-        if count > 0:
-            errors.append(f"  发现乱码特征字 '{ch}' 出现 {count} 次")
-            break  # 发现一个就够了，避免刷屏
+    for f in [x.strip() for x in listing if x.strip().endswith(exts)]:
+        if f == "tools/preflight.py":
+            continue
+        try:
+            text = open(HTML_FILE.parent / f, encoding="utf-8").read()
+        except Exception:
+            continue
+        hits = re.findall(TAG, text)
+        if hits:
+            errors.append(f"  {f}: 发现 {len(hits)} 处闭标签被吃掉的乱码（如 {hits[0]}）")
+        bad = sorted({c for c in text if c in SINGLE})
+        bad += [s for s in SEQS if s in text]
+        if bad:
+            errors.append(f"  {f}: 发现乱码特征（{''.join(bad[:5])}）")
     return errors
 
 def check_page_wrap_structure(html):
@@ -256,8 +275,8 @@ def main():
     except subprocess.TimeoutExpired:
         all_errors.append("  ❌ 覆盖率测试超时")
     
-    print("\n🔍 检查8：编码乱码扫描")
-    e = check_encoding_garbled(html)
+    print("\n🔍 检查8：编码乱码扫描（全仓）")
+    e = check_encoding_garbled()
     if e:
         all_errors.extend(e)
         for err in e: print(err)
