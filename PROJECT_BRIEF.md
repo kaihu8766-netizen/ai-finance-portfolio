@@ -144,7 +144,7 @@
 - 核实结果要在回复中明确告知用户：哪些属实、哪些有偏差
 
 **【强制规则3】Windows文本编码——详见§9.7**
-- 写HTML/demo文件必须用Python `io.open(encoding='utf-8', newline='')`
+- 写任何文本文件必须用Python `io.open(encoding='utf-8', newline='')`
 - 禁止用PowerShell任何形式回写文本文件（`Set-Content`、`Out-File`、`>`重定向、管道回写）
 - 读文本文件必须用`open(path, encoding='utf-8')`
 

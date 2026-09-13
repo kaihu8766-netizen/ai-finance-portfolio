@@ -62,7 +62,7 @@
 
 ### 文档
 - PROJECT_BRIEF.md新增Windows GBK编码陷阱强制规则（写文件用io.open、读子进程用encoding='utf-8'、stdout用reconfigure）
-- REVIEW_REPORT_v6.md新增§11-§14（第十~十五轮复核）
+- REVIEW_REPORT_v6.md新增§10–§15（机制设计与各轮验收记录）
 - DECISIONS.md新增D011-D014
 
 ---
