@@ -11,6 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ github.event.pull_request.head.sha }}  # 校验PR头提交，而非GitHub的合并结果
           fetch-depth: 0  # 需要完整历史算merge-base
 
       - name: Run preflight checks
