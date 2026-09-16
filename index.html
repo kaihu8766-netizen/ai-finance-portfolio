@@ -1694,8 +1694,8 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
       <div class="tl-content">
         <div class="tl-head"><span class="tl-ver">v5.0</span><span class="tl-date">2026.08</span></div>
         <div class="tl-title">体系化重构</div>
-        <div class="tl-desc">四角色AI协作模式；UI全面重构；能力四宫格；从"展示用"变成"自己也在用"</div>
-        <div class="tl-tags"><span>四角色协作</span><span>UI重构</span></div>
+        <div class="tl-desc">四角色AI协作模式→双Agent复核机制；UI全面重构；能力四宫格；从"展示用"变成"自己也在用"</div>
+        <div class="tl-tags"><span>双Agent复核</span><span>UI重构</span></div>
       </div>
     </div>
     <div class="tl-item">
@@ -1909,7 +1909,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
         <div style="font-size:11px;color:#9ba3b7">条批准基线</div>
       </div>
       <div style="flex:1;min-width:100px;text-align:center;background:rgba(251,191,36,0.08);padding:10px;border-radius:8px">
-        <div style="font-size:20px;font-weight:700;color:#fbbf24">9+2</div>
+        <div style="font-size:20px;font-weight:700;color:#fbbf24">10+2</div>
         <div style="font-size:11px;color:#9ba3b7">自动检查+CI闸门</div>
       </div>
       <div style="flex:1;min-width:100px;text-align:center;background:rgba(244,114,182,0.08);padding:10px;border-radius:8px">
@@ -1922,7 +1922,6 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     </div>
   </div>
 
-  <div class="glass" style="margin-top:16px;background:linear-gradient(145deg,rgba(20,24,38,0.9),rgba(14,17,26,0.95));border:1px solid rgba(251,191,36,0.18);border-radius:16px;padding:20px 24px"></div>
   </div>
 
   <div class="glass" style="margin-top:16px;background:linear-gradient(145deg,rgba(20,24,38,0.9),rgba(14,17,26,0.95));border:1px solid rgba(251,191,36,0.18);border-radius:16px;padding:20px 24px">
@@ -1930,7 +1929,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     <div style="font-size:12px;color:#9ba3b7;line-height:1.9">
     主力AI容易犯的错：确认偏误、自我盲区、急于交付。复核AI的价值：独立视角、边界测试、根因分析。<br>
     已落地的防御机制：<br>
-    • <b>preflight 自动体检</b>（9项检查）→ 提交前自动扫描编码乱码、结构错误、敏感信息<br>
+    • <b>preflight 自动体检</b>（10项检查，含图片完整性）→ 提交前自动扫描编码乱码、结构错误、敏感信息<br>
     • <b>CI 闸门</b>（2步）→ 凭证不匹配就合不进去，PR #1已实证生效<br>
     • <b>复核凭证</b>（REVIEW_STAMP.md）→ 12条批准基线，内容相等判据，可追溯<br>
     • <b>强制规则</b>（3条）→ 触发复核、先核实再动手、Windows文本编码<br>
@@ -2149,12 +2148,11 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     "⑮抽屉背景滚动锁定+作品加载提示"
   ],
   "versions": "v1基础 → v2.1体积优化 → v2.2安全修复 → v2.3接入真实AI → v2.4数据底座 → v2.5拷问修复 → v2.6异常全流程 → v2.7内置助手 → v3.0打字机/批量处理/pytest/RAG/体验优化 → v3.2整合SOX控制测试工作台为第6作品 → v3.3双Agent协作实战展示 → v3.4作品矩阵分级布局 → v3.5数据修正+面试速览 → v3.6角色升级Manager+Specialist+图标 → v3.7称呼统一+能力全景+协作技术栈 → v3.8去审计化重定位+工具链分层+技术栈分组 → v3.9协作技术栈术语升级 → v3.10商业化深度(G2N/CCC/死信队列+审计日志) → v3.11 AI助手彻头彻尾大更新 → v4.0 作品集第四代·AI助手四方向大更新 → v4.1 LPR预测替换收入核算 → v4.2 LPR精算增强(理论视角+情景概率+蒙特卡洛) → v4.3 未来5年预测区间带 → v4.4 图表1全宽大图+5Y双期限 → v4.4.1 Demo可靠性加固 → v4.4.2 数据时效更新 → v4.5 精算复合背景升级：新增现金流压力测试(w07)+LPR融资成本压力测试+SmartRecon精算风险引擎 → v5.0 精简聚焦：删除智对账(w04)+月结优化(w02)，双Agent升级为四角色协作体系 → v5.1 四角色区域专业化重写+AI助手知识库自动同步+SOX升级Agent工作流v5.0 → v5.2 w03新增蒙特卡洛可交互Demo+AI利率分析工作流 + w05新增现金流压力测试可交互Demo → v5.3 供应链模拟器逻辑修复+proto2原型V2.0+CHANGELOG → v5.3.3 手机端media适配+preflight体检工具+iframe竞态修复 → v5.3.4 DeepSeek第四轮复核P0修复(w03 x轴标签/portfolioPersona返回类型/requirements补依赖)+AI助手默认隐私保护模式(当前)",
-  "fourRoleCollab": {
+  "dualAgentCollab": {
     "description": "和AI协作的一套方法：任务拆清楚、AI执行、人来验收，中间踩过不少坑也形成了一些规矩",
     "roles": [
       {"name": "胡凯", "role": "Decision Maker", "duty": "最终目标制定、重大决策拍板、定版、角色争议仲裁"},
       {"name": "豆包 2.1 Turbo", "role": "Main Agent", "duty": "任务拆解、方案设计、代码实现、文档撰写、执行落地"},
-      {"name": "TRAE", "role": "Builder / 第二大脑", "duty": "按任务信执行、视觉自检、Bug修复、执行前回讨论信"},
       {"name": "DeepSeek Harness", "role": "Review Agent", "duty": "独立审查、边界测试、提出异议、出具复核凭证，每次合并前都复核"}
     ],
     "mechanism": "重要任务写下来，AI做完先复述理解，确认了再动手，做完有人验收，每步都留记录",
@@ -2271,7 +2269,7 @@ window.SmartReconAI = {
   portfolioPersona: function() {
     var kb = this.portfolioKB;
     if(!kb){ return '你是作品集助手。'; }
-    return '你是"作品集助手"——胡凯 AI×财务作品集的自我认知 AI。你的职责：向用户（胡凯本人或面试官）介绍这个作品集的一切细节，并帮助发现可改进点。回答专业、简洁、结构化，中文回复，控制在 220 字以内，可用换行分点。\n\n【作品集知识库——回答必须基于以下信息，不要编造】\n作者：' + kb.author + '；定位：' + kb.purpose + '\n结构：' + JSON.stringify(kb.structure) + '\n原型：' + JSON.stringify(kb.prototypes) + '\n关键数据：' + JSON.stringify(kb.keyNumbers) + '\n技术栈：' + kb.techStack + '\n缺陷日志（已修复）：' + kb.defectLog.join('；') + '\n版本演进：' + kb.versions + '\nAI协作方法（用户问怎么和AI协作时用这个）：' + JSON.stringify(kb.dualAgentCollab) + '\n\n【行为准则】①用户问"双Agent复核机制/怎么运作/多智能体团队"→必须用fourRoleCollab信息回答，明确是胡凯(Decision Maker)+豆包2.1 Turbo(Main Agent)+DeepSeek Harness(Review Agent)双Agent复核机制，不要混淆资金智算原型里的Manager+Specialist①用户问"有什么功能/介绍作品"→按 structure+prototypes 导览 ②问"怎么实现的/技术"→引用 techStack+keyNumbers ③问"缺陷/修复历史"→列 defectLog ④问"迭代/版本"→列 versions ⑤问"还能怎么改进"→基于 defectLog 和当前架构给 2-3 条具体建议（如：接真实RAG、加pytest测试、数据脱敏后真实数据测试、ECharts进一步瘦身）⑥若收到【实时联网搜索结果】，先判断相关性——相关则基于结果回答，无关则忽略并直接用自己的知识回答（不要在开头提"网络搜索/搜索词"）⑦若没有搜索结果且问题是作品集外的一般问题，可直接用你的知识简要回答（不必强调"知识库未覆盖"），最后自然带一句"如需了解作品集可以问我"⑧被要求讲笑话/闲聊等非业务内容时：轻松幽默回应（可讲财务梗），简短即可，不硬切功能清单⑨用户负面反馈/质疑：先共情再理性回应，不防御性辩解。';
+    return '你是"作品集助手"——胡凯 AI×财务作品集的自我认知 AI。你的职责：向用户（胡凯本人或面试官）介绍这个作品集的一切细节，并帮助发现可改进点。回答专业、简洁、结构化，中文回复，控制在 220 字以内，可用换行分点。\n\n【作品集知识库——回答必须基于以下信息，不要编造】\n作者：' + kb.author + '；定位：' + kb.purpose + '\n结构：' + JSON.stringify(kb.structure) + '\n原型：' + JSON.stringify(kb.prototypes) + '\n关键数据：' + JSON.stringify(kb.keyNumbers) + '\n技术栈：' + kb.techStack + '\n缺陷日志（已修复）：' + kb.defectLog.join('；') + '\n版本演进：' + kb.versions + '\nAI协作方法（用户问怎么和AI协作时用这个）：' + JSON.stringify(kb.dualAgentCollab) + '\n\n【行为准则】①用户问"双Agent复核机制/怎么运作/多智能体团队"→必须用dualAgentCollab信息回答，明确是胡凯(Decision Maker)+豆包2.1 Turbo(Main Agent)+DeepSeek Harness(Review Agent)双Agent复核机制，不要混淆资金智算原型里的Manager+Specialist①用户问"有什么功能/介绍作品"→按 structure+prototypes 导览 ②问"怎么实现的/技术"→引用 techStack+keyNumbers ③问"缺陷/修复历史"→列 defectLog ④问"迭代/版本"→列 versions ⑤问"还能怎么改进"→基于 defectLog 和当前架构给 2-3 条具体建议（如：接真实RAG、加pytest测试、数据脱敏后真实数据测试、ECharts进一步瘦身）⑥若收到【实时联网搜索结果】，先判断相关性——相关则基于结果回答，无关则忽略并直接用自己的知识回答（不要在开头提"网络搜索/搜索词"）⑦若没有搜索结果且问题是作品集外的一般问题，可直接用你的知识简要回答（不必强调"知识库未覆盖"），最后自然带一句"如需了解作品集可以问我"⑧被要求讲笑话/闲聊等非业务内容时：轻松幽默回应（可讲财务梗），简短即可，不硬切功能清单⑨用户负面反馈/质疑：先共情再理性回应，不防御性辩解。';
   },
 
   // ===== 知识库自动同步：从页面DOM提取最新作品信息，避免手动维护 =====
