@@ -218,3 +218,27 @@
 - 每次迭代创建独立文件夹，保留历史版本
 - GitHub仓库：https://github.com/kaihu8766-netizen/ai-finance-portfolio
 - 在线访问：https://kaihu8766-netizen.github.io/ai-finance-portfolio/
+
+## [v5.4.0] - 2026-09-16
+### 新增
+- 双Agent复核机制模块：主力AI（豆包 2.1 Turbo）+ 复核AI（DeepSeek Harness）平等讨论，人做裁决
+- 讨论闭环展示：从分歧到规则沉淀的完整流程
+- 新增图标转换脚本 tools/make_icon_datauri.py（二进制读写+往返校验）
+
+### 修改
+- 四角色协作 → 双Agent复核机制（全文统一，含话术库、面试题、知识库）
+- 角色图标：3个损坏的base64图标 → 豆包+DeepSeek官方图标（页面瘦身约80KB）
+- 数据统计：5轮迭代/0严重问题 → 21轮复核/12条批准基线/9+2自动检查CI闸门
+- 实战案例：SOX迭代过程 → 双Agent讨论闭环（三次流程违规→根因分析→CI闸门落地）
+- 防御机制：从"遇到的问题"改为"工程化防御体系"（preflight+CI闸门+复核凭证+强制规则+分支保护）
+- 作品06：四角色协作（1人+3AI）→ 4-Agent流水线+1个人工复核节点
+- 全文统一：Claude→DeepSeek Harness，WorkBuddy→豆包 2.1 Turbo
+
+### 修复
+- 3个角色图标base64损坏问题（PNG被当文本读写，原始字节永久丢失）
+- 知识库角色表与实际不符（Claude/WorkBuddy/TRAE → 豆包/DeepSeek/工具层）
+
+### 文档
+- README.md：四角色协作体系 → 双Agent复核机制
+- PROJECT_BRIEF.md：§8 同步更新
+- DECISIONS.md：新增D015（取代D003）
