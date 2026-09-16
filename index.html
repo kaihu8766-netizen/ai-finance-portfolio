@@ -1931,7 +1931,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     已落地的防御机制：<br>
     • <b>preflight 自动体检</b>（10项检查，含图片完整性）→ 提交前自动扫描编码乱码、结构错误、敏感信息<br>
     • <b>CI 闸门</b>（2步）→ 凭证不匹配就合不进去，PR #1已实证生效<br>
-    • <b>复核凭证</b>（REVIEW_STAMP.md）→ 12条批准基线，内容相等判据，可追溯<br>
+    • <b>复核凭证</b>（REVIEW_STAMP.md）→ 13条批准基线，内容相等判据，可追溯<br>
     • <b>强制规则</b>（3条）→ 触发复核、先核实再动手、Windows文本编码<br>
     • <b>分支保护</b> → 禁止直推master，必须走PR<br>
     不是说AI有多厉害，而是<span class="hl">我知道AI容易在哪出错，并且把它们变成了工程化的闸门</span>。
@@ -2189,8 +2189,8 @@ window.SmartReconAI = {
       { kw: ['缺陷','问题','修复','bug','历史'], reply: '已修复的缺陷（列举）：①聊天输入XSS ②ECharts全量1004KB→按需打包691KB ③证据链元素用br无法显示→改div ④证据链浅底浅字看不清→改深色文字 ⑤Agent只回固定话术→接入真实DeepSeek API ⑥API失败直接降级→加重试 ⑦数据底座缺月度资金流→补12个月数据 ⑧离线关键词跨场景劫持→场景分离 ⑨人设漂移/逻辑缺陷→persona增强+资金全景 ⑩异常中心按钮无状态流转→完整全流程。<div class="tool-call">portfolio_kb → defect_log ✓</div>' },
       { kw: ['迭代','版本','更新','演进'], reply: '作品集演进历史：v1 基础版→v2.1 ECharts按需打包→v2.2 安全修复→v2.3 接入真实DeepSeek AI→v2.4 数据底座升级→v2.5 AI拷问测试修复→v2.6 异常处理全流程→v2.7 内置作品集助手→v3.2 整合SOX工作台→v3.3 协作实战展示→v3.4 作品矩阵分级→v5.0 双Agent复核机制→v5.3 手机端适配+preflight体检→v5.3.4 DeepSeek第四轮复核全量修复。<div class="tool-call">portfolio_kb → versions ✓</div>' },
       { kw: ['双Agent','复核机制','协作体系','怎么运作','如何运作','multi-agent','多智能体','团队','豆包','2.1 Turbo','DeepSeek Harness','主力AI','复核AI','四角色'], reply: '我实践了一套"主力AI+复核AI"的双Agent复核机制：<br><br>① <b>主力AI提方案并执行</b>：任务拆解、方案设计、代码实现、文档撰写<br>② <b>复核AI独立审查</b>：不是检查，而是平等讨论——边界测试、根因分析、提出异议<br>③ <b>人在分歧点裁决</b>：两个AI有分歧时，人做最终决策<br>④ <b>每一次分歧都沉淀为规则</b>：写入强制规则和CI闸门，可追溯<br><br>比如主力AI三次"先push后复核"，复核AI发现违规后双AI讨论，落地了复核凭证+CI闸门，PR #1实证：不补凭证就合不进去。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
-      { kw: ['复核凭证','CI闸门','凭证','闸门','批准基线'], reply: '复核凭证 = 批准基线的机读记录（REVIEW_STAMP.md），记录每次通过DeepSeek复核、允许合并的内容基线。CI闸门 = PR上自动比对最新批准基线，内容不一致直接红，合不进去。目前有12条批准基线+3条违规记录，PR #1已实证生效。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
-      { kw: ['强制规则','规则','体检','preflight','检查10','检查10是什么','分支保护','几项检查'], reply: '防御体系包括：①3条强制规则（触发复核、先核实再动手、Windows文本编码、hotfix白名单）②10项preflight自动体检（第10项=图片完整性，防止二进制被当文本写坏）③CI闸门2步（preflight+凭证校验）④分支保护（禁止直推master，必须走PR）。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
+      { kw: ['复核凭证','CI闸门','闸门','批准基线'], reply: '复核凭证 = 批准基线的机读记录（REVIEW_STAMP.md），记录每次通过DeepSeek复核、允许合并的内容基线。CI闸门 = PR上自动比对最新批准基线，内容不一致直接红，合不进去。目前有13条批准基线+3条违规记录，PR #1已实证生效。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
+      { kw: ['强制规则','体检','preflight','检查10','分支保护','几项检查'], reply: '防御体系包括：①4条强制规则（触发复核、先核实再动手、Windows文本编码、hotfix白名单）②10项preflight自动体检（第10项=图片完整性，防止二进制被当文本写坏）③CI闸门2步（preflight+凭证校验）④分支保护（禁止直推master，必须走PR）。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
       { kw: ['作者','你是谁','胡凯','背景','个人','介绍'], reply: '作者胡凯，2001年生，浙江宁波人。教育：精算本科（惠灵顿维多利亚大学）+ 金融与投资学（专业会计方向）硕士（宁波诺丁汉大学，2025.09-2027.07）。实习：Smart Automobile财务资金部（2026.05-至今）+ 中审众环审计（2025.12-2026.03）。定位：懂业务+懂数据+懂AI的复合型财务人才。<div class="tool-call">portfolio_kb → author ✓</div>' },
       { kw: ['教育','学历','学校','大学','专业','硕士','本科'], reply: '教育背景：<br>• <b>硕士</b>：宁波诺丁汉大学，金融与投资学（专业会计方向），2025.09-2027.07<br>• <b>本科</b>：惠灵顿维多利亚大学，精算学<br><br>精算本科打下数学建模和风险量化基础，金融会计硕士补充财务和投资知识，形成"量化+财务"复合背景。<div class="tool-call">portfolio_kb → author ✓</div>' },
       { kw: ['实习','工作','经历','smart','汽车','资金部','资金方向','资金运营','审计'], reply: '实习经历：<br>• <b>Smart Automobile 财务资金部</b>（2026.05-至今）：独立负责子公司流动资金贷款全流程，运用SAP完成多法人主体资金台账与多银行账户数据归集，参与集团银行授信、供应链融资、跨境付汇与外汇申报<br>• <b>中审众环 审计实习</b>（2025.12-2026.03）：使用Python开展财务数据清洗与指标波动归因分析，参与制造业、房地产、私募基金年报审计，独立负责货币资金、往来款、固定资产等核心科目底稿<br><br>这些实习中的观察和思考，是作品集所有作品的灵感来源。<div class="tool-call">portfolio_kb → author ✓</div>' },
