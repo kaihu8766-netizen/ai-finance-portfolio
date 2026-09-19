@@ -194,6 +194,23 @@ def check_page_wrap_structure(html):
             errors.append("%s: 模板内 div 未完全闭合（结束时仍有 %d 个未闭合）" % (name, depth))
     return errors
 
+
+def check_image_integrity(html):
+    import base64, re
+    errors = []
+    pattern = r"data:image/(png|jpeg);base64,([A-Za-z0-9+/=]+)"
+    matches = re.findall(pattern, html)
+    for i, (img_type, b64) in enumerate(matches):
+        try:
+            raw = base64.b64decode(b64)
+            if img_type == "png" and not raw[:8] == bytes([0x89,0x50,0x4e,0x47,0x0d,0x0a,0x1a,0x0a]):
+                errors.append(f"  ❌ 内嵌图{i+1}: PNG magic不正确")
+            elif img_type == "jpeg" and not raw[:3] == bytes([0xff,0xd8,0xff]):
+                errors.append(f"  ❌ 内嵌图{i+1}: JPEG magic不正确")
+        except:
+            errors.append(f"  ❌ 内嵌图{i+1}: base64解码失败")
+    return errors
+
 def main():
     print("=" * 60)
     print("作品集提交前自动化体检")
@@ -289,6 +306,14 @@ def main():
     
     print("\n🔍 检查9：作品模板.wrap容器结构")
     e = check_page_wrap_structure(html)
+    if e:
+        all_errors.extend(e)
+        for err in e: print(err)
+    else:
+        print("  ✅ 通过")
+    
+    print("\n🔍 检查10：图片完整性")
+    e = check_image_integrity(html)
     if e:
         all_errors.extend(e)
         for err in e: print(err)

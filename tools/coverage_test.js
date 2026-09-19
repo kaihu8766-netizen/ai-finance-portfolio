@@ -102,6 +102,11 @@ const TESTS = [
   { q: '作品集迭代了几个版本', type: 'coverage' },
   { q: '修复过哪些bug', type: 'coverage' },
   { q: '你的研究有什么局限', type: 'coverage' },
+  // --- 跨场景劫持回归（第二十四轮复验新增）---
+  { q: '记账凭证要检查什么', type: 'out_of_scope' },
+  { q: '费用凭证异常', type: 'out_of_scope' },
+  { q: '复核凭证是什么', type: 'assert', expected: 'canned' },
+  { q: '强制规则有几条', type: 'assert', expected: 'canned' },
 ];
 
 // ===== 6. 跑测试 =====

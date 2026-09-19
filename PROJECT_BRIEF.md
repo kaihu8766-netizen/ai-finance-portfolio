@@ -1,4 +1,4 @@
-# 项目档案 / PROJECT BRIEF
+﻿# 项目档案 / PROJECT BRIEF
 
 > 本文档供复核AI（DeepSeek）快速了解项目全貌。每次重大更新后同步更新。
 
@@ -84,15 +84,15 @@
 
 ---
 
-## 8. 四角色协作体系
+## 8. 双Agent复核机制
 
-作者采用"1人+3AI"的协作模式：
+作者采用"人 + 2 Agent"的协作模式：
 
 | 角色 | 定位 | 工具 |
 |------|------|------|
 | 胡凯（人） | 定方向、拍板、最终确认 | — |
-| 主力AI | 拆任务、想方案、写清楚要做什么、检查质量 | 豆包/WorkBuddy |
-| 执行AI | 干具体的活——核对数据、生成底稿、改错误 | TRAE |
+| 主力AI | 拆任务、想方案、写代码与文档、执行落地 | 豆包 2.1 Turbo |
+| 工具层 | 按场景选用执行类工具 | TRAE/Codex/Kimi等 |
 | 复核AI | 独立检查一遍，看看有没有漏掉什么 | DeepSeek（你） |
 
 **复核AI的职责**：
@@ -108,7 +108,7 @@
 ### 工作目录
 `C:\Users\ROG\WorkBuddy\2026-08-02-03-41-55\outputs\作品集\github-deploy\`
 
-主力AI（豆包/WorkBuddy）和复核AI（DeepSeek Harness）共用此目录。
+主力AI（豆包 2.1 Turbo）和复核AI（DeepSeek Harness）共用此目录。
 
 ### 文件交接方式
 复核AI将复核报告写成 `REVIEW_REPORT.md` 放在工作目录根目录，主力AI读取此文件获取意见。不需要用户逐字转发。
@@ -147,6 +147,8 @@
 - 写任何文本文件必须用Python `io.open(encoding='utf-8', newline='')`
 - 禁止用PowerShell任何形式回写文本文件（`Set-Content`、`Out-File`、`>`重定向、管道回写）
 - 读文本文件必须用`open(path, encoding='utf-8')`
+
+**【强制规则4】hotfix白名单**：仅限「纯恢复/单行纯文本/单行路径/单行关键词/revert」可跳过复核直接push；其余一律走常规复核通道（主力AI修改→DeepSeek复核→批准→合并）。
 
 ### Git权限
 - 复核AI可以执行：git pull / fetch / diff / log / status / add / commit
@@ -203,3 +205,4 @@
 ---
 
 *最后更新：2026-09-10*
+
