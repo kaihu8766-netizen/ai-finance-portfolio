@@ -108,13 +108,7 @@ const TESTS = [
 let assertPass = 0, assertFail = 0;
 let coveragePass = 0, coverageTotal = 0;
 let oosPass = 0, oosFail = 0;
-const failures = [
-  // --- 跨场景劫持回归（第二十四轮复验新增）---
-  { q: '记账凭证要检查什么', type: 'out_of_scope' },
-  { q: '费用凭证异常', type: 'out_of_scope' },
-  { q: '复核凭证是什么', type: 'assert', expected: 'canned' },
-  { q: '强制规则有几条', type: 'assert', expected: 'canned' },
-];
+const failures = [];
 const tierCount = { kb_strong: 0, canned: 0, kb_weak: 0, out_of_scope: 0, unknown: 0, empty: 0 };
 
 console.log('='.repeat(60));
