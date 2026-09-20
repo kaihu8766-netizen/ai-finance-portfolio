@@ -3589,6 +3589,33 @@ window.addEventListener('resize', function() {
   if (chart4) chart4.resize();
   if (chart5) chart5.resize();
 });
+<div class="sec reveal">
+  <div class="sec-head"><span class="num">10</span><h2>局限与诚实披露</h2><span class="en">LIMITATIONS</span></div>
+  <div class="verify-box">
+    <h4>⚠️ 分析预测，非精确模型</h4>
+    <ul>
+      <li>LPR 受政策窗口、美联储降息进程、汇率波动、输入性通胀等外部变量影响，预测存在不确定性</li>
+      <li>分析框架的价值在于「把判断从经验变成可验证的逻辑链」，而非「精确预言」</li>
+      <li>蒙特卡洛模拟 θ（长期中枢）/κ（回复速度）为演示设定、非市场校准；σ 由 2019 改革后 LPR 序列近似估计——脚本可复现，结果仅演示精算方法</li>
+      <li>5Y 模拟更严格：θ=3.0%/κ=0.25/σ=0.22 均为叙事假设（基于地产政策定向引导 5Y 更快下行的预期），无一项由历史数据估计；θ5>θ1 仅为保证期限溢价为正、利差收敛不倒挂，非市场校准</li>
+      <li>数据截至 2026-08（含 8 月 LPR 报价与 2026Q2 净息差），后续数据发布可能改变判断</li>
+    </ul>
+  </div>
+</div>
+
+<div class="sec reveal">
+  <div class="sec-head"><span class="num">11</span><h2>数据来源与假设说明</h2><span class="en">DATA SOURCES</span></div>
+  <table>
+    <tr><th>数据类型</th><th>具体内容</th><th>来源/性质</th><th>说明</th></tr>
+    <tr><td><b>LPR历史数据</b></td><td>2019年8月改革以来1Y/5Y LPR报价序列</td><td><span style="color:#34d399">公开数据</span></td><td>中国人民银行官网每月20日公布，可直接核验</td></tr>
+    <tr><td><b>MLF利率</b></td><td>中期借贷便利操作利率</td><td><span style="color:#34d399">公开数据</span></td><td>央行公开市场操作公告，月度数据</td></tr>
+    <tr><td><b>银行净息差</b></td><td>商业银行净息差季度数据</td><td><span style="color:#34d399">公开数据</span></td><td>国家金融监督管理总局季度统计报告</td></tr>
+    <tr><td><b>社融/CPI</b></td><td>社会融资规模增量、CPI同比</td><td><span style="color:#34d399">公开数据</span></td><td>国家统计局月度发布</td></tr>
+    <tr><td><b>模型参数</b></td><td>Vasicek模型θ/κ/σ</td><td><span style="color:#fbbf24">演示设定</span></td><td>θ/κ为演示假设，σ由历史LPR序列近似估计，非市场校准</td></tr>
+    <tr><td><b>预测结果</b></td><td>未来LPR概率分布</td><td><span style="color:#fbbf24">模型输出</span></td><td>基于演示参数的模拟结果，不构成投资建议</td></tr>
+  </table>
+  <div class="quote" style="margin-top:14px"><b>数据时效：</b>所有公开数据截至2026年8月（含8月LPR报价与2026Q2净息差），后续数据发布可能改变分析结论。</div>
+</div>
 
 window.addEventListener("resize", function(){
   if(chart1) chart1.resize();
@@ -3860,6 +3887,34 @@ window.addEventListener("resize", function(){
     <b style="color:#6d7cff">核心原则：</b>AI 负责执行与计算，人负责判断与决策。利率走势的最终判断必须由人做出——因为 LPR 不是纯数学问题，是政策、经济、政治的综合博弈。
   </div>
 </div>
+<div class="sec reveal">
+  <div class="sec-head"><span class="num">10</span><h2>局限与诚实披露</h2><span class="en">LIMITATIONS</span></div>
+  <div class="verify-box">
+    <h4>⚠️ 分析预测，非精确模型</h4>
+    <ul>
+      <li>LPR 受政策窗口、美联储降息进程、汇率波动、输入性通胀等外部变量影响，预测存在不确定性</li>
+      <li>分析框架的价值在于「把判断从经验变成可验证的逻辑链」，而非「精确预言」</li>
+      <li>情景推演 1 万次（蒙特卡洛模拟）θ（长期中枢）/κ（回复速度）为演示设定、非市场校准；σ 由 2019 改革后 LPR 序列近似估计——脚本可复现，结果仅演示精算方法</li>
+      <li>5Y 模拟更严格：θ=3.0%/κ=0.25/σ=0.22 均为叙事假设（基于地产政策定向引导 5Y 更快下行的预期），无一项由历史数据估计；θ5>θ1 仅为保证期限溢价为正、利差收敛不倒挂，非市场校准</li>
+      <li>数据截至 2026-08（含 8 月 LPR 报价与 2026Q2 净息差），后续数据发布可能改变判断</li>
+    </ul>
+  </div>
+</div>
+
+<div class="sec reveal">
+  <div class="sec-head"><span class="num">11</span><h2>数据来源与假设说明</h2><span class="en">DATA SOURCES</span></div>
+  <table>
+    <tr><th>数据类型</th><th>具体内容</th><th>来源/性质</th><th>说明</th></tr>
+    <tr><td><b>LPR历史数据</b></td><td>2019年8月改革以来1Y/5Y LPR报价序列</td><td><span style="color:#34d399">公开数据</span></td><td>中国人民银行官网每月20日公布，可直接核验</td></tr>
+    <tr><td><b>MLF利率</b></td><td>中期借贷便利操作利率</td><td><span style="color:#34d399">公开数据</span></td><td>央行公开市场操作公告，月度数据</td></tr>
+    <tr><td><b>银行净息差</b></td><td>商业银行净息差季度数据</td><td><span style="color:#34d399">公开数据</span></td><td>国家金融监督管理总局季度统计报告</td></tr>
+    <tr><td><b>社融/CPI</b></td><td>社会融资规模增量、CPI同比</td><td><span style="color:#34d399">公开数据</span></td><td>国家统计局月度发布</td></tr>
+    <tr><td><b>模型参数</b></td><td>利率均值回归模型（Vasicek）θ/κ/σ</td><td><span style="color:#fbbf24">演示设定</span></td><td>θ/κ为演示假设，σ由历史LPR序列近似估计，非市场校准</td></tr>
+    <tr><td><b>预测结果</b></td><td>未来LPR概率分布</td><td><span style="color:#fbbf24">模型输出</span></td><td>基于演示参数的模拟结果，不构成投资建议</td></tr>
+  </table>
+  <div class="quote" style="margin-top:14px"><b>数据时效：</b>所有公开数据截至2026年8月（含8月LPR报价与2026Q2净息差），后续数据发布可能改变分析结论。</div>
+</div>
+
 
 <a class="core-link" href="javascript:void(0)" onclick="window.parent.showWork('07');return false;">
   <div><div class="t">→ 主线下一站：从 LPR 利率预测到现金流压力测试</div><div class="s">LPR 蒙特卡洛输出直接作为现金流模型的利率变量输入——宏观利率→融资成本→流动性风险的完整分析链</div></div>
@@ -4087,6 +4142,7 @@ window.addEventListener('resize', function() {
 <\/script>
 
 </section>
+
 
 </div></script>
 <script type="text/html" id="page-05">
@@ -4994,34 +5050,6 @@ window.addEventListener('resize', function() {
   <div class="quote" style="margin-top:14px"><b>使用说明：</b>本作品的核心价值在于<b>分析框架</b>（资金归集建模→账期错配诊断→现金流预测→三级预警），而非具体数字。实际应用需替换为企业真实数据，并根据行业特性调整模型假设。</div>
 </div>
 
-
-<div class="sec reveal">
-  <div class="sec-head"><span class="num">09</span><h2>局限与诚实披露</h2><span class="en">LIMITATIONS</span></div>
-  <div class="verify-box">
-    <h4>⚠️ 分析预测，非精确模型</h4>
-    <ul>
-      <li>LPR 受政策窗口、美联储降息进程、汇率波动、输入性通胀等外部变量影响，预测存在不确定性</li>
-      <li>分析框架的价值在于「把判断从经验变成可验证的逻辑链」，而非「精确预言」</li>
-      <li>蒙特卡洛模拟 θ（长期中枢）/κ（回复速度）为演示设定、非市场校准；σ 由 2019 改革后 LPR 序列近似估计——脚本可复现，结果仅演示精算方法</li>
-      <li>5Y 模拟更严格：θ=3.0%/κ=0.25/σ=0.22 均为叙事假设（基于地产政策定向引导 5Y 更快下行的预期），无一项由历史数据估计；θ5>θ1 仅为保证期限溢价为正、利差收敛不倒挂，非市场校准</li>
-      <li>数据截至 2026-08（含 8 月 LPR 报价与 2026Q2 净息差），后续数据发布可能改变判断</li>
-    </ul>
-  </div>
-</div>
-
-<div class="sec reveal">
-  <div class="sec-head"><span class="num">10</span><h2>数据来源与假设说明</h2><span class="en">DATA SOURCES</span></div>
-  <table>
-    <tr><th>数据类型</th><th>具体内容</th><th>来源/性质</th><th>说明</th></tr>
-    <tr><td><b>LPR历史数据</b></td><td>2019年8月改革以来1Y/5Y LPR报价序列</td><td><span style="color:#34d399">公开数据</span></td><td>中国人民银行官网每月20日公布，可直接核验</td></tr>
-    <tr><td><b>MLF利率</b></td><td>中期借贷便利操作利率</td><td><span style="color:#34d399">公开数据</span></td><td>央行公开市场操作公告，月度数据</td></tr>
-    <tr><td><b>银行净息差</b></td><td>商业银行净息差季度数据</td><td><span style="color:#34d399">公开数据</span></td><td>国家金融监督管理总局季度统计报告</td></tr>
-    <tr><td><b>社融/CPI</b></td><td>社会融资规模增量、CPI同比</td><td><span style="color:#34d399">公开数据</span></td><td>国家统计局月度发布</td></tr>
-    <tr><td><b>模型参数</b></td><td>Vasicek模型θ/κ/σ</td><td><span style="color:#fbbf24">演示设定</span></td><td>θ/κ为演示假设，σ由历史LPR序列近似估计，非市场校准</td></tr>
-    <tr><td><b>预测结果</b></td><td>未来LPR概率分布</td><td><span style="color:#fbbf24">模型输出</span></td><td>基于演示参数的模拟结果，不构成投资建议</td></tr>
-  </table>
-  <div class="quote" style="margin-top:14px"><b>数据时效：</b>所有公开数据截至2026年8月（含8月LPR报价与2026Q2净息差），后续数据发布可能改变分析结论。</div>
-</div>
 
 
 <script>
