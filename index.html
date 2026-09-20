@@ -1503,7 +1503,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     <div class="stat"><div class="v">5</div><div class="l">递进式作品</div></div>
     <div class="stat"><div class="v">4</div><div class="l">AI协作方法</div></div>
     <div class="stat"><div class="v">10K</div><div class="l">情景推演路径（蒙特卡洛模拟）</div></div>
-    <div class="stat"><div class="v">3</div><div class="l">可运行 Demo</div></div>
+    <div class="stat"><div class="v">4</div><div class="l">可运行 Demo</div></div>
   </div>
 </div>
 
@@ -1555,7 +1555,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     <div style="--cap-color:#fbbf24;--cap-glow:rgba(251,191,36,0.2);--cap-bg:rgba(251,191,36,0.08);background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 18px;text-align:center">
       <div style="font-size:22px;line-height:1">💰</div>
       <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">资金运营</div>
-      <div style="font-size:11px;color:var(--muted);line-height:1.6">smart 汽车 · SAP 资金模块 · 银团授信/外汇结算 · 资金头寸看板</div>
+      <div style="font-size:11px;color:var(--muted);line-height:1.6">smart（奔驰×吉利）· SAP 资金模块 · 银团授信/外汇结算 · 资金头寸看板</div>
     </div>
     <div style="--cap-color:#22d3ee;--cap-glow:rgba(34,211,238,0.2);--cap-bg:rgba(34,211,238,0.08);background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 18px;text-align:center">
       <div style="font-size:22px;line-height:1">🔍</div>
@@ -1601,7 +1601,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
       <div class="about-card">
         <h4>实习经历</h4>
         <p class="list">
-          <span><b>smart 汽车</b> · 资金方向：SAP 资金模块实操、银行对账、资金头寸、供应链融资、银行授信、外汇结算</span>
+          <span><b>smart（奔驰×吉利）</b> · 资金方向：SAP 资金模块实操、银行对账、资金头寸、供应链融资、银行授信、外汇结算</span>
           <span><b>Mazars 审计</b>：货币资金与往来款项测试、穿行测试、内控识别</span>
         </p>
       </div>
@@ -2191,9 +2191,9 @@ window.SmartReconAI = {
       { kw: ['双Agent','复核机制','协作体系','怎么运作','如何运作','multi-agent','多智能体','团队','豆包','2.1 Turbo','DeepSeek Harness','主力AI','复核AI','四角色'], reply: '我实践了一套"主力AI+复核AI"的双Agent复核机制：<br><br>① <b>主力AI提方案并执行</b>：任务拆解、方案设计、代码实现、文档撰写<br>② <b>复核AI独立审查</b>：不是检查，而是平等讨论——边界测试、根因分析、提出异议<br>③ <b>人在分歧点裁决</b>：两个AI有分歧时，人做最终决策<br>④ <b>每一次分歧都沉淀为规则</b>：写入强制规则和CI闸门，可追溯<br><br>比如主力AI三次"先push后复核"，复核AI发现违规后双AI讨论，落地了复核凭证+CI闸门，PR #1实证：不补凭证就合不进去。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
       { kw: ['复核凭证','CI闸门','闸门','批准基线'], reply: '复核凭证 = 批准基线的机读记录（REVIEW_STAMP.md），记录每次通过DeepSeek复核、允许合并的内容基线。CI闸门 = PR上自动比对最新批准基线，内容不一致直接红，合不进去。目前有13条批准基线+3条违规记录，PR #1已实证生效。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
       { kw: ['强制规则','体检','preflight','检查10','分支保护','几项检查'], reply: '防御体系包括：①4条强制规则（触发复核、先核实再动手、Windows文本编码、hotfix白名单）②10项preflight自动体检（第10项=图片完整性，防止二进制被当文本写坏）③CI闸门2步（preflight+凭证校验）④分支保护（禁止直推master，必须走PR）。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
-      { kw: ['作者','你是谁','胡凯','背景','个人','介绍'], reply: '作者胡凯，2001年生，浙江宁波人。教育：精算本科（惠灵顿维多利亚大学）+ 金融与投资学（专业会计方向）硕士（宁波诺丁汉大学，2025.09-2027.07）。实习：梅赛德斯-奔驰x吉利体系财务资金部（2026.05-至今）+ 中审众环审计（2025.12-2026.03）。定位：懂业务+懂数据+懂AI的财务数字化人才。<div class="tool-call">portfolio_kb → author ✓</div>' },
+      { kw: ['作者','你是谁','胡凯','背景','个人','介绍'], reply: '作者胡凯，2001年生，浙江宁波人。教育：精算本科（惠灵顿维多利亚大学）+ 金融与投资学（专业会计方向）硕士（宁波诺丁汉大学，2025.09-2027.07）。实习：smart（梅赛德斯-奔驰 × 吉利合资）财务资金部（2026.05-至今）+ 中审众环审计（2025.12-2026.03）。定位：懂业务+懂数据+懂AI的财务数字化人才。<div class="tool-call">portfolio_kb → author ✓</div>' },
       { kw: ['教育','学历','学校','大学','专业','硕士','本科'], reply: '教育背景：<br>• <b>硕士</b>：宁波诺丁汉大学，金融与投资学（专业会计方向），2025.09-2027.07<br>• <b>本科</b>：惠灵顿维多利亚大学，精算学<br><br>精算本科打下数学建模和风险量化基础，金融会计硕士补充财务和投资知识，形成"量化+财务"复合背景。<div class="tool-call">portfolio_kb → author ✓</div>' },
-      { kw: ['实习','工作','经历','smart','汽车','资金部','资金方向','资金运营','审计'], reply: '实习经历：<br>• <b>梅赛德斯-奔驰x吉利体系 财务资金部</b>（2026.05-至今）：独立负责子公司流动资金贷款全流程，运用SAP完成集团资金台账与多银行账户数据归集，参与集团银行授信、供应链融资、跨境付汇与外汇申报<br>• <b>中审众环 审计实习</b>（2025.12-2026.03）：使用Python开展财务数据清洗与指标波动归因分析，参与制造业、房地产、私募基金年报审计，独立负责货币资金、往来款、固定资产等核心科目底稿<br><br>这些实习中的观察和思考，是作品集所有作品的灵感来源。<div class="tool-call">portfolio_kb → author ✓</div>' },
+      { kw: ['实习','工作','经历','smart','汽车','资金部','资金方向','资金运营','审计'], reply: '实习经历：<br>• <b>smart（梅赛德斯-奔驰 × 吉利合资） 财务资金部</b>（2026.05-至今）：独立负责子公司流动资金贷款全流程，运用SAP完成集团资金台账与多银行账户数据归集，参与集团银行授信、供应链融资、跨境付汇与外汇申报<br>• <b>中审众环 审计实习</b>（2025.12-2026.03）：使用Python开展财务数据清洗与指标波动归因分析，参与制造业、房地产、私募基金年报审计，独立负责货币资金、往来款、固定资产等核心科目底稿<br><br>这些实习中的观察和思考，是作品集所有作品的灵感来源。<div class="tool-call">portfolio_kb → author ✓</div>' },
       { kw: ['技能','能力','会什么','技术栈','工具','python','sql','sap'], reply: '核心技能：<br>• <b>财务专业</b>：资金管理、财务报表、审计底稿、SOX内控、精算建模<br>• <b>数据工具</b>：Python(Pandas/NumPy/Matplotlib)、SQL、Excel高级函数、SAP<br>• <b>AI应用</b>：大语言模型API调用、Agent工作流设计、RAG检索增强、提示词工程<br>• <b>建模能力</b>：蒙特卡洛模拟、均值回归模型(Vasicek)、现金流压力测试、统计抽样法（属性抽样）<br><br>技术栈：原生HTML+CSS+JS、ECharts可视化、DeepSeek API、多Agent协作体系。<div class="tool-call">portfolio_kb → techStack ✓</div>' },
       { kw: ['求职','方向','目标','岗位','职业','规划','找工作'], reply: '求职方向：2027届秋招，聚焦财务数字化、资金管理、AI+财务复合岗位。目标岗位：字节跳动RFT AI Builder、京东JDS管培生（财务/资金方向）、美的/比亚迪财务数字化/资金岗、银行资金运营/国际财税。<br><br>职业规划：短期成为"懂业务+懂数据+懂AI"的复合型财务人才，长期探索AI在财务领域的深度应用。<div class="tool-call">portfolio_kb → purpose ✓</div>' },
       { kw: ['为什么','做这个','动机','初衷','想法','来源'], reply: '这个作品集的所有作品，都来自实习中的观察和深度思考。比如：<br>• 在Smart做资金实习时，发现现金流预测靠Excel手动调整，于是做了现金流压力测试模型<br>• 看到公司贷款定价参考LPR，于是研究LPR走势预测和融资成本压力测试<br>• 审计实习时发现抽样靠经验判断，于是做了SOX统计抽样法（属性抽样）工具<br><br>我是实习生，这些作品没有落地到公司实际业务中，但体现了我从业务问题出发、用数据和AI工具尝试解决问题的思考过程。<div class="tool-call">portfolio_kb → purpose ✓</div>' },
@@ -2688,7 +2688,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   var interviewQuestions=[
     '请介绍一下你最得意的作品——集团现金流压力测试系统，它解决了什么实际业务问题？',
     '你的精算背景在财务工作中具体怎么体现？举一个用精算方法解决财务问题的例子。',
-    '在smart汽车财务资金部实习中，你接触了SAP资金模块，你觉得AI可以在哪些环节提升资金运营效率？',
+    '在smart（奔驰×吉利）财务资金部实习中，你接触了SAP资金模块，你觉得AI可以在哪些环节提升资金运营效率？',
     '你设计的双Agent复核机制中，DeepSeek作为复核AI具体做什么？为什么需要这个角色？',
     '如果让你用AI改进企业的月度结账流程，你会从哪里入手？请说说你的思路。',
     '你的作品集里有LPR利率预测和现金流压力测试，这两个项目在方法论上有什么共通之处？',
