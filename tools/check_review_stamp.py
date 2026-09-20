@@ -35,13 +35,12 @@ def main():
         print("❌ 凭证里的commit %s不存在（可能被rebase掉了）" % approved)
         sys.exit(1)
 
-    # 内容相等判据：忽略REVIEW_STAMP.md自身
-    d = subprocess.run(
-        ["git", "diff", "--quiet", approved, "HEAD", "--", ".", ":(exclude)REVIEW_STAMP.md"]
-    )
+    # 内容相等判据：忽略复核元数据（凭证自身 + 复核报告）
+    EXCL = [":(exclude)REVIEW_STAMP.md", ":(exclude)REVIEW_REPORT*.md"]
+    d = subprocess.run(["git", "diff", "--quiet", approved, "HEAD", "--", "."] + EXCL)
     if d.returncode != 0:
         print("❌ 当前内容与已复核的内容（%s）不一致 → 禁止合并：" % approved[:7])
-        print(sh("git", "diff", "--stat", approved, "HEAD", "--", ".", ":(exclude)REVIEW_STAMP.md"))
+        print(sh(*(("git", "diff", "--stat", approved, "HEAD", "--", ".") + tuple(EXCL))))
         sys.exit(1)
 
     print("✅ 复核凭证有效（内容 = %s）" % approved[:7])

@@ -126,7 +126,7 @@ def check_encoding_garbled():
          ① 必须带 -c core.quotepath=false：否则中文文件名会被转义成 "demo/\344..."，
             不以 .html 结尾 → 被 endswith 静默漏掉（实测：默认模式只能扫到 105/147 个文件，
             漏掉的 42 个恰好是 demo/ 与 versions/ 里的中文名文件——本检查的主要目标）
-         ② 用 git ls-files 枚举 → 天然排除未跟踪的复核报告（它们也含特征字表）
+         ② 用 git ls-files 枚举 + 显式跳过 REVIEW_REPORT*.md（报告里故意含乱码样本作证据）
          ③ 排除本文件自身 → 本文件含特征字表字面量与 ?/div> 注释，否则必然自命中
          ④ 多字序列必须整串匹配，不能拆成单字（会误报，如『滑』）
     """
@@ -140,7 +140,9 @@ def check_encoding_garbled():
                              text=True, encoding="utf-8", errors="replace").stdout.split("\n")
     errors = []
     for f in [x.strip() for x in listing if x.strip().endswith(exts)]:
-        if f == "tools/preflight.py":
+        base = f.rsplit("/", 1)[-1]
+        # 复核报告会「故意引用乱码样本」作为事故证据（如 锛?銆?…）→ 必然自命中，加入白名单
+        if f == "tools/preflight.py" or (base.startswith("REVIEW_REPORT") and base.endswith(".md")):
             continue
         try:
             text = open(HTML_FILE.parent / f, encoding="utf-8").read()

@@ -1,4 +1,4 @@
-# 临时文件
+﻿# 临时文件
 *.tmp
 *.bak
 *.pyc
@@ -16,8 +16,10 @@ desktop.ini
 *.swp
 *.swo
 
-# 复核报告（本地生成，不提交）
+# 复核报告：只提交这两个规范文件（历史/临时报告仍不提交）
 REVIEW_REPORT*.md
+!REVIEW_REPORT_v6.md
+!REVIEW_REPORT_ACTIONS.md
 REFLECTION*.md
 
 # 本地预览
