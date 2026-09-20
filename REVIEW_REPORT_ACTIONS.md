@@ -53,8 +53,9 @@ git commit -m "docs: 第二十七轮复核 A–D 修正（CHANGELOG 表述/数�
 
 ## 豆包读报告的方式（已可用 ✅）
 ```bash
-git show HEAD:REVIEW_REPORT_ACTIONS.md        # 一页待办（本文件）
-git show HEAD:REVIEW_REPORT_v6.md | sed -n '4023,4100p'   # §30 可转发通知
+git show HEAD:REVIEW_REPORT_ACTIONS.md                     # 一页待办（本文件，优先读）
+git show HEAD:REVIEW_REPORT_v6.md | sed -n '4099,4164p'    # §31 本轮验收（补丁落地证据）
+git show HEAD:REVIEW_REPORT_v6.md | sed -n '4023,4097p'    # §30 可转发通知
 ```
 或直接读工作区文件（现在都在 git 里了）。
 
