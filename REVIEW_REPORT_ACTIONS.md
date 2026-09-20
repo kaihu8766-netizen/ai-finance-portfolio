@@ -53,7 +53,7 @@ git push origin feature/business-overhaul-v2
 ## 豆包读报告（已可用 ✅ —— 报告已进 git 且被闸门豁免）
 ```bash
 git show HEAD:REVIEW_REPORT_ACTIONS.md                     # 一页待办（本文件，优先读）
-git show HEAD:REVIEW_REPORT_v6.md | sed -n '4166,4230p'    # §32 本轮最终验收
+git show HEAD:REVIEW_REPORT_v6.md | sed -n '4155,4210p'    # §32 本轮最终验收
 git show HEAD:REVIEW_REPORT_v6.md | sed -n '4099,4164p'    # §31 补丁落地证据
 ```
 

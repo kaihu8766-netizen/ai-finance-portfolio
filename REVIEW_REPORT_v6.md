@@ -4210,12 +4210,7 @@ git push origin feature/business-overhaul-v2   # 推分支不需要额外批准
 ---
 
 *本报告由复核AI（DeepSeek Harness）生成，**第二十九轮（§32 = `814f782` 合并前最终验收 —— ✅ 通过，批准基线 `814f782`）**；报告已进版本控制且被闸门豁免。*
-*§23 基线 `7ba68cd`；§23.10 基线 `6d4383d`；§23.11 基线 `30606ed`；§23.12 基线 `bab8f3a`；**§23.13 基线 `HEAD = 9c48bf6`** —— 分支 `feature/dual-agent-collab`，未 push；`origin/master = 72e396c`。*
-*§23 复跑：`preflight` exit 0；`coverage_test` exit 0（37 题）；18 题探针越界 **15/18**。*
-*§23.10 复跑：`preflight` exit 0；`coverage_test` exit 0（37 题）；`check_review_stamp` exit 0（**假绿**，见 §23.10.2）；探针越界 **4/18**。*
-*§23.11 复跑：`preflight` exit 0；`coverage_test` exit 0（37 题，4 条断言没进 `TESTS`）；`check_review_stamp` exit 1（正确变红）；探针越界 **4/18**、劫持全恢复；图标 PNG 逐 chunk CRC 全过、内嵌 base64 与 `assets/` 逐字节一致。*
-*§23.12 复跑：`preflight` exit 0；`coverage_test` exit 0（37 题，非 41）→ **❌ 不通过**。*
-*§23.13 复跑：`preflight` **exit 0**；`coverage_test` **exit 0（41 题全绿：5/5 + 11/11 + 25/25）**；`check_review_stamp` **exit 1**（正确变红，无提前批准行）；探针越界 **4/18**、劫持全保持恢复 → **✅ 通过**。*
-*§24（读信）基线：`HEAD = e47d0d1`（PR #3 已合并）+ **工作区未提交改动**（`index.html` +227/−56、`DUAL_AGENT_DISCUSSION.md` +107）；工作区 `preflight` **exit 0**、`coverage_test` **exit 0（41 题全绿）**；`REVIEW_STAMP.md` = **13 行批准 + 3 条违规**、最新批准行 `9c48bf6`（第二十四轮）。*
-*§25（报告可见性）基线同 §24；实测：`git check-ignore` 命中 `.gitignore:20`、`git ls-files` 无报告、`:(exclude)REVIEW_REPORT*.md` 排除生效（临时 `add -f` → 已 `reset` 复原）、pre-push 豁免判据在 4 个真实 commit 上结论正确。**§25 的 `hooks/pre-push` 补丁无法在沙箱内整段执行（不能跑 bash）**，已用等价命令 + 等价过滤验证。*
-*本轮分析用临时脚本（`_r24*.py` / `_r24p4.js` / `_r25*.py`）已全部删除，`git status` 干净（只剩你未提交的 `index.html` / `DUAL_AGENT_DISCUSSION.md`，那是你的改动，我没有碰）。*
+*基线一览（各章）：§23 `7ba68cd`（第二十四轮·`e09043b` 全量复核）｜§23.10 `6d4383d`｜§23.11 `30606ed`｜§23.12 `bab8f3a`｜§23.13 `9c48bf6`（第二十四轮 ✅ 通过，已合并）｜§24 读信（`e47d0d1` + 工作区）｜§26 `ebda712`（第二十五轮 ❌）｜§28 `45a22c5`（第二十六轮 ❌）｜§29 `e82113f`（第二十七轮：站点 ✅ / 文档 ❌）｜§31 `3164895`+`ef2b930`（第二十八轮：补丁 5/5 ✅）｜**§32 `814f782`（第二十九轮 ✅ 通过，批准基线）**。*
+*各轮复跑留档：§23 `preflight` 0 / `coverage` 0（37 题）；§23.10 `check_review_stamp` **0（假绿）**；§23.11–§23.12 `coverage` 37 题（4 条断言未进 `TESTS`，§23.12 ❌）；§23.13 `coverage` **41 题（5/5 + 11/11 + 25/25）** ✅；§26 起 `coverage` 41 题全绿、`check_review_stamp` 转为 **1（正确红）**；**§32 复跑：`preflight` 0、`coverage` 0（41 题全绿）、`check_review_stamp` 1（正确红）、内联脚本 14 块 `node --check` 全过、逐页编号全连续、局限/数据来源各 5 篇**。*
+*分析用临时脚本（`_r24*` / `_r25*` / `_r26*` / `_r27*` / `_v*.js|py` / `_jscheck.py` / `_pages.py` / `_final.py` 等）均已删除；`git status` 干净。*
+*本报告已进版本控制（`REVIEW_REPORT_v6.md` / `REVIEW_REPORT_ACTIONS.md`，由 `ef2b930` 入库），并已从闸门判据中豁免（`3164895`：`check_review_stamp.py` / `preflight.py` 检查8 / `pre-push` / `.gitignore`）。*
