@@ -4096,7 +4096,63 @@ git commit -m "docs: 复核报告入库（§23–§30）"
 
 ---
 
-*本报告由复核AI（DeepSeek Harness）生成，**第二十七轮（§29 = `e82113f` 验收：站点 ✅ / 文档 ❌；§30 = 给豆包的可转发通知）**，**未提交、未 push**；不在版本控制内（`.gitignore` = `REVIEW_REPORT*.md`）。*
+## §31 第二十八轮复核：`3164895`+`ef2b930`（可见性根治）+ A–D 文档修正（**工作区未提交**）—— **补丁 ✅ 全部落地；只差把 A–D 提交**
+
+> 你问的两件事：**① 补丁有没有落地 —— 5 处全部落地，而且逐条实测有效 ✅；② 复核 —— 站点 ✅、A–D 内容 ✅（但还没提交）。**
+
+### 31.1 ✅ §27 五处补丁：**全部落地，逐条实测通过**
+
+| # | 补丁 | 落地情况 | 我的实测 |
+|---|---|---|---|
+| ① | `tools/check_review_stamp.py` 判据加 `:(exclude)REVIEW_REPORT*.md` | ✅ 与补丁**逐字一致**（`EXCL` 列表 + 两处调用） | `python tools/check_review_stamp.py` → **exit 1**（业务化改造尚未批准，正确），且**输出里已不含任何 `REVIEW_REPORT*.md`** → 排除生效 ✅ |
+| ② | `tools/preflight.py` 检查8 白名单（+ `:129` 注释同步） | ✅ 逐字一致 | **关键实测**：报告现在**已被 git 跟踪**，`preflight` 仍 **exit 0** → 白名单确实拦住了"报告自命中乱码"这条误报 ✅（不加这处必红） |
+| ③ | `hooks/pre-push` 元数据豁免 | ✅ 逐字一致 | 用等价判据复现（见 31.2）：报告-only commit **放行** ✅、凭证-only commit **放行** ✅、产品 commit **仍需批准** ✅、报告+产品混提交 **仍需批准** ✅ |
+| ④ | `.gitignore` 白名单 | ✅ 三行形式一致 | `git check-ignore -v`：`REVIEW_REPORT_v6.md` / `REVIEW_REPORT_ACTIONS.md` **不再被忽略** ✅；`REVIEW_REPORT.md` / `_v5.md` **仍被忽略** ✅ |
+| ⑤ | 旧 `REVIEW_REPORT.md` | ✅ 已改成一行指针："已废弃 → 最新见 REVIEW_REPORT_v6.md（历史 _v4/_v5），待办见 REVIEW_REPORT_ACTIONS.md。" | ✅ |
+
+**目标已达成**：`git ls-files` 里出现了 `REVIEW_REPORT_ACTIONS.md` 与 `REVIEW_REPORT_v6.md` → **报告进 git 了**，你（豆包）现在可以直接 `git show HEAD:REVIEW_REPORT_v6.md` 读到我的报告，不再靠转发 ✅
+**而且入库版本 = 我的最新版本**：`git diff HEAD -- REVIEW_REPORT_v6.md REVIEW_REPORT_ACTIONS.md` → **空**（说明 `ef2b930` 提交的就是我当前这份，没有提交到旧快照）✅
+
+### 31.2 pre-push 判据等价复现（沙箱不能跑 bash，故用等价命令验证）
+
+```
+3164895   files=[.gitignore, hooks/pre-push, tools/check_review_stamp.py, tools/preflight.py] -> 仍需批准记录   ✅（产品内容）
+ef2b930   files=[REVIEW_REPORT_ACTIONS.md, REVIEW_REPORT_v6.md]                              -> 跳过批准检查  ✅
+8551b1a   files=[REVIEW_STAMP.md]                                                            -> 跳过批准检查  ✅
+e82113f   files=[CHANGELOG.md, index.html]                                                   -> 仍需批准记录   ✅
+9c48bf6   files=[PROJECT_BRIEF.md, index.html, tools/coverage_test.js]                        -> 仍需批准记录   ✅
+合成：只提交报告 -> 放行 ✅ ｜ 只提交凭证 -> 放行 ✅ ｜ 报告+产品混提交 -> 仍需批准 ✅（不会放松产品闸门）
+```
+> ⚠️ 仍请**真机 `git push` 一次**确认（我没有 bash，只能等价验证）。
+
+### 31.3 ✅ A–D 四处文档修正：内容全部正确，**但在工作区、尚未提交**
+
+`git status` 显示 `M CHANGELOG.md`、`M index.html`（共 5 行改动），我逐行核对：
+
+| # | 现在的写法 | 判定 |
+|---|---|---|
+| A | `CHANGELOG:10` → `- **page-01/05/06**：新增"摘要：结论先行"第一屏（page-03/07 待补）` | ✅ **已与事实一致**（不再谎称"全站统一"） |
+| B | `CHANGELOG:22` → `- preflight 10 项全通过（含图片完整性、乱码扫描、.wrap 结构）` | ✅ 已改成可对应的事实 |
+| C | `CHANGELOG:254` → `24轮复核/13条批准基线/10+2自动检查CI闸门` | ✅ 已同步 |
+| D | `index.html:2150` KB `versions` 尾：`→ v5.5.0 业务化大改造（5作品改为业务叙事：摘要→痛点→洞察→应用→技术→局限）+全站措辞业务化+双Agent协作展示(当前)`；`:2190` 话术尾：`→v5.5.0 业务化大改造+全站措辞业务化。` | ✅ 描述已与版本号匹配，不再是"第四轮复核修复" |
+
+**工作区其它状态复核（都过）**：内联脚本 **14 块全部 `node --check` 通过** ✅ · 逐页编号全部 `01..N` 连续（局限/数据来源 **各 5 篇**）✅ · `coverage_test` **exit 0（41 题全绿）** ✅ · `preflight` **exit 0** ✅ · `check_review_stamp` **exit 1**（正确红）✅
+
+### 31.4 🟢 新发现的两个小瑕疵（P2，不阻塞）
+
+1. **`.gitignore` 被写入了 BOM**（首字节 `efbbbf`）—— 这一版补丁把首行 `# 临时文件` 变成了 `\ufeff# 临时文件`。首行是注释，**功能上无影响**（我实测 `git check-ignore` 各条规则都正常），但属于编码卫生问题，建议去掉 BOM（`CHANGELOG.md` 也带 BOM，是既有的）。**根因仍是"用 PowerShell 回写文本文件"**（强制规则3 禁止）——建议这四处补丁的编辑也走 Python `io.open(..., newline='')`。
+2. **KB `versions` 列表跳过了 v5.4.0**：`… → v5.3.3 手机端media适配+preflight体检工具+iframe竞态修复 → v5.5.0 业务化大改造…`，中间的 **v5.4.0（双Agent复核机制）** 没有；话术 `:2190` 还把"双Agent复核机制"标成 **v5.0**（实际是 v5.4.0）。属既有小瑕疵，顺手改更整齐。
+
+### 31.5 下一步（就差一件事）
+
+1. **把 A–D 提交**（`git add CHANGELOG.md index.html && git commit -m "docs: 第二十七轮复核 A–D 修正（CHANGELOG 表述/数字、KB 版本描述）"`）
+2. （可选，同批）清掉 `.gitignore` 的 BOM；修 KB versions 缺 v5.4.0 / 话术 v5.0 标注
+3. 提交后**把 sha 告诉我** → 我复验这 4 处 + 跑 4 项检查 → **我来写 `REVIEW_STAMP.md` 的批准记录**（写那个 sha）→ CI 转绿 → 你 push / 开 PR / 合并
+4. 之后：**报告已进 git 且被闸门豁免** → 我每轮可以直接更新并提交报告，不会再影响 CI，你也能随时读到
+
+---
+
+*本报告由复核AI（DeepSeek Harness）生成，**第二十八轮（§31 = `3164895`+`ef2b930` 补丁落地验收 + A–D 核对 —— 补丁 ✅ 全过；只差提交）**，**未提交、未 push**；报告已进版本控制（`REVIEW_REPORT_v6.md` / `REVIEW_REPORT_ACTIONS.md` 由 `ef2b930` 入库，且闸门已豁免）。*
 *§23 基线 `7ba68cd`；§23.10 基线 `6d4383d`；§23.11 基线 `30606ed`；§23.12 基线 `bab8f3a`；**§23.13 基线 `HEAD = 9c48bf6`** —— 分支 `feature/dual-agent-collab`，未 push；`origin/master = 72e396c`。*
 *§23 复跑：`preflight` exit 0；`coverage_test` exit 0（37 题）；18 题探针越界 **15/18**。*
 *§23.10 复跑：`preflight` exit 0；`coverage_test` exit 0（37 题）；`check_review_stamp` exit 0（**假绿**，见 §23.10.2）；探针越界 **4/18**。*
