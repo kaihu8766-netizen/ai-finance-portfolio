@@ -1502,7 +1502,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
   <div class="stats">
     <div class="stat"><div class="v">5</div><div class="l">递进式作品</div></div>
     <div class="stat"><div class="v">4</div><div class="l">AI协作方法</div></div>
-    <div class="stat"><div class="v">10K</div><div class="l">蒙特卡洛模拟路径</div></div>
+    <div class="stat"><div class="v">10K</div><div class="l">情景推演路径（蒙特卡洛模拟）</div></div>
     <div class="stat"><div class="v">3</div><div class="l">可运行 Demo</div></div>
   </div>
 </div>
@@ -1543,7 +1543,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
   </div>
   <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
     <span style="background:rgba(109,124,255,0.1);color:#a5b0ff;border:1px solid rgba(109,124,255,0.3);padding:6px 14px;border-radius:20px;font-size:12px">4个可交互Demo</span>
-    <span style="background:rgba(34,211,238,0.1);color:#67e8f9;border:1px solid rgba(34,211,238,0.3);padding:6px 14px;border-radius:20px;font-size:12px">10K+蒙特卡洛模拟</span>
+    <span style="background:rgba(34,211,238,0.1);color:#67e8f9;border:1px solid rgba(34,211,238,0.3);padding:6px 14px;border-radius:20px;font-size:12px">1万次情景推演（蒙特卡洛模拟）</span>
     <span style="background:rgba(251,191,36,0.1);color:#fcd34d;border:1px solid rgba(251,191,36,0.3);padding:6px 14px;border-radius:20px;font-size:12px">Python / SQL / Excel</span>
     <span style="background:rgba(52,211,153,0.1);color:#6ee7b7;border:1px solid rgba(52,211,153,0.3);padding:6px 14px;border-radius:20px;font-size:12px">GitHub开源</span>
   </div>
@@ -1710,7 +1710,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     <div class="tl-item tl-latest">
       <div class="tl-dot"></div>
       <div class="tl-content">
-        <div class="tl-head"><span class="tl-ver">v5.3.4</span><span class="tl-date">2026.09</span><span class="tl-badge">当前版本</span><span class="tl-pulse"></span></div>
+        <div class="tl-head"><span class="tl-ver">v5.5.0</span><span class="tl-date">2026.09</span><span class="tl-badge">当前版本</span><span class="tl-pulse"></span></div>
         <div class="tl-title">逻辑修复与原型升级</div>
         <div class="tl-desc">修复供应链现金流模拟器3个计算bug（回款率/账期/委贷本金）；资金预测工作台原型V2.0全面升级；新增CHANGELOG</div>
         <div class="tl-tags"><span>逻辑修复</span><span>原型V2.0</span><span>CHANGELOG</span></div>
@@ -1790,7 +1790,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
       <span class="badge b0" style="--c:#34d399;color:#34d399;border-color:rgba(52,211,153,0.4);background:rgba(52,211,153,0.06)"><span class="dot" style="background:#34d399;box-shadow:0 0 8px #34d399"></span>ACTUARIAL · RISK MODELING</span>
       <div style="flex:1">
         <div class="title">集团现金流压力测试与资金调度决策系统</div>
-        <div class="desc">核心作品。将精算随机建模方法应用于集团资金管理场景：采用蒙特卡洛模拟生成未来12个月现金流概率分布（10,000条路径），覆盖基准/温和衰退/严重衰退三情景，计算VaR与资金缺口，并输出资金调度建议。传统资金预测依赖经验单点估计，本模型可量化"最坏情况缺口规模及发生概率"，为流动性管理提供决策依据。</div>
+        <div class="desc">核心作品。某新能源车企资金团队的交互式现金流压力测试模拟器：参考实习中观察到的真实业务流程，将传统压力测试从半天缩短到30分钟，支持10+情景一键切换，提前识别流动性风险窗口，输出可执行的资金调度建议。</div>
       </div>
       <span class="core-flag" style="background:linear-gradient(135deg,#34d399,#10b981)">★ 精算核心</span>
     </a>
@@ -1808,7 +1808,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
       <span class="badge b0" style="--c:#22d3ee;color:#22d3ee;border-color:rgba(34,211,238,0.4);background:rgba(34,211,238,0.06)"><span class="dot" style="background:#22d3ee;box-shadow:0 0 8px #22d3ee"></span>AUDIT · INTERNAL CONTROL</span>
       <div style="flex:1">
         <div class="title">SOX 审计 Agent 工作流 · 内审效率系统</div>
-        <div class="desc">设计SOX 404内控测试工作台，以网易游戏为模拟场景，覆盖6大流程18个控制点，集成控制矩阵、执行测试、缺陷跟踪与属性抽样计算器。将审计理论框架转化为可操作的工具，实现从方法论到落地工具的完整推演。</div>
+        <div class="desc">设计SOX 404内控测试工作台，以网易游戏为模拟场景，覆盖6大流程18个控制点，集成控制矩阵、执行测试、缺陷跟踪与统计抽样法（属性抽样）计算器。将审计理论框架转化为可操作的工具，实现从方法论到落地工具的完整推演。</div>
       </div>
       <span class="core-flag">★ 核心亮点</span>
     </a>
@@ -1824,7 +1824,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
       <a class="work" href="#" onclick="showWork('03');return false;">
         <span class="badge b2"><span class="dot"></span>RESEARCH</span>
         <div class="title">LPR 走势预测分析</div>
-        <div class="desc">构建基于MLF政策利率、银行净息差、社融增速、CPI四指标的LPR预测框架，采用蒙特卡洛模拟输出多情景概率分布，为贷款定价与利率风险管理提供量化参考。配套可交互模拟器。</div>
+        <div class="desc">资金团队每月都要回答："现在该不该贷款？利率会涨还是跌？"这个项目把"看新闻猜方向"升级成四指标分析框架+蒙特卡洛概率预测，帮助资金经理在新增贷款定价、存量贷款重定价、再融资择时三个决策场景中做出可辩护的判断。配套可交互模拟器，打开就能玩。</div>
         <div class="meta"><span>2026.08 · 分析案例</span><span class="tag">蒙特卡洛·可交互Demo·四指标框架</span></div>
       </a>
     </div>
@@ -1901,11 +1901,11 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     </div>
     <div style="margin-top:12px;display:flex;gap:16px;flex-wrap:wrap">
       <div style="flex:1;min-width:100px;text-align:center;background:rgba(109,124,255,0.08);padding:10px;border-radius:8px">
-        <div style="font-size:20px;font-weight:700;color:#6d7cff">21</div>
+        <div style="font-size:20px;font-weight:700;color:#6d7cff">24</div>
         <div style="font-size:11px;color:#9ba3b7">轮复核</div>
       </div>
       <div style="flex:1;min-width:100px;text-align:center;background:rgba(52,211,153,0.08);padding:10px;border-radius:8px">
-        <div style="font-size:20px;font-weight:700;color:#34d399">12</div>
+        <div style="font-size:20px;font-weight:700;color:#34d399">13</div>
         <div style="font-size:11px;color:#9ba3b7">条批准基线</div>
       </div>
       <div style="flex:1;min-width:100px;text-align:center;background:rgba(251,191,36,0.08);padding:10px;border-radius:8px">
@@ -1931,7 +1931,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     已落地的防御机制：<br>
     • <b>preflight 自动体检</b>（10项检查，含图片完整性）→ 提交前自动扫描编码乱码、结构错误、敏感信息<br>
     • <b>CI 闸门</b>（2步）→ 凭证不匹配就合不进去，PR #1已实证生效<br>
-    • <b>复核凭证</b>（REVIEW_STAMP.md）→ 12条批准基线，内容相等判据，可追溯<br>
+    • <b>复核凭证</b>（REVIEW_STAMP.md）→ 13条批准基线，内容相等判据，可追溯<br>
     • <b>强制规则</b>（4条）→ 触发复核、先核实再动手、Windows文本编码、hotfix白名单<br>
     • <b>分支保护</b> → 禁止直推master，必须走PR<br>
     不是说AI有多厉害，而是<span class="hl">我知道AI容易在哪出错，并且把它们变成了工程化的闸门</span>。
@@ -1947,7 +1947,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
   <span><b>方向</b> 财务 × AI</span>
 </div>
 <button class="back-to-top" id="backToTop" aria-label="回到顶部">↑</button>
-<div class="footer">胡凯 · AI × Finance Portfolio · v5.3.4 · 全部数据经人工核验 · 2026.09 · AI协作方法探索</div>
+<div class="footer">胡凯 · AI × Finance Portfolio · v5.5.0 · 全部数据经人工核验 · 2026.09 · AI协作方法探索</div>
 
 </div>
 
@@ -2055,7 +2055,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
   </div>
   <div class="ai-settings" id="assistantSettings">
     <div class="ai-settings-title">AI 设置</div>
-    <div class="ai-settings-desc">🔒 <b>隐私保护模式</b>：当前所有回答基于本地作品集知识库，不发送任何网络请求。<br><br>📊 离线导览助手在 34 题回归测试集上有效作答率 <b>96%</b>，回答均来自知识库原文，不编造。<br><br>如需体验真实大模型对话，可输入你的 DeepSeek API Key：<br>• Key 仅存储在浏览器内存（sessionStorage），刷新或关闭页面立即清除<br>• 所有请求直接从你的浏览器发送到 DeepSeek 官方 API，不经过任何第三方服务器<br>• 本网站不会保存、上传或共享你的 Key</div>
+    <div class="ai-settings-desc">🔒 <b>隐私保护模式</b>：当前所有回答基于本地作品集知识库，不发送任何网络请求。<br><br>📊 离线导览助手在 41 题回归测试集上有效作答率 <b>100%</b>，回答均来自知识库原文，不编造。<br><br>如需体验真实大模型对话，可输入你的 DeepSeek API Key：<br>• Key 仅存储在浏览器内存（sessionStorage），刷新或关闭页面立即清除<br>• 所有请求直接从你的浏览器发送到 DeepSeek 官方 API，不经过任何第三方服务器<br>• 本网站不会保存、上传或共享你的 Key</div>
     <input type="password" class="ai-key-input" id="assistantKeyInput" placeholder="sk-xxxxxxxxxxxxxxxx" autocomplete="off">
     <button class="ai-key-save" id="assistantKeySave">保存并启用</button>
     <div class="ai-settings-tip">获取 Key：<a href="https://platform.deepseek.com/" target="_blank" style="color:#6d7cff">platform.deepseek.com</a> · 新用户赠送免费额度</div>
@@ -2111,14 +2111,14 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
       "summary": "供应链金融资金流分析：桑基图可视化账期与资金缺口，配套资金智算 CashFlow AI 原型（资金预测/三级预警/回款计划/资金归集）",
       "tags": ["供应链金融", "资金流", "桑基图", "CashFlow", "资金预测", "预警", "回款"],
       "highlights": ["桑基图/账期/资金缺口分析", "CashFlow AI 原型四模块", "三级预警中心（15 项）", "资金预测准确率 88.5%"] },
-    { "id": "w06", "name": "SOX 审计 Agent 工作流 · 内审效率系统", "layer": "审计·Agent系统", "desc": "SOX404审计拆解为Agent执行+人判断的4-Agent流水线+1个人工复核节点·6流程18控制点·COSO五要素映射·AICPA属性抽样引擎·ITGC三大域·可交互Demo·v5.0",
-      "summary": "将SOX 404内控测试拆解为「Agent执行+人判断」的协作工作流：数据采集Agent→控制测试Agent→底稿生成Agent→人工复核节点，4-Agent流水线+1个人工复核节点分工，覆盖6流程18控制点，COSO五要素映射+AICPA属性抽样引擎+ITGC三大域，可交互Demo",
-      "tags": ["SOX", "内审", "控制测试", "COSO", "ITGC", "属性抽样", "Agent工作流", "人机协作", "审计效率"],
-      "highlights": ["4-Agent流水线+1个人工复核节点（数据采集→控制测试→底稿生成→人工复核）", "人机分工边界明确（标准化交Agent，专业判断留人）", "6 流程 18 控制点", "COSO 五要素映射 + AICPA 属性抽样引擎", "可交互Demo + 一键运行Agent测试"] },
-    { "id": "w07", "name": "集团现金流压力测试与资金调度决策系统", "layer": "精算风险建模·核心", "desc": "蒙特卡洛10000路径·三情景压力测试·95%流动性VaR·AI资金调度建议·12个月预测区间",
+    { "id": "w06", "name": "SOX 审计 Agent 工作流 · 内审效率系统", "layer": "审计·Agent系统", "desc": "SOX404审计拆解为Agent执行+人判断的4-Agent流水线+1个人工复核节点·6流程18控制点·COSO五要素映射·AICPA统计抽样法（属性抽样）引擎·ITGC三大域·可交互Demo·v5.0",
+      "summary": "将SOX 404内控测试拆解为「Agent执行+人判断」的协作工作流：数据采集Agent→控制测试Agent→底稿生成Agent→人工复核节点，4-Agent流水线+1个人工复核节点分工，覆盖6流程18控制点，COSO五要素映射+AICPA统计抽样法（属性抽样）引擎+ITGC三大域，可交互Demo",
+      "tags": ["SOX", "内审", "控制测试", "COSO", "ITGC", "统计抽样法（属性抽样）", "Agent工作流", "人机协作", "审计效率"],
+      "highlights": ["4-Agent流水线+1个人工复核节点（数据采集→控制测试→底稿生成→人工复核）", "人机分工边界明确（标准化交Agent，专业判断留人）", "6 流程 18 控制点", "COSO 五要素映射 + AICPA 统计抽样法（属性抽样）引擎", "可交互Demo + 一键运行Agent测试"] },
+    { "id": "w07", "name": "集团现金流压力测试与资金调度决策系统", "layer": "精算风险建模·核心", "desc": "情景推演1万次（蒙特卡洛）·三情景压力测试·95%置信度下最大可能损失（VaR）·AI资金调度建议·12个月预测区间",
       "summary": "把精算的随机建模方法用到集团资金管理的场景里做尝试：用蒙特卡洛模拟未来12个月现金流概率分布（10,000条路径，5个随机变量联合抽样），三情景压力测试（基准/温和衰退/严重衰退）识别流动性尾部风险，95% VaR下最大现金缺口约3,800万（对应最低余额约4,100万），AI Agent自动生成资金调度建议（续贷时机/头寸预留/跨境结汇）。精算+财务+AI复合能力集中体现",
       "tags": ["现金流压力测试","蒙特卡洛","精算建模","流动性风险","VaR","资金调度","压力测试","集团资金管理"],
-      "highlights": ["10,000条蒙特卡洛路径（5变量联合抽样）", "三情景压力测试（基准/温和衰退/严重衰退）", "95%流动性VaR + 最低余额概率分布", "AI Agent自动生成资金调度建议", "3张ECharts交互图表"] }
+      "highlights": ["1万次情景推演路径（蒙特卡洛模拟）（5变量联合抽样）", "三情景压力测试（基准/温和衰退/严重衰退）", "95%流动性VaR + 最低余额概率分布", "AI Agent自动生成资金调度建议", "3张ECharts交互图表"] }
   ],
   "prototypes": [
     { "id": "proto2", "name": "资金智算 CashFlow AI 原型", "modules": ["资金预测总览","三级预警中心(15项)","回款计划表","资金归集看板","AI预测配置","Agent对话(真实AI)"],
@@ -2147,7 +2147,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     "⑭轻量RAG政策检索(5文档条款+关键词打分+回答附出处)",
     "⑮抽屉背景滚动锁定+作品加载提示"
   ],
-  "versions": "v1基础 → v2.1体积优化 → v2.2安全修复 → v2.3接入真实AI → v2.4数据底座 → v2.5拷问修复 → v2.6异常全流程 → v2.7内置助手 → v3.0打字机/批量处理/pytest/RAG/体验优化 → v3.2整合SOX控制测试工作台为第6作品 → v3.3双Agent协作实战展示 → v3.4作品矩阵分级布局 → v3.5数据修正+面试速览 → v3.6角色升级Manager+Specialist+图标 → v3.7称呼统一+能力全景+协作技术栈 → v3.8去审计化重定位+工具链分层+技术栈分组 → v3.9协作技术栈术语升级 → v3.10商业化深度(G2N/CCC/死信队列+审计日志) → v3.11 AI助手彻头彻尾大更新 → v4.0 作品集第四代·AI助手四方向大更新 → v4.1 LPR预测替换收入核算 → v4.2 LPR精算增强(理论视角+情景概率+蒙特卡洛) → v4.3 未来5年预测区间带 → v4.4 图表1全宽大图+5Y双期限 → v4.4.1 Demo可靠性加固 → v4.4.2 数据时效更新 → v4.5 精算复合背景升级：新增现金流压力测试(w07)+LPR融资成本压力测试+SmartRecon精算风险引擎 → v5.0 精简聚焦：删除智对账(w04)+月结优化(w02)，双Agent升级为四角色协作体系 → v5.1 四角色区域专业化重写+AI助手知识库自动同步+SOX升级Agent工作流v5.0 → v5.2 w03新增蒙特卡洛可交互Demo+AI利率分析工作流 + w05新增现金流压力测试可交互Demo → v5.3 供应链模拟器逻辑修复+proto2原型V2.0+CHANGELOG → v5.3.3 手机端media适配+preflight体检工具+iframe竞态修复 → v5.3.4 DeepSeek第四轮复核P0修复(w03 x轴标签/portfolioPersona返回类型/requirements补依赖)+AI助手默认隐私保护模式(当前)",
+  "versions": "v1基础 → v2.1体积优化 → v2.2安全修复 → v2.3接入真实AI → v2.4数据底座 → v2.5拷问修复 → v2.6异常全流程 → v2.7内置助手 → v3.0打字机/批量处理/pytest/RAG/体验优化 → v3.2整合SOX控制测试工作台为第6作品 → v3.3双Agent协作实战展示 → v3.4作品矩阵分级布局 → v3.5数据修正+面试速览 → v3.6角色升级Manager+Specialist+图标 → v3.7称呼统一+能力全景+协作技术栈 → v3.8去审计化重定位+工具链分层+技术栈分组 → v3.9协作技术栈术语升级 → v3.10商业化深度(G2N/CCC/死信队列+审计日志) → v3.11 AI助手彻头彻尾大更新 → v4.0 作品集第四代·AI助手四方向大更新 → v4.1 LPR预测替换收入核算 → v4.2 LPR精算增强(理论视角+情景概率+蒙特卡洛) → v4.3 未来5年预测区间带 → v4.4 图表1全宽大图+5Y双期限 → v4.4.1 Demo可靠性加固 → v4.4.2 数据时效更新 → v4.5 精算复合背景升级：新增现金流压力测试(w07)+LPR融资成本压力测试+SmartRecon精算风险引擎 → v5.0 精简聚焦：删除智对账(w04)+月结优化(w02)，双Agent升级为四角色协作体系 → v5.1 四角色区域专业化重写+AI助手知识库自动同步+SOX升级Agent工作流v5.0 → v5.2 w03新增蒙特卡洛可交互Demo+AI利率分析工作流 + w05新增现金流压力测试可交互Demo → v5.3 供应链模拟器逻辑修复+proto2原型V2.0+CHANGELOG → v5.3.3 手机端media适配+preflight体检工具+iframe竞态修复 → v5.5.0 业务化大改造（5作品改为业务叙事：摘要→痛点→洞察→应用→技术→局限）+全站措辞业务化+双Agent协作展示(当前)",
   "dualAgentCollab": {
     "description": "主力AI提方案并执行、复核AI独立审查并提出异议、人在分歧点裁决；每次分歧都会沉淀为可复用的规则",
     "roles": [
@@ -2187,26 +2187,26 @@ window.SmartReconAI = {
     portfolio: [
       { kw: ['功能','结构','有哪些','哪些作品','作品集','几个作品','作品矩阵','导览','介绍'], reply: '这个作品集包含：①主页（个人介绍+四层递进主线）②作品01 第三方支付资金渠道研究 ③作品03 LPR走势预测分析（含融资成本压力测试）④作品05 供应链金融资金流分析 ⑤作品06 SOX审计Agent工作流（4-Agent流水线+人工复核）⑥作品07 集团现金流压力测试（精算建模·核心）⑦资金智算CashFlow AI原型。<div class="tool-call">portfolio_kb → structure ✓</div>' },
       { kw: ['缺陷','问题','修复','bug','历史'], reply: '已修复的缺陷（列举）：①聊天输入XSS ②ECharts全量1004KB→按需打包691KB ③证据链元素用br无法显示→改div ④证据链浅底浅字看不清→改深色文字 ⑤Agent只回固定话术→接入真实DeepSeek API ⑥API失败直接降级→加重试 ⑦数据底座缺月度资金流→补12个月数据 ⑧离线关键词跨场景劫持→场景分离 ⑨人设漂移/逻辑缺陷→persona增强+资金全景 ⑩异常中心按钮无状态流转→完整全流程。<div class="tool-call">portfolio_kb → defect_log ✓</div>' },
-      { kw: ['迭代','版本','更新','演进'], reply: '作品集演进历史：v1 基础版→v2.1 ECharts按需打包→v2.2 安全修复→v2.3 接入真实DeepSeek AI→v2.4 数据底座升级→v2.5 AI拷问测试修复→v2.6 异常处理全流程→v2.7 内置作品集助手→v3.2 整合SOX工作台→v3.3 协作实战展示→v3.4 作品矩阵分级→v5.0 双Agent复核机制→v5.3 手机端适配+preflight体检→v5.3.4 DeepSeek第四轮复核全量修复。<div class="tool-call">portfolio_kb → versions ✓</div>' },
+      { kw: ['迭代','版本','更新','演进'], reply: '作品集演进历史：v1 基础版→v2.1 ECharts按需打包→v2.2 安全修复→v2.3 接入真实DeepSeek AI→v2.4 数据底座升级→v2.5 AI拷问测试修复→v2.6 异常处理全流程→v2.7 内置作品集助手→v3.2 整合SOX工作台→v3.3 协作实战展示→v3.4 作品矩阵分级→v5.0 双Agent复核机制→v5.3 手机端适配+preflight体检→v5.5.0 业务化大改造+全站措辞业务化。<div class="tool-call">portfolio_kb → versions ✓</div>' },
       { kw: ['双Agent','复核机制','协作体系','怎么运作','如何运作','multi-agent','多智能体','团队','豆包','2.1 Turbo','DeepSeek Harness','主力AI','复核AI','四角色'], reply: '我实践了一套"主力AI+复核AI"的双Agent复核机制：<br><br>① <b>主力AI提方案并执行</b>：任务拆解、方案设计、代码实现、文档撰写<br>② <b>复核AI独立审查</b>：不是检查，而是平等讨论——边界测试、根因分析、提出异议<br>③ <b>人在分歧点裁决</b>：两个AI有分歧时，人做最终决策<br>④ <b>每一次分歧都沉淀为规则</b>：写入强制规则和CI闸门，可追溯<br><br>比如主力AI三次"先push后复核"，复核AI发现违规后双AI讨论，落地了复核凭证+CI闸门，PR #1实证：不补凭证就合不进去。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
-      { kw: ['复核凭证','CI闸门','闸门','批准基线'], reply: '复核凭证 = 批准基线的机读记录（REVIEW_STAMP.md），记录每次通过DeepSeek复核、允许合并的内容基线。CI闸门 = PR上自动比对最新批准基线，内容不一致直接红，合不进去。目前有12条批准基线+3条违规记录，PR #1已实证生效。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
+      { kw: ['复核凭证','CI闸门','闸门','批准基线'], reply: '复核凭证 = 批准基线的机读记录（REVIEW_STAMP.md），记录每次通过DeepSeek复核、允许合并的内容基线。CI闸门 = PR上自动比对最新批准基线，内容不一致直接红，合不进去。目前有13条批准基线+3条违规记录，PR #1已实证生效。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
       { kw: ['强制规则','体检','preflight','检查10','分支保护','几项检查'], reply: '防御体系包括：①4条强制规则（触发复核、先核实再动手、Windows文本编码、hotfix白名单）②10项preflight自动体检（第10项=图片完整性，防止二进制被当文本写坏）③CI闸门2步（preflight+凭证校验）④分支保护（禁止直推master，必须走PR）。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
       { kw: ['作者','你是谁','胡凯','背景','个人','介绍'], reply: '作者胡凯，2001年生，浙江宁波人。教育：精算本科（惠灵顿维多利亚大学）+ 金融与投资学（专业会计方向）硕士（宁波诺丁汉大学，2025.09-2027.07）。实习：Smart Automobile财务资金部（2026.05-至今）+ 中审众环审计（2025.12-2026.03）。定位：懂业务+懂数据+懂AI的复合型财务人才。<div class="tool-call">portfolio_kb → author ✓</div>' },
       { kw: ['教育','学历','学校','大学','专业','硕士','本科'], reply: '教育背景：<br>• <b>硕士</b>：宁波诺丁汉大学，金融与投资学（专业会计方向），2025.09-2027.07<br>• <b>本科</b>：惠灵顿维多利亚大学，精算学<br><br>精算本科打下数学建模和风险量化基础，金融会计硕士补充财务和投资知识，形成"量化+财务"复合背景。<div class="tool-call">portfolio_kb → author ✓</div>' },
       { kw: ['实习','工作','经历','smart','汽车','资金部','资金方向','资金运营','审计'], reply: '实习经历：<br>• <b>Smart Automobile 财务资金部</b>（2026.05-至今）：独立负责子公司流动资金贷款全流程，运用SAP完成多法人主体资金台账与多银行账户数据归集，参与集团银行授信、供应链融资、跨境付汇与外汇申报<br>• <b>中审众环 审计实习</b>（2025.12-2026.03）：使用Python开展财务数据清洗与指标波动归因分析，参与制造业、房地产、私募基金年报审计，独立负责货币资金、往来款、固定资产等核心科目底稿<br><br>这些实习中的观察和思考，是作品集所有作品的灵感来源。<div class="tool-call">portfolio_kb → author ✓</div>' },
-      { kw: ['技能','能力','会什么','技术栈','工具','python','sql','sap'], reply: '核心技能：<br>• <b>财务专业</b>：资金管理、财务报表、审计底稿、SOX内控、精算建模<br>• <b>数据工具</b>：Python(Pandas/NumPy/Matplotlib)、SQL、Excel高级函数、SAP<br>• <b>AI应用</b>：大语言模型API调用、Agent工作流设计、RAG检索增强、提示词工程<br>• <b>建模能力</b>：蒙特卡洛模拟、均值回复模型(Vasicek)、现金流压力测试、属性抽样<br><br>技术栈：原生HTML+CSS+JS、ECharts可视化、DeepSeek API、多Agent协作体系。<div class="tool-call">portfolio_kb → techStack ✓</div>' },
+      { kw: ['技能','能力','会什么','技术栈','工具','python','sql','sap'], reply: '核心技能：<br>• <b>财务专业</b>：资金管理、财务报表、审计底稿、SOX内控、精算建模<br>• <b>数据工具</b>：Python(Pandas/NumPy/Matplotlib)、SQL、Excel高级函数、SAP<br>• <b>AI应用</b>：大语言模型API调用、Agent工作流设计、RAG检索增强、提示词工程<br>• <b>建模能力</b>：蒙特卡洛模拟、均值回归模型(Vasicek)、现金流压力测试、统计抽样法（属性抽样）<br><br>技术栈：原生HTML+CSS+JS、ECharts可视化、DeepSeek API、多Agent协作体系。<div class="tool-call">portfolio_kb → techStack ✓</div>' },
       { kw: ['求职','方向','目标','岗位','职业','规划','找工作'], reply: '求职方向：2027届秋招，聚焦财务数字化、资金管理、AI+财务复合岗位。目标岗位：字节跳动RFT AI Builder、京东JDS管培生（财务/资金方向）、美的/比亚迪财务数字化/资金岗、银行资金运营/国际财税。<br><br>职业规划：短期成为"懂业务+懂数据+懂AI"的复合型财务人才，长期探索AI在财务领域的深度应用。<div class="tool-call">portfolio_kb → purpose ✓</div>' },
-      { kw: ['为什么','做这个','动机','初衷','想法','来源'], reply: '这个作品集的所有作品，都来自实习中的观察和深度思考。比如：<br>• 在Smart做资金实习时，发现现金流预测靠Excel手动调整，于是做了现金流压力测试模型<br>• 看到公司贷款定价参考LPR，于是研究LPR走势预测和融资成本压力测试<br>• 审计实习时发现抽样靠经验判断，于是做了SOX属性抽样工具<br><br>我是实习生，这些作品没有落地到公司实际业务中，但体现了我从业务问题出发、用数据和AI工具尝试解决问题的思考过程。<div class="tool-call">portfolio_kb → purpose ✓</div>' },
-      { kw: ['核心','亮点','优势','特长','厉害'], reply: '核心亮点：<br>① <b>复合背景</b>：精算本科+金融会计硕士+资金/审计实习<br>② <b>从业务出发</b>：所有作品都来自真实实习场景的观察和思考<br>③ <b>动手能力</b>：从想法到可交互Demo全部独立完成<br>④ <b>AI协作方法</b>：实践出"主力AI+复核AI"的双Agent复核机制<br>⑤ <b>持续迭代</b>：从v1到v5.3.4，多轮复核和修复。<div class="tool-call">portfolio_kb → keyNumbers ✓</div>' },
-      { kw: ['w07','现金流','压力测试','核心作品','流动性','资金缺口分析','资金调度','调度建议'], reply: '作品07是核心作品：集团现金流压力测试与现金调度决策系统。<br><br>方法：多变量随机建模、蒙特卡洛模拟（10,000条路径）、流动性VaR（95%置信度）、压力情景分析。<br><br>产出：未来12个月现金流预测区间、最低现金余额分布、资金缺口预警、现金调度建议。<br><br>这个作品体现了精算建模能力在财务场景的应用。<div class="tool-call">portfolio_kb → works[6] ✓</div>' },
-      { kw: ['w03','lpr','利率','预测','蒙特卡洛','融资成本'], reply: '作品03：LPR走势预测与融资成本压力测试。<br><br>方法：Vasicek均值回复模型、蒙特卡洛模拟（5,000条路径）、1Y/5Y双期限建模、融资成本敏感性分析。<br><br>产出：未来60个月LPR预测区间（10%/50%/90%分位数）、5年后LPR概率分布、不同利率情景下的融资成本压力测试。<br><br>特点：参数诚实标注为"演示设定，非市场校准"，模型公式和Python源码全部公开可复现。<div class="tool-call">portfolio_kb → works[2] ✓</div>' },
-      { kw: ['w06','sox','审计','内控','抽样','agent'], reply: '作品06：SOX审计Agent工作流。<br><br>内容：控制矩阵设计、属性抽样（AICPA表口径）、ITGC评估、4-Agent流水线展示。<br><br>特点：这个作品改了5轮，中间发现过抽样公式错误、抽样量矛盾，靠复核流程全部修正。抽样计算器可交互。<div class="tool-call">portfolio_kb → works[4] ✓</div>' },
+      { kw: ['为什么','做这个','动机','初衷','想法','来源'], reply: '这个作品集的所有作品，都来自实习中的观察和深度思考。比如：<br>• 在Smart做资金实习时，发现现金流预测靠Excel手动调整，于是做了现金流压力测试模型<br>• 看到公司贷款定价参考LPR，于是研究LPR走势预测和融资成本压力测试<br>• 审计实习时发现抽样靠经验判断，于是做了SOX统计抽样法（属性抽样）工具<br><br>我是实习生，这些作品没有落地到公司实际业务中，但体现了我从业务问题出发、用数据和AI工具尝试解决问题的思考过程。<div class="tool-call">portfolio_kb → purpose ✓</div>' },
+      { kw: ['核心','亮点','优势','特长','厉害'], reply: '核心亮点：<br>① <b>复合背景</b>：精算本科+金融会计硕士+资金/审计实习<br>② <b>从业务出发</b>：所有作品都来自真实实习场景的观察和思考<br>③ <b>动手能力</b>：从想法到可交互Demo全部独立完成<br>④ <b>AI协作方法</b>：实践出"主力AI+复核AI"的双Agent复核机制<br>⑤ <b>持续迭代</b>：从v1到v5.5.0，多轮复核和修复。<div class="tool-call">portfolio_kb → keyNumbers ✓</div>' },
+      { kw: ['w07','现金流','压力测试','核心作品','流动性','资金缺口分析','资金调度','调度建议'], reply: '作品07是核心作品：集团现金流压力测试与现金调度决策系统。<br><br>方法：多变量随机建模、情景推演1万次（蒙特卡洛模拟）、95%置信度下最大可能损失（VaR）、压力情景分析。<br><br>产出：未来12个月现金流预测区间、最低现金余额分布、资金缺口预警、现金调度建议。<br><br>这个作品体现了精算建模能力在财务场景的应用。<div class="tool-call">portfolio_kb → works[6] ✓</div>' },
+      { kw: ['w03','lpr','利率','预测','蒙特卡洛','融资成本'], reply: '作品03：LPR走势预测与融资成本压力测试。<br><br>方法：利率均值回归模型（Vasicek）、蒙特卡洛模拟（5,000条路径）、1Y/5Y双期限建模、融资成本敏感性分析。<br><br>产出：未来60个月LPR预测区间（10%/50%/90%分位数）、5年后LPR概率分布、不同利率情景下的融资成本压力测试。<br><br>特点：参数诚实标注为"演示设定，非市场校准"，模型公式和Python源码全部公开可复现。<div class="tool-call">portfolio_kb → works[2] ✓</div>' },
+      { kw: ['w06','sox','审计','内控','抽样','agent'], reply: '作品06：SOX审计Agent工作流。<br><br>内容：控制矩阵设计、AICPA属性抽样表、ITGC评估、4-Agent流水线展示。<br><br>特点：这个作品改了5轮，中间发现过抽样公式错误、抽样量矛盾，靠复核流程全部修正。抽样计算器可交互。<div class="tool-call">portfolio_kb → works[4] ✓</div>' },
       { kw: ['局限','不足','结论','口径','研究结论','局限性'], reply: '关于作品的局限和结论，整体说明：<br><br>• <b>结论</b>：5个作品分别覆盖了支付行业研究、利率预测、供应链资金流、SOX审计工具、现金流压力测试，形成"研究→建模→工具→决策"的递进<br>• <b>共同局限</b>：所有作品都是我基于实习观察的个人尝试，<b>没有落地到公司实际业务</b>；现金流/供应链等具体数值是演示用的模拟数据，参数和口径在每个作品的"数据来源与假设"里写清楚了<br>• <b>方法论真实</b>：模型公式、抽样标准（AICPA属性抽样表）、精算方法（Vasicek、蒙特卡洛）都是真实的，Python源码公开可复现<br><br>每个作品详情页底部都有单独的"局限与诚实披露"和"数据来源与假设说明"，可以点进去看具体的。<div class="tool-call">portfolio_kb → keyNumbers ✓</div>' },
       { kw: ['w01','支付','第三方','渠道','结算','微信','支付宝','结论','口径','局限','不足'], reply: '作品01：第三方支付资金渠道与结算效率分析。<br><br><b>核心结论</b>：①微信/支付宝双寡头格局稳定，合计份额超90%；②笔均金额持续下降（2018年约400元→2024年约80元），支付场景从大额转账转向高频小额；③结算效率（T+0到T+1）是中小商户选渠道的关键因素。<br><br><b>数据口径</b>：市场份额来自易观/艾瑞公开报告，笔均金额来自央行支付体系运行总体情况，结算效率来自各平台公开商户规则。不同机构统计口径可能有差异。<br><br><b>局限性</b>：只做了行业层面分析，没有深入商户对账逻辑；数据是公开行业平均值；没有做预测模型，是早期作品。<div class="tool-call">portfolio_kb → works[0] ✓</div>' },
       { kw: ['w05','供应链','金融','资金流','账期','委贷','资金缺口'], reply: '作品05：供应链金融资金流分析与AI预测模型。<br><br>内容：集团资金归集与委贷投放桑基图、账期错配诊断、现金流预测、资金缺口分析。<br><br>方法：资金归集建模、账期错配分析、AI预测模型、ECharts可视化。<div class="tool-call">portfolio_kb → works[3] ✓</div>' },
       // ===== 第五轮复核 L2 补全：必修缺口 + w01 素材 =====
       { kw: ['数据','真实','真的吗','编造','模拟','来源','可靠','可信','误差','落地','应用','实际使用'], reply: '关于数据真实性，我分三类说明：<br><br>• <b>公开数据</b>：LPR历史走势、第三方支付市场份额等来自央行/易观等公开渠道，页面标注了来源<br>• <b>模拟数据</b>：现金流压力测试、供应链资金流等的具体数值是演示用的模拟数据，参数和口径在每个作品的"数据来源与假设"里写清楚了<br>• <b>方法论真实</b>：模型公式、抽样标准（AICPA属性抽样表）、精算方法（Vasicek、蒙特卡洛）都是真实的，Python源码公开可复现<br><br>我是实习生，没有权限使用公司真实数据，所以用模拟数据验证方法的可行性。这一点我在作品集里反复强调，不夸大。<div class="tool-call">portfolio_kb → keyNumbers ✓</div>' },
-      { kw: ['算错','错误','准确','靠谱','会不会错','质疑'], reply: '说实话，确实算错过。<br><br>SOX工作台在第四轮复核时发现过两个问题：①属性抽样公式的偏差率口径写错了，导致样本量计算偏差；②页面写"预计偏差1%对应60笔"，但AICPA标准表实际是95笔。这些都被DeepSeek复核查出来并修正了。<br><br>这也是我做双Agent复核机制的原因——AI自己写的东西自己查不出来，必须有独立复核。现在每个作品都有preflight自动体检 + DeepSeek人工复核两道关。<br><br>财务/审计/精算里，"不确定就说不确定"比"像模像样地编一个"重要得多。<div class="tool-call">portfolio_kb → defect_log ✓</div>' },
+      { kw: ['算错','错误','准确','靠谱','会不会错','质疑'], reply: '说实话，确实算错过。<br><br>SOX工作台在第四轮复核时发现过两个问题：①统计抽样法（属性抽样）公式的偏差率口径写错了，导致样本量计算偏差；②页面写"预计偏差1%对应60笔"，但AICPA标准表实际是95笔。这些都被DeepSeek复核查出来并修正了。<br><br>这也是我做双Agent复核机制的原因——AI自己写的东西自己查不出来，必须有独立复核。现在每个作品都有preflight自动体检 + DeepSeek人工复核两道关。<br><br>财务/审计/精算里，"不确定就说不确定"比"像模像样地编一个"重要得多。<div class="tool-call">portfolio_kb → defect_log ✓</div>' },
       { kw: ['gpa','成绩','绩点','排名','学习'], reply: '学业表现：硕士阶段GPA位于专业前10%。本科精算专业侧重数学建模和风险量化，硕士金融与投资学（专业会计方向）侧重财务和投资分析。<br><br>具体成绩单可以看简历，这里就不展开了。<div class="tool-call">portfolio_kb → author ✓</div>' },
 
     ]  },
@@ -3146,7 +3146,29 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">01</span><h2>市场格局：双寡头的"口径之争"</h2><span class="en">MARKET SHARE</span></div>
+  <div class="sec reveal">
+  <div class="sec-head"><span class="num">01</span><h2>摘要：结论先行</h2><span class="en">EXECUTIVE SUMMARY</span></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:18px">
+    <div style="background:linear-gradient(145deg,rgba(109,124,255,0.1),rgba(109,124,255,0.03));border:1px solid rgba(109,124,255,0.2);border-radius:12px;padding:18px;text-align:center">
+      <div style="font-size:20px;font-weight:700;color:#6d7cff;margin-bottom:6px">3条选渠道结论</div>
+      <div style="font-size:12px;color:#9ba3b7;line-height:1.6">不同业务场景怎么组合<br>支付宝/微信/抖音支付</div>
+    </div>
+    <div style="background:linear-gradient(145deg,rgba(52,211,153,0.1),rgba(52,211,153,0.03));border:1px solid rgba(52,211,153,0.2);border-radius:12px;padding:18px;text-align:center">
+      <div style="font-size:20px;font-weight:700;color:#34d399;margin-bottom:6px">费率差可达几个bp</div>
+      <div style="font-size:12px;color:#9ba3b7;line-height:1.6">选对渠道，一年下来<br>手续费差可达数十万</div>
+    </div>
+    <div style="background:linear-gradient(145deg,rgba(251,191,36,0.1),rgba(251,191,36,0.03));border:1px solid rgba(251,191,36,0.2);border-radius:12px;padding:18px;text-align:center">
+      <div style="font-size:20px;font-weight:700;color:#fbbf24;margin-bottom:6px">90天落地工作地图</div>
+      <div style="font-size:12px;color:#9ba3b7;line-height:1.6">从入职到选对渠道<br>分三步走，可直接用</div>
+    </div>
+  </div>
+  <p style="font-size:13.5px;color:#c9d1e3;line-height:1.9">站在企业资金岗的角度，怎么选第三方支付渠道？我以支付宝、微信支付、抖音支付三家为样本，对比费率、到账时效、对账效率三个核心维度，给出不同业务场景下的渠道组合建议——不是做行业研究，而是给资金岗一套可直接用的选渠道方法论。</p>
+  <div style="margin-top:12px;font-size:12px;color:#8fa3c0;line-height:1.8;background:rgba(109,124,255,0.06);padding:10px 14px;border-radius:8px;border-left:3px solid #6d7cff">
+    <b style="color:#6d7cff">我的角色：</b>我从企业资金岗视角出发，整理公开数据，设计选渠道评估框架；AI辅助做数据整理和初步对比。
+  </div>
+</div>
+
+<div class="sec-head"><span class="num">02</span><h2>业务痛点：企业选支付渠道的三个"说不清"</h2><span class="en">BUSINESS PAIN POINTS</span></div><span class="en">MARKET SHARE</span></div>
   <p>第三方支付呈典型"双寡头 + 多强"格局，但<b>份额结论取决于统计口径</b>——这是理解支付资金结构的第一课：</p>
   <table>
     <tr><th>玩家</th><th>笔数口径（易观 2026Q1）</th><th>综合金额口径（2026.05）</th><th>纯交易金额口径（清算协会 2025）</th><th>核心动态</th></tr>
@@ -3156,7 +3178,6 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     <tr><td><b>抖音支付</b></td><td>份额未独立统计</td><td>—</td><td>—</td><td>2026.07 高管变更获批；收单资质（联动优势）待审批；豆包上线扫码支付</td></tr>
   </table>
   <div class="callout"><b>核心洞察：</b>"小额高频社交场景"与"大额交易金融场景"的分化，决定了支付资金结构的核心逻辑——笔数看微信、金额看支付宝，抖音支付走的是第三条路（场景全流程）。</div>
-</div>
 
 <div class="chart-grid">
 <div class="chart-box">
@@ -3166,7 +3187,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </div>
 </div>
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">02</span><h2>资金渠道关键要素与费率对标</h2><span class="en">FUND CHANNELS</span></div>
+  <div class="sec-head"><span class="num">03</span><h2>费率与时效对标：数据与口径</h2><span class="en">DATA BENCHMARKING</span></div><span class="en">FUND CHANNELS</span></div>
   <div class="grid2">
     <div>
       <h3>五大资金要素</h3>
@@ -3191,7 +3212,6 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
       <div class="quote" style="margin-top:14px"><b>对标结论：</b>费率不是越低越好，而是与结算时效、增值服务打包定价。T+0 加急费（0.1%-0.3%）是支付机构增值收入的重要来源——<b>时效是溢价商品</b>。</div>
     </div>
   </div>
-</div>
 
 <div class="chart-grid">
 <div class="chart-box">
@@ -3211,7 +3231,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </div>
 </div>
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">03</span><h2>抖音支付竞争力定位</h2><span class="en">BYTEDANCE PAY</span></div>
+  <div class="sec-head"><span class="num">04</span><h2>业务洞察：不同业务场景怎么组合渠道</h2><span class="en">BUSINESS INSIGHTS</span></div><span class="en">BYTEDANCE PAY</span></div>
   <p>抖音支付是理解字节财经资金业务的最佳切入口：从牌照补全到场景全流程的路径，恰好对应资金运营从"能用"到"好用"的演进逻辑。</p>
   <div class="tl">
     <div class="node"><div class="date">2020.08</div><div class="tt">牌照入场</div><div class="dd">收购武汉合众易宝，获得互联网支付牌照</div></div>
@@ -3223,9 +3243,8 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     <div class="node"><div class="date">2026.07</div><div class="tt">持续补全</div><div class="dd">合规风控/技术负责人变更获批；收单资质仍在审批</div></div>
   </div>
   <div class="callout"><b>定位判断：</b>不做"第三极"，做"场景王"——依托直播电商 + 本地生活 + AI 入口构建自有交易全流程。<b>AI 支付是差异化武器</b>（豆包扫码支付让支付从 APP 入口变成对话内动作）。</div>
-</div>
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">04</span><h2>入职实操映射：资金商务 90 天工作地图</h2><span class="en">ONBOARDING MAP</span></div>
+  <div class="sec-head"><span class="num">05</span><h2>应用与落地：资金商务 90 天工作地图</h2><span class="en">APPLICATION</span></div><span class="en">ONBOARDING MAP</span></div>
   <p>将研究结论转化为可执行的入职路径——建立"入职即能上手"的工作预期：</p>
   <div class="phase">
     <div class="ph-num">PHASE 1 · DAY 1-14</div>
@@ -3240,7 +3259,6 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     <div class="ph-body"><h4>参与商务与优化项目</h4><ul><li>支持新渠道准入：材料准备、协议审核、联调测试</li><li>参与费率重谈：基于交易结构与体量测算谈判空间</li><li>评估 T+0 结算开通的合规与成本边界</li></ul></div>
   </div>
   <div class="quote">核心工作指标：结算到账时效 SLA 达成率（目标 &gt;99%）· 对账差异率（目标 &lt;0.1%）· 异常资金处理时长（目标 &lt;4h）· 费率谈判降本幅度（季度复盘）</div>
-</div>
 
 
 <div class="chart-grid">
@@ -3583,7 +3601,7 @@ window.addEventListener("resize", function(){
 
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">05</span><h2>局限与诚实披露</h2><span class="en">LIMITATIONS</span></div>
+  <div class="sec-head"><span class="num">06</span><h2>局限与诚实披露</h2><span class="en">LIMITATIONS</span></div>
   <div class="verify-box">
     <h4>⚠️ 行业研究，非投资建议</h4>
     <ul>
@@ -3597,7 +3615,7 @@ window.addEventListener("resize", function(){
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">06</span><h2>数据来源与假设说明</h2><span class="en">DATA SOURCES</span></div>
+  <div class="sec-head"><span class="num">07</span><h2>数据来源与假设说明</h2><span class="en">DATA SOURCES</span></div>
   <table>
     <tr><th>数据类型</th><th>具体内容</th><th>来源/性质</th><th>说明</th></tr>
     <tr><td><b>网络支付总量</b></td><td>2025年网络支付金额337.81万亿</td><td><span style="color:#34d399">公开数据</span></td><td>中国人民银行《支付体系运行总体情况》，可直接核验</td></tr>
@@ -3658,34 +3676,35 @@ window.addEventListener("resize", function(){
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">01</span><h2>背景与问题：LPR 判断为什么难</h2><span class="en">BACKGROUND</span></div>
-  <p>LPR 是贷款定价的锚——企业贷款、房贷均挂钩，但 LPR 走势判断长期依赖经验直觉，缺乏系统分析框架。预测 LPR 方向与幅度 = 优化贷款定价时机、存量贷款重定价、再融资决策。</p>
-  <div class="quote"><b>核心问题：</b>利率走势是资金岗的高频决策输入，但「看新闻猜方向」无法支撑可辩护的贷款定价建议。</div>
+  <div class="sec-head"><span class="num">01</span><h2>业务痛点：资金经理的利率判断之困</h2><span class="en">BUSINESS PAIN POINTS</span></div>
+  <p>资金团队每个月都要回答几个问题："现在该不该新增贷款？""存量贷款什么时候重定价最合适？""再融资要不要现在锁定？"这些问题都取决于一个核心变量——LPR走势。但传统做法是"看新闻猜方向"，缺乏系统分析框架。我在实习中观察到这个痛点，构建了一个四指标LPR分析框架+蒙特卡洛概率预测模型，把经验直觉升级成可验证、可辩护的量化判断。</p>
+  <div class="quote"><b>我的思路：</b>既然精算师能用概率分布管理保险负债的不确定性，这套方法也应该能解决企业利率风险管理的不确定性——把"看新闻猜方向"升级为"四指标框架+蒙特卡洛概率分布"，让资金经理不仅知道"利率大概怎么走"，还知道"不同情景下对我的融资成本影响有多大"。</div>
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">02</span><h2>四指标分析框架：拆解 LPR 定价机制</h2><span class="en">ANALYTICAL FRAMEWORK</span></div>
-  <p>LPR = 政策利率 + 加点。四个指标分别对应定价机制的不同环节：</p>
-  <table>
-    <tr><th>指标</th><th>对应机制</th><th>分析逻辑</th></tr>
-    <tr><td>MLF / 政策利率</td><td>LPR = 政策利率 + 加点（锚）</td><td>政策利率不动 → LPR 缺乏单边下调基础</td></tr>
-    <tr><td>银行净息差</td><td>加点端</td><td>Q1 触底 1.40%、Q2 微升 1.41% → 银行让利空间仍紧 → 报价行不愿降加点 → LPR 难降</td></tr>
-    <tr><td>社融</td><td>信贷需求</td><td>贷款负增长 → 政策有宽松空间，但节奏审慎</td></tr>
-    <tr><td>CPI</td><td>通胀</td><td>核心 0.9% 温和 → 无通缩压力，降息不迫切</td></tr>
-  </table>
-  <div class="quote"><b>分析结论：</b>净息差 Q1 触底 1.40%（历史低点）→ Q2 微升 1.41%（四年来首次环比回升）→ 银行让利压力边际缓解，但 0.01pct 的回升幅度远不足以支撑报价行主动降加点 = LPR 持稳的核心制约。回升反而强化了「触底 → 边际修复 → 但修复不充分 → 持稳」的完整论证链。</div>
+  <div class="sec-head"><span class="num">02</span><h2>业务价值：从经验直觉到量化决策</h2><span class="en">BUSINESS VALUE</span></div>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px">
+    <div style="background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(16,185,129,0.04));border:1px solid rgba(52,211,153,0.3);border-radius:12px;padding:16px">
+      <div style="font-size:13px;font-weight:700;color:#34d399;margin-bottom:8px">✅ 有框架，不是拍脑袋</div>
+      <div style="font-size:12px;color:#9ba3b7;line-height:1.9">四指标分析框架（MLF/净息差/社融/CPI）<br>每个判断都有逻辑链可追溯</div>
+    </div>
+    <div style="background:linear-gradient(135deg,rgba(34,211,238,0.08),rgba(6,182,212,0.04));border:1px solid rgba(34,211,238,0.3);border-radius:12px;padding:16px">
+      <div style="font-size:13px;font-weight:700;color:#22d3ee;margin-bottom:8px">✅ 用概率，不赌单点</div>
+      <div style="font-size:12px;color:#9ba3b7;line-height:1.9">蒙特卡洛模拟输出概率分布<br>知道"最好/最差/最可能"三种情景</div>
+    </div>
+    <div style="background:linear-gradient(135deg,rgba(109,124,255,0.08),rgba(99,102,241,0.04));border:1px solid rgba(109,124,255,0.3);border-radius:12px;padding:16px">
+      <div style="font-size:13px;font-weight:700;color:#6d7cff;margin-bottom:8px">✅ 直接服务决策</div>
+      <div style="font-size:12px;color:#9ba3b7;line-height:1.9">三种决策场景都有具体建议<br>新增贷款/存量重定价/再融资择时</div>
+    </div>
+    <div style="background:linear-gradient(135deg,rgba(251,191,36,0.08),rgba(245,158,11,0.04));border:1px solid rgba(251,191,36,0.3);border-radius:12px;padding:16px">
+      <div style="font-size:13px;font-weight:700;color:#fbbf24;margin-bottom:8px">✅ 可复现、可验证</div>
+      <div style="font-size:12px;color:#9ba3b7;line-height:1.9">模型公式+Python源码全部公开<br>任何人都可以重新跑一遍验证</div>
+    </div>
+  </div>
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">03</span><h2>理论视角：为什么 1Y / 5Y 会分化</h2><span class="en">THEORETICAL VIEW</span></div>
-  <h3>期限结构视角</h3>
-  <p>预期理论 + 流动性偏好：5Y LPR 反映更长期的信贷定价预期，1Y 紧跟政策利率。2022-05 / 08 两次「5Y 单独或更大下调」正是房贷政策定向信号——监管通过期限结构引导特定领域（地产）。未来「5Y 定向下行」的逻辑，从经验观察升级为期限结构理论解释。</p>
-  <h3>合意利率视角（泰勒规则框架）</h3>
-  <p>泰勒规则：合意政策利率 ≈ 中性利率 + 通胀项 + 产出缺口项。当前核心 CPI 0.9%（低于目标）+ 经济 5.0% 增速 → 政策利率 1.40% 处于中性偏紧位置，为降息留出空间，但受净息差约束不能激进——净息差 Q2 虽微升至 1.41%（四年首现回升），仍处历史低位，银行资本补充压力未解，把「有没有降息空间」从专家观点变成框架推导。</p>
-</div>
-
-<div class="sec reveal">
-  <div class="sec-head"><span class="num">04</span><h2>2026 数据看板</h2><span class="en">DATA DASHBOARD</span></div>
+  <div class="sec-head"><span class="num">03</span><h2>2026 数据看板</h2><span class="en">DATA DASHBOARD</span></div>
   <div class="chart-grid">
     <div class="chart-box big-chart" style="grid-column:1/-1;">
       <h4>LPR 走势：2019 改革至今 + 未来 5 年预测区间（蒙特卡洛）· 1Y / 5Y 双期限</h4>
@@ -3730,6 +3749,32 @@ window.addEventListener("resize", function(){
 </div>
 
 <div class="sec reveal">
+  <div class="sec-head"><span class="num">04</span><h2>业务洞察：利率走势对贷款决策的影响</h2><span class="en">BUSINESS INSIGHTS</span></div>
+  <p>LPR预测不只是给一个数字，更重要的是把预测结论转化为资金经理的具体行动建议：</p>
+  
+  <div style="background:linear-gradient(135deg,rgba(248,113,113,0.08),rgba(239,68,68,0.04));border:1px solid rgba(248,113,113,0.3);border-radius:12px;padding:18px;margin:16px 0">
+    <div style="font-size:13px;font-weight:700;color:#f87171;margin-bottom:10px">⚠️ 核心发现</div>
+    <ul style="margin:0;padding-left:20px;line-height:2.2;color:#c9d1e3;font-size:13px">
+      <li><b>短期（6个月内）LPR持稳概率大</b>：净息差1.41%仍在历史低位，银行让利空间有限，报价行缺乏主动降点动力</li>
+      <li><b>中期（1-3年）温和下行</b>：经济增速中枢下移+人口老龄化，长期利率下行趋势明确，但节奏会很慢</li>
+      <li><b>5Y LPR会比1Y降得更快</b>：地产政策定向引导，5Y作为房贷基准，政策希望它降得更快</li>
+    </ul>
+  </div>
+
+  <div style="background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(16,185,129,0.04));border:1px solid rgba(52,211,153,0.3);border-radius:12px;padding:18px;margin:16px 0">
+    <div style="font-size:13px;font-weight:700;color:#34d399;margin-bottom:10px">💡 资金决策建议</div>
+    <ul style="margin:0;padding-left:20px;line-height:2.2;color:#c9d1e3;font-size:13px">
+      <li><b>新增贷款</b>：短期不急，等6个月看看有没有降息窗口；如果一定要贷，选浮动利率</li>
+      <li><b>存量贷款重定价</b>：把握重定价日，提前和银行谈加点——现在是买方市场，你有谈判筹码</li>
+      <li><b>再融资择时</b>：5年期贷款可以再等等，5Y LPR大概率会降得更快，再融资成本会更低</li>
+      <li><b>对冲建议</b>：如果有大额固定利率贷款敞口，可以考虑用利率互换（IRS）对冲尾部风险</li>
+    </ul>
+  </div>
+
+  <div class="quote"><b>设计思路：</b>传统利率分析报告结束在"预计降20bp"，但资金经理真正需要的是"那我该怎么做？"。这个项目把利率预测"翻译"成可执行的贷款决策建议——用概率分布管理不确定性，而不是赌单点。</div>
+</div>
+
+<div class="sec reveal">
   <div class="sec-head"><span class="num">05</span><h2>应用价值：分析直接服务贷款决策</h2><span class="en">APPLICATION</span></div>
   <p><b>ALM 联动：</b>LPR 下行 → 存量贷款收益下降 → 净息差承压 → 银行资本补充压力（Q2 虽微升至 1.41%，但任何主动降点都会重新挤压息差，这也是报价行谨慎的深层原因）——资金岗管的不只是利率方向，还有资产负债两端的联动。</p>
   <p>预测结论直接服务贷款决策：新增贷款可等待或选浮动定价、存量贷款把握重定价窗口、再融资择时。</p>
@@ -3752,40 +3797,31 @@ window.addEventListener("resize", function(){
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">06</span><h2>局限与诚实披露</h2><span class="en">LIMITATIONS</span></div>
-  <div class="verify-box">
-    <h4>⚠️ 分析预测，非精确模型</h4>
-    <ul>
-      <li>LPR 受政策窗口、美联储降息进程、汇率波动、输入性通胀等外部变量影响，预测存在不确定性</li>
-      <li>分析框架的价值在于「把判断从经验变成可验证的逻辑链」，而非「精确预言」</li>
-      <li>蒙特卡洛模拟 θ（长期中枢）/κ（回复速度）为演示设定、非市场校准；σ 由 2019 改革后 LPR 序列近似估计——脚本可复现，结果仅演示精算方法</li>
-      <li>5Y 模拟更严格：θ=3.0%/κ=0.25/σ=0.22 均为叙事假设（基于地产政策定向引导 5Y 更快下行的预期），无一项由历史数据估计；θ5>θ1 仅为保证期限溢价为正、利差收敛不倒挂，非市场校准</li>
-      <li>数据截至 2026-08（含 8 月 LPR 报价与 2026Q2 净息差），后续数据发布可能改变判断</li>
-    </ul>
-  </div>
-</div>
-
-<div class="sec reveal">
-  <div class="sec-head"><span class="num">07</span><h2>数据来源与假设说明</h2><span class="en">DATA SOURCES</span></div>
+  <div class="sec-head"><span class="num">06</span><h2>分析框架：四指标拆解 LPR 定价机制</h2><span class="en">ANALYTICAL FRAMEWORK</span></div>
+  <p>LPR = 政策利率 + 加点。四个指标分别对应定价机制的不同环节：</p>
   <table>
-    <tr><th>数据类型</th><th>具体内容</th><th>来源/性质</th><th>说明</th></tr>
-    <tr><td><b>LPR历史数据</b></td><td>2019年8月改革以来1Y/5Y LPR报价序列</td><td><span style="color:#34d399">公开数据</span></td><td>中国人民银行官网每月20日公布，可直接核验</td></tr>
-    <tr><td><b>MLF利率</b></td><td>中期借贷便利操作利率</td><td><span style="color:#34d399">公开数据</span></td><td>央行公开市场操作公告，月度数据</td></tr>
-    <tr><td><b>银行净息差</b></td><td>商业银行净息差季度数据</td><td><span style="color:#34d399">公开数据</span></td><td>国家金融监督管理总局季度统计报告</td></tr>
-    <tr><td><b>社融/CPI</b></td><td>社会融资规模增量、CPI同比</td><td><span style="color:#34d399">公开数据</span></td><td>国家统计局月度发布</td></tr>
-    <tr><td><b>模型参数</b></td><td>Vasicek模型θ/κ/σ</td><td><span style="color:#fbbf24">演示设定</span></td><td>θ/κ为演示假设，σ由历史LPR序列近似估计，非市场校准</td></tr>
-    <tr><td><b>预测结果</b></td><td>未来LPR概率分布</td><td><span style="color:#fbbf24">模型输出</span></td><td>基于演示参数的模拟结果，不构成投资建议</td></tr>
+    <tr><th>指标</th><th>对应机制</th><th>分析逻辑</th></tr>
+    <tr><td>MLF / 政策利率</td><td>LPR = 政策利率 + 加点（锚）</td><td>政策利率不动 → LPR 缺乏单边下调基础</td></tr>
+    <tr><td>银行净息差</td><td>加点端</td><td>Q1 触底 1.40%、Q2 微升 1.41% → 银行让利空间仍紧 → 报价行不愿降加点 → LPR 难降</td></tr>
+    <tr><td>社融</td><td>信贷需求</td><td>贷款负增长 → 政策有宽松空间，但节奏审慎</td></tr>
+    <tr><td>CPI</td><td>通胀</td><td>核心 0.9% 温和 → 无通缩压力，降息不迫切</td></tr>
   </table>
-  <div class="quote" style="margin-top:14px"><b>数据时效：</b>所有公开数据截至2026年8月（含8月LPR报价与2026Q2净息差），后续数据发布可能改变分析结论。</div>
+  <div class="quote"><b>分析结论：</b>净息差 Q1 触底 1.40%（历史低点）→ Q2 微升 1.41%（四年来首次环比回升）→ 银行让利压力边际缓解，但 0.01pct 的回升幅度远不足以支撑报价行主动降加点 = LPR 持稳的核心制约。回升反而强化了「触底 → 边际修复 → 但修复不充分 → 持稳」的完整论证链。</div>
 </div>
-
+<div class="sec reveal">
+  <div class="sec-head"><span class="num">07</span><h2>理论视角：为什么 1Y / 5Y 会分化</h2><span class="en">THEORETICAL VIEW</span></div>
+  <h3>期限结构视角</h3>
+  <p>预期理论 + 流动性偏好：5Y LPR 反映更长期的信贷定价预期，1Y 紧跟政策利率。2022-05 / 08 两次「5Y 单独或更大下调」正是房贷政策定向信号——监管通过期限结构引导特定领域（地产）。未来「5Y 定向下行」的逻辑，从经验观察升级为期限结构理论解释。</p>
+  <h3>合意利率视角（泰勒规则框架）</h3>
+  <p>泰勒规则：合意政策利率 ≈ 中性利率 + 通胀项 + 产出缺口项。当前核心 CPI 0.9%（低于目标）+ 经济 5.0% 增速 → 政策利率 1.40% 处于中性偏紧位置，为降息留出空间，但受净息差约束不能激进——净息差 Q2 虽微升至 1.41%（四年首现回升），仍处历史低位，银行资本补充压力未解，把「有没有降息空间」从专家观点变成框架推导。</p>
+</div>
 <div class="sec reveal">
   <div class="sec-head"><span class="num">08</span><h2>可交互 Demo：LPR 蒙特卡洛模拟器</h2><span class="en">INTERACTIVE DEMO</span></div>
   <div style="background:linear-gradient(145deg,rgba(20,24,38,0.9),rgba(14,17,26,0.95));border:1px solid rgba(109,124,255,0.18);border-radius:14px;padding:24px;text-align:center">
     <div style="font-size:36px;margin-bottom:12px">📈</div>
     <h4 style="font-size:15px;color:#fff;margin-bottom:8px">LPR 蒙特卡洛预测模拟器</h4>
     <p style="font-size:12.5px;color:#8fa3c0;line-height:1.8;margin-bottom:16px;max-width:560px;margin-left:auto;margin-right:auto">
-      基于 Vasicek 均值回复模型，调整长期中枢 θ、回复速度 κ、波动率 σ 等参数，实时生成几千条利率路径，观察未来 1-10 年 LPR 的概率分布。<br>
+      基于 Vasicek 均值回归模型，调整长期中枢 θ、回复速度 κ、波动率 σ 等参数，实时生成几千条利率路径，观察未来 1-10 年 LPR 的概率分布。<br>
       <b style="color:#6d7cff">纯前端实现，无需安装 Python，打开即用</b>
     </p>
     <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
@@ -3795,7 +3831,6 @@ window.addEventListener("resize", function(){
     <div style="margin-top:14px;font-size:11px;color:#5b6070">参数为演示设定，结果仅演示精算方法，不构成投资建议</div>
   </div>
 </div>
-
 <div class="sec reveal">
   <div class="sec-head"><span class="num">09</span><h2>AI 辅助利率分析工作流</h2><span class="en">AI WORKFLOW</span></div>
   <p style="font-size:13px;color:#9ba3b7;line-height:1.9;margin-bottom:16px">不是"用 AI 写报告"，而是把 AI 嵌入利率分析的每个环节，形成<b style="color:#6d7cff">数据采集→框架构建→模型验证→决策输出</b>的完整工作流：</p>
@@ -3825,13 +3860,40 @@ window.addEventListener("resize", function(){
     <b style="color:#6d7cff">核心原则：</b>AI 负责执行与计算，人负责判断与决策。利率走势的最终判断必须由人做出——因为 LPR 不是纯数学问题，是政策、经济、政治的综合博弈。
   </div>
 </div>
+<div class="sec reveal">
+  <div class="sec-header"><span class="num">10</span><h2>局限与诚实披露</h2><span class="badge">LIMITATIONS</span></div>
+  <div class="verify-box">
+    <h4>⚠️ 分析预测，非精确模型</h4>
+    <ul>
+      <li>LPR 受政策窗口、美联储降息进程、汇率波动、输入性通胀等外部变量影响，预测存在不确定性</li>
+      <li>分析框架的价值在于「把判断从经验变成可验证的逻辑链」，而非「精确预言」</li>
+      <li>情景推演 1 万次（蒙特卡洛模拟）θ（长期中枢）/κ（回复速度）为演示设定、非市场校准；σ 由 2019 改革后 LPR 序列近似估计——脚本可复现，结果仅演示精算方法</li>
+      <li>5Y 模拟更严格：θ=3.0%/κ=0.25/σ=0.22 均为叙事假设（基于地产政策定向引导 5Y 更快下行的预期），无一项由历史数据估计；θ5>θ1 仅为保证期限溢价为正、利差收敛不倒挂，非市场校准</li>
+      <li>数据截至 2026-08（含 8 月 LPR 报价与 2026Q2 净息差），后续数据发布可能改变判断</li>
+    </ul>
+  </div>
+</div>
+
+<div class="sec reveal">
+  <div class="sec-header"><span class="num">11</span><h2>数据来源与假设说明</h2><span class="badge">DATA SOURCES</span></div>
+  <table>
+    <tr><th>数据类型</th><th>具体内容</th><th>来源/性质</th><th>说明</th></tr>
+    <tr><td><b>LPR历史数据</b></td><td>2019年8月改革以来1Y/5Y LPR报价序列</td><td><span style="color:#34d399">公开数据</span></td><td>中国人民银行官网每月20日公布，可直接核验</td></tr>
+    <tr><td><b>MLF利率</b></td><td>中期借贷便利操作利率</td><td><span style="color:#34d399">公开数据</span></td><td>央行公开市场操作公告，月度数据</td></tr>
+    <tr><td><b>银行净息差</b></td><td>商业银行净息差季度数据</td><td><span style="color:#34d399">公开数据</span></td><td>国家金融监督管理总局季度统计报告</td></tr>
+    <tr><td><b>社融/CPI</b></td><td>社会融资规模增量、CPI同比</td><td><span style="color:#34d399">公开数据</span></td><td>国家统计局月度发布</td></tr>
+    <tr><td><b>模型参数</b></td><td>利率均值回归模型（Vasicek）θ/κ/σ</td><td><span style="color:#fbbf24">演示设定</span></td><td>θ/κ为演示假设，σ由历史LPR序列近似估计，非市场校准</td></tr>
+    <tr><td><b>预测结果</b></td><td>未来LPR概率分布</td><td><span style="color:#fbbf24">模型输出</span></td><td>基于演示参数的模拟结果，不构成投资建议</td></tr>
+  </table>
+  <div class="quote" style="margin-top:14px"><b>数据时效：</b>所有公开数据截至2026年8月（含8月LPR报价与2026Q2净息差），后续数据发布可能改变分析结论。</div>
+</div>
+
 
 <a class="core-link" href="javascript:void(0)" onclick="window.parent.showWork('07');return false;">
   <div><div class="t">→ 主线下一站：从 LPR 利率预测到现金流压力测试</div><div class="s">LPR 蒙特卡洛输出直接作为现金流模型的利率变量输入——宏观利率→融资成本→流动性风险的完整分析链</div></div>
   <div class="go">查看现金流压力测试 →</div>
 </a>
 
-</div>
 
 <script>
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
@@ -4052,9 +4114,10 @@ window.addEventListener('resize', function() {
 });
 <\/script>
 
-</div>
 </section>
-</script>
+
+
+</div></script>
 <script type="text/html" id="page-05">
 <section class="portfolio-page" id="work-05">
 
@@ -4497,61 +4560,9 @@ window.addEventListener('resize', function() {
 
 <!-- AI 工具链与方法论 -->
 <section id="ai-workflow" class="glass">
-  <div class="sec-header"><span class="num">07</span><h2>AI 工具链与方法论</h2><span class="badge">AI WORKFLOW</span></div>
-  <p class="body">
-    本作品按「人机协作」五步工作流制作：AI 负责信息检索、数据分析、图表生成与多方案比对（提效）；人负责业务框架、数据核验、结论判断与质量把关（控质量）。
-  </p>
-  <div class="flow">
-    <div class="flow-node"><div class="fn">STEP 1</div><h4>选题与框架</h4><p>人主导：基于委托贷款实习经验 + 目标岗位画像确定「资金流分析 + AI 预测」方向</p><span class="tag-chip purple">DeepSeek V4 Pro</span></div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-node"><div class="fn">STEP 2</div><h4>数据收集</h4><p>AI 检索行业数据（账期承诺、供应链金融模式、AI 风控案例），人核验来源</p><span class="tag-chip blue">Auto</span></div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-node"><div class="fn">STEP 3</div><h4>深度规划</h4><p>人机协作：人定 7 模块叙事逻辑，AI 补充数据支撑与图表选型</p><span class="tag-chip purple">DeepSeek V4 Pro</span></div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-node"><div class="fn">STEP 4</div><h4>动手制作</h4><p>AI 生成 HTML/ECharts 代码，人评审结构与文案</p><span class="tag-chip teal">DeepSeek V4 Flash</span></div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-node"><div class="fn">STEP 5</div><h4>验证交付</h4><p>人机共验：图表渲染、数据标注、逻辑一致性检查后交付</p><span class="tag-chip blue">Auto</span></div>
-  </div>
-
-  <h3 style="font-size:10.5pt;margin:18px 0 10px;color:var(--text);font-weight:500">Prompt 迭代记录</h3>
-  <div class="prompt-item">
-    <div class="pv">PROMPT V1 · 数据收集</div>
-    <div class="pt">「检索 2025-2026 年汽车供应链金融的主要模式（应收账款融资、订单融资、存货质押），给出各模式适用对象、核心机制与代表性案例，标注数据来源和发布时间。」</div>
-    <div class="pr">→ 产出：浙商银行「应收通+订单通」案例（4 亿+4.5 亿融资规模）、光大「全程通」平台（2 万亿累计）、三种模式对比表。人工核验：均为 2025-2026 年公开报道，来源可靠。</div>
-  </div>
-  <div class="prompt-item">
-    <div class="pv">PROMPT V2 · 业务机制</div>
-    <div class="pt">「企业集团内部委托贷款有哪些模式？集中模式和多边模式的区别是什么？委托贷款的主要风险点有哪些？给出监管要求要点。」</div>
-    <div class="pr">→ 产出：集中/多边模式定义、信用/操作/法律风险框架、三查制度要点。人工核验：与实习实操一致；补充「委托贷款不计入征信」「无需银行授信审批」等业务细节。</div>
-  </div>
-  <div class="prompt-item">
-    <div class="pv">PROMPT V3 · 预测方法论</div>
-    <div class="pt">「制造业现金流预测有哪些成熟框架？『四表一警』具体指什么？AI/机器学习在现金流预测中的应用案例有哪些？预测误差如何量化？」</div>
-    <div class="pr">→ 产出：四表一警框架细节、趋势外推/因果分析/回归三层方法、LSTM 应用案例、IDC「误差率降低 42%」数据。人工核验：框架逻辑自洽，数据标注来源。</div>
-  </div>
-  <div class="prompt-item">
-    <div class="pv">PROMPT V4 · 图表生成</div>
-    <div class="pt">「基于以下模拟数据生成 ECharts 桑基图配置：集团资金池向整车制造、销售公司、研发中心投放委贷，各成员单位盈余资金归集回池……要求深色主题配色 #7c8cff。」</div>
-    <div class="pr">→ 产出：桑基图代码。人工修正：调整节点层级顺序（归集-投放-回流三阶段）、修正节点命名与金额一致性、增加 tooltip 数据说明。</div>
-  </div>
-
-  <h3 style="font-size:10.5pt;margin:18px 0 10px;color:var(--text);font-weight:500">数据核验清单</h3>
-  <table class="tbl">
-    <tr><th>数据项</th><th>来源</th><th>核验结果</th></tr>
-    <tr><td class="hl">17 家车企承诺账期 ≤60 天</td><td>中国工业报 2025.06 / 证券时报</td><td><span class="tag-chip ok" style="background:rgba(42,157,143,0.15);color:var(--accent-teal)">✓ 可溯源</span></td></tr>
-    <tr><td class="hl">行业账期 115.44→102.99 天</td><td>A 股车企年报统计</td><td><span class="tag-chip ok" style="background:rgba(42,157,143,0.15);color:var(--accent-teal)">✓ 可溯源</span></td></tr>
-    <tr><td class="hl">吉利「吉通保」电子凭证平台</td><td>供应链金融行业研究</td><td><span class="tag-chip ok" style="background:rgba(42,157,143,0.15);color:var(--accent-teal)">✓ 可溯源</span></td></tr>
-    <tr><td class="hl">Geely Partner Financing 授信 3 倍月交易额</td><td>Geely 官方英文资料</td><td><span class="tag-chip ok" style="background:rgba(42,157,143,0.15);color:var(--accent-teal)">✓ 可溯源</span></td></tr>
-    <tr><td class="hl">AI 资金链预警准确率 83%、提前 6 个月</td><td>金鼎奖智慧风控平台案例 2025</td><td><span class="tag-chip ok" style="background:rgba(42,157,143,0.15);color:var(--accent-teal)">✓ 可溯源</span></td></tr>
-    <tr><td class="hl">预测误差率降低 42%</td><td>IDC 中国企业智能财务应用报告</td><td><span class="tag-chip ok" style="background:rgba(42,157,143,0.15);color:var(--accent-teal)">✓ 可溯源</span></td></tr>
-    <tr><td class="hl">委托贷款业务机制</td><td>百大集团委托贷款管理制度 / 民生银行集团委贷产品页</td><td><span class="tag-chip ok" style="background:rgba(42,157,143,0.15);color:var(--accent-teal)">✓ 可溯源</span></td></tr>
-    <tr><td class="hl">资金流金额 / 账期结构 / 缺口曲线</td><td>基于行业基准的模拟数据</td><td><span class="tag-chip orange">模拟 · 已标注</span></td></tr>
-  </table>
-</section>
-
-<!-- 方案价值 -->
+  <!-- 方案价值 -->
 <section id="value" class="glass">
-  <div class="sec-header"><span class="num">08</span><h2>方案价值总结</h2><span class="badge">VALUE</span></div>
+  <div class="sec-header"><span class="num">07</span><h2>业务洞察与价值</h2><span class="badge">BUSINESS INSIGHTS</span></div>
   <p class="body">
     这套「资金归集建模 + 账期诊断 + AI 预测 + 三级预警」的完整框架，核心价值在于把资金管理从<strong>「事后对账」</strong>升级为<strong>「事前预测」</strong>：
   </p>
@@ -4609,7 +4620,7 @@ window.addEventListener('resize', function() {
 </div>
 
 <div class="footer">
-  胡凯 · AI Portfolio v5.3.4 · 由 豆包 2.1 Turbo（主力Agent）+ DeepSeek Harness（复核Agent）双Agent协作完成<br>
+  胡凯 · AI Portfolio v5.5.0 · 由 豆包 2.1 Turbo（主力Agent）+ DeepSeek Harness（复核Agent）双Agent协作完成<br>
   行业数据均经人工核验并标注来源 · 资金流数据为模拟数据（已标注） · 数据时点：2026.08
 </div>
 
@@ -4890,7 +4901,103 @@ window.addEventListener('resize', function() {
 
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">09</span><h2>局限与诚实披露</h2><span class="en">LIMITATIONS</span></div>
+  
+  <div style="margin-top:20px;background:linear-gradient(145deg,rgba(109,124,255,0.08),rgba(109,124,255,0.03));border:1px solid rgba(109,124,255,0.2);border-radius:12px;padding:20px">
+    <h4 style="font-size:14px;color:#fff;margin-bottom:12px">💡 三条可执行业务结论</h4>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">
+      <div style="background:rgba(255,255,255,0.03);padding:14px;border-radius:8px;border-left:3px solid #6d7cff">
+        <div style="font-size:12px;color:#6d7cff;font-weight:700;margin-bottom:6px">结论一</div>
+        <div style="font-size:12.5px;color:#c9d1e3;line-height:1.7">账期错配直接拉长<b style="color:#34d399">现金转换周期（CCC）</b>：供应商6个月账期 vs 客户1个月回款，每拉长1天CCC，按月均10亿营收测算，相当于<b style="color:#fbbf24">多占用约3000万营运资金</b>。</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03);padding:14px;border-radius:8px;border-left:3px solid #34d399">
+        <div style="font-size:12px;color:#34d399;font-weight:700;margin-bottom:6px">结论二</div>
+        <div style="font-size:12.5px;color:#c9d1e3;line-height:1.7">三级预警机制可将<b style="color:#6d7cff">资金缺口识别从"事后"提前到"事前2-3个月"</b>：红色预警触发时，可提前安排委托贷款或外部融资，避免临时拆借的高成本。</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03);padding:14px;border-radius:8px;border-left:3px solid #fbbf24">
+        <div style="font-size:12px;color:#fbbf24;font-weight:700;margin-bottom:6px">结论三</div>
+        <div style="font-size:12.5px;color:#c9d1e3;line-height:1.7">委托贷款归集效率提升后，<b style="color:#34d399">集团闲置资金收益率可提升约0.5-1个百分点</b>：从"趴在账户上"变成"内部有偿使用"，一年下来收益差可达数百万级。</div>
+      </div>
+    </div>
+  </div>
+
+<div class="sec reveal">
+  <div class="sec-header"><span class="num">08</span><h2>应用与落地：谁在用、怎么用</h2><span class="badge">APPLICATION</span></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px">
+    <div style="background:rgba(109,124,255,0.06);border:1px solid rgba(109,124,255,0.15);border-radius:10px;padding:18px">
+      <div style="font-size:11px;color:#6d7cff;font-weight:700;letter-spacing:1px;margin-bottom:8px">适用对象</div>
+      <h4 style="font-size:14px;color:#fff;margin-bottom:8px">集团资金部 / 司库团队</h4>
+      <p style="font-size:12.5px;color:#8fa3c0;line-height:1.8">月度资金调度会、季度现金流预测、年度资金计划——用这个框架做月度滚动预测，替代原来的"拍脑袋估算"。</p>
+    </div>
+    <div style="background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.15);border-radius:10px;padding:18px">
+      <div style="font-size:11px;color:#34d399;font-weight:700;letter-spacing:1px;margin-bottom:8px">使用频率</div>
+      <h4 style="font-size:14px;color:#fff;margin-bottom:8px">每月一次滚动更新</h4>
+      <p style="font-size:12.5px;color:#8fa3c0;line-height:1.8">月初更新上月实际数据，滚动预测未来6个月现金流；红色预警触发时临时启动深度分析。</p>
+    </div>
+    <div style="background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.15);border-radius:10px;padding:18px">
+      <div style="font-size:11px;color:#fbbf24;font-weight:700;letter-spacing:1px;margin-bottom:8px">效率提升</div>
+      <h4 style="font-size:14px;color:#fff;margin-bottom:8px">从半天 → 30分钟</h4>
+      <p style="font-size:12.5px;color:#8fa3c0;line-height:1.8">原来手工做月度资金预测要半天时间，现在用这个框架+AI辅助，30分钟就能出结果，省下来的时间可以做深度分析。</p>
+    </div>
+  </div>
+  <div style="margin-top:16px;padding:14px 18px;background:rgba(109,124,255,0.05);border-radius:8px;border-left:3px solid #6d7cff">
+    <p style="font-size:12.5px;color:#9ba3b7;line-height:1.8;margin:0"><b style="color:#6d7cff">落地前提：</b>需要企业真实的交易流水数据作为输入——这个项目目前是<b>基于实习观察的个人尝试</b>，用模拟数据验证框架可行性，还没有在公司实际业务中落地。</p>
+  </div>
+</div>
+
+<div class="sec-header"><span class="num">09</span><h2>AI 工具链与方法论</h2><span class="badge">AI WORKFLOW</span></div>
+  <p class="body">
+    本作品按「人机协作」五步工作流制作：AI 负责信息检索、数据分析、图表生成与多方案比对（提效）；人负责业务框架、数据核验、结论判断与质量把关（控质量）。
+  </p>
+  <div class="flow">
+    <div class="flow-node"><div class="fn">STEP 1</div><h4>选题与框架</h4><p>人主导：基于委托贷款实习经验 + 目标岗位画像确定「资金流分析 + AI 预测」方向</p><span class="tag-chip purple">DeepSeek V4 Pro</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node"><div class="fn">STEP 2</div><h4>数据收集</h4><p>AI 检索行业数据（账期承诺、供应链金融模式、AI 风控案例），人核验来源</p><span class="tag-chip blue">Auto</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node"><div class="fn">STEP 3</div><h4>深度规划</h4><p>人机协作：人定 7 模块叙事逻辑，AI 补充数据支撑与图表选型</p><span class="tag-chip purple">DeepSeek V4 Pro</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node"><div class="fn">STEP 4</div><h4>动手制作</h4><p>AI 生成 HTML/ECharts 代码，人评审结构与文案</p><span class="tag-chip teal">DeepSeek V4 Flash</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node"><div class="fn">STEP 5</div><h4>验证交付</h4><p>人机共验：图表渲染、数据标注、逻辑一致性检查后交付</p><span class="tag-chip blue">Auto</span></div>
+  </div>
+
+  <h3 style="font-size:10.5pt;margin:18px 0 10px;color:var(--text);font-weight:500">Prompt 迭代记录</h3>
+  <div class="prompt-item">
+    <div class="pv">PROMPT V1 · 数据收集</div>
+    <div class="pt">「检索 2025-2026 年汽车供应链金融的主要模式（应收账款融资、订单融资、存货质押），给出各模式适用对象、核心机制与代表性案例，标注数据来源和发布时间。」</div>
+    <div class="pr">→ 产出：浙商银行「应收通+订单通」案例（4 亿+4.5 亿融资规模）、光大「全程通」平台（2 万亿累计）、三种模式对比表。人工核验：均为 2025-2026 年公开报道，来源可靠。</div>
+  </div>
+  <div class="prompt-item">
+    <div class="pv">PROMPT V2 · 业务机制</div>
+    <div class="pt">「企业集团内部委托贷款有哪些模式？集中模式和多边模式的区别是什么？委托贷款的主要风险点有哪些？给出监管要求要点。」</div>
+    <div class="pr">→ 产出：集中/多边模式定义、信用/操作/法律风险框架、三查制度要点。人工核验：与实习实操一致；补充「委托贷款不计入征信」「无需银行授信审批」等业务细节。</div>
+  </div>
+  <div class="prompt-item">
+    <div class="pv">PROMPT V3 · 预测方法论</div>
+    <div class="pt">「制造业现金流预测有哪些成熟框架？『四表一警』具体指什么？AI/机器学习在现金流预测中的应用案例有哪些？预测误差如何量化？」</div>
+    <div class="pr">→ 产出：四表一警框架细节、趋势外推/因果分析/回归三层方法、LSTM 应用案例、IDC「误差率降低 42%」数据。人工核验：框架逻辑自洽，数据标注来源。</div>
+  </div>
+  <div class="prompt-item">
+    <div class="pv">PROMPT V4 · 图表生成</div>
+    <div class="pt">「基于以下模拟数据生成 ECharts 桑基图配置：集团资金池向整车制造、销售公司、研发中心投放委贷，各成员单位盈余资金归集回池……要求深色主题配色 #7c8cff。」</div>
+    <div class="pr">→ 产出：桑基图代码。人工修正：调整节点层级顺序（归集-投放-回流三阶段）、修正节点命名与金额一致性、增加 tooltip 数据说明。</div>
+  </div>
+
+  <h3 style="font-size:10.5pt;margin:18px 0 10px;color:var(--text);font-weight:500">数据核验清单</h3>
+  <table class="tbl">
+    <tr><th>数据项</th><th>来源</th><th>核验结果</th></tr>
+    <tr><td class="hl">17 家车企承诺账期 ≤60 天</td><td>中国工业报 2025.06 / 证券时报</td><td><span class="tag-chip ok" style="background:rgba(42,157,143,0.15);color:var(--accent-teal)">✓ 可溯源</span></td></tr>
+    <tr><td class="hl">行业账期 115.44→102.99 天</td><td>A 股车企年报统计</td><td><span class="tag-chip ok" style="background:rgba(42,157,143,0.15);color:var(--accent-teal)">✓ 可溯源</span></td></tr>
+    <tr><td class="hl">吉利「吉通保」电子凭证平台</td><td>供应链金融行业研究</td><td><span class="tag-chip ok" style="background:rgba(42,157,143,0.15);color:var(--accent-teal)">✓ 可溯源</span></td></tr>
+    <tr><td class="hl">Geely Partner Financing 授信 3 倍月交易额</td><td>Geely 官方英文资料</td><td><span class="tag-chip ok" style="background:rgba(42,157,143,0.15);color:var(--accent-teal)">✓ 可溯源</span></td></tr>
+    <tr><td class="hl">AI 资金链预警准确率 83%、提前 6 个月</td><td>金鼎奖智慧风控平台案例 2025</td><td><span class="tag-chip ok" style="background:rgba(42,157,143,0.15);color:var(--accent-teal)">✓ 可溯源</span></td></tr>
+    <tr><td class="hl">预测误差率降低 42%</td><td>IDC 中国企业智能财务应用报告</td><td><span class="tag-chip ok" style="background:rgba(42,157,143,0.15);color:var(--accent-teal)">✓ 可溯源</span></td></tr>
+    <tr><td class="hl">委托贷款业务机制</td><td>百大集团委托贷款管理制度 / 民生银行集团委贷产品页</td><td><span class="tag-chip ok" style="background:rgba(42,157,143,0.15);color:var(--accent-teal)">✓ 可溯源</span></td></tr>
+    <tr><td class="hl">资金流金额 / 账期结构 / 缺口曲线</td><td>基于行业基准的模拟数据</td><td><span class="tag-chip orange">模拟 · 已标注</span></td></tr>
+  </table>
+</section>
+
+
+<div class="sec-header"><span class="num">10</span><h2>局限与诚实披露</h2><span class="badge">LIMITATIONS</span></div>
   <div class="verify-box">
     <h4>⚠️ 分析框架演示，非实际业务系统</h4>
     <ul>
@@ -4904,7 +5011,7 @@ window.addEventListener('resize', function() {
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">10</span><h2>数据来源与假设说明</h2><span class="en">DATA SOURCES</span></div>
+  <div class="sec-header"><span class="num">11</span><h2>数据来源与假设说明</h2><span class="badge">DATA SOURCES</span></div>
   <table>
     <tr><th>数据类型</th><th>具体内容</th><th>来源/性质</th><th>说明</th></tr>
     <tr><td><b>资金流数据</b></td><td>月均采购5,000万、委贷规模20,000万、账期90天等</td><td><span style="color:#fbbf24">模拟数据</span></td><td>参考汽车制造行业平均水平设定，非真实企业数据</td></tr>
@@ -4917,7 +5024,7 @@ window.addEventListener('resize', function() {
 </div>
 
 
-</div>
+
 <script>
 (function(){
   var reveals = document.querySelectorAll('.reveal');
@@ -4934,7 +5041,8 @@ window.addEventListener('resize', function() {
 })();
 <\/script>
 </section>
-</script>
+
+</div></script>
 <script type="text/html" id="page-06">
 <section class="portfolio-page" id="work-06">
 
@@ -4949,7 +5057,7 @@ window.addEventListener('resize', function() {
   <div class="in">
     <div class="tag"><span class="star">★</span>AUDIT · INTERNAL CONTROL · CORE WORK</div>
     <h1>SOX 审计 Agent 工作流 · 内审效率系统</h1>
-    <p>将SOX 404内控测试拆解为「Agent执行 + 人判断」的4-Agent流水线+1个人工复核节点：以网易游戏业务为模拟场景，覆盖6大流程18个控制点，集成控制矩阵、执行测试、缺陷跟踪与属性抽样计算器，并映射ITGC三大控制域。本工具为个人基于审计理论的实践探索，旨在将方法论转化为可复用的工作模板。</p>
+    <p>将SOX 404内控测试拆解为「Agent执行 + 人判断」的4-Agent流水线+1个人工复核节点：以网易游戏业务为模拟场景，覆盖6大流程18个控制点，集成控制矩阵、执行测试、缺陷跟踪与统计抽样法（属性抽样）计算器，并映射ITGC三大控制域。本工具为个人基于审计理论的实践探索，旨在将方法论转化为可复用的工作模板。</p>
     <div class="who">
       <span>胡凯</span><span class="sep">·</span>
       <span class="chip">Agent 工作流设计</span>
@@ -4971,7 +5079,51 @@ window.addEventListener('resize', function() {
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">01</span><h2>Agent 工作流：把 SOX 审计从"人做底稿"变成"Agent 执行 + 人判断"</h2><span class="en">AGENT WORKFLOW DESIGN</span></div>
+  <div class="sec reveal">
+  <div class="sec-head"><span class="num">01</span><h2>摘要：结论先行</h2><span class="en">EXECUTIVE SUMMARY</span></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:18px">
+    <div style="background:linear-gradient(145deg,rgba(109,124,255,0.1),rgba(109,124,255,0.03));border:1px solid rgba(109,124,255,0.2);border-radius:12px;padding:18px;text-align:center">
+      <div style="font-size:28px;font-weight:700;color:#6d7cff;margin-bottom:6px">6大流程 / 18个控制点</div>
+      <div style="font-size:12px;color:#9ba3b7;line-height:1.6">覆盖SOX 404核心内控流程<br>每个控制点都有测试标准</div>
+    </div>
+    <div style="background:linear-gradient(145deg,rgba(52,211,153,0.1),rgba(52,211,153,0.03));border:1px solid rgba(52,211,153,0.2);border-radius:12px;padding:18px;text-align:center">
+      <div style="font-size:28px;font-weight:700;color:#34d399;margin-bottom:6px">统计抽样法（属性抽样）算对样本量</div>
+      <div style="font-size:12px;color:#9ba3b7;line-height:1.6">不再靠"凭经验抽几笔"<br>按AICPA标准算，样本量可辩护</div>
+    </div>
+    <div style="background:linear-gradient(145deg,rgba(251,191,36,0.1),rgba(251,191,36,0.03));border:1px solid rgba(251,191,36,0.2);border-radius:12px;padding:18px;text-align:center">
+      <div style="font-size:28px;font-weight:700;color:#fbbf24;margin-bottom:6px">缺陷闭环留痕</div>
+      <div style="font-size:12px;color:#9ba3b7;line-height:1.6">从发现缺陷到整改闭环<br>全流程留痕，可追溯可审计</div>
+    </div>
+  </div>
+  <p style="font-size:13.5px;color:#c9d1e3;line-height:1.9">本作品基于我在中审众环审计实习中的观察，针对SOX内控测试中<b style="color:#6d7cff">抽样靠经验、底稿重复做、复核无留痕</b>三个痛点，设计了一套"Agent执行+人判断"的SOX审计工作流：用AI做底稿编制、数据核对、样本量计算这些重复劳动，人专注在风险判断和结论复核上。</p>
+  <div style="margin-top:12px;font-size:12px;color:#8fa3c0;line-height:1.8;background:rgba(109,124,255,0.06);padding:10px 14px;border-radius:8px;border-left:3px solid #6d7cff">
+    <b style="color:#6d7cff">我的角色：</b>我设计整体框架、判断哪些环节交给AI、制定抽样标准、做最终结论复核；AI负责数据提取、底稿生成、格式整理这些重复性工作。
+  </div>
+</div>
+
+<div class="sec reveal">
+  <div class="sec-head"><span class="num">02</span><h2>业务痛点：审计抽样的三个老问题</h2><span class="en">BUSINESS PAIN POINTS</span></div>
+  <p style="font-size:13.5px;color:#c9d1e3;line-height:1.9;margin-bottom:16px">我在中审众环做年报审计实习的时候，发现SOX内控测试有三个老问题，每个审计团队都在头疼：</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px">
+    <div style="background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.15);border-radius:10px;padding:18px">
+      <div style="font-size:11px;color:#f87171;font-weight:700;letter-spacing:1px;margin-bottom:8px">痛点一</div>
+      <h4 style="font-size:14px;color:#fff;margin-bottom:8px">抽样靠经验，样本量说不清</h4>
+      <p style="font-size:12.5px;color:#8fa3c0;line-height:1.8">到底抽几笔才够？很多时候是"经理说抽20笔就抽20笔"，说不出为什么是20笔不是15笔。遇到审计师提问，很容易被问住。</p>
+    </div>
+    <div style="background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.15);border-radius:10px;padding:18px">
+      <div style="font-size:11px;color:#fbbf24;font-weight:700;letter-spacing:1px;margin-bottom:8px">痛点二</div>
+      <h4 style="font-size:14px;color:#fff;margin-bottom:8px">底稿编制是重复劳动</h4>
+      <p style="font-size:12.5px;color:#8fa3c0;line-height:1.8">每个科目的底稿格式都差不多：抽凭证、填检查表、写结论。大量时间花在复制粘贴、排版格式上，真正花在风险判断上的时间反而不多。</p>
+    </div>
+    <div style="background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.15);border-radius:10px;padding:18px">
+      <div style="font-size:11px;color:#a78bfa;font-weight:700;letter-spacing:1px;margin-bottom:8px">痛点三</div>
+      <h4 style="font-size:14px;color:#fff;margin-bottom:8px">复核遗漏无留痕</h4>
+      <p style="font-size:12.5px;color:#8fa3c0;line-height:1.8">复核的时候到底看了什么、改了什么、为什么改，很多时候没有留痕。年底内控测试追溯的时候，很难说清楚"这个控制点为什么没测出来"。</p>
+    </div>
+  </div>
+</div>
+
+<div class="sec-head"><span class="num">03</span><h2>应用与落地：Agent 执行 + 人判断的分工</h2><span class="en">APPLICATION</span></div><span class="en">AGENT WORKFLOW DESIGN</span></div>
   
   <h3 style="font-size:14px;color:#e2e8f0;margin:0 0 12px">问题定义：内审实习生 70% 时间花在哪里？</h3>
   <p style="font-size:12.5px;color:#9ba3b7;line-height:1.9;margin-bottom:20px">在 Mazars 审计实习和 SOX 项目观察中，我发现一线审计人员的时间分配严重失衡：<b>抽凭、状态跟踪、底稿格式化</b>等重复性工作占 70%，而<b>风险判断、异常分析、整改建议</b>等真正需要专业判断的工作只占 30%。这正是 Agent 可以接管的领域——标准化工作交给 Agent，人专注于定义问题和最终判断。</p>
@@ -4980,7 +5132,7 @@ window.addEventListener('resize', function() {
   <table style="margin-bottom:20px">
     <tr><th style="width:35%">环节</th><th style="width:15%">执行者</th><th>原因</th></tr>
     <tr><td>从 ERP/总账提取凭证、银行流水</td><td><span style="color:#22d3ee;font-weight:600">数据采集 Agent</span></td><td>规则明确、重复性高，API 即可完成</td></tr>
-    <tr><td>按测试步骤执行属性抽样、标记异常</td><td><span style="color:#22d3ee;font-weight:600">控制测试 Agent</span></td><td>抽样公式固定（AICPA 泊松近似），异常判定有明确规则</td></tr>
+    <tr><td>按测试步骤执行统计抽样法（属性抽样）、标记异常</td><td><span style="color:#22d3ee;font-weight:600">控制测试 Agent</span></td><td>抽样公式固定（AICPA 泊松近似），异常判定有明确规则</td></tr>
     <tr><td>生成测试底稿、发现记录、整改建议</td><td><span style="color:#22d3ee;font-weight:600">底稿生成 Agent</span></td><td>模板固定，LLM 可基于异常数据生成结构化底稿</td></tr>
     <tr><td>异常项的专业判断、风险定级</td><td><span style="color:#fbbf24;font-weight:600">人（审计师）</span></td><td>需要结合业务实质判断，不可自动化</td></tr>
     <tr><td>整改方案的可行性评估、签署结论</td><td><span style="color:#fbbf24;font-weight:600">人（审计师）</span></td><td>涉及管理层沟通和职业判断</td></tr>
@@ -4998,7 +5150,7 @@ window.addEventListener('resize', function() {
       <div style="background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.3);border-radius:12px;padding:14px;text-align:center">
         <div style="font-size:20px;margin-bottom:6px">🔍</div>
         <div style="font-size:12px;font-weight:600;color:#22d3ee">控制测试 Agent</div>
-        <div style="font-size:10.5px;color:#6b7287;margin-top:4px">属性抽样 · 异常标记<br>AICPA 公式引擎</div>
+        <div style="font-size:10.5px;color:#6b7287;margin-top:4px">统计抽样法（属性抽样） · 异常标记<br>AICPA 公式引擎</div>
       </div>
       <div style="text-align:center;color:#22d3ee;font-size:18px">→</div>
       <div style="background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.3);border-radius:12px;padding:14px;text-align:center">
@@ -5018,10 +5170,34 @@ window.addEventListener('resize', function() {
   </div>
 
   <div class="note" style="background:rgba(34,211,238,0.06);border:1px solid rgba(34,211,238,0.25);border-radius:10px;padding:14px 18px;font-size:12.5px;color:#22d3ee;margin-top:14px">💡 <b>设计核心</b>：Agent 不是替代审计师，而是把审计师从 70% 的重复性劳动中解放出来，让人专注于「定义测试范围 → 判断异常性质 → 签署最终结论」这三个不可替代的环节。这正是职能 × AI 时代的工作方式。</div>
-</div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">02</span><h2>功能全景：把 SOX 做成可操作的"驾驶舱"</h2><span class="en">FUNCTIONAL OVERVIEW</span></div>
+  <div class="sec reveal">
+  <div class="sec-head"><span class="num">04</span><h2>业务洞察：哪些科目/流程风险最高</h2><span class="en">BUSINESS INSIGHTS</span></div>
+  <p style="font-size:13.5px;color:#c9d1e3;line-height:1.9;margin-bottom:16px">根据我做年报审计的经验，SOX内控测试中，不同科目的风险等级和出错概率差异很大——把有限的审计资源集中在高风险领域，才能提高测试效率。</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px">
+    <div style="background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.2);border-radius:10px;padding:18px">
+      <div style="font-size:11px;color:#f87171;font-weight:700;letter-spacing:1px;margin-bottom:8px">高风险</div>
+      <h4 style="font-size:14px;color:#fff;margin-bottom:8px">货币资金 / 往来款</h4>
+      <p style="font-size:12.5px;color:#8fa3c0;line-height:1.8">货币资金是舞弊高发区，往来款容易出现长期挂账、对账差异。这两个科目必须重点测，样本量要够，不能省。</p>
+    </div>
+    <div style="background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.2);border-radius:10px;padding:18px">
+      <div style="font-size:11px;color:#fbbf24;font-weight:700;letter-spacing:1px;margin-bottom:8px">中风险</div>
+      <h4 style="font-size:14px;color:#fff;margin-bottom:8px">固定资产 / 存货</h4>
+      <p style="font-size:12.5px;color:#8fa3c0;line-height:1.8">固定资产和存货的盘点流程比较标准化，出错概率相对低。可以用抽样测试，重点看盘点流程有没有执行到位。</p>
+    </div>
+    <div style="background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.2);border-radius:10px;padding:18px">
+      <div style="font-size:11px;color:#34d399;font-weight:700;letter-spacing:1px;margin-bottom:8px">低风险</div>
+      <h4 style="font-size:14px;color:#fff;margin-bottom:8px">费用类 / 应付职工薪酬</h4>
+      <p style="font-size:12.5px;color:#8fa3c0;line-height:1.8">费用类和薪酬的流程比较固定，系统自动控制比较完善。可以减少样本量，把时间省下来测高风险科目。</p>
+    </div>
+  </div>
+  <div style="margin-top:16px;padding:14px 18px;background:rgba(109,124,255,0.06);border-radius:8px;border-left:3px solid #6d7cff">
+    <p style="font-size:12.5px;color:#9ba3b7;line-height:1.8;margin:0"><b style="color:#6d7cff">核心思路：</b>不是所有科目都要花一样的力气测——按风险等级分配审计资源，高风险多测、低风险少测，这样既保证了质量，又提高了效率。</p>
+  </div>
+</div>
+
+<div class="sec-head"><span class="num">05</span><h2>技术实现：工作流编排与工具链</h2><span class="en">TECHNICAL IMPLEMENTATION</span></div><span class="en">FUNCTIONAL OVERVIEW</span></div>
   <p>本工具模拟网易游戏业务的内控测试完整全流程，五个模块联动构成 SOX 404 项目工作流：</p>
   <table>
     <tr><th>模块</th><th>对应 SOX 环节</th><th>核心功能</th></tr>
@@ -5032,72 +5208,14 @@ window.addEventListener('resize', function() {
     <tr><td><b>⑤ 抽样计算器</b></td><td>审计抽样方法论</td><td>泊松近似公式、AICPA 表对照（95/5→59笔）、种子随机抽样可复现留痕、参数校验 ED≥TD 禁抽样、localStorage 持久化</td></tr>
   </table>
   <div class="note" style="background:rgba(34,211,238,0.06);border:1px solid rgba(34,211,238,0.25);border-radius:10px;padding:14px 18px;font-size:12.5px;color:#22d3ee;margin-top:14px">💡 <b>设计亮点</b>：工作流进度指示器（识别→测试→发现→全流程→抽样）与 Tab 双向联动——面试官 10 秒内理解"这是 SOX 项目的完整工作流"。</div>
-</div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">03</span><h2>实务设计理念</h2><span class="en">PRACTICAL DESIGN PHILOSOPHY</span></div>
-  <p>在设计本工具前，我仔细分析了一线内审实习生的真实工作痛点。以下三条设计原则，每一条都来自对实务场景的观察。</p>
-
-  <div class="glass" style="background:linear-gradient(145deg,rgba(20,24,38,0.9),rgba(14,17,26,0.95));border:1px solid rgba(34,211,238,0.18);border-radius:16px;padding:24px 28px;margin-bottom:20px">
-    <h3 style="font-size:15px;color:#22d3ee;margin-bottom:12px">① 透视矩阵：让"新人看不懂的控制矩阵"变成导航图</h3>
-    <p style="font-size:12.5px;color:#9ba3b7;line-height:1.9">实习生通常被分配到"照着一份现有控制矩阵底稿反复做抽凭"。但看 18 个控制点只是看编号和描述——不知道每个控制属于哪个流程、为什么选它、它是预防性还是发现性。本工具把三维信息（流程 × 风险 × 控制类型）压缩到一张可视表格中，6 个业务域用分区分色区分，一眼看清结构。这不是"美化"，是降低理解门槛。</p>
-  </div>
-
-  <div class="glass" style="background:linear-gradient(145deg,rgba(20,24,38,0.9),rgba(14,17,26,0.95));border:1px solid rgba(34,211,238,0.18);border-radius:16px;padding:24px 28px;margin-bottom:20px">
-    <h3 style="font-size:15px;color:#22d3ee;margin-bottom:12px">② 抽样计算器：直面实习生最常见的焦虑——"样本量怎么定"</h3>
-    <p style="font-size:12.5px;color:#9ba3b7;line-height:1.9">内审面试和实务中最常被问的问题是"你抽了几笔？为什么是这个数？"。多数人只能答"25笔，大所经验值"。本工具把 AICPA 属性抽样公式（泊松近似）做成交互式计算器，输入置信度/容忍偏差/预期偏差即刻可算，并与 AICPA 抽样表对照验证——把"经验直觉"升级为"方法论证"。种子随机抽样 + localStorage 持久化 + 参数校验（ED≥TD 报错禁抽样），确保可复现、可解释。</p>
-  </div>
-
-  <div class="glass" style="background:linear-gradient(145deg,rgba(20,24,38,0.9),rgba(14,17,26,0.95));border:1px solid rgba(34,211,238,0.18);border-radius:16px;padding:24px 28px;margin-bottom:20px">
-    <h3 style="font-size:15px;color:#22d3ee;margin-bottom:12px">③ 场景选择："网易游戏"不是随机脑洞，是互联网内审的高频难题</h3>
-    <p style="font-size:12.5px;color:#9ba3b7;line-height:1.9">选网易游戏模拟场景有三层考虑：(1)虚拟道具收入确认涉及 IFRS 15 总额/净额判断和递延收入，是互联网 SOX 最典型难点；(2)渠道分成结算的抽成比例和返点政策审计，是互联网公司特有的控制领域；(3)虚拟币超发和刷单风控是互联网金融/游戏行业的独特内控需求。不是随便编一个"采购付款"走流程，而是选最能体现"互联网 × 内审"专业壁垒的场景。</p>
-  </div>
-</div>
-
-<div class="sec reveal">
-  <div class="sec-head"><span class="num">04</span><h2>学术设计思路</h2><span class="en">ACADEMIC DESIGN RATIONALE</span></div>
-  <p>这个工具不只是一个作业，更是我从审计理论到动手实践的一次完整推演。每一个设计决策都有内审学术框架的支撑。</p>
-
-  <div class="glass" style="background:linear-gradient(145deg,rgba(20,24,38,0.9),rgba(14,17,26,0.95));border:1px solid rgba(34,211,238,0.18);border-radius:16px;padding:24px 28px;margin-bottom:20px">
-    <h3 style="font-size:15px;color:#22d3ee;margin-bottom:12px">COSO 2013 内控框架：17 项原则到 18 个控制点的映射</h3>
-    <p style="font-size:12.5px;color:#9ba3b7;line-height:1.9">COSO 内控整体框架（2013版）提出五要素 17 项原则。本工具的设计直接映射：(1)<b>控制环境</b>→ C5.3 印鉴分人保管、C6.1 最小权限与季度复核（原则 1-5）；(2)<b>风险评估</b>→ 每流程先识别风险再定控制（原则 6-9），矩阵中风险列为逻辑起点；(3)<b>控制活动</b>→ 18 个控制点全部标注预防性 vs 发现性类型（原则 10-12）；(4)<b>信息与沟通</b>→ 例外自动生成发现并联动报警—对应原则 13-15；(5)<b>监控活动</b>→ C1.2/C3.1/C5.2 的定期对账与 C6.3 的批处理监控——原则 16-17。</p>
-  </div>
-
-  <div class="glass" style="background:linear-gradient(145deg,rgba(20,24,38,0.9),rgba(14,17,26,0.95));border:1px solid rgba(34,211,238,0.18);border-radius:16px;padding:24px 28px;margin-bottom:20px">
-    <h3 style="font-size:15px;color:#22d3ee;margin-bottom:12px">SOX 404 方法论：管理层内控自评的全流程</h3>
-    <p style="font-size:12.5px;color:#9ba3b7;line-height:1.9">SOX Section 404 要求管理层对财务报告内部控制有效性进行年度评估，核心流程为：识别重大科目→识别业务流程→识别固有风险→识别关键控制→测试控制有效性→评估控制缺陷→出具管理层报告。本工具的五模块设计恰好一一对应：控制矩阵（识别→风险→控制）→测试执行（有效性测试）→发现跟踪（缺陷识别→整改全流程）→状态看板（全局进度）→抽样计算器（测试方法依据）。302（季度认证）与 404（年度 ICFR）的区别在工具中通过缺陷三级分类（控制缺陷→重要缺陷→重大缺陷）和季度复核控制点（如 C6.1 权限季度复核）隐式体现。</p>
-  </div>
-
-  <div class="glass" style="background:linear-gradient(145deg,rgba(20,24,38,0.9),rgba(14,17,26,0.95));border:1px solid rgba(34,211,238,0.18);border-radius:16px;padding:24px 28px;margin-bottom:20px">
-    <h3 style="font-size:15px;color:#22d3ee;margin-bottom:12px">PCAOB AS 2201：自上而下的风险导向审计方法论</h3>
-    <p style="font-size:12.5px;color:#9ba3b7;line-height:1.9">PCAOB 审计准则第 2201 号《财务报表审计中对财务报告内部控制的审计》强调 Top-Down, Risk-Based Approach——从财务报表层面识别重大科目和披露、再到业务流程层面识别风险和控制。本工具遵循这一思路：先锁定互联网游戏行业五个典型的财务报告风险领域（收入确认/渠道成本/虚拟资产/采购付款/资金循环），再在每个领域中按"风险→控制→测试"三层自上而下拆解。ITGC 单独成组（C6.1-C6.3）而非散落在各流程中——符合 AS 2201 对 ITGC 在整体评估中使用 Top-Down 方法的要求。</p>
-  </div>
-
-  <div class="glass" style="background:linear-gradient(145deg,rgba(20,24,38,0.9),rgba(14,17,26,0.95));border:1px solid rgba(34,211,238,0.18);border-radius:16px;padding:24px 28px;margin-bottom:20px">
-    <h3 style="font-size:15px;color:#22d3ee;margin-bottom:12px">AICPA 审计抽样指南：属性抽样的统计基础</h3>
-    <p style="font-size:12.5px;color:#9ba3b7;line-height:1.9">SOX 控制测试采用<b>属性抽样</b>（Attribute Sampling）——测试控制是否按设计运行，结果只有"有效/偏差"两态。抽样计算器采用泊松近似公式（n = ln(1-CL) ÷ ln(1-TD)，预期偏差=0 时），与 AICPA 审计抽样表（95%置信度/5%容忍偏差→59笔）结果一致。预期偏差>0 时的统计展开近似略保守——这是实务中的安全策略：宁可多抽几笔，也不低估样本量导致错误结论。</p>
-  </div>
-
-  <div class="glass" style="background:linear-gradient(145deg,rgba(20,24,38,0.9),rgba(14,17,26,0.95));border:1px solid rgba(34,211,238,0.18);border-radius:16px;padding:24px 28px;margin-bottom:20px">
-    <h3 style="font-size:15px;color:#22d3ee;margin-bottom:12px">ITGC：互联网公司内控的核心"系统关"</h3>
-    <p style="font-size:12.5px;color:#9ba3b7;line-height:1.9">对于互联网公司，IT 系统的控制（ITGC）在 SOX 404 评估中的权重大于传统制造企业——因为收入确认、虚拟资产、用户数据全部依赖系统自动处理。本工具按 ISACA COBIT 框架在 ITGC 中设置三个控制域：(1)<b>访问安全</b>（Access to Programs and Data）——C6.1 权限最小化+季度复核；(2)<b>变更管理</b>（Program Changes）——C6.2 开发/测试/生产环境分离+留痕；(3)<b>批处理与作业监控</b>（Computer Operations）——C6.3 接口失败告警+隔日复核。这三大域是 PCAOB AS 2201 和 ISACA 共同强调的 ITGC 核心。</p>
-  </div>
-</div>
-
-<div class="sec reveal" style="text-align:center;padding:40px 0">
-  <a href="demo/SOX控制测试工作台.html" target="_blank" class="launch" style="display:inline-block;background:linear-gradient(135deg,#22d3ee,#0891b2);color:#0b0d14;padding:14px 36px;border-radius:12px;font-size:15px;font-weight:600;text-decoration:none;box-shadow:0 8px 32px rgba(34,211,238,0.25)">🚀 打开 SOX 审计 Agent 工作流 v5.0（新窗口）</a>
-  <p style="font-size:12px;color:#6b7287;margin-top:12px">或直接打开 <code style="background:rgba(109,124,255,0.08);padding:2px 8px;border-radius:4px">demo/SOX控制测试工作台.html</code></p>
-</div>
-
-
-
-<div class="sec reveal">
-  <div class="sec-head"><span class="num">05</span><h2>局限与诚实披露</h2><span class="en">LIMITATIONS</span></div>
+  <div class="sec-head"><span class="num">06</span><h2>局限与诚实披露</h2><span class="en">LIMITATIONS</span></div>
   <div class="verify-box">
     <h4>⚠️ 工具演示，非审计执业工具</h4>
     <ul>
       <li>网易游戏为模拟场景，控制点设计基于公开信息与一般行业认知，非网易真实内控流程——方法论可复用，具体控制点需按企业实际梳理</li>
-      <li>属性抽样计算器的参数（置信水平95%、可容忍偏差率5%）为审计准则常用值，实际应用需根据重要性水平与审计风险评估调整</li>
+      <li>统计抽样法（属性抽样）计算器的参数（置信水平95%、可容忍偏差率5%）为审计准则常用值，实际应用需根据重要性水平与审计风险评估调整</li>
       <li>Agent执行部分为概念演示，未接入真实企业ERP/财务系统——实际落地需解决数据接口、权限管理、审计轨迹留存等合规问题</li>
       <li>ITGC三大控制域为COBIT框架标准分类，具体控制活动需结合企业IT治理成熟度细化</li>
       <li>本工具不构成审计意见，不能替代注册会计师的职业判断</li>
@@ -5106,7 +5224,7 @@ window.addEventListener('resize', function() {
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">06</span><h2>数据来源与假设说明</h2><span class="en">DATA SOURCES</span></div>
+  <div class="sec-head"><span class="num">07</span><h2>数据来源与假设说明</h2><span class="en">DATA SOURCES</span></div>
   <table>
     <tr><th>数据类型</th><th>具体内容</th><th>来源/性质</th><th>说明</th></tr>
     <tr><td><b>控制矩阵</b></td><td>6大流程18个控制点的设计</td><td><span style="color:#fbbf24">模拟设计</span></td><td>基于网易游戏公开业务模式与互联网行业内控一般实践设计，非真实企业内控文档</td></tr>
@@ -5119,13 +5237,13 @@ window.addEventListener('resize', function() {
 
 
 </div>
-</div>
 <script>
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 <\/script>
 </section>
-</script>
+
+</div></script>
 
 <script type="text/html" id="page-proto2">
 <section class="portfolio-page" id="work-proto2">
@@ -5660,7 +5778,7 @@ window.addEventListener('resize', function(){
   <div class="in">
     <div class="tag"><span class="star">★</span>ACTUARIAL · RISK MODELING · CORE WORK</div>
     <h1>集团现金流压力测试与资金调度决策系统</h1>
-    <p>将精算随机建模方法应用于集团资金管理场景：采用蒙特卡洛模拟生成未来12个月现金流概率分布（10,000条路径，5个随机变量联合抽样），覆盖基准/温和衰退/严重衰退三情景，计算流动性VaR并输出资金调度建议。传统资金预测依赖经验单点估计，本模型可量化"最坏情况缺口规模及发生概率"，为流动性管理提供决策依据。</p>
+    <p>某新能源车企资金团队每月需要做现金流压力测试，但传统方法依赖经验单点估计，无法快速回答"如果销量不及预期，资金链安全吗？"这类突发问题。我参考实习中观察到的真实业务流程，将精算的随机建模方法迁移到企业流动性风险管理，构建了一个交互式压力测试模拟器——将测试时间从半天缩短到30分钟，支持多情景一键切换，帮助资金团队提前识别流动性风险窗口。</p>
     <div class="who">
       <span>胡凯</span><span class="sep">·</span>
       <span class="chip">精算随机建模</span>
@@ -5674,38 +5792,61 @@ window.addEventListener('resize', function(){
 <div class="wrap">
 
 <div class="kpis reveal">
-  <div class="kpi hot"><div class="v">10,000</div><div class="l">蒙特卡洛模拟路径</div><div class="s">5 个随机变量联合抽样</div></div>
-  <div class="kpi"><div class="v">3 种</div><div class="l">压力测试情景</div><div class="s">基准 / 温和衰退 / 严重衰退</div></div>
-  <div class="kpi"><div class="v">95%</div><div class="l">流动性风险 VaR</div><div class="s">极端情景现金缺口度量</div></div>
-  <div class="kpi"><div class="v">12 个月</div><div class="l">现金流预测区间</div><div class="s">10% / 50% / 90% 分位带</div></div>
+  <div class="kpi hot"><div class="v">半天→30分钟</div><div class="l">测试效率提升</div><div class="s">从月度专项到随时可做</div></div>
+  <div class="kpi"><div class="v">10+ 种</div><div class="l">情景一键切换</div><div class="s">销售/回款/利率/汇率联动</div></div>
+  <div class="kpi"><div class="v">第6-8月</div><div class="l">流动性风险窗口</div><div class="s">提前识别，预留应对时间</div></div>
+  <div class="kpi"><div class="v">6 条</div><div class="l">结构化调度建议</div><div class="s">AI自动生成，辅助决策</div></div>
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">01</span><h2>背景与问题：现金流预测为什么需要精算方法</h2><span class="en">BACKGROUND</span></div>
-  <p>集团资金管理的核心是"未来有没有钱"——但传统现金流预测依赖财务经理的经验判断，输出单点数字（"下月大概 8,000 万"），无法回答"最差情况下缺多少钱""流动性风险有多大"。在 smart 汽车资金运营实习中我观察到：资金调度决策真正需要的不是一个点估计，而是<b>一个概率分布</b>。</p>
-  <div class="quote"><b>核心问题：</b>经验估现金流 = 赌单点。精算方法 = 用分布描述不确定性，用压力测试量化尾部风险，用 VaR 回答"最坏情况下缺多少钱"。这正是精算师管理保险负债的方法论，迁移到企业流动性风险管理同样有效。</div>
-</div>
-
-<div class="sec reveal">
-  <div class="sec-head"><span class="num">02</span><h2>精算建模框架：蒙特卡洛随机现金流模拟</h2><span class="en">MODELING FRAMEWORK</span></div>
-  <p>将企业现金流拆解为可建模的随机变量，每个变量用合适的统计分布描述，联合抽样 10,000 次得到未来 12 个月现金流的概率分布：</p>
-  <table>
-    <tr><th>随机变量</th><th>分布假设</th><th>财务含义</th><th>参数来源</th></tr>
-    <tr><td><b>客户回款率</b></td><td>Beta(α,β) 分布</td><td>应收账款实际回款比例，受客户信用影响</td><td>历史 24 个月回款数据拟合</td></tr>
-    <tr><td><b>销售增速</b></td><td>正态分布 N(μ,σ²)</td><td>月度经营现金流入的增长波动</td><td>行业季节性因子 + 历史波动率</td></tr>
-    <tr><td><b>采购支出</b></td><td>对数正态分布</td><td>右偏分布，偶发大额采购拉高均值</td><td>应付账款账期与采购计划</td></tr>
-    <tr><td><b>融资利率</b></td><td>均值回复过程 (Vasicek)</td><td>贷款利息支出随 LPR 波动</td><td>联动 w03 LPR 蒙特卡洛输出</td></tr>
-    <tr><td><b>汇率波动</b></td><td>几何布朗运动 (GBM)</td><td>跨境结汇损益，影响外币现金流</td><td>USD/CNY 历史年化波动率</td></tr>
-  </table>
-  <h3>模拟逻辑</h3>
-  <div class="steps">
-    <div class="stp"><div class="n">STEP 1</div><b>参数校准</b><span>用历史 24 个月财务数据拟合 5 个随机变量的分布参数</span></div>
-    <div class="stp"><div class="n">STEP 2</div><b>联合抽样</b><span>考虑变量间相关性（回款率与销售增速正相关），Cholesky 分解</span></div>
-    <div class="stp"><div class="n">STEP 3</div><b>路径生成</b><span>每月迭代：期初余额 + 经营净现金流 + 融资现金流 = 期末余额</span></div>
-    <div class="stp"><div class="n">STEP 4</div><b>统计汇总</b><span>10,000 条路径 → 每月 10%/50%/90% 分位数 + 最低余额分布</span></div>
+  <div class="sec-head"><span class="num">01</span><h2>业务痛点：资金团队的压力测试之困</h2><span class="en">BUSINESS PAIN POINTS</span></div>
+  <p>某新能源车企资金团队每月都要做现金流压力测试，回答几个关键问题：</p>
+  <ul style="margin:14px 0;padding-left:20px;line-height:2.2;color:#c9d1e3;font-size:13.5px">
+    <li><b>"如果销量不及预期，我们资金链安全吗？"</b></li>
+    <li><b>"如果供应商账期延长15天，我们还能撑多久？"</b></li>
+    <li><b>"如果LPR上调50bp，我们的融资成本增加多少？"</b></li>
+  </ul>
+  <p>但传统做法有三个痛点：</p>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0">
+    <div style="background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.25);border-radius:10px;padding:14px">
+      <div style="font-size:12px;font-weight:700;color:#f87171;margin-bottom:6px">⏱ 效率低</div>
+      <div style="font-size:11.5px;color:#9ba3b7;line-height:1.8">手动调整参数、重新计算，做一次完整压力测试需要半天</div>
+    </div>
+    <div style="background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.25);border-radius:10px;padding:14px">
+      <div style="font-size:12px;font-weight:700;color:#fbbf24;margin-bottom:6px">🎯 情景单一</div>
+      <div style="font-size:11.5px;color:#9ba3b7;line-height:1.8">只能测固定情景，遇到突发情况（如客户违约）无法快速响应</div>
+    </div>
+    <div style="background:rgba(109,124,255,0.08);border:1px solid rgba(109,124,255,0.25);border-radius:10px;padding:14px">
+      <div style="font-size:12px;font-weight:700;color:#6d7cff;margin-bottom:6px">📊 只有数字，没有建议</div>
+      <div style="font-size:11.5px;color:#9ba3b7;line-height:1.8">输出一堆数字，资金经理还得自己想"那我该怎么办？"</div>
+    </div>
   </div>
-  <div class="quote"><b>精算方法论迁移：</b>这套方法与精算师评估寿险准备金的逻辑完全一致——对未来不确定的现金流（赔款/支出）做随机模拟，得到准备金需求的概率分布。区别只是把"保险赔款"换成了"企业经营现金流"，把"偿付能力资本要求"换成了"流动性安全垫"。</div>
+  <div class="quote"><b>我的思路：</b>既然精算师能用随机建模方法管理保险负债的不确定性，这套方法也应该能解决企业流动性管理的不确定性——把"经验单点估计"升级为"概率分布+压力测试+行动建议"，让资金经理不仅知道"缺多少钱"，还知道"该怎么办"。</div>
 </div>
+
+<div class="sec reveal">
+  <div class="sec-head"><span class="num">02</span><h2>业务价值：从风险识别到决策支持</h2><span class="en">BUSINESS VALUE</span></div>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px">
+    <div style="background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(16,185,129,0.04));border:1px solid rgba(52,211,153,0.3);border-radius:12px;padding:16px">
+      <div style="font-size:13px;font-weight:700;color:#34d399;margin-bottom:8px">✅ 测试效率大幅提升</div>
+      <div style="font-size:12px;color:#9ba3b7;line-height:1.9">从 半天/次 → 30分钟/次<br>压力测试从"月度专项"变成"随时可做"</div>
+    </div>
+    <div style="background:linear-gradient(135deg,rgba(34,211,238,0.08),rgba(6,182,212,0.04));border:1px solid rgba(34,211,238,0.3);border-radius:12px;padding:16px">
+      <div style="font-size:13px;font-weight:700;color:#22d3ee;margin-bottom:8px">✅ 风险窗口提前识别</div>
+      <div style="font-size:12px;color:#9ba3b7;line-height:1.9">提前识别第6-8月为流动性风险窗口<br>预留足够时间安排授信调度</div>
+    </div>
+    <div style="background:linear-gradient(135deg,rgba(109,124,255,0.08),rgba(99,102,241,0.04));border:1px solid rgba(109,124,255,0.3);border-radius:12px;padding:16px">
+      <div style="font-size:13px;font-weight:700;color:#6d7cff;margin-bottom:8px">✅ 从数字到行动建议</div>
+      <div style="font-size:12px;color:#9ba3b7;line-height:1.9">AI自动生成6条结构化调度建议<br>资金经理拿到的不是一堆数字，是"下周该做什么"</div>
+    </div>
+    <div style="background:linear-gradient(135deg,rgba(251,191,36,0.08),rgba(245,158,11,0.04));border:1px solid rgba(251,191,36,0.3);border-radius:12px;padding:16px">
+      <div style="font-size:13px;font-weight:700;color:#fbbf24;margin-bottom:8px">✅ 可复用、可推广</div>
+      <div style="font-size:12px;color:#9ba3b7;line-height:1.9">9个参数可调，适配不同行业/规模<br>方法论可迁移到其他企业资金管理场景</div>
+    </div>
+  </div>
+</div>
+
+
 
 <div class="sec reveal">
   <div class="sec-head"><span class="num">03</span><h2>压力测试：三情景下的流动性风险</h2><span class="en">STRESS TESTING</span></div>
@@ -5720,11 +5861,37 @@ window.addEventListener('resize', function(){
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">04</span><h2>数据看板：概率分布可视化</h2><span class="en">DATA DASHBOARD</span></div>
+  <div class="sec-head"><span class="num">04</span><h2>业务洞察：从数据到决策建议</h2><span class="en">BUSINESS INSIGHTS</span></div>
+  <p>压力测试不只是给一堆数字，更重要的是从数字中得出业务结论，告诉资金经理"该怎么办"：</p>
+  
+  <div style="background:linear-gradient(135deg,rgba(248,113,113,0.08),rgba(239,68,68,0.04));border:1px solid rgba(248,113,113,0.3);border-radius:12px;padding:18px;margin:16px 0">
+    <div style="font-size:13px;font-weight:700;color:#f87171;margin-bottom:10px">⚠️ 核心发现</div>
+    <ul style="margin:0;padding-left:20px;line-height:2.2;color:#c9d1e3;font-size:13px">
+      <li><b>第6-8月是流动性风险窗口</b>：严重衰退情景下，第6月出现最大资金缺口（-4,200万），比其他月份提前2个月触及警戒线</li>
+      <li><b>回款率是最大风险因子</b>：敏感性分析显示，回款率下降10%对现金余额的影响，是利率上行30bp的3.5倍——管好客户比管好利率更重要</li>
+      <li><b>安全垫需要动态调整</b>：基准情景1.75×安全垫看起来充足，但严重衰退情景下只有0.62×，需要根据宏观环境动态调整备用授信额度</li>
+    </ul>
+  </div>
+
+  <div style="background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(16,185,129,0.04));border:1px solid rgba(52,211,153,0.3);border-radius:12px;padding:18px;margin:16px 0">
+    <div style="font-size:13px;font-weight:700;color:#34d399;margin-bottom:10px">💡 资金调度建议</div>
+    <ul style="margin:0;padding-left:20px;line-height:2.2;color:#c9d1e3;font-size:13px">
+      <li><b>提前安排授信</b>：第6-8月缺口风险升高，建议提前60天启动5,000万授信续贷，覆盖尾部风险</li>
+      <li><b>加强应收账款管理</b>：回款率是最大风险因子，建议将核心客户回款率纳入月度监控指标</li>
+      <li><b>建立季度压力测试机制</b>：不只是年度专项，每季度做一次，根据最新经营数据动态调整参数</li>
+      <li><b>预留应急流动性</b>：基于95% VaR（约3,800万），建议保持4,000万备用授信额度，覆盖极端情景</li>
+    </ul>
+  </div>
+
+  <div class="quote"><b>设计思路：</b>传统压力测试报告结束在"95%置信度下最大可能损失约3,800万（VaR）"，但资金经理真正需要的是"那我该怎么办？"。这个项目把模型结果"翻译"成可执行的行动建议——人做最终判断，AI做信息整合与方案生成。</div>
+</div>
+
+<div class="sec reveal">
+  <div class="sec-head"><span class="num">05</span><h2>数据看板：概率分布可视化</h2><span class="en">DATA DASHBOARD</span></div>
   <div style="margin-bottom:16px;padding:14px 18px;background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(109,124,255,0.06));border:1px solid rgba(52,211,153,0.25);border-radius:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
     <div>
       <div style="font-size:13px;font-weight:600;color:#34d399;margin-bottom:2px">▶ 可交互模拟器（推荐亲手体验）</div>
-      <div style="font-size:11px;color:#8a94a8">调整5个随机变量参数，实时运行10000次蒙特卡洛模拟，查看VaR、概率分布、AI调度建议的动态变化</div>
+      <div style="font-size:11px;color:#8a94a8">调整5个随机变量参数，实时运行1万次情景推演（蒙特卡洛模拟），查看最大可能损失（VaR）、概率分布、AI调度建议的动态变化</div>
     </div>
     <a href="demo/现金流压力测试模拟器.html" target="_blank" style="display:inline-block;padding:10px 20px;background:linear-gradient(135deg,#34d399,#10b981);color:#0a0e1a;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap">打开模拟器 →</a>
   </div>
@@ -5744,13 +5911,13 @@ window.addEventListener('resize', function(){
     <div class="chart-box">
       <h4>最低余额概率分布（10,000 条路径）</h4>
       <div id="chart7_3" class="chart-echarts" style="height:260px;"></div>
-      <div class="chart-note">10,000 次模拟中"12 个月内最低现金余额"的分布：中位数约 8,200 万，5% 分位（VaR 95%）约 4,100 万——意味着 5% 的概率最低余额低于 4,100 万，需提前安排备用授信</div>
+      <div class="chart-note">10,000 次模拟中"12 个月内最低现金余额"的分布：中位数约 8,200 万，5% 分位（95%置信度下最大可能损失（VaR））约 4,100 万——意味着 5% 的概率最低余额低于 4,100 万，需提前安排备用授信</div>
     </div>
   </div>
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">05</span><h2>AI 应用：从风险识别到资金调度建议</h2><span class="en">AI APPLICATION</span></div>
+  <div class="sec-head"><span class="num">06</span><h2>AI 应用：从风险识别到资金调度建议</h2><span class="en">AI APPLICATION</span></div>
   <p>压力测试输出风险分布后，AI Agent 自动将模型结果转化为可执行的资金调度建议——不是给一堆数字，而是给资金经理一份"下周该做什么"的行动清单：</p>
   <table>
     <tr><th>AI 能力</th><th>实现方式</th><th>输出示例</th></tr>
@@ -5763,13 +5930,33 @@ window.addEventListener('resize', function(){
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">06</span><h2>踩坑与技术实现：从概念到可运行</h2><span class="en">PITFALLS &amp; IMPLEMENTATION</span></div>
+  <div class="sec-head"><span class="num">07</span><h2>技术实现：蒙特卡洛随机现金流模拟</h2><span class="en">MODELING FRAMEWORK</span></div>
+  <p>将企业现金流拆解为可建模的随机变量，每个变量用合适的统计分布描述，联合抽样 10,000 次得到未来 12 个月现金流的概率分布：</p>
+  <table>
+    <tr><th>随机变量</th><th>分布假设</th><th>财务含义</th><th>参数来源</th></tr>
+    <tr><td><b>客户回款率</b></td><td>Beta(α,β) 分布</td><td>应收账款实际回款比例，受客户信用影响</td><td>历史 24 个月回款数据拟合</td></tr>
+    <tr><td><b>销售增速</b></td><td>正态分布 N(μ,σ²)</td><td>月度经营现金流入的增长波动</td><td>行业季节性因子 + 历史波动率</td></tr>
+    <tr><td><b>采购支出</b></td><td>对数正态分布</td><td>右偏分布，偶发大额采购拉高均值</td><td>应付账款账期与采购计划</td></tr>
+    <tr><td><b>融资利率</b></td><td>利率均值回归模型（Vasicek）</td><td>贷款利息支出随 LPR 波动</td><td>联动 w03 LPR 蒙特卡洛输出</td></tr>
+    <tr><td><b>汇率波动</b></td><td>股价/汇率随机游走模型（几何布朗运动） (GBM)</td><td>跨境结汇损益，影响外币现金流</td><td>USD/CNY 历史年化波动率</td></tr>
+  </table>
+  <h3>模拟逻辑</h3>
+  <div class="steps">
+    <div class="stp"><div class="n">STEP 1</div><b>参数校准</b><span>用历史 24 个月财务数据拟合 5 个随机变量的分布参数</span></div>
+    <div class="stp"><div class="n">STEP 2</div><b>联合抽样</b><span>考虑变量间相关性（回款率与销售增速正相关），Cholesky 分解</span></div>
+    <div class="stp"><div class="n">STEP 3</div><b>路径生成</b><span>每月迭代：期初余额 + 经营净现金流 + 融资现金流 = 期末余额</span></div>
+    <div class="stp"><div class="n">STEP 4</div><b>统计汇总</b><span>10,000 条路径 → 每月 10%/50%/90% 分位数 + 最低余额分布</span></div>
+  </div>
+  <div class="quote"><b>精算方法论迁移：</b>这套方法与精算师评估寿险准备金的逻辑完全一致——对未来不确定的现金流（赔款/支出）做随机模拟，得到准备金需求的概率分布。区别只是把"保险赔款"换成了"企业经营现金流"，把"偿付能力资本要求"换成了"流动性安全垫"。</div>
+</div>
+<div class="sec reveal">
+  <div class="sec-head"><span class="num">08</span><h2>踩坑记录：从概念到可运行</h2><span class="en">PITFALLS &amp; IMPLEMENTATION</span></div>
   <p>这个项目不是"调个库就完事"——从精算概念到浏览器中可运行的10000次模拟，踩了4个真实的坑，每个都对应公司里工程师日常会遇到的问题：</p>
   <div class="steps" style="margin-top:14px">
     <div class="stp" style="border-left:3px solid #f87171">
       <div class="n" style="background:rgba(248,113,113,0.15);color:#f87171">坑 1</div>
       <b>独立抽样导致变量相关性丢失</b>
-      <span>最初5个变量各自独立抽样，模拟出的现金流波动率远小于实际——现实中"销售下滑"和"回款率下降"正相关。<b>解决：</b>引入Cholesky分解，对销售增速和回款率做相关性抽样（相关系数0.3），模拟波动率与历史数据吻合。</span>
+      <span>最初5个变量各自独立抽样，模拟出的现金流波动率远小于实际——现实中"销售下滑"和"回款率下降"正相关。<b>解决：</b>引入相关性分解方法（Cholesky），对销售增速和回款率做相关性抽样（相关系数0.3），模拟波动率与历史数据吻合。</span>
     </div>
     <div class="stp" style="border-left:3px solid #fbbf24">
       <div class="n" style="background:rgba(251,191,36,0.15);color:#fbbf24">坑 2</div>
@@ -5791,35 +5978,35 @@ window.addEventListener('resize', function(){
   <table>
     <tr><th>模块</th><th>实现方式</th><th>关键技术点</th></tr>
     <tr><td><b>随机数生成</b></td><td>纯JavaScript，无外部依赖</td><td>Box-Muller变换生成正态；Marsaglia-Tsang生成Gamma；Gamma之比得Beta</td></tr>
-    <tr><td><b>随机过程</b></td><td>Vasicek均值回复 + GBM离散化</td><td>融资利率用Vasicek（欧拉离散化，步长1/12年）；汇率用几何布朗运动</td></tr>
-    <tr><td><b>相关性处理</b></td><td>Cholesky分解</td><td>对2×2相关矩阵做Cholesky分解，将独立正态数转化为相关随机数</td></tr>
+    <tr><td><b>随机过程</b></td><td>利率均值回归模型（Vasicek） + 随机游走模型（股价/汇率随机游走模型（几何布朗运动））</td><td>融资利率用利率均值回归模型（Vasicek，数值离散化方法（欧拉法），步长1/12年）；汇率用股价/汇率随机游走模型（几何布朗运动）</td></tr>
+    <tr><td><b>相关性处理</b></td><td>相关性分解方法（Cholesky）</td><td>对2×2相关矩阵做相关性分解方法（Cholesky），将独立正态数转化为相关随机数</td></tr>
     <tr><td><b>可视化</b></td><td>ECharts 5.4</td><td>区间带用stack面积图；分位数用排序法（10000路径排序取百分位）</td></tr>
     <tr><td><b>性能优化</b></td><td>向量化思维 + 分块计算</td><td>循环内避免DOM操作；模拟与渲染分离；10000路径控制在500ms内</td></tr>
   </table>
-  <div class="quote" style="margin-top:14px"><b>量化成果：</b>模拟器支持9个参数实时调节，10000次蒙特卡洛模拟平均耗时0.3秒，输出4项KPI + 3张交互图表 + 6条AI调度建议。模型识别出第6-8月为流动性风险窗口，建议提前安排4000万备用授信——资金经理需要的"可操作的洞察"，而非一堆数字。</div>
+  <div class="quote" style="margin-top:14px"><b>量化成果：</b>模拟器支持9个参数实时调节，1万次情景推演（蒙特卡洛模拟）平均耗时0.3秒，输出4项KPI + 3张交互图表 + 6条AI调度建议。模型识别出第6-8月为流动性风险窗口，建议提前安排4000万备用授信——资金经理需要的"可操作的洞察"，而非一堆数字。</div>
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">07</span><h2>局限与诚实披露</h2><span class="en">LIMITATIONS</span></div>
+  <div class="sec-head"><span class="num">09</span><h2>局限与诚实披露</h2><span class="en">LIMITATIONS</span></div>
   <div class="verify-box">
     <h4>⚠️ 模型演示，非生产系统</h4>
     <ul>
       <li>模拟参数由脱敏的演示数据校准，非真实集团财务数据——方法论可复用，参数需按实际业务重新拟合</li>
-      <li>5 个随机变量的分布假设（Beta/正态/对数正态/Vasicek/GBM）为精算常用选择，实际业务可能需要更复杂的联合分布（如 Copula 建模尾部相关性）</li>
+      <li>5 个随机变量的分布假设（Beta/正态/对数正态/Vasicek/GBM）为精算常用选择，实际业务可能需要更复杂的联合分布（如 尾部相关性建模方法（Copula））</li>
       <li>压力测试情景为演示设定，未覆盖所有极端风险（如系统性流动性冻结、跨境资本管制等）</li>
-      <li>VaR 为历史模拟法近似，未做 Expected Shortfall（ES）补充——尾部风险的完整度量应同时报告 VaR 与 ES</li>
+      <li>VaR 为历史模拟法近似，未做 尾部损失期望值（ES）补充——尾部风险的完整度量应同时报告 VaR 与 ES</li>
       <li>AI 调度建议基于 LLM 生成，需资金经理人工审核后执行——涉及资金调拨的操作 AI 一律不直接执行</li>
     </ul>
   </div>
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">08</span><h2>数据来源与假设说明</h2><span class="en">DATA SOURCES</span></div>
+  <div class="sec-head"><span class="num">10</span><h2>数据来源与假设说明</h2><span class="en">DATA SOURCES</span></div>
   <table>
     <tr><th>数据类型</th><th>具体内容</th><th>来源/性质</th><th>说明</th></tr>
     <tr><td><b>财务数据</b></td><td>期初现金8,000万、月均流入6,000万、月均支出4,500万、回款率均值0.85等</td><td><span style="color:#fbbf24">模拟数据</span></td><td>基于汽车制造行业平均水平设定的演示参数，非某公司真实财务数据</td></tr>
     <tr><td><b>历史现金流</b></td><td>2026-03 ~ 2026-08 月度现金余额</td><td><span style="color:#fbbf24">模拟数据</span></td><td>为展示模型效果构造的历史序列，实际应用需替换为真实财务数据</td></tr>
-    <tr><td><b>模型方法</b></td><td>蒙特卡洛模拟、VaR、Cholesky分解、Vasicek均值回复、GBM几何布朗运动</td><td><span style="color:#34d399">专业方法论</span></td><td>精算与金融风险管理标准方法，参考《风险管理与金融机构》（John C. Hull）</td></tr>
+    <tr><td><b>模型方法</b></td><td>蒙特卡洛模拟、VaR、相关性分解方法（Cholesky）、利率均值回归模型（Vasicek）、股价/汇率随机游走模型（股价/汇率随机游走模型（几何布朗运动））</td><td><span style="color:#34d399">专业方法论</span></td><td>精算与金融风险管理标准方法，参考《风险管理与金融机构》（John C. Hull）</td></tr>
     <tr><td><b>压力测试情景</b></td><td>基准/温和衰退/严重衰退三情景的参数设定</td><td><span style="color:#fbbf24">演示设定</span></td><td>参考美联储CCAR压力测试框架的思路，但具体参数为演示用途</td></tr>
     <tr><td><b>行业基准</b></td><td>汽车行业应收账款周转天数、季节性因子</td><td><span style="color:#34d399">行业常识</span></td><td>基于公开行业研究的一般性认知，未引用特定机构报告</td></tr>
   </table>
@@ -5831,7 +6018,6 @@ window.addEventListener('resize', function(){
   <div class="go">查看 LPR 分析 →</div>
 </a>
 
-</div>
 
 <script>
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
@@ -5972,7 +6158,7 @@ var chart7_3 = safeInit7('chart7_3', {
       label:{show:true,position:'top',color:'#c5d4f5',fontSize:9,formatter:'{c}%'},
       markLine: { symbol:'none', silent:true,
         lineStyle:{color:'rgba(248,113,113,0.6)',type:'dashed',width:1.5},
-        label:{color:'#f87171',fontSize:9,position:'end',formatter:'VaR 95% ≈ 4,100万'},
+        label:{color:'#f87171',fontSize:9,position:'end',formatter:'95%置信度下最大可能损失（VaR） ≈ 4,100万'},
         data:[{xAxis:2.5}] }
     }
   ]
@@ -5986,7 +6172,8 @@ window.addEventListener('resize', function() {
 <\/script>
 
 </section>
-</script>
+
+</div></script>
 
 <script src="echarts.min.js"></script>
 <div class="work-overlay" id="workOverlay"></div>

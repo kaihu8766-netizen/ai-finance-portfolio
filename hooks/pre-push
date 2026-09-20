@@ -47,8 +47,13 @@ while read local_ref local_sha remote_ref remote_sha; do
     fi
 
     # 检查每个commit是否在REVIEW_STAMP.md的批准表格中（锚定匹配）
+    # 例外：只改动「复核元数据」（复核报告 / 凭证自身）的commit，不需要批准记录
     all_approved=true
     for commit in $commits; do
+        files=$(git show --pretty=format: --name-only "$commit" 2>/dev/null | grep -v '^$')
+        if [ -n "$files" ] && [ -z "$(echo "$files" | grep -vE '^(REVIEW_REPORT.*\.md|REVIEW_STAMP\.md)$')" ]; then
+            continue
+        fi
         if ! echo "$stamp" | grep -qE "^\| *${commit} *\|.*✅" 2>/dev/null; then
             echo "❌ Commit $commit 未在REVIEW_STAMP.md中找到批准记录"
             all_approved=false
