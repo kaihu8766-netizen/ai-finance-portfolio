@@ -4152,7 +4152,64 @@ e82113f   files=[CHANGELOG.md, index.html]                                      
 
 ---
 
-*本报告由复核AI（DeepSeek Harness）生成，**第二十八轮（§31 = `3164895`+`ef2b930` 补丁落地验收 + A–D 核对 —— 补丁 ✅ 全过；只差提交）**，**未提交、未 push**；报告已进版本控制（`REVIEW_REPORT_v6.md` / `REVIEW_REPORT_ACTIONS.md` 由 `ef2b930` 入库，且闸门已豁免）。*
+## §32 第二十九轮（合并前最终验收）：`814f782` —— **✅ 通过**
+
+> 范围：`feature/business-overhaul-v2`，`HEAD = 814f782`（`docs: 第二十七轮复核 A–D 修正`，只改 `CHANGELOG.md` 6 行、`index.html` 4 行）；工作区**干净**；分支已推到 `origin`（`814f782`）；`origin/master` 仍为 `e47d0d1`。
+> **判定：✅ 通过 —— 批准基线 = `814f782`。** 本轮全量复跑：站点结构/脚本/数字/版本/闸门**全部合格**，A–D 四处文档修正已提交且与事实一致。
+
+### 32.1 全量验收（本轮复跑，逐项实测）
+
+| 检查 | 结果 |
+|---|---|
+| **内联脚本语法（14 块）** | `node --check` **14 块全部通过，失败 0** ✅（page-01 的 P0 已彻底修复） |
+| **逐页章节编号** | `page-01 [1..7]`、`page-03 [1..11]`、`page-05 [1..11]`、`page-06 [1..7]`、`page-07 [1..10]` —— **全部连续递增** ✅ |
+| **局限 / 数据来源** | **各 5 篇**（每个作品恰好 1 篇，无重复、无串页）✅ |
+| **数字一致性** | 统计卡 `24` 轮 / `13` 条；防御卡与话术 13 条；全站 `12条批准基线`、`21轮复核` **0 命中**（含 `CHANGELOG:254` 已改）✅ |
+| **版本一致性** | 页脚 / KB `versions` / 时间线 / 话术 全为 `v5.5.0`；`v5.3.4` **0 命中** ✅ |
+| **CHANGELOG** | 第 1 行 = `# 胡凯 · AI × 财务 作品集 更新日志` ✅；`:10`"page-01/05/06 新增摘要（page-03/07 待补）"、`:22`"preflight 10 项全通过（…）"、`:254` `24轮/13条` —— **三处均已与事实一致** ✅ |
+| **结构 / 编码** | `<div>` 1097/1100 = **−3**（与上轮相同，未引入新问题）✅；`U+FFFD` **0** ✅ |
+| `python tools/preflight.py` | **exit 0**（10 项全绿；报告已入库但仍被白名单跳过，无误报）✅ |
+| `node tools/coverage_test.js` | **exit 0**：41 题、越界 5/5、断言 11/11、覆盖率 100% ✅ |
+| `python tools/check_review_stamp.py` | **exit 1**"与已复核的内容（`9c48bf6`）不一致 → 禁止合并" ✅ **正确状态**（尚无本次批准行） |
+| 分支改动范围 | 相对基线 `e47d0d1` 共 9 个文件：`index.html`、`CHANGELOG.md`、`DUAL_AGENT_DISCUSSION.md`、`.gitignore`、`hooks/pre-push`、`tools/check_review_stamp.py`、`tools/preflight.py` + 两个报告 —— **全部为预期文件，无夹带** ✅ |
+
+### 32.2 批准记录（**请你们按流程写入**）
+
+按项目规则（`REVIEW_STAMP.md` 使用说明第 2 条）由复核AI 出结论、你们写记录。**请在批准表最上方（现 `:12` 之前）加这一行**：
+
+```markdown
+| 814f782 | 第二十九轮 | 2026-09-20 | REVIEW_REPORT_v6.md §32 | ✅ 已批准 |
+```
+
+**写完自测**（应变成 exit 0）：
+```bash
+python tools/check_review_stamp.py     # 期望：✅ 复核凭证有效（内容 = 814f782）
+```
+> ⚠️ **不要**顺手在同一个 commit 里改别的内容（哪怕加一行 CHANGELOG）：批准之后任何非豁免文件的改动都会让 CI 立刻变红。**只动 `REVIEW_STAMP.md`。**
+
+**可选**（仅当你打算**本地** `git push origin master` 时才需要）：pre-push 钩子按"每个 commit 都要在批准表里"检查，而本分支的产品类 commit（`3164895` 机制补丁、`e82113f` 站内修复）不在表里 → 本地推 master 会被拦。**若走 GitHub PR 合并（推荐），钩子不执行，只需上面那一行即可。**
+
+### 32.3 剩下的两个 P2（**不阻塞合并**，下一轮顺手即可）
+
+1. **`.gitignore` 带 BOM**（首字节 `efbbbf`）：首行是注释，功能无影响（各规则实测正常），但属编码卫生问题；根因是"用 PowerShell 回写文本文件"（强制规则3 禁止），以后请用 Python `io.open(..., encoding='utf-8', newline='')`
+2. **KB `versions` 少了 v5.4.0**（双Agent复核机制）：`…v5.3.3 → v5.5.0…`；话术 `:2190` 还把"双Agent复核机制"标成 **v5.0**（实际 v5.4.0）—— 补齐更整齐
+
+### 32.4 合并步骤（拿到批准行后）
+
+```bash
+export PYTHONIOENCODING=utf-8
+# 1) 在 REVIEW_STAMP.md 批准表最上方加 32.2 那一行（只动这个文件）
+python tools/check_review_stamp.py          # 期望 exit 0
+git add REVIEW_STAMP.md
+git commit -m "review: 第二十九轮批准（§32 通过，基线 814f782）"
+git push origin feature/business-overhaul-v2   # 推分支不需要额外批准
+# 2) 在 GitHub 上创建/更新 PR → CI 两步（preflight + 凭证校验）应全绿 → 合并
+```
+合并后建议顺手做：把 §32.3 两个 P2 修掉 + 给 `preflight` 加"检查11（内联脚本语法）"和"检查12（章节编号唯一递增）"（代码分别在 §28.7 / §26.7）。
+
+---
+
+*本报告由复核AI（DeepSeek Harness）生成，**第二十九轮（§32 = `814f782` 合并前最终验收 —— ✅ 通过，批准基线 `814f782`）**；报告已进版本控制且被闸门豁免。*
 *§23 基线 `7ba68cd`；§23.10 基线 `6d4383d`；§23.11 基线 `30606ed`；§23.12 基线 `bab8f3a`；**§23.13 基线 `HEAD = 9c48bf6`** —— 分支 `feature/dual-agent-collab`，未 push；`origin/master = 72e396c`。*
 *§23 复跑：`preflight` exit 0；`coverage_test` exit 0（37 题）；18 题探针越界 **15/18**。*
 *§23.10 复跑：`preflight` exit 0；`coverage_test` exit 0（37 题）；`check_review_stamp` exit 0（**假绿**，见 §23.10.2）；探针越界 **4/18**。*
