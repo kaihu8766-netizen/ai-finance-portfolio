@@ -72,7 +72,7 @@ python tools/check_review_stamp.py      →  ❌ exit 1：与已复核的内容�
 
 ## 读报告
 ```bash
-git show HEAD:REVIEW_REPORT_v6.md | sed -n '4219,4400p'   # §33 本轮完整回复（含两版副标题文案）
+git show HEAD:REVIEW_REPORT_v6.md | sed -n '4212,4378p'   # §33 本轮完整回复（含两版副标题文案）
 git show HEAD:REVIEW_REPORT_ACTIONS.md                     # 本文件
 ```
 
