@@ -4800,7 +4800,110 @@ python tools/preflight.py; node tools/coverage_test.js; python tools/check_revie
 
 ---
 
-*本报告由复核AI（DeepSeek Harness）生成，**第三十四轮（§37 = `644ce41` 验收 + 未提交 `renderMd` 改动复核 —— ❌ 不通过：1 项未修 / 批准行抢跑 / XSS 注入面）**；报告已进版本控制且被闸门豁免。*
+## §38 第三十五轮复核：`760de8d` —— **✅ 通过（批准基线 = `760de8d`）**
+
+> 范围：`760de8d fix: 修复AI助手tool-call显示问题(XSS安全方案splitBadges)+统一品牌写法+修复旧章节名`（仅 `index.html`，+31/−17）；工作区干净；`origin/master` 仍为 `e9b623d`（本提交未推）。
+> **判定：✅ 通过。** §37 提的 3 件事**全部做到**，其中 **XSS 修复我用对抗用例实测验证过**（不是只看代码）。只剩 1 个 **P2 打磨项**（品牌串里的半角 `x` / 一处连接符），**不阻塞**——但**建议在写批准行之前顺手改掉**（批准之后再改就要重走流程）。
+
+### 38.1 ✅ 三项修复的验收
+
+#### ① XSS 注入面 —— **已关闭（实测）**
+代码已按建议改为 `splitBadges`（`index.html:2664` 附近）+ `:5634` 调用点同步：
+```js
+function splitBadges(s){
+  var str = String(s || ''), badges = '';
+  str = str.replace(/<div class="tool-call">([\s\S]*?)<\/div>/g, function(_, inner){
+    badges += '<div class="tool-call">' + escapeHtml(inner.replace(/<[^>]*>/g, '')) + '</div>';
+    return '';
+  });
+  return { plain: str, badges: badges };
+}
+function renderMd(s){ var p = splitBadges(s); return escapeHtml(p.plain)... + p.badges; }
+```
+**实测方法**：把 `escapeHtml` / `splitBadges` / `renderMd` **原样从文件抽出**，用 node 跑 6 组对抗输入 × 2 条渲染路径（`renderMd` 与 `thinkEl` 路径）：
+
+| 用例 | 结果 |
+|---|---|
+| 正常徽标 `<div class="tool-call">portfolio_kb → author ✓</div>` | ✅ 徽标正常渲染（`escapeHtml` 只作用于正文，徽标保留） |
+| 恶意 `<div class="tool-call"><img src=x onerror="alert(1)"></div>` | ✅ **无 `<img>` 输出**（内部标签被剥离后再转义） |
+| 闭合注入 `<div class="tool-call">"><script>alert(1)</script></div>` | ✅ 输出为 `&quot;&gt;alert(1)`（已转义，不成标签） |
+| 嵌套伪造 `<div class="tool-call"><div class="tool-call">evil</div></div>` | ✅ 残余 `</div>` 被转义 |
+| 大写变体 `<DIV CLASS="tool-call">…` | ✅ 正则不匹配 → 整段被转义（安全） |
+| AI 模式追加徽标 | ✅ 硬编码徽标正常 |
+
+**结论**：`RESULT: 注入面已关闭（所有危险标签均被转义）` —— 真实 AI 模式 / 联网搜索返回的内容**无法再注入 HTML**。
+
+#### ② 旧章节名 —— 已修
+`数据来源与假设` 命中 **0**；`数据口径与假设说明` **8 处** ✅（助手话术与页面章节名现在一致）
+
+#### ③ 品牌写法 —— 已统一（13 处）
+- `smart汽车（奔驰x吉利）` **13 处**；`梅赛德斯-奔驰x吉利体系` **0**、`吉利体系` **0**、`smart（奔驰×吉利）` **0** ✅
+- 语义上也更准了：**主体是真实实体名 `smart汽车`，背书放括号**（正是 §33.3 的建议方向）✅
+- 说明：站内还有 3 处"吉利"是**行业事实引用**（17 家车企含吉利、吉利「吉通保」、Geely Partner Financing）——**这些不属于雇主称谓，保持原样正确** ✅
+
+### 38.2 🟢 唯一剩下的 P2（建议在写批准行之前顺手改）
+
+| 项 | 现状 | 建议 |
+|---|---|---|
+| 半角 `x` | `奔驰x吉利` **13 处** | 中文排版惯用全角 `×`：`奔驰×吉利`（可选，纯观感） |
+| 连接符不一致 | `:1501` 副标题用 `smart汽车（奔驰x吉利）**-**财务资金部`（连字符）；其余 12 处用 `·` 或空格 | 统一为 `·`（与经历卡一致） |
+
+> 因为闸门是"**内容相等**"判据，**这两处若在批准后修改，就必须重新走一轮批准**。所以：**要改就现在改**（一起提交），改完我再确认一次即可；不改也不影响通过。
+
+### 38.3 结构 / 闸门复检（本轮）
+
+| 检查 | 结果 |
+|---|---|
+| 模板内联脚本 | **14 块 `node --check` 全过** ✅ |
+| **文档级脚本**（含新 `splitBadges`/`renderMd`） | **5 块全过** ✅（`2166–2583`、`2587–3123`、`6196–6295`、`6298–6388`、`6391–6402`） |
+| 逐页章节编号 | page-01 `[1..7]`、page-03 `[1..11]`、page-05 `[1..11]`、page-06 `[1..7]`、page-07 `[1..10]` —— 全连续 ✅ |
+| 编码 | `U+FFFD` **0** ✅ |
+| `<div>` 计数 | 1100 / 1102 = **−2**（上轮 −3；变化来自 JS 正则字面量增减，**非真实结构变化**） |
+| `preflight` | **exit 0**（10 项全绿）✅ |
+| `coverage_test` | **exit 0**（41 题全绿：5/5 + 11/11 + 25/25）✅ |
+| `check_review_stamp` | **exit 1（红）** ✅ **正确**：`760de8d` 尚无批准行（这也是应有状态） |
+
+### 38.4 批准行怎么写（请按这个改）
+
+现在表里那行是：
+```
+| 644ce41 | 第三十三轮 | 2026-09-21 | REVIEW_REPORT_v6.md §36 | ✅ 已批准 |
+```
+**两个问题**：① 它引用的 §36 并没有"通过"结论（§36 是"剩 5 处小残留"）；② 它批准的 `644ce41` 内容**已被 `760de8d` 取代**（少了 XSS 修复）。
+**建议改成**（替换这一行，保持"一条基线 = 一次内容状态"）：
+```markdown
+| 760de8d | 第三十四轮 | 2026-09-21 | REVIEW_REPORT_v6.md §38 | ✅ 已批准 |
+```
+**可选（建议顺手加，保证审计痕迹完整）**：在「违规记录」表补一行
+```markdown
+| 2026-09-21 | 644ce41 | 未复核先批准 | 在复核AI 未出"通过"结论时预先写入批准行（§36 为"剩 5 处"）；内容已由 §38 补验通过 |
+```
+改完自测：
+```bash
+python tools/check_review_stamp.py     # 期望：✅ 复核凭证有效（内容 = 760de8d）
+git add REVIEW_STAMP.md && git commit -m "review: 第三十四轮批准（§38 通过，基线 760de8d）"
+git push origin master                  # 若走本地推 master，pre-push 会校验；也可走 PR
+```
+> 提醒：**若你选择先改 §38.2 的 P2（`x`→`×`、连接符统一）**，请把它放进**同一个**提交里，然后告诉我新的 sha，我把 §38 的"批准基线"同步更新为该 sha（内容变了，基线也要跟着变）。
+
+### 38.5 复现命令
+
+```bash
+export PYTHONIOENCODING=utf-8
+# ① XSS 实测（把函数原样抽出后用 node 跑对抗用例）
+grep -n 'function splitBadges' index.html && grep -c 'toolCallHtml' index.html   # → 1 处定义 / 0 处残留
+# ② 三项修复
+grep -c '数据来源与假设' index.html            # → 0
+grep -o 'smart汽车（奔驰x吉利）' index.html | wc -l   # → 13
+# ③ 闸门
+python tools/preflight.py; node tools/coverage_test.js; python tools/check_review_stamp.py; echo "stamp=$?"
+```
+
+**本轮分析用临时脚本 `_xss.py` / `_xss2.py` / `_v38.py` 已删除。**
+
+---
+
+*本报告由复核AI（DeepSeek Harness）生成，**第三十五轮（§38 = `760de8d` 验收 —— ✅ 通过，批准基线 `760de8d`；仅剩 1 个 P2 品牌排版项）**；报告已进版本控制且被闸门豁免。*
 *基线一览（各章）：§23 `7ba68cd`（第二十四轮·`e09043b` 全量复核）｜§23.10 `6d4383d`｜§23.11 `30606ed`｜§23.12 `bab8f3a`｜§23.13 `9c48bf6`（第二十四轮 ✅ 通过，已合并）｜§24 读信（`e47d0d1` + 工作区）｜§26 `ebda712`（第二十五轮 ❌）｜§28 `45a22c5`（第二十六轮 ❌）｜§29 `e82113f`（第二十七轮：站点 ✅ / 文档 ❌）｜§31 `3164895`+`ef2b930`（第二十八轮：补丁 5/5 ✅）｜**§32 `814f782`（第二十九轮 ✅ 通过，批准基线）**。*
 *各轮复跑留档：§23 `preflight` 0 / `coverage` 0（37 题）；§23.10 `check_review_stamp` **0（假绿）**；§23.11–§23.12 `coverage` 37 题（4 条断言未进 `TESTS`，§23.12 ❌）；§23.13 `coverage` **41 题（5/5 + 11/11 + 25/25）** ✅；§26 起 `coverage` 41 题全绿、`check_review_stamp` 转为 **1（正确红）**；**§32 复跑：`preflight` 0、`coverage` 0（41 题全绿）、`check_review_stamp` 1（正确红）、内联脚本 14 块 `node --check` 全过、逐页编号全连续、局限/数据来源各 5 篇**。*
 *分析用临时脚本（`_r24*` / `_r25*` / `_r26*` / `_r27*` / `_v*.js|py` / `_jscheck.py` / `_pages.py` / `_final.py` 等）均已删除；`git status` 干净。*
