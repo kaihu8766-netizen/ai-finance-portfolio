@@ -2191,17 +2191,17 @@ window.SmartReconAI = {
       { kw: ['双Agent','复核机制','协作体系','怎么运作','如何运作','multi-agent','多智能体','团队','豆包','2.1 Turbo','DeepSeek Harness','主力AI','复核AI','四角色'], reply: '我实践了一套"主力AI+复核AI"的双Agent复核机制：<br><br>① <b>主力AI提方案并执行</b>：任务拆解、方案设计、代码实现、文档撰写<br>② <b>复核AI独立审查</b>：不是检查，而是平等讨论——边界测试、根因分析、提出异议<br>③ <b>人在分歧点裁决</b>：两个AI有分歧时，人做最终决策<br>④ <b>每一次分歧都沉淀为规则</b>：写入强制规则和CI闸门，可追溯<br><br>比如主力AI三次"先push后复核"，复核AI发现违规后双AI讨论，落地了复核凭证+CI闸门，PR #1实证：不补凭证就合不进去。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
       { kw: ['复核凭证','CI闸门','闸门','批准基线'], reply: '复核凭证 = 批准基线的机读记录（REVIEW_STAMP.md），记录每次通过DeepSeek复核、允许合并的内容基线。CI闸门 = PR上自动比对最新批准基线，内容不一致直接红，合不进去。目前有13条批准基线+3条违规记录，PR #1已实证生效。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
       { kw: ['强制规则','体检','preflight','检查10','分支保护','几项检查'], reply: '防御体系包括：①4条强制规则（触发复核、先核实再动手、Windows文本编码、hotfix白名单）②10项preflight自动体检（第10项=图片完整性，防止二进制被当文本写坏）③CI闸门2步（preflight+凭证校验）④分支保护（禁止直推master，必须走PR）。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
-      { kw: ['作者','你是谁','胡凯','背景','个人','介绍'], reply: '作者胡凯，2001年生，浙江宁波人。教育：精算本科（惠灵顿维多利亚大学）+ 金融与投资学（专业会计方向）硕士（宁波诺丁汉大学，2025.09-2027.07）。实习：smart（梅赛德斯-奔驰 × 吉利合资）财务资金部（2026.05-至今）+ 中审众环审计（2025.12-2026.03）。定位：懂业务+懂数据+懂AI的财务数字化人才。<div class="tool-call">portfolio_kb → author ✓</div>' },
+      { kw: ['作者','你是谁','胡凯','背景','个人','介绍'], reply: '作者胡凯，2001年生，浙江宁波人。教育：精算本科（惠灵顿维多利亚大学）+ 金融与投资学（专业会计方向）硕士（宁波诺丁汉大学，2025.09-2027.07）。实习：smart（奔驰×吉利）财务资金部（2026.05-至今）+ 中审众环审计（2025.12-2026.03）。定位：懂业务+懂数据+懂AI的财务数字化人才。<div class="tool-call">portfolio_kb → author ✓</div>' },
       { kw: ['教育','学历','学校','大学','专业','硕士','本科'], reply: '教育背景：<br>• <b>硕士</b>：宁波诺丁汉大学，金融与投资学（专业会计方向），2025.09-2027.07<br>• <b>本科</b>：惠灵顿维多利亚大学，精算学<br><br>精算本科打下数学建模和风险量化基础，金融会计硕士补充财务和投资知识，形成"量化+财务"复合背景。<div class="tool-call">portfolio_kb → author ✓</div>' },
-      { kw: ['实习','工作','经历','smart','汽车','资金部','资金方向','资金运营','审计'], reply: '实习经历：<br>• <b>smart（梅赛德斯-奔驰 × 吉利合资） 财务资金部</b>（2026.05-至今）：独立负责子公司流动资金贷款全流程，运用SAP完成集团资金台账与多银行账户数据归集，参与集团银行授信、供应链融资、跨境付汇与外汇申报<br>• <b>中审众环 审计实习</b>（2025.12-2026.03）：使用Python开展财务数据清洗与指标波动归因分析，参与制造业、房地产、私募基金年报审计，独立负责货币资金、往来款、固定资产等核心科目底稿<br><br>这些实习中的观察和思考，是作品集所有作品的灵感来源。<div class="tool-call">portfolio_kb → author ✓</div>' },
+      { kw: ['实习','工作','经历','smart','汽车','资金部','资金方向','资金运营','审计'], reply: '实习经历：<br>• <b>smart（奔驰×吉利）财务资金部</b>（2026.05-至今）：独立负责子公司流动资金贷款全流程，运用SAP完成集团资金台账与多银行账户数据归集，参与集团银行授信、供应链融资、跨境付汇与外汇申报<br>• <b>中审众环 审计实习</b>（2025.12-2026.03）：使用Python开展财务数据清洗与指标波动归因分析，参与制造业、房地产、私募基金年报审计，独立负责货币资金、往来款、固定资产等核心科目底稿<br><br>这些实习中的观察和思考，是作品集所有作品的灵感来源。<div class="tool-call">portfolio_kb → author ✓</div>' },
       { kw: ['技能','能力','会什么','技术栈','工具','python','sql','sap'], reply: '核心技能：<br>• <b>财务专业</b>：资金管理、财务报表、审计底稿、SOX内控、精算建模<br>• <b>数据工具</b>：Python(Pandas/NumPy/Matplotlib)、SQL、Excel高级函数、SAP<br>• <b>AI应用</b>：大语言模型API调用、Agent工作流设计、RAG检索增强、提示词工程<br>• <b>建模能力</b>：蒙特卡洛模拟、均值回归模型(Vasicek)、现金流压力测试、统计抽样法（属性抽样）<br><br>技术栈：原生HTML+CSS+JS、ECharts可视化、DeepSeek API、多Agent协作体系。<div class="tool-call">portfolio_kb → techStack ✓</div>' },
       { kw: ['求职','方向','目标','岗位','职业','规划','找工作'], reply: '求职方向：2027届秋招，聚焦财务数字化、资金管理、AI+财务复合岗位。目标岗位：字节跳动RFT AI Builder、京东JDS管培生（财务/资金方向）、美的/比亚迪财务数字化/资金岗、银行资金运营/国际财税。<br><br>职业规划：短期成为"懂业务+懂数据+懂AI"的复合型财务人才，长期探索AI在财务领域的深度应用。<div class="tool-call">portfolio_kb → purpose ✓</div>' },
-      { kw: ['为什么','做这个','动机','初衷','想法','来源'], reply: '这个作品集的所有作品，都来自实习中的观察和深度思考。比如：<br>• 在Smart做资金实习时，发现现金流预测靠Excel手动调整，于是做了现金流压力测试模型<br>• 看到公司贷款定价参考LPR，于是研究LPR走势预测和融资成本压力测试<br>• 审计实习时发现抽样靠经验判断，于是做了SOX统计抽样法（属性抽样）工具<br><br>我是实习生，这些作品没有落地到公司实际业务中，但体现了我从业务问题出发、用数据和AI工具尝试解决问题的思考过程。<div class="tool-call">portfolio_kb → purpose ✓</div>' },
+      { kw: ['为什么','做这个','动机','初衷','想法','来源'], reply: '这个作品集的所有作品，都来自实习中的观察和深度思考。比如：<br>• 在 smart（奔驰×吉利）做资金实习时，发现现金流预测靠Excel手动调整，于是做了现金流压力测试模型<br>• 看到公司贷款定价参考LPR，于是研究LPR走势预测和融资成本压力测试<br>• 审计实习时发现抽样靠经验判断，于是做了SOX统计抽样法（属性抽样）工具<br><br>我是实习生，这些作品没有落地到公司实际业务中，但体现了我从业务问题出发、用数据和AI工具尝试解决问题的思考过程。<div class="tool-call">portfolio_kb → purpose ✓</div>' },
       { kw: ['核心','亮点','优势','特长','厉害'], reply: '核心亮点：<br>① <b>复合背景</b>：精算本科+金融会计硕士+资金/审计实习<br>② <b>从业务出发</b>：所有作品都来自真实实习场景的观察和思考<br>③ <b>动手能力</b>：从想法到可交互Demo全部独立完成<br>④ <b>AI协作方法</b>：实践出"主力AI+复核AI"的双Agent复核机制<br>⑤ <b>持续迭代</b>：从v1到v5.5.0，多轮复核和修复。<div class="tool-call">portfolio_kb → keyNumbers ✓</div>' },
       { kw: ['w07','现金流','压力测试','核心作品','流动性','资金缺口分析','资金调度','调度建议'], reply: '作品07是核心作品：集团现金流压力测试与现金调度决策系统。<br><br>方法：多变量随机建模、情景推演1万次（蒙特卡洛模拟）、95%置信度下最大可能损失（VaR）、压力情景分析。<br><br>产出：未来12个月现金流预测区间、最低现金余额分布、资金缺口预警、现金调度建议。<br><br>这个作品体现了精算建模能力在财务场景的应用。<div class="tool-call">portfolio_kb → works[6] ✓</div>' },
       { kw: ['w03','lpr','利率','预测','蒙特卡洛','融资成本'], reply: '作品03：LPR走势预测与融资成本压力测试。<br><br>方法：利率均值回归模型（Vasicek）、蒙特卡洛模拟（5,000条路径）、1Y/5Y双期限建模、融资成本敏感性分析。<br><br>产出：未来60个月LPR预测区间（10%/50%/90%分位数）、5年后LPR概率分布、不同利率情景下的融资成本压力测试。<br><br>特点：参数诚实标注为"演示设定，非市场校准"，模型公式和Python源码全部公开可复现。<div class="tool-call">portfolio_kb → works[2] ✓</div>' },
       { kw: ['w06','sox','审计','内控','抽样','agent'], reply: '作品06：SOX审计Agent工作流。<br><br>内容：控制矩阵设计、AICPA属性抽样表、ITGC评估、4-Agent流水线展示。<br><br>特点：这个作品改了5轮，中间发现过抽样公式错误、抽样量矛盾，靠复核流程全部修正。抽样计算器可交互。<div class="tool-call">portfolio_kb → works[4] ✓</div>' },
-      { kw: ['局限','不足','结论','口径','研究结论','局限性'], reply: '关于作品的局限和结论，整体说明：<br><br>• <b>结论</b>：5个作品分别覆盖了支付行业研究、利率预测、供应链资金流、SOX审计工具、现金流压力测试，形成"研究→建模→工具→决策"的递进<br>• <b>共同局限</b>：所有作品都是我基于实习观察的个人尝试，<b>没有落地到公司实际业务</b>；现金流/供应链等具体数值是演示用的模拟数据，参数和口径在每个作品的"数据来源与假设"里写清楚了<br>• <b>方法论真实</b>：模型公式、抽样标准（AICPA属性抽样表）、精算方法（Vasicek、蒙特卡洛）都是真实的，Python源码公开可复现<br><br>每个作品详情页底部都有单独的"局限与诚实披露"和"数据来源与假设说明"，可以点进去看具体的。<div class="tool-call">portfolio_kb → keyNumbers ✓</div>' },
+      { kw: ['局限','不足','结论','口径','研究结论','局限性'], reply: '关于作品的局限和结论，整体说明：<br><br>• <b>结论</b>：5个作品分别覆盖了支付行业研究、利率预测、供应链资金流、SOX审计工具、现金流压力测试，形成"研究→建模→工具→决策"的递进<br>• <b>共同局限</b>：所有作品都是我基于实习观察的个人尝试，<b>没有落地到公司实际业务</b>；现金流/供应链等具体数值是演示用的模拟数据，参数和口径在每个作品的"数据来源与假设"里写清楚了<br>• <b>方法论真实</b>：模型公式、抽样标准（AICPA属性抽样表）、精算方法（Vasicek、蒙特卡洛）都是真实的，Python源码公开可复现<br><br>每个作品详情页底部都有单独的"局限与诚实披露"和"数据口径与假设说明"，可以点进去看具体的。<div class="tool-call">portfolio_kb → keyNumbers ✓</div>' },
       { kw: ['w01','支付','第三方','渠道','结算','微信','支付宝','结论','口径','局限','不足'], reply: '作品01：第三方支付资金渠道与结算效率分析。<br><br><b>核心结论</b>：①微信/支付宝双寡头格局稳定，合计份额超90%；②笔均金额持续下降（2018年约400元→2024年约80元），支付场景从大额转账转向高频小额；③结算效率（T+0到T+1）是中小商户选渠道的关键因素。<br><br><b>数据口径</b>：市场份额来自易观/艾瑞公开报告，笔均金额来自央行支付体系运行总体情况，结算效率来自各平台公开商户规则。不同机构统计口径可能有差异。<br><br><b>局限性</b>：只做了行业层面分析，没有深入商户对账逻辑；数据是公开行业平均值；没有做预测模型，是早期作品。<div class="tool-call">portfolio_kb → works[0] ✓</div>' },
       { kw: ['w05','供应链','金融','资金流','账期','委贷','资金缺口'], reply: '作品05：供应链金融资金流分析与AI预测模型。<br><br>内容：集团资金归集与委贷投放桑基图、账期错配诊断、现金流预测、资金缺口分析。<br><br>方法：资金归集建模、账期错配分析、AI预测模型、ECharts可视化。<div class="tool-call">portfolio_kb → works[3] ✓</div>' },
       // ===== 第五轮复核 L2 补全：必修缺口 + w01 素材 =====
@@ -3132,7 +3132,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     <div class="tag"><span class="dot"></span>LAYER 01 · RESEARCH</div>
     <h1>第三方支付资金渠道与结算效率分析</h1>
     <p>面向支付机构资金运营视角的行业研究：以抖音支付为核心观察对象，拆解双寡头格局下的市场份额口径之争、费率与结算体系、备付金监管，并对标渠道竞争力，输出"入职第 1 周即可用"的资金运营工作地图。</p>
-    <div class="who"><span>胡凯</span><span class="sep">·</span><span>金融与投资学（专业会计方向）硕士</span><span class="sep">·</span><span>smart 资金运营 × Mazars 审计背景</span><span class="sep">·</span><span>2026.08</span></div>
+    <div class="who"><span>胡凯</span><span class="sep">·</span><span>金融与投资学（专业会计方向）硕士</span><span class="sep">·</span><span>smart（奔驰×吉利）资金运营 × Mazars 审计背景</span><span class="sep">·</span><span>2026.08</span></div>
   </div>
 </div>
 
@@ -3615,14 +3615,14 @@ window.addEventListener("resize", function(){
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">07</span><h2>数据来源与假设说明</h2><span class="en">DATA SOURCES</span></div>
+  <div class="sec-head"><span class="num">07</span><h2>数据口径与假设说明</h2><span class="en">DATA DEFINITIONS</span></div>
   <table>
-    <tr><th>数据类型</th><th>具体内容</th><th>来源/性质</th><th>说明</th></tr>
-    <tr><td><b>网络支付总量</b></td><td>2025年网络支付金额337.81万亿</td><td><span style="color:#34d399">公开数据</span></td><td>中国人民银行《支付体系运行总体情况》，可直接核验</td></tr>
-    <tr><td><b>市场份额</b></td><td>微信59.7%（笔数）、支付宝54.6%（金额）</td><td><span style="color:#34d399">第三方研究</span></td><td>易观分析2026Q1监测数据，不同机构口径可能存在差异</td></tr>
-    <tr><td><b>备付金政策</b></td><td>客户备付金集中存管要求</td><td><span style="color:#34d399">监管规定</span></td><td>中国人民银行关于支付机构客户备付金集中存管的相关规定</td></tr>
-    <tr><td><b>抖音支付动态</b></td><td>牌照获取、高管变更、豆包扫码支付上线</td><td><span style="color:#34d399">公开报道</span></td><td>来自公司公告、高管公开发言与权威媒体报道</td></tr>
-    <tr><td><b>费率与时效</b></td><td>支付费率区间、结算时效一般水平</td><td><span style="color:#fbbf24">行业估算</span></td><td>基于公开信息与行业一般水平估算，具体以实际签约为准</td></tr>
+    <tr><th>字段/指标</th><th>业务口径定义</th><th>数据来源</th><th>粒度/时间</th><th>已知偏差或假设</th><th>可核验性</th></tr>
+    <tr><td><b>网络支付总量</b></td><td>非银行支付机构处理的网络支付业务金额总和</td><td>中国人民银行《支付体系运行总体情况》</td><td>年度/全行业</td><td>含线上线下全渠道，不同统计口径可能有差异</td><td><span style="color:#34d399">✅ 公开可查</span></td></tr>
+    <tr><td><b>市场份额</b></td><td>按交易笔数/交易金额统计的头部支付机构占比</td><td>易观分析2026Q1监测数据</td><td>季度/头部机构</td><td>不同监测机构口径差异可达数个百分点，仅供参考</td><td><span style="color:#fbbf24">⚠️ 第三方研究</span></td></tr>
+    <tr><td><b>备付金政策</b></td><td>支付机构客户备付金集中存管比例与监管要求</td><td>中国人民银行相关规定</td><td>政策/全行业</td><td>政策可能随监管导向调整，需关注最新文件</td><td><span style="color:#34d399">✅ 公开可查</span></td></tr>
+    <tr><td><b>抖音支付动态</b></td><td>牌照获取、高管变更、产品上线等关键事件</td><td>公司公告、权威媒体报道</td><td>事件/单家机构</td><td>部分信息来自媒体报道，以官方最终公告为准</td><td><span style="color:#34d399">✅ 公开可查</span></td></tr>
+    <tr><td><b>费率与时效</b></td><td>支付费率区间、结算时效的行业一般水平</td><td>公开信息与行业一般水平估算</td><td>区间/行业平均</td><td>具体费率以实际签约为准，不同商户类型差异较大</td><td><span style="color:#fbbf24">⚠️ 行业估算</span></td></tr>
   </table>
   <div class="quote" style="margin-top:14px"><b>数据时效：</b>所有公开数据截至2026年8月，支付行业监管政策与市场格局变化较快，后续数据发布可能改变分析结论。</div>
 </div>
@@ -3662,7 +3662,7 @@ window.addEventListener("resize", function(){
     <div class="tag"><span class="dot"></span>LAYER 01 · RESEARCH</div>
     <h1>LPR 走势预测分析｜贷款定价决策支持</h1>
     <p>基于 MLF 政策利率 · 银行净息差 · 社融 · CPI 四指标框架，预测央行 LPR 调整方向与幅度——把「利率走势判断」从经验直觉变成可验证的分析逻辑链，直接服务贷款定价、重定价与再融资决策。</p>
-    <div class="who"><span>胡凯</span><span class="sep">·</span><span>smart 资金运营 × 京东资金管理岗视角</span><span class="sep">·</span><span>2026.08</span></div>
+    <div class="who"><span>胡凯</span><span class="sep">·</span><span>smart（奔驰×吉利）资金运营 × 京东资金管理岗视角</span><span class="sep">·</span><span>2026.08</span></div>
   </div>
 </div>
 
@@ -3875,15 +3875,15 @@ window.addEventListener("resize", function(){
 </div>
 
 <div class="sec reveal">
-  <div class="sec-header"><span class="num">11</span><h2>数据来源与假设说明</h2><span class="badge">DATA SOURCES</span></div>
+  <div class="sec-header"><span class="num">11</span><h2>数据口径与假设说明</h2><span class="badge">DATA DEFINITIONS</span></div>
   <table>
-    <tr><th>数据类型</th><th>具体内容</th><th>来源/性质</th><th>说明</th></tr>
-    <tr><td><b>LPR历史数据</b></td><td>2019年8月改革以来1Y/5Y LPR报价序列</td><td><span style="color:#34d399">公开数据</span></td><td>中国人民银行官网每月20日公布，可直接核验</td></tr>
-    <tr><td><b>MLF利率</b></td><td>中期借贷便利操作利率</td><td><span style="color:#34d399">公开数据</span></td><td>央行公开市场操作公告，月度数据</td></tr>
-    <tr><td><b>银行净息差</b></td><td>商业银行净息差季度数据</td><td><span style="color:#34d399">公开数据</span></td><td>国家金融监督管理总局季度统计报告</td></tr>
-    <tr><td><b>社融/CPI</b></td><td>社会融资规模增量、CPI同比</td><td><span style="color:#34d399">公开数据</span></td><td>国家统计局月度发布</td></tr>
-    <tr><td><b>模型参数</b></td><td>利率均值回归模型（Vasicek）θ/κ/σ</td><td><span style="color:#fbbf24">演示设定</span></td><td>θ/κ为演示假设，σ由历史LPR序列近似估计，非市场校准</td></tr>
-    <tr><td><b>预测结果</b></td><td>未来LPR概率分布</td><td><span style="color:#fbbf24">模型输出</span></td><td>基于演示参数的模拟结果，不构成投资建议</td></tr>
+    <tr><th>字段/指标</th><th>业务口径定义</th><th>数据来源</th><th>粒度/时间</th><th>已知偏差或假设</th><th>可核验性</th></tr>
+    <tr><td><b>LPR历史数据</b></td><td>贷款市场报价利率，1年期与5年期以上两个期限品种</td><td>中国人民银行官网</td><td>月度/2019.08至今</td><td>每月20日公布（遇节假日顺延），改革前后口径不可比</td><td><span style="color:#34d399">✅ 公开可查</span></td></tr>
+    <tr><td><b>MLF利率</b></td><td>中期借贷便利操作利率，央行向商业银行投放中期流动性的利率</td><td>央行公开市场操作公告</td><td>月度/操作日</td><td>仅统计1年期MLF，不同期限操作利率可能有差异</td><td><span style="color:#34d399">✅ 公开可查</span></td></tr>
+    <tr><td><b>银行净息差</b></td><td>商业银行净利息收入与生息资产平均余额的比值</td><td>国家金融监督管理总局</td><td>季度/全行业</td><td>不同类型银行（国有/股份/城商/农商）差异较大，行业平均仅供参考</td><td><span style="color:#34d399">✅ 公开可查</span></td></tr>
+    <tr><td><b>社融/CPI</b></td><td>社会融资规模增量（实体经济从金融体系获得的资金）、CPI同比涨幅</td><td>国家统计局/央行</td><td>月度/全国</td><td>社融有季节性波动，CPI权重可能随消费结构调整</td><td><span style="color:#34d399">✅ 公开可查</span></td></tr>
+    <tr><td><b>模型参数</b></td><td>Vasicek均值回归模型：θ（长期均值）、κ（回归速度）、σ（波动率）</td><td>演示设定+历史估计</td><td>参数/模型</td><td>θ/κ为演示假设，σ由历史LPR序列近似估计，非市场校准；实际使用需按最新数据重新校准</td><td><span style="color:#fbbf24">⚠️ 演示设定</span></td></tr>
+    <tr><td><b>预测结果</b></td><td>基于蒙特卡洛模拟的未来LPR概率分布与区间预测</td><td>模型输出</td><td>预测/未来12个月</td><td>基于演示参数的模拟结果，不构成投资建议；模型假设利率服从均值回归，极端政策冲击可能失效</td><td><span style="color:#fbbf24">⚠️ 模型输出</span></td></tr>
   </table>
   <div class="quote" style="margin-top:14px"><b>数据时效：</b>所有公开数据截至2026年8月（含8月LPR报价与2026Q2净息差），后续数据发布可能改变分析结论。</div>
 </div>
@@ -4351,7 +4351,7 @@ window.addEventListener('resize', function() {
   <div class="meta">
     <span><span class="dot"></span>胡凯</span>
     <span>宁波诺丁汉大学 · 金融与投资学（专业会计方向）硕士</span>
-    <span>2026.05-至今 smart 资金方向 · 2025.12-2026.03 Mazars 审计</span>
+    <span>2026.05-至今 smart（奔驰×吉利）资金方向 · 2025.12-2026.03 Mazars 审计</span>
   </div>
 </section>
 
@@ -4359,7 +4359,7 @@ window.addEventListener('resize', function() {
 <section id="abstract" class="glass">
   <div class="sec-header"><span class="num">01</span><h2>摘要：结论先行</h2><span class="badge">EXECUTIVE SUMMARY</span></div>
   <p class="body">
-    本作品围绕三个递进问题展开：<strong>① 集团资金归集与委托贷款如何运作？</strong>——基于 smart 财务实习中真实参与的委托贷款业务，还原「集团资金池 → 银行通道 → 成员单位」的资金链路，梳理集中模式与多边模式两种委贷机制；<strong>② 供应链账期错配为何引发资金缺口？</strong>——用行业公开数据（汽车供应链 3-6 个月长账期、2025 年 17 家车企承诺 ≤60 天账期）量化账期错配对上下游的资金占用；<strong>③ AI 如何让资金流从「事后对账」走向「事前预测」？</strong>——设计「四表一警」现金流预测框架，用 AI 辅助构建回款概率模型、资金缺口预测与三级预警机制。
+    本作品围绕三个递进问题展开：<strong>① 集团资金归集与委托贷款如何运作？</strong>——基于 smart（奔驰×吉利）财务实习中真实参与的委托贷款业务，还原「集团资金池 → 银行通道 → 成员单位」的资金链路，梳理集中模式与多边模式两种委贷机制；<strong>② 供应链账期错配为何引发资金缺口？</strong>——用行业公开数据（汽车供应链 3-6 个月长账期、2025 年 17 家车企承诺 ≤60 天账期）量化账期错配对上下游的资金占用；<strong>③ AI 如何让资金流从「事后对账」走向「事前预测」？</strong>——设计「四表一警」现金流预测框架，用 AI 辅助构建回款概率模型、资金缺口预测与三级预警机制。
   </p>
   <div class="kpi-grid">
     <div class="kpi"><div class="value">60天</div><div class="label">2025 年 17 家主流车企（含吉利）承诺的供应商账期上限</div><div class="src">中国工业报 · 2025.06</div></div>
@@ -4412,10 +4412,11 @@ window.addEventListener('resize', function() {
     </div>
   </div>
   <p class="body" style="margin-top:14px">
-    以 smart 实习期间参与的资金业务为原型，下方桑基图模拟集团内部「资金归集 → 委贷投放 → 利息回流」的月度资金流（<b>模拟数据</b>）：
+    以 smart（奔驰×吉利）实习期间参与的资金业务为原型，下方桑基图模拟集团内部「资金归集 → 委贷投放 → 利息回流」的月度资金流（<b>模拟数据</b>）：
   </p>
   <div id="chart5_1" class="chart-echarts"></div>
   <div class="chart-note">图 1：集团资金池归集各成员单位盈余资金，经委托贷款通道投放至资金紧缺主体，形成「归集-投放-回流」全流程。模拟数据，单位：万元/月。</div>
+  <div class="quote" style="margin-top:10px"><b>这张图回答的决策问题：</b>集团内部哪一段资金占用最长、资金沉淀在哪里？可以从哪里压出来、重新配置到更需要资金的主体？——通过可视化资金链路，识别资金归集效率与委贷投放结构的优化空间。</div>
   <p class="body" style="margin-top:12px">
     <strong>建模要点</strong>：① 资金归集端——各成员单位按「最低营运资金保有量」标准上划盈余资金；② 投放端——按「借款利率不低于委托方资金成本、不高于市场同期利率」定价；③ 回流端——本金到期归还 + 利息按季结算；④ 风险端——借款方逾期时，集团资金池需垫付流动性，这正是「事前预测」的价值所在。
   </p>
@@ -5011,14 +5012,14 @@ window.addEventListener('resize', function() {
 </div>
 
 <div class="sec reveal">
-  <div class="sec-header"><span class="num">11</span><h2>数据来源与假设说明</h2><span class="badge">DATA SOURCES</span></div>
+  <div class="sec-header"><span class="num">11</span><h2>数据口径与假设说明</h2><span class="badge">DATA DEFINITIONS</span></div>
   <table>
-    <tr><th>数据类型</th><th>具体内容</th><th>来源/性质</th><th>说明</th></tr>
-    <tr><td><b>资金流数据</b></td><td>月均采购5,000万、委贷规模20,000万、账期90天等</td><td><span style="color:#fbbf24">模拟数据</span></td><td>参考汽车制造行业平均水平设定，非真实企业数据</td></tr>
-    <tr><td><b>行业基准</b></td><td>汽车行业应收账款周转天数、供应链金融模式</td><td><span style="color:#34d399">公开研究</span></td><td>基于行业公开报告与一般认知，未引用特定机构数据</td></tr>
-    <tr><td><b>委贷机制</b></td><td>委托贷款的法律结构、银行通道角色</td><td><span style="color:#34d399">监管规定</span></td><td>依据《商业银行委托贷款管理办法》（银监发〔2018〕2号）</td></tr>
-    <tr><td><b>预测模型</b></td><td>四表一警框架、趋势外推+因果分析+回归三层方法</td><td><span style="color:#34d399">方法论</span></td><td>参考企业现金流预测标准实践，为个人设计的分析框架</td></tr>
-    <tr><td><b>预警阈值</b></td><td>绿色/橙色/红色三级预警的资金缺口阈值</td><td><span style="color:#fbbf24">演示设定</span></td><td>基于安全垫倍数设定，需按企业实际风险偏好调整</td></tr>
+    <tr><th>字段/指标</th><th>业务口径定义</th><th>数据来源</th><th>粒度/时间</th><th>已知偏差或假设</th><th>可核验性</th></tr>
+    <tr><td><b>资金流数据</b></td><td>月均采购额、委贷规模、账期天数等资金链路核心参数</td><td>模拟数据（参考汽车制造行业平均水平）</td><td>月度/单集团模拟</td><td>非真实企业数据，仅用于演示分析框架；不同企业规模差异较大</td><td><span style="color:#fbbf24">⚠️ 模拟数据</span></td></tr>
+    <tr><td><b>行业基准</b></td><td>汽车行业应收账款周转天数、供应链金融典型模式</td><td>行业公开报告与一般认知</td><td>年度/行业平均</td><td>未引用特定机构数据，不同细分领域（整车/零部件/经销商）差异较大</td><td><span style="color:#34d399">✅ 公开研究</span></td></tr>
+    <tr><td><b>委贷机制</b></td><td>委托贷款的法律结构、银行作为通道的角色与职责</td><td>《商业银行委托贷款管理办法》</td><td>政策/全行业</td><td>银监发〔2018〕2号文，后续监管要求可能有调整，需关注最新规定</td><td><span style="color:#34d399">✅ 公开可查</span></td></tr>
+    <tr><td><b>预测模型</b></td><td>四表一警框架：现金流量表/资产负债表/利润表/资金计划表+预警中心</td><td>企业现金流预测标准实践+个人设计</td><td>方法论/框架</td><td>趋势外推+因果分析+回归三层方法为个人设计，非行业标准；实际应用需按企业业务特性调整</td><td><span style="color:#34d399">✅ 方法论</span></td></tr>
+    <tr><td><b>预警阈值</b></td><td>绿色/橙色/红色三级预警对应的资金缺口与安全垫倍数</td><td>演示设定（基于安全垫倍数）</td><td>阈值/三级</td><td>基于安全垫倍数（≥1.5绿/1.0-1.5橙/<1.0红）设定，需按企业实际风险偏好与融资能力调整</td><td><span style="color:#fbbf24">⚠️ 演示设定</span></td></tr>
   </table>
   <div class="quote" style="margin-top:14px"><b>使用说明：</b>本作品的核心价值在于<b>分析框架</b>（资金归集建模→账期错配诊断→现金流预测→三级预警），而非具体数字。实际应用需替换为企业真实数据，并根据行业特性调整模型假设。</div>
 </div>
@@ -5224,14 +5225,14 @@ window.addEventListener('resize', function() {
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">07</span><h2>数据来源与假设说明</h2><span class="en">DATA SOURCES</span></div>
+  <div class="sec-head"><span class="num">07</span><h2>数据口径与假设说明</h2><span class="en">DATA DEFINITIONS</span></div>
   <table>
-    <tr><th>数据类型</th><th>具体内容</th><th>来源/性质</th><th>说明</th></tr>
-    <tr><td><b>控制矩阵</b></td><td>6大流程18个控制点的设计</td><td><span style="color:#fbbf24">模拟设计</span></td><td>基于网易游戏公开业务模式与互联网行业内控一般实践设计，非真实企业内控文档</td></tr>
-    <tr><td><b>审计准则</b></td><td>SOX 404、PCAOB AS 2201、AICPA审计准则第1314号</td><td><span style="color:#34d399">公开准则</span></td><td>美国公众公司会计监督委员会与美国注册会计师协会公开发布的执业准则</td></tr>
-    <tr><td><b>ITGC框架</b></td><td>COBIT框架的访问安全、变更管理、批处理三大域</td><td><span style="color:#34d399">公开框架</span></td><td>ISACA发布的COBIT 2019框架，为IT治理国际标准</td></tr>
-    <tr><td><b>抽样参数</b></td><td>置信水平95%、可容忍偏差率5%、预计偏差率1%</td><td><span style="color:#34d399">准则常用值</span></td><td>AICPA审计抽样指南中的典型参数，实际应用需按审计计划调整</td></tr>
-    <tr><td><b>测试数据</b></td><td>控制测试的例外项、缺陷分级</td><td><span style="color:#fbbf24">演示数据</span></td><td>为展示工具功能构造的示例数据，非真实审计发现</td></tr>
+    <tr><th>字段/指标</th><th>业务口径定义</th><th>数据来源</th><th>粒度/时间</th><th>已知偏差或假设</th><th>可核验性</th></tr>
+    <tr><td><b>控制矩阵</b></td><td>6大业务流程、18个关键控制点的设计与执行测试模板</td><td>模拟设计（参考互联网行业内控一般实践）</td><td>控制点/单公司模拟</td><td>基于公开业务模式设计，非真实企业内控文档；实际应用需按企业真实业务流程重新梳理</td><td><span style="color:#fbbf24">⚠️ 模拟设计</span></td></tr>
+    <tr><td><b>审计准则</b></td><td>SOX 404内部控制评估、PCAOB AS 2201财务报告内部控制审计、AICPA审计抽样准则</td><td>PCAOB/AICPA公开发布的执业准则</td><td>准则/美国市场</td><td>美国公众公司适用，中国境内上市公司需结合中国内控规范与审计准则；准则可能随监管要求更新</td><td><span style="color:#34d399">✅ 公开可查</span></td></tr>
+    <tr><td><b>ITGC框架</b></td><td>IT一般控制：访问安全、变更管理、批处理与操作三大控制域</td><td>ISACA COBIT 2019框架</td><td>框架/国际标准</td><td>COBIT为IT治理国际标准，具体控制活动需结合企业IT治理成熟度与系统环境细化</td><td><span style="color:#34d399">✅ 公开可查</span></td></tr>
+    <tr><td><b>抽样参数</b></td><td>属性抽样：置信水平95%、可容忍偏差率5%、预计偏差率1%</td><td>AICPA审计抽样指南典型参数</td><td>参数/属性抽样</td><td>为准则常用值，实际应用需按审计计划、重要性水平、控制风险评估结果调整</td><td><span style="color:#34d399">✅ 准则常用值</span></td></tr>
+    <tr><td><b>测试数据</b></td><td>控制测试的例外项示例、缺陷分级（重大/重要/一般）</td><td>演示数据（为展示工具功能构造）</td><td>示例/单控制测试</td><td>为展示工具功能构造的示例数据，非真实审计发现；缺陷分级标准需按企业实际情况与审计准则确定</td><td><span style="color:#fbbf24">⚠️ 演示数据</span></td></tr>
   </table>
   <div class="quote" style="margin-top:14px"><b>使用说明：</b>本工具的核心价值在于<b>将审计方法论转化为可操作的工作模板</b>（控制矩阵→执行测试→缺陷跟踪→抽样计算），而非具体控制点设计。实际应用需按企业真实业务流程重新梳理控制点，并由注册会计师审核确认。</div>
 
@@ -6001,14 +6002,14 @@ window.addEventListener('resize', function(){
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">10</span><h2>数据来源与假设说明</h2><span class="en">DATA SOURCES</span></div>
+  <div class="sec-head"><span class="num">10</span><h2>数据口径与假设说明</h2><span class="en">DATA DEFINITIONS</span></div>
   <table>
-    <tr><th>数据类型</th><th>具体内容</th><th>来源/性质</th><th>说明</th></tr>
-    <tr><td><b>财务数据</b></td><td>期初现金8,000万、月均流入6,000万、月均支出4,500万、回款率均值0.85等</td><td><span style="color:#fbbf24">模拟数据</span></td><td>基于汽车制造行业平均水平设定的演示参数，非某公司真实财务数据</td></tr>
-    <tr><td><b>历史现金流</b></td><td>2026-03 ~ 2026-08 月度现金余额</td><td><span style="color:#fbbf24">模拟数据</span></td><td>为展示模型效果构造的历史序列，实际应用需替换为真实财务数据</td></tr>
-    <tr><td><b>模型方法</b></td><td>蒙特卡洛模拟、VaR、相关性分解方法（Cholesky）、利率均值回归模型（Vasicek）、股价/汇率随机游走模型（股价/汇率随机游走模型（几何布朗运动））</td><td><span style="color:#34d399">专业方法论</span></td><td>精算与金融风险管理标准方法，参考《风险管理与金融机构》（John C. Hull）</td></tr>
-    <tr><td><b>压力测试情景</b></td><td>基准/温和衰退/严重衰退三情景的参数设定</td><td><span style="color:#fbbf24">演示设定</span></td><td>参考美联储CCAR压力测试框架的思路，但具体参数为演示用途</td></tr>
-    <tr><td><b>行业基准</b></td><td>汽车行业应收账款周转天数、季节性因子</td><td><span style="color:#34d399">行业常识</span></td><td>基于公开行业研究的一般性认知，未引用特定机构报告</td></tr>
+    <tr><th>字段/指标</th><th>业务口径定义</th><th>数据来源</th><th>粒度/时间</th><th>已知偏差或假设</th><th>可核验性</th></tr>
+    <tr><td><b>财务数据</b></td><td>期初现金余额、月均现金流入/流出、回款率均值等现金流模型核心参数</td><td>模拟数据（参考汽车制造行业平均水平）</td><td>月度/单公司模拟</td><td>基于行业平均水平设定的演示参数，非某公司真实财务数据；不同企业规模与业务模式差异较大</td><td><span style="color:#fbbf24">⚠️ 模拟数据</span></td></tr>
+    <tr><td><b>历史现金流</b></td><td>2026-03 ~ 2026-08 月度现金余额序列，用于模型校准与回测</td><td>模拟数据（为展示模型效果构造）</td><td>月度/6个月</td><td>为展示模型效果构造的历史序列，实际应用需替换为企业真实财务数据并重新校准</td><td><span style="color:#fbbf24">⚠️ 模拟数据</span></td></tr>
+    <tr><td><b>模型方法</b></td><td>蒙特卡洛模拟、VaR（风险价值）、Cholesky相关性分解、Vasicek利率均值回归、几何布朗运动</td><td>精算与金融风险管理标准方法</td><td>方法论/模型</td><td>参考《风险管理与金融机构》（John C. Hull）等标准教材；模型假设变量服从特定分布，极端事件可能超出模型假设</td><td><span style="color:#34d399">✅ 专业方法论</span></td></tr>
+    <tr><td><b>压力测试情景</b></td><td>基准/温和衰退/严重衰退三情景对应的宏观参数与业务参数设定</td><td>演示设定（参考CCAR框架思路）</td><td>情景/三档</td><td>参考美联储CCAR压力测试框架的思路，但具体参数为演示用途，非监管规定的标准情景</td><td><span style="color:#fbbf24">⚠️ 演示设定</span></td></tr>
+    <tr><td><b>行业基准</b></td><td>汽车行业应收账款周转天数、销售季节性因子等行业特征参数</td><td>公开行业研究的一般性认知</td><td>年度/行业平均</td><td>基于公开行业研究的一般性认知，未引用特定机构报告；不同细分领域（整车/零部件/经销商）差异较大</td><td><span style="color:#34d399">✅ 行业常识</span></td></tr>
   </table>
   <div class="quote" style="margin-top:14px"><b>使用说明：</b>本模型的核心价值在于<b>方法论框架</b>（随机建模→压力测试→VaR度量→调度建议），而非具体数字。实际应用时，需用企业真实财务数据重新校准所有参数，并根据行业特性调整变量分布假设。</div>
 </div>

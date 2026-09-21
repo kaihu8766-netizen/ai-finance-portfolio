@@ -24,6 +24,7 @@ REFLECTION*.md
 
 # 本地预览
 *.local.html
+.preview/
 
 # 版本归档中的过程产物（QA截图、浏览器缓存、测试结果等）
 versions/**/playwright_temp_*/
