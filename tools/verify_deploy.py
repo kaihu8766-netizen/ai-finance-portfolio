@@ -34,7 +34,7 @@ MUST_HAVE = [
 MUST_NOT_HAVE = [
     "在线 · 了解全部5个作品",
     "可接入真实大模型",
-    "sk-e46307ffee254b49824dfc1da723fdb0",
+    "sk-***REDACTED***",
 ]
 
 # 需要检查200的资源
