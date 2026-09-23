@@ -11,12 +11,17 @@ rules:
   demo_publish:           # 可运行 Demo（对外发布产物）
     paths: ["demo/"]
     keywords: ["demo", "模拟器", "工作台"]
-  gate_self:              # 门禁自身（改门禁=绕过全部闸门，必审）
+  gate_self:              # 门禁自身（改门禁=绕过全部闸门，必审；控制面精确覆盖，证据面 tools/raw/ 排除）
     paths:
-      - "tools/"
+      - "tools/trace_gate.py"
+      - "tools/deepseek_gate.py"
+      - "tools/deepseek_client.py"
+      - "tools/preflight.py"
+      - "tools/check_review_stamp.py"
+      - "tools/project_state.py"
+      - "tools/gate_rules.yaml"
       - ".githooks/"
       - ".github/workflows/"
-      - "tools/gate_rules.yaml"
       - "PROJECT_BRIEF.md"
       - "REVIEW_STAMP.md"
       - ".gitignore"
