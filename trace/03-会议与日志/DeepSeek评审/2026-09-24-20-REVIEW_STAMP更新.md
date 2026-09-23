@@ -3,7 +3,7 @@ id: PF-RV-20260924-20
 date: 2026-09-24T00:49:56
 topic: REVIEW_STAMP更新
 status: pending
-diff_hash: 3311dbaf252552eb
+diff_hash: 6cc4ddae43f534e5
 decision_ids: []
 issue_ids: []
 task_ids: []
