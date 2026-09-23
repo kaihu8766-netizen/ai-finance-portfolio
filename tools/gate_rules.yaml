@@ -1,0 +1,28 @@
+# 作品集评审红线（机制迁移 PF-RV-20260923-01 采纳）
+# 命中即必须带已批准且 diff_hash 匹配的 PF-RV-ID 才能提交
+# 类别: paths(前缀匹配) 或 keywords(文件名/路径含词)
+rules:
+  index_html:             # 主页/核心页面
+    paths: ["index.html"]
+    keywords: ["index.html", "主页", "作品卡片"]
+  echarts_lib:            # 图表库（第三方依赖，改版本影响全部图表）
+    paths: ["echarts.min.js"]
+    keywords: ["echarts"]
+  demo_publish:           # 可运行 Demo（对外发布产物）
+    paths: ["demo/"]
+    keywords: ["demo", "模拟器", "工作台"]
+  gate_self:              # 门禁自身（改门禁=绕过全部闸门，必审；控制面精确覆盖，证据面 tools/raw/ 排除）
+    paths:
+      - "tools/trace_gate.py"
+      - "tools/deepseek_gate.py"
+      - "tools/deepseek_client.py"
+      - "tools/preflight.py"
+      - "tools/check_review_stamp.py"
+      - "tools/project_state.py"
+      - "tools/gate_rules.yaml"
+      - ".githooks/"
+      - ".github/workflows/"
+      - "PROJECT_BRIEF.md"
+      - "REVIEW_STAMP.md"
+      - ".gitignore"
+    keywords: ["gate", "hook", "钩子", "门禁", "preflight", "coverage"]

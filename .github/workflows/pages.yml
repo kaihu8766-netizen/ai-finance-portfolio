@@ -25,12 +25,28 @@ jobs:
         uses: actions/checkout@v4
       - name: Preflight check
         run: python tools/preflight.py
+      - name: Build Pages artifact (whitelist)
+        run: |
+          mkdir -p _site
+          # 白名单：只发布运行时需要的文件，排除 trace/ tools/ .github/ 及所有 .md 文档
+          cp index.html _site/
+          cp echarts.min.js _site/
+          cp -r demo _site/
+          cp -r assets _site/
+          cp -r versions _site/
+          # favicon / icon（如存在）
+          [ -f favicon.ico ] && cp favicon.ico _site/ || true
+          [ -f favicon.png ] && cp favicon.png _site/ || true
+          # .nojekyll 必须存在，否则下划线目录被 Jekyll 吞掉
+          touch _site/.nojekyll
+          echo "Pages artifact files:"
+          find _site -type f | head -50
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: '_site'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

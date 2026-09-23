@@ -34,3 +34,10 @@ versions/**/test-results/
 versions/**/_tmp_*.js
 versions/**/_verify_*.png
 versions/**/chrome_debug.log
+
+# 密钥保护（B1：API key 绝不入仓）
+.env
+.env.*
+!.env.example
+*.key
+*.pem

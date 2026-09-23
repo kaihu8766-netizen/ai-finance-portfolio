@@ -1,0 +1,3 @@
+# tools/ 运行依赖（B5：门禁可复现）
+requests==2.32.3
+pyyaml==6.0.2
