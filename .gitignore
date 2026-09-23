@@ -16,10 +16,11 @@ desktop.ini
 *.swp
 *.swo
 
-# 复核报告：只提交这两个规范文件（历史/临时报告仍不提交）
+# 复核报告：只提交规范文件（历史/临时报告仍不提交）
 REVIEW_REPORT*.md
 !REVIEW_REPORT_v6.md
 !REVIEW_REPORT_ACTIONS.md
+!REVIEW_REPORT_DISCUSSION*.md
 REFLECTION*.md
 
 # 本地预览
