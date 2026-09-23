@@ -1,5 +1,7 @@
 # REVIEW_REPORT_v6 — 第十一轮：流程违规分析 + `ec94b0e` 复核 + 反思报告 5 问回答
 
+> ⚠️ **【已冻结 · 历史档案只读】** 截至 2026-09-23，本文件为旧机制（REVIEW_REPORT.md 文件交接）的历史复核档案，保留根目录供追溯。后续所有评审一律走新机制 `trace/03-会议与日志/DeepSeek评审/`（PF-RV 档案，唯一权威源）。禁止在本文件新增复核条目；如需引用历史结论，标注"REVIEW_REPORT_v6 §N（历史）"。
+
 > 复核AI（DeepSeek Harness）｜2026-09-13
 > 基线：`HEAD = ec94b0e`（= `origin/master`，**已 push 上线**；`python tools/verify_deploy.py` exit 0，线上 = 本地 HEAD）
 > 前置报告：`REVIEW_REPORT_v5.md`（第一~十轮，§0–§16）。本文件**自包含**，可单独阅读。
