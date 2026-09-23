@@ -20,6 +20,7 @@ rules:
       - "tools/check_review_stamp.py"
       - "tools/project_state.py"
       - "tools/gate_rules.yaml"
+      - "tests/"
       - ".githooks/"
       - ".github/workflows/"
       - "PROJECT_BRIEF.md"

@@ -34,7 +34,11 @@ from pathlib import Path
 
 # 项目根（用 git rev-parse，兼容 worktree/CI/不同 checkout 路径）
 import subprocess as _sp
-ROOT = Path(_sp.check_output(["git", "rev-parse", "--show-toplevel"], text=True).strip())
+# RV-28（F-20260924-03）：ROOT 支持 TRACE_GATE_ROOT env 注入（测试隔离用）；
+# 未设置时回退 git rev-parse（真实仓根）。测试 fixture 须断言 ROOT != 真实仓根。
+import os as _os
+_env_root = _os.environ.get("TRACE_GATE_ROOT", "").strip()
+ROOT = Path(_env_root) if _env_root else Path(_sp.check_output(["git", "rev-parse", "--show-toplevel"], text=True).strip())
 
 # 作品集仓内 trace/ 决策追踪目录
 TRACE = ROOT / "trace"
@@ -183,7 +187,8 @@ def cmd_ids(grep: str) -> int:
 def _classify(staged_diff: str) -> tuple[list[str], str]:
     """按 gate_rules.yaml 分类 staged diff：返回 (命中类别列表, diff_hash)。"""
     import hashlib, re, yaml
-    rules_path = Path(__file__).parent / "gate_rules.yaml"
+    # RV-28（F-20260924-03）：rules_path 尊重 TRACE_GATE_ROOT（测试隔离完整）
+    rules_path = ROOT / "tools/gate_rules.yaml"
     rules = yaml.safe_load(rules_path.read_text(encoding="utf-8"))["rules"]
     diff_hash = hashlib.sha256(staged_diff.encode("utf-8", "replace")).hexdigest()[:16]
     files = set()

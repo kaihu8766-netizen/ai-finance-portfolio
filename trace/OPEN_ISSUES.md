@@ -4,7 +4,7 @@
 
 | ISS-ID | 日期 | 问题 | 影响 | 状态 |
 |---|---|---|---|---|
-| ISS-20260923-01 | 2026-09-23 | commit 时间可伪造（GIT_COMMITTER_DATE/--date），时间序校验可绕过 | 低：权威时间锚定 PF-RV 归档提交时间 | open |
+| ISS-20260923-01 | 2026-09-23 | commit 时间可伪造（GIT_COMMITTER_DATE/--date），时间序校验可绕过 | 低：F-20260924-03 以 GitHub 平台时间为权威缓解（PR merged_at / PushEvent created_at，落盘快照），非完全解决 | open（缓解中） |
 | ISS-20260923-02 | 2026-09-23 | 本地 hook 可被 --no-verify 绕过 | 低：CI review-gate 为不可绕过兜底 | open |
 | ISS-20260923-03 | 2026-09-23 | squash merge 时 PR 内 commit 校验需改 squash message 含 PF-RV-ID | 低：CI 层校验 squash message | open |
 | ISS-20260923-04 | 2026-09-23 | 新克隆默认不生效 core.hooksPath，需手动 git config core.hooksPath .githooks | 中：preflight 增加 hooksPath 自检 | open |
