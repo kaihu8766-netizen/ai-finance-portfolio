@@ -1719,7 +1719,12 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     <div class="tl-item tl-latest">
       <div class="tl-dot"></div>
       <div class="tl-content">
-        <div class="tl-head"><span class="tl-ver">v5.7.0</span><span class="tl-date">2026.09</span><span class="tl-badge">当前版本</span><span class="tl-pulse"></span></div>
+        <div class="tl-head"><span class="tl-ver">v5.7.1</span><span class="tl-date">2026.09</span><span class="tl-badge">当前版本</span><span class="tl-pulse"></span></div>
+        <div class="tl-desc">作品01发票核验加系统流水线图+规则引擎覆盖图（ECharts），文案口径修正（10条规则/未见异常），解决纯文字单调问题</div>
+        <div class="tl-tags"><span>可视化</span><span>ECharts</span><span>口径修正</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-head"><span class="tl-ver">v5.7.0</span><span class="tl-date">2026.09</span></div>
         <div class="tl-title">逻辑修复与原型升级</div>
         <div class="tl-desc">修复供应链现金流模拟器3个计算bug（回款率/账期/委贷本金）；资金预测工作台原型V2.0全面升级；新增CHANGELOG</div>
         <div class="tl-tags"><span>逻辑修复</span><span>原型V2.0</span><span>CHANGELOG</span></div>
@@ -1829,7 +1834,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
       <div class="work" onclick="showWork('01');return false;" style="cursor:pointer">
         <span class="badge b1"><span class="dot"></span>RESEARCH · 基础层</span>
         <div class="title">发票合规预审 · 解析与规则引擎</div>
-        <div class="desc">实习中观察到财务每天手工核票的低效场景，动手搭了一套「上传即解析、规则自动预警」的发票合规预审工具：XML/OFD/PDF 三通道解析 + R1-R11 规则引擎 + 结构化证据链 + 通俗解释，把重复报销、金额勾稽断裂、红冲异常变成机器检查。</div>
+        <div class="desc">实习中观察到财务每天手工核票的低效场景，动手搭了一套「上传即解析、规则自动预警」的发票合规预审工具：XML/OFD/PDF 三通道解析 + 10条规则引擎 + 结构化证据链 + 通俗解释，把重复报销、金额勾稽断裂、红冲异常变成机器检查。</div>
         <div class="meta"><span>2026.09 · 工具原型</span><span class="tag">解析引擎·规则引擎·双Agent复核</span><a class="demo-tag" href="demo/invoice-precheck-demo.html" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Demo ↗</a></div>
       </div>
 
@@ -1962,7 +1967,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
   <span><b>方向</b> 财务 × AI</span>
 </div>
 <button class="back-to-top" id="backToTop" aria-label="回到顶部">↑</button>
-<div class="footer">胡凯 · AI × Finance Portfolio · v5.7.0 · 全部数据经人工核验 · 2026.09 · AI协作方法探索</div>
+<div class="footer">胡凯 · AI × Finance Portfolio · v5.7.1 · 全部数据经人工核验 · 2026.09 · AI协作方法探索</div>
 
 </div>
 
@@ -2114,10 +2119,10 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
       "summary": "个人主页：一句话定位 + 资金运营/审计背景 + 3 层主线故事 + 作品矩阵分级布局",
       "tags": ["主页", "个人介绍", "作品矩阵", "入口", "背景"],
       "highlights": ["四层递进主线（研究→AI系统→审计→精算风险建模）", "5 作品矩阵分级布局", "能力全景卡片 + 双Agent复核机制"] },
-    { "id": "w01", "name": "发票合规预审 · 解析与规则引擎", "layer": "工具原型", "desc": "三通道解析(XML/OFD/PDF)·规则引擎R1-R11·证据链·69项测试·可运行Demo",
-      "summary": "实习中观察到财务手工核票的低效场景，动手搭了发票合规预审工具：XML/OFD/PDF 三通道解析 + R1-R11 规则引擎 + 证据链 + 通俗解释，输出分级风险报告",
+    { "id": "w01", "name": "发票合规预审 · 解析与规则引擎", "layer": "工具原型", "desc": "三通道解析(XML/OFD/PDF)·10条规则引擎·证据链·69项测试·可运行Demo",
+      "summary": "实习中观察到财务手工核票的低效场景，动手搭了发票合规预审工具：XML/OFD/PDF 三通道解析 + 10条规则引擎 + 证据链 + 通俗解释，输出分级风险报告",
       "tags": ["发票", "核验", "解析引擎", "规则引擎", "合规预审", "重复报销", "勾稽", "红冲", "证据链"],
-      "highlights": ["三通道解析（XML/OFD/PDF）", "规则引擎 R1-R11 分级+证据链", "69 项自动化测试", "可运行 Demo（合成样例）"] },
+      "highlights": ["三通道解析（XML/OFD/PDF）", "10条规则引擎 分级+证据链", "69 项自动化测试", "可运行 Demo（合成样例）"] },
     { "id": "w03", "name": "LPR 走势预测分析", "layer": "研究", "desc": "四指标框架(MLF/净息差/社融/CPI)·LPR历史走势·2026数据看板·贷款定价决策",
       "summary": "基于 MLF 政策利率、银行净息差、社融、CPI 四指标框架预测 LPR 调整方向与幅度：净息差 Q1 触底 1.40%、Q2 微升 1.41%（四年来首次环比回升）仍处历史低位，银行无主动降点动力是 LPR 持稳核心制约（已连续 15 个月不变），年内或先降政策利率 10-20bp、5Y LPR 定向下行，直接服务贷款定价与重定价决策",
       "tags": ["LPR", "利率预测", "净息差", "贷款定价", "宏观分析", "MLF", "社融", "CPI"],
@@ -2162,7 +2167,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     "⑭轻量RAG政策检索(5文档条款+关键词打分+回答附出处)",
     "⑮抽屉背景滚动锁定+作品加载提示"
   ],
-  "versions": "v1基础 → v2.1体积优化 → v2.2安全修复 → v2.3接入真实AI → v2.4数据底座 → v2.5拷问修复 → v2.6异常全流程 → v2.7内置助手 → v3.0打字机/批量处理/pytest/RAG/体验优化 → v3.2整合SOX控制测试工作台为第6作品 → v3.3双Agent协作实战展示 → v3.4作品矩阵分级布局 → v3.5数据修正+面试速览 → v3.6角色升级Manager+Specialist+图标 → v3.7称呼统一+能力全景+协作技术栈 → v3.8去审计化重定位+工具链分层+技术栈分组 → v3.9协作技术栈术语升级 → v3.10商业化深度(G2N/CCC/死信队列+审计日志) → v3.11 AI助手彻头彻尾大更新 → v4.0 作品集第四代·AI助手四方向大更新 → v4.1 LPR预测替换收入核算 → v4.2 LPR精算增强(理论视角+情景概率+蒙特卡洛) → v4.3 未来5年预测区间带 → v4.4 图表1全宽大图+5Y双期限 → v4.4.1 Demo可靠性加固 → v4.4.2 数据时效更新 → v4.5 精算复合背景升级：新增现金流压力测试(w07)+LPR融资成本压力测试+SmartRecon精算风险引擎 → v5.0 精简聚焦：删除智对账(w04)+月结优化(w02)，双Agent升级为四角色协作体系 → v5.1 四角色区域专业化重写+AI助手知识库自动同步+SOX升级Agent工作流v5.0 → v5.2 w03新增蒙特卡洛可交互Demo+AI利率分析工作流 + w05新增现金流压力测试可交互Demo → v5.3 供应链模拟器逻辑修复+proto2原型V2.0+CHANGELOG → v5.3.3 手机端media适配+preflight体检工具+iframe竞态修复 → v5.5.0 业务化大改造（5作品改为业务叙事：摘要→痛点→洞察→应用→技术→局限）+全站措辞业务化+双Agent协作展示 → v5.6.0 主页作品卡片新增显眼Demo入口（3宽卡「在线 Demo ↗」按钮+mini卡 Demo tag+研究型标注；卡片div化解嵌套链接）+版本基线更新 → v5.6.1 AI协作经验章节更新（双Agent机制升级三阶段闭环：事前对齐方案→独立复核→机器闸门兜底；关键规矩增至6条；数据更新43轮复核/26条批准基线；去内部词） → v5.7.0 作品01替换为发票合规预审（镜像产品演示页：三通道解析+规则引擎R1-R11+证据链；公开渠道去内部词/环境变量名/样本细节，数据全合成）",
+  "versions": "v1基础 → v2.1体积优化 → v2.2安全修复 → v2.3接入真实AI → v2.4数据底座 → v2.5拷问修复 → v2.6异常全流程 → v2.7内置助手 → v3.0打字机/批量处理/pytest/RAG/体验优化 → v3.2整合SOX控制测试工作台为第6作品 → v3.3双Agent协作实战展示 → v3.4作品矩阵分级布局 → v3.5数据修正+面试速览 → v3.6角色升级Manager+Specialist+图标 → v3.7称呼统一+能力全景+协作技术栈 → v3.8去审计化重定位+工具链分层+技术栈分组 → v3.9协作技术栈术语升级 → v3.10商业化深度(G2N/CCC/死信队列+审计日志) → v3.11 AI助手彻头彻尾大更新 → v4.0 作品集第四代·AI助手四方向大更新 → v4.1 LPR预测替换收入核算 → v4.2 LPR精算增强(理论视角+情景概率+蒙特卡洛) → v4.3 未来5年预测区间带 → v4.4 图表1全宽大图+5Y双期限 → v4.4.1 Demo可靠性加固 → v4.4.2 数据时效更新 → v4.5 精算复合背景升级：新增现金流压力测试(w07)+LPR融资成本压力测试+SmartRecon精算风险引擎 → v5.0 精简聚焦：删除智对账(w04)+月结优化(w02)，双Agent升级为四角色协作体系 → v5.1 四角色区域专业化重写+AI助手知识库自动同步+SOX升级Agent工作流v5.0 → v5.2 w03新增蒙特卡洛可交互Demo+AI利率分析工作流 + w05新增现金流压力测试可交互Demo → v5.3 供应链模拟器逻辑修复+proto2原型V2.0+CHANGELOG → v5.3.3 手机端media适配+preflight体检工具+iframe竞态修复 → v5.5.0 业务化大改造（5作品改为业务叙事：摘要→痛点→洞察→应用→技术→局限）+全站措辞业务化+双Agent协作展示 → v5.6.0 主页作品卡片新增显眼Demo入口（3宽卡「在线 Demo ↗」按钮+mini卡 Demo tag+研究型标注；卡片div化解嵌套链接）+版本基线更新 → v5.6.1 AI协作经验章节更新（双Agent机制升级三阶段闭环：事前对齐方案→独立复核→机器闸门兜底；关键规矩增至6条；数据更新43轮复核/26条批准基线；去内部词） → v5.7.0 作品01替换为发票合规预审（镜像产品演示页：三通道解析+规则引擎R1-R11+证据链；公开渠道去内部词/环境变量名/样本细节，数据全合成） → v5.7.1 作品01加图表（系统流水线HTML/CSS+规则引擎覆盖ECharts横向堆叠条形，数据来自产品RULES_META真实定义）+文案口径修正（10条规则/未见异常）",
   "dualAgentCollab": {
     "description": "主力AI提方案并执行、复核AI独立审查并提出异议、人在分歧点裁决；每次分歧都会沉淀为可复用的规则",
     "roles": [
@@ -2202,7 +2207,7 @@ window.SmartReconAI = {
     portfolio: [
       { kw: ['功能','结构','有哪些','哪些作品','作品集','几个作品','作品矩阵','导览','介绍'], reply: '这个作品集包含：①主页（个人介绍+四层递进主线）②作品01 发票合规预审（解析+规则引擎） ③作品03 LPR走势预测分析（含融资成本压力测试）④作品05 供应链金融资金流分析 ⑤作品06 SOX审计Agent工作流（4-Agent流水线+人工复核）⑥作品07 集团现金流压力测试（精算建模·核心）⑦资金智算CashFlow AI原型。<div class="tool-call">portfolio_kb → structure ✓</div>' },
       { kw: ['缺陷','问题','修复','bug','历史'], reply: '已修复的缺陷（列举）：①聊天输入XSS ②ECharts全量1004KB→按需打包691KB ③证据链元素用br无法显示→改div ④证据链浅底浅字看不清→改深色文字 ⑤Agent只回固定话术→接入真实DeepSeek API ⑥API失败直接降级→加重试 ⑦数据底座缺月度资金流→补12个月数据 ⑧离线关键词跨场景劫持→场景分离 ⑨人设漂移/逻辑缺陷→persona增强+资金全景 ⑩异常中心按钮无状态流转→完整全流程。<div class="tool-call">portfolio_kb → defect_log ✓</div>' },
-      { kw: ['迭代','版本','更新','演进'], reply: '作品集演进历史：v1 基础版→v2.1 ECharts按需打包→v2.2 安全修复→v2.3 接入真实DeepSeek AI→v2.4 数据底座升级→v2.5 AI拷问测试修复→v2.6 异常处理全流程→v2.7 内置作品集助手→v3.2 整合SOX工作台→v3.3 协作实战展示→v3.4 作品矩阵分级→v5.0 双Agent复核机制→v5.3 手机端适配+preflight体检→v5.5.0 业务化大改造+全站措辞业务化→v5.6.0 主页Demo入口显眼化→v5.6.1 AI协作经验章节更新（三阶段闭环+规矩6条+数据更新）→v5.7.0 作品01替换为发票合规预审（可运行Demo）。<div class="tool-call">portfolio_kb → versions ✓</div>' },
+      { kw: ['迭代','版本','更新','演进'], reply: '作品集演进历史：v1 基础版→v2.1 ECharts按需打包→v2.2 安全修复→v2.3 接入真实DeepSeek AI→v2.4 数据底座升级→v2.5 AI拷问测试修复→v2.6 异常处理全流程→v2.7 内置作品集助手→v3.2 整合SOX工作台→v3.3 协作实战展示→v3.4 作品矩阵分级→v5.0 双Agent复核机制→v5.3 手机端适配+preflight体检→v5.5.0 业务化大改造+全站措辞业务化→v5.6.0 主页Demo入口显眼化→v5.6.1 AI协作经验章节更新（三阶段闭环+规矩6条+数据更新）→v5.7.0 作品01替换为发票合规预审（可运行Demo）→v5.7.1 作品01加系统流水线图+规则覆盖图，文案口径修正。<div class="tool-call">portfolio_kb → versions ✓</div>' },
       { kw: ['双Agent','复核机制','协作体系','怎么运作','如何运作','multi-agent','多智能体','团队','豆包','2.1 Turbo','DeepSeek','主力AI','复核AI','四角色'], reply: '我实践了一套"主力AI+复核AI"的双Agent复核机制，闭环拉满：<br><br>① <b>开工前先对齐方案</b>：AI先复述理解、提异议，人拍板后再动手<br>② <b>主力AI提方案并执行</b>：任务拆解、方案设计、代码实现、文档撰写<br>③ <b>复核AI独立审查</b>：不是检查，而是平等讨论——边界测试、根因分析、提出异议<br>④ <b>人在分歧点裁决</b>：两个AI有分歧时，人做最终决策<br>⑤ <b>机器闸门兜底</b>：没复核的改动提交时会被拦下来，每一次分歧都沉淀为规则<br><br>比如主力AI三次"先push后复核"，复核AI发现违规后双AI讨论，落地了复核凭证+CI闸门，PR #1实证：不补凭证就合不进去。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
       { kw: ['复核凭证','CI闸门','闸门','批准基线'], reply: '复核凭证 = 批准基线的机读记录（REVIEW_STAMP.md），记录每次通过DeepSeek复核、允许合并的内容基线。CI闸门 = PR上自动比对最新批准基线，内容不一致直接红，合不进去。目前有26条批准基线+3条违规记录，PR #1已实证生效。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
       { kw: ['强制规则','体检','preflight','检查10','分支保护','几项检查'], reply: '防御体系包括：①4条强制规则（触发复核、先核实再动手、Windows文本编码、hotfix白名单）②10项preflight自动体检（第10项=图片完整性，防止二进制被当文本写坏）③CI闸门2步（preflight+凭证校验）④分支保护（禁止直推master，必须走PR）。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
@@ -2212,12 +2217,12 @@ window.SmartReconAI = {
       { kw: ['技能','能力','会什么','技术栈','工具','python','sql','sap'], reply: '核心技能：<br>• <b>财务专业</b>：资金管理、财务报表、审计底稿、SOX内控、精算建模<br>• <b>数据工具</b>：Python(Pandas/NumPy/Matplotlib)、SQL、Excel高级函数、SAP<br>• <b>AI应用</b>：大语言模型API调用、Agent工作流设计、RAG检索增强、提示词工程<br>• <b>建模能力</b>：蒙特卡洛模拟、均值回归模型(Vasicek)、现金流压力测试、统计抽样法（属性抽样）<br><br>技术栈：原生HTML+CSS+JS、ECharts可视化、DeepSeek API、多Agent协作体系。<div class="tool-call">portfolio_kb → techStack ✓</div>' },
       { kw: ['求职','方向','目标','岗位','职业','规划','找工作'], reply: '求职方向：2027届秋招，聚焦财务数字化、资金管理、AI+财务复合岗位。目标岗位：字节跳动RFT AI Builder、京东JDS管培生（财务/资金方向）、美的/比亚迪财务数字化/资金岗、银行资金运营/国际财税。<br><br>职业规划：短期成为"懂业务+懂数据+懂AI"的复合型财务人才，长期探索AI在财务领域的深度应用。<div class="tool-call">portfolio_kb → purpose ✓</div>' },
       { kw: ['为什么','做这个','动机','初衷','想法','来源'], reply: '这个作品集的所有作品，都来自实习中的观察和深度思考。比如：<br>• 在 smart汽车（奔驰×吉利）做资金实习时，发现现金流预测靠Excel手动调整，于是做了现金流压力测试模型<br>• 看到公司贷款定价参考LPR，于是研究LPR走势预测和融资成本压力测试<br>• 审计实习时发现抽样靠经验判断，于是做了SOX统计抽样法（属性抽样）工具<br><br>我是实习生，这些作品没有落地到公司实际业务中，但体现了我从业务问题出发、用数据和AI工具尝试解决问题的思考过程。<div class="tool-call">portfolio_kb → purpose ✓</div>' },
-      { kw: ['核心','亮点','优势','特长','厉害'], reply: '核心亮点：<br>① <b>复合背景</b>：精算本科+金融会计硕士+资金/审计实习<br>② <b>从业务出发</b>：所有作品都来自真实实习场景的观察和思考<br>③ <b>动手能力</b>：从想法到可交互Demo全部独立完成<br>④ <b>AI协作方法</b>：实践出"主力AI+复核AI"的双Agent复核机制<br>⑤ <b>持续迭代</b>：从v1到v5.7.0，多轮复核和修复。<div class="tool-call">portfolio_kb → keyNumbers ✓</div>' },
+      { kw: ['核心','亮点','优势','特长','厉害'], reply: '核心亮点：<br>① <b>复合背景</b>：精算本科+金融会计硕士+资金/审计实习<br>② <b>从业务出发</b>：所有作品都来自真实实习场景的观察和思考<br>③ <b>动手能力</b>：从想法到可交互Demo全部独立完成<br>④ <b>AI协作方法</b>：实践出"主力AI+复核AI"的双Agent复核机制<br>⑤ <b>持续迭代</b>：从v1到v5.7.1，多轮复核和修复。<div class="tool-call">portfolio_kb → keyNumbers ✓</div>' },
       { kw: ['w07','现金流','压力测试','核心作品','流动性','资金缺口分析','资金调度','调度建议'], reply: '作品07是核心作品：集团现金流压力测试与现金调度决策系统。<br><br>方法：多变量随机建模、情景推演1万次（蒙特卡洛模拟）、95%置信度下最大可能损失（VaR）、压力情景分析。<br><br>产出：未来12个月现金流预测区间、最低现金余额分布、资金缺口预警、现金调度建议。<br><br>这个作品体现了精算建模能力在财务场景的应用。<div class="tool-call">portfolio_kb → works[6] ✓</div>' },
       { kw: ['w03','lpr','利率','预测','蒙特卡洛','融资成本'], reply: '作品03：LPR走势预测与融资成本压力测试。<br><br>方法：利率均值回归模型（Vasicek）、蒙特卡洛模拟（5,000条路径）、1Y/5Y双期限建模、融资成本敏感性分析。<br><br>产出：未来60个月LPR预测区间（10%/50%/90%分位数）、5年后LPR概率分布、不同利率情景下的融资成本压力测试。<br><br>特点：参数诚实标注为"演示设定，非市场校准"，模型公式和Python源码全部公开可复现。<div class="tool-call">portfolio_kb → works[2] ✓</div>' },
       { kw: ['w06','sox','审计','内控','抽样','agent'], reply: '作品06：SOX审计Agent工作流。<br><br>内容：控制矩阵设计、AICPA属性抽样表、ITGC评估、4-Agent流水线展示。<br><br>特点：这个作品改了5轮，中间发现过抽样公式错误、抽样量矛盾，靠复核流程全部修正。抽样计算器可交互。<div class="tool-call">portfolio_kb → works[4] ✓</div>' },
       { kw: ['局限','不足','结论','口径','研究结论','局限性'], reply: '关于作品的局限和结论，整体说明：<br><br>• <b>结论</b>：5个作品分别覆盖了支付行业研究、利率预测、供应链资金流、SOX审计工具、现金流压力测试，形成"研究→建模→工具→决策"的递进<br>• <b>共同局限</b>：所有作品都是我基于实习观察的个人尝试，<b>没有落地到公司实际业务</b>；现金流/供应链等具体数值是演示用的模拟数据，参数和口径在每个作品的"数据口径与假设说明"里写清楚了<br>• <b>方法论真实</b>：模型公式、抽样标准（AICPA属性抽样表）、精算方法（Vasicek、蒙特卡洛）都是真实的，Python源码公开可复现<br><br>每个作品详情页底部都有单独的"局限与诚实披露"和"数据口径与假设说明"，可以点进去看具体的。<div class="tool-call">portfolio_kb → keyNumbers ✓</div>' },
-      { kw: ['w01','发票','核验','解析','规则','预审','重复报销','勾稽','红冲','证据链','局限'], reply: '作品01：发票合规预审 · 解析与规则引擎。<br><br><b>做什么</b>：财务入账前的发票合规预审工具——上传发票自动解析票面信息，跑 R1-R11 规则引擎（重复报销/金额勾稽/连号/限额/集中度/日期/差额征税/红冲关联），输出分级风险报告，每条风险带证据链（字段/原值/行号）和通俗解释（是什么/影响/怎么处理/该谁处理）。<br><br><b>能力</b>：XML/OFD/PDF 三通道解析引擎（PDF 支持版式文本+二维码解码+扫描件 OCR 分流）、69 项自动化测试、单票六项预审（票面状态/金额勾稽/归档合规/异常凭证/重复检查/红冲检查）、结论分「阻断入账/建议核对/建议入账」。<br><br><b>局限</b>：预警标准为占位口径，不构成合规结论；后端未公网部署（演示页为静态模式）；首版仅支持单企业主体。数据全部为合成虚构样例，非真实发票。<div class="tool-call">portfolio_kb → works[0] ✓</div>' },
+      { kw: ['w01','发票','核验','解析','规则','预审','重复报销','勾稽','红冲','证据链','局限'], reply: '作品01：发票合规预审 · 解析与规则引擎。<br><br><b>做什么</b>：财务入账前的发票合规预审工具——上传发票自动解析票面信息，跑 10条规则引擎（重复报销/金额勾稽/连号/限额/集中度/日期/差额征税/红冲关联），输出分级风险报告，每条风险带证据链（字段/原值/行号）和通俗解释（是什么/影响/怎么处理/该谁处理）。<br><br><b>能力</b>：XML/OFD/PDF 三通道解析引擎（PDF 支持版式文本+二维码解码+扫描件 OCR 分流）、69 项自动化测试、单票六项预审（票面状态/金额勾稽/归档合规/异常凭证/重复检查/红冲检查）、结论分「阻断入账/建议核对/未见异常」。<br><br><b>局限</b>：预警标准为占位口径，不构成合规结论；后端未公网部署（演示页为静态模式）；首版仅支持单企业主体。数据全部为合成虚构样例，非真实发票。<div class="tool-call">portfolio_kb → works[0] ✓</div>' },
       { kw: ['w05','供应链','金融','资金流','账期','委贷','资金缺口'], reply: '作品05：供应链金融资金流分析与AI预测模型。<br><br>内容：集团资金归集与委贷投放桑基图、账期错配诊断、现金流预测、资金缺口分析。<br><br>方法：资金归集建模、账期错配分析、AI预测模型、ECharts可视化。<div class="tool-call">portfolio_kb → works[3] ✓</div>' },
       // ===== 第五轮复核 L2 补全：必修缺口 + w01 素材 =====
       { kw: ['数据','真实','真的吗','编造','模拟','来源','可靠','可信','误差','落地','应用','实际使用'], reply: '关于数据真实性，我分三类说明：<br><br>• <b>公开数据</b>：LPR历史走势、宏观指标等来自央行等公开渠道，页面标注了来源<br>• <b>模拟数据</b>：现金流压力测试、供应链资金流等的具体数值是演示用的模拟数据，参数和口径在每个作品的"数据口径与假设说明"里写清楚了<br>• <b>方法论真实</b>：模型公式、抽样标准（AICPA属性抽样表）、精算方法（Vasicek、蒙特卡洛）都是真实的，Python源码公开可复现<br><br>我是实习生，没有权限使用公司真实数据，所以用模拟数据验证方法的可行性。这一点我在作品集里反复强调，不夸大。<div class="tool-call">portfolio_kb → keyNumbers ✓</div>' },
@@ -3167,9 +3172,9 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 <div class="kpis reveal">
   <div class="kpi"><div class="v">3 通道</div><div class="l">发票解析：XML / OFD / PDF（版式+二维码）</div><div class="s">PDF 支持打印版与扫描件识别</div></div>
-  <div class="kpi"><div class="v">R1-R11</div><div class="l">规则引擎：重复报销/勾稽/连号/红冲…</div><div class="s">风险分级 + 置信度 + 证据链</div></div>
+  <div class="kpi"><div class="v">10 条</div><div class="l">规则引擎：重复报销/勾稽/连号/红冲…</div><div class="s">风险分级 + 置信度 + 证据链</div></div>
   <div class="kpi"><div class="v">69 项</div><div class="l">解析 + 规则引擎自动化测试</div><div class="s">含合成样例可复现校验</div></div>
-  <div class="kpi"><div class="v">6 项</div><div class="l">单票预审检查：票面/勾稽/归档/异常/重复/红冲</div><div class="s">结论分「阻断入账/建议核对/建议入账」</div></div>
+  <div class="kpi"><div class="v">6 项</div><div class="l">单票预审检查：票面/勾稽/归档/异常/重复/红冲</div><div class="s">结论分「阻断入账/建议核对/未见异常」</div></div>
 </div>
 
 <div class="sec reveal">
@@ -3189,7 +3194,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     <tr><td><b>金额勾稽</b></td><td>逐行看金额×税率是否=税额</td><td>明细行税率标错、税额改数，勾稽断裂直接入账会进项转出</td></tr>
     <tr><td><b>红冲/异常</b></td><td>人工核对红票对应蓝票、进项转出提示</td><td>红冲关系不成立、负数票入账无对应蓝票，申报数据不一致</td></tr>
   </table>
-  <div class="callout"><b>核心洞察：</b>三关全是「规则明确、重复性高」的检查——这恰恰是规则引擎擅长的事：把人工核对逻辑固化成 R1-R11 条规则，上传即自动过一遍，人只需要处理机器标出的风险。</div>
+  <div class="callout"><b>核心洞察：</b>三关全是「规则明确、重复性高」的检查——这恰恰是规则引擎擅长的事：把人工核对逻辑固化成 10 条规则，上传即自动过一遍，人只需要处理机器标出的风险。</div>
 </div>
 
 <div class="sec reveal">
@@ -3200,19 +3205,58 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
       <div style="font-size:12px;color:#9ba3b7;line-height:1.6">XML 结构化解析 / OFD<br>PDF 版式文本 + 二维码解码<br>扫描件 OCR 分流</div>
     </div>
     <div style="background:linear-gradient(145deg,rgba(52,211,153,0.1),rgba(52,211,153,0.03));border:1px solid rgba(52,211,153,0.2);border-radius:12px;padding:18px;text-align:center">
-      <div style="font-size:20px;font-weight:700;color:#34d399;margin-bottom:6px">规则引擎 R1-R11</div>
+      <div style="font-size:20px;font-weight:700;color:#34d399;margin-bottom:6px">规则引擎（10条）</div>
       <div style="font-size:12px;color:#9ba3b7;line-height:1.6">重复/勾稽/连号/限额/集中度<br>日期/差额征税/红冲<br>分级 + 置信度 + 证据链</div>
     </div>
     <div style="background:linear-gradient(145deg,rgba(251,191,36,0.1),rgba(251,191,36,0.03));border:1px solid rgba(251,191,36,0.2);border-radius:12px;padding:18px;text-align:center">
       <div style="font-size:20px;font-weight:700;color:#fbbf24;margin-bottom:6px">风险报告</div>
-      <div style="font-size:12px;color:#9ba3b7;line-height:1.6">阻断入账 / 建议核对 / 建议入账<br>通俗解释（是什么/影响/怎么处理）<br>证据链可审计定位</div>
+      <div style="font-size:12px;color:#9ba3b7;line-height:1.6">阻断入账 / 建议核对 / 未见异常<br>通俗解释（是什么/影响/怎么处理）<br>证据链可审计定位</div>
     </div>
   </div>
   <p style="font-size:13.5px;color:#c9d1e3;line-height:1.9">解析引擎按「值类型识别 + 勾稽三元组」从版式文本提取字段（发票号=20位数字、日期=年M月D日、税号=91开头18位、公司名=含「公司/集团/厂」行），二维码兜底取税务核验短码；规则引擎分跨票规则（重复 R1、连号 R3、集中度 R6——逐张调用会失效）与单票规则（勾稽 R8/R10、差额征税 R9、红冲 R11 等）；红线保护：关键字段缺失或主体未配置时禁止产出「确定」级结论，降级为低危/疑似提示。</p>
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">04</span><h2>演示：在线 Demo（合成样例）</h2><span class="en">DEMO</span></div>
+  <div class="sec-head"><span class="num">04</span><h2>系统流水线与规则覆盖</h2><span class="en">ARCHITECTURE</span></div>
+  <!-- 流水线图 -->
+  <div style="display:flex;align-items:stretch;justify-content:space-between;gap:6px;margin-bottom:22px;flex-wrap:wrap">
+    <div style="flex:1;min-width:110px;background:linear-gradient(145deg,rgba(109,124,255,0.12),rgba(109,124,255,0.03));border:1px solid rgba(109,124,255,0.25);border-radius:10px;padding:14px 8px;text-align:center">
+      <div style="font-size:20px;margin-bottom:4px">📄</div>
+      <div style="font-size:12.5px;font-weight:700;color:#e8eaf0;margin-bottom:3px">上传发票</div>
+      <div style="font-size:10px;color:#8fa3c0;line-height:1.5">XML/OFD/PDF<br>批量或单张</div>
+    </div>
+    <div style="display:flex;align-items:center;color:#4a5578;font-size:16px;font-weight:700">→</div>
+    <div style="flex:1;min-width:110px;background:linear-gradient(145deg,rgba(52,211,153,0.12),rgba(52,211,153,0.03));border:1px solid rgba(52,211,153,0.25);border-radius:10px;padding:14px 8px;text-align:center">
+      <div style="font-size:20px;margin-bottom:4px">🔍</div>
+      <div style="font-size:12.5px;font-weight:700;color:#e8eaf0;margin-bottom:3px">三通道解析</div>
+      <div style="font-size:10px;color:#8fa3c0;line-height:1.5">XML结构化/OFD<br>PDF版式+二维码<br>扫描件OCR分流</div>
+    </div>
+    <div style="display:flex;align-items:center;color:#4a5578;font-size:16px;font-weight:700">→</div>
+    <div style="flex:1;min-width:110px;background:linear-gradient(145deg,rgba(251,191,36,0.12),rgba(251,191,36,0.03));border:1px solid rgba(251,191,36,0.25);border-radius:10px;padding:14px 8px;text-align:center">
+      <div style="font-size:20px;margin-bottom:4px">⚙️</div>
+      <div style="font-size:12.5px;font-weight:700;color:#e8eaf0;margin-bottom:3px">规则引擎</div>
+      <div style="font-size:10px;color:#8fa3c0;line-height:1.5">10条规则<br>跨票+单票<br>分级+置信度</div>
+    </div>
+    <div style="display:flex;align-items:center;color:#4a5578;font-size:16px;font-weight:700">→</div>
+    <div style="flex:1;min-width:110px;background:linear-gradient(145deg,rgba(236,72,153,0.12),rgba(236,72,153,0.03));border:1px solid rgba(236,72,153,0.25);border-radius:10px;padding:14px 8px;text-align:center">
+      <div style="font-size:20px;margin-bottom:4px">🔗</div>
+      <div style="font-size:12.5px;font-weight:700;color:#e8eaf0;margin-bottom:3px">证据链</div>
+      <div style="font-size:10px;color:#8fa3c0;line-height:1.5">字段/原值/行号<br>可审计定位<br>通俗解释</div>
+    </div>
+    <div style="display:flex;align-items:center;color:#4a5578;font-size:16px;font-weight:700">→</div>
+    <div style="flex:1;min-width:110px;background:linear-gradient(145deg,rgba(248,113,113,0.12),rgba(248,113,113,0.03));border:1px solid rgba(248,113,113,0.25);border-radius:10px;padding:14px 8px;text-align:center">
+      <div style="font-size:20px;margin-bottom:4px">📋</div>
+      <div style="font-size:12.5px;font-weight:700;color:#e8eaf0;margin-bottom:3px">分级报告</div>
+      <div style="font-size:10px;color:#8fa3c0;line-height:1.5">阻断入账<br>建议核对<br>未见异常</div>
+    </div>
+  </div>
+  <!-- 规则覆盖图 -->
+  <p style="font-size:12.5px;color:#9ba3b7;margin-bottom:8px">规则引擎按业务类别分组（高风险=红调，中风险=黄调），数据来自产品 RULES_META 真实定义：</p>
+  <div id="w01-rule-chart" class="chart-echarts" style="height:300px;width:100%"></div>
+</div>
+
+<div class="sec reveal">
+  <div class="sec-head"><span class="num">05</span><h2>演示：在线 Demo（合成样例）</h2><span class="en">DEMO</span></div>
   <p style="font-size:13.5px;color:#c9d1e3;line-height:1.9">演示页使用<b>全部虚构的合成样例</b>（示例公司/演示票号），覆盖重复报销、金额勾稽、差额征税、红冲关联、扫描件识别失败等典型场景。打开即可看到：批次统计 → 逐票六项预审 → 规则风险发现（分级徽章 + 证据链 + 通俗解释）。</p>
   <div style="margin-top:14px">
     <a class="demo-entry" href="demo/invoice-precheck-demo.html" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:12px 24px;background:#6d7cff;color:#fff;border-radius:10px;font-weight:700;font-size:14px;text-decoration:none;box-shadow:0 4px 14px rgba(109,124,255,.3)">🚀 打开在线 Demo ↗</a>
@@ -3221,7 +3265,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">05</span><h2>局限与诚实声明</h2><span class="en">LIMITATIONS</span></div>
+  <div class="sec-head"><span class="num">06</span><h2>局限与诚实声明</h2><span class="en">LIMITATIONS</span></div>
   <ul style="font-size:13.5px;color:#c9d1e3;line-height:2;margin-left:18px">
     <li>预警标准（限额/连号窗口/金额上限）为<b>占位口径</b>，待真实业务数据校准，<b>不构成合规结论</b>——这是一个思考与尝试，尚未落地到企业实际业务</li>
     <li>开发中以真实样本做过验证，结果归档为基准集记录，源文件按数据红线验后删除，演示环境不可重跑真实样本</li>
@@ -3243,6 +3287,53 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   } else {
     reveals.forEach(function(el){ el.classList.add('in'); });
   }
+  // 规则引擎覆盖图（横向堆叠条形）
+  try {
+    var el = document.getElementById('w01-rule-chart');
+    if (el && window.echarts) {
+      var chart = echarts.init(el);
+      var ruleData = {
+        categories: ['重复合规','金额勾稽','日期连号','限额标准','供应商集中度','红冲关联'],
+        high: [2, 2, 0, 0, 0, 0],
+        mid:  [0, 1, 2, 1, 1, 1],
+        detail: [
+          ['R1 重复报销','R2 抬头税号'],
+          ['R8 金额异常','R10 行级勾稽','R9 差额征税'],
+          ['R3 连号异常','R7 日期异常'],
+          ['R4 类别限额'],
+          ['R6 集中度'],
+          ['R11 红冲关联']
+        ]
+      };
+      chart.setOption({
+        tooltip: {
+          trigger: 'axis', axisPointer: {type:'shadow'},
+          backgroundColor: 'rgba(10,10,15,0.95)', borderColor: 'rgba(120,140,255,0.3)', borderWidth: 1,
+          textStyle: {color:'#e8eaf0', fontSize: 11},
+          formatter: function(ps){
+            var i = ps[0].dataIndex;
+            var out = '<b>' + ruleData.categories[i] + '</b><br/>';
+            ps.forEach(function(p){ if (p.value > 0) out += p.marker + p.seriesName + '：' + p.value + ' 条<br/>'; });
+            out += '<span style="color:#8fa3c0">规则：' + ruleData.detail[i].join('、') + '</span>';
+            return out;
+          }
+        },
+        legend: { top: 0, textStyle: {color:'#8a8fa0', fontSize: 11}, itemWidth: 12, itemHeight: 8 },
+        grid: { left: 8, right: 20, top: 36, bottom: 8, containLabel: true },
+        xAxis: { type: 'value', max: 3, interval: 1, axisLabel: {color:'#8a8fa0', fontSize: 10}, splitLine: {lineStyle:{color:'rgba(120,140,255,0.08)'}}, axisLine: {show:false} },
+        yAxis: { type: 'category', data: ruleData.categories, axisLabel: {color:'#c9d1e3', fontSize: 11}, axisLine: {show:false}, axisTick: {show:false} },
+        series: [
+          { name: '高风险', type: 'bar', stack: 'total', data: ruleData.high, barWidth: 18,
+            itemStyle: {color: new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#f87171'},{offset:1,color:'#ef4444'}])},
+            label: {show:true, position:'inside', color:'#fff', fontSize:10, fontWeight:700, formatter: function(p){return p.value>0?p.value:'';}} },
+          { name: '中风险', type: 'bar', stack: 'total', data: ruleData.mid, barWidth: 18,
+            itemStyle: {color: new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#fbbf24'},{offset:1,color:'#f59e0b'}]), borderRadius:[0,4,4,0]},
+            label: {show:true, position:'inside', color:'#1a1a2e', fontSize:10, fontWeight:700, formatter: function(p){return p.value>0?p.value:'';}} }
+        ]
+      });
+      window.addEventListener('resize', function(){ chart.resize(); });
+    }
+  } catch(e) { console.warn('w01 rule chart init failed:', e); }
 })();
 <\/script>
 </section>
@@ -4222,7 +4313,7 @@ window.addEventListener('resize', function() {
 </div>
 
 <div class="footer">
-  胡凯 · AI Portfolio v5.7.0 · 由 豆包 2.1 Turbo（主力Agent）+ DeepSeek（复核Agent）双Agent协作完成<br>
+  胡凯 · AI Portfolio v5.7.1 · 由 豆包 2.1 Turbo（主力Agent）+ DeepSeek（复核Agent）双Agent协作完成<br>
   行业数据均经人工核验并标注来源 · 资金流数据为模拟数据（已标注） · 数据时点：2026.08
 </div>
 
