@@ -234,8 +234,65 @@ def cmd_check_rv(message: str) -> int:
 
     commit-msg 钩子调用：1) 分类 staged diff；2) 命中红线→必须有 RV-ID 且
     其档案记录的 diff_hash == 当前 staged diff hash；3) 无 RV 或哈希不符→拒绝。
+
+    D 案（RV-20260929-289/290/291 adopted）：印章更新类提交（staged 含 REVIEW_STAMP.md
+    改动）走 fail-closed 绑定路径——必须带已 adopted PF-RV 且印章新增批准记录引用该
+    PF-RV，diff_hash 豁免（解除 REVIEW_STAMP 自指死锁，RV-123 同类）。非印章提交走
+    常规路径（diff 命令不变，与 deepseek_gate 记录口径一致，防 hash 分裂）。
     """
     import subprocess, re, yaml
+    # 印章更新判定（绑定路径；--unified=0 严格 + 行解析，防旧行重排冒充新增——RV-294 B2）
+    stamp_diff = subprocess.run(["git", "diff", "--cached", "--unified=0", "--", "REVIEW_STAMP.md"],
+                                capture_output=True, text=True, cwd=ROOT).stdout
+    if stamp_diff.strip():
+        # B1（RV-294）：豁免只限印章自身——同提交夹带其他红线文件 → 拒绝（须拆分提交）。
+        # 排除集用显式固定文件名（REVIEW_STAMP/REVIEW_REPORT），不用目录通配——
+        # 本仓红线（gate_rules.yaml + HARD_GATE_SELF）本就不含 trace/ tools/raw/（评审产物），
+        # 夹带评审产物文件不命中红线，天然免检；通配会掩盖夹带风险（RV-294 a 项收口）。
+        rest_diff = subprocess.run(["git", "diff", "--cached", "--binary", "--", ".",
+                                    ":(top,exclude)REVIEW_STAMP.md", ":(top,exclude)REVIEW_REPORT*.md"],
+                                   capture_output=True, text=True, cwd=ROOT).stdout
+        rest_hits, _ = _classify(rest_diff)
+        if rest_hits:
+            print(f"✗ 印章更新提交禁止夹带其他红线文件（{', '.join(rest_hits)}），"
+                  f"请拆分提交：印章相关改动单独 commit（RV-294 B1 防净放松）", file=sys.stderr)
+            return 1
+        # 词边界匹配（RV-294 b1）：PF-RV-20260929-11 不被 -110/-111 命中
+        m = re.search(r"\bPF-RV-(\d{8}-\d{2})(?!\d)", message)
+        if not m:
+            print("✗ 印章更新提交被拒：message 必须带已批准 PF-RV-ID（REVIEW_STAMP 改动须基于已采纳评审）", file=sys.stderr)
+            return 1
+        rv = m.group(1)
+        # 索引行不含完整 RV-ID（只有序号），按档案文件名格式匹配：YYYY-MM-DD-NN
+        ymd, no = rv.split("-")[0], "-".join(rv.split("-")[1:])
+        arch_glob = f"{ymd[:4]}-{ymd[4:6]}-{ymd[6:]}-{no}"
+        idx = _read_text(RV_INDEX)
+        rv_line = next((ln for ln in idx.splitlines() if arch_glob in ln), None)
+        arch = None
+        if rv_line:
+            cm = re.search(r"\|\s*([^|]+\.md)\s*\|", rv_line)
+            if cm:
+                arch = cm.group(1).strip()
+        if not arch:
+            print(f"✗ PF-RV-{rv} 未在索引中找到档案，印章提交被拒", file=sys.stderr)
+            return 1
+        arch_path = Path(RV_INDEX).parent / arch
+        if not arch_path.exists():
+            print(f"✗ PF-RV-{rv} 档案不存在（{arch}），印章提交被拒", file=sys.stderr)
+            return 1
+        atext = arch_path.read_text(encoding="utf-8")
+        if "status: adopted" not in atext:
+            print(f"✗ PF-RV-{rv} 档案未置 adopted，印章提交被拒（pending 号不可作为批准依据）", file=sys.stderr)
+            return 1
+        # 绑定校验：印章新增批准记录必须引用该 PF-RV（只查 + 行，删除行不算引用，
+        # 防"删除旧批准行"冒充绑定——RV-292 反例 1）
+        add_lines = [l for l in stamp_diff.splitlines() if l.startswith("+") and not l.startswith("+++")]
+        if not any(f"PF-RV-{rv}" in l for l in add_lines):
+            print(f"✗ 印章改动未新增引用 PF-RV-{rv} 的批准记录（「依据」列必须含该评审号），提交被拒", file=sys.stderr)
+            return 1
+        print(f"[check-rv] 通过：印章更新基于已批准 PF-RV-{rv}（绑定校验通过，diff_hash 豁免）")
+        return 0
+    # 常规路径（diff 命令保持原样：:!trace/ :!tools/raw/，与 deepseek_gate 记录口径一致）
     diff = subprocess.run(["git", "diff", "--cached", "--binary", "--", ".", ":!trace/", ":!tools/raw/"],
                           capture_output=True, text=True, cwd=ROOT).stdout
     hits, cur_hash = _classify(diff)

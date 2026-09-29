@@ -184,3 +184,59 @@ def test_check_scheme_docs_skipped(gate_repo: Path):
     """非功能提交（docs:）→ 跳过 scheme 校验。"""
     r = _run_gate(gate_repo, "check-scheme", "--message", "docs: t (PF-RV-20260924-22)")
     assert r.returncode == 0
+
+
+# ============ 闸门2-D案：印章更新绑定路径（RV-20260929-289/290/291）============
+
+def _stage_stamp(gate_repo: Path, content: str = "| 新批准 | ... | 依据 PF-RV-20260924-22 |\n") -> None:
+    """staged 一个 REVIEW_STAMP.md 改动（模拟印章更新提交）。"""
+    (gate_repo / "REVIEW_STAMP.md").write_text(content, encoding="utf-8")
+    subprocess.run(["git", "-C", str(gate_repo), "add", "REVIEW_STAMP.md"], check=True)
+
+
+def test_stamp_binding_requires_pf_rv(gate_repo: Path):
+    """印章更新无 PF-RV-ID → exit 1（fail-closed）。"""
+    _stage_stamp(gate_repo)
+    r = _run_gate(gate_repo, "check-rv", "--message", "docs(review): 印章更新")
+    assert r.returncode == 1
+    assert "PF-RV" in (r.stdout + r.stderr)
+
+
+def test_stamp_binding_pending_rejected(gate_repo: Path):
+    """印章更新引用 pending 档案 → exit 1。"""
+    (gate_repo / "trace/03-会议与日志/DeepSeek评审/2026-09-24-23-待定.md").write_text(
+        "status: pending\n", encoding="utf-8")
+    idx = gate_repo / "trace/03-会议与日志/DeepSeek评审/索引.md"
+    idx.write_text(idx.read_text() + "| 23 | 2026-09-24 | 待定 | 见档案 | pending | 2026-09-24-23-待定.md | 见档案 |\n",
+                   encoding="utf-8")
+    subprocess.run(["git", "-C", str(gate_repo), "add", "-A"], check=True)
+    _stage_stamp(gate_repo, "| 新批准 | ... | 依据 PF-RV-20260924-23 |\n")
+    r = _run_gate(gate_repo, "check-rv", "--message", "docs(review): 印章更新 (PF-RV-20260924-23)")
+    assert r.returncode == 1
+    assert "adopted" in (r.stdout + r.stderr)
+
+
+def test_stamp_binding_unreferenced_rejected(gate_repo: Path):
+    """印章新增批准记录未引用 message 的 PF-RV → exit 1（防无关 adopted 档案冒用）。"""
+    _stage_stamp(gate_repo, "| 新批准 | ... | 依据 PF-RV-20260924-99 |\n")
+    r = _run_gate(gate_repo, "check-rv", "--message", "docs(review): 印章更新 (PF-RV-20260924-22)")
+    assert r.returncode == 1
+    assert "未新增引用" in (r.stdout + r.stderr)
+
+
+def test_stamp_binding_pass(gate_repo: Path):
+    """印章更新引用 adopted 且绑定校验通过 → exit 0（diff_hash 豁免，解除自指死锁）。"""
+    _stage_stamp(gate_repo)
+    r = _run_gate(gate_repo, "check-rv", "--message", "docs(review): 印章更新 (PF-RV-20260924-22)")
+    assert r.returncode == 0
+    assert "印章更新基于已批准" in r.stdout
+
+
+def test_stamp_binding_carries_redline_rejected(gate_repo: Path):
+    """印章更新夹带其他红线文件 → exit 1（RV-294 B1：豁免只限印章自身，防净放松）。"""
+    _stage_stamp(gate_repo)
+    (gate_repo / "tools/trace_gate.py").write_text("# 夹带红线改动\n", encoding="utf-8")
+    subprocess.run(["git", "-C", str(gate_repo), "add", "tools/trace_gate.py"], check=True)
+    r = _run_gate(gate_repo, "check-rv", "--message", "docs(review): 印章更新 (PF-RV-20260924-22)")
+    assert r.returncode == 1
+    assert "禁止夹带" in (r.stdout + r.stderr)
