@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="胡凯 · AI × 财务作品集：第三方支付资金渠道研究、现金流压力测试、LPR 走势预测分析、资金对账 AI Agent（可运行 Demo）、供应链金融资金流分析。2027 届秋招 · 金融与投资学（专业会计方向）硕士。">
+    <meta name="description" content="胡凯 · AI × 财务作品集：发票合规预审（可运行 Demo）、现金流压力测试、LPR 走势预测分析、SOX 审计 Agent 工作流、供应链金融资金流分析。2027 届秋招 · 金融与投资学（专业会计方向）硕士。">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%236d7cff'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3E%E8%83%A1%3C/text%3E%3C/svg%3E">
     <title>胡凯 · AI × 财务 作品集</title>
     
@@ -1512,7 +1512,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     <div class="stat"><div class="v">5</div><div class="l">递进式作品</div></div>
     <div class="stat"><div class="v">4</div><div class="l">AI协作方法</div></div>
     <div class="stat"><div class="v">10K</div><div class="l">情景推演路径（蒙特卡洛模拟）</div></div>
-    <div class="stat"><div class="v">4</div><div class="l">可运行 Demo</div></div>
+    <div class="stat"><div class="v">5</div><div class="l">可运行 Demo</div></div>
   </div>
 </div>
 
@@ -1551,7 +1551,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     </div>
   </div>
   <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
-    <span style="background:rgba(109,124,255,0.1);color:#a5b0ff;border:1px solid rgba(109,124,255,0.3);padding:6px 14px;border-radius:20px;font-size:12px">4个可交互Demo</span>
+    <span style="background:rgba(109,124,255,0.1);color:#a5b0ff;border:1px solid rgba(109,124,255,0.3);padding:6px 14px;border-radius:20px;font-size:12px">5个可交互Demo</span>
     <span style="background:rgba(34,211,238,0.1);color:#67e8f9;border:1px solid rgba(34,211,238,0.3);padding:6px 14px;border-radius:20px;font-size:12px">1万次情景推演（蒙特卡洛模拟）</span>
     <span style="background:rgba(251,191,36,0.1);color:#fcd34d;border:1px solid rgba(251,191,36,0.3);padding:6px 14px;border-radius:20px;font-size:12px">Python / SQL / Excel</span>
     <span style="background:rgba(52,211,153,0.1);color:#6ee7b7;border:1px solid rgba(52,211,153,0.3);padding:6px 14px;border-radius:20px;font-size:12px">GitHub开源</span>
@@ -1719,7 +1719,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     <div class="tl-item tl-latest">
       <div class="tl-dot"></div>
       <div class="tl-content">
-        <div class="tl-head"><span class="tl-ver">v5.6.1</span><span class="tl-date">2026.09</span><span class="tl-badge">当前版本</span><span class="tl-pulse"></span></div>
+        <div class="tl-head"><span class="tl-ver">v5.7.0</span><span class="tl-date">2026.09</span><span class="tl-badge">当前版本</span><span class="tl-pulse"></span></div>
         <div class="tl-title">逻辑修复与原型升级</div>
         <div class="tl-desc">修复供应链现金流模拟器3个计算bug（回款率/账期/委贷本金）；资金预测工作台原型V2.0全面升级；新增CHANGELOG</div>
         <div class="tl-tags"><span>逻辑修复</span><span>原型V2.0</span><span>CHANGELOG</span></div>
@@ -1828,9 +1828,9 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     <div style="grid-column:1/-1;display:grid;grid-template-columns:repeat(2,1fr);gap:16px" class="works-mini">
       <div class="work" onclick="showWork('01');return false;" style="cursor:pointer">
         <span class="badge b1"><span class="dot"></span>RESEARCH · 基础层</span>
-        <div class="title">第三方支付资金渠道与结算效率分析</div>
-        <div class="desc">研究抖音支付资金渠道与结算效率：对比双寡头市场份额（多口径差异分析）、费率结构与到账时效，梳理备付金集中存管政策影响，并输出支付行业入职90天工作框架。</div>
-        <div class="meta"><span>2026.08 · 研究型</span><span class="tag">Kimi·DeepSeek·豆包</span><span class="research-tag">🔬 研究型 · 暂无 Demo</span></div>
+        <div class="title">发票合规预审 · 解析与规则引擎</div>
+        <div class="desc">实习中观察到财务每天手工核票的低效场景，动手搭了一套「上传即解析、规则自动预警」的发票合规预审工具：XML/OFD/PDF 三通道解析 + R1-R11 规则引擎 + 结构化证据链 + 通俗解释，把重复报销、金额勾稽断裂、红冲异常变成机器检查。</div>
+        <div class="meta"><span>2026.09 · 工具原型</span><span class="tag">解析引擎·规则引擎·双Agent复核</span><a class="demo-tag" href="demo/invoice-precheck-demo.html" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Demo ↗</a></div>
       </div>
 
       <div class="work" onclick="showWork('03');return false;" style="cursor:pointer">
@@ -1962,7 +1962,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
   <span><b>方向</b> 财务 × AI</span>
 </div>
 <button class="back-to-top" id="backToTop" aria-label="回到顶部">↑</button>
-<div class="footer">胡凯 · AI × Finance Portfolio · v5.6.1 · 全部数据经人工核验 · 2026.09 · AI协作方法探索</div>
+<div class="footer">胡凯 · AI × Finance Portfolio · v5.7.0 · 全部数据经人工核验 · 2026.09 · AI协作方法探索</div>
 
 </div>
 
@@ -2114,10 +2114,10 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
       "summary": "个人主页：一句话定位 + 资金运营/审计背景 + 3 层主线故事 + 作品矩阵分级布局",
       "tags": ["主页", "个人介绍", "作品矩阵", "入口", "背景"],
       "highlights": ["四层递进主线（研究→AI系统→审计→精算风险建模）", "5 作品矩阵分级布局", "能力全景卡片 + 双Agent复核机制"] },
-    { "id": "w01", "name": "第三方支付资金渠道与结算效率分析", "layer": "研究", "desc": "双寡头口径之争·11项数据源交叉核验·资金运营90天工作地图·5张交互图表",
-      "summary": "以抖音支付为核心观察对象的行业研究：拆解双寡头份额口径之争、费率与结算体系、备付金监管，输出入职第 1 周即可用的资金运营工作地图",
-      "tags": ["第三方支付", "资金渠道", "结算效率", "抖音支付", "双寡头", "备付金", "费率", "行业研究"],
-      "highlights": ["双寡头口径之争（笔数 vs 金额）", "11 项数据源交叉核验", "资金运营 90 天工作地图", "5 张交互图表"] },
+    { "id": "w01", "name": "发票合规预审 · 解析与规则引擎", "layer": "工具原型", "desc": "三通道解析(XML/OFD/PDF)·规则引擎R1-R11·证据链·69项测试·可运行Demo",
+      "summary": "实习中观察到财务手工核票的低效场景，动手搭了发票合规预审工具：XML/OFD/PDF 三通道解析 + R1-R11 规则引擎 + 证据链 + 通俗解释，输出分级风险报告",
+      "tags": ["发票", "核验", "解析引擎", "规则引擎", "合规预审", "重复报销", "勾稽", "红冲", "证据链"],
+      "highlights": ["三通道解析（XML/OFD/PDF）", "规则引擎 R1-R11 分级+证据链", "69 项自动化测试", "可运行 Demo（合成样例）"] },
     { "id": "w03", "name": "LPR 走势预测分析", "layer": "研究", "desc": "四指标框架(MLF/净息差/社融/CPI)·LPR历史走势·2026数据看板·贷款定价决策",
       "summary": "基于 MLF 政策利率、银行净息差、社融、CPI 四指标框架预测 LPR 调整方向与幅度：净息差 Q1 触底 1.40%、Q2 微升 1.41%（四年来首次环比回升）仍处历史低位，银行无主动降点动力是 LPR 持稳核心制约（已连续 15 个月不变），年内或先降政策利率 10-20bp、5Y LPR 定向下行，直接服务贷款定价与重定价决策",
       "tags": ["LPR", "利率预测", "净息差", "贷款定价", "宏观分析", "MLF", "社融", "CPI"],
@@ -2162,7 +2162,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     "⑭轻量RAG政策检索(5文档条款+关键词打分+回答附出处)",
     "⑮抽屉背景滚动锁定+作品加载提示"
   ],
-  "versions": "v1基础 → v2.1体积优化 → v2.2安全修复 → v2.3接入真实AI → v2.4数据底座 → v2.5拷问修复 → v2.6异常全流程 → v2.7内置助手 → v3.0打字机/批量处理/pytest/RAG/体验优化 → v3.2整合SOX控制测试工作台为第6作品 → v3.3双Agent协作实战展示 → v3.4作品矩阵分级布局 → v3.5数据修正+面试速览 → v3.6角色升级Manager+Specialist+图标 → v3.7称呼统一+能力全景+协作技术栈 → v3.8去审计化重定位+工具链分层+技术栈分组 → v3.9协作技术栈术语升级 → v3.10商业化深度(G2N/CCC/死信队列+审计日志) → v3.11 AI助手彻头彻尾大更新 → v4.0 作品集第四代·AI助手四方向大更新 → v4.1 LPR预测替换收入核算 → v4.2 LPR精算增强(理论视角+情景概率+蒙特卡洛) → v4.3 未来5年预测区间带 → v4.4 图表1全宽大图+5Y双期限 → v4.4.1 Demo可靠性加固 → v4.4.2 数据时效更新 → v4.5 精算复合背景升级：新增现金流压力测试(w07)+LPR融资成本压力测试+SmartRecon精算风险引擎 → v5.0 精简聚焦：删除智对账(w04)+月结优化(w02)，双Agent升级为四角色协作体系 → v5.1 四角色区域专业化重写+AI助手知识库自动同步+SOX升级Agent工作流v5.0 → v5.2 w03新增蒙特卡洛可交互Demo+AI利率分析工作流 + w05新增现金流压力测试可交互Demo → v5.3 供应链模拟器逻辑修复+proto2原型V2.0+CHANGELOG → v5.3.3 手机端media适配+preflight体检工具+iframe竞态修复 → v5.5.0 业务化大改造（5作品改为业务叙事：摘要→痛点→洞察→应用→技术→局限）+全站措辞业务化+双Agent协作展示 → v5.6.0 主页作品卡片新增显眼Demo入口（3宽卡「在线 Demo ↗」按钮+mini卡 Demo tag+研究型标注；卡片div化解嵌套链接）+版本基线更新 → v5.6.1 AI协作经验章节更新（双Agent机制升级三阶段闭环：事前对齐方案→独立复核→机器闸门兜底；关键规矩增至6条；数据更新43轮复核/26条批准基线；去内部词）",
+  "versions": "v1基础 → v2.1体积优化 → v2.2安全修复 → v2.3接入真实AI → v2.4数据底座 → v2.5拷问修复 → v2.6异常全流程 → v2.7内置助手 → v3.0打字机/批量处理/pytest/RAG/体验优化 → v3.2整合SOX控制测试工作台为第6作品 → v3.3双Agent协作实战展示 → v3.4作品矩阵分级布局 → v3.5数据修正+面试速览 → v3.6角色升级Manager+Specialist+图标 → v3.7称呼统一+能力全景+协作技术栈 → v3.8去审计化重定位+工具链分层+技术栈分组 → v3.9协作技术栈术语升级 → v3.10商业化深度(G2N/CCC/死信队列+审计日志) → v3.11 AI助手彻头彻尾大更新 → v4.0 作品集第四代·AI助手四方向大更新 → v4.1 LPR预测替换收入核算 → v4.2 LPR精算增强(理论视角+情景概率+蒙特卡洛) → v4.3 未来5年预测区间带 → v4.4 图表1全宽大图+5Y双期限 → v4.4.1 Demo可靠性加固 → v4.4.2 数据时效更新 → v4.5 精算复合背景升级：新增现金流压力测试(w07)+LPR融资成本压力测试+SmartRecon精算风险引擎 → v5.0 精简聚焦：删除智对账(w04)+月结优化(w02)，双Agent升级为四角色协作体系 → v5.1 四角色区域专业化重写+AI助手知识库自动同步+SOX升级Agent工作流v5.0 → v5.2 w03新增蒙特卡洛可交互Demo+AI利率分析工作流 + w05新增现金流压力测试可交互Demo → v5.3 供应链模拟器逻辑修复+proto2原型V2.0+CHANGELOG → v5.3.3 手机端media适配+preflight体检工具+iframe竞态修复 → v5.5.0 业务化大改造（5作品改为业务叙事：摘要→痛点→洞察→应用→技术→局限）+全站措辞业务化+双Agent协作展示 → v5.6.0 主页作品卡片新增显眼Demo入口（3宽卡「在线 Demo ↗」按钮+mini卡 Demo tag+研究型标注；卡片div化解嵌套链接）+版本基线更新 → v5.6.1 AI协作经验章节更新（双Agent机制升级三阶段闭环：事前对齐方案→独立复核→机器闸门兜底；关键规矩增至6条；数据更新43轮复核/26条批准基线；去内部词） → v5.7.0 作品01替换为发票合规预审（镜像产品演示页：三通道解析+规则引擎R1-R11+证据链；公开渠道去内部词/环境变量名/样本细节，数据全合成）",
   "dualAgentCollab": {
     "description": "主力AI提方案并执行、复核AI独立审查并提出异议、人在分歧点裁决；每次分歧都会沉淀为可复用的规则",
     "roles": [
@@ -2200,9 +2200,9 @@ window.SmartReconAI = {
     ],
     // 作品集助手场景（portfolio-assistant）
     portfolio: [
-      { kw: ['功能','结构','有哪些','哪些作品','作品集','几个作品','作品矩阵','导览','介绍'], reply: '这个作品集包含：①主页（个人介绍+四层递进主线）②作品01 第三方支付资金渠道研究 ③作品03 LPR走势预测分析（含融资成本压力测试）④作品05 供应链金融资金流分析 ⑤作品06 SOX审计Agent工作流（4-Agent流水线+人工复核）⑥作品07 集团现金流压力测试（精算建模·核心）⑦资金智算CashFlow AI原型。<div class="tool-call">portfolio_kb → structure ✓</div>' },
+      { kw: ['功能','结构','有哪些','哪些作品','作品集','几个作品','作品矩阵','导览','介绍'], reply: '这个作品集包含：①主页（个人介绍+四层递进主线）②作品01 发票合规预审（解析+规则引擎） ③作品03 LPR走势预测分析（含融资成本压力测试）④作品05 供应链金融资金流分析 ⑤作品06 SOX审计Agent工作流（4-Agent流水线+人工复核）⑥作品07 集团现金流压力测试（精算建模·核心）⑦资金智算CashFlow AI原型。<div class="tool-call">portfolio_kb → structure ✓</div>' },
       { kw: ['缺陷','问题','修复','bug','历史'], reply: '已修复的缺陷（列举）：①聊天输入XSS ②ECharts全量1004KB→按需打包691KB ③证据链元素用br无法显示→改div ④证据链浅底浅字看不清→改深色文字 ⑤Agent只回固定话术→接入真实DeepSeek API ⑥API失败直接降级→加重试 ⑦数据底座缺月度资金流→补12个月数据 ⑧离线关键词跨场景劫持→场景分离 ⑨人设漂移/逻辑缺陷→persona增强+资金全景 ⑩异常中心按钮无状态流转→完整全流程。<div class="tool-call">portfolio_kb → defect_log ✓</div>' },
-      { kw: ['迭代','版本','更新','演进'], reply: '作品集演进历史：v1 基础版→v2.1 ECharts按需打包→v2.2 安全修复→v2.3 接入真实DeepSeek AI→v2.4 数据底座升级→v2.5 AI拷问测试修复→v2.6 异常处理全流程→v2.7 内置作品集助手→v3.2 整合SOX工作台→v3.3 协作实战展示→v3.4 作品矩阵分级→v5.0 双Agent复核机制→v5.3 手机端适配+preflight体检→v5.5.0 业务化大改造+全站措辞业务化→v5.6.0 主页Demo入口显眼化→v5.6.1 AI协作经验章节更新（三阶段闭环+规矩6条+数据更新）。<div class="tool-call">portfolio_kb → versions ✓</div>' },
+      { kw: ['迭代','版本','更新','演进'], reply: '作品集演进历史：v1 基础版→v2.1 ECharts按需打包→v2.2 安全修复→v2.3 接入真实DeepSeek AI→v2.4 数据底座升级→v2.5 AI拷问测试修复→v2.6 异常处理全流程→v2.7 内置作品集助手→v3.2 整合SOX工作台→v3.3 协作实战展示→v3.4 作品矩阵分级→v5.0 双Agent复核机制→v5.3 手机端适配+preflight体检→v5.5.0 业务化大改造+全站措辞业务化→v5.6.0 主页Demo入口显眼化→v5.6.1 AI协作经验章节更新（三阶段闭环+规矩6条+数据更新）→v5.7.0 作品01替换为发票合规预审（可运行Demo）。<div class="tool-call">portfolio_kb → versions ✓</div>' },
       { kw: ['双Agent','复核机制','协作体系','怎么运作','如何运作','multi-agent','多智能体','团队','豆包','2.1 Turbo','DeepSeek','主力AI','复核AI','四角色'], reply: '我实践了一套"主力AI+复核AI"的双Agent复核机制，闭环拉满：<br><br>① <b>开工前先对齐方案</b>：AI先复述理解、提异议，人拍板后再动手<br>② <b>主力AI提方案并执行</b>：任务拆解、方案设计、代码实现、文档撰写<br>③ <b>复核AI独立审查</b>：不是检查，而是平等讨论——边界测试、根因分析、提出异议<br>④ <b>人在分歧点裁决</b>：两个AI有分歧时，人做最终决策<br>⑤ <b>机器闸门兜底</b>：没复核的改动提交时会被拦下来，每一次分歧都沉淀为规则<br><br>比如主力AI三次"先push后复核"，复核AI发现违规后双AI讨论，落地了复核凭证+CI闸门，PR #1实证：不补凭证就合不进去。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
       { kw: ['复核凭证','CI闸门','闸门','批准基线'], reply: '复核凭证 = 批准基线的机读记录（REVIEW_STAMP.md），记录每次通过DeepSeek复核、允许合并的内容基线。CI闸门 = PR上自动比对最新批准基线，内容不一致直接红，合不进去。目前有26条批准基线+3条违规记录，PR #1已实证生效。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
       { kw: ['强制规则','体检','preflight','检查10','分支保护','几项检查'], reply: '防御体系包括：①4条强制规则（触发复核、先核实再动手、Windows文本编码、hotfix白名单）②10项preflight自动体检（第10项=图片完整性，防止二进制被当文本写坏）③CI闸门2步（preflight+凭证校验）④分支保护（禁止直推master，必须走PR）。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
@@ -2212,15 +2212,15 @@ window.SmartReconAI = {
       { kw: ['技能','能力','会什么','技术栈','工具','python','sql','sap'], reply: '核心技能：<br>• <b>财务专业</b>：资金管理、财务报表、审计底稿、SOX内控、精算建模<br>• <b>数据工具</b>：Python(Pandas/NumPy/Matplotlib)、SQL、Excel高级函数、SAP<br>• <b>AI应用</b>：大语言模型API调用、Agent工作流设计、RAG检索增强、提示词工程<br>• <b>建模能力</b>：蒙特卡洛模拟、均值回归模型(Vasicek)、现金流压力测试、统计抽样法（属性抽样）<br><br>技术栈：原生HTML+CSS+JS、ECharts可视化、DeepSeek API、多Agent协作体系。<div class="tool-call">portfolio_kb → techStack ✓</div>' },
       { kw: ['求职','方向','目标','岗位','职业','规划','找工作'], reply: '求职方向：2027届秋招，聚焦财务数字化、资金管理、AI+财务复合岗位。目标岗位：字节跳动RFT AI Builder、京东JDS管培生（财务/资金方向）、美的/比亚迪财务数字化/资金岗、银行资金运营/国际财税。<br><br>职业规划：短期成为"懂业务+懂数据+懂AI"的复合型财务人才，长期探索AI在财务领域的深度应用。<div class="tool-call">portfolio_kb → purpose ✓</div>' },
       { kw: ['为什么','做这个','动机','初衷','想法','来源'], reply: '这个作品集的所有作品，都来自实习中的观察和深度思考。比如：<br>• 在 smart汽车（奔驰×吉利）做资金实习时，发现现金流预测靠Excel手动调整，于是做了现金流压力测试模型<br>• 看到公司贷款定价参考LPR，于是研究LPR走势预测和融资成本压力测试<br>• 审计实习时发现抽样靠经验判断，于是做了SOX统计抽样法（属性抽样）工具<br><br>我是实习生，这些作品没有落地到公司实际业务中，但体现了我从业务问题出发、用数据和AI工具尝试解决问题的思考过程。<div class="tool-call">portfolio_kb → purpose ✓</div>' },
-      { kw: ['核心','亮点','优势','特长','厉害'], reply: '核心亮点：<br>① <b>复合背景</b>：精算本科+金融会计硕士+资金/审计实习<br>② <b>从业务出发</b>：所有作品都来自真实实习场景的观察和思考<br>③ <b>动手能力</b>：从想法到可交互Demo全部独立完成<br>④ <b>AI协作方法</b>：实践出"主力AI+复核AI"的双Agent复核机制<br>⑤ <b>持续迭代</b>：从v1到v5.6.1，多轮复核和修复。<div class="tool-call">portfolio_kb → keyNumbers ✓</div>' },
+      { kw: ['核心','亮点','优势','特长','厉害'], reply: '核心亮点：<br>① <b>复合背景</b>：精算本科+金融会计硕士+资金/审计实习<br>② <b>从业务出发</b>：所有作品都来自真实实习场景的观察和思考<br>③ <b>动手能力</b>：从想法到可交互Demo全部独立完成<br>④ <b>AI协作方法</b>：实践出"主力AI+复核AI"的双Agent复核机制<br>⑤ <b>持续迭代</b>：从v1到v5.7.0，多轮复核和修复。<div class="tool-call">portfolio_kb → keyNumbers ✓</div>' },
       { kw: ['w07','现金流','压力测试','核心作品','流动性','资金缺口分析','资金调度','调度建议'], reply: '作品07是核心作品：集团现金流压力测试与现金调度决策系统。<br><br>方法：多变量随机建模、情景推演1万次（蒙特卡洛模拟）、95%置信度下最大可能损失（VaR）、压力情景分析。<br><br>产出：未来12个月现金流预测区间、最低现金余额分布、资金缺口预警、现金调度建议。<br><br>这个作品体现了精算建模能力在财务场景的应用。<div class="tool-call">portfolio_kb → works[6] ✓</div>' },
       { kw: ['w03','lpr','利率','预测','蒙特卡洛','融资成本'], reply: '作品03：LPR走势预测与融资成本压力测试。<br><br>方法：利率均值回归模型（Vasicek）、蒙特卡洛模拟（5,000条路径）、1Y/5Y双期限建模、融资成本敏感性分析。<br><br>产出：未来60个月LPR预测区间（10%/50%/90%分位数）、5年后LPR概率分布、不同利率情景下的融资成本压力测试。<br><br>特点：参数诚实标注为"演示设定，非市场校准"，模型公式和Python源码全部公开可复现。<div class="tool-call">portfolio_kb → works[2] ✓</div>' },
       { kw: ['w06','sox','审计','内控','抽样','agent'], reply: '作品06：SOX审计Agent工作流。<br><br>内容：控制矩阵设计、AICPA属性抽样表、ITGC评估、4-Agent流水线展示。<br><br>特点：这个作品改了5轮，中间发现过抽样公式错误、抽样量矛盾，靠复核流程全部修正。抽样计算器可交互。<div class="tool-call">portfolio_kb → works[4] ✓</div>' },
       { kw: ['局限','不足','结论','口径','研究结论','局限性'], reply: '关于作品的局限和结论，整体说明：<br><br>• <b>结论</b>：5个作品分别覆盖了支付行业研究、利率预测、供应链资金流、SOX审计工具、现金流压力测试，形成"研究→建模→工具→决策"的递进<br>• <b>共同局限</b>：所有作品都是我基于实习观察的个人尝试，<b>没有落地到公司实际业务</b>；现金流/供应链等具体数值是演示用的模拟数据，参数和口径在每个作品的"数据口径与假设说明"里写清楚了<br>• <b>方法论真实</b>：模型公式、抽样标准（AICPA属性抽样表）、精算方法（Vasicek、蒙特卡洛）都是真实的，Python源码公开可复现<br><br>每个作品详情页底部都有单独的"局限与诚实披露"和"数据口径与假设说明"，可以点进去看具体的。<div class="tool-call">portfolio_kb → keyNumbers ✓</div>' },
-      { kw: ['w01','支付','第三方','渠道','结算','微信','支付宝','结论','口径','局限','不足'], reply: '作品01：第三方支付资金渠道与结算效率分析。<br><br><b>核心结论</b>：①微信/支付宝双寡头格局稳定，合计份额超90%；②笔均金额持续下降（2018年约400元→2024年约80元），支付场景从大额转账转向高频小额；③结算效率（T+0到T+1）是中小商户选渠道的关键因素。<br><br><b>数据口径</b>：市场份额来自易观/艾瑞公开报告，笔均金额来自央行支付体系运行总体情况，结算效率来自各平台公开商户规则。不同机构统计口径可能有差异。<br><br><b>局限性</b>：只做了行业层面分析，没有深入商户对账逻辑；数据是公开行业平均值；没有做预测模型，是早期作品。<div class="tool-call">portfolio_kb → works[0] ✓</div>' },
+      { kw: ['w01','发票','核验','解析','规则','预审','重复报销','勾稽','红冲','证据链','局限'], reply: '作品01：发票合规预审 · 解析与规则引擎。<br><br><b>做什么</b>：财务入账前的发票合规预审工具——上传发票自动解析票面信息，跑 R1-R11 规则引擎（重复报销/金额勾稽/连号/限额/集中度/日期/差额征税/红冲关联），输出分级风险报告，每条风险带证据链（字段/原值/行号）和通俗解释（是什么/影响/怎么处理/该谁处理）。<br><br><b>能力</b>：XML/OFD/PDF 三通道解析引擎（PDF 支持版式文本+二维码解码+扫描件 OCR 分流）、69 项自动化测试、单票六项预审（票面状态/金额勾稽/归档合规/异常凭证/重复检查/红冲检查）、结论分「阻断入账/建议核对/建议入账」。<br><br><b>局限</b>：预警标准为占位口径，不构成合规结论；后端未公网部署（演示页为静态模式）；首版仅支持单企业主体。数据全部为合成虚构样例，非真实发票。<div class="tool-call">portfolio_kb → works[0] ✓</div>' },
       { kw: ['w05','供应链','金融','资金流','账期','委贷','资金缺口'], reply: '作品05：供应链金融资金流分析与AI预测模型。<br><br>内容：集团资金归集与委贷投放桑基图、账期错配诊断、现金流预测、资金缺口分析。<br><br>方法：资金归集建模、账期错配分析、AI预测模型、ECharts可视化。<div class="tool-call">portfolio_kb → works[3] ✓</div>' },
       // ===== 第五轮复核 L2 补全：必修缺口 + w01 素材 =====
-      { kw: ['数据','真实','真的吗','编造','模拟','来源','可靠','可信','误差','落地','应用','实际使用'], reply: '关于数据真实性，我分三类说明：<br><br>• <b>公开数据</b>：LPR历史走势、第三方支付市场份额等来自央行/易观等公开渠道，页面标注了来源<br>• <b>模拟数据</b>：现金流压力测试、供应链资金流等的具体数值是演示用的模拟数据，参数和口径在每个作品的"数据口径与假设说明"里写清楚了<br>• <b>方法论真实</b>：模型公式、抽样标准（AICPA属性抽样表）、精算方法（Vasicek、蒙特卡洛）都是真实的，Python源码公开可复现<br><br>我是实习生，没有权限使用公司真实数据，所以用模拟数据验证方法的可行性。这一点我在作品集里反复强调，不夸大。<div class="tool-call">portfolio_kb → keyNumbers ✓</div>' },
+      { kw: ['数据','真实','真的吗','编造','模拟','来源','可靠','可信','误差','落地','应用','实际使用'], reply: '关于数据真实性，我分三类说明：<br><br>• <b>公开数据</b>：LPR历史走势、宏观指标等来自央行等公开渠道，页面标注了来源<br>• <b>模拟数据</b>：现金流压力测试、供应链资金流等的具体数值是演示用的模拟数据，参数和口径在每个作品的"数据口径与假设说明"里写清楚了<br>• <b>方法论真实</b>：模型公式、抽样标准（AICPA属性抽样表）、精算方法（Vasicek、蒙特卡洛）都是真实的，Python源码公开可复现<br><br>我是实习生，没有权限使用公司真实数据，所以用模拟数据验证方法的可行性。这一点我在作品集里反复强调，不夸大。<div class="tool-call">portfolio_kb → keyNumbers ✓</div>' },
       { kw: ['算错','错误','准确','靠谱','会不会错','质疑'], reply: '说实话，确实算错过。<br><br>SOX工作台在第四轮复核时发现过两个问题：①统计抽样法（属性抽样）公式的偏差率口径写错了，导致样本量计算偏差；②页面写"预计偏差1%对应60笔"，但AICPA标准表实际是95笔。这些都被DeepSeek复核查出来并修正了。<br><br>这也是我做双Agent复核机制的原因——AI自己写的东西自己查不出来，必须有独立复核。现在每个作品都有preflight自动体检 + DeepSeek人工复核两道关。<br><br>财务/审计/精算里，"不确定就说不确定"比"像模像样地编一个"重要得多。<div class="tool-call">portfolio_kb → defect_log ✓</div>' },
       { kw: ['gpa','成绩','绩点','排名','学习'], reply: '学业表现：硕士阶段GPA位于专业前10%。本科精算专业侧重数学建模和风险量化，硕士金融与投资学（专业会计方向）侧重财务和投资分析。<br><br>具体成绩单可以看简历，这里就不展开了。<div class="tool-call">portfolio_kb → author ✓</div>' },
 
@@ -3156,505 +3156,79 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 <div class="cover">
   <div class="in">
-    <div class="tag"><span class="dot"></span>LAYER 01 · RESEARCH</div>
-    <h1>第三方支付资金渠道与结算效率分析</h1>
-    <p>面向支付机构资金运营视角的行业研究：以抖音支付为核心观察对象，拆解双寡头格局下的市场份额口径之争、费率与结算体系、备付金监管，并对标渠道竞争力，输出"入职第 1 周即可用"的资金运营工作地图。</p>
-    <div class="who"><span>胡凯</span><span class="sep">·</span><span>金融与投资学（专业会计方向）硕士</span><span class="sep">·</span><span>smart汽车（奔驰×吉利）资金运营 × Mazars 审计背景</span><span class="sep">·</span><span>2026.08</span></div>
+    <div class="tag"><span class="dot"></span>LAYER 01 · 工具原型</div>
+    <h1>发票合规预审 · 解析与规则引擎</h1>
+    <p>面向财务入账前场景的发票合规预审工具：实习中观察到财务每天要收票、核票、对账，重复报销、金额勾稽断裂、红冲异常全靠人工一眼一眼盯。我尝试把它自动化——上传发票即可自动解析票面信息、跑规则引擎、输出分级风险报告，每条风险都带证据链和通俗解释。</p>
+    <div class="who"><span>胡凯</span><span class="sep">·</span><span>金融与投资学（专业会计方向）硕士</span><span class="sep">·</span><span>财务资金部实习观察 · 个人尝试</span><span class="sep">·</span><span>2026.09</span></div>
   </div>
 </div>
 
 <div class="wrap">
 
 <div class="kpis reveal">
-  <div class="kpi"><div class="v">337.81万亿</div><div class="l">2025 年网络支付金额</div><div class="s">央行《2025 支付体系运行总体情况》</div></div>
-  <div class="kpi"><div class="v">59.7%</div><div class="l">微信支付份额（笔数口径）</div><div class="s">易观 2026Q1 · 金额口径支付宝 54.6% 领先</div></div>
-  <div class="kpi"><div class="v">2.56万亿</div><div class="l">备付金余额（2026.04）</div><div class="s">央行资产负债表 · 连续 9 个月超 2.5 万亿</div></div>
-  <div class="kpi"><div class="v">0.6%</div><div class="l">行业标准商户费率</div><div class="s">微信/支付宝标准费率 · 特殊行业 1.0-1.2%</div></div>
+  <div class="kpi"><div class="v">3 通道</div><div class="l">发票解析：XML / OFD / PDF（版式+二维码）</div><div class="s">PDF 支持打印版与扫描件识别</div></div>
+  <div class="kpi"><div class="v">R1-R11</div><div class="l">规则引擎：重复报销/勾稽/连号/红冲…</div><div class="s">风险分级 + 置信度 + 证据链</div></div>
+  <div class="kpi"><div class="v">69 项</div><div class="l">解析 + 规则引擎自动化测试</div><div class="s">含合成样例可复现校验</div></div>
+  <div class="kpi"><div class="v">6 项</div><div class="l">单票预审检查：票面/勾稽/归档/异常/重复/红冲</div><div class="s">结论分「阻断入账/建议核对/建议入账」</div></div>
 </div>
 
 <div class="sec reveal">
-  <div class="sec reveal">
   <div class="sec-head"><span class="num">01</span><h2>摘要：结论先行</h2><span class="en">EXECUTIVE SUMMARY</span></div>
+  <p style="font-size:13.5px;color:#c9d1e3;line-height:1.9">财务入账前，发票核验是个高频又容易被忽视的环节。我从实习中的观察出发——<b>重复报销、明细税额与合计对不上、红字票没有对应蓝票</b>——这些靠人工核对既慢又容易漏。这个项目把「解析 + 规则 + 报告」做成一条自动化流水线：解析引擎读票面（XML/OFD/PDF 三通道），规则引擎跑 11 条检查（重复、勾稽、连号、限额、集中度、日期、差额征税、红冲等），每条风险输出<b>证据链</b>（字段/原值/行号）和<b>通俗解释</b>（是什么/影响/怎么处理/该谁处理）。</p>
+  <div style="margin-top:12px;font-size:12px;color:#8fa3c0;line-height:1.8;background:rgba(109,124,255,0.06);padding:10px 14px;border-radius:8px;border-left:3px solid #6d7cff">
+    <b style="color:#6d7cff">我的角色：</b>实习中观察到手工核票的低效场景后，自己设计解析-规则-报告流水线并动手实现；AI 协作完成代码调试与复核（双 Agent 复核机制：主力执行 + 独立评审，机器闸门兜底）。
+  </div>
+</div>
+
+<div class="sec reveal">
+  <div class="sec-head"><span class="num">02</span><h2>业务痛点：手工核票的三个「拦路虎」</h2><span class="en">BUSINESS PAIN POINTS</span></div>
+  <p>财务入账前，发票要过三关，每一关都靠人工：</p>
+  <table>
+    <tr><th>关卡</th><th>人工怎么做</th><th>风险</th></tr>
+    <tr><td><b>重复报销</b></td><td>凭记忆 + 翻历史记录比对</td><td>同一张票报两次，重复抵扣进项税，审计一查一个准</td></tr>
+    <tr><td><b>金额勾稽</b></td><td>逐行看金额×税率是否=税额</td><td>明细行税率标错、税额改数，勾稽断裂直接入账会进项转出</td></tr>
+    <tr><td><b>红冲/异常</b></td><td>人工核对红票对应蓝票、进项转出提示</td><td>红冲关系不成立、负数票入账无对应蓝票，申报数据不一致</td></tr>
+  </table>
+  <div class="callout"><b>核心洞察：</b>三关全是「规则明确、重复性高」的检查——这恰恰是规则引擎擅长的事：把人工核对逻辑固化成 R1-R11 条规则，上传即自动过一遍，人只需要处理机器标出的风险。</div>
+</div>
+
+<div class="sec reveal">
+  <div class="sec-head"><span class="num">03</span><h2>方法论：解析 → 规则 → 报告</h2><span class="en">METHOD</span></div>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:18px">
     <div style="background:linear-gradient(145deg,rgba(109,124,255,0.1),rgba(109,124,255,0.03));border:1px solid rgba(109,124,255,0.2);border-radius:12px;padding:18px;text-align:center">
-      <div style="font-size:20px;font-weight:700;color:#6d7cff;margin-bottom:6px">3条选渠道结论</div>
-      <div style="font-size:12px;color:#9ba3b7;line-height:1.6">不同业务场景怎么组合<br>支付宝/微信/抖音支付</div>
+      <div style="font-size:20px;font-weight:700;color:#6d7cff;margin-bottom:6px">解析引擎</div>
+      <div style="font-size:12px;color:#9ba3b7;line-height:1.6">XML 结构化解析 / OFD<br>PDF 版式文本 + 二维码解码<br>扫描件 OCR 分流</div>
     </div>
     <div style="background:linear-gradient(145deg,rgba(52,211,153,0.1),rgba(52,211,153,0.03));border:1px solid rgba(52,211,153,0.2);border-radius:12px;padding:18px;text-align:center">
-      <div style="font-size:20px;font-weight:700;color:#34d399;margin-bottom:6px">费率差可达几个bp</div>
-      <div style="font-size:12px;color:#9ba3b7;line-height:1.6">选对渠道，一年下来<br>手续费差可达数十万</div>
+      <div style="font-size:20px;font-weight:700;color:#34d399;margin-bottom:6px">规则引擎 R1-R11</div>
+      <div style="font-size:12px;color:#9ba3b7;line-height:1.6">重复/勾稽/连号/限额/集中度<br>日期/差额征税/红冲<br>分级 + 置信度 + 证据链</div>
     </div>
     <div style="background:linear-gradient(145deg,rgba(251,191,36,0.1),rgba(251,191,36,0.03));border:1px solid rgba(251,191,36,0.2);border-radius:12px;padding:18px;text-align:center">
-      <div style="font-size:20px;font-weight:700;color:#fbbf24;margin-bottom:6px">90天落地工作地图</div>
-      <div style="font-size:12px;color:#9ba3b7;line-height:1.6">从入职到选对渠道<br>分三步走，可直接用</div>
+      <div style="font-size:20px;font-weight:700;color:#fbbf24;margin-bottom:6px">风险报告</div>
+      <div style="font-size:12px;color:#9ba3b7;line-height:1.6">阻断入账 / 建议核对 / 建议入账<br>通俗解释（是什么/影响/怎么处理）<br>证据链可审计定位</div>
     </div>
   </div>
-  <p style="font-size:13.5px;color:#c9d1e3;line-height:1.9">站在企业资金岗的角度，怎么选第三方支付渠道？我以支付宝、微信支付、抖音支付三家为样本，对比费率、到账时效、对账效率三个核心维度，给出不同业务场景下的渠道组合建议——不是做行业研究，而是给资金岗一套可直接用的选渠道方法论。</p>
-  <div style="margin-top:12px;font-size:12px;color:#8fa3c0;line-height:1.8;background:rgba(109,124,255,0.06);padding:10px 14px;border-radius:8px;border-left:3px solid #6d7cff">
-    <b style="color:#6d7cff">我的角色：</b>我从企业资金岗视角出发，整理公开数据，设计选渠道评估框架；AI辅助做数据整理和初步对比。
-  </div>
+  <p style="font-size:13.5px;color:#c9d1e3;line-height:1.9">解析引擎按「值类型识别 + 勾稽三元组」从版式文本提取字段（发票号=20位数字、日期=年M月D日、税号=91开头18位、公司名=含「公司/集团/厂」行），二维码兜底取税务核验短码；规则引擎分跨票规则（重复 R1、连号 R3、集中度 R6——逐张调用会失效）与单票规则（勾稽 R8/R10、差额征税 R9、红冲 R11 等）；红线保护：关键字段缺失或主体未配置时禁止产出「确定」级结论，降级为低危/疑似提示。</p>
 </div>
-
-<div class="sec-head"><span class="num">02</span><h2>业务痛点：企业选支付渠道的三个"说不清"</h2><span class="en">BUSINESS PAIN POINTS</span></div><span class="en">MARKET SHARE</span></div>
-  <p>第三方支付呈典型"双寡头 + 多强"格局，但<b>份额结论取决于统计口径</b>——这是理解支付资金结构的第一课：</p>
-  <table>
-    <tr><th>玩家</th><th>笔数口径（易观 2026Q1）</th><th>综合金额口径（2026.05）</th><th>纯交易金额口径（清算协会 2025）</th><th>核心动态</th></tr>
-    <tr><td><b>微信支付</b></td><td>59.7%</td><td>33.4%</td><td>41.8%</td><td>小额高频场景渗透率 97.5%；小微商户覆盖 94.7%</td></tr>
-    <tr><td><b>支付宝</b></td><td>36.2%</td><td>54.6%</td><td>45.7%</td><td>大额支付场景垄断；"AI 付"3 亿笔交易</td></tr>
-    <tr><td><b>云闪付</b></td><td>—</td><td>约 6.2%（金额口径第三）</td><td>—</td><td>政务/交通/医疗高合规场景；数字人民币一体化</td></tr>
-    <tr><td><b>抖音支付</b></td><td>份额未独立统计</td><td>—</td><td>—</td><td>2026.07 高管变更获批；收单资质（联动优势）待审批；豆包上线扫码支付</td></tr>
-  </table>
-  <div class="callout"><b>核心洞察：</b>"小额高频社交场景"与"大额交易金融场景"的分化，决定了支付资金结构的核心逻辑——笔数看微信、金额看支付宝，抖音支付走的是第三条路（场景全流程）。</div>
-
-<div class="chart-grid">
-<div class="chart-box">
-  <h4>市场份额（按交易笔数，2026Q1）</h4>
-  <div id="chart1" class="chart-echarts"></div>
-  <div class="chart-note">数据来源：易观分析 2026Q1 监测。笔数口径下微信占优；金额口径下支付宝 54.6% 领先（2026.05 行业报告）。悬停查看明细。</div>
-</div>
-</div>
-<div class="sec reveal">
-  <div class="sec-head"><span class="num">03</span><h2>费率与时效对标：数据与口径</h2><span class="en">DATA BENCHMARKING</span></div><span class="en">FUND CHANNELS</span></div>
-  <div class="grid2">
-    <div>
-      <h3>五大资金要素</h3>
-      <table>
-        <tr><th>要素</th><th>核心机制</th><th>对资金运营的含义</th></tr>
-        <tr><td>备付金管理</td><td>100% 集中交存央行（2.56 万亿）；2025 年起纳入 M1</td><td>合规红线；运营转向效率与成本</td></tr>
-        <tr><td>清算通道</td><td>断直连后经网联/银联清算（2025 年网联处理 1.19 万亿笔）</td><td>通道费、结算时点成为核心指标</td></tr>
-        <tr><td>结算模式</td><td>T+1 为默认主流；T+0 需 0.1%-0.3% 加急费且监管趋严</td><td>时效影响商户体验与资金周转</td></tr>
-        <tr><td>费率结构</td><td>微信/支付宝 0.6%，云闪付 0.38%，银行通道 0.23% 起</td><td>商户渠道选择第一决策变量</td></tr>
-        <tr><td>跨境渠道</td><td>支付宝 T+1（0.8%-1.2% 含结汇）；微信 T+0 实时结汇</td><td>外汇管理与反洗钱是准入关键</td></tr>
-      </table>
-    </div>
-    <div>
-      <h3>费率分层（商户端标准费率）</h3>
-      <table>
-        <tr><th>渠道</th><th>费率</th><th>备注</th></tr>
-        <tr><td>银行直连通道</td><td>0.23% 起</td><td>2026 年农商行"0 费率"红利终结</td></tr>
-        <tr><td>聚合支付</td><td>≈0.25%</td><td>通道组合实现较低复合费率</td></tr>
-        <tr><td>云闪付</td><td>0.38%</td><td>银联商务 7×24 差异化卡位大额商户</td></tr>
-        <tr><td>微信/支付宝标准</td><td>0.6%</td><td>特殊行业 1.0%-1.2%</td></tr>
-      </table>
-      <div class="quote" style="margin-top:14px"><b>对标结论：</b>费率不是越低越好，而是与结算时效、增值服务打包定价。T+0 加急费（0.1%-0.3%）是支付机构增值收入的重要来源——<b>时效是溢价商品</b>。</div>
-    </div>
-  </div>
-
-<div class="chart-grid">
-<div class="chart-box">
-  <h4>业务量（柱）与笔均金额（线）双轴对比</h4>
-  <div id="chart2" class="chart-echarts"></div>
-  <div class="chart-note">数据来源：央行《支付体系运行总体情况》。2023 年起修订统计口径（纳入转账业务、去重）。柱=网络支付业务量（万亿笔），线=笔均金额（元）。2023-2025 年笔均按央行数据计算；2020-2022 年按央行旧口径推算。笔均金额持续下降反映小额高频化趋势。</div>
-</div>
-<div class="chart-box">
-  <h4>各渠道标准费率对比（商户端）</h4>
-  <div id="chart3" class="chart-echarts"></div>
-  <div class="chart-note">来源：支付宝/微信官方商户文档、银联商务公开费率、2026 农商行收单新规公告。展示各渠道典型标准费率（区间取中位数或常见值）。银行通道 2026 年起"0 费率"红利终结（山东/山西/江苏等多地农商行自 2026.01 起按 0.23% 起收费）。</div>
-</div>
-<div class="chart-box">
-  <h4>各渠道到账模式覆盖比例</h4>
-  <div id="chart4" class="chart-echarts"></div>
-  <div class="chart-note">来源：微信/支付宝商户规则、银联商务服务说明、行业实践（2026）。覆盖比例为基于行业观察的定性估算：T+1 为默认主流；T+0/实时需额外申请并支付 0.1%-0.3% 加急费；银联商务以 7×24 小时处理差异化卡位大额商户。</div>
-</div>
-</div>
-<div class="sec reveal">
-  <div class="sec-head"><span class="num">04</span><h2>业务洞察：不同业务场景怎么组合渠道</h2><span class="en">BUSINESS INSIGHTS</span></div><span class="en">BYTEDANCE PAY</span></div>
-  <p>抖音支付是理解字节财经资金业务的最佳切入口：从牌照补全到场景全流程的路径，恰好对应资金运营从"能用"到"好用"的演进逻辑。</p>
-  <div class="tl">
-    <div class="node"><div class="date">2020.08</div><div class="tt">牌照入场</div><div class="dd">收购武汉合众易宝，获得互联网支付牌照</div></div>
-    <div class="node"><div class="date">2024</div><div class="tt">补齐收单</div><div class="dd">拟 7.5 亿元收购联动优势电商（银行卡收单资质）</div></div>
-    <div class="node"><div class="date">2025.01</div><div class="tt">资本扩张</div><div class="dd">注册资本 1.5 亿 → 31.5 亿元，行业第四</div></div>
-    <div class="node"><div class="date">2025.07</div><div class="tt">资质升级</div><div class="dd">获"长期有效"支付牌照（首批 13 家之一）</div></div>
-    <div class="node"><div class="date">2025.12</div><div class="tt">场景破圈</div><div class="dd">"抖音买单"线下试点（上海/深圳/杭州）</div></div>
-    <div class="node"><div class="date">2026.05</div><div class="tt">AI 支付</div><div class="dd">豆包上线扫码支付，打通"对话-交易"全流程</div></div>
-    <div class="node"><div class="date">2026.07</div><div class="tt">持续补全</div><div class="dd">合规风控/技术负责人变更获批；收单资质仍在审批</div></div>
-  </div>
-  <div class="callout"><b>定位判断：</b>不做"第三极"，做"场景王"——依托直播电商 + 本地生活 + AI 入口构建自有交易全流程。<b>AI 支付是差异化武器</b>（豆包扫码支付让支付从 APP 入口变成对话内动作）。</div>
-<div class="sec reveal">
-  <div class="sec-head"><span class="num">05</span><h2>应用与落地：资金商务 90 天工作地图</h2><span class="en">APPLICATION</span></div><span class="en">ONBOARDING MAP</span></div>
-  <p>将研究结论转化为可执行的入职路径——建立"入职即能上手"的工作预期：</p>
-  <div class="phase">
-    <div class="ph-num">PHASE 1 · DAY 1-14</div>
-    <div class="ph-body"><h4>建立渠道认知底座</h4><ul><li>梳理微信/支付宝/银联/网联四类渠道费率表与结算规则</li><li>理解备付金集中存管与 M1 口径对资金头寸的影响</li><li>整理"渠道-费率-时效-对账方式"四维速查表</li></ul></div>
-  </div>
-  <div class="phase">
-    <div class="ph-num">PHASE 2 · W3-6</div>
-    <div class="ph-body"><h4>独立承担日常运营</h4><ul><li>独立完成日/月结算对账与差异追踪，输出差异报告</li><li>维护渠道 SLA 监控表（到账时效、异常率、对账差异率）</li><li>按周汇总资金头寸与在途资金，支持资金计划</li></ul></div>
-  </div>
-  <div class="phase">
-    <div class="ph-num">PHASE 3 · M2-3</div>
-    <div class="ph-body"><h4>参与商务与优化项目</h4><ul><li>支持新渠道准入：材料准备、协议审核、联调测试</li><li>参与费率重谈：基于交易结构与体量测算谈判空间</li><li>评估 T+0 结算开通的合规与成本边界</li></ul></div>
-  </div>
-  <div class="quote">核心工作指标：结算到账时效 SLA 达成率（目标 &gt;99%）· 对账差异率（目标 &lt;0.1%）· 异常资金处理时长（目标 &lt;4h）· 费率谈判降本幅度（季度复盘）</div>
-
-
-<div class="chart-grid">
-<div class="chart-box">
-  <h4>支付机构竞争力六维雷达（定性评分）</h4>
-  <div id="chart5" class="chart-echarts"></div>
-  <div class="chart-note">基于公开信息的综合定性评分（1-5 分），非官方数据：商户覆盖、费率竞争力、结算时效、跨境能力、合规资质、生态协同。抖音支付生态协同显著领先（直播电商+本地生活+AI 入口），跨境与线下收单为短板。</div>
-</div>
-</div>
-
-<script>
-// ===== 安全初始化：单图失败不影响整体 =====
-
-
-function safeInit(chartId, option) {
-  try {
-    var el = document.getElementById(chartId);
-    if (!el) { console.warn('Chart element not found: ' + chartId); return null; }
-    var chart = echarts.init(el);
-    // 手机端适配：按需生成media，只覆盖该图真正拥有的组件
-    if (!option.baseOption) {
-      var mob = {};
-      if (option.grid)   mob.grid   = { left: 8, right: 8, top: 56, bottom: 64, containLabel: true };
-      if (option.legend) mob.legend = { bottom: 0, top: 'auto', itemWidth: 10, itemHeight: 6, textStyle: { fontSize: 9 }, type: 'scroll' };
-      if (option.xAxis)  mob.xAxis  = { axisLabel: { fontSize: 9, rotate: 45 } };
-      if (option.yAxis)  mob.yAxis  = Array.isArray(option.yAxis)
-          ? option.yAxis.map(function(){ return { axisLabel: { fontSize: 9 }, nameTextStyle: { fontSize: 9 } }; })
-          : { axisLabel: { fontSize: 9 }, nameTextStyle: { fontSize: 9 } };
-      if (Object.keys(mob).length > 0) {
-        option = { baseOption: option, media: [{ query: { maxWidth: 768 }, option: mob }] };
-      }
-    }
-    chart.setOption(option);
-    return chart;
-  } catch (e) {
-    console.error('Chart init failed: ' + chartId, e);
-    var el = document.getElementById(chartId);
-    if (el) el.innerHTML = '<div style="padding:20px;color:#f87171;font-size:11px;word-break:break-all;">错误: ' + (e && e.message ? e.message : String(e)) + '</div>';
-    return null;
-  }
-}
-
-var axisText = '#8a8fa0';
-var axisLine = 'rgba(120,140,255,0.15)';
-var splitLine = 'rgba(120,140,255,0.08)';
-
-// ===== 图表1：移动支付市场格局（南丁格尔玫瑰图，笔数口径） =====
-var chart1 = safeInit('chart1', {
-  tooltip: {
-    trigger: 'item',
-    backgroundColor: 'rgba(10,10,15,0.95)',
-    borderColor: 'rgba(120,140,255,0.3)',
-    borderWidth: 1,
-    textStyle: { color: '#e8eaf0' },
-    formatter: function(p) {
-      return p.name + '<br/>份额：' + p.value + '%<br/>口径：交易笔数（易观 2026Q1）';
-    }
-  },
-  legend: {
-    bottom: 0,
-    textStyle: { color: axisText, fontSize: 10 },
-    itemWidth: 12,
-    itemHeight: 12
-  },
-  series: [{
-    type: 'pie',
-    radius: ['18%', '62%'],
-    center: ['50%', '45%'],
-    roseType: 'area',
-    itemStyle: { borderRadius: 4 },
-    label: { color: axisText, fontSize: 9, formatter: '{b}\n{d}%', position: 'outside', distanceToLabelLine: 4 },
-    labelLine: { length: 8, length2: 6, lineStyle: { color: axisLine } },
-    data: [
-      { name: '微信支付', value: 59.7, itemStyle: { color: '#7c8cff' } },
-      { name: '支付宝', value: 36.2, itemStyle: { color: '#a78bfa' } },
-      { name: '其他', value: 4.1, itemStyle: { color: '#555866' } }
-    ]
-  }]
-});
-
-// ===== 图表2：业务量趋势（柱+折线双轴） =====
-var chart2 = safeInit('chart2', {
-  tooltip: {
-    trigger: 'axis',
-    backgroundColor: 'rgba(10,10,15,0.95)',
-    borderColor: 'rgba(120,140,255,0.3)',
-    borderWidth: 1,
-    textStyle: { color: '#e8eaf0' }
-  },
-  legend: {
-    top: 0,
-    textStyle: { color: axisText, fontSize: 10 }
-  },
-  grid: { left: 50, right: 50, top: 34, bottom: 28 },
-  xAxis: {
-    type: 'category',
-    data: ['2020', '2021', '2022', '2023', '2024', '2025'],
-    axisLabel: { color: axisText, fontSize: 10 },
-    axisLine: { lineStyle: { color: axisLine } }
-  },
-  yAxis: [
-    {
-      type: 'value', name: '业务量(万亿笔)', nameTextStyle: { color: axisText, fontSize: 9 },
-      axisLabel: { color: axisText, fontSize: 10 },
-      splitLine: { lineStyle: { color: splitLine } }
-    },
-    {
-      type: 'value', name: '笔均(元)', nameTextStyle: { color: axisText, fontSize: 9 },
-      axisLabel: { color: axisText, fontSize: 10 },
-      splitLine: { show: false }
-    }
-  ],
-  series: [
-    {
-      name: '网络支付业务量（万亿笔）',
-      type: 'bar',
-      data: [0.83, 1.03, 1.10, 1.22, 1.34, 1.33],
-      barWidth: 28,
-      itemStyle: {
-        color: function(params) {
-          return params.dataIndex === 5 ? '#7c8cff' : 'rgba(109,124,255,0.45)';
-        },
-        borderRadius: [3, 3, 0, 0]
-      },
-      label: { show: true, position: 'top', color: axisText, fontSize: 9, formatter: '{c}' }
-    },
-    {
-      name: '笔均金额（元）',
-      type: 'line',
-      yAxisIndex: 1,
-      data: [354, 331, 315, 280, 247.5, 254.0],
-      smooth: true,
-      symbolSize: 6,
-      lineStyle: { color: '#4fd1c5', width: 2 },
-      itemStyle: { color: '#4fd1c5' },
-      label: { show: true, position: 'top', color: '#4fd1c5', fontSize: 9, formatter: '{c}' }
-    }
-  ]
-});
-
-// ===== 图表3：渠道标准费率对比（横向条形图，单一数值） =====
-var chart3 = safeInit('chart3', {
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: { type: 'shadow' },
-    backgroundColor: 'rgba(10,10,15,0.95)',
-    borderColor: 'rgba(120,140,255,0.3)',
-    borderWidth: 1,
-    textStyle: { color: '#e8eaf0' },
-    formatter: function(params) {
-      var p = params[0];
-      return p.name + '<br/>标准费率：' + p.value + '%';
-    }
-  },
-  grid: { left: 10, right: 50, top: 10, bottom: 20, containLabel: true },
-  xAxis: {
-    type: 'value', max: 1.4,
-    axisLabel: { color: axisText, fontSize: 9, formatter: '{value}%' },
-    axisLine: { lineStyle: { color: axisLine } },
-    splitLine: { lineStyle: { color: splitLine } }
-  },
-  yAxis: {
-    type: 'category', inverse: true,
-    data: ['银行直连通道', '第四方聚合', '云闪付扫码', '微信支付', '支付宝', '特殊行业(数娱/游戏/直播)'],
-    axisLabel: { color: axisText, fontSize: 9.5 },
-    axisLine: { lineStyle: { color: axisLine } }
-  },
-  series: [{
-    type: 'bar',
-    data: [0.25, 0.28, 0.38, 0.60, 0.60, 1.10],
-    barWidth: 16,
-    itemStyle: {
-      color: function(params) {
-        var colors = ['#2a9d8f', '#7a93b5', '#4fd1c5', '#7c8cff', '#a78bfa', '#c0392b'];
-        return colors[params.dataIndex];
-      },
-      borderRadius: [0, 3, 3, 0]
-    },
-    label: {
-      show: true, position: 'right', fontSize: 9,
-      color: axisText,
-      formatter: '{c}%'
-    }
-  }]
-});
-
-// ===== 图表4：各渠道到账模式覆盖比例（堆叠条形图） =====
-var chart4 = safeInit('chart4', {
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: { type: 'shadow' },
-    backgroundColor: 'rgba(10,10,15,0.95)',
-    borderColor: 'rgba(120,140,255,0.3)',
-    borderWidth: 1,
-    textStyle: { color: '#e8eaf0' },
-    formatter: function(params) {
-      var res = params[0].name + '<br/>';
-      params.forEach(function(p) {
-        if (p.value > 0) res += p.marker + ' ' + p.seriesName + '：' + p.value + '%<br/>';
-      });
-      return res;
-    }
-  },
-  legend: {
-    top: 0,
-    textStyle: { color: axisText, fontSize: 9 },
-    itemWidth: 12,
-    itemHeight: 12
-  },
-  grid: { left: 10, right: 30, top: 28, bottom: 20, containLabel: true },
-  xAxis: {
-    type: 'value', max: 100,
-    axisLabel: { color: axisText, fontSize: 9, formatter: '{value}%' },
-    axisLine: { lineStyle: { color: axisLine } },
-    splitLine: { lineStyle: { color: splitLine } }
-  },
-  yAxis: {
-    type: 'category', inverse: true,
-    data: ['实时到账加急', '银联商务', '银行聚合', '支付宝', '微信支付'],
-    axisLabel: { color: axisText, fontSize: 9.5 },
-    axisLine: { lineStyle: { color: axisLine } }
-  },
-  series: [
-    {
-      name: '实时到账',
-      type: 'bar',
-      stack: 'total',
-      data: [100, 40, 0, 0, 0],
-      barWidth: 16,
-      itemStyle: { color: '#2a9d8f', borderRadius: [0, 3, 3, 0] }
-    },
-    {
-      name: 'T+0',
-      type: 'bar',
-      stack: 'total',
-      data: [0, 30, 10, 10, 5],
-      itemStyle: { color: '#4fd1c5' }
-    },
-    {
-      name: 'T+1',
-      type: 'bar',
-      stack: 'total',
-      data: [0, 30, 70, 90, 95],
-      itemStyle: { color: '#7c8cff' }
-    },
-    {
-      name: 'D+1',
-      type: 'bar',
-      stack: 'total',
-      data: [0, 0, 20, 0, 0],
-      itemStyle: { color: '#7a93b5', borderRadius: [0, 3, 3, 0] }
-    }
-  ]
-});
-
-// ===== 图表5：支付机构竞争力六维雷达 =====
-var chart5 = safeInit('chart5', {
-  tooltip: {
-    backgroundColor: 'rgba(10,10,15,0.95)',
-    borderColor: 'rgba(120,140,255,0.3)',
-    borderWidth: 1,
-    textStyle: { color: '#e8eaf0' }
-  },
-  legend: {
-    bottom: 0,
-    textStyle: { color: axisText, fontSize: 9.5 },
-    itemWidth: 12,
-    itemHeight: 12
-  },
-  radar: {
-    indicator: [
-      { name: '商户覆盖', max: 5 },
-      { name: '费率竞争力', max: 5 },
-      { name: '结算时效', max: 5 },
-      { name: '跨境能力', max: 5 },
-      { name: '合规资质', max: 5 },
-      { name: '生态协同', max: 5 }
-    ],
-    radius: '62%',
-    center: ['50%', '46%'],
-    axisName: { color: axisText, fontSize: 9 },
-    splitLine: { lineStyle: { color: splitLine } },
-    splitArea: { areaStyle: { color: ['rgba(109,124,255,0.02)', 'rgba(109,124,255,0.05)'] } },
-    axisLine: { lineStyle: { color: axisLine } }
-  },
-  series: [{
-    type: 'radar',
-    data: [
-      {
-        name: '微信支付',
-        value: [5, 4, 3, 3, 5, 4],
-        lineStyle: { color: '#7c8cff', width: 2 },
-        itemStyle: { color: '#7c8cff' },
-        areaStyle: { color: 'rgba(109,124,255,0.15)' }
-      },
-      {
-        name: '支付宝',
-        value: [5, 4, 4, 4, 5, 4],
-        lineStyle: { color: '#a78bfa', width: 2 },
-        itemStyle: { color: '#a78bfa' },
-        areaStyle: { color: 'rgba(167,139,250,0.12)' }
-      },
-      {
-        name: '抖音支付',
-        value: [2, 4, 3, 2, 3, 5],
-        lineStyle: { color: '#4fd1c5', width: 2 },
-        itemStyle: { color: '#4fd1c5' },
-        areaStyle: { color: 'rgba(79,209,197,0.12)' }
-      },
-      {
-        name: '云闪付',
-        value: [3, 5, 4, 3, 5, 2],
-        lineStyle: { color: '#e67e22', width: 2 },
-        itemStyle: { color: '#e67e22' },
-        areaStyle: { color: 'rgba(230,126,34,0.10)' }
-      }
-    ]
-  }]
-});
-
-// ===== 导航高亮 =====
-
-
-window.addEventListener('resize', function() {
-  if (chart1) chart1.resize();
-  if (chart2) chart2.resize();
-  if (chart3) chart3.resize();
-  if (chart4) chart4.resize();
-  if (chart5) chart5.resize();
-});
-
-window.addEventListener("resize", function(){
-  if(chart1) chart1.resize();
-  if(chart2) chart2.resize();
-  if(chart3) chart3.resize();
-  if(chart4) chart4.resize();
-  if(chart5) chart5.resize();
-});
-<\/script>
-
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">06</span><h2>局限与诚实披露</h2><span class="en">LIMITATIONS</span></div>
-  <div class="verify-box">
-    <h4>⚠️ 行业研究，非投资建议</h4>
-    <ul>
-      <li>市场份额数据存在多口径差异（笔数/金额/活跃用户），不同机构统计结果不一致——本研究已标注口径，但仍可能存在统计偏差</li>
-      <li>抖音支付相关数据多来自公开报道与高管发言，非官方完整披露——收单资质、交易规模等核心数据尚未完全公开</li>
-      <li>费率与结算时效为行业一般水平，具体机构间存在商务谈判差异，不代表实际签约价格</li>
-      <li>"入职90天工作地图"为基于岗位理解的个人规划，非支付机构官方培训体系</li>
-      <li>本研究不构成任何投资建议或商业决策依据</li>
-    </ul>
+  <div class="sec-head"><span class="num">04</span><h2>演示：在线 Demo（合成样例）</h2><span class="en">DEMO</span></div>
+  <p style="font-size:13.5px;color:#c9d1e3;line-height:1.9">演示页使用<b>全部虚构的合成样例</b>（示例公司/演示票号），覆盖重复报销、金额勾稽、差额征税、红冲关联、扫描件识别失败等典型场景。打开即可看到：批次统计 → 逐票六项预审 → 规则风险发现（分级徽章 + 证据链 + 通俗解释）。</p>
+  <div style="margin-top:14px">
+    <a class="demo-entry" href="demo/invoice-precheck-demo.html" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:12px 24px;background:#6d7cff;color:#fff;border-radius:10px;font-weight:700;font-size:14px;text-decoration:none;box-shadow:0 4px 14px rgba(109,124,255,.3)">🚀 打开在线 Demo ↗</a>
+    <span style="margin-left:12px;font-size:12px;color:#8fa3c0">数据全为合成样例，非真实发票</span>
   </div>
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">07</span><h2>数据口径与假设说明</h2><span class="en">DATA DEFINITIONS</span></div>
-  <table>
-    <tr><th>字段/指标</th><th>业务口径定义</th><th>数据来源</th><th>粒度/时间</th><th>已知偏差或假设</th><th>可核验性</th></tr>
-    <tr><td><b>网络支付总量</b></td><td>非银行支付机构处理的网络支付业务金额总和</td><td>中国人民银行《支付体系运行总体情况》</td><td>年度/全行业</td><td>含线上线下全渠道，不同统计口径可能有差异</td><td><span style="color:#34d399">✅ 公开可查</span></td></tr>
-    <tr><td><b>市场份额</b></td><td>按交易笔数/交易金额统计的头部支付机构占比</td><td>易观分析2026Q1监测数据</td><td>季度/头部机构</td><td>不同监测机构口径差异可达数个百分点，仅供参考</td><td><span style="color:#fbbf24">⚠️ 第三方研究</span></td></tr>
-    <tr><td><b>备付金政策</b></td><td>支付机构客户备付金集中存管比例与监管要求</td><td>中国人民银行相关规定</td><td>政策/全行业</td><td>政策可能随监管导向调整，需关注最新文件</td><td><span style="color:#34d399">✅ 公开可查</span></td></tr>
-    <tr><td><b>抖音支付动态</b></td><td>牌照获取、高管变更、产品上线等关键事件</td><td>公司公告、权威媒体报道</td><td>事件/单家机构</td><td>部分信息来自媒体报道，以官方最终公告为准</td><td><span style="color:#34d399">✅ 公开可查</span></td></tr>
-    <tr><td><b>费率与时效</b></td><td>支付费率区间、结算时效的行业一般水平</td><td>公开信息与行业一般水平估算</td><td>区间/行业平均</td><td>具体费率以实际签约为准，不同商户类型差异较大</td><td><span style="color:#fbbf24">⚠️ 行业估算</span></td></tr>
-  </table>
-  <div class="quote" style="margin-top:14px"><b>数据时效：</b>所有公开数据截至2026年8月，支付行业监管政策与市场格局变化较快，后续数据发布可能改变分析结论。</div>
+  <div class="sec-head"><span class="num">05</span><h2>局限与诚实声明</h2><span class="en">LIMITATIONS</span></div>
+  <ul style="font-size:13.5px;color:#c9d1e3;line-height:2;margin-left:18px">
+    <li>预警标准（限额/连号窗口/金额上限）为<b>占位口径</b>，待真实业务数据校准，<b>不构成合规结论</b>——这是一个思考与尝试，尚未落地到企业实际业务</li>
+    <li>开发中以真实样本做过验证，结果归档为基准集记录，源文件按数据红线验后删除，演示环境不可重跑真实样本</li>
+    <li>后端 FastAPI 未公网部署：演示页为静态模式，连接服务为产品部署后的能力</li>
+    <li>首版仅支持单企业主体（集团多法人/代开场景未覆盖）</li>
+  </ul>
 </div>
-
-
 </div>
 <script>
 (function(){
@@ -4648,7 +4222,7 @@ window.addEventListener('resize', function() {
 </div>
 
 <div class="footer">
-  胡凯 · AI Portfolio v5.6.1 · 由 豆包 2.1 Turbo（主力Agent）+ DeepSeek（复核Agent）双Agent协作完成<br>
+  胡凯 · AI Portfolio v5.7.0 · 由 豆包 2.1 Turbo（主力Agent）+ DeepSeek（复核Agent）双Agent协作完成<br>
   行业数据均经人工核验并标注来源 · 资金流数据为模拟数据（已标注） · 数据时点：2026.08
 </div>
 
