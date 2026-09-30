@@ -1890,7 +1890,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
 <div class="sec reveal" id="pipeline">
   <div class="sec-head"><span class="idx">02</span><h2>双Agent复核机制</h2><span class="en">DUAL-AGENT REVIEW WORKFLOW</span></div>
 
-  <p style="font-size:13px;color:#9ba3b7;line-height:1.9;margin-bottom:20px">单一AI有幻觉、确认偏误、自我盲区。财务场景对准确性要求极高，一个错误可能导致严重后果。因此我实践了一套"主力AI+复核AI"的双Agent协作机制，并且把闭环拉满：<b>开工前先对齐方案</b>（AI先提异议、人拍板再动手）、<b>做完独立复核</b>（AI不能自己说自己完成了，必须有人查）、<b>机器闸门兜底</b>（没复核的改动，提交时会被拦下来——不靠自觉，靠机制）。复核不是一刀切：<b>按风险分级</b>——数据、逻辑、对外发布这类高风险内容必复核；文案、样式等低风险改动走机器检查和人工抽查，把资源花在刀刃上。关键事实<b>不靠AI记忆</b>：拿不准的信息由执行方联网搜索原文，再交叉验证后才写进结论，杜绝编造。复核成本也<b>有台账可查</b>，持续优化，不无限堆砌。两个AI不是上下级检查关系，而是平等讨论——主力AI提出方案并执行，复核AI独立审查并提出异议，人在分歧点做最终决策。讨论过程本身就是知识沉淀，每一次分歧和裁决都会变成可复用的规则。这和我做的SOX内控测试是同一个思路：把容易出错的环节，变成有记录、有复核、有拦截的流程。</p>
+  <p style="font-size:13px;color:#9ba3b7;line-height:1.9;margin-bottom:20px">单一AI有幻觉、确认偏误、自我盲区。财务场景对准确性要求极高，一个错误可能导致严重后果。因此我实践了一套"主力AI+复核AI"的双Agent协作机制，并且把闭环拉满：<b>开工前先对齐方案</b>（AI先提异议、人拍板再动手）、<b>做完独立复核</b>（AI不能自己说自己完成了，必须有人查）、<b>机器闸门兜底</b>（没复核的改动，提交时会被拦下来——不靠自觉，靠机制）。复核不是一刀切：<b>按风险分级</b>——数据、逻辑、对外发布这类高风险内容必复核；文案、样式等低风险改动走机器检查和人工抽查，把资源花在刀刃上。而且分级<b>不靠AI自觉</b>：在自己的项目里按文件类型、改动规模、关键词自动定级，高风险强制复核。<b>事前对齐也不靠自觉</b>：功能改动必须先有已批准的方案评审，方案晚于代码会被机器拦下——"先讨论再动手"是强制规则，不是好习惯。关键事实<b>不靠AI记忆</b>：拿不准的信息由执行方联网搜索原文，再交叉验证后才写进结论，杜绝编造。复核成本也<b>有台账可查</b>：单价外置配置、每次调用快照当时价格、日月可汇总，设计上可追溯可审计。两个AI不是上下级检查关系，而是平等讨论——主力AI提出方案并执行，复核AI独立审查并提出异议，人在分歧点做最终决策。讨论过程本身就是知识沉淀，每一次分歧和裁决都会变成可复用的规则。这和我做的SOX内控测试是同一个思路：把容易出错的环节，变成有记录、有复核、有拦截的流程。</p>
 
   <div class="about-grid" style="margin-top:18px">
     <div class="about-card">
@@ -1907,13 +1907,20 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     </div>
     <div class="about-card">
       <h4>几个关键规矩</h4>
-      <p style="font-size:12px;line-height:2">
+      <p style="font-size:11px;color:#6d7cff;font-weight:600;margin-bottom:6px;letter-spacing:0.5px">协作规矩</p>
+      <p style="font-size:12px;line-height:2;margin-bottom:10px">
       <span class="hl">任务写清楚</span>：AI经常理解偏差，所以重要的事都写下来，动手前先让它复述一遍，确认没理解错再做<br>
       <span class="hl">开工先对齐</span>：动工前先讨论方案，AI先提异议、人拍板后再动手——事前对齐比事后补救便宜得多<br>
       <span class="hl">问题分轻重</span>：数据错了立刻停，功能有问题优先修，样式小问题记下来以后改<br>
       <span class="hl">做完有人查</span>：AI做完不能自己说完成了，必须有人检查一遍，避免自己改自己的bug越改越错<br>
       <span class="hl">机器闸门兜底</span>：没复核的改动提交时会被拦下来，时间戳对不上也会被提示——不靠自觉，靠机制<br>
       <span class="hl">每步都记录</span>：所有决定和改动都记下来，以后回看能知道当时为什么这么做
+      </p>
+      <p style="font-size:11px;color:#fbbf24;font-weight:600;margin-bottom:6px;letter-spacing:0.5px">机制保障（在自己的项目里实践）</p>
+      <p style="font-size:12px;line-height:2">
+      <span class="hl">风险自动定级</span>：不是AI自己拍脑袋判"这次要不要复核"，而是按文件类型、改动规模、关键词自动定高/中/低风险，高风险强制复核——防止为省事把自己判成低风险<br>
+      <span class="hl">讨论有触发条件</span>：不是每步都调复核AI——只有高风险、两个AI结论不一致、主力AI自报不确定、人明确要求时才发起；同主题连续3轮无新论点自动终止转人裁决<br>
+      <span class="hl">自我完善机制</span>：遇到问题随手记进错误日志，隔日自动跑一致性/积压/完整性检查，新增问题进入汇总讨论——不靠人盯着，靠机制自我迭代
       </p>
       <div style="margin-top:10px;font-size:11.5px;color:var(--dim);background:rgba(251,191,36,0.06);padding:8px 12px;border-radius:8px">
       💡 想法很简单：AI适合干重复活，人适合做判断。我做的事情就是把这两件事分开。
