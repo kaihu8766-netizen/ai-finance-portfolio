@@ -1,0 +1,14 @@
+# DeepSeek API 单价配置（元/百万 token）
+# 价格变动时只改此文件，纳入 git 留痕；每次改价在 DECISIONS.md 记一条
+# 来源：DeepSeek 官方定价页 https://api-docs.deepseek.com/quick_start/pricing
+model: deepseek-chat
+pricing:
+  input_per_million: 1.0    # 输入单价（元/百万 token）
+  output_per_million: 4.0   # 输出单价（元/百万 token）
+  cache_hit_per_million: 0.1  # 缓存命中单价（元/百万 token）
+last_updated: "2026-09-30"
+source: "DeepSeek 官方定价（flash 模式）"
+notes: |
+  - 台账按调用时单价快照计费，历史数据不受后续调价影响
+  - 历史 raw JSON 无单价字段的，按当前单价估算并标注 estimated=true
+  - 每月与 DeepSeek 控制台实际账单对账，差异>5% 报警

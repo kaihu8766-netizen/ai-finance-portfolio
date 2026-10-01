@@ -31,7 +31,12 @@ DEEPSEEK_BASE_URL = "https://api.deepseek.com"
 
 
 def _chat_stream(payload, key, timeout):
-    """流式调用 /chat/completions，返回 (content, finish_reason)。"""
+    """流式调用 /chat/completions，返回 (content, tool_calls, finish_reason, usage)。
+
+    usage（F-20261001-02 成本台账升级）：payload 含 stream_options.include_usage 时，
+    末 chunk 带真实 token 用量；接口未返回时 usage=None（不崩溃）。
+    tool_calls 作品集侧暂未启用，恒为 None（保留签名与 project-trace 对齐）。
+    """
     resp = requests.post(
         DEEPSEEK_BASE_URL + "/chat/completions",
         headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
@@ -43,6 +48,7 @@ def _chat_stream(payload, key, timeout):
         raise RuntimeError(f"HTTP {resp.status_code}: {resp.text[:300]}")
     content = []
     finish_reason = None
+    usage = None
     for line in resp.iter_lines(decode_unicode=True):
         if not line or not line.startswith("data:"):
             continue
@@ -53,6 +59,8 @@ def _chat_stream(payload, key, timeout):
             chunk = json.loads(data)
         except json.JSONDecodeError:
             continue
+        if chunk.get("usage"):
+            usage = chunk["usage"]
         if chunk.get("choices"):
             delta = chunk["choices"][0].get("delta", {})
             if delta.get("content"):
@@ -60,14 +68,15 @@ def _chat_stream(payload, key, timeout):
             fr = chunk["choices"][0].get("finish_reason")
             if fr:
                 finish_reason = fr
-    return "".join(content), finish_reason
+    return "".join(content), None, finish_reason, usage
 
 
 def chat(messages, model="deepseek-v4-flash", max_tokens=32000, thinking=True,
          temperature=0.7, timeout=600, retries=3, auto_grow=True):
-    """调用 /chat/completions（流式）。返回 (内容, finish_reason)。
+    """调用 /chat/completions（流式）。返回 (内容, tool_calls, finish_reason, usage)。
 
     finish_reason: "stop"=正常完成；"length"=达到 max_tokens 上限（自动放大重试或提示拆分）。
+    usage（F-20261001-02）：真实 token 用量 dict 或 None（接口未返回时）。
     """
     key = os.environ.get("DEEPSEEK_API_KEY")
     if not key:
@@ -80,6 +89,7 @@ def chat(messages, model="deepseek-v4-flash", max_tokens=32000, thinking=True,
         "max_tokens": max_tokens,
         "thinking": {"type": "enabled" if thinking else "disabled"},
         "stream": True,
+        "stream_options": {"include_usage": True},  # 成本台账（F-20261001-02）：末 chunk 带真实 usage
     }
 
     def attempt(ml, mx):
@@ -87,20 +97,20 @@ def chat(messages, model="deepseek-v4-flash", max_tokens=32000, thinking=True,
         last_err = None
         for i in range(1, retries + 1):
             try:
-                content, finish = _chat_stream(p, key, timeout)
+                content, _tc, finish, _usage = _chat_stream(p, key, timeout)
                 if finish == "length" and auto_grow and mx < 128000:
-                    return content, finish, mx * 2  # 触发自动放大
-                return content, finish, mx
+                    return content, finish, mx * 2, _usage  # 触发自动放大
+                return content, finish, mx, _usage
             except Exception as e:
                 last_err = repr(e)
             time.sleep(min(2 * i, 6))
         raise RuntimeError(f"DeepSeek 调用失败（重试 {retries} 次）：{last_err}")
 
-    content, finish, mx_used = attempt(model, max_tokens)
+    content, finish, mx_used, _u1 = attempt(model, max_tokens)
     if finish == "length":
         # 配额翻倍后再试一次
-        content, finish, mx_used = attempt(model, mx_used)
-    return content, finish
+        content, finish, mx_used, _u2 = attempt(model, mx_used)
+    return content, None, finish, _u2 if "length" == finish and "_u2" in locals() else _u1
 
 
 def main():
@@ -116,10 +126,14 @@ def main():
         {"role": "system", "content": args.system},
         {"role": "user", "content": args.question},
     ]
-    content, finish = chat(messages, model=args.model, max_tokens=args.max_tokens,
-                           thinking=not args.no_thinking)
-    print(f"[finish_reason={finish}] [模型={args.model}] [思考模式={'开' if not args.no_thinking else '关'}]\n")
+    content, _tc, finish, usage = chat(messages, model=args.model, max_tokens=args.max_tokens,
+                                         thinking=not args.no_thinking)
+    print(f"[finish_reason={finish}] [模型={args.model}] [思考模式={'开' if not args.no_thinking else '关'}]"
+          + (f" [usage={usage.get('total_tokens')}tok]" if usage else ""))
     print(content)
+    # F-20261001-02：机器可读哨兵（gate 解析真实 usage；密钥仍在 client 子进程，gate 零密钥）
+    if usage:
+        print(f"[gate_usage_json] {json.dumps({k: int(usage.get(k, 0) or 0) for k in ('prompt_tokens', 'completion_tokens', 'total_tokens')})}")
 
 
 if __name__ == "__main__":

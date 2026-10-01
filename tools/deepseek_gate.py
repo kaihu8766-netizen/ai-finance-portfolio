@@ -50,20 +50,56 @@ def _next_rv_no() -> int:
     return n + 1
 
 
-def _save_raw(prompt: str, response: str, rv_no: int) -> tuple[Path, str]:
+def _save_raw(prompt: str, response: str, rv_no: int,
+             usage_total: dict | None = None) -> tuple[Path, str]:
+    """F-20261001-02 成本台账升级：raw 记录真实 token 用量 + 单价快照 + 费用估算。
+
+    usage_total 为 None（无 usage 返回）时跳过成本字段，不伪造。
+    """
     RAW_DIR.mkdir(parents=True, exist_ok=True)
     h = hashlib.sha256((prompt + response).encode()).hexdigest()[:12]
     f = RAW_DIR / f"rv-{TODAY}-{rv_no:02d}-{h}.json"
-    f.write_text(json.dumps({
+    payload = {
         "ts": datetime.datetime.now().isoformat(timespec="seconds"),
         "prompt": prompt,
         "response": response,
         "sha256": hashlib.sha256(response.encode()).hexdigest(),
-    }, ensure_ascii=False, indent=2), encoding="utf-8")
+    }
+    if usage_total:
+        payload["usage_total"] = usage_total
+        try:
+            import yaml as _yaml
+            _pricing_path = ROOT / "config" / "pricing.yaml"
+            if _pricing_path.exists():
+                _pcfg = _yaml.safe_load(_pricing_path.read_text(encoding="utf-8")) or {}
+            else:
+                _pcfg = {}
+                payload["price_snapshot_error"] = "config/pricing.yaml not found（用默认单价）"
+            _p = _pcfg.get("pricing", {})
+            _in_price = float(_p.get("input_per_million", 1.0))
+            _out_price = float(_p.get("output_per_million", 4.0))
+            _pt = int(usage_total.get("prompt_tokens", 0) or 0)
+            _ct = int(usage_total.get("completion_tokens", 0) or 0)
+            _cost = round(_pt * _in_price / 1e6 + _ct * _out_price / 1e6, 4)
+            payload["price_snapshot"] = {
+                "input_per_million": _in_price,
+                "output_per_million": _out_price,
+                "last_updated": _pcfg.get("last_updated", ""),
+            }
+            payload["cost_estimated"] = _cost
+        except Exception as _e:
+            payload["price_snapshot_error"] = str(_e)
+    f.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     return f, hashlib.sha256(response.encode()).hexdigest()
 
 
-def _call_deepseek(prompt: str, max_tokens: int) -> str:
+def _call_deepseek(prompt: str, max_tokens: int) -> tuple[str, dict | None]:
+    """subprocess 调 client（PF-RV-20261001-26 密钥面修正：gate 进程零密钥）。
+
+    client 在正文后输出哨兵行 [gate_usage_json] {...}，gate 解析取 usage_total；
+    无哨兵（usage 缺失）→ None（未知≠0，不上成本字段）。
+    返回 (content, usage_total dict|None)。
+    """
     env = dict(os.environ)
     env.setdefault("DEEPSEEK_API_KEY", "")
     if not env.get("DEEPSEEK_API_KEY"):
@@ -76,7 +112,20 @@ def _call_deepseek(prompt: str, max_tokens: int) -> str:
     if r.returncode != 0:
         print("FATAL: deepseek_client 失败", r.stderr[-2000:], file=sys.stderr)
         sys.exit(2)
-    return r.stdout
+    out = r.stdout
+    usage_total = None
+    for line in out.splitlines():
+        if line.startswith("[gate_usage_json] "):
+            try:
+                usage_total = json.loads(line[len("[gate_usage_json] "):])
+            except json.JSONDecodeError:
+                usage_total = None
+            out = out.replace(line + "\n", "").replace(line, "")
+    content = out.strip()
+    if not content:
+        print("FATAL: deepseek_client 返回空内容", file=sys.stderr)
+        sys.exit(2)
+    return content, usage_total
 
 
 def _parse_meta(raw: str) -> dict:
@@ -230,8 +279,8 @@ def main() -> int:
 
     # 1. 调用
     print("[gate] 调用 DeepSeek（思考模式）…", file=sys.stderr)
-    response = _call_deepseek(inject + args.prompt, args.max_tokens)
-    raw_file, raw_hash = _save_raw(inject + args.prompt, response, rv_no)
+    response, usage_total = _call_deepseek(inject + args.prompt, args.max_tokens)
+    raw_file, raw_hash = _save_raw(inject + args.prompt, response, rv_no, usage_total)
 
     # 2. 生成档案
     rv_id = f"PF-RV-{TODAY}-{rv_no:02d}"
