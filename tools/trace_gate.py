@@ -357,9 +357,21 @@ def _next_feature_no() -> int:
 
 
 def _find_scheme_rv(fid: str) -> Path | None:
-    """查功能登记 F-xxx 是否有已批准(adopted)且 phase=scheme 的方案评审档案。"""
+    """查功能登记 F-xxx 是否有已批准(adopted)且 phase=scheme 的方案评审档案。
+
+    F-20261009-02（fail-closed legacy 白名单 + 双源校验，从 invoice-precheck 同步）：
+    - 严格：frontmatter phase=scheme + feature=fid + status=adopted
+    - legacy fallback（仅白名单，防删 phase 行绕过）：frontmatter 缺 phase 字段
+      且 legacy_scheme: true 显式标记 且 feature=fid 且 adopted → 才放行
+    - phase 存在但 ≠scheme → 不匹配
+    - 双源：索引行须含档案文件名且状态 adopted/covered
+    """
     if not RV_DIR.exists():
         return None
+    index_txt = ""
+    index_file = RV_DIR / "索引.md"
+    if index_file.exists():
+        index_txt = index_file.read_text(encoding="utf-8", errors="replace")
     for f in sorted(RV_DIR.glob("*.md")):
         if f.name == "索引.md":
             continue
@@ -367,9 +379,18 @@ def _find_scheme_rv(fid: str) -> Path | None:
         fm = re.search(r"phase:\s*(\S+)", head)
         feat = re.search(r"feature:\s*(\S+)", head)
         st = re.search(r"status:\s*(\S+)", head)
-        if fm and fm.group(1) == "scheme" and feat and feat.group(1) == fid \
-                and st and st.group(1) == "adopted":
-            return f
+        legacy = re.search(r"legacy_scheme:\s*(\S+)", head)
+        if not (feat and feat.group(1) == fid and st and st.group(1) == "adopted"):
+            continue
+        matched = False
+        if fm and fm.group(1) == "scheme":
+            matched = True
+        elif fm is None and legacy and legacy.group(1) == "true":
+            matched = True
+        if matched:
+            for line in index_txt.splitlines():
+                if f.name in line and re.search(r"\|\s*(adopted|covered)\s*\|", line):
+                    return f
     return None
 
 
