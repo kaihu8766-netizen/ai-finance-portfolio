@@ -16,14 +16,21 @@ const html = fs.readFileSync(HTML_PATH, 'utf-8');
 function extractScript(id) {
   const re = new RegExp(`<script[^>]*id="${id}"[^>]*>([\\s\\S]*?)</script>`);
   const m = html.match(re);
-  return m ? m[1].trim() : null;
+  if (!m) return null;      // 标签不存在 → null（极简版无此脚本）
+  return m[1].trim();        // 标签存在 → 返回内容（空串=空标签，走报错）
 }
 
 const kbJson = extractScript('portfolioKB-data');
 const engineJs = extractScript('ai-engine');
 
-if (!kbJson) { console.error('❌ 找不到 portfolioKB-data'); process.exit(1); }
-if (!engineJs) { console.error('❌ 找不到 ai-engine'); process.exit(1); }
+// v6.0 极简版无内置 AI 助手：两个脚本标签均不存在时跳过覆盖率回归（非失败）
+// 注意：标签存在但内容为空（''）不算"不存在"，走下方报错（RV-20261019-63 盲区收口）
+if (kbJson === null && engineJs === null) {
+  console.log('跳过：极简版无内置 AI 助手（portfolioKB-data/ai-engine 均不存在）');
+  process.exit(0);
+}
+if (kbJson === null || kbJson === '') { console.error('❌ 找不到 portfolioKB-data'); process.exit(1); }
+if (engineJs === null || engineJs === '') { console.error('❌ 找不到 ai-engine'); process.exit(1); }
 
 // ===== 2. 注入最小DOM stub =====
 const domStub = `
