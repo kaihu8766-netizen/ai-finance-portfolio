@@ -440,7 +440,7 @@ function generateAdvice(medianMin,var95,breachProb,threshold,q10,months){
   if(breachProb>20){
     items.push({type:'danger',text:'流动性风险高：'+breachProb+'%概率跌破安全垫，建议立即安排备用授信额度 '+Math.round((threshold-var95)*1.5).toLocaleString()+' 万'});
   }else if(breachProb>5){
-    items.push({type:'warn',text:'流动性风险中等：'+breachProb+'%概率跌破安全垫，建议预留 '+Math.round((threshold-var95)*1.2).toLocaleString()+' 万应急资金'});
+    items.push({type:'warn',text:'流动性风险中等：'+breachProb+'%概率跌破安全垫，建议以协定存款超额头寸补足安全垫 '+Math.round((threshold-var95)*1.2).toLocaleString()+' 万，兼顾流动性与利息收益'});
   }else{
     items.push({type:'normal',text:'流动性风险可控：跌破安全垫概率仅 '+breachProb+'%，当前资金头寸充足'});
   }
@@ -457,7 +457,7 @@ function generateAdvice(medianMin,var95,breachProb,threshold,q10,months){
   items.push({type:'normal',text:'对冲建议：融资利率波动较大时，可考虑利率互换(IRS)锁定中长期融资成本，对冲利率上行风险'});
   items.push({type:'normal',text:'模型局限：本模拟假设变量间线性相关，极端情景下相关性可能失效（尾部风险），建议结合压力测试交叉验证'});
 
-  list.innerHTML=items.map(i=>'<li class="'+(i.type||'')+'">'+i.text+'</li>').join('');
+  list.innerHTML=items.map(i=>'<li class="'+(i.type||'')+'">'+i.text+'<span style="color:#9ba3b7;font-size:11px"> （模拟测算·示例参数）</span></li>').join('');
   advice.style.display='block';
 }
 
