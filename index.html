@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="胡凯 · AI × 财务作品集：发票合规预审（解析+规则引擎，可运行 Demo）、集团现金流压力测试与资金调度决策（蒙特卡洛精算建模）。2027 届秋招 · 金融与投资学（专业会计）硕士。">
+    <meta name="description" content="胡凯 · AI × 财务作品集：LPR 走势预测分析（四指标框架 + 蒙特卡洛概率预测，可运行 Demo）。2027 届秋招 · 金融与投资学（专业会计）硕士。">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%236d7cff'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3E%E8%83%A1%3C/text%3E%3C/svg%3E">
     <title>胡凯 · AI × 财务 作品集</title>
     
@@ -61,7 +61,7 @@ body::after{
 /* 作品卡片hover发光增强 */
 .work.wide:hover{box-shadow:0 24px 60px rgba(0,0,0,0.35),0 0 50px rgba(109,124,255,0.18)}
 .work:hover{border-color:rgba(109,124,255,0.4)}
-/* w07精算核心卡特殊视觉 */
+/* 旗舰作品精算核心卡特殊视觉 */
 .work.wide.actuarial-core{border-color:rgba(52,211,153,0.25);background:linear-gradient(135deg,rgba(52,211,153,0.03),transparent 40%)}
 .work.wide.actuarial-core:hover{border-color:rgba(52,211,153,0.5);box-shadow:0 24px 60px rgba(0,0,0,0.35),0 0 50px rgba(52,211,153,0.2)}
 /* AI助手按钮脉冲动画 */
@@ -1474,14 +1474,14 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
 <div class="hero">
   <div class="tag"><span class="pulse"></span>AI × FINANCE PORTFOLIO · 2026</div>
   <h1>从财务一线痛点出发，<br>用 <span class="accent">精算建模和AI工具</span> 解决实际问题</h1>
-  <p class="sub">精算学（辅修金融）本科 + 金融与投资学（专业会计）硕士复合背景，智马达汽车有限公司（奔驰x吉利）· 财务资金部实习，独立负责子公司流贷全流程。实习中观察到资金监控、发票核验等环节的效率痛点，开始探索AI在财务场景的应用：独立完成发票合规预审、集团现金流压力测试等交互式财务原型项目并部署上线。实践"主力AI+复核AI"双Agent协作模式，目标是成为"懂业务+懂数据+懂AI"的财务数字化人才。</p>
+  <p class="sub">精算学（辅修金融）本科 + 金融与投资学（专业会计）硕士复合背景，智马达汽车有限公司（奔驰x吉利）· 财务资金部实习，独立负责子公司流贷全流程。实习中观察到利率判断靠"看新闻猜方向"的效率痛点，开始探索AI在财务场景的应用：独立完成 LPR 走势预测与融资成本压力测试交互式财务原型并部署上线。实践"主力AI+复核AI"双Agent协作模式，目标是成为"懂业务+懂数据+懂AI"的财务数字化人才。</p>
   <div class="stats">
-    <div class="stat"><div class="v">2</div><div class="l">递进式作品</div></div>
-    <div class="stat"><div class="v">4</div><div class="l">AI协作方法</div></div>
-    <div class="stat"><div class="v">10K</div><div class="l">情景推演路径（蒙特卡洛模拟）</div></div>
-    <div class="stat"><div class="v">2</div><div class="l">核心交互 Demo</div></div>
+    <div class="stat"><div class="v">1</div><div class="l">旗舰作品</div></div>
+    <div class="stat"><div class="v">4</div><div class="l">指标分析框架</div></div>
+    <div class="stat"><div class="v">5K</div><div class="l">蒙特卡洛模拟路径</div></div>
+    <div class="stat"><div class="v">3</div><div class="l">资金决策场景</div></div>
   </div>
-  <p style="font-size:11px;color:#9ba3b7;margin-top:8px;text-align:center">口径：2 个旗舰作品各含 1 个可运行交互 Demo</p>
+  <p style="font-size:11px;color:#9ba3b7;margin-top:8px;text-align:center">口径：单一旗舰作品 LPR 走势预测分析，含可运行交互 Demo</p>
 </div>
 
 <!-- 30秒速览 -->
@@ -1512,8 +1512,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px">
       <div style="font-size:12px;color:var(--muted);margin-bottom:8px">🏆 代表作品</div>
       <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.9">
-        现金流压力测试系统<br>
-发票合规预审
+        LPR 走势预测与融资成本压力测试
       </div>
     </div>
   </div>
@@ -1584,7 +1583,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
       <div class="about-card">
         <h4>产品与数据分析</h4>
         <p class="list">
-          <span><b>产品设计</b>：发票合规预审 · 现金流压力测试系统——从业务问题出发，做成能用的工具</span>
+          <span><b>产品设计</b>：LPR 走势预测分析——从利率判断痛点出发，做成可辩护的量化决策工具</span>
           <span><b>数据分析</b>：Python / SQL / Power BI 财务数据建模 · 蒙特卡洛风险模拟</span>
           <span><b>技术实现</b>：AI工作流设计 · Axure/墨刀原型</span>
         </p>
@@ -1748,10 +1747,19 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     <div class="tl-item tl-latest">
       <div class="tl-dot"></div>
       <div class="tl-content">
-        <div class="tl-head"><span class="tl-ver">v6.2.3</span><span class="tl-date">2026.10</span><span class="tl-badge">当前版本</span><span class="tl-pulse"></span></div>
+        <div class="tl-head"><span class="tl-ver">v6.2.3</span><span class="tl-date">2026.10</span></div>
         <div class="tl-title">审计公司名统一</div>
         <div class="tl-desc">审计主体口径统一：Mazars 国际网络与中审众环为同一主体，能力卡/能力时间线统一为 中审众环会计师事务所宁波分所（全站仅此一名）</div>
         <div class="tl-tags"><span>口径统一</span><span>Mazars=中审众环</span></div>
+      </div>
+    </div>
+    <div class="tl-item tl-latest">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-head"><span class="tl-ver">v7.0</span><span class="tl-date">2026.10</span><span class="tl-badge">当前版本</span><span class="tl-pulse"></span></div>
+        <div class="tl-title">单作品重构：只留 LPR</div>
+        <div class="tl-desc">作品集收敛为单一旗舰作品 LPR 走势预测与融资成本压力测试系统（用户拍板）：删除发票合规预审（01）与现金流压力测试（07）及对应详情页/知识库/话术/面试题；从历史版本恢复 LPR 完整详情页（四指标框架 + 蒙特卡洛 5 年区间带 + 融资成本 VaR + 贷款定价决策）；Hero/能力卡/统计口径全站同步</div>
+        <div class="tl-tags"><span>单一旗舰</span><span>LPR</span><span>精算×AI</span></div>
       </div>
     </div>
   </div>
@@ -1811,28 +1819,18 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
 
 <!-- 作品 -->
 <div class="sec reveal" id="works">
-  <div class="sec-head"><span class="idx">01</span><h2>作品矩阵</h2><span class="en">RESEARCH → AI SYSTEM → AUDIT → ACTUARIAL RISK</span></div>
+  <div class="sec-head"><span class="idx">01</span><h2>旗舰作品</h2><span class="en">ACTUARIAL RISK → AI SYSTEM → DECISION</span></div>
   <p class="work-lead" style="margin:0 0 18px;font-size:14px;color:#9ba3b7;line-height:1.9;">这些作品都来自实习中的观察和思考：在公司看到某个问题，自己想办法、动手试。还没到能直接落地的程度，但每一个都经过了深度思考和完整实现。</p>
   <div class="works">
 
-    <div class="work wide actuarial-core" onclick="showWork('07');return false;" style="cursor:pointer">
-      <span class="badge b0" style="--c:#34d399;color:#34d399;border-color:rgba(52,211,153,0.4);background:rgba(52,211,153,0.06)"><span class="dot" style="background:#34d399;box-shadow:0 0 8px #34d399"></span>ACTUARIAL · RISK MODELING</span>
+    <div class="work wide actuarial-core" onclick="showWork('03');return false;" style="cursor:pointer">
+      <span class="badge b0" style="--c:#34d399;color:#34d399;border-color:rgba(52,211,153,0.4);background:rgba(52,211,153,0.06)"><span class="dot" style="background:#34d399;box-shadow:0 0 8px #34d399"></span>ACTUARIAL · RATE RISK MODELING</span>
       <div style="flex:1">
-        <div class="title">集团现金流压力测试与资金调度决策系统</div>
-        <div class="desc">核心作品。某新能源车企资金团队的交互式现金流压力测试模拟器：参考实习中观察到的真实业务流程，将传统压力测试从半天缩短到30分钟，支持10+情景一键切换，提前识别流动性风险窗口，输出可执行的资金调度建议。</div>
-        <a class="demo-entry" href="demo/现金流压力测试模拟器.html" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">🚀 在线 Demo ↗</a>
+        <div class="title">LPR 走势预测与融资成本压力测试系统</div>
+        <div class="desc">旗舰作品。资金团队每月都要回答"现在该不该贷款？利率会涨还是跌？"——这个项目把"看新闻猜方向"升级为四指标分析框架（MLF / 净息差 / 社融 / CPI）+ 蒙特卡洛概率预测：输出未来 5 年 LPR 区间带与情景概率，直接服务新增贷款定价、存量重定价、再融资择时三个决策场景。配套可交互模拟器，打开就能玩。</div>
+        <a class="demo-entry" href="demo/LPR蒙特卡洛预测模拟器.html" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">🚀 在线 Demo ↗</a>
       </div>
       <span class="core-flag" style="background:var(--bg2)">★ 精算核心</span>
-    </div>
-
-    <div style="grid-column:1/-1;display:grid;grid-template-columns:1fr;gap:16px" class="works-mini">
-      <div class="work" onclick="showWork('01');return false;" style="cursor:pointer">
-        <span class="badge b1"><span class="dot"></span>RESEARCH · 基础层</span>
-        <div class="title">发票合规预审 · 解析与规则引擎</div>
-        <div class="desc">实习中观察到财务每天手工核票的低效场景，动手搭了一套「上传即解析、规则自动预警」的发票合规预审工具：XML/OFD/PDF 三通道解析 + 10条规则引擎 + 结构化证据链 + 通俗解释，把重复报销、金额勾稽断裂、红冲异常变成机器检查。</div>
-        <div class="meta"><span>2026.09 · 工具原型</span><span class="tag">解析引擎·规则引擎·双Agent复核</span><a class="demo-tag" href="demo/invoice-precheck-demo.html" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Demo ↗</a></div>
-      </div>
-
     </div>
 
   </div>
@@ -1963,7 +1961,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
   <span><b>方向</b> 财务 × AI</span>
 </div>
 <button class="back-to-top" id="backToTop" aria-label="回到顶部">↑</button>
-<div class="footer">胡凯 · AI × Finance Portfolio · v6.2.3 · 全部数据经人工核验 · 2026.10 · AI协作方法探索</div>
+<div class="footer">胡凯 · AI × Finance Portfolio · v7.0 · 全部数据经人工核验 · 2026.10 · AI协作方法探索</div>
 
 </div>
 
@@ -2112,18 +2110,13 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
   "purpose": "2027届秋招·财务×金融×精算×AI复合能力证明·定位职能团队AI Builder（拆解业务流程→设计人机协作工作流→搭建可运行Agent系统）",
   "structure": [
     { "id": "home", "name": "主页", "layer": "主页", "desc": "个人介绍 + 两条主线（工具原型→精算风险建模）+ 2 作品入口",
-      "summary": "个人主页：一句话定位 + 资金运营/审计背景 + 3 层主线故事 + 作品矩阵分级布局",
+      "summary": "个人主页：一句话定位 + 资金运营/审计背景 + 旗舰作品深度拆解 + 能力全景",
       "tags": ["主页", "个人介绍", "作品矩阵", "入口", "背景"],
-      "highlights": ["两条主线（工具原型→精算风险建模）", "2 作品矩阵分级布局", "能力全景卡片 + 双Agent复核机制"] },
-    { "id": "w01", "name": "发票合规预审 · 解析与规则引擎", "layer": "工具原型", "desc": "三通道解析(XML/OFD/PDF)·10条规则引擎·证据链·69项测试·可运行Demo",
-      "summary": "实习中观察到财务手工核票的低效场景，动手搭了发票合规预审工具：XML/OFD/PDF 三通道解析 + 10条规则引擎 + 证据链 + 通俗解释，输出分级风险报告",
-      "tags": ["发票", "核验", "解析引擎", "规则引擎", "合规预审", "重复报销", "勾稽", "红冲", "证据链"],
-      "highlights": ["三通道解析（XML/OFD/PDF）", "10条规则引擎 分级+证据链", "69 项自动化测试", "可运行 Demo（合成样例）"] },
-                { "id": "w07", "name": "集团现金流压力测试与资金调度决策系统", "layer": "精算风险建模·核心", "desc": "情景推演1万次（蒙特卡洛）·三情景压力测试·95%置信度下最大可能损失（VaR）·AI资金调度建议·12个月预测区间",
-      "summary": "把精算的随机建模方法用到集团资金管理的场景里做尝试：用蒙特卡洛模拟未来12个月现金流概率分布（10,000条路径，5个随机变量联合抽样），三情景压力测试（基准/温和衰退/严重衰退）识别流动性尾部风险，95% VaR下最大现金缺口约3,800万（对应最低余额约4,100万），AI Agent自动生成资金调度建议（续贷时机/头寸预留/跨境结汇）。精算+财务+AI复合能力集中体现",
-      "tags": ["现金流压力测试","蒙特卡洛","精算建模","流动性风险","VaR","资金调度","压力测试","集团资金管理"],
-      "highlights": ["1万次情景推演路径（蒙特卡洛模拟）（5变量联合抽样）", "三情景压力测试（基准/温和衰退/严重衰退）", "95%流动性VaR + 最低余额概率分布", "AI Agent自动生成资金调度建议", "3张ECharts交互图表"] }
-  ],
+      "highlights": ["单一旗舰（利率风险管理 × 蒙特卡洛预测）", "四指标分析框架 + 三种资金决策场景", "能力全景卡片 + 双Agent复核机制"] },
+    { "id": "w03", "name": "LPR 走势预测分析", "layer": "研究", "desc": "四指标框架(MLF/净息差/社融/CPI)·LPR历史走势·2026数据看板·贷款定价决策",
+      "summary": "基于 MLF 政策利率、银行净息差、社融、CPI 四指标框架预测 LPR 调整方向与幅度：净息差 Q1 触底 1.40%、Q2 微升 1.41%（四年来首次环比回升），银行让利空间有限；蒙特卡洛 5000 条路径输出 5 年区间带（10%/50%/90% 分位数）与情景概率（基准 60%/偏鸽 25%/持稳 15%），直接服务新增贷款定价、存量重定价、再融资择时三个决策场景",
+      "tags": ["LPR", "利率预测", "净息差", "贷款定价", "宏观分析", "MLF", "社融", "CPI"],
+      "highlights": ["四指标分析框架", "LPR 2019 改革历史走势", "蒙特卡洛5年预测区间带", "企业融资成本压力测试（VaR）", "贷款定价决策建议"] },
   "prototypes": [],
   "keyNumbers": {},
   "techStack": "原生HTML+CSS+JS·ECharts5.5按需打包·本地知识库检索（默认）·可选接入用户自备Key的真实大模型（面试演示模式）·多Agent协作体系(人+3AI信箱通信)·RAG检索增强·Python蒙特卡洛Demo(纯标准库)",
@@ -2144,7 +2137,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     "⑭轻量RAG政策检索(5文档条款+关键词打分+回答附出处)",
     "⑮抽屉背景滚动锁定+作品加载提示"
   ],
-  "versions": "v1基础 → v2.1体积优化 → v2.2安全修复 → v2.3接入真实AI → v2.4数据底座 → v2.5拷问修复 → v2.6异常全流程 → v2.7内置助手 → v3.0打字机/批量处理/pytest/RAG/体验优化 → v3.2整合SOX控制测试工作台为第6作品 → v3.3双Agent协作实战展示 → v3.4作品矩阵分级布局 → v3.5数据修正+面试速览 → v3.6角色升级Manager+Specialist+图标 → v3.7称呼统一+能力全景+协作技术栈 → v3.8去审计化重定位+工具链分层+技术栈分组 → v3.9协作技术栈术语升级 → v3.10商业化深度(G2N/CCC/死信队列+审计日志) → v3.11 AI助手彻头彻尾大更新 → v4.0 作品集第四代·AI助手四方向大更新 → v4.1 LPR预测替换收入核算 → v4.2 LPR精算增强(理论视角+情景概率+蒙特卡洛) → v4.3 未来5年预测区间带 → v4.4 图表1全宽大图+5Y双期限 → v4.4.1 Demo可靠性加固 → v4.4.2 数据时效更新 → v4.5 精算复合背景升级：新增现金流压力测试(w07)+LPR融资成本压力测试+SmartRecon精算风险引擎 → v5.0 精简聚焦：删除智对账(w04)+月结优化(w02)，双Agent升级为四角色协作体系 → v5.1 四角色区域专业化重写+AI助手知识库自动同步+SOX升级Agent工作流v5.0 → v5.2 w03新增蒙特卡洛可交互Demo+AI利率分析工作流 + w05新增现金流压力测试可交互Demo → v5.3 供应链模拟器逻辑修复+proto2原型V2.0+CHANGELOG → v5.3.3 手机端media适配+preflight体检工具+iframe竞态修复 → v5.5.0 业务化大改造（5作品改为业务叙事：摘要→痛点→洞察→应用→技术→局限）+全站措辞业务化+双Agent协作展示 → v5.6.0 主页作品卡片新增显眼Demo入口（3宽卡「在线 Demo ↗」按钮+mini卡 Demo tag+研究型标注；卡片div化解嵌套链接）+版本基线更新 → v5.6.1 AI协作经验章节更新（双Agent机制升级三阶段闭环：事前对齐方案→独立复核→机器闸门兜底；关键规矩增至6条；数据更新43轮复核/26条批准基线；去内部词） → v5.7.0 作品01替换为发票合规预审（镜像产品演示页：三通道解析+规则引擎R1-R11+证据链；公开渠道去内部词/环境变量名/样本细节，数据全合成） → v5.7.1 作品01加图表（系统流水线HTML/CSS+规则引擎覆盖ECharts横向堆叠条形，数据来自产品RULES_META真实定义）+文案口径修正（10条规则/未见异常） → v6.1 精简聚焦：恢复v5.7.1设计质感，仅保留作品01发票合规预审+作品07现金流压力测试，删除LPR/供应链/SOX/资金智算四个作品及对应知识库条目 → v6.2 细节打磨：Hero统计口径统一（2核心交互Demo）、双Agent企业级角色术语、学历口径对齐简历、资金调度建议呼应协定存款 → v6.2.1 实习公司名写全名：smart汽车（奔驰×吉利）→ 智马达汽车有限公司（奔驰x吉利） → v6.2.2 公司全名修正为官方口径：智马达汽车有限公司（奔驰x吉利）+ 中审众环会计师事务所宁波分所 → v6.2.3 审计公司名口径统一：Mazars 与中审众环为同一主体，统一为 中审众环会计师事务所宁波分所",
+  "versions": "v1基础 → v2.1体积优化 → v2.2安全修复 → v2.3接入真实AI → v2.4数据底座 → v2.5拷问修复 → v2.6异常全流程 → v2.7内置助手 → v3.0打字机/批量处理/pytest/RAG/体验优化 → v3.2整合SOX控制测试工作台为第6作品 → v3.3双Agent协作实战展示 → v3.4作品矩阵分级布局 → v3.5数据修正+面试速览 → v3.6角色升级Manager+Specialist+图标 → v3.7称呼统一+能力全景+协作技术栈 → v3.8去审计化重定位+工具链分层+技术栈分组 → v3.9协作技术栈术语升级 → v3.10商业化深度(G2N/CCC/死信队列+审计日志) → v3.11 AI助手彻头彻尾大更新 → v4.0 作品集第四代·AI助手四方向大更新 → v4.1 LPR预测替换收入核算 → v4.2 LPR精算增强(理论视角+情景概率+蒙特卡洛) → v4.3 未来5年预测区间带 → v4.4 图表1全宽大图+5Y双期限 → v4.4.1 Demo可靠性加固 → v4.4.2 数据时效更新 → v4.5 精算复合背景升级：新增现金流压力测试(w07)+LPR融资成本压力测试+SmartRecon精算风险引擎 → v5.0 精简聚焦：删除智对账(w04)+月结优化(w02)，双Agent升级为四角色协作体系 → v5.1 四角色区域专业化重写+AI助手知识库自动同步+SOX升级Agent工作流v5.0 → v5.2 w03新增蒙特卡洛可交互Demo+AI利率分析工作流 + w05新增现金流压力测试可交互Demo → v5.3 供应链模拟器逻辑修复+proto2原型V2.0+CHANGELOG → v5.3.3 手机端media适配+preflight体检工具+iframe竞态修复 → v5.5.0 业务化大改造（5作品改为业务叙事：摘要→痛点→洞察→应用→技术→局限）+全站措辞业务化+双Agent协作展示 → v5.6.0 主页作品卡片新增显眼Demo入口（3宽卡「在线 Demo ↗」按钮+mini卡 Demo tag+研究型标注；卡片div化解嵌套链接）+版本基线更新 → v5.6.1 AI协作经验章节更新（双Agent机制升级三阶段闭环：事前对齐方案→独立复核→机器闸门兜底；关键规矩增至6条；数据更新43轮复核/26条批准基线；去内部词） → v5.7.0 作品01替换为发票合规预审（镜像产品演示页：三通道解析+规则引擎R1-R11+证据链；公开渠道去内部词/环境变量名/样本细节，数据全合成） → v5.7.1 作品01加图表（系统流水线HTML/CSS+规则引擎覆盖ECharts横向堆叠条形，数据来自产品RULES_META真实定义）+文案口径修正（10条规则/未见异常） → v6.1 精简聚焦：恢复v5.7.1设计质感，仅保留作品01发票合规预审+作品07现金流压力测试，删除LPR/供应链/SOX/资金智算四个作品及对应知识库条目 → v6.2 细节打磨：Hero统计口径统一（2核心交互Demo）、双Agent企业级角色术语、学历口径对齐简历、资金调度建议呼应协定存款 → v6.2.1 实习公司名写全名：smart汽车（奔驰×吉利）→ 智马达汽车有限公司（奔驰x吉利） → v6.2.2 公司全名修正为官方口径：智马达汽车有限公司（奔驰x吉利）+ 中审众环会计师事务所宁波分所 → v6.2.3 审计公司名口径统一：Mazars 与中审众环为同一主体，统一为 中审众环会计师事务所宁波分所 → v7.0 单作品重构：只留 LPR（删除发票/现金流，恢复 LPR 完整详情页，全站口径同步）",
   "dualAgentCollab": {
     "description": "主力AI提方案并执行、复核AI独立审查并提出异议、人在分歧点裁决；每次分歧都会沉淀为可复用的规则",
     "roles": [
@@ -2153,7 +2146,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
       {"name": "复核 Agent（独立审查模型）", "role": "Review Agent", "duty": "独立审查、边界测试、提出异议、出具复核凭证，每次合并前都复核"}
     ],
     "mechanism": "重要任务写下来，AI做完先复述理解，确认了再动手，做完有人验收，每步都留记录",
-    "case": "SOX工作台从v1到v5改了5轮，中间发现过抽样公式错误、抽样量矛盾等问题，都是靠这套方法查出来的"
+    "case": "LPR 蒙特卡洛模型从初版到 v7.0 迭代多轮，中间发现过 Vasicek 参数校准口径不一致、预测区间偏窄等问题，都是靠这套方法查出来的"
   },
   "maintenance": "每次修改作品集后，同步更新 defectLog 与 versions（知识维护机制）"
 }
@@ -2172,7 +2165,7 @@ window.SmartReconAI = {
   offlineReplies: {
     // 作品集助手场景（portfolio-assistant）
     portfolio: [
-      { kw: ['功能','结构','有哪些','哪些作品','作品集','几个作品','作品矩阵','导览','介绍'], reply: '这个作品集包含：①主页（个人介绍+两条主线）②作品01 发票合规预审·解析与规则引擎（可运行Demo）③作品07 集团现金流压力测试与资金调度决策系统（精算建模·核心）。<div class="tool-call">portfolio_kb → structure ✓</div>' },
+      { kw: ['功能','结构','有哪些','哪些作品','作品集','几个作品','作品矩阵','导览','介绍'], reply: '这个作品集围绕一个旗舰作品展开：①主页（个人介绍 + 精算/财务/AI 能力全景）②旗舰作品 LPR 走势预测与融资成本压力测试系统（四指标框架 + 蒙特卡洛概率预测 + 可运行 Demo + 深度详情页）③AI 协作经验（双 Agent 机制）④面试模式（模拟面试官提问）。<div class="tool-call">portfolio_kb → home ✓</div>' },
       { kw: ['缺陷','问题','修复','bug','历史'], reply: '已修复的缺陷（列举）：①聊天输入XSS ②ECharts全量1004KB→按需打包691KB ③证据链元素用br无法显示→改div ④证据链浅底浅字看不清→改深色文字 ⑤Agent只回固定话术→接入真实DeepSeek API ⑥API失败直接降级→加重试 ⑦数据底座缺月度资金流→补12个月数据 ⑧离线关键词跨场景劫持→场景分离 ⑨人设漂移/逻辑缺陷→persona增强+资金全景 ⑩异常中心按钮无状态流转→完整全流程。<div class="tool-call">portfolio_kb → defect_log ✓</div>' },
       { kw: ['迭代','版本','更新','演进'], reply: '作品集演进历史：v1 基础版→v2.1 ECharts按需打包→v2.2 安全修复→v2.3 接入真实DeepSeek AI→v2.4 数据底座升级→v2.5 AI拷问测试修复→v2.6 异常处理全流程→v2.7 内置作品集助手→v3.2 整合SOX工作台→v3.3 协作实战展示→v3.4 作品矩阵分级→v5.0 双Agent复核机制→v5.3 手机端适配+preflight体检→v5.5.0 业务化大改造+全站措辞业务化→v5.6.0 主页Demo入口显眼化→v5.6.1 AI协作经验章节更新（三阶段闭环+规矩6条+数据更新）→v5.7.0 作品01替换为发票合规预审（可运行Demo）→v5.7.1 作品01加系统流水线图+规则覆盖图，文案口径修正→v6.1 精简聚焦：仅保留作品01+作品07，删除LPR/供应链/SOX/资金智算。<div class="tool-call">portfolio_kb → versions ✓</div>' },
       { kw: ['双Agent','复核机制','协作体系','怎么运作','如何运作','multi-agent','多智能体','团队','豆包','2.1 Turbo','DeepSeek','主力AI','复核AI','四角色'], reply: '我实践了一套"主力AI+复核AI"的双Agent复核机制，闭环拉满：<br><br>① <b>开工前先对齐方案</b>：AI先复述理解、提异议，人拍板后再动手<br>② <b>主力AI提方案并执行</b>：任务拆解、方案设计、代码实现、文档撰写<br>③ <b>复核AI独立审查</b>：不是检查，而是平等讨论——边界测试、根因分析、提出异议<br>④ <b>人在分歧点裁决</b>：两个AI有分歧时，人做最终决策<br>⑤ <b>机器闸门兜底</b>：没复核的改动提交时会被拦下来，每一次分歧都沉淀为规则<br><br>比如主力AI三次"先push后复核"，复核AI发现违规后双AI讨论，落地了复核凭证+CI闸门，PR #1实证：不补凭证就合不进去。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
@@ -2181,16 +2174,14 @@ window.SmartReconAI = {
       { kw: ['作者','你是谁','胡凯','背景','个人','介绍'], reply: '作者胡凯，2001年生，浙江宁波人。教育：精算学（辅修金融）本科（惠灵顿维多利亚大学）+ 金融与投资学（专业会计）硕士（宁波诺丁汉大学，2025.09-2027.07）。实习：智马达汽车有限公司（奔驰x吉利）财务资金部（2026.05-至今）+ 中审众环会计师事务所宁波分所审计（2025.12-2026.03）。定位：懂业务+懂数据+懂AI的财务数字化人才。<div class="tool-call">portfolio_kb → author ✓</div>' },
       { kw: ['教育','学历','学校','大学','专业','硕士','本科'], reply: '教育背景：<br>• <b>硕士</b>：宁波诺丁汉大学，金融与投资学（专业会计），2025.09-2027.07<br>• <b>本科</b>：新西兰惠灵顿维多利亚大学，精算学（辅修金融）<br><br>精算本科打下数学建模和风险量化基础，金融会计硕士补充财务和投资知识，形成"量化+财务"复合背景。<div class="tool-call">portfolio_kb → author ✓</div>' },
       { kw: ['实习','工作','经历','smart','汽车','资金部','资金方向','资金运营','审计'], reply: '实习经历：<br>• <b>智马达汽车有限公司（奔驰x吉利）财务资金部</b>（2026.05-至今）：独立负责子公司流动资金贷款全流程，运用SAP完成集团资金台账与多银行账户数据归集，参与集团银行授信、供应链融资、跨境付汇与外汇申报<br>• <b>中审众环会计师事务所宁波分所 审计实习</b>（2025.12-2026.03）：使用Python开展财务数据清洗与指标波动归因分析，参与制造业、房地产、私募基金年报审计，独立负责货币资金、往来款、固定资产等核心科目底稿<br><br>这些实习中的观察和思考，是作品集所有作品的灵感来源。<div class="tool-call">portfolio_kb → author ✓</div>' },
-      { kw: ['技能','能力','会什么','技术栈','工具','python','sql','sap'], reply: '核心技能：<br>• <b>财务专业</b>：资金管理、财务报表、审计底稿、SOX内控、精算建模<br>• <b>数据工具</b>：Python(Pandas/NumPy/Matplotlib)、SQL、Excel高级函数、SAP<br>• <b>AI应用</b>：大语言模型API调用、Agent工作流设计、RAG检索增强、提示词工程<br>• <b>建模能力</b>：蒙特卡洛模拟、均值回归模型(Vasicek)、现金流压力测试、统计抽样法（属性抽样）<br><br>技术栈：原生HTML+CSS+JS、ECharts可视化、DeepSeek API、多Agent协作体系。<div class="tool-call">portfolio_kb → techStack ✓</div>' },
+      { kw: ['技能','能力','会什么','技术栈','工具','python','sql','sap'], reply: '核心技能：<br>• <b>财务专业</b>：资金管理、财务报表、审计底稿、SOX内控、精算建模<br>• <b>数据工具</b>：Python(Pandas/NumPy/Matplotlib)、SQL、Excel高级函数、SAP<br>• <b>AI应用</b>：大语言模型API调用、Agent工作流设计、RAG检索增强、提示词工程<br>• <b>建模能力</b>：蒙特卡洛模拟、均值回归模型(Vasicek)、利率风险与融资成本建模<br><br>技术栈：原生HTML+CSS+JS、ECharts可视化、DeepSeek API、多Agent协作体系。<div class="tool-call">portfolio_kb → techStack ✓</div>' },
       { kw: ['求职','方向','目标','岗位','职业','规划','找工作'], reply: '求职方向：2027届秋招，聚焦财务数字化、资金管理、AI+财务复合岗位。目标岗位：字节跳动RFT AI Builder、京东JDS管培生（财务/资金方向）、美的/比亚迪财务数字化/资金岗、银行资金运营/国际财税。<br><br>职业规划：短期成为"懂业务+懂数据+懂AI"的复合型财务人才，长期探索AI在财务领域的深度应用。<div class="tool-call">portfolio_kb → purpose ✓</div>' },
-      { kw: ['为什么','做这个','动机','初衷','想法','来源'], reply: '这个作品集的所有作品，都来自实习中的观察和深度思考。比如：<br>• 在 智马达汽车有限公司（奔驰x吉利）做资金实习时，发现现金流预测靠Excel手动调整，于是做了现金流压力测试模型<br>• 审计实习时发现发票核验靠人工逐张检查，于是做了发票合规预审工具<br><br>我是实习生，这些作品没有落地到公司实际业务中，但体现了我从业务问题出发、用数据和AI工具尝试解决问题的思考过程。<div class="tool-call">portfolio_kb → purpose ✓</div>' },
+      { kw: ['为什么','做这个','动机','初衷','想法','来源'], reply: '这个作品集的核心作品，来自实习中的观察和深度思考：<br>• 在 智马达汽车有限公司（奔驰x吉利）做资金实习时，发现资金经理判断利率靠"看新闻猜方向"，没有可验证的分析框架，于是做了 LPR 走势预测与融资成本压力测试<br><br>我是实习生，这个作品没有落地到公司实际业务中，但体现了我从业务问题出发、用精算方法和 AI 工具尝试解决问题的思考过程。<div class="tool-call">portfolio_kb → purpose ✓</div>' },
       { kw: ['核心','亮点','优势','特长','厉害'], reply: '核心亮点：<br>① <b>复合背景</b>：精算本科+金融会计硕士+资金/审计实习<br>② <b>从业务出发</b>：所有作品都来自真实实习场景的观察和思考<br>③ <b>动手能力</b>：从想法到可交互Demo全部独立完成<br>④ <b>AI协作方法</b>：实践出"主力AI+复核AI"的双Agent复核机制<br>⑤ <b>持续迭代</b>：从v1到v6.2，多轮复核和修复。<div class="tool-call">portfolio_kb → keyNumbers ✓</div>' },
-      { kw: ['w07','现金流','压力测试','核心作品','流动性','资金缺口分析','资金调度','调度建议'], reply: '作品07是核心作品：集团现金流压力测试与现金调度决策系统。<br><br>方法：多变量随机建模、情景推演1万次（蒙特卡洛模拟）、95%置信度下最大可能损失（VaR）、压力情景分析。<br><br>产出：未来12个月现金流预测区间、最低现金余额分布、资金缺口预警、现金调度建议。<br><br>这个作品体现了精算建模能力在财务场景的应用。<div class="tool-call">portfolio_kb → works[2] ✓</div>' },
-                  { kw: ['局限','不足','结论','口径','研究结论','局限性'], reply: '关于作品的局限和结论，整体说明：<br><br>• <b>结论</b>：2个作品分别覆盖了发票合规预审（工具原型）与集团现金流压力测试（精算风险建模），形成"工具→决策"的递进<br>• <b>共同局限</b>：所有作品都是我基于实习观察的个人尝试，<b>没有落地到公司实际业务</b>；现金流压力测试等具体数值是演示用的模拟数据，参数和口径在每个作品的"数据口径与假设说明"里写清楚了<br>• <b>方法论真实</b>：模型公式、抽样标准（AICPA属性抽样表）、精算方法（Vasicek、蒙特卡洛）都是真实的，Python源码公开可复现<br><br>每个作品详情页底部都有单独的"局限与诚实披露"和"数据口径与假设说明"，可以点进去看具体的。<div class="tool-call">portfolio_kb → keyNumbers ✓</div>' },
-      { kw: ['w01','发票','核验','解析','规则','预审','重复报销','勾稽','红冲','证据链','局限'], reply: '作品01：发票合规预审 · 解析与规则引擎。<br><br><b>做什么</b>：财务入账前的发票合规预审工具——上传发票自动解析票面信息，跑 10条规则引擎（重复报销/金额勾稽/连号/限额/集中度/日期/差额征税/红冲关联），输出分级风险报告，每条风险带证据链（字段/原值/行号）和通俗解释（是什么/影响/怎么处理/该谁处理）。<br><br><b>能力</b>：XML/OFD/PDF 三通道解析引擎（PDF 支持版式文本+二维码解码+扫描件 OCR 分流）、69 项自动化测试、单票六项预审（票面状态/金额勾稽/归档合规/异常凭证/重复检查/红冲检查）、结论分「阻断入账/建议核对/未见异常」。<br><br><b>局限</b>：预警标准为占位口径，不构成合规结论；后端未公网部署（演示页为静态模式）；首版仅支持单企业主体。数据全部为合成虚构样例，非真实发票。<div class="tool-call">portfolio_kb → works[1] ✓</div>' },
-            // ===== 第五轮复核 L2 补全：必修缺口 + w01 素材 =====
-      { kw: ['数据','真实','真的吗','编造','模拟','来源','可靠','可信','误差','落地','应用','实际使用'], reply: '关于数据真实性，我分三类说明：<br><br>• <b>公开数据</b>：页面标注来源的宏观/市场数据来自公开渠道<br>• <b>模拟数据</b>：现金流压力测试等具体数值是演示用的模拟数据，参数和口径在每个作品的"数据口径与假设说明"里写清楚了<br>• <b>方法论真实</b>：模型公式、抽样标准（AICPA属性抽样表）、精算方法（Vasicek、蒙特卡洛）都是真实的，Python源码公开可复现<br><br>我是实习生，没有权限使用公司真实数据，所以用模拟数据验证方法的可行性。这一点我在作品集里反复强调，不夸大。<div class="tool-call">portfolio_kb → keyNumbers ✓</div>' },
-      { kw: ['算错','错误','准确','靠谱','会不会错','质疑'], reply: '说实话，确实算错过。<br><br>SOX工作台在第四轮复核时发现过两个问题：①统计抽样法（属性抽样）公式的偏差率口径写错了，导致样本量计算偏差；②页面写"预计偏差1%对应60笔"，但AICPA标准表实际是95笔。这些都被DeepSeek复核查出来并修正了。<br><br>这也是我做双Agent复核机制的原因——AI自己写的东西自己查不出来，必须有独立复核。现在每个作品都有preflight自动体检 + DeepSeek人工复核两道关。<br><br>财务/审计/精算里，"不确定就说不确定"比"像模像样地编一个"重要得多。<div class="tool-call">portfolio_kb → defect_log ✓</div>' },
+            { kw: ['w03','lpr','利率','预测','蒙特卡洛','融资成本','贷款定价','净息差','MLF','社融','CPI'], reply: '旗舰作品：LPR 走势预测与融资成本压力测试。<br><br>方法：四指标分析框架（MLF政策利率/银行净息差/社融/CPI）+ 利率均值回归模型（Vasicek）+ 蒙特卡洛模拟（5,000条路径）+ 1Y/5Y双期限建模 + 融资成本敏感性分析。<br><br>产出：未来60个月LPR预测区间（10%/50%/90%分位数）、5年后LPR概率分布、情景概率（基准60%/偏鸽25%/持稳15%）、不同利率情景下的融资成本压力测试。<br><br>特点：参数诚实标注为"演示设定，非市场校准"，模型公式和Python源码全部公开可复现。<div class="tool-call">portfolio_kb → works[0] ✓</div>' },
+                  { kw: ['局限','不足','结论','口径','研究结论','局限性'], reply: '关于作品的局限和结论，整体说明：<br><br>• <b>结论</b>：LPR 短期（6个月内）持稳概率大（净息差 1.41% 历史低位限制让利空间），中期（1-3年）温和下行，5Y 会比 1Y 降得更快（地产政策定向引导）<br>• <b>局限</b>：参数（θ/κ/σ）为演示设定非市场校准；宏观情景概率基于公开数据推断；模型假设变量线性相关，极端情景可能失效<br>• <b>建议</b>：预测用于决策参考，重大融资决策仍需结合公司敞口与银行报价复核。<div class="tool-call">portfolio_kb → works[0] ✓</div>' },
+      { kw: ['数据','真实','真的吗','编造','模拟','来源','可靠','可信','误差','落地','应用','实际使用'], reply: '关于数据真实性，我分三类说明：<br><br>• <b>公开数据</b>：页面标注来源的宏观/市场数据来自公开渠道<br>• <b>模拟数据</b>：LPR 蒙特卡洛预测的具体数值是演示用模拟数据，参数和口径在每个作品的"数据口径与假设说明"里写清楚了<br>• <b>方法论真实</b>：模型公式（Vasicek、蒙特卡洛）、精算方法都是真实的，Python源码公开可复现<br><br>我是实习生，没有权限使用公司真实数据，所以用模拟数据验证方法的可行性。这一点我在作品集里反复强调，不夸大。<div class="tool-call">portfolio_kb → keyNumbers ✓</div>' },
+      { kw: ['算错','错误','准确','靠谱','会不会错','质疑'], reply: '说实话，确实算错过。<br><br>早期搭 LPR 蒙特卡洛模型时，Vasicek 参数（θ/κ）初始设定与历史校准口径不一致，导致预测区间偏窄，被 DeepSeek 复核查出来并修正了。<br><br>这也是我做双Agent复核机制的原因——AI自己写的东西自己查不出来，必须有独立复核。现在作品集有preflight自动体检 + DeepSeek人工复核两道关。<br><br>财务/审计/精算里，"不确定就说不确定"比"像模像样地编一个"重要得多。<div class="tool-call">portfolio_kb → defect_log ✓</div>' },
       { kw: ['gpa','成绩','绩点','排名','学习'], reply: '学业表现：硕士阶段GPA位于专业前10%。本科精算学（辅修金融）侧重数学建模和风险量化，硕士金融与投资学（专业会计）侧重财务和投资分析。<br><br>具体成绩单可以看简历，这里就不展开了。<div class="tool-call">portfolio_kb → author ✓</div>' },
 
     ]  },
@@ -2210,6 +2201,15 @@ window.SmartReconAI = {
 
   // 离线正式回答：KB 检索优先（三级策略）→ 话术兜底 → 越界模板
   buildOfflineAnswer: function(text, fallbackMsg) {
+    var t0 = text.toLowerCase();
+    // v7.0 已删主题拦截（发票/现金流/供应链/SOX/资金智算/w01/w07 已从作品集移除，问到时明确拒答，防止答非所问）
+    // v7.0 已删主题拦截：短语级匹配避免误伤 LPR 正当问法（如"蒙特卡洛抽样路径""企业现金流影响"）；LPR 意图优先，拦截仅在未命中任何 LPR 话术时生效
+    var REMOVED = ['发票','发票预审','核验','勾稽','三通道','现金流压力测试','现金流预测','资金缺口','供应链','sox工作台','sox审计','sox抽样','抽样量','抽样公式','资金智算','w01','w07'];
+    for (var ri = 0; ri < REMOVED.length; ri++) {
+      if (t0.indexOf(REMOVED[ri]) > -1) {
+        return '这个问题超出了作品集的范围 🙂 作品集当前只保留一个旗舰作品：LPR 走势预测与融资成本压力测试系统（发票核验、现金流压力测试等早期作品已从作品集移除）。你问的这方面内容不在作品集里，但如果你想了解 LPR 预测的方法、数据或局限，可以直接问我。';
+      }
+    }
     var hits = (this.kbSearch(text) || []).filter(function(h){ return h.type === 'work'; });
     var top = hits[0];
     // 强相关（≥2.0）：直接答 KB 原文
@@ -2266,7 +2266,7 @@ window.SmartReconAI = {
       var works = document.querySelectorAll('.work');
       var synced = 0;
       works.forEach(function(el) {
-        // 从onclick提取作品id: showWork('07') -> w07
+        // 从onclick提取作品id: showWork('03') -> w03
         var onclick = el.getAttribute('onclick') || '';
         var m = onclick.match(/showWork\(['"](\d+)['"]\)/);
         if (!m) return;
@@ -2682,13 +2682,13 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   var interviewMode=false;
   var interviewQIndex=0;
   var interviewQuestions=[
-    '请介绍一下你最得意的作品——集团现金流压力测试系统，它解决了什么实际业务问题？',
+    '请介绍一下你的旗舰作品——LPR 走势预测与融资成本压力测试系统，它解决了什么实际业务问题？',
     '你的精算背景在财务工作中具体怎么体现？举一个用精算方法解决财务问题的例子。',
     '在智马达汽车有限公司（奔驰x吉利）财务资金部实习中，你接触了SAP资金模块，你觉得AI可以在哪些环节提升资金运营效率？',
     '你设计的双Agent复核机制中，复核AI（独立评审角色）具体做什么？为什么需要这个角色？',
     '如果让你用AI改进企业的月度结账流程，你会从哪里入手？请说说你的思路。',
-    '你的作品集里发票合规预审和现金流压力测试这两个作品，在方法论上有什么共通之处？',
-    '发票合规预审这个作品，如果要真正接入企业报销流程，你认为最大的挑战是什么？',
+    '你的作品集里 LPR 预测用了四指标框架和蒙特卡洛，这两者在方法论上是怎么配合的？',
+    'LPR 预测模型如果要真正接入企业融资决策流程，你认为最大的挑战是什么？',
     '请说说你对"AI时代财务人员核心竞争力"的理解，你自己是怎么准备的？'
   ];
   function getNextInterviewQuestion(){
@@ -2697,7 +2697,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     return q;
   }
   function interviewPersona(){
-    return '你是"面试官模式"下的资深财务+AI 面试官（由胡凯作品集助手扮演）。你的任务：向用户（求职者）进行模拟面试，考察其对财务/审计/AI Agent 的理解深度。\n规则：①一次只问一个问题，等用户回答后再追问或换题 ②问题围绕作品集体现的能力：财务知识（资金运营/现金流压力测试/发票合规预审/精算建模/营运资金）、AI 能力（双Agent复核/Agent架构/人在回路/工作流设计/规则引擎）、工程实践（QA/流式/降级/基线）③用户回答后先简短点评（1-2 句），再问下一题 ④不要替用户回答 ⑤当用户/面试官要求"打开/展示作品"时，不要执行任何打开动作，改为引导式回答：「作品在下方作品矩阵，您可以点击『作品名』卡片查看」——把导览动作留给对方自己点 ⑥当用户说"退出面试/结束面试"时，总结 2-3 条面试表现亮点，结束面试模式。\n现在开始：先一句话说明面试规则，然后问第一个问题。';
+    return '你是"面试官模式"下的资深财务+AI 面试官（由胡凯作品集助手扮演）。你的任务：向用户（求职者）进行模拟面试，考察其对财务/审计/AI Agent 的理解深度。\n规则：①一次只问一个问题，等用户回答后再追问或换题 ②问题围绕作品集体现的能力：财务知识（资金运营/利率分析/精算建模/融资成本）、AI 能力（双Agent复核/Agent架构/人在回路/工作流设计）、工程实践（QA/流式/降级/基线）③用户回答后先简短点评（1-2 句），再问下一题 ④不要替用户回答 ⑤当用户/面试官要求"打开/展示作品"时，不要执行任何打开动作，改为引导式回答：「作品在下方作品矩阵，您可以点击『作品名』卡片查看」——把导览动作留给对方自己点 ⑥当用户说"退出面试/结束面试"时，总结 2-3 条面试表现亮点，结束面试模式。\n现在开始：先一句话说明面试规则，然后问第一个问题。';
   }
   function enterInterview(){
     interviewMode=true;
@@ -2732,8 +2732,8 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     {icon:'🎓',text:'模拟面试我（面试官模式）',q:'开始面试'}
   ];
   var navItems=[
-    {id:'01',name:'发票合规预审',n:'W01'},
-    {id:'07',name:'现金流压力测试',n:'W07'}
+    {id:'03',name:'LPR 走势预测',n:'W03'},
+    {id:'00',name:'AI协作经验',n:'W00'}
   ];
   function buildWelcome(){
     if(!welcome) return;
@@ -2797,8 +2797,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   var NAV_VERBS=/(打开|展示|跳到|跳转|进入|看看|前往|导览|带我去|给我看)/;
   var NAV_NUM=/(?:打开|展示|跳到|跳转|进入|看看|前往|导览|带我去|给我看)[^\d]{0,6}([1-9])(?:个|号|个作品|作品)?/;
   var NAV_NAMES=[
-    {id:'01',kw:['发票','合规','预审','核验','解析','规则引擎','税号','勾稽']},
-    {id:'07',kw:['现金流','压力测试','蒙特卡洛','资金调度','流动性','VaR','缺口']}
+    {id:'03',kw:['lpr','利率','预测','蒙特卡洛','净息差','MLF','社融','CPI','贷款定价','融资成本']}
   ];
   function parseNav(text){
     var t=String(text).toLowerCase();
@@ -3105,8 +3104,8 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 })();
 </script>
 
-<script type="text/html" id="page-01">
-<section class="portfolio-page" id="work-01">
+<script type="text/html" id="page-03">
+<section class="portfolio-page" id="work-03">
 
 
 <div class="topbar">
@@ -3118,433 +3117,236 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 <div class="cover">
   <div class="in">
-    <div class="tag"><span class="dot"></span>LAYER 01 · 工具原型</div>
-    <h1>发票合规预审 · 解析与规则引擎</h1>
-    <p>面向财务入账前场景的发票合规预审工具：实习中观察到财务每天要收票、核票、对账，重复报销、金额勾稽断裂、红冲异常全靠人工一眼一眼盯。我尝试把它自动化——上传发票即可自动解析票面信息、跑规则引擎、输出分级风险报告，每条风险都带证据链和通俗解释。</p>
-    <div class="who"><span>胡凯</span><span class="sep">·</span><span>金融与投资学（专业会计）硕士</span><span class="sep">·</span><span>财务资金部实习观察 · 个人尝试</span><span class="sep">·</span><span>2026.09</span></div>
+    <div class="tag"><span class="dot"></span>LAYER 01 · RESEARCH</div>
+    <h1>LPR 走势预测分析｜贷款定价决策支持</h1>
+    <p>基于 MLF 政策利率 · 银行净息差 · 社融 · CPI 四指标框架，预测央行 LPR 调整方向与幅度——把「利率走势判断」从经验直觉变成可验证的分析逻辑链，直接服务贷款定价、重定价与再融资决策。</p>
+    <div class="who"><span>胡凯</span><span class="sep">·</span><span>智马达汽车有限公司（奔驰x吉利）资金运营 × 京东资金管理岗视角</span><span class="sep">·</span><span>2026.08</span></div>
   </div>
 </div>
 
 <div class="wrap">
 
 <div class="kpis reveal">
-  <div class="kpi"><div class="v">3 通道</div><div class="l">发票解析：XML / OFD / PDF（版式+二维码）</div><div class="s">PDF 支持打印版与扫描件识别</div></div>
-  <div class="kpi"><div class="v">10 条</div><div class="l">规则引擎：重复报销/勾稽/连号/红冲…</div><div class="s">风险分级 + 置信度 + 证据链</div></div>
-  <div class="kpi"><div class="v">69 项</div><div class="l">解析 + 规则引擎自动化测试</div><div class="s">含合成样例可复现校验</div></div>
-  <div class="kpi"><div class="v">6 项</div><div class="l">单票预审检查：票面/勾稽/归档/异常/重复/红冲</div><div class="s">结论分「阻断入账/建议核对/未见异常」</div></div>
+  <div class="kpi"><div class="v">3.0% / 3.5%</div><div class="l">1Y / 5Y LPR 连续 15 个月持稳</div><div class="s">2025.05 至今 · 央行</div></div>
+  <div class="kpi"><div class="v">1.41%</div><div class="l">商业银行净息差（四年首现回升）</div><div class="s">2026Q2 · 金融监管总局</div></div>
+  <div class="kpi"><div class="v">+7.4%</div><div class="l">社融存量同比 · 贷款单月 -3400 亿</div><div class="s">2026-07 · 央行</div></div>
+  <div class="kpi"><div class="v">+0.5%</div><div class="l">CPI 同比 · 核心 +0.9%</div><div class="s">2026-07 · 国家统计局</div></div>
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">01</span><h2>摘要：结论先行</h2><span class="en">EXECUTIVE SUMMARY</span></div>
-  <p style="font-size:14px;color:#9ba3b7;line-height:1.9">财务入账前，发票核验是个高频又容易被忽视的环节。我从实习中的观察出发——<b>重复报销、明细税额与合计对不上、红字票没有对应蓝票</b>——这些靠人工核对既慢又容易漏。这个项目把「解析 + 规则 + 报告」做成一条自动化流水线：解析引擎读票面（XML/OFD/PDF 三通道），规则引擎跑 11 条检查（重复、勾稽、连号、限额、集中度、日期、差额征税、红冲等），每条风险输出<b>证据链</b>（字段/原值/行号）和<b>通俗解释</b>（是什么/影响/怎么处理/该谁处理）。</p>
-  <div style="margin-top:12px;font-size:12px;color:#9ba3b7;line-height:1.8;background:rgba(109,124,255,0.06);padding:10px 14px;border-radius:8px;border-left:3px solid #6d7cff">
-    <b style="color:#6d7cff">我的角色：</b>实习中观察到手工核票的低效场景后，自己设计解析-规则-报告流水线并动手实现；AI 协作完成代码调试与复核（双 Agent 复核机制：主力执行 + 独立评审，机器闸门兜底）。
-  </div>
+  <div class="sec-head"><span class="num">01</span><h2>业务痛点：资金经理的利率判断之困</h2><span class="en">BUSINESS PAIN POINTS</span></div>
+  <p>资金团队每个月都要回答几个问题："现在该不该新增贷款？""存量贷款什么时候重定价最合适？""再融资要不要现在锁定？"这些问题都取决于一个核心变量——LPR走势。但传统做法是"看新闻猜方向"，缺乏系统分析框架。我在实习中观察到这个痛点，构建了一个四指标LPR分析框架+蒙特卡洛概率预测模型，把经验直觉升级成可验证、可辩护的量化判断。</p>
+  <div class="quote"><b>我的思路：</b>既然精算师能用概率分布管理保险负债的不确定性，这套方法也应该能解决企业利率风险管理的不确定性——把"看新闻猜方向"升级为"四指标框架+蒙特卡洛概率分布"，让资金经理不仅知道"利率大概怎么走"，还知道"不同情景下对我的融资成本影响有多大"。</div>
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">02</span><h2>业务痛点：手工核票的三个「拦路虎」</h2><span class="en">BUSINESS PAIN POINTS</span></div>
-  <p>财务入账前，发票要过三关，每一关都靠人工：</p>
-  <table>
-    <tr><th>关卡</th><th>人工怎么做</th><th>风险</th></tr>
-    <tr><td><b>重复报销</b></td><td>凭记忆 + 翻历史记录比对</td><td>同一张票报两次，重复抵扣进项税，审计一查一个准</td></tr>
-    <tr><td><b>金额勾稽</b></td><td>逐行看金额×税率是否=税额</td><td>明细行税率标错、税额改数，勾稽断裂直接入账会进项转出</td></tr>
-    <tr><td><b>红冲/异常</b></td><td>人工核对红票对应蓝票、进项转出提示</td><td>红冲关系不成立、负数票入账无对应蓝票，申报数据不一致</td></tr>
-  </table>
-  <div class="callout"><b>核心洞察：</b>三关全是「规则明确、重复性高」的检查——这恰恰是规则引擎擅长的事：把人工核对逻辑固化成 10 条规则，上传即自动过一遍，人只需要处理机器标出的风险。</div>
-</div>
-
-<div class="sec reveal">
-  <div class="sec-head"><span class="num">03</span><h2>方法论：解析 → 规则 → 报告</h2><span class="en">METHOD</span></div>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:18px">
-    <div style="background:linear-gradient(145deg,rgba(109,124,255,0.1),rgba(109,124,255,0.03));border:1px solid rgba(109,124,255,0.2);border-radius:12px;padding:18px;text-align:center">
-      <div style="font-size:20px;font-weight:700;color:#6d7cff;margin-bottom:6px">解析引擎</div>
-      <div style="font-size:12px;color:#9ba3b7;line-height:1.6">XML 结构化解析 / OFD<br>PDF 版式文本 + 二维码解码<br>扫描件 OCR 分流</div>
-    </div>
-    <div style="background:linear-gradient(145deg,rgba(52,211,153,0.1),rgba(52,211,153,0.03));border:1px solid rgba(52,211,153,0.2);border-radius:12px;padding:18px;text-align:center">
-      <div style="font-size:20px;font-weight:700;color:#34d399;margin-bottom:6px">规则引擎（10条）</div>
-      <div style="font-size:12px;color:#9ba3b7;line-height:1.6">重复/勾稽/连号/限额/集中度<br>日期/差额征税/红冲<br>分级 + 置信度 + 证据链</div>
-    </div>
-    <div style="background:linear-gradient(145deg,rgba(251,191,36,0.1),rgba(251,191,36,0.03));border:1px solid rgba(251,191,36,0.2);border-radius:12px;padding:18px;text-align:center">
-      <div style="font-size:20px;font-weight:700;color:#fbbf24;margin-bottom:6px">风险报告</div>
-      <div style="font-size:12px;color:#9ba3b7;line-height:1.6">阻断入账 / 建议核对 / 未见异常<br>通俗解释（是什么/影响/怎么处理）<br>证据链可审计定位</div>
-    </div>
-  </div>
-  <p style="font-size:14px;color:#9ba3b7;line-height:1.9">解析引擎按「值类型识别 + 勾稽三元组」从版式文本提取字段（发票号=20位数字、日期=年M月D日、税号=91开头18位、公司名=含「公司/集团/厂」行），二维码兜底取税务核验短码；规则引擎分跨票规则（重复 R1、连号 R3、集中度 R6——逐张调用会失效）与单票规则（勾稽 R8/R10、差额征税 R9、红冲 R11 等）；红线保护：关键字段缺失或主体未配置时禁止产出「确定」级结论，降级为低危/疑似提示。</p>
-</div>
-
-<div class="sec reveal">
-  <div class="sec-head"><span class="num">04</span><h2>系统流水线与规则覆盖</h2><span class="en">ARCHITECTURE</span></div>
-  <!-- 流水线图 -->
-  <div style="display:flex;align-items:stretch;justify-content:space-between;gap:6px;margin-bottom:22px;flex-wrap:wrap">
-    <div style="flex:1;min-width:110px;background:linear-gradient(145deg,rgba(109,124,255,0.12),rgba(109,124,255,0.03));border:1px solid rgba(109,124,255,0.25);border-radius:10px;padding:14px 8px;text-align:center">
-      <div style="font-size:20px;margin-bottom:4px">📄</div>
-      <div style="font-size:12.5px;font-weight:700;color:#e2e8f0;margin-bottom:3px">上传发票</div>
-      <div style="font-size:12px;color:#9ba3b7;line-height:1.5">XML/OFD/PDF<br>批量或单张</div>
-    </div>
-    <div style="display:flex;align-items:center;color:#6b7287;font-size:16px;font-weight:700">→</div>
-    <div style="flex:1;min-width:110px;background:linear-gradient(145deg,rgba(52,211,153,0.12),rgba(52,211,153,0.03));border:1px solid rgba(52,211,153,0.25);border-radius:10px;padding:14px 8px;text-align:center">
-      <div style="font-size:20px;margin-bottom:4px">🔍</div>
-      <div style="font-size:12.5px;font-weight:700;color:#e2e8f0;margin-bottom:3px">三通道解析</div>
-      <div style="font-size:12px;color:#9ba3b7;line-height:1.5">XML结构化/OFD<br>PDF版式+二维码<br>扫描件OCR分流</div>
-    </div>
-    <div style="display:flex;align-items:center;color:#6b7287;font-size:16px;font-weight:700">→</div>
-    <div style="flex:1;min-width:110px;background:linear-gradient(145deg,rgba(251,191,36,0.12),rgba(251,191,36,0.03));border:1px solid rgba(251,191,36,0.25);border-radius:10px;padding:14px 8px;text-align:center">
-      <div style="font-size:20px;margin-bottom:4px">⚙️</div>
-      <div style="font-size:12.5px;font-weight:700;color:#e2e8f0;margin-bottom:3px">规则引擎</div>
-      <div style="font-size:12px;color:#9ba3b7;line-height:1.5">10条规则<br>跨票+单票<br>分级+置信度</div>
-    </div>
-    <div style="display:flex;align-items:center;color:#6b7287;font-size:16px;font-weight:700">→</div>
-    <div style="flex:1;min-width:110px;background:linear-gradient(145deg,rgba(236,72,153,0.12),rgba(236,72,153,0.03));border:1px solid rgba(236,72,153,0.25);border-radius:10px;padding:14px 8px;text-align:center">
-      <div style="font-size:20px;margin-bottom:4px">🔗</div>
-      <div style="font-size:12.5px;font-weight:700;color:#e2e8f0;margin-bottom:3px">证据链</div>
-      <div style="font-size:12px;color:#9ba3b7;line-height:1.5">字段/原值/行号<br>可审计定位<br>通俗解释</div>
-    </div>
-    <div style="display:flex;align-items:center;color:#6b7287;font-size:16px;font-weight:700">→</div>
-    <div style="flex:1;min-width:110px;background:linear-gradient(145deg,rgba(248,113,113,0.12),rgba(248,113,113,0.03));border:1px solid rgba(248,113,113,0.25);border-radius:10px;padding:14px 8px;text-align:center">
-      <div style="font-size:20px;margin-bottom:4px">📋</div>
-      <div style="font-size:12.5px;font-weight:700;color:#e2e8f0;margin-bottom:3px">分级报告</div>
-      <div style="font-size:12px;color:#9ba3b7;line-height:1.5">阻断入账<br>建议核对<br>未见异常</div>
-    </div>
-  </div>
-  <!-- 规则覆盖图 -->
-  <p style="font-size:12.5px;color:#9ba3b7;margin-bottom:8px">规则引擎按业务类别分组（高风险=红调，中风险=黄调），数据来自产品 RULES_META 真实定义：</p>
-  <div id="w01-rule-chart" class="chart-echarts" style="height:300px;width:100%"></div>
-</div>
-
-<div class="sec reveal">
-  <div class="sec-head"><span class="num">05</span><h2>演示：在线 Demo（合成样例）</h2><span class="en">DEMO</span></div>
-  <p style="font-size:14px;color:#9ba3b7;line-height:1.9">演示页使用<b>全部虚构的合成样例</b>（示例公司/演示票号），覆盖重复报销、金额勾稽、差额征税、红冲关联、扫描件识别失败等典型场景。打开即可看到：批次统计 → 逐票六项预审 → 规则风险发现（分级徽章 + 证据链 + 通俗解释）。</p>
-  <div style="margin-top:14px">
-    <a class="demo-entry" href="demo/invoice-precheck-demo.html" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:12px 24px;background:#6d7cff;color:#fff;border-radius:10px;font-weight:700;font-size:14px;text-decoration:none;box-shadow:0 4px 14px rgba(109,124,255,.3)">🚀 打开在线 Demo ↗</a>
-    <span style="margin-left:12px;font-size:12px;color:#9ba3b7">数据全为合成样例，非真实发票</span>
-  </div>
-</div>
-
-<div class="sec reveal">
-  <div class="sec-head"><span class="num">06</span><h2>局限与诚实声明</h2><span class="en">LIMITATIONS</span></div>
-  <ul style="font-size:14px;color:#9ba3b7;line-height:2;margin-left:18px">
-    <li>预警标准（限额/连号窗口/金额上限）为<b>占位口径</b>，待真实业务数据校准，<b>不构成合规结论</b>——这是一个思考与尝试，尚未落地到企业实际业务</li>
-    <li>开发中以真实样本做过验证，结果归档为基准集记录，源文件按数据红线验后删除，演示环境不可重跑真实样本</li>
-    <li>后端 FastAPI 未公网部署：演示页为静态模式，连接服务为产品部署后的能力</li>
-    <li>首版仅支持单企业主体（集团多法人/代开场景未覆盖）</li>
-  </ul>
-</div>
-</div>
-<script>
-(function(){
-  var reveals = document.querySelectorAll('.reveal');
-  if('IntersectionObserver' in window){
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
-      });
-    },{threshold:0.1});
-    reveals.forEach(function(el){ io.observe(el); });
-  } else {
-    reveals.forEach(function(el){ el.classList.add('in'); });
-  }
-  // 规则引擎覆盖图（横向堆叠条形）
-  try {
-    var el = document.getElementById('w01-rule-chart');
-    if (el && window.echarts) {
-      var chart = echarts.init(el);
-      var ruleData = {
-        categories: ['重复合规','金额勾稽','日期连号','限额标准','供应商集中度','红冲关联'],
-        high: [2, 2, 0, 0, 0, 0],
-        mid:  [0, 1, 2, 1, 1, 1],
-        detail: [
-          ['R1 重复报销','R2 抬头税号'],
-          ['R8 金额异常','R10 行级勾稽','R9 差额征税'],
-          ['R3 连号异常','R7 日期异常'],
-          ['R4 类别限额'],
-          ['R6 集中度'],
-          ['R11 红冲关联']
-        ]
-      };
-      chart.setOption({
-        tooltip: {
-          trigger: 'axis', axisPointer: {type:'shadow'},
-          backgroundColor: 'rgba(10,10,15,0.95)', borderColor: 'rgba(120,140,255,0.3)', borderWidth: 1,
-          textStyle: {color:'#e2e8f0', fontSize: 11},
-          formatter: function(ps){
-            var i = ps[0].dataIndex;
-            var out = '<b>' + ruleData.categories[i] + '</b><br/>';
-            ps.forEach(function(p){ if (p.value > 0) out += p.marker + p.seriesName + '：' + p.value + ' 条<br/>'; });
-            out += '<span style="color:#9ba3b7">规则：' + ruleData.detail[i].join('、') + '</span>';
-            return out;
-          }
-        },
-        legend: { top: 0, textStyle: {color:'#9ba3b7', fontSize: 11}, itemWidth: 12, itemHeight: 8 },
-        grid: { left: 8, right: 20, top: 36, bottom: 8, containLabel: true },
-        xAxis: { type: 'value', max: 3, interval: 1, axisLabel: {color:'#9ba3b7', fontSize: 10}, splitLine: {lineStyle:{color:'rgba(120,140,255,0.08)'}}, axisLine: {show:false} },
-        yAxis: { type: 'category', data: ruleData.categories, axisLabel: {color:'#9ba3b7', fontSize: 11}, axisLine: {show:false}, axisTick: {show:false} },
-        series: [
-          { name: '高风险', type: 'bar', stack: 'total', data: ruleData.high, barWidth: 18,
-            itemStyle: {color: new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#f87171'},{offset:1,color:'#ef4444'}])},
-            label: {show:true, position:'inside', color:'#fff', fontSize:10, fontWeight:700, formatter: function(p){return p.value>0?p.value:'';}} },
-          { name: '中风险', type: 'bar', stack: 'total', data: ruleData.mid, barWidth: 18,
-            itemStyle: {color: new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#fbbf24'},{offset:1,color:'#fbbf24'}]), borderRadius:[0,4,4,0]},
-            label: {show:true, position:'inside', color:'#1a1a2e', fontSize:10, fontWeight:700, formatter: function(p){return p.value>0?p.value:'';}} }
-        ]
-      });
-      window.addEventListener('resize', function(){ chart.resize(); });
-    }
-  } catch(e) { console.warn('w01 rule chart init failed:', e); }
-})();
-<\/script>
-</section>
-</script>
-
-
-<script type="text/html" id="page-07">
-<section class="portfolio-page" id="work-07">
-
-<div class="topbar">
-  <div class="in">
-    <div class="br"><span class="dot"></span>胡凯 · AI × Finance 作品集</div>
-    <a href="javascript:void(0)" onclick="window.parent.showHome();return false;">← 返回作品集</a>
-  </div>
-</div>
-
-<div class="cover">
-  <div class="in">
-    <div class="tag"><span class="star">★</span>ACTUARIAL · RISK MODELING · CORE WORK</div>
-    <h1>集团现金流压力测试与资金调度决策系统</h1>
-    <p>某新能源车企资金团队每月需要做现金流压力测试，但传统方法依赖经验单点估计，无法快速回答"如果销量不及预期，资金链安全吗？"这类突发问题。我参考实习中观察到的真实业务流程，将精算的随机建模方法迁移到企业流动性风险管理，构建了一个交互式压力测试模拟器——将测试时间从半天缩短到30分钟，支持多情景一键切换，帮助资金团队提前识别流动性风险窗口。</p>
-    <div class="who">
-      <span>胡凯</span><span class="sep">·</span>
-      <span class="chip">精算随机建模</span>
-      <span class="chip">蒙特卡洛模拟</span>
-      <span class="chip">压力测试</span>
-      <span class="chip">AI 资金调度</span>
-    </div>
-  </div>
-</div>
-
-<div class="wrap">
-
-<div class="kpis reveal">
-  <div class="kpi hot"><div class="v">半天→30分钟</div><div class="l">测试效率提升</div><div class="s">从月度专项到随时可做</div></div>
-  <div class="kpi"><div class="v">10+ 种</div><div class="l">情景一键切换</div><div class="s">销售/回款/利率/汇率联动</div></div>
-  <div class="kpi"><div class="v">第6-8月</div><div class="l">流动性风险窗口</div><div class="s">提前识别，预留应对时间</div></div>
-  <div class="kpi"><div class="v">6 条</div><div class="l">结构化调度建议</div><div class="s">AI自动生成，辅助决策</div></div>
-</div>
-
-<div class="sec reveal">
-  <div class="sec-head"><span class="num">01</span><h2>业务痛点：资金团队的压力测试之困</h2><span class="en">BUSINESS PAIN POINTS</span></div>
-  <p>某新能源车企资金团队每月都要做现金流压力测试，回答几个关键问题：</p>
-  <ul style="margin:14px 0;padding-left:20px;line-height:2.2;color:#9ba3b7;font-size:14px">
-    <li><b>"如果销量不及预期，我们资金链安全吗？"</b></li>
-    <li><b>"如果供应商账期延长15天，我们还能撑多久？"</b></li>
-    <li><b>"如果LPR上调50bp，我们的融资成本增加多少？"</b></li>
-  </ul>
-  <p>但传统做法有三个痛点：</p>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0">
-    <div style="background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.25);border-radius:10px;padding:14px">
-      <div style="font-size:12px;font-weight:700;color:#f87171;margin-bottom:6px">⏱ 效率低</div>
-      <div style="font-size:12px;color:#9ba3b7;line-height:1.8">手动调整参数、重新计算，做一次完整压力测试需要半天</div>
-    </div>
-    <div style="background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.25);border-radius:10px;padding:14px">
-      <div style="font-size:12px;font-weight:700;color:#fbbf24;margin-bottom:6px">🎯 情景单一</div>
-      <div style="font-size:12px;color:#9ba3b7;line-height:1.8">只能测固定情景，遇到突发情况（如客户违约）无法快速响应</div>
-    </div>
-    <div style="background:rgba(109,124,255,0.08);border:1px solid rgba(109,124,255,0.25);border-radius:10px;padding:14px">
-      <div style="font-size:12px;font-weight:700;color:#6d7cff;margin-bottom:6px">📊 只有数字，没有建议</div>
-      <div style="font-size:12px;color:#9ba3b7;line-height:1.8">输出一堆数字，资金经理还得自己想"那我该怎么办？"</div>
-    </div>
-  </div>
-  <div class="quote"><b>我的思路：</b>既然精算师能用随机建模方法管理保险负债的不确定性，这套方法也应该能解决企业流动性管理的不确定性——把"经验单点估计"升级为"概率分布+压力测试+行动建议"，让资金经理不仅知道"缺多少钱"，还知道"该怎么办"。</div>
-</div>
-
-<div class="sec reveal">
-  <div class="sec-head"><span class="num">02</span><h2>业务价值：从风险识别到决策支持</h2><span class="en">BUSINESS VALUE</span></div>
+  <div class="sec-head"><span class="num">02</span><h2>业务价值：从经验直觉到量化决策</h2><span class="en">BUSINESS VALUE</span></div>
   <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px">
     <div style="background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(16,185,129,0.04));border:1px solid rgba(52,211,153,0.3);border-radius:12px;padding:16px">
-      <div style="font-size:14px;font-weight:700;color:#34d399;margin-bottom:8px">✅ 测试效率大幅提升</div>
-      <div style="font-size:12px;color:#9ba3b7;line-height:1.9">从 半天/次 → 30分钟/次<br>压力测试从"月度专项"变成"随时可做"</div>
+      <div style="font-size:13px;font-weight:700;color:#34d399;margin-bottom:8px">✅ 有框架，不是拍脑袋</div>
+      <div style="font-size:12px;color:#9ba3b7;line-height:1.9">四指标分析框架（MLF/净息差/社融/CPI）<br>每个判断都有逻辑链可追溯</div>
     </div>
     <div style="background:linear-gradient(135deg,rgba(34,211,238,0.08),rgba(6,182,212,0.04));border:1px solid rgba(34,211,238,0.3);border-radius:12px;padding:16px">
-      <div style="font-size:14px;font-weight:700;color:#22d3ee;margin-bottom:8px">✅ 风险窗口提前识别</div>
-      <div style="font-size:12px;color:#9ba3b7;line-height:1.9">提前识别第6-8月为流动性风险窗口<br>预留足够时间安排授信调度</div>
+      <div style="font-size:13px;font-weight:700;color:#22d3ee;margin-bottom:8px">✅ 用概率，不赌单点</div>
+      <div style="font-size:12px;color:#9ba3b7;line-height:1.9">蒙特卡洛模拟输出概率分布<br>知道"最好/最差/最可能"三种情景</div>
     </div>
     <div style="background:linear-gradient(135deg,rgba(109,124,255,0.08),rgba(99,102,241,0.04));border:1px solid rgba(109,124,255,0.3);border-radius:12px;padding:16px">
-      <div style="font-size:14px;font-weight:700;color:#6d7cff;margin-bottom:8px">✅ 从数字到行动建议</div>
-      <div style="font-size:12px;color:#9ba3b7;line-height:1.9">AI自动生成6条结构化调度建议<br>资金经理拿到的不是一堆数字，是"下周该做什么"</div>
+      <div style="font-size:13px;font-weight:700;color:#6d7cff;margin-bottom:8px">✅ 直接服务决策</div>
+      <div style="font-size:12px;color:#9ba3b7;line-height:1.9">三种决策场景都有具体建议<br>新增贷款/存量重定价/再融资择时</div>
     </div>
     <div style="background:linear-gradient(135deg,rgba(251,191,36,0.08),rgba(245,158,11,0.04));border:1px solid rgba(251,191,36,0.3);border-radius:12px;padding:16px">
-      <div style="font-size:14px;font-weight:700;color:#fbbf24;margin-bottom:8px">✅ 可复用、可推广</div>
-      <div style="font-size:12px;color:#9ba3b7;line-height:1.9">9个参数可调，适配不同行业/规模<br>方法论可迁移到其他企业资金管理场景</div>
+      <div style="font-size:13px;font-weight:700;color:#fbbf24;margin-bottom:8px">✅ 可复现、可验证</div>
+      <div style="font-size:12px;color:#9ba3b7;line-height:1.9">模型公式+Python源码全部公开<br>任何人都可以重新跑一遍验证</div>
     </div>
   </div>
 </div>
 
-
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">03</span><h2>压力测试：三情景下的流动性风险</h2><span class="en">STRESS TESTING</span></div>
-  <p>蒙特卡洛给出基准分布，压力测试回答"如果坏事情同时发生会怎样"。三种情景对应不同的宏观与经营冲击：</p>
+  <div class="sec-head"><span class="num">03</span><h2>2026 数据看板</h2><span class="en">DATA DASHBOARD</span></div>
+  <div class="chart-grid">
+    <div class="chart-box big-chart" style="grid-column:1/-1;">
+      <h4>LPR 走势：2019 改革至今 + 未来 5 年预测区间（蒙特卡洛）· 1Y / 5Y 双期限</h4>
+      <div id="chart1" class="chart-echarts" style="height:400px;"></div>
+      <div class="chart-note">历史段：央行/中行 LPR 报价序列（1Y/5Y 双线）· 关键节点：2019-08 改革首报 → 2020-04 最大降幅（1Y -20bp）→ 2022-05 首次 5Y 单独下调 15bp → 2025-05 降至 3.0%/3.5% 持稳至今；未来段（2026.08-2031.07）：1Y（蓝带）与 5Y（青带）双蒙特卡洛区间带 + 中位数线，区间随预测期变宽 = 可视化「预测越远越不准」；1Y 的 σ 由历史序列估计、θ/κ 演示设定；5Y 的 θ=3.0%/κ/σ 均为叙事假设（地产政策定向更快下行，θ>1Y 保证期限溢价不倒挂），脚本 demo/lpr_monte_carlo.py 可复现</div>
+    </div>
+  </div>
+  <div class="chart-grid">
+    <div class="chart-box">
+      <h4>四指标联动：为什么 LPR 按兵不动</h4>
+      <div id="chart2" class="chart-echarts" style="height:260px;"></div>
+      <div class="chart-note">因果链：净息差 Q1 触底 1.40% → Q2 微升 1.41%（四年首现回升）→ 银行让利压力边际缓解但仍紧 → 报价行缺主动降点动力 → LPR 持稳；社融偏弱 + CPI 温和 → 宽松有空间但节奏审慎</div>
+    </div>
+    <div class="chart-box">
+      <h4>期限利差：5Y-1Y 从 0.5% 收窄，但期限溢价不倒挂</h4>
+      <div id="chart3" class="chart-echarts" style="height:260px;"></div>
+      <div class="chart-note">5Y-1Y 利差：2022-01 高点 0.90% → 当前 0.50% → 预测中位数收窄至 ~0.26%（5Y 降幅 0.36pct 快于 1Y 的 0.12pct，「更快下行」来自距中枢更远 + 回复更快，θ5=3.0%>θ1=2.7% 保证期限溢价为正）；区间带 = 10-90% 分位差组合，预测段同为叙事假设</div>
+    </div>
+  </div>
+  <h3>关键数据一览</h3>
   <table>
-    <tr><th>情景</th><th>冲击设定</th><th>最低现金余额</th><th>安全垫倍数</th><th>最大缺口</th><th>发生月份</th></tr>
-    <tr><td><b>基准</b></td><td>变量按历史分布随机波动</td><td>7,900 万</td><td>1.75×</td><td>无缺口</td><td>第 10 月（年末支出高峰）</td></tr>
-    <tr><td><b>温和衰退</b></td><td>销售增速 -2σ + 回款率降至 72% + 利率上行 30bp</td><td>5,200 万</td><td>1.15×</td><td>-1,500 万</td><td>第 8 月</td></tr>
-    <tr><td><b>严重衰退</b></td><td>销售增速 -3σ + 回款率降至 61% + 主要客户违约 + 汇率贬值 5%</td><td>2,800 万</td><td>0.62×</td><td>-4,200 万</td><td>第 6 月</td></tr>
+    <tr><th>指标</th><th>最新值</th><th>含义</th></tr>
+    <tr><td>1Y / 5Y LPR</td><td>3.0% / 3.5%</td><td>2025.05 后连续 15 个月持稳</td></tr>
+    <tr><td>商业银行净息差</td><td>1.41%</td><td>2026Q2 四年首现环比回升（Q1 触底 1.40%）</td></tr>
+    <tr><td>7 天逆回购利率</td><td>1.40%</td><td>政策利率锚，稳定 13 个月</td></tr>
+    <tr><td>社融存量</td><td>463.27 万亿（+7.4%）</td><td>2026-07 末；7 月人民币贷款单月 -3400 亿</td></tr>
+    <tr><td>CPI / 核心 CPI</td><td>+0.5% / +0.9%</td><td>2026-07，温和无通缩压力</td></tr>
   </table>
-  <div class="quote"><b>95% 流动性 VaR：</b>在 95% 置信度下，未来 12 个月最大现金缺口约 <b>3,800 万元</b>（对应模拟路径中最低现金余额约 4,100 万）——意味着有 5% 的概率企业会面临超过 3,800 万的流动性短缺。资金经理据此确定安全垫底线与备用授信额度。</div>
+  <h3>情景概率预测（精算方法：用概率表达不确定性）</h3>
+  <div class="quote"><b>基准判断：</b>年内政策利率或先降 10-20bp，LPR 跟进 5-10bp（基准情景，概率 60%）。</div>
+  <table>
+    <tr><th>情景</th><th>内容</th><th>概率</th></tr>
+    <tr><td>基准</td><td>政策利率降 10-20bp，LPR 跟进 5-10bp，5Y 定向下行</td><td>60%</td></tr>
+    <tr><td>偏鸽</td><td>经济失速 → 更大幅度宽松，5Y 大幅下调</td><td>25%</td></tr>
+    <tr><td>持稳</td><td>外部冲击（美联储 / 汇率 / 油价）→ 继续按兵不动</td><td>15%</td></tr>
+  </table>
+  <div class="quote"><b>概率加权期望：</b>E(LPR) = Σ Pi × LPRi = 2.95%×60% + 2.8%×25% + 3.0%×15% ≈ 2.92%——低于当前 3.0%，方向上仍指向温和下行。这是精算师评估负债的方法论：不赌单点，用分布求期望。</div>
+  <h3>5 年趋势展望：利率中枢长期下行</h3>
+  <p>经济增速中枢下移 + 人口老龄化 + 国际低利率经验（日本政策利率 1970s 6-9% → 1999 零利率 → 2016 负利率；韩国基准利率长期维持 1.25-1.5% 低位）→ 中国 LPR 中枢长期趋势性下行。</p>
+  <p><b>区间预测（非点预测）：</b>未来 5 年 1Y LPR 中枢或从 3.0% 逐步下行至 <b>2.5%-2.8% 区间</b>；5Y 受地产政策导向或更快下行。预测越远越不准——区间宽度本身就是在表达不确定性，这是趋势判断，不是精确模型。</p>
+  <div class="quote"><b>蒙特卡洛模拟（5000 条路径，脚本可复现）：</b>5 年后 1Y LPR <2.5% 概率约 2.7%、2.5%-3.0% 约 69.7%、≥3.0% 约 27.6%，期望 ≈2.88%；5Y LPR <3.0% 约 32.4%、3.0%-3.5% 约 56.1%、≥3.5% 约 11.5%，期望 ≈3.14%——分布整体右偏于下行，但「快速深降」尾部概率低，期限溢价（5Y-1Y ≈0.26%）不归零。脚本 demo/lpr_monte_carlo.py 用 2019 改革后 LPR 序列估计波动率，1Y θ/κ 与 5Y θ/κ/σ 均为演示/叙事设定。</div>
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">04</span><h2>业务洞察：从数据到决策建议</h2><span class="en">BUSINESS INSIGHTS</span></div>
-  <p>压力测试不只是给一堆数字，更重要的是从数字中得出业务结论，告诉资金经理"该怎么办"：</p>
+  <div class="sec-head"><span class="num">04</span><h2>业务洞察：利率走势对贷款决策的影响</h2><span class="en">BUSINESS INSIGHTS</span></div>
+  <p>LPR预测不只是给一个数字，更重要的是把预测结论转化为资金经理的具体行动建议：</p>
   
   <div style="background:linear-gradient(135deg,rgba(248,113,113,0.08),rgba(239,68,68,0.04));border:1px solid rgba(248,113,113,0.3);border-radius:12px;padding:18px;margin:16px 0">
-    <div style="font-size:14px;font-weight:700;color:#f87171;margin-bottom:10px">⚠️ 核心发现</div>
-    <ul style="margin:0;padding-left:20px;line-height:2.2;color:#9ba3b7;font-size:14px">
-      <li><b>第6-8月是流动性风险窗口</b>：严重衰退情景下，第6月出现最大资金缺口（-4,200万），比其他月份提前2个月触及警戒线</li>
-      <li><b>回款率是最大风险因子</b>：敏感性分析显示，回款率下降10%对现金余额的影响，是利率上行30bp的3.5倍——管好客户比管好利率更重要</li>
-      <li><b>安全垫需要动态调整</b>：基准情景1.75×安全垫看起来充足，但严重衰退情景下只有0.62×，需要根据宏观环境动态调整备用授信额度</li>
+    <div style="font-size:13px;font-weight:700;color:#f87171;margin-bottom:10px">⚠️ 核心发现</div>
+    <ul style="margin:0;padding-left:20px;line-height:2.2;color:#c9d1e3;font-size:13px">
+      <li><b>短期（6个月内）LPR持稳概率大</b>：净息差1.41%仍在历史低位，银行让利空间有限，报价行缺乏主动降点动力</li>
+      <li><b>中期（1-3年）温和下行</b>：经济增速中枢下移+人口老龄化，长期利率下行趋势明确，但节奏会很慢</li>
+      <li><b>5Y LPR会比1Y降得更快</b>：地产政策定向引导，5Y作为房贷基准，政策希望它降得更快</li>
     </ul>
   </div>
 
   <div style="background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(16,185,129,0.04));border:1px solid rgba(52,211,153,0.3);border-radius:12px;padding:18px;margin:16px 0">
-    <div style="font-size:14px;font-weight:700;color:#34d399;margin-bottom:6px">💡 资金调度建议</div>
-    <div style="font-size:11px;color:#9ba3b7;margin-bottom:10px">（示例情景参数·模拟测算，非真实业务数据）</div>
-    <ul style="margin:0;padding-left:20px;line-height:2.2;color:#9ba3b7;font-size:14px">
-      <li><b>提前安排授信</b>：第6-8月缺口风险升高，建议提前60天启动5,000万授信续贷，覆盖尾部风险；短期缺口由协定存款超额头寸补足安全垫，兼顾流动性与利息收益</li>
-      <li><b>加强应收账款管理</b>：回款率是最大风险因子，建议将核心客户回款率纳入月度监控指标</li>
-      <li><b>建立季度压力测试机制</b>：不只是年度专项，每季度做一次，根据最新经营数据动态调整参数</li>
-      <li><b>预留应急流动性</b>：基于95% VaR（约3,800万），建议保持4,000万备用授信额度，覆盖极端情景</li>
+    <div style="font-size:13px;font-weight:700;color:#34d399;margin-bottom:10px">💡 资金决策建议</div>
+    <ul style="margin:0;padding-left:20px;line-height:2.2;color:#c9d1e3;font-size:13px">
+      <li><b>新增贷款</b>：短期不急，等6个月看看有没有降息窗口；如果一定要贷，选浮动利率</li>
+      <li><b>存量贷款重定价</b>：把握重定价日，提前和银行谈加点——现在是买方市场，你有谈判筹码</li>
+      <li><b>再融资择时</b>：5年期贷款可以再等等，5Y LPR大概率会降得更快，再融资成本会更低</li>
+      <li><b>对冲建议</b>：如果有大额固定利率贷款敞口，可以考虑用利率互换（IRS）对冲尾部风险</li>
     </ul>
   </div>
 
-  <div class="quote"><b>设计思路：</b>传统压力测试报告结束在"95%置信度下最大可能损失约3,800万（VaR）"，但资金经理真正需要的是"那我该怎么办？"。这个项目把模型结果"翻译"成可执行的行动建议——人做最终判断，AI做信息整合与方案生成。</div>
+  <div class="quote"><b>设计思路：</b>传统利率分析报告结束在"预计降20bp"，但资金经理真正需要的是"那我该怎么做？"。这个项目把利率预测"翻译"成可执行的贷款决策建议——用概率分布管理不确定性，而不是赌单点。</div>
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">05</span><h2>数据看板：概率分布可视化</h2><span class="en">DATA DASHBOARD</span></div>
-  <div style="margin-bottom:16px;padding:14px 18px;background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(109,124,255,0.06));border:1px solid rgba(52,211,153,0.25);border-radius:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
-    <div>
-      <div style="font-size:14px;font-weight:500;color:#34d399;margin-bottom:2px">▶ 可交互模拟器（推荐亲手体验）</div>
-      <div style="font-size:12px;color:#9ba3b7">调整5个随机变量参数，实时运行1万次情景推演（蒙特卡洛模拟），查看最大可能损失（VaR）、概率分布、AI调度建议的动态变化</div>
-    </div>
-    <a href="demo/现金流压力测试模拟器.html" target="_blank" style="display:inline-block;padding:10px 20px;background:var(--bg2);color:#0b0d14;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap">打开模拟器 →</a>
-  </div>
-  <div class="chart-grid">
-    <div class="chart-box big-chart" style="grid-column:1/-1;">
-      <h4>集团现金余额：历史 6 个月 + 未来 12 个月蒙特卡洛预测区间（10%/50%/90% 分位）</h4>
-      <div id="chart7_1" class="chart-echarts" style="height:360px;"></div>
-      <div class="chart-note">历史段：实际月度现金余额（2026-03 ~ 2026-08）；未来段（2026-09 ~ 2027-08）：10,000 条蒙特卡洛路径的 10%/50%/90% 分位数，区间随预测期变宽 = 不确定性递增；中位数路径显示现金余额温和增长，但 10% 分位路径在第 6-8 月触及低位——这正是压力测试需要关注的尾部窗口。模拟参数由历史 24 个月数据校准，脚本可复现。</div>
-    </div>
-  </div>
-  <div class="chart-grid">
-    <div class="chart-box">
-      <h4>三情景压力测试：最低现金余额对比</h4>
-      <div id="chart7_2" class="chart-echarts" style="height:260px;"></div>
-      <div class="chart-note">安全垫阈值 = 月均支出 4,500 万（1.0× 线）；基准情景最低 7,900 万（1.75×）安全，温和衰退 5,200 万（1.15×）接近警戒线，严重衰退 2,800 万（0.62×）跌破安全垫——红色区域即为流动性风险敞口</div>
-    </div>
-    <div class="chart-box">
-      <h4>最低余额概率分布（10,000 条路径）</h4>
-      <div id="chart7_3" class="chart-echarts" style="height:260px;"></div>
-      <div class="chart-note">10,000 次模拟中"12 个月内最低现金余额"的分布：中位数约 8,200 万，5% 分位（95%置信度下最大可能损失（VaR））约 4,100 万——意味着 5% 的概率最低余额低于 4,100 万，需提前安排备用授信</div>
-    </div>
-  </div>
-</div>
-
-<div class="sec reveal">
-  <div class="sec-head"><span class="num">06</span><h2>AI 应用：从风险识别到资金调度建议</h2><span class="en">AI APPLICATION</span></div>
-  <p>压力测试输出风险分布后，AI Agent 自动将模型结果转化为可执行的资金调度建议——不是给一堆数字，而是给资金经理一份"下周该做什么"的行动清单：</p>
+  <div class="sec-head"><span class="num">05</span><h2>应用价值：分析直接服务贷款决策</h2><span class="en">APPLICATION</span></div>
+  <p><b>ALM 联动：</b>LPR 下行 → 存量贷款收益下降 → 净息差承压 → 银行资本补充压力（Q2 虽微升至 1.41%，但任何主动降点都会重新挤压息差，这也是报价行谨慎的深层原因）——资金岗管的不只是利率方向，还有资产负债两端的联动。</p>
+  <p>预测结论直接服务贷款决策：新增贷款可等待或选浮动定价、存量贷款把握重定价窗口、再融资择时。</p>
+  <h3>三类决策场景</h3>
   <table>
-    <tr><th>AI 能力</th><th>实现方式</th><th>输出示例</th></tr>
-    <tr><td><b>RAG 动态更新假设</b></td><td>读取央行公告、行业新闻、客户信用评级变化，自动更新模拟参数</td><td>"客户 C 评级下调 → 回款率 β 分布参数从 (8,2) 调整为 (6,4)，重新模拟"</td></tr>
-    <tr><td><b>资金调度建议生成</b></td><td>LLM + 模拟结果 + 政策库，输出结构化行动建议</td><td>"第 6 月缺口风险升高 → 建议提前 60 天启动 5,000 万授信续贷；尾部缺口 1,500 万由协定存款超额头寸补足安全垫，兼顾流动性与利息收益"</td></tr>
-    <tr><td><b>跨境结汇时机提示</b></td><td>联动汇率 GBM 模拟，识别结汇最优窗口</td><td>"USD/CNY 90% 分位预测 7.35 → 建议本月结汇 200 万美元，锁定汇率"</td></tr>
-    <tr><td><b>预警自动推送</b></td><td>当模拟余额跌破安全垫阈值，自动推送预警至资金经理</td><td>"⚠️ 温和衰退情景下第 8 月余额 5,200 万 < 警戒线 5,400 万，请关注"</td></tr>
+    <tr><th>决策</th><th>LPR 下行预期下的动作</th></tr>
+    <tr><td>新增贷款定价</td><td>可等待降息窗口，或选择浮动定价锁定下行红利</td></tr>
+    <tr><td>存量贷款重定价</td><td>把握重定价日窗口，提前与银行协商加点</td></tr>
+    <tr><td>再融资择时</td><td>债务到期续作前评估利率窗口，错峰安排</td></tr>
   </table>
-  <div class="callout"><span class="ic">💡</span><div><b>设计哲学：</b>AI 不替代资金经理做决策，而是把精算模型的概率分布"翻译"成可执行的行动建议——人做最终判断，AI 做信息整合与方案生成。这与作品01发票预审"机器拦截硬伤、人做专业判断"的分工思路一脉相承。</div></div>
+  <h3 style="margin-top:24px">企业融资成本压力测试（精算方法：用分布做决策，不赌单点）</h3>
+  <p>以集团 <b>1 亿元 5 年期浮动利率贷款</b>（挂钩 1Y LPR，按年重定价）为例，将 LPR 预测的三情景概率转化为企业实际利息支出的概率分布——这是精算师评估负债成本的标准方法：不赌"利率一定降到多少"，而是算"不同情景下利息支出的期望与尾部风险"。</p>
+  <table>
+    <tr><th>情景</th><th>概率</th><th>5 年累计利息（万元）</th><th>较基准增减</th><th>决策含义</th></tr>
+    <tr><td>基准（政策降 10-20bp，LPR 跟降 5-10bp）</td><td>60%</td><td>~1,320</td><td>基准</td><td>浮动定价可享下行红利</td></tr>
+    <tr><td>偏鸽（经济失速，5Y 大幅下调）</td><td>25%</td><td>~1,180</td><td>-140 万</td><td>等待降息窗口再提款</td></tr>
+    <tr><td>持稳（外部冲击，按兵不动）</td><td>15%</td><td>~1,500</td><td>+180 万</td><td>锁定固定利率对冲尾部</td></tr>
+  </table>
+  <div class="quote"><b>概率加权期望利息：</b>E(利息) = 1320×60% + 1180×25% + 1500×15% = <b>1,312 万元</b>；<b>95% VaR（利率风险价值）：</b>极端情景下 5 年利息支出上限约 1,500 万元，较期望高出 188 万——资金经理据此决定是否用利率互换（IRS）对冲尾部风险。精算思维的核心：<b>决策依据是分布的期望与尾部，而非最可能发生的单点。</b></div>
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">07</span><h2>技术实现：蒙特卡洛随机现金流模拟</h2><span class="en">MODELING FRAMEWORK</span></div>
-  <p>将企业现金流拆解为可建模的随机变量，每个变量用合适的统计分布描述，联合抽样 10,000 次得到未来 12 个月现金流的概率分布：</p>
+  <div class="sec-head"><span class="num">06</span><h2>分析框架：四指标拆解 LPR 定价机制</h2><span class="en">ANALYTICAL FRAMEWORK</span></div>
+  <p>LPR = 政策利率 + 加点。四个指标分别对应定价机制的不同环节：</p>
   <table>
-    <tr><th>随机变量</th><th>分布假设</th><th>财务含义</th><th>参数来源</th></tr>
-    <tr><td><b>客户回款率</b></td><td>Beta(α,β) 分布</td><td>应收账款实际回款比例，受客户信用影响</td><td>历史 24 个月回款数据拟合</td></tr>
-    <tr><td><b>销售增速</b></td><td>正态分布 N(μ,σ²)</td><td>月度经营现金流入的增长波动</td><td>行业季节性因子 + 历史波动率</td></tr>
-    <tr><td><b>采购支出</b></td><td>对数正态分布</td><td>右偏分布，偶发大额采购拉高均值</td><td>应付账款账期与采购计划</td></tr>
-    <tr><td><b>融资利率</b></td><td>利率均值回归模型（Vasicek）</td><td>贷款利息支出随 LPR 波动</td><td>利率情景参数手动设定（合成样例）</td></tr>
-    <tr><td><b>汇率波动</b></td><td>股价/汇率随机游走模型（几何布朗运动） (GBM)</td><td>跨境结汇损益，影响外币现金流</td><td>USD/CNY 历史年化波动率</td></tr>
+    <tr><th>指标</th><th>对应机制</th><th>分析逻辑</th></tr>
+    <tr><td>MLF / 政策利率</td><td>LPR = 政策利率 + 加点（锚）</td><td>政策利率不动 → LPR 缺乏单边下调基础</td></tr>
+    <tr><td>银行净息差</td><td>加点端</td><td>Q1 触底 1.40%、Q2 微升 1.41% → 银行让利空间仍紧 → 报价行不愿降加点 → LPR 难降</td></tr>
+    <tr><td>社融</td><td>信贷需求</td><td>贷款负增长 → 政策有宽松空间，但节奏审慎</td></tr>
+    <tr><td>CPI</td><td>通胀</td><td>核心 0.9% 温和 → 无通缩压力，降息不迫切</td></tr>
   </table>
-  <h3>模拟逻辑</h3>
-  <div class="steps">
-    <div class="stp"><div class="n">STEP 1</div><b>参数校准</b><span>用历史 24 个月财务数据拟合 5 个随机变量的分布参数</span></div>
-    <div class="stp"><div class="n">STEP 2</div><b>联合抽样</b><span>考虑变量间相关性（回款率与销售增速正相关），Cholesky 分解</span></div>
-    <div class="stp"><div class="n">STEP 3</div><b>路径生成</b><span>每月迭代：期初余额 + 经营净现金流 + 融资现金流 = 期末余额</span></div>
-    <div class="stp"><div class="n">STEP 4</div><b>统计汇总</b><span>10,000 条路径 → 每月 10%/50%/90% 分位数 + 最低余额分布</span></div>
-  </div>
-  <div class="quote"><b>精算方法论迁移：</b>这套方法与精算师评估寿险准备金的逻辑完全一致——对未来不确定的现金流（赔款/支出）做随机模拟，得到准备金需求的概率分布。区别只是把"保险赔款"换成了"企业经营现金流"，把"偿付能力资本要求"换成了"流动性安全垫"。</div>
+  <div class="quote"><b>分析结论：</b>净息差 Q1 触底 1.40%（历史低点）→ Q2 微升 1.41%（四年来首次环比回升）→ 银行让利压力边际缓解，但 0.01pct 的回升幅度远不足以支撑报价行主动降加点 = LPR 持稳的核心制约。回升反而强化了「触底 → 边际修复 → 但修复不充分 → 持稳」的完整论证链。</div>
 </div>
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">08</span><h2>踩坑记录：从概念到可运行</h2><span class="en">PITFALLS &amp; IMPLEMENTATION</span></div>
-  <p>这个项目不是"调个库就完事"——从精算概念到浏览器中可运行的10000次模拟，踩了4个真实的坑，每个都对应公司里工程师日常会遇到的问题：</p>
-  <div class="steps" style="margin-top:14px">
-    <div class="stp" style="border-left:3px solid #f87171">
-      <div class="n" style="background:rgba(248,113,113,0.15);color:#f87171">坑 1</div>
-      <b>独立抽样导致变量相关性丢失</b>
-      <span>最初5个变量各自独立抽样，模拟出的现金流波动率远小于实际——现实中"销售下滑"和"回款率下降"正相关。<b>解决：</b>引入相关性分解方法（Cholesky），对销售增速和回款率做相关性抽样（相关系数0.3），模拟波动率与历史数据吻合。</span>
+  <div class="sec-head"><span class="num">07</span><h2>理论视角：为什么 1Y / 5Y 会分化</h2><span class="en">THEORETICAL VIEW</span></div>
+  <h3>期限结构视角</h3>
+  <p>预期理论 + 流动性偏好：5Y LPR 反映更长期的信贷定价预期，1Y 紧跟政策利率。2022-05 / 08 两次「5Y 单独或更大下调」正是房贷政策定向信号——监管通过期限结构引导特定领域（地产）。未来「5Y 定向下行」的逻辑，从经验观察升级为期限结构理论解释。</p>
+  <h3>合意利率视角（泰勒规则框架）</h3>
+  <p>泰勒规则：合意政策利率 ≈ 中性利率 + 通胀项 + 产出缺口项。当前核心 CPI 0.9%（低于目标）+ 经济 5.0% 增速 → 政策利率 1.40% 处于中性偏紧位置，为降息留出空间，但受净息差约束不能激进——净息差 Q2 虽微升至 1.41%（四年首现回升），仍处历史低位，银行资本补充压力未解，把「有没有降息空间」从专家观点变成框架推导。</p>
+</div>
+<div class="sec reveal">
+  <div class="sec-head"><span class="num">08</span><h2>可交互 Demo：LPR 蒙特卡洛模拟器</h2><span class="en">INTERACTIVE DEMO</span></div>
+  <div style="background:linear-gradient(145deg,rgba(20,24,38,0.9),rgba(14,17,26,0.95));border:1px solid rgba(109,124,255,0.18);border-radius:14px;padding:24px;text-align:center">
+    <div style="font-size:36px;margin-bottom:12px">📈</div>
+    <h4 style="font-size:15px;color:#fff;margin-bottom:8px">LPR 蒙特卡洛预测模拟器</h4>
+    <p style="font-size:12.5px;color:#8fa3c0;line-height:1.8;margin-bottom:16px;max-width:560px;margin-left:auto;margin-right:auto">
+      基于 Vasicek 均值回归模型，调整长期中枢 θ、回复速度 κ、波动率 σ 等参数，实时生成几千条利率路径，观察未来 1-10 年 LPR 的概率分布。<br>
+      <b style="color:#6d7cff">纯前端实现，无需安装 Python，打开即用</b>
+    </p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="demo/LPR蒙特卡洛预测模拟器.html" target="_blank" style="display:inline-block;background:linear-gradient(135deg,#6d7cff,#4f5bd5);color:#fff;padding:12px 28px;border-radius:10px;font-size:13px;font-weight:600;text-decoration:none;box-shadow:0 6px 20px rgba(109,124,255,0.3)">🚀 打开模拟器（新窗口）</a>
+      <a href="demo/lpr_monte_carlo.py" target="_blank" style="display:inline-block;background:rgba(109,124,255,0.1);color:#a5b0ff;padding:12px 24px;border-radius:10px;font-size:12.5px;font-weight:500;text-decoration:none;border:1px solid rgba(109,124,255,0.2)">📄 Python 源码</a>
     </div>
-    <div class="stp" style="border-left:3px solid #fbbf24">
-      <div class="n" style="background:rgba(251,191,36,0.15);color:#fbbf24">坑 2</div>
-      <b>极端情景下现金余额出现负值</b>
-      <span>严重衰退情景下模拟路径余额跌至负值——但企业不会让余额变负，会触发融资。<b>解决：</b>加入融资约束：余额低于安全垫时自动触发备用授信提款（利率上浮50bp），余额不为负但融资成本上升——真实的流动性风险传导。</span>
+    <div style="margin-top:14px;font-size:11px;color:#5b6070">参数为演示设定，结果仅演示精算方法，不构成投资建议</div>
+  </div>
+</div>
+<div class="sec reveal">
+  <div class="sec-head"><span class="num">09</span><h2>AI 辅助利率分析工作流</h2><span class="en">AI WORKFLOW</span></div>
+  <p style="font-size:13px;color:#9ba3b7;line-height:1.9;margin-bottom:16px">不是"用 AI 写报告"，而是把 AI 嵌入利率分析的每个环节，形成<b style="color:#6d7cff">数据采集→框架构建→模型验证→决策输出</b>的完整工作流：</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+    <div style="background:rgba(109,124,255,0.06);border:1px solid rgba(109,124,255,0.12);border-radius:10px;padding:16px">
+      <div style="font-size:11px;color:#6d7cff;font-weight:700;letter-spacing:1px;margin-bottom:6px">STEP 1</div>
+      <h4 style="font-size:13px;color:#fff;margin-bottom:6px">数据采集与清洗</h4>
+      <p style="font-size:11.5px;color:#8fa3c0;line-height:1.7">AI 辅助从央行、金融监管总局、统计局批量提取 MLF、净息差、社融、CPI 数据，自动核对口径与时间戳</p>
     </div>
-    <div class="stp" style="border-left:3px solid #22d3ee">
-      <div class="n" style="background:rgba(34,211,238,0.15);color:#22d3ee">坑 3</div>
-      <b>Beta分布抽样在浏览器中性能差</b>
-      <span>最初用拒绝采样法生成Beta随机数，12万次抽样浏览器卡顿3秒。<b>解决：</b>改用Marsaglia-Tsang Gamma近似法，两个Gamma变量之比生成Beta，抽样速度提升约6倍，10000次模拟从3秒降至0.3秒。</span>
+    <div style="background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.12);border-radius:10px;padding:16px">
+      <div style="font-size:11px;color:#34d399;font-weight:700;letter-spacing:1px;margin-bottom:6px">STEP 2</div>
+      <h4 style="font-size:13px;color:#fff;margin-bottom:6px">分析框架构建</h4>
+      <p style="font-size:11.5px;color:#8fa3c0;line-height:1.7">四指标框架（MLF/净息差/社融/CPI）由 AI 辅助梳理因果链，人判断指标权重与逻辑合理性</p>
     </div>
-    <div class="stp" style="border-left:3px solid #6d7cff">
-      <div class="n" style="background:rgba(109,124,255,0.15);color:#6d7cff">坑 4</div>
-      <b>Beta分布参数校准无解析解</b>
-      <span>Beta(α,β)极大似然估计无闭式解，试错法调参拟合偏差大。<b>解决：</b>用矩估计法从历史24个月回款率的均值和方差反推α、β，再数值优化微调，拟合优度R²从0.71提升至0.89。</span>
+    <div style="background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.12);border-radius:10px;padding:16px">
+      <div style="font-size:11px;color:#fbbf24;font-weight:700;letter-spacing:1px;margin-bottom:6px">STEP 3</div>
+      <h4 style="font-size:13px;color:#fff;margin-bottom:6px">模型验证与校准</h4>
+      <p style="font-size:11.5px;color:#8fa3c0;line-height:1.7">蒙特卡洛参数由历史数据估计（σ）+ 人设定（θ/κ），AI 辅助回测检验，人最终确认参数合理性</p>
+    </div>
+    <div style="background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.12);border-radius:10px;padding:16px">
+      <div style="font-size:11px;color:#a78bfa;font-weight:700;letter-spacing:1px;margin-bottom:6px">STEP 4</div>
+      <h4 style="font-size:13px;color:#fff;margin-bottom:6px">决策输出</h4>
+      <p style="font-size:11.5px;color:#8fa3c0;line-height:1.7">概率加权期望 + VaR 尾部风险，输出贷款定价/重定价/再融资建议，AI 起草、人审核签字</p>
     </div>
   </div>
-  <h3 style="margin-top:20px">技术实现栈</h3>
-  <table>
-    <tr><th>模块</th><th>实现方式</th><th>关键技术点</th></tr>
-    <tr><td><b>随机数生成</b></td><td>纯JavaScript，无外部依赖</td><td>Box-Muller变换生成正态；Marsaglia-Tsang生成Gamma；Gamma之比得Beta</td></tr>
-    <tr><td><b>随机过程</b></td><td>利率均值回归模型（Vasicek） + 随机游走模型（股价/汇率随机游走模型（几何布朗运动））</td><td>融资利率用利率均值回归模型（Vasicek，数值离散化方法（欧拉法），步长1/12年）；汇率用股价/汇率随机游走模型（几何布朗运动）</td></tr>
-    <tr><td><b>相关性处理</b></td><td>相关性分解方法（Cholesky）</td><td>对2×2相关矩阵做相关性分解方法（Cholesky），将独立正态数转化为相关随机数</td></tr>
-    <tr><td><b>可视化</b></td><td>ECharts 5.4</td><td>区间带用stack面积图；分位数用排序法（10000路径排序取百分位）</td></tr>
-    <tr><td><b>性能优化</b></td><td>向量化思维 + 分块计算</td><td>循环内避免DOM操作；模拟与渲染分离；10000路径控制在500ms内</td></tr>
-  </table>
-  <div class="quote" style="margin-top:14px"><b>量化成果：</b>模拟器支持9个参数实时调节，1万次情景推演（蒙特卡洛模拟）平均耗时0.3秒，输出4项KPI + 3张交互图表 + 6条AI调度建议。模型识别出第6-8月为流动性风险窗口，建议提前安排4000万备用授信——资金经理需要的"可操作的洞察"，而非一堆数字。</div>
+  <div style="margin-top:14px;font-size:12px;color:#9ba3b7;line-height:1.8;background:rgba(109,124,255,0.06);padding:12px 16px;border-radius:8px;border-left:3px solid #6d7cff">
+    <b style="color:#6d7cff">核心原则：</b>AI 负责执行与计算，人负责判断与决策。利率走势的最终判断必须由人做出——因为 LPR 不是纯数学问题，是政策、经济、政治的综合博弈。
+  </div>
 </div>
-
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">09</span><h2>局限与诚实披露</h2><span class="en">LIMITATIONS</span></div>
+  <div class="sec-header"><span class="num">10</span><h2>局限与诚实披露</h2><span class="badge">LIMITATIONS</span></div>
   <div class="verify-box">
-    <h4>⚠️ 模型演示，非生产系统</h4>
+    <h4>⚠️ 分析预测，非精确模型</h4>
     <ul>
-      <li>模拟参数由脱敏的演示数据校准，非真实集团财务数据——方法论可复用，参数需按实际业务重新拟合</li>
-      <li>5 个随机变量的分布假设（Beta/正态/对数正态/Vasicek/GBM）为精算常用选择，实际业务可能需要更复杂的联合分布（如 尾部相关性建模方法（Copula））</li>
-      <li>压力测试情景为演示设定，未覆盖所有极端风险（如系统性流动性冻结、跨境资本管制等）</li>
-      <li>VaR 为历史模拟法近似，未做 尾部损失期望值（ES）补充——尾部风险的完整度量应同时报告 VaR 与 ES</li>
-      <li>AI 调度建议基于 LLM 生成，需资金经理人工审核后执行——涉及资金调拨的操作 AI 一律不直接执行</li>
+      <li>LPR 受政策窗口、美联储降息进程、汇率波动、输入性通胀等外部变量影响，预测存在不确定性</li>
+      <li>分析框架的价值在于「把判断从经验变成可验证的逻辑链」，而非「精确预言」</li>
+      <li>情景推演 1 万次（蒙特卡洛模拟）θ（长期中枢）/κ（回复速度）为演示设定、非市场校准；σ 由 2019 改革后 LPR 序列近似估计——脚本可复现，结果仅演示精算方法</li>
+      <li>5Y 模拟更严格：θ=3.0%/κ=0.25/σ=0.22 均为叙事假设（基于地产政策定向引导 5Y 更快下行的预期），无一项由历史数据估计；θ5>θ1 仅为保证期限溢价为正、利差收敛不倒挂，非市场校准</li>
+      <li>数据截至 2026-08（含 8 月 LPR 报价与 2026Q2 净息差），后续数据发布可能改变判断</li>
     </ul>
   </div>
 </div>
 
 <div class="sec reveal">
-  <div class="sec-head"><span class="num">10</span><h2>数据口径与假设说明</h2><span class="en">DATA DEFINITIONS</span></div>
+  <div class="sec-header"><span class="num">11</span><h2>数据口径与假设说明</h2><span class="badge">DATA DEFINITIONS</span></div>
   <table>
     <tr><th>字段/指标</th><th>业务口径定义</th><th>数据来源</th><th>粒度/时间</th><th>已知偏差或假设</th><th>可核验性</th></tr>
-    <tr><td><b>财务数据</b></td><td>期初现金余额、月均现金流入/流出、回款率均值等现金流模型核心参数</td><td>模拟数据（参考汽车制造行业平均水平）</td><td>月度/单公司模拟</td><td>基于行业平均水平设定的演示参数，非某公司真实财务数据；不同企业规模与业务模式差异较大</td><td><span style="color:#fbbf24">⚠️ 模拟数据</span></td></tr>
-    <tr><td><b>历史现金流</b></td><td>2026-03 ~ 2026-08 月度现金余额序列，用于模型校准与回测</td><td>模拟数据（为展示模型效果构造）</td><td>月度/6个月</td><td>为展示模型效果构造的历史序列，实际应用需替换为企业真实财务数据并重新校准</td><td><span style="color:#fbbf24">⚠️ 模拟数据</span></td></tr>
-    <tr><td><b>模型方法</b></td><td>蒙特卡洛模拟、VaR（风险价值）、Cholesky相关性分解、Vasicek利率均值回归、几何布朗运动</td><td>精算与金融风险管理标准方法</td><td>方法论/模型</td><td>参考《风险管理与金融机构》（John C. Hull）等标准教材；模型假设变量服从特定分布，极端事件可能超出模型假设</td><td><span style="color:#34d399">✅ 专业方法论</span></td></tr>
-    <tr><td><b>压力测试情景</b></td><td>基准/温和衰退/严重衰退三情景对应的宏观参数与业务参数设定</td><td>演示设定（参考CCAR框架思路）</td><td>情景/三档</td><td>参考美联储CCAR压力测试框架的思路，但具体参数为演示用途，非监管规定的标准情景</td><td><span style="color:#fbbf24">⚠️ 演示设定</span></td></tr>
-    <tr><td><b>行业基准</b></td><td>汽车行业应收账款周转天数、销售季节性因子等行业特征参数</td><td>公开行业研究的一般性认知</td><td>年度/行业平均</td><td>基于公开行业研究的一般性认知，未引用特定机构报告；不同细分领域（整车/零部件/经销商）差异较大</td><td><span style="color:#34d399">✅ 行业常识</span></td></tr>
+    <tr><td><b>LPR历史数据</b></td><td>贷款市场报价利率，1年期与5年期以上两个期限品种</td><td>中国人民银行官网</td><td>月度/2019.08至今</td><td>每月20日公布（遇节假日顺延），改革前后口径不可比</td><td><span style="color:#34d399">✅ 公开可查</span></td></tr>
+    <tr><td><b>MLF利率</b></td><td>中期借贷便利操作利率，央行向商业银行投放中期流动性的利率</td><td>央行公开市场操作公告</td><td>月度/操作日</td><td>仅统计1年期MLF，不同期限操作利率可能有差异</td><td><span style="color:#34d399">✅ 公开可查</span></td></tr>
+    <tr><td><b>银行净息差</b></td><td>商业银行净利息收入与生息资产平均余额的比值</td><td>国家金融监督管理总局</td><td>季度/全行业</td><td>不同类型银行（国有/股份/城商/农商）差异较大，行业平均仅供参考</td><td><span style="color:#34d399">✅ 公开可查</span></td></tr>
+    <tr><td><b>社融/CPI</b></td><td>社会融资规模增量（实体经济从金融体系获得的资金）、CPI同比涨幅</td><td>国家统计局/央行</td><td>月度/全国</td><td>社融有季节性波动，CPI权重可能随消费结构调整</td><td><span style="color:#34d399">✅ 公开可查</span></td></tr>
+    <tr><td><b>模型参数</b></td><td>Vasicek均值回归模型：θ（长期均值）、κ（回归速度）、σ（波动率）</td><td>演示设定+历史估计</td><td>参数/模型</td><td>θ/κ为演示假设，σ由历史LPR序列近似估计，非市场校准；实际使用需按最新数据重新校准</td><td><span style="color:#fbbf24">⚠️ 演示设定</span></td></tr>
+    <tr><td><b>预测结果</b></td><td>基于蒙特卡洛模拟的未来LPR概率分布与区间预测</td><td>模型输出</td><td>预测/未来12个月</td><td>基于演示参数的模拟结果，不构成投资建议；模型假设利率服从均值回归，极端政策冲击可能失效</td><td><span style="color:#fbbf24">⚠️ 模型输出</span></td></tr>
   </table>
-  <div class="quote" style="margin-top:14px"><b>使用说明：</b>本模型的核心价值在于<b>方法论框架</b>（随机建模→压力测试→VaR度量→调度建议），而非具体数字。实际应用时，需用企业真实财务数据重新校准所有参数，并根据行业特性调整变量分布假设。</div>
+  <div class="quote" style="margin-top:14px"><b>数据时效：</b>所有公开数据截至2026年8月（含8月LPR报价与2026Q2净息差），后续数据发布可能改变分析结论。</div>
 </div>
+
+
 
 
 <script>
@@ -3553,7 +3355,8 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 <\/script>
 
 <script>
-function safeInit7(chartId, option) {
+// ===== 安全初始化 =====
+function safeInit(chartId, option) {
   try {
     var el = document.getElementById(chartId);
     if (!el) { console.warn('Chart element not found: ' + chartId); return null; }
@@ -3576,133 +3379,199 @@ function safeInit7(chartId, option) {
   } catch (e) {
     console.error('Chart init failed: ' + chartId, e);
     var el = document.getElementById(chartId);
-    if (el) el.innerHTML = '<div style="padding:20px;color:#f87171;font-size:12px;word-break:break-all;">错误: ' + (e && e.message ? e.message : String(e)) + '</div>';
+    if (el) el.innerHTML = '<div style="padding:20px;color:#f87171;font-size:11px;word-break:break-all;">错误: ' + (e && e.message ? e.message : String(e)) + '</div>';
     return null;
   }
 }
-var axisText7 = '#9ba3b7', axisLine7 = 'rgba(120,140,255,0.15)', splitLine7 = 'rgba(120,140,255,0.08)';
-var tooltipDark7 = { trigger:'axis', axisPointer:{type:'shadow'}, backgroundColor:'rgba(10,10,15,0.95)', borderColor:'rgba(120,140,255,0.3)', borderWidth:1, textStyle:{color:'#e2e8f0'} };
+var axisText = '#8a8fa0', axisLine = 'rgba(120,140,255,0.15)', splitLine = 'rgba(120,140,255,0.08)';
+var tooltipDark = { trigger:'axis', axisPointer:{type:'shadow'}, backgroundColor:'rgba(10,10,15,0.95)', borderColor:'rgba(120,140,255,0.3)', borderWidth:1, textStyle:{color:'#e8eaf0'} };
 
-// ===== 图表1 现金余额：历史 + 未来 12 个月预测区间带 =====
-var histCash = [8200, 8400, 8500, 8300, 8600, 8700];
-var histCashLb = ['2026-03','2026-04','2026-05','2026-06','2026-07','2026-08'];
-var futCashLb = ['2026-09','2026-10','2026-11','2026-12','2027-01','2027-02','2027-03','2027-04','2027-05','2027-06','2027-07','2027-08'];
-var futQ10 = [8700, 8650, 8550, 8400, 8250, 8100, 7900, 7700, 7550, 7400, 7250, 7100];
-var futQ50 = [8750, 8900, 9050, 9200, 9350, 9450, 9600, 9700, 9850, 9950, 10100, 10200];
-var futQ90 = [8820, 9100, 9400, 9700, 10000, 10300, 10600, 10900, 11200, 11500, 11800, 12100];
-var histIdx7 = histCash.length;
-var catAll7 = histCashLb.concat(futCashLb);
-function histPad7(arr){ return arr.concat(new Array(12).fill(null)); }
-function futPad7(arr){ return new Array(histIdx7).fill(null).concat(arr); }
-var pad10_7 = futPad7(futQ10), pad90_7 = futPad7(futQ90);
-var bandDelta7 = pad90_7.map(function(v,i){ return (v==null||pad10_7[i]==null)?null:v-pad10_7[i]; });
-
-var chart7_1 = safeInit7('chart7_1', {
-  tooltip: Object.assign({}, tooltipDark7, { formatter: function(ps){
+// ===== 图表1 LPR 走势：历史 + 未来 5 年预测区间带（蒙特卡洛） =====
+// 历史段（2019-08 ~ 2026-07）：1Y/5Y 真实 LPR 报价
+var hist1Y = [4.25,3.85,3.80,3.70,3.70,3.65,3.55,3.45,3.35,3.10,3.00,3.00];
+var hist5Y = [4.85,4.65,4.65,4.60,4.45,4.30,4.20,3.95,3.85,3.60,3.50,3.50];
+var histLb = ['2019-08','2020-04','2021-12','2022-01','2022-05','2022-08','2023-06','2024-02','2024-07','2024-10','2025-05','2026-07'];
+// 未来段（2026-08 ~ 2031-07，60 个月）：蒙特卡洛 10/50/90 分位（demo/lpr_mc_quantiles.csv 真实输出，θ/κ 演示设定）
+var futLb = ['2026-08','2026-09','2026-10','2026-11','2026-12','2027-01','2027-02','2027-03','2027-04','2027-05','2027-06','2027-07','2027-08','2027-09','2027-10','2027-11','2027-12','2028-01','2028-02','2028-03','2028-04','2028-05','2028-06','2028-07','2028-08','2028-09','2028-10','2028-11','2028-12','2029-01','2029-02','2029-03','2029-04','2029-05','2029-06','2029-07','2029-08','2029-09','2029-10','2029-11','2029-12','2030-01','2030-02','2030-03','2030-04','2030-05','2030-06','2030-07','2030-08','2030-09','2030-10','2030-11','2030-12','2031-01','2031-02','2031-03','2031-04','2031-05','2031-06','2031-07'];
+var futQ10 = [2.96,2.94,2.92,2.91,2.90,2.89,2.88,2.87,2.86,2.85,2.84,2.84,2.83,2.82,2.82,2.81,2.80,2.80,2.79,2.78,2.78,2.78,2.77,2.76,2.76,2.75,2.75,2.74,2.74,2.73,2.73,2.72,2.72,2.71,2.71,2.71,2.70,2.70,2.69,2.69,2.69,2.68,2.68,2.68,2.67,2.67,2.66,2.66,2.66,2.65,2.65,2.65,2.65,2.64,2.64,2.64,2.64,2.63,2.63,2.62];
+var futQ50 = [3.00,3.00,2.99,2.99,2.99,2.99,2.98,2.98,2.98,2.98,2.98,2.97,2.97,2.97,2.97,2.96,2.96,2.96,2.96,2.96,2.95,2.95,2.95,2.95,2.95,2.94,2.94,2.94,2.94,2.94,2.94,2.93,2.93,2.93,2.93,2.92,2.92,2.92,2.92,2.92,2.91,2.91,2.91,2.91,2.91,2.91,2.90,2.90,2.90,2.90,2.89,2.89,2.89,2.89,2.89,2.89,2.88,2.88,2.88,2.88];
+var futQ90 = [3.04,3.05,3.06,3.07,3.08,3.09,3.09,3.10,3.10,3.11,3.11,3.11,3.12,3.12,3.12,3.12,3.12,3.12,3.13,3.13,3.13,3.13,3.13,3.13,3.13,3.13,3.14,3.14,3.13,3.14,3.13,3.14,3.14,3.13,3.14,3.13,3.13,3.13,3.13,3.14,3.14,3.13,3.14,3.14,3.14,3.15,3.15,3.14,3.14,3.14,3.14,3.14,3.14,3.14,3.14,3.14,3.14,3.14,3.14,3.13];
+// 5Y 未来段（2026-08 ~ 2031-07）：蒙特卡洛 10/50/90 分位（demo/lpr_mc_quantiles.csv 真实输出，θ=3.0%/κ=0.25/σ=0.22 均为叙事假设）
+var futQ10_5y = [3.41,3.36,3.33,3.30,3.27,3.25,3.23,3.21,3.18,3.17,3.15,3.14,3.12,3.10,3.09,3.08,3.06,3.05,3.04,3.03,3.01,3.00,2.99,2.98,2.96,2.96,2.95,2.94,2.93,2.92,2.91,2.91,2.90,2.88,2.88,2.87,2.85,2.85,2.85,2.85,2.84,2.83,2.83,2.83,2.81,2.81,2.80,2.80,2.80,2.79,2.79,2.78,2.77,2.77,2.77,2.76,2.76,2.76,2.74,2.74];
+var futQ50_5y = [3.49,3.48,3.47,3.46,3.45,3.44,3.43,3.42,3.41,3.40,3.40,3.39,3.38,3.37,3.36,3.35,3.34,3.34,3.33,3.33,3.32,3.31,3.31,3.30,3.29,3.29,3.28,3.27,3.27,3.26,3.26,3.25,3.24,3.24,3.24,3.23,3.22,3.22,3.21,3.21,3.20,3.20,3.19,3.19,3.18,3.18,3.18,3.17,3.17,3.16,3.16,3.16,3.16,3.15,3.15,3.15,3.15,3.14,3.14,3.14];
+var futQ90_5y = [3.57,3.60,3.61,3.62,3.62,3.63,3.63,3.63,3.63,3.64,3.64,3.63,3.63,3.63,3.63,3.63,3.63,3.64,3.63,3.63,3.62,3.62,3.61,3.62,3.61,3.61,3.60,3.60,3.60,3.59,3.59,3.58,3.58,3.59,3.58,3.58,3.57,3.57,3.57,3.57,3.57,3.56,3.55,3.56,3.55,3.55,3.55,3.54,3.54,3.54,3.54,3.54,3.53,3.53,3.53,3.53,3.52,3.53,3.53,3.52];
+var histIdx = histLb.length;
+// 拼接：历史 12 点 + 未来 60 点（图表长度 72）
+var catAll = histLb.concat(futLb);
+function histPad(arr){ return arr.concat(new Array(60).fill(null)); }
+function futPad(arr){ return new Array(histIdx).fill(null).concat(arr); }
+// 区间带填充（stack 方案）：底座 = q10，增量 = q90 - q10，填色只出现在带内
+var pad10 = futPad(futQ10), pad90 = futPad(futQ90), pad10_5 = futPad(futQ10_5y), pad90_5 = futPad(futQ90_5y);
+var band1yDelta = pad90.map(function(v,i){ return (v==null||pad10[i]==null)?null:Math.round((v-pad10[i])*100)/100; });
+var band5yDelta = pad90_5.map(function(v,i){ return (v==null||pad10_5[i]==null)?null:Math.round((v-pad10_5[i])*100)/100; });
+var chart1 = safeInit('chart1', {
+  tooltip: Object.assign({}, tooltipDark, { formatter: function(ps){
     var i = ps[0].dataIndex;
-    var out = '<b>' + catAll7[i] + '</b>' + (i >= histIdx7 ? ' <span style="color:#fbbf24">▸ 预测段</span>' : '');
+    var out = '<b>' + catAll[i] + '</b>' + (i >= histIdx ? ' <span style="color:#fbbf24">▸ 预测段</span>' : '');
+    var bands = {};
+    ps.forEach(function(p){
+      if (p.value == null) return;
+      if (p.seriesName.indexOf('预测区间带') !== -1) {
+        if (!bands[p.seriesName]) bands[p.seriesName] = { marker:p.marker, vals:[] };
+        bands[p.seriesName].vals.push(p.value);
+        return;
+      }
+      out += '<br/>' + p.marker + p.seriesName + '：<b>' + p.value + '%</b>';
+    });
+    Object.keys(bands).forEach(function(k){
+      var b = bands[k];
+      out += '<br/>' + b.marker + ' ' + k + '：<b>' + Math.min.apply(null,b.vals) + '% ~ ' + Math.max.apply(null,b.vals) + '%</b>';
+    });
+    return out;
+  }}),
+  legend: { top:0, textStyle:{color:axisText,fontSize:11}, icon:'roundRect', itemWidth:14, itemHeight:8 },
+  grid: { left:28, right:140, top:44, bottom:56, containLabel:true },
+  xAxis: { type:'category', data:catAll, boundaryGap:false,
+    axisLabel:{ color:axisText, fontSize:10.5, fontWeight:500, rotate:30,
+      interval: function(idx){
+        // 历史段关键节点 + 未来段每年 + 首尾
+        var keep = [0,4,8,11,24,36,48,60,71];
+        return keep.indexOf(idx) !== -1;
+      },
+      formatter: function(v, idx){
+        var keep = [0,4,8,11,24,36,48,60,71];
+        return keep.indexOf(idx) !== -1 ? v : '';
+      } },
+    axisLine:{lineStyle:{color:axisLine}}, axisTick:{show:false} },
+  yAxis: { type:'value', name:'%', min:2.4, max:5.0,
+    nameTextStyle:{color:axisText,fontSize:10,padding:[0,0,0,0]}, axisLabel:{color:axisText,fontSize:10.5,formatter:'{value}%'}, splitLine:{lineStyle:{color:splitLine,type:'dashed'}}, axisLine:{show:false}, axisTick:{show:false} },
+  series: [
+    // 未来段 1Y：区间带填充（stack：底座 q10 + 增量 q90-q10，silent 不进 tooltip）
+    { name:'1Y 预测区间带 (10%-90%)', type:'line', stack:'band1y', data:pad10, symbol:'none', lineStyle:{opacity:0}, silent:true, z:0 },
+    { name:'1Y 预测区间带 (10%-90%)', type:'line', stack:'band1y', data:band1yDelta, symbol:'none', lineStyle:{opacity:0}, silent:true, z:0,
+      areaStyle:{color:'rgba(109,124,255,0.16)'} },
+    // 未来段 5Y：区间带填充（青色，与 1Y 拉开区分）
+    { name:'5Y 预测区间带 (10%-90%)', type:'line', stack:'band5y', data:pad10_5, symbol:'none', lineStyle:{opacity:0}, silent:true, z:0 },
+    { name:'5Y 预测区间带 (10%-90%)', type:'line', stack:'band5y', data:band5yDelta, symbol:'none', lineStyle:{opacity:0}, silent:true, z:0,
+      areaStyle:{color:'rgba(79,209,197,0.14)'} },
+    // 未来段 1Y：区间带边界线（q90/q10，clip:false 保证右端点标注不被裁剪）
+    { name:'1Y 预测区间带 (10%-90%)', type:'line', data:pad90, symbol:'none', lineStyle:{width:1,color:'rgba(109,124,255,0.45)'}, itemStyle:{color:'rgba(109,124,255,0.45)'}, z:2, clip:false,
+      markPoint:{clip:false,symbol:'circle',symbolSize:4,itemStyle:{color:'#a5b0ff'},label:{show:true,position:'right',distance:6,offset:[0,14],color:'#a5b0ff',fontSize:10,formatter:function(p){return p.value;}},data:[{xAxis:catAll.length-1,yAxis:futQ90[futQ90.length-1],value:'90% '+futQ90[futQ90.length-1]+'%'}],z:5} },
+    { name:'1Y 预测区间带 (10%-90%)', type:'line', data:pad10, symbol:'none', lineStyle:{width:1,color:'rgba(109,124,255,0.45)'}, itemStyle:{color:'rgba(109,124,255,0.45)'}, z:2, clip:false,
+      markPoint:{clip:false,symbol:'circle',symbolSize:4,itemStyle:{color:'#a5b0ff'},label:{show:true,position:'right',distance:6,offset:[0,-8],color:'#a5b0ff',fontSize:10,formatter:function(p){return p.value;}},data:[{xAxis:catAll.length-1,yAxis:futQ10[futQ10.length-1],value:'10% '+futQ10[futQ10.length-1]+'%'}],z:5},
+      markLine: { symbol:'none', silent:true,
+        lineStyle:{color:'rgba(151,163,190,0.55)',type:'dashed',width:1},
+        label:{color:axisText,fontSize:10,position:'insideEndTop',formatter:'今天 · 预测起点'},
+        data:[{xAxis:11}] } },
+    // 未来段 5Y：区间带边界线（青色，端点不标 10/90——避免右端拥挤）
+    { name:'5Y 预测区间带 (10%-90%)', type:'line', data:pad90_5, symbol:'none', lineStyle:{width:1,color:'rgba(79,209,197,0.50)'}, itemStyle:{color:'rgba(79,209,197,0.50)'}, z:2 },
+    { name:'5Y 预测区间带 (10%-90%)', type:'line', data:pad10_5, symbol:'none', lineStyle:{width:1,color:'rgba(79,209,197,0.50)'}, itemStyle:{color:'rgba(79,209,197,0.50)'}, z:2 },
+    // 未来段：中位数线（右端点 markPoint 标注，不重叠）
+    { name:'1Y 预测中位数 (50%)', type:'line', data:futPad(futQ50), symbol:'none',
+      lineStyle:{width:2,color:'#fbbf24',type:'dashed'}, itemStyle:{color:'#fbbf24'}, z:3, clip:false,
+      markPoint:{clip:false,symbol:'circle',symbolSize:4,itemStyle:{color:'#fbbf24'},label:{show:true,position:'right',distance:6,color:'#fbbf24',fontSize:10,formatter:function(p){return p.value;}},data:[{xAxis:catAll.length-1,yAxis:futQ50[futQ50.length-1],value:'1Y 中位数 '+futQ50[futQ50.length-1]+'%'}],z:5} },
+    { name:'5Y 预测中位数 (50%)', type:'line', data:futPad(futQ50_5y), symbol:'none',
+      lineStyle:{width:2,color:'#4fd1c5',type:'dashed'}, itemStyle:{color:'#4fd1c5'}, z:3, clip:false,
+      markPoint:{clip:false,symbol:'circle',symbolSize:4,itemStyle:{color:'#4fd1c5'},label:{show:true,position:'right',distance:6,offset:[0,-14],color:'#4fd1c5',fontSize:10,formatter:function(p){return p.value;}},data:[{xAxis:catAll.length-1,yAxis:futQ50_5y[futQ50_5y.length-1],value:'5Y 中位数 '+futQ50_5y[futQ50_5y.length-1]+'%'}],z:5} },
+    // 历史段：真实 LPR 双线（关键节点标注数值：改革首报 / 2022-05 / 当前持稳）
+    { name:'1Y LPR（历史）', type:'line', smooth:true, data:histPad(hist1Y), symbol:'circle', symbolSize:7,
+      lineStyle:{width:2.5,color:'#6d7cff'}, itemStyle:{color:'#6d7cff'}, z:4,
+      label:{show:true,color:'#c5d4f5',fontSize:10.5,position:'bottom',distance:8,fontWeight:600,formatter:function(p){ var k=[0,4,11]; return k.indexOf(p.dataIndex)!==-1?(p.value+'%'):''; }} },
+    { name:'5Y LPR（历史）', type:'line', smooth:true, data:histPad(hist5Y), symbol:'circle', symbolSize:7,
+      lineStyle:{width:2.5,color:'#4fd1c5'}, itemStyle:{color:'#4fd1c5'}, z:4,
+      label:{show:true,color:'#c5d4f5',fontSize:10.5,position:'top',distance:8,fontWeight:600,formatter:function(p){ var k=[0,4,11]; return k.indexOf(p.dataIndex)!==-1?(p.value+'%'):''; }} }
+  ]
+});
+
+// ===== 图表2 四指标联动（净息差 → 报价行 → LPR 因果） =====
+var chart2 = safeInit('chart2', {
+  tooltip: tooltipDark,
+  legend: { top:0, textStyle:{color:axisText,fontSize:11}, icon:'roundRect', itemWidth:14, itemHeight:8 },
+  grid: { left:20, right:20, top:36, bottom:24, containLabel:true },
+  xAxis: { type:'category', data:['政策利率\n1.40% 稳','净息差\n1.41% 微升','社融\n+7.4% 贷款负增','CPI\n+0.5% 核心 0.9%'], axisLabel:{color:axisText,fontSize:11,fontWeight:500,lineHeight:16}, axisLine:{lineStyle:{color:axisLine}}, axisTick:{show:false} },
+  yAxis: { type:'value', name:'影响方向', nameTextStyle:{color:axisText,fontSize:10}, axisLabel:{color:axisText,fontSize:10}, splitLine:{lineStyle:{color:splitLine,type:'dashed'}}, axisLine:{show:false}, axisTick:{show:false} },
+  series: [
+    { name:'支撑持稳', type:'bar', stack:'t', data:[8,0,4,3], barWidth:44,
+      itemStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#4fd1c5'},{offset:1,color:'#2a9d8f'}]),borderRadius:[0,0,6,6]},
+      label:{show:true,position:'top',color:'#c5d4f5',fontSize:10.5,fontWeight:600,formatter:function(p){return p.value?['政策稳→缺降息基础','','宽松空间','降息不迫切'][p.dataIndex]:''}} },
+    { name:'制约降点', type:'bar', stack:'t', data:[0,9,0,0], barWidth:44,
+      itemStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#f87171'},{offset:1,color:'#dc2626'}]),borderRadius:[6,6,0,0]},
+      label:{show:true,position:'top',color:'#f87171',fontSize:10.5,fontWeight:600,formatter:function(p){return p.value?'回升微弱→仍不愿降点':''}} }
+  ]
+});
+
+// ===== 图表3 期限利差：5Y-1Y 历史收敛 + 未来预测 =====
+// 历史利差 = 5Y - 1Y（12 点）；未来 = q50_5y - q50_1y（中位数）+ 区间（q10_5y-q90_1y ~ q90_5y-q10_1y）
+function spreadHist() { var a = []; for (var i = 0; i < hist1Y.length; i++) { a.push(+(hist5Y[i] - hist1Y[i]).toFixed(2)); } return a; }
+function spreadMed() { var a = []; for (var i = 0; i < futQ50_5y.length; i++) { a.push(+(futQ50_5y[i] - futQ50[i]).toFixed(2)); } return a; }
+function spreadLow() { var a = []; for (var i = 0; i < futQ10_5y.length; i++) { a.push(Math.max(0, +(futQ10_5y[i] - futQ90[i]).toFixed(2))); } return a; }
+function spreadHigh() { var a = []; for (var i = 0; i < futQ90_5y.length; i++) { a.push(+(futQ90_5y[i] - futQ10[i]).toFixed(2)); } return a; }
+// 区间带填充（stack 方案）：底座 = spreadLow，增量 = spreadHigh - spreadLow
+var sprLow = futPad(spreadLow()), sprHigh = futPad(spreadHigh());
+var sprDelta = sprHigh.map(function(v,i){ return (v==null||sprLow[i]==null)?null:Math.round((v-sprLow[i])*100)/100; });
+var chart3 = safeInit('chart3', {
+  tooltip: Object.assign({}, tooltipDark, { formatter: function(ps){
+    var i = ps[0].dataIndex, out = '<b>' + catAll[i] + '</b>' + (i >= histIdx ? ' <span style="color:#fbbf24">▸ 预测段</span>' : '');
     var band = [];
     ps.forEach(function(p){
       if (p.value == null) return;
-      if (p.seriesName.indexOf('预测区间带') !== -1) { band.push(p.value); return; }
-      out += '<br/>' + p.marker + p.seriesName + '：<b>' + p.value.toLocaleString() + ' 万</b>';
+      if (p.seriesName === '预测利差区间 (10%-90%)') { band.push(p.value); return; }
+      out += '<br/>' + p.marker + p.seriesName + '：<b>' + p.value + 'pct</b>';
     });
-    if (band.length === 2) out += '<br/> 预测区间 (10%-90%)：<b>' + Math.min.apply(null,band).toLocaleString() + ' ~ ' + Math.max.apply(null,band).toLocaleString() + ' 万</b>';
+    if (band.length === 2) out += '<br/> 预测利差区间 (10%-90%)：<b>' + Math.min(band[0],band[1]) + ' ~ ' + Math.max(band[0],band[1]) + 'pct</b>';
     return out;
   }}),
-  legend: { top:0, textStyle:{color:axisText7,fontSize:11}, icon:'roundRect', itemWidth:14, itemHeight:8 },
-  grid: { left:30, right:40, top:44, bottom:50, containLabel:true },
-  xAxis: { type:'category', data:catAll7, boundaryGap:false,
-    axisLabel:{ color:axisText7, fontSize:10.5, fontWeight:500, rotate:30 },
-    axisLine:{lineStyle:{color:axisLine7}}, axisTick:{show:false} },
-  yAxis: { type:'value', name:'万元', min:6000, max:13000,
-    nameTextStyle:{color:axisText7,fontSize:10}, axisLabel:{color:axisText7,fontSize:10.5,formatter:function(v){return v.toLocaleString();}}, splitLine:{lineStyle:{color:splitLine7,type:'dashed'}}, axisLine:{show:false}, axisTick:{show:false} },
+  legend: { bottom:0, textStyle:{color:axisText,fontSize:11}, icon:'roundRect', itemWidth:14, itemHeight:8, padding:[0,0,4,0] },
+  grid: { left:24, right:30, top:16, bottom:74, containLabel:true },
+  xAxis: { type:'category', data:catAll, boundaryGap:false,
+    axisLabel:{ color:axisText, fontSize:10, fontWeight:500, rotate:30,
+      interval: function(idx){ var keep = [0,4,8,11,24,36,48,60,71]; return keep.indexOf(idx) !== -1; },
+      formatter: function(v, idx){ var keep = [0,4,8,11,24,36,48,60,71]; return keep.indexOf(idx) !== -1 ? v : ''; } },
+    axisLine:{lineStyle:{color:axisLine}}, axisTick:{show:false} },
+  yAxis: { type:'value', name:'利差 (5Y-1Y)', min:0, max:1.0,
+    nameTextStyle:{color:axisText,fontSize:10,padding:[0,0,0,0]}, axisLabel:{color:axisText,fontSize:10,formatter:'{value}'}, splitLine:{lineStyle:{color:splitLine,type:'dashed'}}, axisLine:{show:false}, axisTick:{show:false} },
   series: [
-    { name:'预测区间带 (10%-90%)', type:'line', stack:'band7', data:pad10_7, symbol:'none', lineStyle:{opacity:0}, silent:true, z:0 },
-    { name:'预测区间带 (10%-90%)', type:'line', stack:'band7', data:bandDelta7, symbol:'none', lineStyle:{opacity:0}, silent:true, z:0,
-      areaStyle:{color:'rgba(52,211,153,0.16)'} },
-    { name:'预测区间带 (10%-90%)', type:'line', data:pad90_7, symbol:'none', lineStyle:{width:1,color:'rgba(52,211,153,0.45)'}, itemStyle:{color:'rgba(52,211,153,0.45)'}, z:2 },
-    { name:'预测区间带 (10%-90%)', type:'line', data:pad10_7, symbol:'none', lineStyle:{width:1,color:'rgba(52,211,153,0.45)'}, itemStyle:{color:'rgba(52,211,153,0.45)'}, z:2,
+    // 未来段：区间带填充（stack：底座 spreadLow + 增量，填色只在带内，silent 不进 tooltip）
+    { name:'预测利差区间 (10%-90%)', type:'line', stack:'sprBand', data:sprLow, symbol:'none', lineStyle:{opacity:0}, silent:true, z:0 },
+    { name:'预测利差区间 (10%-90%)', type:'line', stack:'sprBand', data:sprDelta, symbol:'none', lineStyle:{opacity:0}, silent:true, z:0,
+      areaStyle:{color:'rgba(167,139,250,0.15)'} },
+    // 未来段：区间带边界线
+    { name:'预测利差区间 (10%-90%)', type:'line', data:sprHigh, symbol:'none', lineStyle:{width:1,color:'rgba(167,139,250,0.45)'}, itemStyle:{color:'rgba(167,139,250,0.45)'}, z:2 },
+    { name:'预测利差区间 (10%-90%)', type:'line', data:sprLow, symbol:'none', lineStyle:{width:1,color:'rgba(167,139,250,0.45)'}, itemStyle:{color:'rgba(167,139,250,0.45)'}, z:2,
       markLine: { symbol:'none', silent:true,
         lineStyle:{color:'rgba(151,163,190,0.55)',type:'dashed',width:1},
-        label:{color:'#e2e8f0',fontSize:10,position:'insideEndTop',formatter:'今天 · 预测起点'},
-        data:[{xAxis:histIdx7-1}] } },
-    { name:'预测中位数 (50%)', type:'line', data:futPad7(futQ50), symbol:'none',
-      lineStyle:{width:2,color:'#34d399',type:'dashed'}, itemStyle:{color:'#34d399'}, z:3, clip:false,
-      markPoint:{clip:false,symbol:'circle',symbolSize:4,itemStyle:{color:'#34d399'},label:{show:true,position:'right',distance:6,color:'#34d399',fontSize:10,formatter:function(p){return p.value.toLocaleString();}},data:[{xAxis:catAll7.length-1,yAxis:futQ50[futQ50.length-1],value:'中位数 '+futQ50[futQ50.length-1].toLocaleString()+'万'}],z:5} },
-    { name:'历史现金余额', type:'line', smooth:true, data:histPad7(histCash), symbol:'circle', symbolSize:7,
-      lineStyle:{width:2.5,color:'#6d7cff'}, itemStyle:{color:'#6d7cff'}, z:4,
-      label:{show:true,color:'#a5b0ff',fontSize:10.5,position:'top',distance:8,fontWeight:600,formatter:function(p){return p.value.toLocaleString();}} }
-  ]
-});
-
-// ===== 图表2 三情景压力测试：最低余额对比 =====
-var chart7_2 = safeInit7('chart7_2', {
-  tooltip: Object.assign({}, tooltipDark7, { formatter: function(ps){
-    var p = ps[0];
-    var names = ['基准','温和衰退','严重衰退'];
-    var vals = [7900, 5200, 2800];
-    var ratios = ['1.75×','1.15×','0.62×'];
-    var gaps = ['无缺口','-1,500 万','-4,200 万'];
-    var idx = p.dataIndex;
-    return '<b>' + names[idx] + '</b><br/>最低余额：<b>' + vals[idx].toLocaleString() + ' 万</b><br/>安全垫：' + ratios[idx] + '<br/>最大缺口：' + gaps[idx];
-  }}),
-  grid: { left:30, right:20, top:30, bottom:40, containLabel:true },
-  xAxis: { type:'category', data:['基准','温和衰退','严重衰退'], axisLabel:{color:axisText7,fontSize:11,fontWeight:500}, axisLine:{lineStyle:{color:axisLine7}}, axisTick:{show:false} },
-  yAxis: { type:'value', name:'万元', min:0, max:10000,
-    nameTextStyle:{color:axisText7,fontSize:10}, axisLabel:{color:axisText7,fontSize:10,formatter:function(v){return v.toLocaleString();}}, splitLine:{lineStyle:{color:splitLine7,type:'dashed'}}, axisLine:{show:false}, axisTick:{show:false} },
-  series: [
-    { name:'最低现金余额', type:'bar', barWidth:50, data:[
-        {value:7900, itemStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#34d399'},{offset:1,color:'#34d399'}]), borderRadius:[6,6,0,0]}},
-        {value:5200, itemStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#fbbf24'},{offset:1,color:'#fbbf24'}]), borderRadius:[6,6,0,0]}},
-        {value:2800, itemStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#f87171'},{offset:1,color:'#f87171'}]), borderRadius:[6,6,0,0]}}
-      ],
-      label:{show:true,position:'top',color:'#a5b0ff',fontSize:11,fontWeight:600,formatter:function(p){return p.value.toLocaleString()+'万';}},
-      markLine: { symbol:'none', silent:true,
-        lineStyle:{color:'rgba(248,113,113,0.6)',type:'dashed',width:1.5},
-        label:{color:'#f87171',fontSize:10,position:'end',formatter:'安全垫阈值 4,500万 (1.0×)'},
-        data:[{yAxis:4500}] }
-    }
-  ]
-});
-
-// ===== 图表3 最低余额概率分布（直方图） =====
-var distBins = ['<3000','3000-4000','4000-5000','5000-6000','6000-7000','7000-8000','8000-9000','9000-10000','>10000'];
-var distFreq = [1.2, 3.8, 8.5, 14.2, 18.6, 20.1, 16.8, 11.3, 5.5];
-var chart7_3 = safeInit7('chart7_3', {
-  tooltip: Object.assign({}, tooltipDark7, { formatter: function(ps){
-    var p = ps[0];
-    return '<b>最低余额 ' + distBins[p.dataIndex] + ' 万</b><br/>发生概率：<b>' + p.value + '%</b>';
-  }}),
-  grid: { left:30, right:20, top:30, bottom:50, containLabel:true },
-  xAxis: { type:'category', data:distBins, axisLabel:{color:axisText7,fontSize:9,rotate:25}, axisLine:{lineStyle:{color:axisLine7}}, axisTick:{show:false} },
-  yAxis: { type:'value', name:'概率 %', min:0, max:25,
-    nameTextStyle:{color:axisText7,fontSize:10}, axisLabel:{color:axisText7,fontSize:10}, splitLine:{lineStyle:{color:splitLine7,type:'dashed'}}, axisLine:{show:false}, axisTick:{show:false} },
-  series: [
-    { name:'概率分布', type:'bar', barWidth:'60%', data:distFreq.map(function(v,i){
-        var color = i < 3 ? '#f87171' : (i < 5 ? '#fbbf24' : '#34d399');
-        return {value:v, itemStyle:{color:color, borderRadius:[4,4,0,0]}};
-      }),
-      label:{show:true,position:'top',color:'#a5b0ff',fontSize:9,formatter:'{c}%'},
-      markLine: { symbol:'none', silent:true,
-        lineStyle:{color:'rgba(248,113,113,0.6)',type:'dashed',width:1.5},
-        label:{color:'#f87171',fontSize:9,position:'end',formatter:'95%置信度下最大可能损失（VaR） ≈ 4,100万'},
-        data:[{xAxis:2.5}] }
-    }
+        label:{color:'#e2e8f0',fontSize:10,position:'end',rotate:0,align:'center',formatter:'今天 · 预测起点'},
+        data:[{xAxis:11}] } },
+    { name:'预测利差中位数', type:'line', data:futPad(spreadMed()), symbol:'none',
+      lineStyle:{width:2,color:'#a78bfa',type:'dashed'}, itemStyle:{color:'#a78bfa'}, z:3, clip:false,
+      markPoint:{clip:false,symbol:'circle',symbolSize:4,itemStyle:{color:'#a78bfa'},label:{show:true,position:'right',distance:6,offset:[0,-14],color:'#a78bfa',fontSize:10,formatter:function(p){return p.value;}},data:[{xAxis:catAll.length-1,yAxis:spreadMed()[spreadMed().length-1],value:'利差 '+spreadMed()[spreadMed().length-1]+'pct'}],z:5} },
+    { name:'历史利差 (5Y-1Y)', type:'line', smooth:true, data:spreadHist(), symbol:'circle', symbolSize:6,
+      lineStyle:{width:2.5,color:'#a78bfa'}, itemStyle:{color:'#a78bfa'}, z:4,
+      label:{show:false},
+      markPoint:{ clip:false, silent:true, symbol:'circle', symbolSize:7, z:5,
+        data:[
+          // index 0 = 0.6pct (左下起点)，顶部
+          {coord:[0,  spreadHist()[0]],  value:spreadHist()[0]+'pct',  itemStyle:{color:'#a78bfa'}, label:{position:[12, -10], color:'#e9d5ff', fontSize:11, fontWeight:600}},
+          // index 4 = 0.75pct (最高点)，左侧
+          {coord:[4,  spreadHist()[4]],  value:spreadHist()[4]+'pct',  itemStyle:{color:'#a78bfa'}, label:{position:'left',   distance:8,  color:'#e9d5ff', fontSize:11, fontWeight:600}},
+          // index 11 = 0.5pct (今天点)，右下避让 markLine
+          {coord:[11, spreadHist()[11]], value:spreadHist()[11]+'pct', itemStyle:{color:'#a78bfa'}, label:{position:'right',  distance:10, color:'#e9d5ff', fontSize:11, fontWeight:600}}
+        ]
+      } }
   ]
 });
 
 window.addEventListener('resize', function() {
-  if (chart7_1) chart7_1.resize();
-  if (chart7_2) chart7_2.resize();
-  if (chart7_3) chart7_3.resize();
+  if (chart1) chart1.resize();
+  if (chart2) chart2.resize();
+  if (chart3) chart3.resize();
 });
 <\/script>
 
 </section>
 
-</div></script>
 
+</div></script>
 <script src="echarts.min.js"></script>
 <div class="work-overlay" id="workOverlay"></div>
 <div id="workFrame" style="display:none;position:fixed;inset:0;z-index:9999;background:#0b0d14">
