@@ -1754,13 +1754,22 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
         <div class="tl-tags"><span>单一旗舰</span><span>LPR</span><span>精算×AI</span></div>
       </div>
     </div>
-    <div class="tl-item tl-latest">
+    <div class="tl-item">
       <div class="tl-dot"></div>
       <div class="tl-content">
-        <div class="tl-head"><span class="tl-ver">v7.1</span><span class="tl-date">2026.10</span><span class="tl-badge">当前版本</span><span class="tl-pulse"></span></div>
+        <div class="tl-head"><span class="tl-ver">v7.1</span><span class="tl-date">2026.10</span></div>
         <div class="tl-title">首屏引导与口径统一</div>
         <div class="tl-desc">首屏新增「查看旗舰作品 / 在线 Demo」双 CTA（移动端满宽、44px 触控、focus-visible）；导航按当前章节高亮并带 aria-current；蒙特卡洛路径口径统一为 10,000 条（脚本/CSV/图表/文案同源，seed=42 可复现）；全站中英之间补空格；Demo 数量口径统一为「1 个在线可交互 Demo」</div>
         <div class="tl-tags"><span>首屏 CTA</span><span>导航激活态</span><span>口径统一</span></div>
+      </div>
+    </div>
+    <div class="tl-item tl-latest">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-head"><span class="tl-ver">v7.2</span><span class="tl-date">2026.10</span><span class="tl-badge">当前版本</span><span class="tl-pulse"></span></div>
+        <div class="tl-title">移除面试模式</div>
+        <div class="tl-desc">按用户拍板移除作品集助手的模拟面试功能：去掉固定题库、面试官人格提示词、顶部模式徽标与进入/退出指令，以及快捷提问中的对应入口；助手定位收敛为「作品集导览 + 改进建议」，死代码 kbDigest 一并清理</div>
+        <div class="tl-tags"><span>功能精简</span><span>助手定位收敛</span></div>
       </div>
     </div>
   </div>
@@ -1962,7 +1971,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
   <span><b>方向</b> 财务 × AI</span>
 </div>
 <button class="back-to-top" id="backToTop" aria-label="回到顶部">↑</button>
-<div class="footer">胡凯 · AI × Finance Portfolio · v7.1 · 全部数据经人工核验 · 2026.10 · AI 协作方法探索</div>
+<div class="footer">胡凯 · AI × Finance Portfolio · v7.2 · 全部数据经人工核验 · 2026.10 · AI 协作方法探索</div>
 
 </div>
 
@@ -2043,8 +2052,6 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
 .ai-key-save{width:100%;padding:8px;background:var(--hk-primary);border:none;border-radius:8px;color:#fff;font-size:12px;font-weight:500;cursor:pointer;transition:all .2s}
 .ai-key-save:hover{opacity:0.9}
 .ai-settings-tip{font-size:12px;color:#6b7280;margin-top:8px;text-align:center}
-.interview-badge{font-size:12px;padding:3px 9px;border-radius:8px;border:1px solid rgba(250,204,21,0.4);background:rgba(250,204,21,0.1);color:#fbbf24;cursor:pointer;flex-shrink:0;font-weight:500;transition:all .2s}
-.interview-badge:hover{background:rgba(250,204,21,0.2)}
 @media(max-width:600px){
   .ai-panel{width:calc(100vw - 24px);right:12px;bottom:84px;height:calc(100vh - 110px);max-height:none;border-radius:18px}
   .ai-fab{width:48px;height:48px;right:16px;bottom:16px;border-radius:14px}
@@ -2064,7 +2071,6 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
       <div class="ai-head-title">作品集导览助手</div>
       <div class="ai-head-sub"><span class="online-dot" id="assistantStateDot" style="background:#fbbf24;box-shadow:0 0 6px #fbbf24"></span>隐私保护模式 · 基于作品集知识库作答（点 ⚙ 接入真实 AI）</div>
     </div>
-    <span class="interview-badge" id="assistantInterviewBadge" style="display:none" title="点击退出面试模式">面试模式</span>
     <button class="ai-head-gear" id="assistantGear" title="设置">⚙</button>
     <button class="ai-head-close" id="assistantClose">✕</button>
   </div>
@@ -2086,7 +2092,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
   <div class="ai-body" id="assistantBody">
     <div class="ai-welcome" id="assistantWelcome">
       <div class="aw-greeting">你好，我是<span class="accent">胡凯的作品集导览顾问</span></div>
-      <div class="aw-desc">我可以帮你快速了解这个作品集的核心亮点、每个作品展示的能力，以及作者的财务×精算×AI 复合背景。也可以模拟面试官进行提问。</div>
+      <div class="aw-desc">我可以帮你快速了解这个作品集的核心亮点、每个作品展示的能力，以及作者的财务×精算×AI 复合背景。也可以帮你检查作品集里还有哪些地方值得改进。</div>
       <div class="aw-section-title">常见问题</div>
       <div class="quick-list" id="quickChips"></div>
       <div class="aw-section-title">快速导览</div>
@@ -2120,7 +2126,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
       "highlights": ["四指标分析框架", "LPR 2019 改革历史走势", "蒙特卡洛5年预测区间带", "企业融资成本压力测试（VaR）", "贷款定价决策建议"] },
   "prototypes": [],
   "keyNumbers": {},
-  "techStack": "原生HTML+CSS+JS·ECharts5.5按需打包·本地知识库检索（默认）·可选接入用户自备Key的真实大模型（面试演示模式）·多Agent协作体系(人+3AI信箱通信)·RAG检索增强·Python蒙特卡洛Demo(纯标准库)",
+  "techStack": "原生HTML+CSS+JS·ECharts5.5按需打包·本地知识库检索（默认）·可选接入用户自备Key的真实大模型（演示模式）·多Agent协作体系(人+3AI信箱通信)·RAG检索增强·Python蒙特卡洛Demo(纯标准库)",
   "defectLog": [
     "①XSS:聊天输入未转义→escapeHtml修复",
     "②体积:ECharts全量1004KB→按需打包691KB(整文件-21%)",
@@ -2138,7 +2144,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     "⑭轻量RAG政策检索(5文档条款+关键词打分+回答附出处)",
     "⑮抽屉背景滚动锁定+作品加载提示"
   ],
-  "versions": "v1基础 → v2.1体积优化 → v2.2安全修复 → v2.3接入真实AI → v2.4数据底座 → v2.5拷问修复 → v2.6异常全流程 → v2.7内置助手 → v3.0打字机/批量处理/pytest/RAG/体验优化 → v3.2整合SOX控制测试工作台为第6作品 → v3.3双Agent协作实战展示 → v3.4作品矩阵分级布局 → v3.5数据修正+面试速览 → v3.6角色升级Manager+Specialist+图标 → v3.7称呼统一+能力全景+协作技术栈 → v3.8去审计化重定位+工具链分层+技术栈分组 → v3.9协作技术栈术语升级 → v3.10商业化深度(G2N/CCC/死信队列+审计日志) → v3.11 AI助手彻头彻尾大更新 → v4.0 作品集第四代·AI助手四方向大更新 → v4.1 LPR预测替换收入核算 → v4.2 LPR精算增强(理论视角+情景概率+蒙特卡洛) → v4.3 未来5年预测区间带 → v4.4 图表1全宽大图+5Y双期限 → v4.4.1 Demo可靠性加固 → v4.4.2 数据时效更新 → v4.5 精算复合背景升级：新增现金流压力测试(w07)+LPR融资成本压力测试+SmartRecon精算风险引擎 → v5.0 精简聚焦：删除智对账(w04)+月结优化(w02)，双Agent升级为四角色协作体系 → v5.1 四角色区域专业化重写+AI助手知识库自动同步+SOX升级Agent工作流v5.0 → v5.2 w03新增蒙特卡洛可交互Demo+AI利率分析工作流 + w05新增现金流压力测试可交互Demo → v5.3 供应链模拟器逻辑修复+proto2原型V2.0+CHANGELOG → v5.3.3 手机端media适配+preflight体检工具+iframe竞态修复 → v5.5.0 业务化大改造（5作品改为业务叙事：摘要→痛点→洞察→应用→技术→局限）+全站措辞业务化+双Agent协作展示 → v5.6.0 主页作品卡片新增显眼Demo入口（3宽卡「在线 Demo ↗」按钮+mini卡 Demo tag+研究型标注；卡片div化解嵌套链接）+版本基线更新 → v5.6.1 AI协作经验章节更新（双Agent机制升级三阶段闭环：事前对齐方案→独立复核→机器闸门兜底；关键规矩增至6条；数据更新43轮复核/26条批准基线；去内部词） → v5.7.0 作品01替换为发票合规预审（镜像产品演示页：三通道解析+规则引擎R1-R11+证据链；公开渠道去内部词/环境变量名/样本细节，数据全合成） → v5.7.1 作品01加图表（系统流水线HTML/CSS+规则引擎覆盖ECharts横向堆叠条形，数据来自产品RULES_META真实定义）+文案口径修正（10条规则/未见异常） → v6.1 精简聚焦：恢复v5.7.1设计质感，仅保留作品01发票合规预审+作品07现金流压力测试，删除LPR/供应链/SOX/资金智算四个作品及对应知识库条目 → v6.2 细节打磨：Hero统计口径统一（2核心交互Demo）、双Agent企业级角色术语、学历口径对齐简历、资金调度建议呼应协定存款 → v7.0 单作品重构：只留 LPR（删除发票/现金流，恢复 LPR 完整详情页，全站口径同步） → v7.1 首屏 CTA + 导航激活态 + 蒙特卡洛口径统一 10,000 + 中英空格统一 + Demo 口径统一",
+  "versions": "v1基础 → v2.1体积优化 → v2.2安全修复 → v2.3接入真实AI → v2.4数据底座 → v2.5拷问修复 → v2.6异常全流程 → v2.7内置助手 → v3.0打字机/批量处理/pytest/RAG/体验优化 → v3.2整合SOX控制测试工作台为第6作品 → v3.3双Agent协作实战展示 → v3.4作品矩阵分级布局 → v3.5数据修正+面试速览 → v3.6角色升级Manager+Specialist+图标 → v3.7称呼统一+能力全景+协作技术栈 → v3.8去审计化重定位+工具链分层+技术栈分组 → v3.9协作技术栈术语升级 → v3.10商业化深度(G2N/CCC/死信队列+审计日志) → v3.11 AI助手彻头彻尾大更新 → v4.0 作品集第四代·AI助手四方向大更新 → v4.1 LPR预测替换收入核算 → v4.2 LPR精算增强(理论视角+情景概率+蒙特卡洛) → v4.3 未来5年预测区间带 → v4.4 图表1全宽大图+5Y双期限 → v4.4.1 Demo可靠性加固 → v4.4.2 数据时效更新 → v4.5 精算复合背景升级：新增现金流压力测试(w07)+LPR融资成本压力测试+SmartRecon精算风险引擎 → v5.0 精简聚焦：删除智对账(w04)+月结优化(w02)，双Agent升级为四角色协作体系 → v5.1 四角色区域专业化重写+AI助手知识库自动同步+SOX升级Agent工作流v5.0 → v5.2 w03新增蒙特卡洛可交互Demo+AI利率分析工作流 + w05新增现金流压力测试可交互Demo → v5.3 供应链模拟器逻辑修复+proto2原型V2.0+CHANGELOG → v5.3.3 手机端media适配+preflight体检工具+iframe竞态修复 → v5.5.0 业务化大改造（5作品改为业务叙事：摘要→痛点→洞察→应用→技术→局限）+全站措辞业务化+双Agent协作展示 → v5.6.0 主页作品卡片新增显眼Demo入口（3宽卡「在线 Demo ↗」按钮+mini卡 Demo tag+研究型标注；卡片div化解嵌套链接）+版本基线更新 → v5.6.1 AI协作经验章节更新（双Agent机制升级三阶段闭环：事前对齐方案→独立复核→机器闸门兜底；关键规矩增至6条；数据更新43轮复核/26条批准基线；去内部词） → v5.7.0 作品01替换为发票合规预审（镜像产品演示页：三通道解析+规则引擎R1-R11+证据链；公开渠道去内部词/环境变量名/样本细节，数据全合成） → v5.7.1 作品01加图表（系统流水线HTML/CSS+规则引擎覆盖ECharts横向堆叠条形，数据来自产品RULES_META真实定义）+文案口径修正（10条规则/未见异常） → v6.1 精简聚焦：恢复v5.7.1设计质感，仅保留作品01发票合规预审+作品07现金流压力测试，删除LPR/供应链/SOX/资金智算四个作品及对应知识库条目 → v6.2 细节打磨：Hero统计口径统一（2核心交互Demo）、双Agent企业级角色术语、学历口径对齐简历、资金调度建议呼应协定存款 → v7.0 单作品重构：只留 LPR（删除发票/现金流，恢复 LPR 完整详情页，全站口径同步） → v7.1 首屏 CTA + 导航激活态 + 蒙特卡洛口径统一 10,000 + 中英空格统一 + Demo 口径统一 → v7.2 移除面试模式（用户拍板），助手专注导览与改进建议",
   "dualAgentCollab": {
     "description": "主力AI提方案并执行、复核AI独立审查并提出异议、人在分歧点裁决；每次分歧都会沉淀为可复用的规则",
     "roles": [
@@ -2166,7 +2172,7 @@ window.SmartReconAI = {
   offlineReplies: {
     // 作品集助手场景（portfolio-assistant）
     portfolio: [
-      { kw: ['功能','结构','有哪些','哪些作品','作品集','几个作品','作品矩阵','导览','介绍'], reply: '这个作品集围绕一个旗舰作品展开：①主页（个人介绍 + 精算/财务/AI 能力全景）②旗舰作品 LPR 走势预测与融资成本压力测试系统（四指标框架 + 蒙特卡洛概率预测 + 可运行 Demo + 深度详情页）③AI 协作经验（双 Agent 机制）④面试模式（模拟面试官提问）。<div class="tool-call">portfolio_kb → home ✓</div>' },
+      { kw: ['功能','结构','有哪些','哪些作品','作品集','几个作品','作品矩阵','导览','介绍'], reply: '这个作品集围绕一个旗舰作品展开：①主页（个人介绍 + 精算/财务/AI 能力全景）②旗舰作品 LPR 走势预测与融资成本压力测试系统（四指标框架 + 蒙特卡洛概率预测 + 可运行 Demo + 深度详情页）③AI 协作经验（双 Agent 机制）<div class="tool-call">portfolio_kb → home ✓</div>' },
       { kw: ['缺陷','问题','修复','bug','历史'], reply: '已修复的缺陷（列举）：①聊天输入XSS ②ECharts全量1004KB→按需打包691KB ③证据链元素用br无法显示→改div ④证据链浅底浅字看不清→改深色文字 ⑤Agent只回固定话术→接入真实DeepSeek API ⑥API失败直接降级→加重试 ⑦数据底座缺月度资金流→补12个月数据 ⑧离线关键词跨场景劫持→场景分离 ⑨人设漂移/逻辑缺陷→persona增强+资金全景 ⑩异常中心按钮无状态流转→完整全流程。<div class="tool-call">portfolio_kb → defect_log ✓</div>' },
       { kw: ['迭代','版本','更新','演进'], reply: '作品集演进历史：v1 基础版→v2.1 ECharts按需打包→v2.2 安全修复→v2.3 接入真实DeepSeek AI→v2.4 数据底座升级→v2.5 AI拷问测试修复→v2.6 异常处理全流程→v2.7 内置作品集助手→v3.2 整合SOX工作台→v3.3 协作实战展示→v3.4 作品矩阵分级→v5.0 双Agent复核机制→v5.3 手机端适配+preflight体检→v5.5.0 业务化大改造+全站措辞业务化→v5.6.0 主页Demo入口显眼化→v5.6.1 AI协作经验章节更新（三阶段闭环+规矩6条+数据更新）→v5.7.0 作品01替换为发票合规预审（可运行Demo）→v5.7.1 作品01加系统流水线图+规则覆盖图，文案口径修正→v6.1 精简聚焦：仅保留作品01+作品07，删除LPR/供应链/SOX/资金智算。<div class="tool-call">portfolio_kb → versions ✓</div>' },
       { kw: ['双Agent','复核机制','协作体系','怎么运作','如何运作','multi-agent','多智能体','团队','豆包','2.1 Turbo','DeepSeek','主力AI','复核AI','四角色'], reply: '我实践了一套"主力AI+复核AI"的双Agent复核机制，闭环拉满：<br><br>① <b>开工前先对齐方案</b>：AI先复述理解、提异议，人拍板后再动手<br>② <b>主力AI提方案并执行</b>：任务拆解、方案设计、代码实现、文档撰写<br>③ <b>复核AI独立审查</b>：不是检查，而是平等讨论——边界测试、根因分析、提出异议<br>④ <b>人在分歧点裁决</b>：两个AI有分歧时，人做最终决策<br>⑤ <b>机器闸门兜底</b>：没复核的改动提交时会被拦下来，每一次分歧都沉淀为规则<br><br>比如主力AI三次"先push后复核"，复核AI发现违规后双AI讨论，落地了复核凭证+CI闸门，PR #1实证：不补凭证就合不进去。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
@@ -2256,7 +2262,7 @@ window.SmartReconAI = {
   portfolioPersona: function() {
     var kb = this.portfolioKB;
     if(!kb){ return '你是作品集助手。'; }
-    return '你是"作品集助手"——胡凯 AI×财务作品集的自我认知 AI。你的职责：向用户（胡凯本人或面试官）介绍这个作品集的一切细节，并帮助发现可改进点。回答专业、简洁、结构化，中文回复，控制在 220 字以内，可用换行分点。\n\n【作品集知识库——回答必须基于以下信息，不要编造】\n作者：' + kb.author + '；定位：' + kb.purpose + '\n结构：' + JSON.stringify(kb.structure) + '\n原型：' + JSON.stringify(kb.prototypes) + '\n关键数据：' + JSON.stringify(kb.keyNumbers) + '\n技术栈：' + kb.techStack + '\n缺陷日志（已修复）：' + kb.defectLog.join('；') + '\n版本演进：' + kb.versions + '\nAI协作方法（用户问怎么和AI协作时用这个）：' + JSON.stringify(kb.dualAgentCollab) + '\n\n【行为准则】①用户问"双Agent复核机制/怎么运作/多智能体团队"→必须用dualAgentCollab信息回答，明确是胡凯(Decision Maker)+主力生成 Agent(Main Agent)+复核 Agent(Review Agent)双Agent复核机制，不要混淆资金智算原型里的Manager+Specialist①用户问"有什么功能/介绍作品"→按 structure+prototypes 导览 ②问"怎么实现的/技术"→引用 techStack+keyNumbers ③问"缺陷/修复历史"→列 defectLog ④问"迭代/版本"→列 versions ⑤问"还能怎么改进"→基于 defectLog 和当前架构给 2-3 条具体建议（如：接真实RAG、加pytest测试、数据脱敏后真实数据测试、ECharts进一步瘦身）⑥若收到【实时联网搜索结果】，先判断相关性——相关则基于结果回答，无关则忽略并直接用自己的知识回答（不要在开头提"网络搜索/搜索词"）⑦若没有搜索结果且问题是作品集外的一般问题，可直接用你的知识简要回答（不必强调"知识库未覆盖"），最后自然带一句"如需了解作品集可以问我"⑧被要求讲笑话/闲聊等非业务内容时：轻松幽默回应（可讲财务梗），简短即可，不硬切功能清单⑨用户负面反馈/质疑：先共情再理性回应，不防御性辩解。';
+    return '你是"作品集助手"——胡凯 AI×财务作品集的自我认知 AI。你的职责：向用户（胡凯本人或访客）介绍这个作品集的一切细节，并帮助发现可改进点。回答专业、简洁、结构化，中文回复，控制在 220 字以内，可用换行分点。\n\n【作品集知识库——回答必须基于以下信息，不要编造】\n作者：' + kb.author + '；定位：' + kb.purpose + '\n结构：' + JSON.stringify(kb.structure) + '\n原型：' + JSON.stringify(kb.prototypes) + '\n关键数据：' + JSON.stringify(kb.keyNumbers) + '\n技术栈：' + kb.techStack + '\n缺陷日志（已修复）：' + kb.defectLog.join('；') + '\n版本演进：' + kb.versions + '\nAI协作方法（用户问怎么和AI协作时用这个）：' + JSON.stringify(kb.dualAgentCollab) + '\n\n【行为准则】①用户问"双Agent复核机制/怎么运作/多智能体团队"→必须用dualAgentCollab信息回答，明确是胡凯(Decision Maker)+主力生成 Agent(Main Agent)+复核 Agent(Review Agent)双Agent复核机制，不要混淆资金智算原型里的Manager+Specialist①用户问"有什么功能/介绍作品"→按 structure+prototypes 导览 ②问"怎么实现的/技术"→引用 techStack+keyNumbers ③问"缺陷/修复历史"→列 defectLog ④问"迭代/版本"→列 versions ⑤问"还能怎么改进"→基于 defectLog 和当前架构给 2-3 条具体建议（如：接真实RAG、加pytest测试、数据脱敏后真实数据测试、ECharts进一步瘦身）⑥若收到【实时联网搜索结果】，先判断相关性——相关则基于结果回答，无关则忽略并直接用自己的知识回答（不要在开头提"网络搜索/搜索词"）⑦若没有搜索结果且问题是作品集外的一般问题，可直接用你的知识简要回答（不必强调"知识库未覆盖"），最后自然带一句"如需了解作品集可以问我"⑧被要求讲笑话/闲聊等非业务内容时：轻松幽默回应（可讲财务梗），简短即可，不硬切功能清单⑨用户负面反馈/质疑：先共情再理性回应，不防御性辩解。';
   },
 
   // ===== 知识库自动同步：从页面DOM提取最新作品信息，避免手动维护 =====
@@ -2601,7 +2607,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   });
 })();
 
-// ===== 作品集助手（悬浮 AI · v3.11 大更新：流式/快捷提问/快速导览/面试模式/可填Key/作品跳转）=====
+// ===== 作品集助手（悬浮 AI · v3.11 大更新：流式/快捷提问/快速导览/可填Key/作品跳转）=====
 (function(){
   var fab=document.getElementById('assistantFab');
   var panel=document.getElementById('assistantPanel');
@@ -2615,7 +2621,6 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   var keyInput=document.getElementById('assistantKeyInput');
   var keySave=document.getElementById('assistantKeySave');
   var stateDot=document.getElementById('assistantStateDot');
-  var interviewBadge=document.getElementById('assistantInterviewBadge');
   var titleEl=document.getElementById('assistantTitle');
   if(!fab||!panel||!body||!input||!sendBtn) return;
 
@@ -2679,50 +2684,8 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   }
   function setTitle(t){ if(titleEl) titleEl.textContent=t; }
 
-  // ---- 面试模式 ----
-  var interviewMode=false;
-  var interviewQIndex=0;
-  var interviewQuestions=[
-    '请介绍一下你的旗舰作品——LPR 走势预测与融资成本压力测试系统，它解决了什么实际业务问题？',
-    '你的精算背景在财务工作中具体怎么体现？举一个用精算方法解决财务问题的例子。',
-    '在智马达汽车有限公司（奔驰x吉利）财务资金部实习中，你接触了SAP资金模块，你觉得AI可以在哪些环节提升资金运营效率？',
-    '你设计的双Agent复核机制中，复核AI（独立评审角色）具体做什么？为什么需要这个角色？',
-    '如果让你用AI改进企业的月度结账流程，你会从哪里入手？请说说你的思路。',
-    '你的作品集里 LPR 预测用了四指标框架和蒙特卡洛，这两者在方法论上是怎么配合的？',
-    'LPR 预测模型如果要真正接入企业融资决策流程，你认为最大的挑战是什么？',
-    '请说说你对"AI时代财务人员核心竞争力"的理解，你自己是怎么准备的？'
-  ];
-  function getNextInterviewQuestion(){
-    var q=interviewQuestions[interviewQIndex % interviewQuestions.length];
-    interviewQIndex++;
-    return q;
-  }
-  function interviewPersona(){
-    return '你是"面试官模式"下的资深财务+AI 面试官（由胡凯作品集助手扮演）。你的任务：向用户（求职者）进行模拟面试，考察其对财务/审计/AI Agent 的理解深度。\n规则：①一次只问一个问题，等用户回答后再追问或换题 ②问题围绕作品集体现的能力：财务知识（资金运营/利率分析/精算建模/融资成本）、AI 能力（双Agent复核/Agent架构/人在回路/工作流设计）、工程实践（QA/流式/降级/基线）③用户回答后先简短点评（1-2 句），再问下一题 ④不要替用户回答 ⑤当用户/面试官要求"打开/展示作品"时，不要执行任何打开动作，改为引导式回答：「作品在下方作品矩阵，您可以点击『作品名』卡片查看」——把导览动作留给对方自己点 ⑥当用户说"退出面试/结束面试"时，总结 2-3 条面试表现亮点，结束面试模式。\n现在开始：先一句话说明面试规则，然后问第一个问题。';
-  }
-  function enterInterview(){
-    interviewMode=true;
-    if(interviewBadge) interviewBadge.style.display='inline-block';
-    setState('#fbbf24','面试官模式');
-    setTitle('面试官模式');
-  }
-  function exitInterview(){
-    interviewMode=false;
-    interviewQIndex=0;
-    if(interviewBadge) interviewBadge.style.display='none';
-    if(window.SmartReconAI && window.SmartReconAI.apiKey){
-      setState('#34d399','真实 AI 模式');
-    } else {
-      setState('#fbbf24','隐私保护模式 · 点⚙体验真实AI');
-    }
-    setTitle('作品集助手');
-  }
-  if(interviewBadge){
-    interviewBadge.addEventListener('click',function(){
-      exitInterview();
-      addMsg('assistant','面试模式已结束。随时可以再说「面试」重新开始。',false);
-    });
-  }
+
+  // ---- v7.2：面试模式已移除（用户拍板，助手专注导览与复盘）----
 
   // ---- 快捷提问与快速导览（欢迎态两层 UI）----
   var quickQs=[
@@ -2730,7 +2693,6 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     {icon:'🎯',text:'最能体现精算能力的作品是哪个？',q:'最能体现精算能力的作品是哪个？'},
     {icon:'💼',text:'作者的财务和AI背景怎么结合的？',q:'作者的财务和AI背景怎么结合的？'},
     {icon:'🤖',text:'双Agent复核机制是怎么运作的？',q:'双Agent复核机制是怎么运作的？'},
-    {icon:'🎓',text:'模拟面试我（面试官模式）',q:'开始面试'}
   ];
   var navItems=[
     {id:'03',name:'LPR 走势预测',n:'W03'},
@@ -2895,18 +2857,6 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     var thinkEl=document.getElementById(thinkId);
     sendBtn.disabled=true;
 
-    // ① 面试模式：退出指令优先
-    if(interviewMode&&/(退出面试|结束面试|停止面试|不面了|面试结束|够了)/.test(text)){
-      exitInterview();
-      if(thinkEl) thinkEl.outerHTML='面试模式已结束 ✅ 感谢你的尝试，随时可以再说「面试」重新开始。';
-      sendBtn.disabled=false;
-      return;
-    }
-    // ② 面试模式：触发指令（触发后继续走 askAI，由 AI 生成第一题）
-    if(!interviewMode&&/(^面试|开始面试|来场面试|模拟面试|面试一下|面试我|面个试|来面试|面试模式)/.test(text)){
-      enterInterview();
-      if(thinkEl) thinkEl.outerHTML='<span id="'+thinkId+'"><span class="typing-dots"><span></span><span></span><span></span></span></span>';
-    }
 
     // ③ 查记忆指令
     var queryMem=/记住过|记了什么|我的记忆|memor(y|ies)|看看记忆|有什么记忆/i.test(text)&&!/记住[：:]\s*\S/.test(text);
@@ -2927,8 +2877,8 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
       return;
     }
 
-    // ⑤ 主动导览（非面试模式）：强模式匹配 → 打开作品
-    if(!interviewMode&&NAV_VERBS.test(text)){
+    // ⑤ 主动导览：强模式匹配 → 打开作品
+    if(NAV_VERBS.test(text)){
       var navTarget=parseNav(text);
       if(navTarget){
         if(thinkEl) thinkEl.outerHTML='<span id="'+thinkId+'">🧭 正在打开第 '+navTarget+' 个作品…</span>';
@@ -2942,7 +2892,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     }
 
     // ===== 联网搜索判断 =====
-    var localPattern=/作品|功能|缺陷|改进|版本|资金智算|助手|你是谁|你叫什么|你有什么|你的|导览|技术|实现|ROI|数据底座|知识库|原型|记忆|记住|演示|面试|怎么做的|怎么实现|做了什么|能做什么|有什么能力|介绍一下|介绍下|讲讲|说说|复盘|迭代|评估体系|LangGraph|MCP|RAG|Demo|demo|资金|审计|支付|收入|供应链|协作|bug|缺陷|财务|看板|现金流|压力测试|精算|蒙特卡洛|VaR/;
+    var localPattern=/作品|功能|缺陷|改进|版本|资金智算|助手|你是谁|你叫什么|你有什么|你的|导览|技术|实现|ROI|数据底座|知识库|原型|记忆|记住|演示|怎么做的|怎么实现|做了什么|能做什么|有什么能力|介绍一下|介绍下|讲讲|说说|复盘|迭代|评估体系|LangGraph|MCP|RAG|Demo|demo|资金|审计|支付|收入|供应链|协作|bug|缺陷|财务|看板|现金流|压力测试|精算|蒙特卡洛|VaR/;
     var isLocalQuestion=localPattern.test(text);
     var webEnabled=webOn&&!isLocalQuestion;
     var reqSeq=0;
@@ -2952,14 +2902,9 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
       // v3.11：滑动窗口 + 摘要注入（只送最近 8 轮 + 更早摘要）
       var histText=(memory.summary?'【更早对话摘要】'+memory.summary+'\n':'')+
         memory.history.slice(0,-1).map(function(m){return (m.role==='user'?'用户':'助手')+'：'+String(m.content).slice(0,150);}).join('\n');
-      var persona;
-      if(interviewMode){
-        persona=interviewPersona()+'\n\n【作品集知识库参考】'+kbDigest();
-      } else {
-        persona=window.SmartReconAI.portfolioPersona()+
-          '\n\n【你的长期记忆】'+getNotesText()+
-          (histText?('\n\n【对话历史】'+histText):'');
-      }
+      var persona=window.SmartReconAI.portfolioPersona()+
+        '\n\n【你的长期记忆】'+getNotesText()+
+        (histText?('\n\n【对话历史】'+histText):'');
       // v3.11：RAG 升级——作品级 + 政策级双通道检索，命中注入上下文并附出处
       var kbHits=window.SmartReconAI.kbSearch(text);
       var workHits=kbHits.filter(function(h){return h.type==='work';});
@@ -2976,16 +2921,9 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
       if(searchResult){
         persona+='\n\n【实时联网搜索结果（优先参考，回答时注明信息来源）】\n'+searchResult.slice(0,1200);
       }
-      if(!interviewMode){
         persona+='\n\n【行为】①用户说"记住：xxx"→存入长期记忆 ②用户问记忆→展示 ③回答时引用相关记忆 ④保持助手人设 ⑤有【实时联网搜索结果】时：先判断搜索结果与用户问题是否相关——若相关则基于结果回答（标注"来自网络搜索"）；若明显无关（如搜出其他话题），忽略搜索结果，按你的知识直接回答用户问题，不要在回答开头提"网络搜索/搜索词"等字样 ⑥无搜索结果且是作品集外问题：直接用你的知识自然回答（不强调"基于模型知识/建议核实"），结尾轻轻带一句"需要更深入的信息可以问我作品集相关内容" ⑦被要求讲笑话/闲聊/情感话题等非业务内容时：可以轻松幽默地回应（可讲财务梗或生活向），简短即可，不要生硬切回功能清单 ⑧用户给负面反馈或质疑时：先共情承认，再理性回应，不要防御性辩解 ⑨若用户问题缺少主语或意图模糊（如"它""这个"开头的代词问题）且上一轮你未反问过：先反问一句澄清（一句话），不要展开回答；若上一轮已反问过：直接按最合理假设回答，不要重复反问。';
-      }
       var fallback;
-      if(interviewMode){
-        var q=getNextInterviewQuestion();
-        fallback='（隐私保护模式）好的，我们开始模拟面试。我会围绕你的作品集和复合背景提问。<br><br><b>第 '+interviewQIndex+' 题：</b>'+q+'<br><br>请回答，回答后我会继续追问或换下一题。';
-      }else{
         fallback='已收到。当前为隐私保护模式，我可以回答作品集相关问题：作品结构、核心亮点、作者背景与能力。';
-      }
       // 流式渲染缓冲
       var streamBuf='';
       window.SmartReconAI.askWithHistory(memory.history,persona,fallback,function(reply,isAI,meta){
@@ -3047,20 +2985,13 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
       else if(searchResult) setState('#34d399','真实 AI + 联网');
       else setState('#34d399','真实 AI 模式');
       el.insertAdjacentHTML('beforeend',badge);
-      // 回答涉及某作品 → 嵌入「查看这个作品 →」跳转按钮（非面试模式）
-      if(!interviewMode&&isAI){
+      // 回答涉及某作品 → 嵌入「查看这个作品 →」跳转按钮
+      if(isAI){
         var jw=mapReplyToWork(String(reply||''));
         if(jw){
           el.insertAdjacentHTML('beforeend','<button class="jump-btn" data-work="'+jw.id+'">查看《'+escapeHtml(jw.name)+'》→</button>');
         }
       }
-    }
-    function kbDigest(){
-      try{
-        var kb=window.SmartReconAI&&window.SmartReconAI.portfolioKB;
-        if(!kb) return '';
-        return '作者：'+kb.author+'；结构：'+JSON.stringify(kb.structure.map(function(w){return {id:w.id,name:w.name,layer:w.layer,desc:w.desc};}))+'；关键数据：'+JSON.stringify(kb.keyNumbers);
-      }catch(e){ return ''; }
     }
     if(webEnabled){
       if(thinkEl) thinkEl.outerHTML='<span id="'+thinkId+'">🔍 正在联网搜索…（约2秒）</span>';
