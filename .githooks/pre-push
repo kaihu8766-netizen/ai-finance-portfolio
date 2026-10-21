@@ -47,11 +47,17 @@ while read local_ref local_sha remote_ref remote_sha; do
     fi
 
     # 检查每个commit是否在REVIEW_STAMP.md的批准表格中（锚定匹配）
-    # 例外：只改动「复核元数据」（复核报告 / 凭证自身）的commit，不需要批准记录
+    # 例外：只改动「复核元数据」的commit，不需要批准记录：
+    #   - 复核报告 / 凭证自身 / 评审档案目录（.md/.json 白名单）
+    #   - 评审原始响应目录（tools/raw/，.json/.md 白名单）
+    # 评审档案在内容 commit 之后独立落盘（v7.1 起），属审计记录，由 git 历史保证不可篡改；
+    # 若不放行则档案永远无法在内容之后提交（死锁，见 PF-RV-20261021-78）。
+    # 注意：必须 -c core.quotepath=false 输出真实中文路径，否则正则永不命中（RV-78 条件3）。
+    # 判定语义：全部文件均命中例外才免批；任一文件不命中 → 进入批准检查（防 tools/raw/ 藏代码）。
     all_approved=true
     for commit in $commits; do
-        files=$(git show --pretty=format: --name-only "$commit" 2>/dev/null | grep -v '^$')
-        if [ -n "$files" ] && [ -z "$(echo "$files" | grep -vE '^(REVIEW_REPORT.*\.md|REVIEW_STAMP\.md)$')" ]; then
+        files=$(git -c core.quotepath=false show --pretty=format: --name-only "$commit" 2>/dev/null | grep -v '^$')
+        if [ -n "$files" ] && [ -z "$(echo "$files" | grep -vE '^(REVIEW_STAMP\.md|REVIEW_CHECKLIST\.md|(.*/)?REVIEW_REPORT[^/]*\.md|trace/03-会议与日志/DeepSeek评审/.*\.(md|json)|tools/raw/.*\.(json|md))$')" ]; then
             continue
         fi
         if ! echo "$stamp" | grep -qE "^\| *${commit} *\|.*✅" 2>/dev/null; then

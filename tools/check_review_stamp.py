@@ -35,8 +35,16 @@ def main():
         print("❌ 凭证里的commit %s不存在（可能被rebase掉了）" % approved)
         sys.exit(1)
 
-    # 内容相等判据：忽略复核元数据（凭证自身 + 复核报告）
-    EXCL = [":(exclude)REVIEW_STAMP.md", ":(exclude)REVIEW_REPORT*.md"]
+    # 内容相等判据：忽略复核元数据（凭证自身 + 复核报告 + 评审档案 + 评审原始响应）
+    # v7.1（RV-20261021-77 收尾）起：评审必然发生在内容 commit 之后、档案独立落盘，
+    # 若不排除评审产物目录，任何"内容后置评审档案"都会使 diff 非空 → 永远无法通过。
+    # 档案目录可信性由 git 历史保证（不可篡改），不纳入 CI 内容相等判据。
+    # 注意：排除必须限定文档/数据扩展名（.md/.json），目录级 ** 会连带排除藏匿代码
+    # （如 tools/raw/evil.py）→ 门禁盲区（PF-RV-20261021-78 条件2/6 回归测试锁定）。
+    EXCL = [":(exclude)REVIEW_STAMP.md", ":(exclude)REVIEW_REPORT*.md", ":(exclude)REVIEW_CHECKLIST.md",
+            ":(exclude)trace/03-会议与日志/DeepSeek评审/*.md",
+            ":(exclude)trace/03-会议与日志/DeepSeek评审/*.json",
+            ":(exclude)tools/raw/*.json", ":(exclude)tools/raw/*.md"]
     d = subprocess.run(["git", "diff", "--quiet", approved, "HEAD", "--", "."] + EXCL)
     if d.returncode != 0:
         print("❌ 当前内容与已复核的内容（%s）不一致 → 禁止合并：" % approved[:7])
