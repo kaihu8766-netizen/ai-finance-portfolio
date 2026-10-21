@@ -3,6 +3,17 @@
 
 
 
+## [v7.3.1] 2026-10-22 无障碍细节修正（RV-80 条件落实）
+
+### 修改
+- 修复 iframe 详情页标题层级跳级（4 处 H2→H4 → H3）：图表标题 ×3、Demo 卡片标题、AI 工作流 STEP 卡片 ×4、局限与诚实披露（含模型假设与局限）→ 补齐 `.chart-box h3` / `.verify-box h3` / `.portfolio-page .chart-box h3` 样式，保持视觉不变
+- 统计区 label 精确化：「自动检查 + CI 闸门」→「preflight 10 项 + CI 2 闸门」；「决策可追溯」→「决策可追溯（评审 + 印章全量留档）」
+- 版本号同步：footer v7.3.1、迭代时间线新增 v7.3.1（v7.3 降为普通条目）、kb.versions 追加
+
+### 验证
+- heading 序列检测（详情 iframe）：H1→H2→H3 连续，跳级 0
+- preflight 10 项全绿；coverage_test.js 覆盖率 100%
+
 ## [v7.3] 2026-10-22 AI 协作叙述更新 + 模型假设与局限
 
 ### 修改

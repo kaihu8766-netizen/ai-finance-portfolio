@@ -636,6 +636,7 @@ a,button,.card,.tag,.nav a,.btn{min-height:44px;transition:color .16s cubic-bezi
   .portfolio-page .chart-grid{grid-template-columns:1fr !important;gap:10px !important;padding:12px !important}
   .portfolio-page .chart-box{padding:10px !important;border-radius:10px !important}
   .portfolio-page .chart-box h4{font-size:14px !important;margin-bottom:8px !important}
+.portfolio-page .chart-box h3{font-size:14px !important;margin-bottom:8px !important}
   .portfolio-page .chart-echarts{height:290px !important}
   .portfolio-page .chart-box.big-chart .chart-echarts{height:360px !important}
   .portfolio-page .chart-note{font-size:12px !important;line-height:1.5 !important;padding:8px !important}
@@ -1230,6 +1231,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
   border-radius:14px;padding:18px 22px;
 }
 .verify-box h4{font-size:14px;color:#f87171;margin-bottom:10px;letter-spacing:.5px}
+.verify-box h3{font-size:14px;color:#f87171;margin-bottom:10px;letter-spacing:.5px}
 .verify-box ul{margin:0;padding-left:18px}
 .verify-box li{font-size:12.5px;color:var(--muted);line-height:1.8;margin-bottom:5px}
 
@@ -1274,7 +1276,9 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
 .chart-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;margin:20px 0}
 .chart-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;transition:all .25s ease-out;background-image:linear-gradient(180deg,rgba(109,124,255,0.025),transparent 40%)}
 .chart-box h4{font-size:11pt;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:8px;font-weight:500}
+.chart-box h3{font-size:11pt;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:8px;font-weight:500}
 .chart-box h4::before{content:'';width:3px;height:14px;background:var(--hk-primary);border-radius:2px}
+.chart-box h3::before{content:'';width:3px;height:14px;background:var(--hk-primary);border-radius:2px}
 .chart-box:hover{border-color:var(--border-hover);box-shadow:0 8px 24px rgba(0,0,0,0.18),0 0 24px rgba(109,124,255,0.08)}
 .chart-echarts{width:100%;height:270px}
 .chart-note{font-family:var(--mono);font-size:8.5pt;color:var(--dim);margin-top:10px;line-height:1.6}
@@ -1772,13 +1776,22 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
         <div class="tl-tags"><span>功能精简</span><span>助手定位收敛</span></div>
       </div>
     </div>
-    <div class="tl-item tl-latest">
+    <div class="tl-item">
       <div class="tl-dot"></div>
       <div class="tl-content">
-        <div class="tl-head"><span class="tl-ver">v7.3</span><span class="tl-date">2026.10</span><span class="tl-badge">当前版本</span><span class="tl-pulse"></span></div>
+        <div class="tl-head"><span class="tl-ver">v7.3</span><span class="tl-date">2026.10</span></div>
         <div class="tl-title">AI 协作叙述更新 + 模型假设与局限</div>
         <div class="tl-desc">AI 协作章节按现状更新：双 Agent（主力生成 + 独立复核）+ 工具化复核通道（能读仓库/跑浏览器/跑门禁）、风险分级、机器闸门，统计口径刷新为 70 轮复核 / 51 条批准基线；LPR 详情页新增「模型假设与局限」小节：OU 过程假设、参数性质（θ/κ 演示设定、仅 σ 历史估计）、已知局限（正态尾部、政策跳变、样本期短）、假设失效影响与生产化路线</div>
         <div class="tl-tags"><span>AI 协作</span><span>模型假设</span><span>面试可展开</span></div>
+      </div>
+    </div>
+    <div class="tl-item tl-latest">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-head"><span class="tl-ver">v7.3.1</span><span class="tl-date">2026.10</span><span class="tl-badge">当前版本</span><span class="tl-pulse"></span></div>
+        <div class="tl-title">无障碍细节修正</div>
+        <div class="tl-desc">按 RV-80 实施复核条件修正：详情页 4 处 H2→H4 标题跳级改为 H3（图表标题 / Demo 卡 / AI 工作流 STEP / 模型假设与局限），补齐 h3 样式保持视觉不变；统计区 label 精确化（preflight 10 项 + CI 2 闸门、决策可追溯含评审与印章全量留档）</div>
+        <div class="tl-tags"><span>heading-order</span><span>标签精确化</span></div>
       </div>
     </div>
   </div>
@@ -1942,11 +1955,11 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
       </div>
       <div style="flex:1;min-width:100px;text-align:center;background:rgba(251,191,36,0.08);padding:10px;border-radius:8px">
         <div style="font-size:20px;font-weight:700;color:#fbbf24">10+2</div>
-        <div style="font-size:12px;color:#9ba3b7">自动检查+CI 闸门</div>
+        <div style="font-size:12px;color:#9ba3b7">preflight 10 项 + CI 2 闸门</div>
       </div>
       <div style="flex:1;min-width:100px;text-align:center;background:rgba(244,114,182,0.08);padding:10px;border-radius:8px">
         <div style="font-size:20px;font-weight:700;color:#f472b6">100%</div>
-        <div style="font-size:12px;color:#9ba3b7">决策可追溯</div>
+        <div style="font-size:12px;color:#9ba3b7">决策可追溯（评审 + 印章全量留档）</div>
       </div>
     </div>
     <div style="margin-top:14px;font-size:12px;color:#9ba3b7;line-height:1.9;border-top:1px solid rgba(109,124,255,0.12);padding-top:12px">
@@ -1980,7 +1993,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
   <span><b>方向</b> 财务 × AI</span>
 </div>
 <button class="back-to-top" id="backToTop" aria-label="回到顶部">↑</button>
-<div class="footer">胡凯 · AI × Finance Portfolio · v7.3 · 全部数据经人工核验 · 2026.10 · AI 协作方法探索</div>
+<div class="footer">胡凯 · AI × Finance Portfolio · v7.3.1 · 全部数据经人工核验 · 2026.10 · AI 协作方法探索</div>
 
 </div>
 
@@ -2153,7 +2166,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     "⑭轻量RAG政策检索(5文档条款+关键词打分+回答附出处)",
     "⑮抽屉背景滚动锁定+作品加载提示"
   ],
-  "versions": "v1基础 → v2.1体积优化 → v2.2安全修复 → v2.3接入真实AI → v2.4数据底座 → v2.5拷问修复 → v2.6异常全流程 → v2.7内置助手 → v3.0打字机/批量处理/pytest/RAG/体验优化 → v3.2整合SOX控制测试工作台为第6作品 → v3.3双Agent协作实战展示 → v3.4作品矩阵分级布局 → v3.5数据修正+面试速览 → v3.6角色升级Manager+Specialist+图标 → v3.7称呼统一+能力全景+协作技术栈 → v3.8去审计化重定位+工具链分层+技术栈分组 → v3.9协作技术栈术语升级 → v3.10商业化深度(G2N/CCC/死信队列+审计日志) → v3.11 AI助手彻头彻尾大更新 → v4.0 作品集第四代·AI助手四方向大更新 → v4.1 LPR预测替换收入核算 → v4.2 LPR精算增强(理论视角+情景概率+蒙特卡洛) → v4.3 未来5年预测区间带 → v4.4 图表1全宽大图+5Y双期限 → v4.4.1 Demo可靠性加固 → v4.4.2 数据时效更新 → v4.5 精算复合背景升级：新增现金流压力测试(w07)+LPR融资成本压力测试+SmartRecon精算风险引擎 → v5.0 精简聚焦：删除智对账(w04)+月结优化(w02)，双Agent升级为四角色协作体系 → v5.1 四角色区域专业化重写+AI助手知识库自动同步+SOX升级Agent工作流v5.0 → v5.2 w03新增蒙特卡洛可交互Demo+AI利率分析工作流 + w05新增现金流压力测试可交互Demo → v5.3 供应链模拟器逻辑修复+proto2原型V2.0+CHANGELOG → v5.3.3 手机端media适配+preflight体检工具+iframe竞态修复 → v5.5.0 业务化大改造（5作品改为业务叙事：摘要→痛点→洞察→应用→技术→局限）+全站措辞业务化+双Agent协作展示 → v5.6.0 主页作品卡片新增显眼Demo入口（3宽卡「在线 Demo ↗」按钮+mini卡 Demo tag+研究型标注；卡片div化解嵌套链接）+版本基线更新 → v5.6.1 AI协作经验章节更新（双Agent机制升级三阶段闭环：事前对齐方案→独立复核→机器闸门兜底；关键规矩增至6条；数据更新43轮复核/26条批准基线；去内部词） → v5.7.0 作品01替换为发票合规预审（镜像产品演示页：三通道解析+规则引擎R1-R11+证据链；公开渠道去内部词/环境变量名/样本细节，数据全合成） → v5.7.1 作品01加图表（系统流水线HTML/CSS+规则引擎覆盖ECharts横向堆叠条形，数据来自产品RULES_META真实定义）+文案口径修正（10条规则/未见异常） → v6.1 精简聚焦：恢复v5.7.1设计质感，仅保留作品01发票合规预审+作品07现金流压力测试，删除LPR/供应链/SOX/资金智算四个作品及对应知识库条目 → v6.2 细节打磨：Hero统计口径统一（2核心交互Demo）、双Agent企业级角色术语、学历口径对齐简历、资金调度建议呼应协定存款 → v7.0 单作品重构：只留 LPR（删除发票/现金流，恢复 LPR 完整详情页，全站口径同步） → v7.1 首屏 CTA + 导航激活态 + 蒙特卡洛口径统一 10,000 + 中英空格统一 + Demo 口径统一 → v7.2 移除面试模式（用户拍板），助手专注导览与改进建议 → v7.3 AI 协作叙述更新（双 Agent+工具化复核、70 轮/51 基线）+ LPR 模型假设与局限小节",
+  "versions": "v1基础 → v2.1体积优化 → v2.2安全修复 → v2.3接入真实AI → v2.4数据底座 → v2.5拷问修复 → v2.6异常全流程 → v2.7内置助手 → v3.0打字机/批量处理/pytest/RAG/体验优化 → v3.2整合SOX控制测试工作台为第6作品 → v3.3双Agent协作实战展示 → v3.4作品矩阵分级布局 → v3.5数据修正+面试速览 → v3.6角色升级Manager+Specialist+图标 → v3.7称呼统一+能力全景+协作技术栈 → v3.8去审计化重定位+工具链分层+技术栈分组 → v3.9协作技术栈术语升级 → v3.10商业化深度(G2N/CCC/死信队列+审计日志) → v3.11 AI助手彻头彻尾大更新 → v4.0 作品集第四代·AI助手四方向大更新 → v4.1 LPR预测替换收入核算 → v4.2 LPR精算增强(理论视角+情景概率+蒙特卡洛) → v4.3 未来5年预测区间带 → v4.4 图表1全宽大图+5Y双期限 → v4.4.1 Demo可靠性加固 → v4.4.2 数据时效更新 → v4.5 精算复合背景升级：新增现金流压力测试(w07)+LPR融资成本压力测试+SmartRecon精算风险引擎 → v5.0 精简聚焦：删除智对账(w04)+月结优化(w02)，双Agent升级为四角色协作体系 → v5.1 四角色区域专业化重写+AI助手知识库自动同步+SOX升级Agent工作流v5.0 → v5.2 w03新增蒙特卡洛可交互Demo+AI利率分析工作流 + w05新增现金流压力测试可交互Demo → v5.3 供应链模拟器逻辑修复+proto2原型V2.0+CHANGELOG → v5.3.3 手机端media适配+preflight体检工具+iframe竞态修复 → v5.5.0 业务化大改造（5作品改为业务叙事：摘要→痛点→洞察→应用→技术→局限）+全站措辞业务化+双Agent协作展示 → v5.6.0 主页作品卡片新增显眼Demo入口（3宽卡「在线 Demo ↗」按钮+mini卡 Demo tag+研究型标注；卡片div化解嵌套链接）+版本基线更新 → v5.6.1 AI协作经验章节更新（双Agent机制升级三阶段闭环：事前对齐方案→独立复核→机器闸门兜底；关键规矩增至6条；数据更新43轮复核/26条批准基线；去内部词） → v5.7.0 作品01替换为发票合规预审（镜像产品演示页：三通道解析+规则引擎R1-R11+证据链；公开渠道去内部词/环境变量名/样本细节，数据全合成） → v5.7.1 作品01加图表（系统流水线HTML/CSS+规则引擎覆盖ECharts横向堆叠条形，数据来自产品RULES_META真实定义）+文案口径修正（10条规则/未见异常） → v6.1 精简聚焦：恢复v5.7.1设计质感，仅保留作品01发票合规预审+作品07现金流压力测试，删除LPR/供应链/SOX/资金智算四个作品及对应知识库条目 → v6.2 细节打磨：Hero统计口径统一（2核心交互Demo）、双Agent企业级角色术语、学历口径对齐简历、资金调度建议呼应协定存款 → v7.0 单作品重构：只留 LPR（删除发票/现金流，恢复 LPR 完整详情页，全站口径同步） → v7.1 首屏 CTA + 导航激活态 + 蒙特卡洛口径统一 10,000 + 中英空格统一 + Demo 口径统一 → v7.2 移除面试模式（用户拍板），助手专注导览与改进建议 → v7.3 AI 协作叙述更新（双 Agent+工具化复核、70 轮/51 基线）+ LPR 模型假设与局限小节 → v7.3.1 标题层级修正（iframe 内 H2→H3）+ 统计标签精确化",
   "dualAgentCollab": {
     "description": "主力AI提方案并执行、复核AI独立审查并提出异议、人在分歧点裁决；每次分歧都会沉淀为可复用的规则",
     "roles": [
@@ -3106,19 +3119,19 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   <div class="sec-head"><span class="num">03</span><h2>2026 数据看板</h2><span class="en">DATA DASHBOARD</span></div>
   <div class="chart-grid">
     <div class="chart-box big-chart" style="grid-column:1/-1;">
-      <h4>LPR 走势：2019 改革至今 + 未来 5 年预测区间（蒙特卡洛）· 1Y / 5Y 双期限</h4>
+      <h3>LPR 走势：2019 改革至今 + 未来 5 年预测区间（蒙特卡洛）· 1Y / 5Y 双期限</h3>
       <div id="chart1" class="chart-echarts" style="height:400px;"></div>
       <div class="chart-note">历史段：央行/中行 LPR 报价序列（1Y/5Y 双线）· 关键节点：2019-08 改革首报 → 2020-04 最大降幅（1Y -20bp）→ 2022-05 首次 5Y 单独下调 15bp → 2025-05 降至 3.0%/3.5% 持稳至今；未来段（2026.08-2031.07）：1Y（蓝带）与 5Y（青带）双蒙特卡洛区间带 + 中位数线，区间随预测期变宽 = 可视化「预测越远越不准」；1Y 的 σ 由历史序列估计、θ/κ 演示设定；5Y 的 θ=3.0%/κ/σ 均为叙事假设（地产政策定向更快下行，θ>1Y 保证期限溢价不倒挂），脚本 demo/lpr_monte_carlo.py 可复现</div>
     </div>
   </div>
   <div class="chart-grid">
     <div class="chart-box">
-      <h4>四指标联动：为什么 LPR 按兵不动</h4>
+      <h3>四指标联动：为什么 LPR 按兵不动</h3>
       <div id="chart2" class="chart-echarts" style="height:260px;"></div>
       <div class="chart-note">因果链：净息差 Q1 触底 1.40% → Q2 微升 1.41%（四年首现回升）→ 银行让利压力边际缓解但仍紧 → 报价行缺主动降点动力 → LPR 持稳；社融偏弱 + CPI 温和 → 宽松有空间但节奏审慎</div>
     </div>
     <div class="chart-box">
-      <h4>期限利差：5Y-1Y 从 0.5% 收窄，但期限溢价不倒挂</h4>
+      <h3>期限利差：5Y-1Y 从 0.5% 收窄，但期限溢价不倒挂</h3>
       <div id="chart3" class="chart-echarts" style="height:260px;"></div>
       <div class="chart-note">5Y-1Y 利差：2022-01 高点 0.90% → 当前 0.50% → 预测中位数收窄至 ~0.26%（5Y 降幅 0.36pct 快于 1Y 的 0.12pct，「更快下行」来自距中枢更远 + 回复更快，θ5=3.0%>θ1=2.7% 保证期限溢价为正）；区间带 = 10-90% 分位差组合，预测段同为叙事假设</div>
     </div>
@@ -3218,7 +3231,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   <div class="sec-head"><span class="num">08</span><h2>可交互 Demo：LPR 蒙特卡洛模拟器</h2><span class="en">INTERACTIVE DEMO</span></div>
   <div style="background:linear-gradient(145deg,rgba(20,24,38,0.9),rgba(14,17,26,0.95));border:1px solid rgba(109,124,255,0.18);border-radius:14px;padding:24px;text-align:center">
     <div style="font-size:36px;margin-bottom:12px">📈</div>
-    <h4 style="font-size:15px;color:#fff;margin-bottom:8px">LPR 蒙特卡洛预测模拟器</h4>
+    <h3 style="font-size:15px;color:#fff;margin-bottom:8px">LPR 蒙特卡洛预测模拟器</h3>
     <p style="font-size:12.5px;color:#8fa3c0;line-height:1.8;margin-bottom:16px;max-width:560px;margin-left:auto;margin-right:auto">
       基于 Vasicek 均值回归模型，调整长期中枢 θ、回复速度 κ、波动率 σ 等参数，实时生成几千条利率路径，观察未来 1-10 年 LPR 的概率分布。<br>
       <b style="color:#6d7cff">纯前端实现，无需安装 Python，打开即用</b>
@@ -3236,22 +3249,22 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
     <div style="background:rgba(109,124,255,0.06);border:1px solid rgba(109,124,255,0.12);border-radius:10px;padding:16px">
       <div style="font-size:11px;color:#6d7cff;font-weight:700;letter-spacing:1px;margin-bottom:6px">STEP 1</div>
-      <h4 style="font-size:13px;color:#fff;margin-bottom:6px">数据采集与清洗</h4>
+      <h3 style="font-size:13px;color:#fff;margin-bottom:6px">数据采集与清洗</h3>
       <p style="font-size:11.5px;color:#8fa3c0;line-height:1.7">AI 辅助从央行、金融监管总局、统计局批量提取 MLF、净息差、社融、CPI 数据，自动核对口径与时间戳</p>
     </div>
     <div style="background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.12);border-radius:10px;padding:16px">
       <div style="font-size:11px;color:#34d399;font-weight:700;letter-spacing:1px;margin-bottom:6px">STEP 2</div>
-      <h4 style="font-size:13px;color:#fff;margin-bottom:6px">分析框架构建</h4>
+      <h3 style="font-size:13px;color:#fff;margin-bottom:6px">分析框架构建</h3>
       <p style="font-size:11.5px;color:#8fa3c0;line-height:1.7">四指标框架（MLF/净息差/社融/CPI）由 AI 辅助梳理因果链，人判断指标权重与逻辑合理性</p>
     </div>
     <div style="background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.12);border-radius:10px;padding:16px">
       <div style="font-size:11px;color:#fbbf24;font-weight:700;letter-spacing:1px;margin-bottom:6px">STEP 3</div>
-      <h4 style="font-size:13px;color:#fff;margin-bottom:6px">模型验证与校准</h4>
+      <h3 style="font-size:13px;color:#fff;margin-bottom:6px">模型验证与校准</h3>
       <p style="font-size:11.5px;color:#8fa3c0;line-height:1.7">蒙特卡洛参数由历史数据估计（σ）+ 人设定（θ/κ），AI 辅助回测检验，人最终确认参数合理性</p>
     </div>
     <div style="background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.12);border-radius:10px;padding:16px">
       <div style="font-size:11px;color:#a78bfa;font-weight:700;letter-spacing:1px;margin-bottom:6px">STEP 4</div>
-      <h4 style="font-size:13px;color:#fff;margin-bottom:6px">决策输出</h4>
+      <h3 style="font-size:13px;color:#fff;margin-bottom:6px">决策输出</h3>
       <p style="font-size:11.5px;color:#8fa3c0;line-height:1.7">概率加权期望 + VaR 尾部风险，输出贷款定价/重定价/再融资建议，AI 起草、人审核签字</p>
     </div>
   </div>
@@ -3262,7 +3275,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 <div class="sec reveal">
   <div class="sec-header"><span class="num">10</span><h2>局限与诚实披露</h2><span class="badge">LIMITATIONS</span></div>
 <div class="verify-box">
-<h4>🧮 模型假设与局限（Vasicek 均值回归）</h4>
+<h3>🧮 模型假设与局限（Vasicek 均值回归）</h3>
 <ul>
 <li><b>过程假设</b>：利率服从均值回归的 OU 过程 <code>dr=κ(θ−r)dt+σdW</code>，冲击服从正态分布；θ/κ/σ 在预测期内视为恒定；1Y 与 5Y 独立建模，不设期限结构相关性。</li>
 <li><b>参数性质</b>：θ/κ 为演示设定、5Y 参数为叙事假设，仅 σ 由 2019 改革后 LPR 序列近似估计；<b>未做市场校准</b>（无隐含波动率拟合、无期限结构约束）。</li>
@@ -3272,7 +3285,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </ul>
 </div>
   <div class="verify-box">
-    <h4>⚠️ 分析预测，非精确模型</h4>
+    <h3>⚠️ 分析预测，非精确模型</h3>
     <ul>
       <li>LPR 受政策窗口、美联储降息进程、汇率波动、输入性通胀等外部变量影响，预测存在不确定性</li>
       <li>分析框架的价值在于「把判断从经验变成可验证的逻辑链」，而非「精确预言」</li>
