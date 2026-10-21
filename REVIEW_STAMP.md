@@ -9,6 +9,7 @@
 
 | Commit SHA | 复核轮次 | 复核日期 | 复核报告章节 | 状态 |
 |------------|----------|----------|--------------|------|
+| 82a1c38 | 第七十轮（v7.2 移除面试模式：8 题题库/面试官人格/徽标/触发指令/快捷入口/kbDigest 全删，助手收敛为导览+改进建议——用户拍板，PF-RV-20261021-79 adopted，5 条补证条件全闭环） | 2026-10-22 | preflight 10/10 + coverage 100.0% + pytest 21 passed + 主 Agent 独立抽查 8/8（双端无徽标/快捷 4 项无面试入口/面板打开/CTA 回归/console 0/无横滚）+ 4 快捷问题逐项点击验证 + 全仓 interview 扫描源码 0 残留 | ✅ 已批准 | 依据 PF-RV-20261021-79 adopted + 用户拍板 2026-10-22 |
 | 91564e0 | 第六十九轮（门禁例外扩展：评审产物目录豁免 .md/.json 白名单 + quotepath 修复 + 3 条回归测试——PF-RV-20261021-78 adopted，修复"内容后置评审档案"死锁） | 2026-10-22 | pytest 21 passed（含 test_gate_exempt 3 条）+ check_review_stamp 本地绿 + pre-push bash -n 通过 | ✅ 已批准 | 依据 PF-RV-20261021-78 adopted |
 | 16b8c96 | 第六十八轮（v7.1 首屏引导与口径统一：Hero 双 CTA + 导航激活态 + 蒙特卡洛 10,000 口径统一 + 中英空格统一 + Demo 口径统一——PF-RV-20261021-75/76/77 全链闭环，7 条发布阻塞条件全部落实） | 2026-10-22 | preflight 10/10 + coverage 100.0% + pytest 18 passed + 主 Agent 双端独立实测 11/11 PASS（无横滚/CTA 落点无遮挡/scrollspy 激活/console 0/AI 助手唤起/移动端详情 ECharts 渲染） | ✅ 已批准 | 依据 PF-RV-20261021-77 adopted + DSH 实证 + 主 Agent 独立复核 |
 | fb8ab3a | 第六十七轮（v7.0.1 时间线降噪：移除 v6.2.1/2/3 公司名口径修正条目+versions 同步清理——用户拍板“这种简单变动不显示”，文案级自审，无需 DeepSeek 评审） | 2026-10-21 | preflight 全绿 + 访客层 v6.2.x 清零 + Deploy success | ✅ 已批准 | 依据 用户拍板 2026-10-21 |
