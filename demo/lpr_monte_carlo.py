@@ -62,7 +62,7 @@ r0 = lpr_hist[-1]  # current 1Y LPR = 3.0%
 dt = 1 / 12        # monthly step
 years = 5
 steps = years * 12 # 60 steps
-N = 5000           # number of paths
+N = 10000          # number of paths
 
 # ===== 2. Monte Carlo Simulation (1Y) =====
 r = np.full((N, steps + 1), r0, dtype=float)
@@ -70,7 +70,7 @@ eps = np.random.normal(0, 1, (N, steps))
 for t in range(steps):
     r[:, t + 1] = r[:, t] + kappa * (theta - r[:, t]) * dt + sigma * np.sqrt(dt) * eps[:, t]
 
-final = r[:, -1]  # 5000 LPR values at year 5
+final = r[:, -1]  # 10000 LPR values at year 5
 
 # ===== 2.1 Monte Carlo Simulation (5Y) =====
 # Narrative assumption (not market-calibrated): property policy targeted guidance for 5Y faster decline — reflected in "further from mean + faster reversion",
@@ -175,7 +175,7 @@ axes[1].text(3.10, axes[1].get_ylim()[1] * 0.52, f"5Y mean {mean_final5:.2f}%", 
 axes[1].axvline(mean_final, color="#fbbf24", ls="-.", lw=1.5)
 axes[1].text(mean_final + 0.02, axes[1].get_ylim()[1] * 0.5, f"1Y mean {mean_final:.2f}%", color="#fbbf24", fontsize=9)
 axes[1].legend(loc="upper left", fontsize=9)
-axes[1].set_title("LPR Probability Distribution After 5 Years (5000 paths)", fontsize=11)
+axes[1].set_title("LPR Probability Distribution After 5 Years (10000 paths)", fontsize=11)
 axes[1].set_xlabel("LPR (%)", fontsize=10)
 axes[1].set_ylabel("Path Count", fontsize=10)
 

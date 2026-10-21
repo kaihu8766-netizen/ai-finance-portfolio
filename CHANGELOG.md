@@ -3,6 +3,21 @@
 
 
 
+## [v7.1] 2026-10-21 首屏引导与口径统一
+
+### 修改
+- 首屏新增 CTA：主按钮「查看旗舰作品」（锚点 `#works`）+ 次按钮「在线 Demo」（新标签打开模拟器，`rel="noopener noreferrer"`）；移动端纵向满宽、`min-height:44px`、`:focus-visible` 焦点环；锚点区加 `scroll-margin-top` 避开固定导航
+- 导航激活态：IntersectionObserver 按当前章节给 `.nav a` 加 `active` + `aria-current="location"`
+- 蒙特卡洛口径统一为 **10,000 条**：`demo/lpr_monte_carlo.py` 的 `N=10000` 重跑（seed=42），`lpr_mc_quantiles.csv` / `lpr_mc_paths.png` 重新生成，指标卡 5K→10K、Hero 徽章与正文两处「5000/1万」→「10,000」，5 年概率与期望按新结果替换
+- 中英空格统一：正文文本节点中英文之间补空格（脚本处理，跳过 script/style/标签内）
+- Demo 数量口径统一：`5个可交互Demo` → `1 个在线可交互 Demo`，迭代统计「在线 Demo 2」→ `1`
+- 版本号同步：footer v7.1、迭代时间线新增 v7.1（v7.0 降为普通条目）、kb.versions 追加
+
+### 验证
+- preflight 10 项全绿；coverage_test.js 覆盖率 100%
+- Playwright 双端探针：Hero CTA 2 个（`min-height:44px`，次按钮 `target=_blank rel=noopener`）、滚到 #works 时「作品」`active` + `aria-current=location`、中英相邻样本 60→0、指标卡 `1/4/10K/3`
+- 已知环境差异：Windows 下 pytest 5 条 locale 相关用例失败，干净 HEAD 副本同样失败（非本次改动引入）
+
 ## [v6.2.3] 2026-10-19 审计公司名口径统一
 
 ### 修改
