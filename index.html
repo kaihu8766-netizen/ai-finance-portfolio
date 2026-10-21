@@ -1763,13 +1763,22 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
         <div class="tl-tags"><span>首屏 CTA</span><span>导航激活态</span><span>口径统一</span></div>
       </div>
     </div>
-    <div class="tl-item tl-latest">
+    <div class="tl-item">
       <div class="tl-dot"></div>
       <div class="tl-content">
-        <div class="tl-head"><span class="tl-ver">v7.2</span><span class="tl-date">2026.10</span><span class="tl-badge">当前版本</span><span class="tl-pulse"></span></div>
+        <div class="tl-head"><span class="tl-ver">v7.2</span><span class="tl-date">2026.10</span></div>
         <div class="tl-title">移除面试模式</div>
         <div class="tl-desc">按用户拍板移除作品集助手的模拟面试功能：去掉固定题库、面试官人格提示词、顶部模式徽标与进入/退出指令，以及快捷提问中的对应入口；助手定位收敛为「作品集导览 + 改进建议」，死代码 kbDigest 一并清理</div>
         <div class="tl-tags"><span>功能精简</span><span>助手定位收敛</span></div>
+      </div>
+    </div>
+    <div class="tl-item tl-latest">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-head"><span class="tl-ver">v7.3</span><span class="tl-date">2026.10</span><span class="tl-badge">当前版本</span><span class="tl-pulse"></span></div>
+        <div class="tl-title">AI 协作叙述更新 + 模型假设与局限</div>
+        <div class="tl-desc">AI 协作章节按现状更新：双 Agent（主力生成 + 独立复核）+ 工具化复核通道（能读仓库/跑浏览器/跑门禁）、风险分级、机器闸门，统计口径刷新为 70 轮复核 / 51 条批准基线；LPR 详情页新增「模型假设与局限」小节：OU 过程假设、参数性质（θ/κ 演示设定、仅 σ 历史估计）、已知局限（正态尾部、政策跳变、样本期短）、假设失效影响与生产化路线</div>
+        <div class="tl-tags"><span>AI 协作</span><span>模型假设</span><span>面试可展开</span></div>
       </div>
     </div>
   </div>
@@ -1875,7 +1884,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
 <div class="sec reveal" id="pipeline">
   <div class="sec-head"><span class="idx">02</span><h2>双 Agent 复核机制</h2><span class="en">DUAL-AGENT REVIEW WORKFLOW</span></div>
 
-  <p style="font-size:14px;color:#9ba3b7;line-height:1.9;margin-bottom:20px">单一 AI 有幻觉、确认偏误、自我盲区。财务场景对准确性要求极高，一个错误可能导致严重后果。因此我实践了一套"主力 AI+复核 AI"的双 Agent 协作机制，并且把闭环拉满：<b>开工前先对齐方案</b>（AI 先提异议、人拍板再动手）、<b>做完独立复核</b>（AI 不能自己说自己完成了，必须有人查）、<b>机器闸门兜底</b>（没复核的改动，提交时会被拦下来——不靠自觉，靠机制）。复核不是一刀切：<b>按风险分级</b>——数据、逻辑、对外发布这类高风险内容必复核；文案、样式等低风险改动走机器检查和人工抽查，把资源花在刀刃上。而且分级<b>不靠 AI 自觉</b>：在自己的项目里按文件类型、改动规模、关键词自动定级，高风险强制复核。<b>事前对齐也不靠自觉</b>：功能改动必须先有已批准的方案评审，方案晚于代码会被机器拦下——"先讨论再动手"是强制规则，不是好习惯。关键事实<b>不靠 AI 记忆</b>：拿不准的信息由执行方联网搜索原文，再交叉验证后才写进结论，杜绝编造。复核成本也<b>有台账可查</b>：单价外置配置、每次调用快照当时价格、日月可汇总，设计上可追溯可审计。两个 AI 不是上下级检查关系，而是平等讨论——主力 AI 提出方案并执行，复核 AI 独立审查并提出异议，人在分歧点做最终决策。讨论过程本身就是知识沉淀，每一次分歧和裁决都会变成可复用的规则。这和我做的 SOX 内控测试是同一个思路：把容易出错的环节，变成有记录、有复核、有拦截的流程。<br><br><span style="color:#64748b">（注：角色名称为架构抽象，工具链按真实场景选型披露——如豆包用于主力生成、DeepSeek 用于独立复核。）</span></p>
+<p style="font-size:14px;color:#9ba3b7;line-height:1.9;margin-bottom:20px">单一 AI 有幻觉、确认偏误、自我盲区。财务场景对准确性要求极高，一个错误可能导致严重后果。我实践的是<b>「主力生成 Agent + 独立复核 Agent」</b>的双 Agent 机制，并且把闭环拉满：<b>开工前先对齐方案</b>（复述理解、提异议，人拍板再动手）、<b>做完独立复核</b>（写代码的不能自己说自己完成，必须换一个独立视角查）、<b>机器闸门兜底</b>（没复核的改动提交时被拦下——不靠自觉，靠机制）、<b>复核方按能力升级</b>（从只会读文本的 API 复核，扩到能读仓库、跑浏览器、跑门禁的工具化复核，两条通道并行）。复核也不是一刀切：按文件类型、改动规模、关键词自动分级——数据/逻辑/口径问题强制高等级复核。</p>
 
   <div class="about-grid" style="margin-top:18px">
     <div class="about-card">
@@ -1924,11 +1933,11 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     </div>
     <div style="margin-top:12px;display:flex;gap:16px;flex-wrap:wrap">
       <div style="flex:1;min-width:100px;text-align:center;background:rgba(109,124,255,0.08);padding:10px;border-radius:8px">
-        <div style="font-size:20px;font-weight:700;color:#6d7cff">43</div>
+        <div style="font-size:20px;font-weight:700;color:#6d7cff">70</div>
         <div style="font-size:12px;color:#9ba3b7">轮复核</div>
       </div>
       <div style="flex:1;min-width:100px;text-align:center;background:rgba(52,211,153,0.08);padding:10px;border-radius:8px">
-        <div style="font-size:20px;font-weight:700;color:#34d399">26</div>
+        <div style="font-size:20px;font-weight:700;color:#34d399">51</div>
         <div style="font-size:12px;color:#9ba3b7">条批准基线</div>
       </div>
       <div style="flex:1;min-width:100px;text-align:center;background:rgba(251,191,36,0.08);padding:10px;border-radius:8px">
@@ -1941,7 +1950,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
       </div>
     </div>
     <div style="margin-top:14px;font-size:12px;color:#9ba3b7;line-height:1.9;border-top:1px solid rgba(109,124,255,0.12);padding-top:12px">
-    <b style="color:#6d7cff">⚡ 核心价值</b>：不是简单地"用 AI"，而是两个 AI 平等讨论、人做裁决，每一次分歧都沉淀为可复用的规则。这和 SOX 内控测试是同一个思路——把容易出错的环节，变成有记录、有复核、有拦截的流程。
+    <b style="color:#6d7cff">⚡ 核心价值</b>：不是简单地"用 AI"，而是两个 AI 平等讨论、人做裁决，每一次分歧都沉淀为可复用的规则。这和 SOX 内控测试是同一个思路——把容易出错的环节，变成有记录、有复核、有拦截的流程。 2026-10 的最新一轮里，工具化复核方（能读仓库、跑浏览器、跑门禁的独立智能体）一次性提出 7 条发布阻塞（口径残留、无障碍对比度、锚点遮挡等），逐条闭环并附 commit 级证据后，才被允许盖章发布。
     </div>
   </div>
 
@@ -1971,7 +1980,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
   <span><b>方向</b> 财务 × AI</span>
 </div>
 <button class="back-to-top" id="backToTop" aria-label="回到顶部">↑</button>
-<div class="footer">胡凯 · AI × Finance Portfolio · v7.2 · 全部数据经人工核验 · 2026.10 · AI 协作方法探索</div>
+<div class="footer">胡凯 · AI × Finance Portfolio · v7.3 · 全部数据经人工核验 · 2026.10 · AI 协作方法探索</div>
 
 </div>
 
@@ -2144,7 +2153,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     "⑭轻量RAG政策检索(5文档条款+关键词打分+回答附出处)",
     "⑮抽屉背景滚动锁定+作品加载提示"
   ],
-  "versions": "v1基础 → v2.1体积优化 → v2.2安全修复 → v2.3接入真实AI → v2.4数据底座 → v2.5拷问修复 → v2.6异常全流程 → v2.7内置助手 → v3.0打字机/批量处理/pytest/RAG/体验优化 → v3.2整合SOX控制测试工作台为第6作品 → v3.3双Agent协作实战展示 → v3.4作品矩阵分级布局 → v3.5数据修正+面试速览 → v3.6角色升级Manager+Specialist+图标 → v3.7称呼统一+能力全景+协作技术栈 → v3.8去审计化重定位+工具链分层+技术栈分组 → v3.9协作技术栈术语升级 → v3.10商业化深度(G2N/CCC/死信队列+审计日志) → v3.11 AI助手彻头彻尾大更新 → v4.0 作品集第四代·AI助手四方向大更新 → v4.1 LPR预测替换收入核算 → v4.2 LPR精算增强(理论视角+情景概率+蒙特卡洛) → v4.3 未来5年预测区间带 → v4.4 图表1全宽大图+5Y双期限 → v4.4.1 Demo可靠性加固 → v4.4.2 数据时效更新 → v4.5 精算复合背景升级：新增现金流压力测试(w07)+LPR融资成本压力测试+SmartRecon精算风险引擎 → v5.0 精简聚焦：删除智对账(w04)+月结优化(w02)，双Agent升级为四角色协作体系 → v5.1 四角色区域专业化重写+AI助手知识库自动同步+SOX升级Agent工作流v5.0 → v5.2 w03新增蒙特卡洛可交互Demo+AI利率分析工作流 + w05新增现金流压力测试可交互Demo → v5.3 供应链模拟器逻辑修复+proto2原型V2.0+CHANGELOG → v5.3.3 手机端media适配+preflight体检工具+iframe竞态修复 → v5.5.0 业务化大改造（5作品改为业务叙事：摘要→痛点→洞察→应用→技术→局限）+全站措辞业务化+双Agent协作展示 → v5.6.0 主页作品卡片新增显眼Demo入口（3宽卡「在线 Demo ↗」按钮+mini卡 Demo tag+研究型标注；卡片div化解嵌套链接）+版本基线更新 → v5.6.1 AI协作经验章节更新（双Agent机制升级三阶段闭环：事前对齐方案→独立复核→机器闸门兜底；关键规矩增至6条；数据更新43轮复核/26条批准基线；去内部词） → v5.7.0 作品01替换为发票合规预审（镜像产品演示页：三通道解析+规则引擎R1-R11+证据链；公开渠道去内部词/环境变量名/样本细节，数据全合成） → v5.7.1 作品01加图表（系统流水线HTML/CSS+规则引擎覆盖ECharts横向堆叠条形，数据来自产品RULES_META真实定义）+文案口径修正（10条规则/未见异常） → v6.1 精简聚焦：恢复v5.7.1设计质感，仅保留作品01发票合规预审+作品07现金流压力测试，删除LPR/供应链/SOX/资金智算四个作品及对应知识库条目 → v6.2 细节打磨：Hero统计口径统一（2核心交互Demo）、双Agent企业级角色术语、学历口径对齐简历、资金调度建议呼应协定存款 → v7.0 单作品重构：只留 LPR（删除发票/现金流，恢复 LPR 完整详情页，全站口径同步） → v7.1 首屏 CTA + 导航激活态 + 蒙特卡洛口径统一 10,000 + 中英空格统一 + Demo 口径统一 → v7.2 移除面试模式（用户拍板），助手专注导览与改进建议",
+  "versions": "v1基础 → v2.1体积优化 → v2.2安全修复 → v2.3接入真实AI → v2.4数据底座 → v2.5拷问修复 → v2.6异常全流程 → v2.7内置助手 → v3.0打字机/批量处理/pytest/RAG/体验优化 → v3.2整合SOX控制测试工作台为第6作品 → v3.3双Agent协作实战展示 → v3.4作品矩阵分级布局 → v3.5数据修正+面试速览 → v3.6角色升级Manager+Specialist+图标 → v3.7称呼统一+能力全景+协作技术栈 → v3.8去审计化重定位+工具链分层+技术栈分组 → v3.9协作技术栈术语升级 → v3.10商业化深度(G2N/CCC/死信队列+审计日志) → v3.11 AI助手彻头彻尾大更新 → v4.0 作品集第四代·AI助手四方向大更新 → v4.1 LPR预测替换收入核算 → v4.2 LPR精算增强(理论视角+情景概率+蒙特卡洛) → v4.3 未来5年预测区间带 → v4.4 图表1全宽大图+5Y双期限 → v4.4.1 Demo可靠性加固 → v4.4.2 数据时效更新 → v4.5 精算复合背景升级：新增现金流压力测试(w07)+LPR融资成本压力测试+SmartRecon精算风险引擎 → v5.0 精简聚焦：删除智对账(w04)+月结优化(w02)，双Agent升级为四角色协作体系 → v5.1 四角色区域专业化重写+AI助手知识库自动同步+SOX升级Agent工作流v5.0 → v5.2 w03新增蒙特卡洛可交互Demo+AI利率分析工作流 + w05新增现金流压力测试可交互Demo → v5.3 供应链模拟器逻辑修复+proto2原型V2.0+CHANGELOG → v5.3.3 手机端media适配+preflight体检工具+iframe竞态修复 → v5.5.0 业务化大改造（5作品改为业务叙事：摘要→痛点→洞察→应用→技术→局限）+全站措辞业务化+双Agent协作展示 → v5.6.0 主页作品卡片新增显眼Demo入口（3宽卡「在线 Demo ↗」按钮+mini卡 Demo tag+研究型标注；卡片div化解嵌套链接）+版本基线更新 → v5.6.1 AI协作经验章节更新（双Agent机制升级三阶段闭环：事前对齐方案→独立复核→机器闸门兜底；关键规矩增至6条；数据更新43轮复核/26条批准基线；去内部词） → v5.7.0 作品01替换为发票合规预审（镜像产品演示页：三通道解析+规则引擎R1-R11+证据链；公开渠道去内部词/环境变量名/样本细节，数据全合成） → v5.7.1 作品01加图表（系统流水线HTML/CSS+规则引擎覆盖ECharts横向堆叠条形，数据来自产品RULES_META真实定义）+文案口径修正（10条规则/未见异常） → v6.1 精简聚焦：恢复v5.7.1设计质感，仅保留作品01发票合规预审+作品07现金流压力测试，删除LPR/供应链/SOX/资金智算四个作品及对应知识库条目 → v6.2 细节打磨：Hero统计口径统一（2核心交互Demo）、双Agent企业级角色术语、学历口径对齐简历、资金调度建议呼应协定存款 → v7.0 单作品重构：只留 LPR（删除发票/现金流，恢复 LPR 完整详情页，全站口径同步） → v7.1 首屏 CTA + 导航激活态 + 蒙特卡洛口径统一 10,000 + 中英空格统一 + Demo 口径统一 → v7.2 移除面试模式（用户拍板），助手专注导览与改进建议 → v7.3 AI 协作叙述更新（双 Agent+工具化复核、70 轮/51 基线）+ LPR 模型假设与局限小节",
   "dualAgentCollab": {
     "description": "主力AI提方案并执行、复核AI独立审查并提出异议、人在分歧点裁决；每次分歧都会沉淀为可复用的规则",
     "roles": [
@@ -3252,6 +3261,16 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </div>
 <div class="sec reveal">
   <div class="sec-header"><span class="num">10</span><h2>局限与诚实披露</h2><span class="badge">LIMITATIONS</span></div>
+<div class="verify-box">
+<h4>🧮 模型假设与局限（Vasicek 均值回归）</h4>
+<ul>
+<li><b>过程假设</b>：利率服从均值回归的 OU 过程 <code>dr=κ(θ−r)dt+σdW</code>，冲击服从正态分布；θ/κ/σ 在预测期内视为恒定；1Y 与 5Y 独立建模，不设期限结构相关性。</li>
+<li><b>参数性质</b>：θ/κ 为演示设定、5Y 参数为叙事假设，仅 σ 由 2019 改革后 LPR 序列近似估计；<b>未做市场校准</b>（无隐含波动率拟合、无期限结构约束）。</li>
+<li><b>已知局限</b>：正态假设低估极端尾部；无法刻画政策一次性跳变（如 2022-05 5Y 单独下调 15bp）；样本期短（2019.08 起）；未建模银行行为与信贷供需反馈。</li>
+<li><b>假设失效的影响</b>：政策跳变或危机情景下，区间带偏窄、VaR 低估尾部损失；跨期限对冲场景会低估相关性风险。</li>
+<li><b>生产化路线</b>：σ/κ 用历史+隐含双校准、引入跳跃/状态切换、期限结构联合建模、滚动回测与压力测试通过后，再用于定价决策。</li>
+</ul>
+</div>
   <div class="verify-box">
     <h4>⚠️ 分析预测，非精确模型</h4>
     <ul>
