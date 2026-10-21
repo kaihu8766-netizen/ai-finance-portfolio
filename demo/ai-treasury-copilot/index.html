@@ -496,6 +496,14 @@
   }
 
   function renderChart(agg){
+    if(typeof Chart === 'undefined'){
+      var host = document.getElementById('chart');
+      if(host && !document.getElementById('chartFallback')){
+        host.insertAdjacentHTML('afterend', '<div id="chartFallback" style="color:#F87171;font-size:12px;padding:12px">⚠️ 图表库加载失败（CDN 不可达），排程图暂不可用；KPI、台账与 AI 报告不受影响。</div>');
+        host.style.display = 'none';
+      }
+      return;
+    }
     var n = Number(document.getElementById('windowSel').value || 12);
     var ms = agg.months.slice(0, n);
     var ctx = document.getElementById('chart').getContext('2d');
@@ -571,10 +579,9 @@
 
   function renderAll(){
     state.agg = aggregate();
-    renderKpis(state.agg);
-    renderChart(state.agg);
-    renderLedger(state.agg);
-    renderCopilot(state.agg);
+    [renderKpis, renderChart, renderLedger, renderCopilot].forEach(function(fn){
+      try{ fn(state.agg); }catch(e){ console.warn('[render]', fn.name, e && e.message); }
+    });
   }
 
   /* ================= AI 合同解析（规则引擎） ================= */
@@ -823,9 +830,6 @@
   });
 
   /* 启动 */
-  if(typeof Chart === 'undefined'){
-    document.getElementById('chart').insertAdjacentHTML('afterend','<div style="color:#F87171;font-size:12px;padding:12px">图表库加载失败（CDN 不可达），请联网后刷新。</div>');
-  }
   renderAll();
 })();
 </script>
