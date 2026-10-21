@@ -9,6 +9,7 @@
 
 | Commit SHA | 复核轮次 | 复核日期 | 复核报告章节 | 状态 |
 |------------|----------|----------|--------------|------|
+| c336fba | 第七十二轮（v7.4/v7.4.1/v7.4.2 新产品「AI 司库还本付息系统」+ 首页双旗舰升级：Actual/360 精算引擎、AI 合同解析（规则引擎）、Copilot 洞察、SheetJS 导出；RV-81 adopted——P0 两条主 Agent 实测闭环（CDN 降级+导出开箱复算精确）、P1 四条落实（节假日/重定价口径注、AI 规则引擎标注、axe 0 违规）、P2-8 评审误判关闭（9.0445 亿→9.04 正确）、补充发现并修复 Chart 缺失时渲染链中断缺陷） | 2026-10-22 | preflight 10/10 + coverage 100.0% + pytest 21 passed + 主 Agent 独立实测：精算引擎源码逐行核实 + 排程利息 5 笔手工复算精确 + 大写金额解析验证 184,450,000 + 双路径（正常/CDN 屏蔽）全通过 + 首页双旗舰六处命中 | ✅ 已批准 | 依据 PF-RV-20261021-81 adopted |
 | fc6176e | 第七十一轮（v7.3.1 闭环 RV-80 条件：AI 协作叙述更新（双 Agent+工具化复核、70 轮/51 基线）+ LPR 详情新增「模型假设与局限」小节——PF-RV-20261021-80 adopted，P0 5 条全闭环：实例/口径/51 基线已核，label 精确化 + iframe heading-order 修复（10 个 h4→h3）独立复测 0 跳级） | 2026-10-22 | preflight 10/10 + coverage 100.0% + pytest 21 passed + 主 Agent 独立复测：heading jumps=0、模型小节=H3、iframe h4 剩余 0、console 0、label 两处命中 | ✅ 已批准 | 依据 PF-RV-20261021-80 adopted |
 | 82a1c38 | 第七十轮（v7.2 移除面试模式：8 题题库/面试官人格/徽标/触发指令/快捷入口/kbDigest 全删，助手收敛为导览+改进建议——用户拍板，PF-RV-20261021-79 adopted，5 条补证条件全闭环） | 2026-10-22 | preflight 10/10 + coverage 100.0% + pytest 21 passed + 主 Agent 独立抽查 8/8（双端无徽标/快捷 4 项无面试入口/面板打开/CTA 回归/console 0/无横滚）+ 4 快捷问题逐项点击验证 + 全仓 interview 扫描源码 0 残留 | ✅ 已批准 | 依据 PF-RV-20261021-79 adopted + 用户拍板 2026-10-22 |
 | 91564e0 | 第六十九轮（门禁例外扩展：评审产物目录豁免 .md/.json 白名单 + quotepath 修复 + 3 条回归测试——PF-RV-20261021-78 adopted，修复"内容后置评审档案"死锁） | 2026-10-22 | pytest 21 passed（含 test_gate_exempt 3 条）+ check_review_stamp 本地绿 + pre-push bash -n 通过 | ✅ 已批准 | 依据 PF-RV-20261021-78 adopted |
