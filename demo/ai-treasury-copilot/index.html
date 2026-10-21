@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Treasury Debt &amp; Amortization Copilot · 集团贷款还本付息排程与利息计提</title>
+<title>AI Treasury Debt &amp; Amortization Copilot · 集团贷款还本付息排程与利息计提（规则引擎演示版）</title>
 <meta name="description" content="AI 集团贷款还本付息动态排程与利息计提系统：Actual/360 银行级精算、AI 合同解析、AI 司库决策助手">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
@@ -12,7 +12,7 @@
     --bg:#0B132B; --bg2:#0F1B33; --panel:#111C33; --panel2:#152241;
     --card:rgba(30,41,59,0.55); --card-solid:#16233B;
     --line:rgba(148,163,184,0.14); --line-strong:rgba(148,163,184,0.26);
-    --text:#E2E8F0; --muted:#94A3B8; --dim:#64748B;
+    --text:#E2E8F0; --muted:#A5B4C8; --dim:#8FA0B8;
     --cyan:#38BDF8; --violet:#A78BFA; --green:#34D399; --orange:#FBBF24; --red:#F87171;
     --mono:"JetBrains Mono","Cascadia Code",Consolas,"SF Mono",monospace;
     --sans:"Inter","Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
@@ -224,7 +224,7 @@
             </div>
           </div>
           <div class="chart-wrap"><canvas id="chart" aria-label="未来12个月还本付息对比柱状图" role="img"></canvas></div>
-          <div style="font-size:11.5px;color:var(--dim);margin-top:8px">口径：日利率 = 年利率 / 360，当月利息 = 借款余额 × 日利率 × 当月实际天数；结息日遇周末顺延至周一。</div>
+          <div style="font-size:11.5px;color:var(--dim);margin-top:8px">口径：日利率 = 年利率 / 360，当月利息 = 借款余额 × 日利率 × 当月实际天数；结息日仅周末顺延至周一（不含法定节假日）；未建模 LPR 重定价条款。</div>
         </section>
 
         <section class="card ledger" id="ledgerCard">
@@ -251,7 +251,7 @@
         <section class="copilot" id="copilotCard">
           <div class="copilot-inner">
             <h2><span class="spark">✦</span> AI Treasury Copilot</h2>
-            <div class="cap">司库 AI 决策助手</div>
+            <div class="cap">司库 AI 决策助手 · 规则引擎演示（非大模型）</div>
 
             <div class="c-block">
               <div class="t">● 流动性诊断</div>
@@ -288,7 +288,7 @@
     </div>
 
     <div style="margin-top:18px;font-size:11.5px;color:var(--dim);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
-      <span>LPR 1Y 基准 3.00%（2026-08 报价）· 数据为演示样本，不构成融资建议</span>
+      <span>LPR 1Y 基准 3.00%（2026-08 报价）· 结息日仅周末顺延（不含法定节假日）· 未建模 LPR 重定价条款 · 数据为演示样本，不构成融资建议</span>
       <span>AI Copilot · 纯前端规则引擎（无外部 API Key）</span>
     </div>
   </main>
@@ -325,7 +325,7 @@
 
       <div class="ai-panel">
         <h4>✦ AI 智能合同解析</h4>
-        <div class="tip">粘贴非结构化借款合同文本，自动提取银行、本金、起止日、LPR 加点与结息方式并回填表单。</div>
+        <div class="tip">粘贴非结构化借款合同文本，自动提取银行、本金、起止日、LPR 加点与结息方式并回填表单（规则引擎演示，非大模型）。</div>
         <label class="sr-only" for="contract">合同文本</label>
         <textarea class="contract" id="contract" spellcheck="false"></textarea>
         <div class="presets">
@@ -376,7 +376,7 @@
   function days(a,b){ return Math.round((b-a)/DAY); }
   function shiftWeekend(d){ var w=d.getDay(); if(w===6) return new Date(d.getTime()+2*DAY); if(w===0) return new Date(d.getTime()+1*DAY); return d; }
   function money(n){ return '¥' + Math.round(n).toLocaleString('en-US'); }
-  function compact(n){ if(n>=1e8) return '¥'+(n/1e8).toFixed(2)+' 亿'; if(n>=1e4) return '¥'+(n/1e4).toFixed(0)+' 万'; return '¥'+Math.round(n).toLocaleString('en-US'); }
+  function compact(n){ if(n>=1e8) return '¥'+(Math.round(n/1e6)/100).toFixed(2)+' 亿'; if(n>=1e4) return '¥'+Math.round(n/1e4)+' 万'; return '¥'+Math.round(n).toLocaleString('en-US'); }
   function pct(x){ return (x*100).toFixed(2)+'%'; }
   function monthKey(d){ return d.getFullYear()+'/'+pad(d.getMonth()+1); }
   function monthLabel(d){ return String(d.getFullYear()).slice(2)+'/'+pad(d.getMonth()+1); }
