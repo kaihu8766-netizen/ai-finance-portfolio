@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Treasury Debt &amp; Amortization Copilot · 集团贷款还本付息排程与利息计提</title>
+<meta name="description" content="AI 集团贷款还本付息动态排程与利息计提系统：Actual/360 银行级精算、AI 合同解析、AI 司库决策助手">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<style>
+  :root{
+    --bg:#0B132B; --bg2:#0F1B33; --panel:#111C33; --panel2:#152241;
+    --card:rgba(30,41,59,0.55); --card-solid:#16233B;
+    --line:rgba(148,163,184,0.14); --line-strong:rgba(148,163,184,0.26);
+    --text:#E2E8F0; --muted:#94A3B8; --dim:#64748B;
+    --cyan:#38BDF8; --violet:#A78BFA; --green:#34D399; --orange:#FBBF24; --red:#F87171;
+    --mono:"JetBrains Mono","Cascadia Code",Consolas,"SF Mono",monospace;
+    --sans:"Inter","Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;line-height:1.6;overflow-x:hidden}
+  body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(900px 500px at 8% -10%,rgba(56,189,248,0.10),transparent 60%),
+      radial-gradient(800px 500px at 95% 0%,rgba(167,139,250,0.10),transparent 60%),
+      linear-gradient(rgba(148,163,184,0.05) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(148,163,184,0.05) 1px,transparent 1px);
+    background-size:auto,auto,44px 44px,44px 44px;}
+  .app{position:relative;z-index:1;display:flex;min-height:100vh}
+  /* ---------- 侧边栏 ---------- */
+  .side{width:228px;flex:0 0 228px;background:linear-gradient(180deg,var(--bg2),#0B1428);border-right:1px solid var(--line);display:flex;flex-direction:column;padding:18px 14px}
+  .brand{display:flex;align-items:center;gap:10px;padding:6px 8px 18px;border-bottom:1px solid var(--line);margin-bottom:14px}
+  .brand .mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--cyan),var(--violet));display:flex;align-items:center;justify-content:center;font-weight:800;color:#06101f;font-size:15px;box-shadow:0 0 22px rgba(56,189,248,0.35)}
+  .brand b{display:block;font-size:14px;letter-spacing:.2px}
+  .brand span{display:block;font-size:10.5px;color:var(--muted);letter-spacing:.6px}
+  .nav{display:flex;flex-direction:column;gap:4px}
+  .nav a{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;color:var(--muted);text-decoration:none;font-size:13px;border:1px solid transparent;cursor:pointer;transition:.18s}
+  .nav a .ic{width:18px;text-align:center;opacity:.85}
+  .nav a:hover{background:rgba(148,163,184,0.07);color:var(--text)}
+  .nav a.on{background:linear-gradient(90deg,rgba(56,189,248,0.14),rgba(167,139,250,0.06));border-color:rgba(56,189,248,0.28);color:#fff}
+  .nav .sub{padding-left:30px;font-size:12px;color:var(--dim)}
+  .side .spacer{flex:1}
+  .side .user{display:flex;align-items:center;gap:10px;padding:12px 8px;border-top:1px solid var(--line);margin-top:12px}
+  .avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#64748B,#334155);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:600}
+  /* ---------- 主区 ---------- */
+  .main{flex:1;min-width:0;padding:20px 24px 40px}
+  .topbar{display:flex;align-items:flex-start;gap:18px;justify-content:space-between;margin-bottom:18px}
+  .topbar h1{font-size:19px;letter-spacing:.2px}
+  .topbar .sub{font-size:12px;color:var(--muted);margin-top:2px}
+  .top-actions{display:flex;align-items:center;gap:10px}
+  .search{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 12px;min-width:220px}
+  .search input{background:none;border:none;outline:none;color:var(--text);font-size:13px;width:100%}
+  .icon-btn{width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;transition:.18s}
+  .icon-btn:hover{color:#fff;border-color:var(--line-strong)}
+  .icon-btn .dot{position:absolute;top:8px;right:9px;width:6px;height:6px;border-radius:50%;background:var(--orange);box-shadow:0 0 8px var(--orange)}
+  /* KPI */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;position:relative;overflow:hidden}
+  .kpi::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--cyan);opacity:.55}
+  .kpi:nth-child(2)::after{background:var(--violet)}
+  .kpi:nth-child(3)::after{background:var(--orange)}
+  .kpi:nth-child(4)::after{background:var(--green)}
+  .kpi .lab{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px}
+  .kpi .val{font-family:var(--mono);font-size:23px;font-weight:700;margin:6px 0 2px;letter-spacing:-.5px;white-space:nowrap}
+  .kpi .hint{font-size:11.5px;color:var(--dim)}
+  .kpi .hint b{color:var(--green);font-weight:600}
+  .kpi .hint.warn b{color:var(--orange)}
+  /* 布局 */
+  .grid{display:grid;grid-template-columns:minmax(0,1.62fr) minmax(300px,0.78fr);gap:14px;align-items:start}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+  .card-head h2{font-size:14.5px;font-weight:600;display:flex;align-items:center;gap:8px}
+  .card-head .tag{font-size:11px;color:var(--muted);border:1px solid var(--line);padding:3px 8px;border-radius:999px}
+  .select{background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:6px 10px;font-size:12px;outline:none}
+  .chart-wrap{position:relative;height:300px}
+  .legend{display:flex;gap:16px;font-size:12px;color:var(--muted)}
+  .legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px}
+  /* Copilot */
+  .copilot{position:relative;border-radius:16px;padding:1px;background:linear-gradient(135deg,rgba(56,189,248,.65),rgba(167,139,250,.55),rgba(56,189,248,.18));box-shadow:0 0 40px rgba(56,189,248,0.10)}
+  .copilot-inner{background:linear-gradient(180deg,#101C33,#0E1830);border-radius:15px;padding:16px}
+  .copilot h2{font-size:15px;display:flex;align-items:center;gap:8px}
+  .copilot h2 .spark{color:var(--cyan);filter:drop-shadow(0 0 6px rgba(56,189,248,.8))}
+  .copilot .cap{font-size:11px;color:var(--violet);letter-spacing:2px;margin:2px 0 14px}
+  .c-block{border-top:1px solid var(--line);padding:12px 0}
+  .c-block:first-of-type{border-top:none;padding-top:0}
+  .c-block .t{font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:6px}
+  .c-block .big{font-size:15px;font-weight:600;margin-top:6px}
+  .c-block .s{font-size:11.5px;color:var(--dim);margin-top:2px}
+  .gauge{display:flex;align-items:center;gap:14px}
+  .gauge svg{flex:0 0 86px}
+  .badge{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;padding:4px 9px;border-radius:999px;border:1px solid}
+  .badge.ok{color:var(--green);border-color:rgba(52,211,153,.4);background:rgba(52,211,153,.08)}
+  .badge.warn{color:var(--orange);border-color:rgba(251,191,36,.4);background:rgba(251,191,36,.08)}
+  .badge.red{color:var(--red);border-color:rgba(248,113,113,.4);background:rgba(248,113,113,.08)}
+  .copilot-actions{display:flex;gap:10px;margin-top:14px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:10px;border:1px solid var(--line-strong);background:var(--panel2);color:var(--text);font-size:12.5px;font-weight:600;padding:10px 14px;cursor:pointer;transition:.18s}
+  .btn:hover{transform:translateY(-1px);border-color:rgba(56,189,248,.5)}
+  .btn.primary{background:linear-gradient(135deg,rgba(56,189,248,.22),rgba(167,139,250,.18));border-color:rgba(56,189,248,.5);color:#fff;box-shadow:0 0 22px rgba(56,189,248,.18)}
+  .btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+  .report{margin-top:12px;max-height:220px;overflow:auto;font-size:12.5px;line-height:1.85;color:#CBD5E1;background:rgba(2,6,23,.45);border:1px solid var(--line);border-radius:10px;padding:12px;display:none;white-space:pre-wrap}
+  .report.show{display:block}
+  .report .cursor{display:inline-block;width:7px;height:14px;background:var(--cyan);vertical-align:-2px;animation:blink 1s steps(2) infinite}
+  @keyframes blink{50%{opacity:0}}
+  /* 台账 */
+  .ledger{margin-top:14px}
+  .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px}
+  table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:820px}
+  th{background:rgba(15,27,51,.85);color:var(--muted);font-weight:600;text-align:left;padding:10px 12px;white-space:nowrap;border-bottom:1px solid var(--line)}
+  td{padding:11px 12px;border-bottom:1px solid rgba(148,163,184,.08);white-space:nowrap}
+  tbody tr:hover{background:rgba(56,189,248,.04)}
+  td.mono,.mono{font-family:var(--mono)}
+  .pill{font-size:11px;padding:2px 8px;border-radius:999px;border:1px solid var(--line)}
+  .pill.accrued{color:var(--green);border-color:rgba(52,211,153,.35);background:rgba(52,211,153,.08)}
+  .pill.scheduled{color:var(--cyan);border-color:rgba(56,189,248,.35);background:rgba(56,189,248,.08)}
+  .table-foot{display:flex;align-items:center;justify-content:space-between;padding:10px 4px;color:var(--dim);font-size:12px}
+  .pager{display:flex;gap:6px;align-items:center}
+  .pager button{width:28px;height:28px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--muted);cursor:pointer}
+  /* 弹窗 */
+  .modal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,.7);backdrop-filter:blur(6px);padding:20px}
+  .modal.open{display:flex}
+  .modal-box{width:min(940px,100%);max-height:90vh;overflow:auto;background:linear-gradient(180deg,#111D36,#0D1729);border:1px solid var(--line-strong);border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.55)}
+  .modal-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line)}
+  .modal-head h3{font-size:15px}
+  .modal-head .x{width:32px;height:32px;border-radius:9px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;font-size:15px}
+  .modal-body{display:grid;grid-template-columns:1.05fr .95fr;gap:0}
+  .form{padding:18px 20px;border-right:1px solid var(--line)}
+  .form label{display:block;font-size:12px;color:var(--muted);margin:12px 0 5px}
+  .form label:first-child{margin-top:0}
+  .form input,.form select{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:9px;color:var(--text);padding:9px 11px;font-size:13px;outline:none;font-family:var(--sans)}
+  .form input:focus,.form select:focus{border-color:rgba(56,189,248,.55)}
+  .form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .ai-panel{padding:18px 20px;background:rgba(2,6,23,.25)}
+  .ai-panel h4{font-size:13px;display:flex;align-items:center;gap:8px;color:var(--cyan)}
+  .ai-panel .tip{font-size:11.5px;color:var(--dim);margin:6px 0 10px}
+  .contract{width:100%;height:150px;resize:vertical;background:rgba(15,27,51,.9);border:1px solid rgba(56,189,248,.25);border-radius:10px;color:#CBD5E1;padding:11px;font-size:12.5px;line-height:1.8;outline:none}
+  .presets{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+  .presets button{font-size:11px;padding:4px 9px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+  .presets button:hover{color:var(--cyan);border-color:rgba(56,189,248,.4)}
+  .parsed{margin-top:12px;display:none}
+  .parsed.show{display:block}
+  .parsed .kv{display:flex;justify-content:space-between;gap:10px;font-size:12px;padding:6px 0;border-bottom:1px dashed rgba(148,163,184,.15)}
+  .parsed .kv span:last-child{color:#fff;font-family:var(--mono)}
+  .loading{display:none;align-items:center;gap:8px;font-size:12px;color:var(--cyan);margin-top:10px}
+  .loading.show{display:flex}
+  .spinner{width:13px;height:13px;border-radius:50%;border:2px solid rgba(56,189,248,.25);border-top-color:var(--cyan);animation:spin .8s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .modal-foot{display:flex;justify-content:flex-end;gap:10px;padding:14px 20px;border-top:1px solid var(--line)}
+  /* toast */
+  .toast-wrap{position:fixed;right:22px;bottom:22px;z-index:80;display:flex;flex-direction:column;gap:8px}
+  .toast{background:#0F1B33;border:1px solid rgba(56,189,248,.35);border-left:3px solid var(--cyan);border-radius:10px;padding:10px 14px;font-size:12.5px;color:var(--text);box-shadow:0 10px 30px rgba(0,0,0,.4);animation:slideIn .25s ease}
+  @keyframes slideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  @media(max-width:1180px){
+    .kpis{grid-template-columns:repeat(2,1fr)}
+    .grid{grid-template-columns:1fr}
+    .modal-body{grid-template-columns:1fr}
+    .form{border-right:none;border-bottom:1px solid var(--line)}
+  }
+  @media(max-width:860px){
+    .side{display:none}
+    .main{padding:14px}
+    .topbar{flex-direction:column}
+    .search{width:100%}
+    .kpis{grid-template-columns:1fr}
+    .chart-wrap{height:240px}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- 侧边栏 -->
+  <aside class="side">
+    <div class="brand">
+      <div class="mark">T</div>
+      <div><b>Treasury Copilot</b><span>AI DEBT &amp; ACCRUAL</span></div>
+    </div>
+    <nav class="nav" id="nav">
+      <a class="on" data-target="kpis"><span class="ic">▦</span>总览 Dashboard</a>
+      <a data-target="ledgerCard"><span class="ic">▤</span>债务台账 Ledger</a>
+      <a data-target="trendCard"><span class="ic">▥</span>利息计提 Accrual</a>
+      <a data-target="copilotCard"><span class="ic">✦</span>AI 决策助手 Copilot</a>
+      <a data-open="modal"><span class="ic">＋</span>新增借款 New Loan</a>
+      <a data-target="ledgerCard"><span class="ic">⚙</span>系统设置 Settings</a>
+    </nav>
+    <div class="spacer"></div>
+    <div class="user"><div class="avatar">HK</div><div><div style="font-size:12.5px">胡凯 · 资金管理</div><div style="font-size:10.5px;color:var(--dim)">集团司库中心</div></div></div>
+  </aside>
+
+  <!-- 主区 -->
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <h1>Debt Amortization &amp; Interest Accrual System</h1>
+        <div class="sub">集团贷款还本付息动态排程与利息计提 · 银行级 Actual/360 精算 · AI 合同解析与司库洞察</div>
+      </div>
+      <div class="top-actions">
+        <div class="search"><span style="color:var(--dim)">⌕</span><label class="sr-only" for="q">搜索台账</label><input id="q" placeholder="搜索银行 / 借款类型…"></div>
+        <button class="icon-btn" title="通知">🔔<span class="dot"></span></button>
+        <button class="icon-btn" title="账户">👤</button>
+      </div>
+    </div>
+
+    <!-- KPI -->
+    <section class="kpis" id="kpis">
+      <div class="kpi"><div class="lab">总借款余额 Total Debt Balance</div><div class="val mono" id="kpiBalance">—</div><div class="hint" id="kpiBalanceHint">4 笔在贷 · 加权平均成本见右</div></div>
+      <div class="kpi"><div class="lab">当月利息计提 Monthly Interest Accrued</div><div class="val mono" id="kpiAccrual">—</div><div class="hint" id="kpiAccrualHint">Actual/360 · 按日计提至今日</div></div>
+      <div class="kpi"><div class="lab">近 30 天现金流出 Upcoming Cash Outflow</div><div class="val mono" id="kpiOutflow">—</div><div class="hint warn" id="kpiOutflowHint">含本金与利息 · 30 天窗口</div></div>
+      <div class="kpi"><div class="lab">加权平均利率 WACD</div><div class="val mono" id="kpiWacd">—</div><div class="hint" id="kpiWacdHint">按本金余额动态加权</div></div>
+    </section>
+
+    <div class="grid">
+      <!-- 左：图表 + 台账 -->
+      <div>
+        <section class="card" id="trendCard">
+          <div class="card-head">
+            <h2>12-Month Repayment Schedule <span class="tag">未来 12 个月还本付息排程</span></h2>
+            <div style="display:flex;align-items:center;gap:14px">
+              <div class="legend"><span><i style="background:var(--green)"></i>本金 Principal</span><span><i style="background:var(--orange)"></i>利息 Interest</span></div>
+              <select class="select" id="windowSel" aria-label="时间窗口">
+                <option value="12" selected>近 12 个月</option>
+                <option value="6">近 6 个月</option>
+              </select>
+            </div>
+          </div>
+          <div class="chart-wrap"><canvas id="chart" aria-label="未来12个月还本付息对比柱状图" role="img"></canvas></div>
+          <div style="font-size:11.5px;color:var(--dim);margin-top:8px">口径：日利率 = 年利率 / 360，当月利息 = 借款余额 × 日利率 × 当月实际天数；结息日遇周末顺延至周一。</div>
+        </section>
+
+        <section class="card ledger" id="ledgerCard">
+          <div class="card-head">
+            <h2>Debt Ledger <span class="tag">还本付息台账</span></h2>
+            <div style="display:flex;gap:8px">
+              <button class="btn" id="btnExport">⤓ 导出 Excel</button>
+              <button class="btn primary" data-open="modal">＋ 新增借款</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <caption class="sr-only">集团贷款还本付息台账，含借款银行、本金余额、执行利率、下一结息日与计提状态</caption>
+              <thead><tr><th>借款类型</th><th>银行 / 机构</th><th>本金余额</th><th>执行利率 (LPR+)</th><th>下一结息日</th><th>状态</th><th>计量法</th></tr></thead>
+              <tbody id="ledgerBody"></tbody>
+            </table>
+          </div>
+          <div class="table-foot"><span id="ledgerCount">共 4 笔贷款 · Actual/360</span><div class="pager"><button aria-label="上一页">‹</button><button aria-label="当前页" class="on" style="color:#fff;border-color:rgba(56,189,248,.5)">1</button><button aria-label="下一页">›</button></div></div>
+        </section>
+      </div>
+
+      <!-- 右：AI Copilot -->
+      <aside>
+        <section class="copilot" id="copilotCard">
+          <div class="copilot-inner">
+            <h2><span class="spark">✦</span> AI Treasury Copilot</h2>
+            <div class="cap">司库 AI 决策助手</div>
+
+            <div class="c-block">
+              <div class="t">● 流动性诊断</div>
+              <div class="gauge">
+                <svg viewBox="0 0 100 62" width="86" height="54" aria-hidden="true">
+                  <path d="M8 56 A42 42 0 0 1 92 56" fill="none" stroke="rgba(148,163,184,0.22)" stroke-width="9" stroke-linecap="round"/>
+                  <path id="gaugeArc" d="M8 56 A42 42 0 0 1 92 56" fill="none" stroke="url(#gg)" stroke-width="9" stroke-linecap="round" stroke-dasharray="132" stroke-dashoffset="40"/>
+                  <defs><linearGradient id="gg" x1="0" x2="1"><stop offset="0" stop-color="#34D399"/><stop offset="1" stop-color="#38BDF8"/></linearGradient></defs>
+                </svg>
+                <div><div class="big" id="liqState">充足</div><div class="s" id="liqHint">近 30 天现金流出可控</div></div>
+              </div>
+            </div>
+
+            <div class="c-block">
+              <div class="t">● 还款高峰预警</div>
+              <div class="big" id="peakMonth">—</div>
+              <div class="s" id="peakDesc">单月还款超 5,000 万自动预警</div>
+              <div id="peakBadge" style="margin-top:8px"></div>
+            </div>
+
+            <div class="c-block">
+              <div class="t">● 融资 / 再融资建议</div>
+              <div class="s" id="refiHint">基于加权成本与到期结构自动生成</div>
+            </div>
+
+            <div class="copilot-actions">
+              <button class="btn primary" id="btnReport">✦ 生成 AI 资金洞察报告</button>
+              <button class="btn" id="btnActions">执行建议</button>
+            </div>
+            <div class="report" id="report" aria-live="polite"></div>
+          </div>
+        </section>
+      </aside>
+    </div>
+
+    <div style="margin-top:18px;font-size:11.5px;color:var(--dim);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+      <span>LPR 1Y 基准 3.00%（2026-08 报价）· 数据为演示样本，不构成融资建议</span>
+      <span>AI Copilot · 纯前端规则引擎（无外部 API Key）</span>
+    </div>
+  </main>
+</div>
+
+<!-- ===== 新增借款 / AI 合同解析 ===== -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <div class="modal-head"><h3 id="modalTitle">新增借款 · AI 合同解析</h3><button class="x" data-close="modal" aria-label="关闭">✕</button></div>
+    <div class="modal-body">
+      <form class="form" id="loanForm" onsubmit="return false">
+        <div class="row">
+          <div><label for="fBank">银行名称</label><input id="fBank" placeholder="如：中国工商银行上海分行"></div>
+          <div><label for="fType">借款类型</label>
+            <select id="fType"><option>流动资金贷款</option><option>项目贷款</option><option>银行承兑汇票</option><option>并购贷款</option></select>
+          </div>
+        </div>
+        <div class="row">
+          <div><label for="fPrincipal">本金（元）</label><input id="fPrincipal" placeholder="50000000"></div>
+          <div><label for="fSpread">LPR 加点（bp）</label><input id="fSpread" placeholder="15"></div>
+        </div>
+        <div class="row">
+          <div><label for="fStart">起息日</label><input id="fStart" type="date"></div>
+          <div><label for="fEnd">到期日</label><input id="fEnd" type="date"></div>
+        </div>
+        <div class="row">
+          <div><label for="fSettle">结息方式</label>
+            <select id="fSettle"><option value="month20">按月 20 日结息</option><option value="quarterEnd">按季末结息</option><option value="maturity">到期还本付息</option></select>
+          </div>
+          <div><label for="fConvention">计息基准</label><select id="fConvention"><option>Actual/360</option><option disabled>Actual/365（仅演示，本期不启用）</option></select></div>
+        </div>
+        <label for="fNote">备注</label><input id="fNote" placeholder="可选：合同编号 / 客户经理">
+      </form>
+
+      <div class="ai-panel">
+        <h4>✦ AI 智能合同解析</h4>
+        <div class="tip">粘贴非结构化借款合同文本，自动提取银行、本金、起止日、LPR 加点与结息方式并回填表单。</div>
+        <label class="sr-only" for="contract">合同文本</label>
+        <textarea class="contract" id="contract" spellcheck="false"></textarea>
+        <div class="presets">
+          <button type="button" data-preset="0">样本 A · 按月 20 日</button>
+          <button type="button" data-preset="1">样本 B · 季末结息</button>
+          <button type="button" data-preset="2">样本 C · 固定利率格式</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:10px">
+          <button type="button" class="btn primary" id="btnParse">✦ AI 智能提取</button>
+          <div class="loading" id="parseLoading"><span class="spinner"></span>大模型解析中…</div>
+        </div>
+        <div class="parsed" id="parsed"></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close="modal">取消</button>
+      <button class="btn primary" id="btnSave">保存并重算排程</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 执行建议 ===== -->
+<div class="modal" id="actionsModal" role="dialog" aria-modal="true" aria-labelledby="actionsTitle">
+  <div class="modal-box" style="width:min(640px,100%)">
+    <div class="modal-head"><h3 id="actionsTitle">执行建议 · 司库动作清单</h3><button class="x" data-close="actionsModal" aria-label="关闭">✕</button></div>
+    <div class="modal-body" style="grid-template-columns:1fr">
+      <div style="padding:18px 20px" id="actionList"></div>
+    </div>
+    <div class="modal-foot"><button class="btn primary" data-close="actionsModal">知道了</button></div>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toasts" aria-live="polite"></div>
+
+<script>
+(function(){
+  "use strict";
+  /* ================= 基础工具 ================= */
+  var LPR_BASE = 3.00;               // 2026-08 一年期 LPR
+  var DAY = 86400000;
+  var today = (function(){ var d=new Date(); d.setHours(0,0,0,0); return d; })();
+  var ALERT_THRESHOLD = 50000000;    // 5,000 万
+
+  function pad(n){ return n<10 ? '0'+n : ''+n; }
+  function ymd(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+  function parseYmd(s){ var p=(s||'').split('-').map(Number); return new Date(p[0], (p[1]||1)-1, p[2]||1); }
+  function addMonths(d,n){ var x=new Date(d.getTime()); x.setMonth(x.getMonth()+n); return x; }
+  function days(a,b){ return Math.round((b-a)/DAY); }
+  function shiftWeekend(d){ var w=d.getDay(); if(w===6) return new Date(d.getTime()+2*DAY); if(w===0) return new Date(d.getTime()+1*DAY); return d; }
+  function money(n){ return '¥' + Math.round(n).toLocaleString('en-US'); }
+  function compact(n){ if(n>=1e8) return '¥'+(n/1e8).toFixed(2)+' 亿'; if(n>=1e4) return '¥'+(n/1e4).toFixed(0)+' 万'; return '¥'+Math.round(n).toLocaleString('en-US'); }
+  function pct(x){ return (x*100).toFixed(2)+'%'; }
+  function monthKey(d){ return d.getFullYear()+'/'+pad(d.getMonth()+1); }
+  function monthLabel(d){ return String(d.getFullYear()).slice(2)+'/'+pad(d.getMonth()+1); }
+  function monthFull(d){ return d.getFullYear()+'年'+(d.getMonth()+1)+'月'; }
+
+  /* ================= 贷款数据（演示样本） ================= */
+  var loans = [
+    { id:'LN-2026-011', bank:'中国工商银行 上海分行', type:'流动资金贷款', principal:320000000, start:'2026-05-15', end:'2027-05-15', spread:15, settle:'month20', convention:'Actual/360', note:'集团统借统还' },
+    { id:'LN-2026-024', bank:'中国建设银行 江苏分行', type:'流动资金贷款', principal:184450000, start:'2026-06-10', end:'2026-12-10', spread:15, settle:'quarterEnd', convention:'Actual/360', note:'子公司流贷' },
+    { id:'LN-2026-007', bank:'中国银行 浙江分行', type:'流动资金贷款', principal:280000000, start:'2026-03-01', end:'2027-03-01', spread:10, settle:'month20', convention:'Actual/360', note:'营运资金周转' },
+    { id:'LN-2026-031', bank:'招商银行 杭州分行', type:'流动资金贷款', principal:120000000, start:'2026-08-25', end:'2027-02-25', spread:40, settle:'month20', convention:'Actual/360', note:'短期过桥' }
+  ].map(function(l){ l.rate = (LPR_BASE + l.spread/100)/100; return l; });
+
+  /* ================= 精算引擎：Actual/360 + 结息日顺延 ================= */
+  function settlementDates(loan){
+    var start = parseYmd(loan.start), end = parseYmd(loan.end);
+    var out = [];
+    if(loan.settle === 'maturity'){ out.push(end); return out; }
+    if(loan.settle === 'month20'){
+      var y = start.getFullYear(), m = start.getMonth();
+      for(;;){
+        var d = new Date(y, m, 20);
+        if(d > end) break;
+        if(d >= start) out.push(d);
+        m++; if(m>11){ m=0; y++; }
+      }
+      if(!out.length || out[out.length-1] < end) out.push(end);
+      return out;
+    }
+    // 季末结息：3/6/9/12 月末
+    var cursor = new Date(start.getFullYear(), start.getMonth(), 1);
+    while(cursor <= end){
+      var mm = cursor.getMonth();
+      if(mm === 2 || mm === 5 || mm === 8 || mm === 11){
+        var last = new Date(cursor.getFullYear(), mm+1, 0);
+        if(last >= start && last <= end) out.push(last);
+      }
+      cursor = addMonths(cursor, 1);
+    }
+    if(!out.length || out[out.length-1] < end) out.push(end);
+    return out;
+  }
+
+  function buildSchedule(loan){
+    var dates = settlementDates(loan);
+    var prev = parseYmd(loan.start);
+    var balance = loan.principal;
+    var rows = [];
+    dates.forEach(function(raw, i){
+      var payDate = shiftWeekend(raw);
+      var dd = Math.max(0, days(prev, payDate));
+      var interest = balance * loan.rate / 360 * dd;
+      var principal = (i === dates.length - 1) ? balance : 0;
+      rows.push({ date: payDate, depositDate: raw, days: dd, interest: interest, principal: principal, balance: balance });
+      prev = payDate;
+    });
+    return rows;
+  }
+
+  /* ================= 聚合：KPI / 图表 / 预警 ================= */
+  function aggregate(){
+    var schedules = loans.map(function(l){ return { loan:l, rows: buildSchedule(l) }; });
+    var balance = loans.reduce(function(s,l){ return s + l.principal; }, 0);
+    var wacd = balance ? loans.reduce(function(s,l){ return s + l.principal*l.rate; }, 0)/balance : 0;
+
+    // 当月计提（按日累计至 today）
+    var ms = new Date(today.getFullYear(), today.getMonth(), 1);
+    var accrual = 0;
+    schedules.forEach(function(sc){
+      var from = new Date(Math.max(parseYmd(sc.loan.start), ms));
+      var to = new Date(Math.min(today, parseYmd(sc.loan.end)));
+      if(to > from) accrual += sc.loan.principal * sc.loan.rate / 360 * days(from, to);
+    });
+
+    // 30 天现金流出
+    var horizon = new Date(today.getTime() + 30*DAY);
+    var outflow30 = 0;
+    schedules.forEach(function(sc){
+      sc.rows.forEach(function(r){ if(r.date >= today && r.date <= horizon) outflow30 += r.principal + r.interest; });
+    });
+
+    // 未来 12 个月柱状
+    var months = [];
+    for(var i=0;i<12;i++){
+      var d = addMonths(new Date(today.getFullYear(), today.getMonth(), 1), i);
+      months.push({ key: monthKey(d), label: monthLabel(d), full: monthFull(d), principal:0, interest:0 });
+    }
+    var idx = {}; months.forEach(function(m,i){ idx[m.key]=i; });
+    schedules.forEach(function(sc){
+      sc.rows.forEach(function(r){
+        var k = monthKey(r.date);
+        if(idx[k] !== undefined){ months[idx[k]].principal += r.principal; months[idx[k]].interest += r.interest; }
+      });
+    });
+
+    // 峰值预警
+    var peaks = months.filter(function(m){ return (m.principal+m.interest) > ALERT_THRESHOLD; })
+      .sort(function(a,b){ return (b.principal+b.interest)-(a.principal+a.interest); });
+    var annualInterest = months.reduce(function(s,m){ return s + m.interest; }, 0);
+    var annualPrincipal = months.reduce(function(s,m){ return s + m.principal; }, 0);
+
+    return { schedules:schedules, balance:balance, wacd:wacd, accrual:accrual, outflow30:outflow30, months:months, peaks:peaks, annualInterest:annualInterest, annualPrincipal:annualPrincipal };
+  }
+
+  /* ================= 渲染 ================= */
+  var state = { agg:null, chart:null, filter:'' };
+
+  function renderKpis(agg){
+    document.getElementById('kpiBalance').textContent = compact(agg.balance);
+    document.getElementById('kpiBalanceHint').innerHTML = loans.length + ' 笔在贷 · 本金余额合计 ' + money(agg.balance);
+    document.getElementById('kpiAccrual').textContent = money(agg.accrual);
+    document.getElementById('kpiAccrualHint').textContent = 'Actual/360 · 按日计提至 ' + ymd(today);
+    document.getElementById('kpiOutflow').textContent = compact(agg.outflow30);
+    document.getElementById('kpiOutflowHint').textContent = '含本金与利息 · ' + ymd(today) + ' 起 30 天';
+    document.getElementById('kpiWacd').textContent = pct(agg.wacd);
+    document.getElementById('kpiWacdHint').textContent = '按本金余额动态加权 · LPR 1Y ' + LPR_BASE.toFixed(2) + '%';
+  }
+
+  function renderChart(agg){
+    var n = Number(document.getElementById('windowSel').value || 12);
+    var ms = agg.months.slice(0, n);
+    var ctx = document.getElementById('chart').getContext('2d');
+    var data = {
+      labels: ms.map(function(m){ return m.label; }),
+      datasets: [
+        { label:'本金 Principal', data: ms.map(function(m){ return m.principal; }), backgroundColor: 'rgba(52,211,153,0.85)', borderRadius: 5, maxBarThickness: 22, yAxisID:'y', order:2 },
+        { label:'利息 Interest', data: ms.map(function(m){ return m.interest; }), backgroundColor: 'rgba(251,191,36,0.9)', borderRadius: 5, maxBarThickness: 22, yAxisID:'y1', order:1 }
+      ]
+    };
+    var opts = {
+      responsive:true, maintainAspectRatio:false, animation:{duration:500},
+      plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label:function(c){ return c.dataset.label + '：' + money(c.raw); } } } },
+      scales:{
+        x:{ grid:{ color:'rgba(148,163,184,0.06)' }, ticks:{ color:'#94A3B8', font:{size:11} }, barPercentage:0.55, categoryPercentage:0.7 },
+        y:{ position:'left', title:{display:true,text:'本金（亿元）',color:'#34D399',font:{size:10}}, grid:{ color:'rgba(148,163,184,0.10)' }, ticks:{ color:'#94A3B8', font:{size:11}, callback:function(v){ return (v/1e8).toFixed(1)+'亿'; } } },
+        y1:{ position:'right', title:{display:true,text:'利息（万元）',color:'#FBBF24',font:{size:10}}, grid:{ drawOnChartArea:false }, ticks:{ color:'#FBBF24', font:{size:11}, callback:function(v){ return (v/1e4).toFixed(0)+'万'; } } }
+      }
+    };
+    if(state.chart){ state.chart.data = data; state.chart.options = opts; state.chart.update(); }
+    else { state.chart = new Chart(ctx, { type:'bar', data:data, options:opts }); }
+  }
+
+  function nextSettlement(loan){
+    var rows = buildSchedule(loan);
+    for(var i=0;i<rows.length;i++){ if(rows[i].date >= today) return rows[i]; }
+    return rows[rows.length-1] || null;
+  }
+
+  function renderLedger(agg){
+    var body = document.getElementById('ledgerBody');
+    var q = state.filter.trim().toLowerCase();
+    var list = loans.filter(function(l){ return !q || (l.bank+' '+l.type).toLowerCase().indexOf(q) > -1; });
+    body.innerHTML = list.map(function(l){
+      var nx = nextSettlement(l);
+      var inDays = nx ? days(today, nx.date) : 999;
+      var statusCls = inDays <= 30 ? 'accrued' : 'scheduled';
+      var status = inDays <= 30 ? 'Accrued 计提中' : 'Scheduled 待结息';
+      return '<tr>' +
+        '<td>' + l.type + '<div style="font-size:10.5px;color:var(--dim)" class="mono">' + l.id + '</div></td>' +
+        '<td>' + l.bank + '</td>' +
+        '<td class="mono">' + money(l.principal) + '</td>' +
+        '<td>LPR+' + l.spread + 'bp <span style="color:var(--dim)">(' + pct(l.rate) + ')</span></td>' +
+        '<td class="mono">' + (nx ? ymd(nx.date) : '—') + '</td>' +
+        '<td><span class="pill ' + statusCls + '">' + status + '</span></td>' +
+        '<td class="mono">' + l.convention + '</td></tr>';
+    }).join('');
+    document.getElementById('ledgerCount').textContent = '共 ' + list.length + ' 笔贷款 · Actual/360';
+  }
+
+  function renderCopilot(agg){
+    var peak = agg.peaks[0];
+    document.getElementById('peakMonth').textContent = peak ? (peak.full + ' · ' + compact(peak.principal + peak.interest)) : '未来 12 个月无超限月份';
+    document.getElementById('peakDesc').textContent = peak ? ('单月还本付息 ' + money(peak.principal + peak.interest) + '，超过 ' + compact(ALERT_THRESHOLD) + ' 阈值') : '单月还款超 5,000 万自动预警';
+    document.getElementById('peakBadge').innerHTML = peak
+      ? '<span class="badge red">● 流动性峰值预警 · ' + peak.full + '</span>'
+      : '<span class="badge ok">✓ 未触发阈值</span>';
+
+    var ratio = Math.min(1, agg.outflow30 / (loans.reduce(function(s,l){return s+l.principal;},0) * 0.15 || 1));
+    var arc = document.getElementById('gaugeArc');
+    arc.setAttribute('stroke-dashoffset', String(Math.round(132 * (1 - ratio))));
+    var stateEl = document.getElementById('liqState'), hintEl = document.getElementById('liqHint');
+    if(ratio < 0.45){ stateEl.textContent = '充足'; stateEl.style.color = 'var(--green)'; }
+    else if(ratio < 0.8){ stateEl.textContent = '偏紧'; stateEl.style.color = 'var(--orange)'; }
+    else { stateEl.textContent = '紧张'; stateEl.style.color = 'var(--red)'; }
+    hintEl.textContent = '近 30 天现金流出 ' + compact(agg.outflow30) + '（含本息）';
+
+    var highest = loans.slice().sort(function(a,b){ return b.spread-a.spread; })[0];
+    document.getElementById('refiHint').textContent = highest
+      ? ('当前最高加点：' + highest.bank.replace(/\s+/g,'') + ' LPR+' + highest.spread + 'bp（' + compact(highest.principal) + '），可优先议价')
+      : '基于加权成本与到期结构自动生成';
+  }
+
+  function renderAll(){
+    state.agg = aggregate();
+    renderKpis(state.agg);
+    renderChart(state.agg);
+    renderLedger(state.agg);
+    renderCopilot(state.agg);
+  }
+
+  /* ================= AI 合同解析（规则引擎） ================= */
+  var PRESETS = [
+    '甲方中国工商银行上海分行同意向乙方提供流动资金贷款人民币伍仟万元整（¥50,000,000.00），借款期限自2026年5月15日至2027年5月15日，执行利率为一年期LPR加15个基点，按月20日结息，到期一次性还本。',
+    '中国建设银行江苏省分行向借款人发放流动资金贷款壹亿捌仟肆佰肆拾伍万元，期限2026年6月10日至2026年12月10日，执行利率为LPR+15BP，按季末结息，到期还本。',
+    '招商银行杭州分行：贷款金额人民币120,000,000元，执行利率一年期LPR加40个基点，自2026年8月25日起息，2027年2月25日到期，按月20日结息。'
+  ];
+  document.getElementById('contract').value = PRESETS[0];
+
+  var CN_DIGIT = { '零':0,'壹':1,'贰':2,'叁':3,'肆':4,'伍':5,'陆':6,'柒':7,'捌':8,'玖':9,'两':2 };
+  var CN_UNIT = { '拾':10,'佰':100,'仟':1000 };
+  function parseChineseNumber(s){
+    var total = 0, section = 0, num = 0;
+    for(var i=0;i<s.length;i++){
+      var ch = s[i];
+      if(CN_DIGIT[ch] !== undefined){ num = CN_DIGIT[ch]; continue; }
+      if(CN_UNIT[ch] !== undefined){ section += (num || 1) * CN_UNIT[ch]; num = 0; continue; }
+      if(ch === '万'){ total += (section + num) * 10000; section = 0; num = 0; continue; }
+      if(ch === '亿'){ total = (total + section + num) * 100000000; section = 0; num = 0; continue; }
+    }
+    return total + section + num;
+  }
+
+  function parseContract(text){
+    var out = { bank:'', principal:null, start:'', end:'', spread:null, settle:'month20', type:'流动资金贷款' };
+    var m;
+    m = text.match(/((?:中国)?(?:工商|建设|农业|交通|招商|浦发|中信|兴业|民生|平安)银行(?:[^\s，,。；;]{0,10}?(?:分行|支行))?)/);
+    if(m) out.bank = m[0].trim();
+    m = text.match(/(?:人民币|¥|￥)\s*([\d,]+(?:\.\d+)?)/);
+    if(m){ out.principal = parseFloat(m[1].replace(/,/g,'')); }
+    if(!out.principal){
+      m = text.match(/([零壹贰叁肆伍陆柒捌玖拾佰仟万亿两]+)\s*元/);
+      if(m){ out.principal = parseChineseNumber(m[1]); }
+    }
+    var dates = [];
+    var re = /(\d{4})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日/g;
+    while((m = re.exec(text))){ dates.push(m[1]+'-'+pad(+m[2])+'-'+pad(+m[3])); }
+    if(dates.length >= 2){ out.start = dates[0]; out.end = dates[1]; }
+    m = text.match(/(?:加|\+)\s*(\d{1,3})\s*(?:个基点|BP|bp|基点)/);
+    if(m) out.spread = +m[1];
+    if(/按季末|季末结息|季度末/.test(text)) out.settle = 'quarterEnd';
+    else if(/到期还本付息|到期一次性还本/.test(text)) out.settle = 'maturity';
+    else if(/按月\s*20\s*日|每月\s*20\s*日|按月结息/.test(text)) out.settle = 'month20';
+    if(/银行承兑|票据/.test(text)) out.type = '银行承兑汇票';
+    else if(/项目贷款/.test(text)) out.type = '项目贷款';
+    return out;
+  }
+
+  function fillForm(p){
+    document.getElementById('fBank').value = p.bank || '';
+    document.getElementById('fType').value = p.type;
+    document.getElementById('fPrincipal').value = p.principal ? String(p.principal) : '';
+    document.getElementById('fSpread').value = (p.spread === null || p.spread === undefined) ? '' : String(p.spread);
+    document.getElementById('fStart').value = p.start || '';
+    document.getElementById('fEnd').value = p.end || '';
+    document.getElementById('fSettle').value = p.settle;
+  }
+
+  function showParsed(p){
+    var el = document.getElementById('parsed');
+    var rows = [
+      ['银行 Bank', p.bank || '—'],
+      ['本金 Principal', p.principal ? money(p.principal) : '—'],
+      ['起息 / 到期', (p.start||'—') + ' → ' + (p.end||'—')],
+      ['LPR 加点 Spread', (p.spread===null||p.spread===undefined) ? '—' : ('LPR + ' + p.spread + 'bp')],
+      ['结息方式 Settlement', ({month20:'按月 20 日',quarterEnd:'按季末',maturity:'到期还本付息'})[p.settle]],
+      ['计息基准', 'Actual/360']
+    ];
+    el.innerHTML = '<div style="font-size:12px;color:var(--cyan);margin-bottom:6px">✓ 解析结果（自动回填表单）</div>' + rows.map(function(r){
+      return '<div class="kv"><span>' + r[0] + '</span><span>' + r[1] + '</span></div>';
+    }).join('');
+    el.classList.add('show');
+  }
+
+  /* ================= 事件绑定 ================= */
+  function toast(msg, type){
+    var wrap = document.getElementById('toasts');
+    var el = document.createElement('div');
+    el.className = 'toast';
+    if(type === 'warn') el.style.borderLeftColor = 'var(--orange)';
+    if(type === 'err') el.style.borderLeftColor = 'var(--red)';
+    el.textContent = msg;
+    wrap.appendChild(el);
+    setTimeout(function(){ el.style.opacity='0'; el.style.transition='opacity .3s'; }, 2600);
+    setTimeout(function(){ el.remove(); }, 3000);
+  }
+
+  function openModal(id){ document.getElementById(id).classList.add('open'); }
+  function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+
+  document.querySelectorAll('[data-open]').forEach(function(b){
+    b.addEventListener('click', function(e){ e.preventDefault(); openModal(b.getAttribute('data-open')); });
+  });
+  document.querySelectorAll('[data-close]').forEach(function(b){
+    b.addEventListener('click', function(){ closeModal(b.getAttribute('data-close')); });
+  });
+  document.querySelectorAll('.modal').forEach(function(m){
+    m.addEventListener('click', function(e){ if(e.target === m) m.classList.remove('open'); });
+  });
+
+  document.querySelectorAll('[data-preset]').forEach(function(b){
+    b.addEventListener('click', function(){ document.getElementById('contract').value = PRESETS[+b.getAttribute('data-preset')] || PRESETS[0]; });
+  });
+
+  document.getElementById('btnParse').addEventListener('click', function(){
+    var btn = this, loading = document.getElementById('parseLoading');
+    var text = document.getElementById('contract').value.trim();
+    if(!text){ toast('请先粘贴合同文本', 'warn'); return; }
+    btn.disabled = true; loading.classList.add('show');
+    document.getElementById('parsed').classList.remove('show');
+    setTimeout(function(){
+      var parsed = parseContract(text);
+      fillForm(parsed);
+      showParsed(parsed);
+      btn.disabled = false; loading.classList.remove('show');
+      var ok = parsed.principal && parsed.start && parsed.end;
+      toast(ok ? 'AI 解析完成：已自动回填 6 项字段' : '解析不完整：请检查合同文本格式', ok ? '' : 'warn');
+    }, 500);
+  });
+
+  document.getElementById('btnSave').addEventListener('click', function(){
+    var bank = document.getElementById('fBank').value.trim();
+    var principal = Number(document.getElementById('fPrincipal').value);
+    var spread = Number(document.getElementById('fSpread').value);
+    var start = document.getElementById('fStart').value;
+    var end = document.getElementById('fEnd').value;
+    if(!bank || !principal || !start || !end){ toast('请补齐银行、本金、起息日、到期日', 'warn'); return; }
+    if(parseYmd(end) <= parseYmd(start)){ toast('到期日必须晚于起息日', 'warn'); return; }
+    loans.push({
+      id:'LN-'+new Date().getFullYear()+'-'+String(loans.length+11).padStart(3,'0'),
+      bank: bank, type: document.getElementById('fType').value,
+      principal: principal, start: start, end: end,
+      spread: isNaN(spread) ? 0 : spread,
+      settle: document.getElementById('fSettle').value,
+      convention:'Actual/360', note: document.getElementById('fNote').value.trim(),
+      rate: (LPR_BASE + (isNaN(spread)?0:spread)/100)/100
+    });
+    closeModal('modal');
+    renderAll();
+    toast('已新增借款并重算排程：' + bank);
+  });
+
+  /* AI 报告：流式打字机 */
+  var reportTimer = null;
+  function buildReport(agg){
+    var peak = agg.peaks[0];
+    var top = loans.slice().sort(function(a,b){ return b.principal-a.principal; })[0];
+    var high = loans.slice().sort(function(a,b){ return b.spread-a.spread; })[0];
+    var saving = high ? high.principal * (high.spread-15)/10000 : 0;
+    var lines = [];
+    lines.push('【AI 资金洞察报告 · ' + ymd(today) + '】');
+    lines.push('');
+    if(peak){
+      lines.push('1) 流动性峰值：' + peak.full + ' 单月还本付息 ' + money(peak.principal+peak.interest) + '，超出 5,000 万预警线 ' + compact(peak.principal+peak.interest-ALERT_THRESHOLD) + '。');
+      lines.push('   → 建议在该结息日前 45 天启动续作或分批提款，避免与本月利息支付叠加。');
+    } else {
+      lines.push('1) 流动性：未来 12 个月无单月超 5,000 万的还款峰值，现金流节奏平稳。');
+    }
+    lines.push('2) 成本结构：加权平均成本 ' + pct(agg.wacd) + '，最高加点为 ' + (high? high.bank.replace(/\s+/g,'') + '（LPR+' + high.spread + 'bp）' : '—') + '。');
+    if(high && high.spread > 15){
+      lines.push('   → 以 LPR+15bp 为对标谈价，按 ' + compact(high.principal) + ' 测算年化可省息约 ' + compact(saving) + '。');
+    }
+    lines.push('3) 到期结构：最大单笔为 ' + (top? top.bank.replace(/\s+/g,'') + '（' + compact(top.principal) + '，' + top.end + ' 到期）' : '—') + '，占比 ' + (top? (top.principal/agg.balance*100).toFixed(1) : 0) + '%。');
+    lines.push('   → 集中度高，建议将到期日按季度错配，避免同月多笔叠加。');
+    lines.push('4) 计息合规：全部按 Actual/360 逐日计提（当月利息 = 余额 × 年利率/360 × 实际天数），结息日遇周末顺延周一，与银行对账单口径一致。');
+    lines.push('5) 未来 12 个月利息支出合计 ' + compact(agg.annualInterest) + '，本金到期 ' + compact(agg.annualPrincipal) + '；建议按季度复核 LPR 基准（当前 3.00%）并预留 10% 利息缓冲。');
+    lines.push('');
+    lines.push('—— 以上由 Treasury Copilot 基于当前台账数据生成，供决策参考。');
+    return lines.join('\n');
+  }
+
+  document.getElementById('btnReport').addEventListener('click', function(){
+    var btn = this;
+    if(reportTimer){ clearInterval(reportTimer); reportTimer = null; btn.textContent = '✦ 生成 AI 资金洞察报告'; document.getElementById('report').classList.remove('show'); return; }
+    var reportEl = document.getElementById('report');
+    var text = buildReport(state.agg);
+    reportEl.classList.add('show');
+    reportEl.textContent = '';
+    btn.textContent = '■ 停止生成';
+    var i = 0;
+    reportTimer = setInterval(function(){
+      i += 1;
+      reportEl.innerHTML = text.slice(0, i).replace(/&/g,'&amp;').replace(/</g,'&lt;') + '<span class="cursor"></span>';
+      reportEl.scrollTop = reportEl.scrollHeight;
+      if(i >= text.length){
+        clearInterval(reportTimer); reportTimer = null;
+        reportEl.innerHTML = text.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+        btn.textContent = '✦ 重新生成报告';
+      }
+    }, 18);
+  });
+
+  document.getElementById('btnActions').addEventListener('click', function(){
+    var agg = state.agg, peak = agg.peaks[0];
+    var high = loans.slice().sort(function(a,b){ return b.spread-a.spread; })[0];
+    var items = [
+      { t:'① 峰值月提前续作', d: peak ? (peak.full + ' 到期/结息前 45 天启动续作，锁定额度，避免 ' + compact(peak.principal+peak.interest) + ' 集中流出') : '未来 12 个月无超限峰值，保持季度复盘', o:'资金部 · 本周' },
+      { t:'② LPR 加点议价', d: high ? (high.bank.replace(/\s+/g,'') + ' 当前 LPR+' + high.spread + 'bp，以同业 LPR+15bp 为对标发起议价') : '无高加点贷款', o:'司库 · 本月' },
+      { t:'③ 到期日错配', d:'将 4 笔贷款到期日按季度分散，单季到期本金占比控制在 35% 以内', o:'资金部 · 下季度' }
+    ];
+    document.getElementById('actionList').innerHTML = items.map(function(x){
+      return '<div style="border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px">'
+        + '<div style="font-size:13px;font-weight:600">' + x.t + '</div>'
+        + '<div style="font-size:12px;color:var(--muted);margin-top:4px;line-height:1.7">' + x.d + '</div>'
+        + '<div style="font-size:11px;color:var(--dim);margin-top:6px">责任：' + x.o + '</div></div>';
+    }).join('');
+    openModal('actionsModal');
+  });
+
+  /* 搜索 */
+  document.getElementById('q').addEventListener('input', function(e){ state.filter = e.target.value; renderLedger(state.agg); });
+  document.getElementById('windowSel').addEventListener('change', function(){ renderChart(state.agg); });
+
+  /* 侧边栏 */
+  document.querySelectorAll('.nav a').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      document.querySelectorAll('.nav a').forEach(function(x){ x.classList.remove('on'); });
+      a.classList.add('on');
+      var t = a.getAttribute('data-target');
+      if(t){ var el = document.getElementById(t); if(el) el.scrollIntoView({behavior:'smooth', block:'start'}); }
+    });
+  });
+
+  /* Excel 导出（SheetJS） */
+  document.getElementById('btnExport').addEventListener('click', function(){
+    if(typeof XLSX === 'undefined'){ toast('Excel 组件加载失败，请检查网络后重试', 'err'); return; }
+    try{
+      var wb = XLSX.utils.book_new();
+      var ledger = [['借款编号','借款类型','银行/机构','本金余额(元)','执行利率','加点(bp)','起息日','到期日','结息方式','计息基准','备注']];
+      loans.forEach(function(l){
+        ledger.push([l.id, l.type, l.bank, l.principal, pct(l.rate), l.spread, l.start, l.end,
+          ({month20:'按月20日',quarterEnd:'按季末',maturity:'到期还本付息'})[l.settle], l.convention, l.note || '']);
+      });
+      XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(ledger), '债务台账');
+
+      var rows = [['结息日','计息天数','本金(元)','利息(元)','还款合计(元)','对应贷款']];
+      state.agg.schedules.forEach(function(sc){
+        sc.rows.forEach(function(r){ rows.push([ymd(r.date), r.days, r.principal, Math.round(r.interest), Math.round(r.principal+r.interest), sc.loan.id]); });
+      });
+      XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(rows), '还本付息排程');
+      XLSX.writeFile(wb, 'AI-Treasury-Debt-Schedule-' + ymd(today).replace(/-/g,'') + '.xlsx');
+      toast('已导出 Excel：台账 + 排程两个工作表');
+    }catch(err){ toast('导出失败：' + err.message, 'err'); }
+  });
+
+  /* 启动 */
+  if(typeof Chart === 'undefined'){
+    document.getElementById('chart').insertAdjacentHTML('afterend','<div style="color:#F87171;font-size:12px;padding:12px">图表库加载失败（CDN 不可达），请联网后刷新。</div>');
+  }
+  renderAll();
+})();
+</script>
+</body>
+</html>
