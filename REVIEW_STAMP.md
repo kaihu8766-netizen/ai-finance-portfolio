@@ -9,6 +9,7 @@
 
 | Commit SHA | 复核轮次 | 复核日期 | 复核报告章节 | 状态 |
 |------------|----------|----------|--------------|------|
+| fc6176e | 第七十一轮（v7.3.1 闭环 RV-80 条件：AI 协作叙述更新（双 Agent+工具化复核、70 轮/51 基线）+ LPR 详情新增「模型假设与局限」小节——PF-RV-20261021-80 adopted，P0 5 条全闭环：实例/口径/51 基线已核，label 精确化 + iframe heading-order 修复（10 个 h4→h3）独立复测 0 跳级） | 2026-10-22 | preflight 10/10 + coverage 100.0% + pytest 21 passed + 主 Agent 独立复测：heading jumps=0、模型小节=H3、iframe h4 剩余 0、console 0、label 两处命中 | ✅ 已批准 | 依据 PF-RV-20261021-80 adopted |
 | 82a1c38 | 第七十轮（v7.2 移除面试模式：8 题题库/面试官人格/徽标/触发指令/快捷入口/kbDigest 全删，助手收敛为导览+改进建议——用户拍板，PF-RV-20261021-79 adopted，5 条补证条件全闭环） | 2026-10-22 | preflight 10/10 + coverage 100.0% + pytest 21 passed + 主 Agent 独立抽查 8/8（双端无徽标/快捷 4 项无面试入口/面板打开/CTA 回归/console 0/无横滚）+ 4 快捷问题逐项点击验证 + 全仓 interview 扫描源码 0 残留 | ✅ 已批准 | 依据 PF-RV-20261021-79 adopted + 用户拍板 2026-10-22 |
 | 91564e0 | 第六十九轮（门禁例外扩展：评审产物目录豁免 .md/.json 白名单 + quotepath 修复 + 3 条回归测试——PF-RV-20261021-78 adopted，修复"内容后置评审档案"死锁） | 2026-10-22 | pytest 21 passed（含 test_gate_exempt 3 条）+ check_review_stamp 本地绿 + pre-push bash -n 通过 | ✅ 已批准 | 依据 PF-RV-20261021-78 adopted |
 | 16b8c96 | 第六十八轮（v7.1 首屏引导与口径统一：Hero 双 CTA + 导航激活态 + 蒙特卡洛 10,000 口径统一 + 中英空格统一 + Demo 口径统一——PF-RV-20261021-75/76/77 全链闭环，7 条发布阻塞条件全部落实） | 2026-10-22 | preflight 10/10 + coverage 100.0% + pytest 18 passed + 主 Agent 双端独立实测 11/11 PASS（无横滚/CTA 落点无遮挡/scrollspy 激活/console 0/AI 助手唤起/移动端详情 ECharts 渲染） | ✅ 已批准 | 依据 PF-RV-20261021-77 adopted + DSH 实证 + 主 Agent 独立复核 |
