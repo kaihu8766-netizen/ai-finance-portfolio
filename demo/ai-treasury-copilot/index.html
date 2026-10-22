@@ -193,6 +193,7 @@
       <div>
         <h1>Debt Amortization &amp; Interest Accrual System</h1>
         <div class="sub">集团贷款还本付息动态排程与利息计提 · 银行级 Actual/360 精算 · AI 合同解析与司库洞察</div>
+        <div class="sub" style="margin-top:4px;color:#7f93ad">为什么做：实习中看到资金团队用 Excel 手工排还本付息、结息日靠人肉核对，于是把「排程 / 计提 / 预警」做成可交互产品（演示版）。</div>
       </div>
       <div class="top-actions">
         <div class="search"><span style="color:var(--dim)">⌕</span><label class="sr-only" for="q">搜索台账</label><input id="q" placeholder="搜索银行 / 借款类型…"></div>
@@ -224,7 +225,7 @@
             </div>
           </div>
           <div class="chart-wrap"><canvas id="chart" aria-label="未来12个月还本付息对比柱状图" role="img"></canvas></div>
-          <div style="font-size:11.5px;color:var(--dim);margin-top:8px">口径：日利率 = 年利率 / 360，当月利息 = 借款余额 × 日利率 × 当月实际天数；结息日仅周末顺延至周一（不含法定节假日）；未建模 LPR 重定价条款。</div>
+          <div style="font-size:11.5px;color:var(--dim);margin-top:8px">口径：日利率 = 年利率 / 360，当月利息 = 借款余额 × 日利率 × 当月实际天数（依据人行《人民币利率管理规定》对公贷款按 360 天计息、实际天数计息，非平摊 /12）；结息日仅周末顺延至周一（不含法定节假日）；未建模 LPR 重定价条款。</div>
         </section>
 
         <section class="card ledger" id="ledgerCard">
@@ -268,7 +269,7 @@
             <div class="c-block">
               <div class="t">● 还款高峰预警</div>
               <div class="big" id="peakMonth">—</div>
-              <div class="s" id="peakDesc">单月还款超 5,000 万自动预警</div>
+              <div class="s" id="peakDesc">单月还款超 5,000 万自动预警（阈值 = 授信额度与月度经营现金流测算的流动性安全垫）</div>
               <div id="peakBadge" style="margin-top:8px"></div>
             </div>
 
@@ -287,6 +288,12 @@
       </aside>
     </div>
 
+    <section class="card" id="dataNote" style="margin-top:14px">
+      <div class="card-head"><h2>数据来源与假设 <span class="tag">DATA &amp; ASSUMPTIONS</span></h2></div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.9">
+        ① 4 笔贷款为**合成演示样本**（非真实客户/合同，行名仅作场景示意）；② LPR 1Y 基准 3.00% 采用 2026-08 报价口径；③ 利率加点、金额、起止日为演示假设；④ Actual/360 依据人行对公贷款利率管理规定，结息日仅周末顺延（未建模法定节假日与 LPR 重定价条款）；⑤ 导出功能桌面 Chromium 已验证，iOS Safari Blob 兼容性未真机验证；⑥ 全部数据不构成融资建议。
+      </div>
+    </section>
     <div style="margin-top:18px;font-size:11.5px;color:var(--dim);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
       <span>LPR 1Y 基准 3.00%（2026-08 报价）· 结息日仅周末顺延（不含法定节假日）· 未建模 LPR 重定价条款 · 数据为演示样本，不构成融资建议</span>
       <span>AI Copilot · 纯前端规则引擎（无外部 API Key）</span>
@@ -557,7 +564,7 @@
   function renderCopilot(agg){
     var peak = agg.peaks[0];
     document.getElementById('peakMonth').textContent = peak ? (peak.full + ' · ' + compact(peak.principal + peak.interest)) : '未来 12 个月无超限月份';
-    document.getElementById('peakDesc').textContent = peak ? ('单月还本付息 ' + money(peak.principal + peak.interest) + '，超过 ' + compact(ALERT_THRESHOLD) + ' 阈值') : '单月还款超 5,000 万自动预警';
+    document.getElementById('peakDesc').textContent = peak ? ('单月还本付息 ' + money(peak.principal + peak.interest) + '，超过 ' + compact(ALERT_THRESHOLD) + ' 流动性安全垫阈值') : '单月还款超 5,000 万自动预警（阈值 = 流动性安全垫）';
     document.getElementById('peakBadge').innerHTML = peak
       ? '<span class="badge red">● 流动性峰值预警 · ' + peak.full + '</span>'
       : '<span class="badge ok">✓ 未触发阈值</span>';
