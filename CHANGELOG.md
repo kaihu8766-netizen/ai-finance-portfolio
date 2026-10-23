@@ -3,6 +3,22 @@
 
 
 
+## [v7.9] 2026-10-23 Agent 协作机制更新
+
+### 修改
+- 方法论章节重写：「双 Agent 复核机制」→「Agent 协作机制」，按实际协作方式列出四层分工：
+  - 人（胡凯）：定方向、拍板、分歧裁决
+  - 执行 Agent（DSH 内 DeepSeek，带工具）：读需求、写代码、跑 preflight/pytest/coverage、浏览器实测、commit/push
+  - 独立复核 Agent（豆包云电脑，带工具）：独立 pull、复测复算、axe、写 RV 档案、REVIEW_STAMP 盖章、发布、线上验证
+  - 复核 AI（DS API，异模型）：独立评审 diff、产出 RV 条件；结论是输入非判决
+- 补充 A/B 分级、对齐单、机器闸门（未盖章 Review gate 必红、Deploy 拦截）、结论复用、自我完善机制等现行流程；导航「双 Agent 复核」→「Agent 协作」
+- 助手 KB：dualAgentCollab 角色表同步四层分工；行为准则角色说明与离线话术更新
+- 版本号：footer v7.9、时间线新增 v7.9、kb.versions 追加
+
+### 验证
+- preflight 10/10 全绿；coverage 100%
+- 章节渲染四角色、导航标签、KB 话术同步
+
 ## [v7.8] 2026-10-23 主页文字全量校对
 
 ### 修改
