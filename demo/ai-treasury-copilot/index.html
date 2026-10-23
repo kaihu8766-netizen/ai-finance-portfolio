@@ -233,7 +233,7 @@ td.mono,td .pill{white-space:nowrap}
             </div>
           </div>
           <div class="chart-wrap"><canvas id="chart" aria-label="未来12个月还本付息对比柱状图" role="img"></canvas></div>
-          <div style="font-size:11.5px;color:var(--dim);margin-top:8px">口径：日利率 = 年利率 / 360，当月利息 = 借款余额 × 日利率 × 当月实际天数（依据人行《人民币利率管理规定》对公贷款按 360 天计息、实际天数计息，非平摊 /12）；结息日仅周末顺延至周一（不含法定节假日）；年度重定价已建模（首年基准 LPR 3.10% → 次年 3.00%，执行利率 = 基准 + 加点）。</div>
+          <div style="font-size:11.5px;color:var(--dim);margin-top:8px">口径：日利率 = 年利率 / 360，当月利息 = 借款余额 × 日利率 × 当月实际天数（依据人行《人民币利率管理规定》对公贷款按 360 天计息、实际天数计息，非平摊 /12）；结息日仅周末顺延至周一（不含法定节假日）；年度重定价已建模：重定价日 = 放款周年日（Anniversary Date），加点固定、仅调整 1Y LPR 基准（首年 3.10% → 次年 3.00%，执行利率 = 基准 + 加点）。</div>
         </section>
 
         <section class="card ledger" id="ledgerCard">
@@ -299,7 +299,7 @@ td.mono,td .pill{white-space:nowrap}
     <section class="card" id="dataNote" style="margin-top:14px">
       <div class="card-head"><h2>数据来源与假设 <span class="tag">DATA &amp; ASSUMPTIONS</span></h2></div>
       <div style="font-size:12px;color:var(--muted);line-height:1.9">
-        ① 9 笔贷款为**合成演示样本**（按用户提供的集团贷款台账模板结构脱敏，非真实客户/合同）；② 首年 LPR 3.10%、次年 3.00%（年度重定价）为演示基准；③ 利率加点、金额、起止日为演示假设；④ Actual/360 依据人行对公贷款利率管理规定，按季结息（季末月 20 日）、结息日仅周末顺延；年度重定价按周年日切换（首年基准 3.10% → 次年 3.00%）；⑤ 导出为 ExcelJS 生成（11 个 sheet），桌面 Chromium 已验证，iOS Safari Blob 兼容性未真机验证；⑥ 全部数据不构成融资建议。
+        ① 9 笔贷款为**合成演示样本**（按用户提供的集团贷款台账模板结构脱敏，非真实客户/合同）；② 首年 LPR 3.10%、次年 3.00%（年度重定价）为演示基准；③ 利率加点、金额、起止日为演示假设；④ Actual/360 依据人行对公贷款利率管理规定，按季结息（季末月 20 日）、结息日仅周末顺延；年度重定价日 = 放款周年日（Anniversary Date），加点固定、仅调整 1Y LPR 基准（首年 3.10% → 次年 3.00%）；⑤ 导出为 ExcelJS 生成（11 个 sheet），桌面 Chromium 已验证，iOS Safari Blob 兼容性未真机验证；⑥ 全部数据不构成融资建议。
       </div>
     </section>
     <div style="margin-top:18px;font-size:11.5px;color:var(--dim);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
@@ -520,7 +520,9 @@ td.mono,td .pill{white-space:nowrap}
     document.getElementById('kpiBalance').textContent = compact(agg.balance);
     document.getElementById('kpiBalanceHint').innerHTML = loans.length + ' 笔在贷 · 本金余额合计 ' + money(agg.balance) + '（4.15 亿）';
     document.getElementById('kpiAccrual').textContent = money(agg.accrual);
-    document.getElementById('kpiAccrualHint').textContent = 'Actual/360 · 按日计提至 ' + ymd(today);
+    var accFrom = new Date(today.getFullYear(), today.getMonth(), 1);
+    var accTo = new Date(today.getTime() - DAY);
+    document.getElementById('kpiAccrualHint').textContent = 'Actual/360 · 计提区间 ' + ymd(accFrom) + ' → ' + ymd(accTo) + '（共 ' + days(accFrom, today) + ' 天，不含今日）';
     document.getElementById('kpiOutflow').textContent = compact(agg.outflow30);
     document.getElementById('kpiOutflowHint').textContent = agg.outflow30 > 0 ? ('含本金与利息 · ' + ymd(today) + ' 起 30 天') : ('未来 30 天无到期 · 下次结息 ' + (function(){ var nx=null; loans.forEach(function(l){ var s2=buildSchedule(l); s2.forEach(function(r){ if(r.date>=today && (!nx || r.date<nx)) nx=r.date; }); }); return nx?ymd(nx):'—'; })());
     document.getElementById('kpiWacd').textContent = pct(agg.wacd);
