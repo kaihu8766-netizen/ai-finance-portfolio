@@ -233,6 +233,7 @@ td.mono,td .pill{white-space:nowrap}
             </div>
           </div>
           <div class="chart-wrap"><canvas id="chart" aria-label="未来12个月还本付息对比柱状图" role="img"></canvas></div>
+        <div id="chartNote" style="font-size:11px;color:#94A3B8;margin-top:8px;line-height:1.8">读图提示：左轴 = 本金余额（亿元）· 右轴 = 当期利息（万元），量级不同请勿直比；虚线标记季末结息月（3/6/9/12）的付息波峰。</div>
           <div style="font-size:11.5px;color:var(--dim);margin-top:8px">口径：日利率 = 年利率 / 360，当月利息 = 借款余额 × 日利率 × 当月实际天数（依据人行《人民币利率管理规定》对公贷款按 360 天计息、实际天数计息，非平摊 /12）；结息日仅周末顺延至周一（不含法定节假日）；年度重定价已建模：重定价日 = 放款周年日（Anniversary Date），加点固定、仅调整 1Y LPR 基准（首年 3.10% → 次年 3.00%，执行利率 = 基准 + 加点）。</div>
         </section>
 
@@ -557,8 +558,15 @@ td.mono,td .pill{white-space:nowrap}
         y1:{ position:'right', title:{display:true,text:'利息（万元）',color:'#FBBF24',font:{size:10}}, grid:{ drawOnChartArea:false }, ticks:{ color:'#FBBF24', font:{size:11}, callback:function(v){ return (v/1e4).toFixed(0)+'万'; } } }
       }
     };
-    if(state.chart){ state.chart.data = data; state.chart.options = opts; state.chart.update(); }
-    else { state.chart = new Chart(ctx, { type:'bar', data:data, options:opts }); }
+    var quarterLine = { id: 'quarterLine', afterDatasetsDraw: function (chart) {
+    var c = chart.ctx; var ya = chart.scales.y; var meta = chart.getDatasetMeta(0);
+    c.save(); c.strokeStyle = 'rgba(251,191,36,0.35)'; c.setLineDash([4, 4]); c.lineWidth = 1;
+    chart.data.labels.forEach(function (lb, i) { if ((i + 1) % 3 === 0 && meta.data[i]) { var x = meta.data[i].x;
+      c.beginPath(); c.moveTo(x, ya.top); c.lineTo(x, ya.bottom); c.stroke(); } });
+    c.restore();
+  } };
+  if(state.chart){ state.chart.data = data; state.chart.options = opts; state.chart.update(); }
+    else { state.chart = new Chart(ctx, { type:'bar', data:data, options:opts, plugins:[quarterLine] }); }
   }
 
   function nextSettlement(loan){
