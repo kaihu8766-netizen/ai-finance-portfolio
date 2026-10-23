@@ -1536,8 +1536,8 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px">
       <div style="font-size:12px;color:var(--muted);margin-bottom:8px">🏆 代表作品</div>
       <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.9">
-        LPR 走势预测与融资成本压力测试<br>
-        AI 集团贷款还本付息动态排程与利息计提系统
+        AI 集团贷款还本付息动态排程与利息计提系统<br>
+        LPR 走势预测与融资成本压力测试
       </div>
     </div>
   </div>
@@ -1805,13 +1805,22 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
         <div class="tl-tags"><span>双旗舰</span><span>AI 司库</span><span>Actual/360</span></div>
       </div>
     </div>
-    <div class="tl-item tl-latest">
+    <div class="tl-item">
       <div class="tl-dot"></div>
       <div class="tl-content">
-        <div class="tl-head"><span class="tl-ver">v7.5</span><span class="tl-date">2026.10</span><span class="tl-badge">当前版本</span><span class="tl-pulse"></span></div>
+        <div class="tl-head"><span class="tl-ver">v7.5</span><span class="tl-date">2026.10</span></div>
         <div class="tl-title">司库与 LPR 同权 + 对齐单落地</div>
         <div class="tl-desc">按用户拍板与对齐单执行：Hero 双等权入口（LPR Demo / AI 司库应用）、两张旗舰卡同权标识（★ 精算核心 / ★ 工程化产品）、「产品化落地」改「产品化尝试」并标注第二件旗舰作品；产品页补「为什么做」动机段、为什么 Actual/360、5,000 万阈值口径、数据来源与假设小节；规则引擎演示前移至卡内首行</div>
         <div class="tl-tags"><span>同权</span><span>对齐单</span><span>诚实性</span></div>
+      </div>
+    </div>
+    <div class="tl-item tl-latest">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-head"><span class="tl-ver">v7.6</span><span class="tl-date">2026.10</span><span class="tl-badge">当前版本</span><span class="tl-pulse"></span></div>
+        <div class="tl-title">司库上移 + 详情页 + 模板级导出</div>
+        <div class="tl-desc">司库作品移到 LPR 上方并新增与 LPR 同级的详情页（page-04：业务痛点 / 产品定位 / Actual-360 精算规则 / 数据与假设 / iframe 交互 Demo / AI 实现 / 参数敏感性 / 局限披露）；应用数据换成用户提供的集团贷款台账 9 笔口径（4.15 亿 / 按季结息季末月 20 日 / 年度重定价），并支持按季结息 + 年度重定价的引擎；一键导出改为 ExcelJS 复刻 11-sheet「动态穿透版」模板（汇总 + 9 单笔附表 + 参数敏感性，含 HYPERLINK 与合计公式）；助手 KB/导览同步</div>
+        <div class="tl-tags"><span>详情页</span><span>模板导出</span><span>年度重定价</span></div>
       </div>
     </div>
   </div>
@@ -1875,26 +1884,28 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
   <p class="work-lead" style="margin:0 0 18px;font-size:14px;color:#9ba3b7;line-height:1.9;">这些作品都来自实习中的观察和思考：在公司看到某个问题，自己想办法、动手试。还没到能直接落地的程度，但每一个都经过了深度思考和完整实现。</p>
   <div class="works">
 
-    <div class="work wide actuarial-core" onclick="showWork('03');return false;" style="cursor:pointer">
+    <div class="work wide" onclick="showWork('04');return false;" style="cursor:pointer">
+        <span class="badge b0" style="--c:#38bdf8;color:#38bdf8;border-color:rgba(56,189,248,0.4);background:rgba(56,189,248,0.06)"><span class="dot" style="background:#38bdf8;box-shadow:0 0 8px #38bdf8"></span>AI TREASURY · AMORTIZATION &amp; ACCRUAL</span>
+        <div style="flex:1">
+          <div style="font-size:11.5px;color:#38bdf8;letter-spacing:.5px;margin-bottom:4px">规则引擎演示 · 非大模型</div>
+          <div class="title">AI 集团贷款还本付息动态排程与利息计提系统</div>
+          <div class="desc">第一件旗舰作品 · 产品化尝试。银行级 Actual/360 精算（日利率 = 年利率 / 360，结息日遇周末顺延）+ 4 大 KPI + 12 个月还本付息排程 + 单月超 5,000 万流动性预警；AI 合同一键解析自动回填、AI 司库 Copilot 流式洞察报告、SheetJS 一键导出 Excel。单文件纯前端，打开即用。</div>
+          <a class="demo-entry" href="demo/ai-treasury-copilot/index.html" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">✦ 在线应用 ↗</a>
+        </div>
+        <span class="core-flag" style="background:var(--bg2)">★ 工程化产品</span>
+      </div>
+
+      <div class="work wide actuarial-core" onclick="showWork('03');return false;" style="cursor:pointer">
       <span class="badge b0" style="--c:#34d399;color:#34d399;border-color:rgba(52,211,153,0.4);background:rgba(52,211,153,0.06)"><span class="dot" style="background:#34d399;box-shadow:0 0 8px #34d399"></span>ACTUARIAL · RATE RISK MODELING</span>
       <div style="flex:1">
         <div class="title">LPR 走势预测与融资成本压力测试系统</div>
-        <div class="desc">第一件旗舰作品。资金团队每月都要回答"现在该不该贷款？利率会涨还是跌？"——这个项目把"看新闻猜方向"升级为四指标分析框架（MLF / 净息差 / 社融 / CPI）+ 蒙特卡洛概率预测：输出未来 5 年 LPR 区间带与情景概率，直接服务新增贷款定价、存量重定价、再融资择时三个决策场景。配套可交互模拟器，打开就能玩。</div>
+        <div class="desc">第二件旗舰作品。资金团队每月都要回答"现在该不该贷款？利率会涨还是跌？"——这个项目把"看新闻猜方向"升级为四指标分析框架（MLF / 净息差 / 社融 / CPI）+ 蒙特卡洛概率预测：输出未来 5 年 LPR 区间带与情景概率，直接服务新增贷款定价、存量重定价、再融资择时三个决策场景。配套可交互模拟器，打开就能玩。</div>
         <a class="demo-entry" href="demo/LPR蒙特卡洛预测模拟器.html" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">🚀 在线 Demo ↗</a>
       </div>
       <span class="core-flag" style="background:var(--bg2)">★ 精算核心</span>
     </div>
 
-      <div class="work wide" onclick="window.open('demo/ai-treasury-copilot/index.html','_blank');return false;" style="cursor:pointer">
-        <span class="badge b0" style="--c:#38bdf8;color:#38bdf8;border-color:rgba(56,189,248,0.4);background:rgba(56,189,248,0.06)"><span class="dot" style="background:#38bdf8;box-shadow:0 0 8px #38bdf8"></span>AI TREASURY · AMORTIZATION &amp; ACCRUAL</span>
-        <div style="flex:1">
-          <div style="font-size:11.5px;color:#38bdf8;letter-spacing:.5px;margin-bottom:4px">规则引擎演示 · 非大模型</div>
-          <div class="title">AI 集团贷款还本付息动态排程与利息计提系统</div>
-          <div class="desc">第二件旗舰作品 · 产品化尝试。银行级 Actual/360 精算（日利率 = 年利率 / 360，结息日遇周末顺延）+ 4 大 KPI + 12 个月还本付息排程 + 单月超 5,000 万流动性预警；AI 合同一键解析自动回填、AI 司库 Copilot 流式洞察报告、SheetJS 一键导出 Excel。单文件纯前端，打开即用。</div>
-          <a class="demo-entry" href="demo/ai-treasury-copilot/index.html" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">✦ 在线应用 ↗</a>
-        </div>
-        <span class="core-flag" style="background:var(--bg2)">★ 工程化产品</span>
-      </div>
+      
 
   </div>
 </div>
@@ -2024,7 +2035,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
   <span><b>方向</b> 财务 × AI</span>
 </div>
 <button class="back-to-top" id="backToTop" aria-label="回到顶部">↑</button>
-<div class="footer">胡凯 · AI × Finance Portfolio · v7.5 · 全部数据经人工核验 · 2026.10 · AI 协作方法探索</div>
+<div class="footer">胡凯 · AI × Finance Portfolio · v7.6 · 全部数据经人工核验 · 2026.10 · AI 协作方法探索</div>
 
 </div>
 
@@ -2170,9 +2181,9 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
   "purpose": "2027届秋招·财务×金融×精算×AI复合能力证明·定位职能团队AI Builder（拆解业务流程→设计人机协作工作流→搭建可运行Agent系统）",
   "structure": [
     { "id": "home", "name": "主页", "layer": "主页", "desc": "个人介绍 + 两条主线（工具原型→精算风险建模）+ 2 作品入口",
-      "summary": "个人主页：一句话定位 + 资金运营/审计背景 + 旗舰作品深度拆解 + 能力全景",
+      "summary": "个人主页：一句话定位 + 资金运营/审计背景 + 双旗舰作品深度拆解（AI 司库产品 + LPR 研究）+ 能力全景",
       "tags": ["主页", "个人介绍", "作品矩阵", "入口", "背景"],
-      "highlights": ["双旗舰（LPR 研究 + AI 司库产品）", "四指标分析框架 + 12 个月还本付息排程", "能力全景卡片 + 双Agent复核机制"] },
+      "highlights": ["双旗舰（AI 司库产品 + LPR 研究）", "四指标分析框架 + 12 个月还本付息排程", "能力全景卡片 + 双Agent复核机制"] },
     { "id": "w03", "name": "LPR 走势预测分析", "layer": "研究", "desc": "四指标框架(MLF/净息差/社融/CPI)·LPR历史走势·2026数据看板·贷款定价决策",
       "summary": "基于 MLF 政策利率、银行净息差、社融、CPI 四指标框架预测 LPR 调整方向与幅度：净息差 Q1 触底 1.40%、Q2 微升 1.41%（四年来首次环比回升），银行让利空间有限；蒙特卡洛 10,000 条路径输出 5 年区间带（10%/50%/90% 分位数）与情景概率（基准 60%/偏鸽 25%/持稳 15%），直接服务新增贷款定价、存量重定价、再融资择时三个决策场景",
       "tags": ["LPR", "利率预测", "净息差", "贷款定价", "宏观分析", "MLF", "社融", "CPI"],
@@ -2201,7 +2212,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     "⑭轻量RAG政策检索(5文档条款+关键词打分+回答附出处)",
     "⑮抽屉背景滚动锁定+作品加载提示"
   ],
-  "versions": "v1基础 → v2.1体积优化 → v2.2安全修复 → v2.3接入真实AI → v2.4数据底座 → v2.5拷问修复 → v2.6异常全流程 → v2.7内置助手 → v3.0打字机/批量处理/pytest/RAG/体验优化 → v3.2整合SOX控制测试工作台为第6作品 → v3.3双Agent协作实战展示 → v3.4作品矩阵分级布局 → v3.5数据修正+面试速览 → v3.6角色升级Manager+Specialist+图标 → v3.7称呼统一+能力全景+协作技术栈 → v3.8去审计化重定位+工具链分层+技术栈分组 → v3.9协作技术栈术语升级 → v3.10商业化深度(G2N/CCC/死信队列+审计日志) → v3.11 AI助手彻头彻尾大更新 → v4.0 作品集第四代·AI助手四方向大更新 → v4.1 LPR预测替换收入核算 → v4.2 LPR精算增强(理论视角+情景概率+蒙特卡洛) → v4.3 未来5年预测区间带 → v4.4 图表1全宽大图+5Y双期限 → v4.4.1 Demo可靠性加固 → v4.4.2 数据时效更新 → v4.5 精算复合背景升级：新增现金流压力测试(w07)+LPR融资成本压力测试+SmartRecon精算风险引擎 → v5.0 精简聚焦：删除智对账(w04)+月结优化(w02)，双Agent升级为四角色协作体系 → v5.1 四角色区域专业化重写+AI助手知识库自动同步+SOX升级Agent工作流v5.0 → v5.2 w03新增蒙特卡洛可交互Demo+AI利率分析工作流 + w05新增现金流压力测试可交互Demo → v5.3 供应链模拟器逻辑修复+proto2原型V2.0+CHANGELOG → v5.3.3 手机端media适配+preflight体检工具+iframe竞态修复 → v5.5.0 业务化大改造（5作品改为业务叙事：摘要→痛点→洞察→应用→技术→局限）+全站措辞业务化+双Agent协作展示 → v5.6.0 主页作品卡片新增显眼Demo入口（3宽卡「在线 Demo ↗」按钮+mini卡 Demo tag+研究型标注；卡片div化解嵌套链接）+版本基线更新 → v5.6.1 AI协作经验章节更新（双Agent机制升级三阶段闭环：事前对齐方案→独立复核→机器闸门兜底；关键规矩增至6条；数据更新43轮复核/26条批准基线；去内部词） → v5.7.0 作品01替换为发票合规预审（镜像产品演示页：三通道解析+规则引擎R1-R11+证据链；公开渠道去内部词/环境变量名/样本细节，数据全合成） → v5.7.1 作品01加图表（系统流水线HTML/CSS+规则引擎覆盖ECharts横向堆叠条形，数据来自产品RULES_META真实定义）+文案口径修正（10条规则/未见异常） → v6.1 精简聚焦：恢复v5.7.1设计质感，仅保留作品01发票合规预审+作品07现金流压力测试，删除LPR/供应链/SOX/资金智算四个作品及对应知识库条目 → v6.2 细节打磨：Hero统计口径统一（2核心交互Demo）、双Agent企业级角色术语、学历口径对齐简历、资金调度建议呼应协定存款 → v7.0 单作品重构：只留 LPR（删除发票/现金流，恢复 LPR 完整详情页，全站口径同步） → v7.1 首屏 CTA + 导航激活态 + 蒙特卡洛口径统一 10,000 + 中英空格统一 + Demo 口径统一 → v7.2 移除面试模式（用户拍板），助手专注导览与改进建议 → v7.3 AI 协作叙述更新（双 Agent+工具化复核、70 轮/51 基线）+ LPR 模型假设与局限小节 → v7.3.1 标题层级修正（iframe 内 H2→H3）+ 统计标签精确化 → v7.4 新增第二旗舰作品：AI 司库还本付息系统（Actual/360 + AI 合同解析 + Copilot）→ v7.5 司库与 LPR 同权（Hero 双等权入口 + 两卡同权标识）、产品页补动机/口径/数据来源小节",
+  "versions": "v1基础 → v2.1体积优化 → v2.2安全修复 → v2.3接入真实AI → v2.4数据底座 → v2.5拷问修复 → v2.6异常全流程 → v2.7内置助手 → v3.0打字机/批量处理/pytest/RAG/体验优化 → v3.2整合SOX控制测试工作台为第6作品 → v3.3双Agent协作实战展示 → v3.4作品矩阵分级布局 → v3.5数据修正+面试速览 → v3.6角色升级Manager+Specialist+图标 → v3.7称呼统一+能力全景+协作技术栈 → v3.8去审计化重定位+工具链分层+技术栈分组 → v3.9协作技术栈术语升级 → v3.10商业化深度(G2N/CCC/死信队列+审计日志) → v3.11 AI助手彻头彻尾大更新 → v4.0 作品集第四代·AI助手四方向大更新 → v4.1 LPR预测替换收入核算 → v4.2 LPR精算增强(理论视角+情景概率+蒙特卡洛) → v4.3 未来5年预测区间带 → v4.4 图表1全宽大图+5Y双期限 → v4.4.1 Demo可靠性加固 → v4.4.2 数据时效更新 → v4.5 精算复合背景升级：新增现金流压力测试(w07)+LPR融资成本压力测试+SmartRecon精算风险引擎 → v5.0 精简聚焦：删除智对账(w04)+月结优化(w02)，双Agent升级为四角色协作体系 → v5.1 四角色区域专业化重写+AI助手知识库自动同步+SOX升级Agent工作流v5.0 → v5.2 w03新增蒙特卡洛可交互Demo+AI利率分析工作流 + w05新增现金流压力测试可交互Demo → v5.3 供应链模拟器逻辑修复+proto2原型V2.0+CHANGELOG → v5.3.3 手机端media适配+preflight体检工具+iframe竞态修复 → v5.5.0 业务化大改造（5作品改为业务叙事：摘要→痛点→洞察→应用→技术→局限）+全站措辞业务化+双Agent协作展示 → v5.6.0 主页作品卡片新增显眼Demo入口（3宽卡「在线 Demo ↗」按钮+mini卡 Demo tag+研究型标注；卡片div化解嵌套链接）+版本基线更新 → v5.6.1 AI协作经验章节更新（双Agent机制升级三阶段闭环：事前对齐方案→独立复核→机器闸门兜底；关键规矩增至6条；数据更新43轮复核/26条批准基线；去内部词） → v5.7.0 作品01替换为发票合规预审（镜像产品演示页：三通道解析+规则引擎R1-R11+证据链；公开渠道去内部词/环境变量名/样本细节，数据全合成） → v5.7.1 作品01加图表（系统流水线HTML/CSS+规则引擎覆盖ECharts横向堆叠条形，数据来自产品RULES_META真实定义）+文案口径修正（10条规则/未见异常） → v6.1 精简聚焦：恢复v5.7.1设计质感，仅保留作品01发票合规预审+作品07现金流压力测试，删除LPR/供应链/SOX/资金智算四个作品及对应知识库条目 → v6.2 细节打磨：Hero统计口径统一（2核心交互Demo）、双Agent企业级角色术语、学历口径对齐简历、资金调度建议呼应协定存款 → v7.0 单作品重构：只留 LPR（删除发票/现金流，恢复 LPR 完整详情页，全站口径同步） → v7.1 首屏 CTA + 导航激活态 + 蒙特卡洛口径统一 10,000 + 中英空格统一 + Demo 口径统一 → v7.2 移除面试模式（用户拍板），助手专注导览与改进建议 → v7.3 AI 协作叙述更新（双 Agent+工具化复核、70 轮/51 基线）+ LPR 模型假设与局限小节 → v7.3.1 标题层级修正（iframe 内 H2→H3）+ 统计标签精确化 → v7.4 新增第二旗舰作品：AI 司库还本付息系统（Actual/360 + AI 合同解析 + Copilot）→ v7.5 司库与 LPR 同权（Hero 双等权入口 + 两卡同权标识）、产品页补动机/口径/数据来源小节 → v7.6 司库上移 + page-04 详情页 + 9 笔模板口径 + ExcelJS 11-sheet 导出",
   "dualAgentCollab": {
     "description": "主力AI提方案并执行、复核AI独立审查并提出异议、人在分歧点裁决；每次分歧都会沉淀为可复用的规则",
     "roles": [
@@ -2753,6 +2764,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     {icon:'🤖',text:'双Agent复核机制是怎么运作的？',q:'双Agent复核机制是怎么运作的？'},
   ];
   var navItems=[
+    {id:'04',name:'AI 司库系统',n:'W04'},
     {id:'03',name:'LPR 走势预测',n:'W03'},
     {id:'00',name:'AI协作经验',n:'W00'}
   ];
@@ -3572,6 +3584,143 @@ window.addEventListener('resize', function() {
 
 
 </div></script>
+
+<script type="text/html" id="page-04">
+<title>AI 司库还本付息系统 · 作品详情</title>
+<section class="portfolio-page" id="work-04">
+<div class="topbar">
+  <div class="in">
+    <div class="br"><span class="dot"></span>胡凯 · AI × Finance 作品集</div>
+    <a href="javascript:void(0)" onclick="window.parent.showHome();return false;">← 返回作品集</a>
+  </div>
+</div>
+
+<div class="cover">
+  <div class="in">
+    <div class="tag"><span class="dot"></span>LAYER 02 · PRODUCT</div>
+    <h1>AI 集团贷款还本付息动态排程与利息计提系统</h1>
+    <p>银行级 Actual/360 精算 × AI 合同解析 × 司库 Copilot：把集团多笔流贷的「排程 / 计提 / 预警 / 导出」做成可交互产品。单文件纯前端，打开即用。</p>
+    <div class="meta">胡凯 · 智马达汽车（奔驰 × 吉利）资金运营与京东资金管理岗视角 · 2026.10</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:22px">
+      <div class="glass" style="padding:14px 16px"><div style="font-size:22px;font-weight:700;color:#67e8f9">9 笔</div><div style="font-size:12px;color:#8fa3c0">集团流贷台账样本</div></div>
+      <div class="glass" style="padding:14px 16px"><div style="font-size:22px;font-weight:700;color:#67e8f9">¥4.15 亿</div><div style="font-size:12px;color:#8fa3c0">集团流贷总规模</div></div>
+      <div class="glass" style="padding:14px 16px"><div style="font-size:22px;font-weight:700;color:#67e8f9">Actual/360</div><div style="font-size:12px;color:#8fa3c0">逐日计提 · 按季结息</div></div>
+      <div class="glass" style="padding:14px 16px"><div style="font-size:22px;font-weight:700;color:#67e8f9">11 sheet</div><div style="font-size:12px;color:#8fa3c0">动态穿透版 Excel 导出</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap" style="max-width:1100px;margin:0 auto;padding:36px 24px 60px">
+
+  <div class="sec reveal">
+    <div class="sec-head"><span class="num">01</span><h2>业务痛点：为什么做</h2><span class="en">BUSINESS PAIN POINTS</span></div>
+    <h3>多笔贷款的排程与计提，靠 Excel 手工拼</h3>
+    <p>集团资金部管理 9 家银行的流动资金贷款：每笔起息日、到期日、加点、结息方式各不相同。每月要手工拼还款计划、按结息日逐笔核对利息，一处口径错误就会导致资金计划偏差。实习中观察到的真实问题是：<b>台账不缺数据，缺的是「可复算、可穿透、可预警」的计算层</b>。</p>
+    <p>这个作品就是一次产品化尝试：把银行贷款的 Actual/360 计息规则、按季结息（季末月 20 日）、年度重定价、到期还本、集团汇总穿透与 Excel 导出，做成一个打开即用的系统，并用 AI 降低录入与解读成本。</p>
+    <div class="verify-box">
+      <h4>目标用户与场景</h4>
+      <ul>
+        <li><b>资金经理</b>：月初看未来 12 个月还本付息排程与峰值，提前安排续作/提款</li>
+        <li><b>财务核算</b>：按银行口径逐日计提利息，期末与银行对账单交叉核对</li>
+        <li><b>资金负责人</b>：看加权平均成本（WACD）与加点分布，做 LPR 议价与结构优化</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec reveal">
+    <div class="sec-head"><span class="num">02</span><h2>产品定位与核心能力</h2><span class="en">PRODUCT CAPABILITIES</span></div>
+    <div class="about-grid">
+      <div class="about-card"><h4>📊 4 大 KPI</h4><p>总借款余额、当月利息计提、近 30 天现金流出、加权平均利率（WACD 按本金动态加权）。</p></div>
+      <div class="about-card"><h4>📈 12 个月还本付息排程</h4><p>本金（绿）/ 利息（橙）双轴柱状图，一眼看到未来 12 个月的到期分布与峰值月份。</p></div>
+      <div class="about-card"><h4>🚨 流动性峰值预警</h4><p>单月还本付息超 5,000 万自动预警；阈值口径 = 授信额度与月度经营现金流测算的流动性安全垫。</p></div>
+      <div class="about-card"><h4>📄 动态穿透台账</h4><p>9 笔贷款明细 + 状态（Accrued / Scheduled）+ 下一结息日；支持搜索过滤。</p></div>
+      <div class="about-card"><h4>✦ AI 合同解析</h4><p>粘贴非结构化合同，0.5 秒解析动效后自动提取银行/本金/起止日/LPR 加点/结息方式并回填（含中文大写金额解析）。</p></div>
+      <div class="about-card"><h4>✦ AI 司库 Copilot</h4><p>基于当前台账数据流式生成资金洞察报告：峰值、成本结构、集中度、合规口径与建议。</p></div>
+      <div class="about-card"><h4>⤓ 11-sheet Excel 导出</h4><p>复刻「集团贷款还款总表(动态穿透版)」：汇总 + 9 名单笔附表 + 参数敏感性，含 HYPERLINK 穿透与合计公式。</p></div>
+      <div class="about-card"><h4>🧮 降级可用</h4><p>CDN 不可达时图表提示、KPI/台账/Copilot/解析照常；导出组件缺失时给出明确提示。</p></div>
+    </div>
+  </div>
+
+  <div class="sec reveal">
+    <div class="sec-head"><span class="num">03</span><h2>精算规则：Actual/360 + 按季结息 + 年度重定价</h2><span class="en">ACTUARIAL RULES</span></div>
+    <div class="quote">
+      <b>日利率</b> = 年利率 / 360；<b>当期利息</b> = 贷款余额 × 日利率 × 当期实际天数；<b>不允许</b> 用年利息 / 12 平摊。
+    </div>
+    <h3>为什么用 Actual/360</h3>
+    <p>依据中国人民银行《人民币利率管理规定》及国内对公贷款惯例：流贷按 360 天为年计息基准、按实际天数计息。用 /365 或 /12 平摊会与银行对账单产生系统偏差，尤其在跨月、跨季、到期日不齐的情况下误差会累积。</p>
+    <h3>结息与重定价</h3>
+    <p>按季结息：每年 3/6/9/12 月 20 日结息、21 日扣款；遇周末顺延至下周一（不建模法定节假日）。年度重定价：借款每满一整年（Anniversary Date）按最新 1Y LPR 重新确定执行利率——本演示首年 LPR 3.10%、次年 3.00%，到期一次性还本。</p>
+    <div class="verify-box">
+      <h4>🧮 可复算示例（LN2026-001）</h4>
+      <ul>
+        <li>本金 ¥70,000,000，首年 LPR 3.10% + 15bp = <b>3.25%</b></li>
+        <li>首期 2026-01-15 → 2026-03-20，实际 <b>64 天</b></li>
+        <li>利息 = 70,000,000 × 3.25% ÷ 360 × 64 = <b>¥404,444.44</b></li>
+        <li>末期 2026-12-20 → 2027-01-15 按次年 3.15% 计息并归还本金（年度重定价）</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec reveal">
+    <div class="sec-head"><span class="num">04</span><h2>数据与假设</h2><span class="en">DATA &amp; ASSUMPTIONS</span></div>
+    <p>9 笔贷款为<b>合成演示样本</b>（按集团贷款台账模板结构脱敏，非真实客户/合同，银行名仅作场景示意）。首年 LPR 3.10%、次年 3.00%；加点 10–35bp；期限 12 个月；按季结息、到期还本。所得税税率 15%（高新技术企业口径）、流贷额度上限 5 亿元，仅用于敏感性测算。</p>
+    <div class="quote"><b>口径单一真源：</b>页面 KPI、台账、排程、Excel 导出的参数与计算逻辑来自同一套引擎；导出文件为「合成演示数据版」，文件名沿用泛化名，不包含真实机构与合同信息。</div>
+  </div>
+
+  <div class="sec reveal">
+    <div class="sec-head"><span class="num">05</span><h2>交互 Demo：在线应用</h2><span class="en">INTERACTIVE DEMO</span></div>
+    <p>下方为完整应用（iframe 内嵌）：可查看 KPI、12 个月排程、台账、AI 合同解析、AI 司库报告与 Excel 导出。也可以<a href="demo/ai-treasury-copilot/index.html" target="_blank" rel="noopener noreferrer" style="color:#a5b0ff">在新标签打开完整应用 ↗</a>。</p>
+    <div style="border:1px solid rgba(109,124,255,0.25);border-radius:14px;overflow:hidden;background:#0B132B">
+      <iframe id="treasuryFrame" src="demo/ai-treasury-copilot/index.html" title="AI 司库还本付息系统在线应用" loading="lazy" style="width:100%;height:860px;border:0;display:block"></iframe>
+    </div>
+    <div style="margin-top:10px;font-size:11.5px;color:#7f93ad">提示：应用依赖 CDN（Chart.js / ExcelJS）；断网时图表与导出不可用，KPI/台账/解析照常。</div>
+  </div>
+
+  <div class="sec reveal">
+    <div class="sec-head"><span class="num">06</span><h2>AI 实现（诚实标注）</h2><span class="en">AI IMPLEMENTATION</span></div>
+    <p><b>说明：两处 AI 交互均为纯前端规则引擎，不是大模型调用。</b>刻意标注，是因为实习观察里真正的痛点在排程、口径与流动性，AI 在这里是「交互包装」：</p>
+    <ul>
+      <li><b>合同解析：</b>正则 + 中文大写金额解析器，覆盖银行/本金/起止日/LPR 加点/结息方式五类要素，0.5 秒解析动效用于演示「AI 录入」体验；</li>
+      <li><b>司库 Copilot：</b>读取当前台账与排程数据，套模板生成峰值/成本/集中度/合规口径四段式洞察，并以流式打字机方式输出；</li>
+      <li><b>边界：</b>不调用外部 API Key、不上传数据；换真实合同格式时需要扩展解析规则或接入真实 NLP/OCR。</li>
+    </ul>
+  </div>
+
+  <div class="sec reveal">
+    <div class="sec-head"><span class="num">07</span><h2>参数与敏感性</h2><span class="en">PARAMETERS &amp; SENSITIVITY</span></div>
+    <p>导出文件中的「参数配置与敏感性测算」sheet 使用与页面一致的参数：LPR 3.10%、Actual/360、按季结息（季末月 20 日）、所得税 15%、流贷额度上限 5 亿元；并给出 6 档 LPR 情景（-50 / -25 / 0 / +25 / +50 / +100bps）对年度利息与税后利润的影响。</p>
+    <div class="verify-box">
+      <h4>敏感性示例（口径）</h4>
+      <ul>
+        <li>年度利息总额 = 集团流贷总规模 × 加权平均年利率</li>
+        <li>较基准变动额 = 情景年度利息 − 基准情景年度利息</li>
+        <li>税后净利润影响 = −变动额 × (1 − 15%)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec reveal">
+    <div class="sec-head"><span class="num">08</span><h2>局限与诚实披露</h2><span class="en">LIMITATIONS</span></div>
+    <div class="verify-box">
+      <h4>⚠️ 这是一个演示型产品</h4>
+      <ul>
+        <li><b>数据：</b>9 笔贷款与参数为合成演示样本，非真实客户/合同，不构成融资建议；</li>
+        <li><b>规则：</b>结息日仅周末顺延，未建模法定节假日；年度重定价按周年日切换，未建模分段计息到日；</li>
+        <li><b>导出：</b>ExcelJS 生成 11 个 sheet（结构复刻），但样式/公式由 Excel 打开后计算，未在 iOS Safari 真机验证导出兼容性；</li>
+        <li><b>AI：</b>规则引擎演示，非大模型；解析器覆盖预设合同格式，非通用 OCR/NLP。</li>
+      </ul>
+    </div>
+    <div style="margin-top:18px"><a href="javascript:void(0)" onclick="window.parent.showHome();return false;" style="color:#a5b0ff">← 返回作品集，继续看 LPR 作品</a></div>
+  </div>
+
+</div>
+<script>
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+<\/script>
+</section>
+</script>
+
 <script src="echarts.min.js"></script>
 <div class="work-overlay" id="workOverlay"></div>
 <div id="workFrame" style="display:none;position:fixed;inset:0;z-index:9999;background:#0b0d14">

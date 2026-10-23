@@ -6,7 +6,7 @@
 <title>AI Treasury Debt &amp; Amortization Copilot · 集团贷款还本付息排程与利息计提（规则引擎演示版）</title>
 <meta name="description" content="AI 集团贷款还本付息动态排程与利息计提系统：Actual/360 银行级精算、AI 合同解析、AI 司库决策助手">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
 <style>
   :root{
     --bg:#0B132B; --bg2:#0F1B33; --panel:#111C33; --panel2:#152241;
@@ -236,7 +236,7 @@
               <button class="btn primary" data-open="modal">＋ 新增借款</button>
             </div>
           </div>
-          <div class="table-wrap">
+          <div class="table-wrap" tabindex="0">
             <table>
               <caption class="sr-only">集团贷款还本付息台账，含借款银行、本金余额、执行利率、下一结息日与计提状态</caption>
               <thead><tr><th>借款类型</th><th>银行 / 机构</th><th>本金余额</th><th>执行利率 (LPR+)</th><th>下一结息日</th><th>状态</th><th>计量法</th></tr></thead>
@@ -282,7 +282,7 @@
               <button class="btn primary" id="btnReport">✦ 生成 AI 资金洞察报告</button>
               <button class="btn" id="btnActions">执行建议</button>
             </div>
-            <div class="report" id="report" aria-live="polite"></div>
+            <div class="report" id="report" aria-live="polite" tabindex="0"></div>
           </div>
         </section>
       </aside>
@@ -291,11 +291,11 @@
     <section class="card" id="dataNote" style="margin-top:14px">
       <div class="card-head"><h2>数据来源与假设 <span class="tag">DATA &amp; ASSUMPTIONS</span></h2></div>
       <div style="font-size:12px;color:var(--muted);line-height:1.9">
-        ① 4 笔贷款为**合成演示样本**（非真实客户/合同，行名仅作场景示意）；② LPR 1Y 基准 3.00% 采用 2026-08 报价口径；③ 利率加点、金额、起止日为演示假设；④ Actual/360 依据人行对公贷款利率管理规定，结息日仅周末顺延（未建模法定节假日与 LPR 重定价条款）；⑤ 导出功能桌面 Chromium 已验证，iOS Safari Blob 兼容性未真机验证；⑥ 全部数据不构成融资建议。
+        ① 9 笔贷款为**合成演示样本**（按用户提供的集团贷款台账模板结构脱敏，非真实客户/合同）；② 首年 LPR 3.10%、次年 3.00%（年度重定价）为演示基准；③ 利率加点、金额、起止日为演示假设；④ Actual/360 依据人行对公贷款利率管理规定，按季结息（季末月 20 日）、结息日仅周末顺延；⑤ 导出为 ExcelJS 生成（11 个 sheet），桌面 Chromium 已验证，iOS Safari Blob 兼容性未真机验证；⑥ 全部数据不构成融资建议。
       </div>
     </section>
     <div style="margin-top:18px;font-size:11.5px;color:var(--dim);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
-      <span>LPR 1Y 基准 3.00%（2026-08 报价）· 结息日仅周末顺延（不含法定节假日）· 未建模 LPR 重定价条款 · 数据为演示样本，不构成融资建议</span>
+      <span>LPR 1Y 首年 3.10% / 次年 3.00%（年度重定价）· 按季结息（季末月 20 日）· 结息日仅周末顺延（不含法定节假日）· Excel 导出为合成演示数据</span>
       <span>AI Copilot · 纯前端规则引擎（无外部 API Key）</span>
     </div>
   </main>
@@ -371,7 +371,8 @@
 (function(){
   "use strict";
   /* ================= 基础工具 ================= */
-  var LPR_BASE = 3.00;               // 2026-08 一年期 LPR
+  var LPR_BASE = 3.10;               // 首年 1Y LPR（按季结息基准）
+  var LPR_NEXT = 3.00;               // 次年 1Y LPR（年度重定价后）
   var DAY = 86400000;
   var today = (function(){ var d=new Date(); d.setHours(0,0,0,0); return d; })();
   var ALERT_THRESHOLD = 50000000;    // 5,000 万
@@ -391,11 +392,21 @@
 
   /* ================= 贷款数据（演示样本） ================= */
   var loans = [
-    { id:'LN-2026-011', bank:'中国工商银行 上海分行', type:'流动资金贷款', principal:320000000, start:'2026-05-15', end:'2027-05-15', spread:15, settle:'month20', convention:'Actual/360', note:'集团统借统还' },
-    { id:'LN-2026-024', bank:'中国建设银行 江苏分行', type:'流动资金贷款', principal:184450000, start:'2026-06-10', end:'2026-12-10', spread:15, settle:'quarterEnd', convention:'Actual/360', note:'子公司流贷' },
-    { id:'LN-2026-007', bank:'中国银行 浙江分行', type:'流动资金贷款', principal:280000000, start:'2026-03-01', end:'2027-03-01', spread:10, settle:'month20', convention:'Actual/360', note:'营运资金周转' },
-    { id:'LN-2026-031', bank:'招商银行 杭州分行', type:'流动资金贷款', principal:120000000, start:'2026-08-25', end:'2027-02-25', spread:40, settle:'month20', convention:'Actual/360', note:'短期过桥' }
-  ].map(function(l){ l.rate = (LPR_BASE + l.spread/100)/100; return l; });
+    { id:'LN2026-001', bank:'中国工商银行 (ICBC)', type:'短期流动资金贷款', principal:70000000, start:'2026-01-15', end:'2027-01-15', spread:15, settle:'quarter20', convention:'Actual/360', note:'集团统借统还' },
+    { id:'LN2026-002', bank:'中国建设银行 (CCB)', type:'短期流动资金贷款', principal:60000000, start:'2026-02-20', end:'2027-02-20', spread:20, settle:'quarter20', convention:'Actual/360', note:'子公司流贷' },
+    { id:'LN2026-003', bank:'中国银行 (BOC)', type:'短期流动资金贷款', principal:55000000, start:'2026-03-10', end:'2027-03-10', spread:10, settle:'quarter20', convention:'Actual/360', note:'营运资金周转' },
+    { id:'LN2026-004', bank:'中国农业银行 (ABC)', type:'短期流动资金贷款', principal:50000000, start:'2026-04-18', end:'2027-04-18', spread:25, settle:'quarter20', convention:'Actual/360', note:'采购备货' },
+    { id:'LN2026-005', bank:'交通银行 (BOCOM)', type:'短期流动资金贷款', principal:45000000, start:'2026-05-15', end:'2027-05-15', spread:15, settle:'quarter20', convention:'Actual/360', note:'流动性补充' },
+    { id:'LN2026-006', bank:'招商银行 (CMB)', type:'短期流动资金贷款', principal:40000000, start:'2026-06-20', end:'2027-06-20', spread:30, settle:'quarter20', convention:'Actual/360', note:'短期过桥' },
+    { id:'LN2026-007', bank:'中信银行 (CITIC)', type:'短期流动资金贷款', principal:35000000, start:'2026-07-12', end:'2027-07-12', spread:25, settle:'quarter20', convention:'Actual/360', note:'经营性周转' },
+    { id:'LN2026-008', bank:'兴业银行 (CIB)', type:'短期流动资金贷款', principal:30000000, start:'2026-08-25', end:'2027-08-25', spread:35, settle:'quarter20', convention:'Actual/360', note:'季节性备货' },
+    { id:'LN2026-009', bank:'浦发银行 (SPDB)', type:'短期流动资金贷款', principal:30000000, start:'2026-09-18', end:'2027-09-18', spread:30, settle:'quarter20', convention:'Actual/360', note:'流动性备付' }
+  ].map(function(l){
+    l.rate1 = (LPR_BASE + l.spread/100) / 100;
+    l.rate2 = (LPR_NEXT + l.spread/100) / 100;
+    l.anniversary = addMonths(parseYmd(l.start), 12);
+    return l;
+  });
 
   /* ================= 精算引擎：Actual/360 + 结息日顺延 ================= */
   function settlementDates(loan){
@@ -413,18 +424,23 @@
       if(!out.length || out[out.length-1] < end) out.push(end);
       return out;
     }
-    // 季末结息：3/6/9/12 月末
+    // 按季结息：3/6/9/12 月 20 日（quarter20）或季末最后一日（quarterEnd）
     var cursor = new Date(start.getFullYear(), start.getMonth(), 1);
     while(cursor <= end){
       var mm = cursor.getMonth();
       if(mm === 2 || mm === 5 || mm === 8 || mm === 11){
-        var last = new Date(cursor.getFullYear(), mm+1, 0);
-        if(last >= start && last <= end) out.push(last);
+        var lastDay = new Date(cursor.getFullYear(), mm+1, 0);
+        var d = (loan.settle === 'quarter20') ? new Date(cursor.getFullYear(), mm, 20) : lastDay;
+        if(d >= start && d <= end) out.push(d);
       }
       cursor = addMonths(cursor, 1);
     }
     if(!out.length || out[out.length-1] < end) out.push(end);
     return out;
+  }
+
+  function rateAt(loan, d){
+    return d >= loan.anniversary ? loan.rate2 : loan.rate1;
   }
 
   function buildSchedule(loan){
@@ -435,9 +451,10 @@
     dates.forEach(function(raw, i){
       var payDate = shiftWeekend(raw);
       var dd = Math.max(0, days(prev, payDate));
-      var interest = balance * loan.rate / 360 * dd;
+      var rate = rateAt(loan, payDate);
+      var interest = balance * rate / 360 * dd;
       var principal = (i === dates.length - 1) ? balance : 0;
-      rows.push({ date: payDate, depositDate: raw, days: dd, interest: interest, principal: principal, balance: balance });
+      rows.push({ date: payDate, depositDate: raw, days: dd, interest: interest, principal: principal, balance: balance, rate: rate, dayRate: rate/360 });
       prev = payDate;
     });
     return rows;
@@ -447,7 +464,7 @@
   function aggregate(){
     var schedules = loans.map(function(l){ return { loan:l, rows: buildSchedule(l) }; });
     var balance = loans.reduce(function(s,l){ return s + l.principal; }, 0);
-    var wacd = balance ? loans.reduce(function(s,l){ return s + l.principal*l.rate; }, 0)/balance : 0;
+    var wacd = balance ? loans.reduce(function(s,l){ return s + l.principal*l.rate1; }, 0)/balance : 0;
 
     // 当月计提（按日累计至 today）
     var ms = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -455,7 +472,7 @@
     schedules.forEach(function(sc){
       var from = new Date(Math.max(parseYmd(sc.loan.start), ms));
       var to = new Date(Math.min(today, parseYmd(sc.loan.end)));
-      if(to > from) accrual += sc.loan.principal * sc.loan.rate / 360 * days(from, to);
+      if(to > from) accrual += sc.loan.principal * rateAt(sc.loan, new Date(Math.max(from.getTime(), sc.loan.anniversary.getTime()))) / 360 * days(from, to);
     });
 
     // 30 天现金流出
@@ -493,13 +510,13 @@
 
   function renderKpis(agg){
     document.getElementById('kpiBalance').textContent = compact(agg.balance);
-    document.getElementById('kpiBalanceHint').innerHTML = loans.length + ' 笔在贷 · 本金余额合计 ' + money(agg.balance);
+    document.getElementById('kpiBalanceHint').innerHTML = loans.length + ' 笔在贷 · 本金余额合计 ' + money(agg.balance) + '（4.15 亿）';
     document.getElementById('kpiAccrual').textContent = money(agg.accrual);
     document.getElementById('kpiAccrualHint').textContent = 'Actual/360 · 按日计提至 ' + ymd(today);
     document.getElementById('kpiOutflow').textContent = compact(agg.outflow30);
-    document.getElementById('kpiOutflowHint').textContent = '含本金与利息 · ' + ymd(today) + ' 起 30 天';
+    document.getElementById('kpiOutflowHint').textContent = agg.outflow30 > 0 ? ('含本金与利息 · ' + ymd(today) + ' 起 30 天') : ('未来 30 天无到期 · 下次结息 ' + (function(){ var nx=null; loans.forEach(function(l){ var s2=buildSchedule(l); s2.forEach(function(r){ if(r.date>=today && (!nx || r.date<nx)) nx=r.date; }); }); return nx?ymd(nx):'—'; })());
     document.getElementById('kpiWacd').textContent = pct(agg.wacd);
-    document.getElementById('kpiWacdHint').textContent = '按本金余额动态加权 · LPR 1Y ' + LPR_BASE.toFixed(2) + '%';
+    document.getElementById('kpiWacdHint').textContent = '按本金余额加权 · 首年 LPR ' + LPR_BASE.toFixed(2) + '%（次年 ' + LPR_NEXT.toFixed(2) + '%）';
   }
 
   function renderChart(agg){
@@ -553,7 +570,7 @@
         '<td>' + l.type + '<div style="font-size:10.5px;color:var(--dim)" class="mono">' + l.id + '</div></td>' +
         '<td>' + l.bank + '</td>' +
         '<td class="mono">' + money(l.principal) + '</td>' +
-        '<td>LPR+' + l.spread + 'bp <span style="color:var(--dim)">(' + pct(l.rate) + ')</span></td>' +
+        '<td>LPR+' + l.spread + 'bp <span style="color:var(--dim)">(' + pct(l.rate1) + ' 首年 → ' + pct(l.rate2) + ' 次年)</span></td>' +
         '<td class="mono">' + (nx ? ymd(nx.date) : '—') + '</td>' +
         '<td><span class="pill ' + statusCls + '">' + status + '</span></td>' +
         '<td class="mono">' + l.convention + '</td></tr>';
@@ -593,9 +610,9 @@
 
   /* ================= AI 合同解析（规则引擎） ================= */
   var PRESETS = [
-    '甲方中国工商银行上海分行同意向乙方提供流动资金贷款人民币伍仟万元整（¥50,000,000.00），借款期限自2026年5月15日至2027年5月15日，执行利率为一年期LPR加15个基点，按月20日结息，到期一次性还本。',
-    '中国建设银行江苏省分行向借款人发放流动资金贷款壹亿捌仟肆佰肆拾伍万元，期限2026年6月10日至2026年12月10日，执行利率为LPR+15BP，按季末结息，到期还本。',
-    '招商银行杭州分行：贷款金额人民币120,000,000元，执行利率一年期LPR加40个基点，自2026年8月25日起息，2027年2月25日到期，按月20日结息。'
+    '甲方中国工商银行上海分行同意向乙方提供流动资金贷款人民币柒仟万元整（¥70,000,000.00），借款期限自2026年1月15日至2027年1月15日，执行利率为一年期LPR加15个基点，按季结息（季末月20日），到期一次性还本。',
+    '中国建设银行江苏省分行向借款人发放流动资金贷款陆仟万元，期限2026年2月20日至2027年2月20日，执行利率为LPR+20BP，按季结息，到期还本。',
+    '招商银行杭州分行：贷款金额人民币40,000,000元，执行利率一年期LPR加30个基点，自2026年6月20日起息，2027年6月20日到期，按季结息（季末月20日）。'
   ];
   document.getElementById('contract').value = PRESETS[0];
 
@@ -630,7 +647,7 @@
     if(dates.length >= 2){ out.start = dates[0]; out.end = dates[1]; }
     m = text.match(/(?:加|\+)\s*(\d{1,3})\s*(?:个基点|BP|bp|基点)/);
     if(m) out.spread = +m[1];
-    if(/按季末|季末结息|季度末/.test(text)) out.settle = 'quarterEnd';
+    if(/按季末|季末结息|季度末|按季结息|按季/.test(text)) out.settle = 'quarter20';
     else if(/到期还本付息|到期一次性还本/.test(text)) out.settle = 'maturity';
     else if(/按月\s*20\s*日|每月\s*20\s*日|按月结息/.test(text)) out.settle = 'month20';
     if(/银行承兑|票据/.test(text)) out.type = '银行承兑汇票';
@@ -655,7 +672,7 @@
       ['本金 Principal', p.principal ? money(p.principal) : '—'],
       ['起息 / 到期', (p.start||'—') + ' → ' + (p.end||'—')],
       ['LPR 加点 Spread', (p.spread===null||p.spread===undefined) ? '—' : ('LPR + ' + p.spread + 'bp')],
-      ['结息方式 Settlement', ({month20:'按月 20 日',quarterEnd:'按季末',maturity:'到期还本付息'})[p.settle]],
+      ['结息方式 Settlement', ({month20:'按月 20 日',quarter20:'按季结息（季末月 20 日）',quarterEnd:'按季末',maturity:'到期还本付息'})[p.settle]],
       ['计息基准', 'Actual/360']
     ];
     el.innerHTML = '<div style="font-size:12px;color:var(--cyan);margin-bottom:6px">✓ 解析结果（自动回填表单）</div>' + rows.map(function(r){
@@ -814,25 +831,299 @@
     });
   });
 
-  /* Excel 导出（SheetJS） */
-  document.getElementById('btnExport').addEventListener('click', function(){
-    if(typeof XLSX === 'undefined'){ toast('Excel 组件加载失败，请检查网络后重试', 'err'); return; }
-    try{
-      var wb = XLSX.utils.book_new();
-      var ledger = [['借款编号','借款类型','银行/机构','本金余额(元)','执行利率','加点(bp)','起息日','到期日','结息方式','计息基准','备注']];
-      loans.forEach(function(l){
-        ledger.push([l.id, l.type, l.bank, l.principal, pct(l.rate), l.spread, l.start, l.end,
-          ({month20:'按月20日',quarterEnd:'按季末',maturity:'到期还本付息'})[l.settle], l.convention, l.note || '']);
-      });
-      XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(ledger), '债务台账');
+  /* ================= Excel 导出（ExcelJS · 复刻「集团贷款还款总表(动态穿透版)」11 sheet 结构） ================= */
+  var BANK_SHORT = ['中国工商银行','中国建设银行','中国银行','中国农业银行','交通银行','招商银行','中信银行','兴业银行','浦发银行'];
 
-      var rows = [['结息日','计息天数','本金(元)','利息(元)','还款合计(元)','对应贷款']];
-      state.agg.schedules.forEach(function(sc){
-        sc.rows.forEach(function(r){ rows.push([ymd(r.date), r.days, r.principal, Math.round(r.interest), Math.round(r.principal+r.interest), sc.loan.id]); });
+  function xlBorder(c){
+    c.border = { top:{style:'thin',color:{argb:'FFB4C6E7'}}, left:{style:'thin',color:{argb:'FFB4C6E7'}}, bottom:{style:'thin',color:{argb:'FFB4C6E7'}}, right:{style:'thin',color:{argb:'FFB4C6E7'}} };
+  }
+  function xlHead(ws, row, vals){
+    vals.forEach(function(v, i){
+      var c = ws.getCell(row, i+1);
+      c.value = v;
+      c.font = { bold:true, size:10, color:{argb:'FFFFFFFF'} };
+      c.fill = { type:'pattern', pattern:'solid', fgColor:{argb:'FF2E5B88'} };
+      c.alignment = { horizontal:'center', vertical:'middle', wrapText:true };
+      xlBorder(c);
+    });
+  }
+  function xlTitle(ws, text, lastCol){
+    ws.mergeCells('A1:' + lastCol + '1');
+    var c = ws.getCell('A1');
+    c.value = text;
+    c.font = { bold:true, size:14, color:{argb:'FFFFFFFF'} };
+    c.fill = { type:'pattern', pattern:'solid', fgColor:{argb:'FF1B365D'} };
+    c.alignment = { horizontal:'center', vertical:'middle' };
+    ws.getRow(1).height = 26;
+  }
+  function xlSub(ws, text, lastCol){
+    ws.mergeCells('A2:' + lastCol + '2');
+    var c = ws.getCell('A2');
+    c.value = text;
+    c.font = { size:9, color:{argb:'FFE2E8F0'} };
+    c.fill = { type:'pattern', pattern:'solid', fgColor:{argb:'FF2E5B88'} };
+    c.alignment = { horizontal:'center', vertical:'middle' };
+  }
+  function xlDate(str){ var p = str.split('-'); return new Date(Date.UTC(+p[0], +p[1]-1, +p[2])); }
+  function xlMoney(c){ c.numFmt = '#,##0.00'; }
+  function xlPct4(c){ c.numFmt = '0.0000%'; }
+
+  function buildTemplateWorkbook(){
+    var wb = new ExcelJS.Workbook();
+    wb.creator = 'AI Treasury Copilot';
+    wb.created = new Date();
+    var agg = state.agg;
+    var sums = { principal:0, i2026:0, iTotal:0, p2026:0 };
+
+    // ---------- 1) 集团贷款汇总总表 ----------
+    var ws = wb.addWorksheet('集团贷款汇总总表');
+    xlTitle(ws, '某大型新能源整车制造企业 · 集团流动资金贷款还款总表 (动态穿透跳转版 · 合成演示数据)', 'N');
+    xlSub(ws, '企业主体: 某大型新能源整车制造集团资金管理部 | 计息标准: PBOC Actual/360 | 首年 LPR 3.10% / 次年 3.00%（年度重定价）', 'N');
+    [14,24,18,16,15,15,10,12,10,15,24,18,18,18].forEach(function(w,i){ ws.getColumn(i+1).width = w; });
+
+    var kpiLabels = ['集团流贷总规模 (Total Debt)','加权平均年化借贷利率 (WAVG Rate)','2026年度实付利息 (2026 Interest)','全周期借贷利息总额 (Total Interest)','2026年到期本金偿还 (Principal)'];
+    var kpiRanges = ['A4:C4','D4:F4','G4:I4','J4:L4','M4:N4'];
+    kpiLabels.forEach(function(t, i){
+      ws.mergeCells(kpiRanges[i]);
+      var c = ws.getCell(kpiRanges[i].split(':')[0]);
+      c.value = t; c.font = { bold:true, size:9, color:{argb:'FFFFFFFF'} };
+      c.fill = { type:'pattern', pattern:'solid', fgColor:{argb:'FF1B365D'} };
+      c.alignment = { horizontal:'center', vertical:'middle', wrapText:true };
+    });
+    var kpiCells = ['A5','D5','G5','J5','M5'];
+    var kpiFormulas = [ {formula:'D19'}, {formula:'J19'}, {formula:'L19'}, {formula:'M19'}, 0 ];
+    var kpiMerges = ['A5:C5','D5:F5','G5:I5','J5:L5','M5:N5'];
+    kpiMerges.forEach(function(rg, i){
+      ws.mergeCells(rg);
+      var c = ws.getCell(kpiCells[i]);
+      c.value = kpiFormulas[i];
+      c.font = { bold:true, size:12, color:{argb:'FF1B365D'} };
+      c.alignment = { horizontal:'center', vertical:'middle' };
+      if(i===1) xlPct4(c); else xlMoney(c);
+    });
+
+    ws.mergeCells('A8:N8');
+    var sec = ws.getCell('A8');
+    sec.value = '【集团核心流动资金贷款穿透汇总总表】(点击银行名称或「查看付息排程」可直达单笔贷款附表)';
+    sec.font = { bold:true, size:11, color:{argb:'FF1B365D'} };
+    sec.fill = { type:'pattern', pattern:'solid', fgColor:{argb:'FFE8EEF7'} };
+
+    xlHead(ws, 9, ['贷款编号','放款金融机构 (点击直达附表)','业务品种','合同本金 (元)','借款起息日','合同到期日','期限(月)','基准利率','利差(bps)','首年执行年利率','重定价机制','2026实付利息 (元)','全周期利息总额 (元)','穿透明细台账']);
+
+    loans.forEach(function(l, i){
+      var r = 10 + i;
+      var sheetName = 'LN' + String(i+1).padStart(2,'0') + '_' + BANK_SHORT[i];
+      var p = buildSchedule(l);
+      var i2026 = p.filter(function(x){ return x.date.getFullYear() === 2026; }).reduce(function(s,x){ return s + x.interest; }, 0);
+      var iTotal = p.reduce(function(s,x){ return s + x.interest; }, 0);
+      sums.principal += l.principal; sums.i2026 += i2026; sums.iTotal += iTotal;
+
+      ws.getCell(r,1).value = l.id;
+      var b = ws.getCell(r,2);
+      b.value = { text: BANK_SHORT[i] + ' (' + l.bank.replace(/.*\(/,'').replace(/\)/,'') + ')', hyperlink: "#'" + sheetName + "'!A1" };
+      b.font = { color:{argb:'FF0563C1'}, underline:true };
+      ws.getCell(r,3).value = l.type;
+      ws.getCell(r,4).value = { formula: "'" + sheetName + "'!C5" }; xlMoney(ws.getCell(r,4));
+      ws.getCell(r,5).value = xlDate(l.start); ws.getCell(r,5).numFmt = 'yyyy-mm-dd';
+      ws.getCell(r,6).value = xlDate(l.end); ws.getCell(r,6).numFmt = 'yyyy-mm-dd';
+      ws.getCell(r,7).value = { formula: "'" + sheetName + "'!C8" };
+      ws.getCell(r,8).value = { formula: "'" + sheetName + "'!C9" }; xlPct4(ws.getCell(r,8));
+      ws.getCell(r,9).value = { formula: "'" + sheetName + "'!C10" };
+      ws.getCell(r,10).value = { formula: "'" + sheetName + "'!C11" }; xlPct4(ws.getCell(r,10));
+      ws.getCell(r,11).value = '按年重定价 (每年按最新1Y LPR调整)';
+      ws.getCell(r,12).value = { formula: "'" + sheetName + "'!C13" }; xlMoney(ws.getCell(r,12));
+      ws.getCell(r,13).value = { formula: "'" + sheetName + "'!C14" }; xlMoney(ws.getCell(r,13));
+      var n = ws.getCell(r,14);
+      n.value = { text: '查看付息排程 ➜', hyperlink: "#'" + sheetName + "'!A1" };
+      n.font = { color:{argb:'FF0563C1'}, underline:true };
+      for(var c=1;c<=14;c++){ xlBorder(ws.getCell(r,c)); }
+    });
+
+    var totalRow = 19;
+    var totals = ['合计','集团流贷资产包汇总','9笔流贷','SUM(D10:D18)','','','AVERAGE(G10:G18)','AVERAGE(H10:H18)','SUMPRODUCT(D10:D18,I10:I18)/D19','SUMPRODUCT(D10:D18,J10:J18)/D19','按年重定价','SUM(L10:L18)','SUM(M10:M18)','9 笔穿透联动'];
+    totals.forEach(function(v, i){
+      var c = ws.getCell(totalRow, i+1);
+      if(v === '') return;
+      if(/^(SUM|AVERAGE|SUMPRODUCT)\(/.test(v)) c.value = { formula: v }; else c.value = v;
+      c.font = { bold:true, size:10 };
+      c.fill = { type:'pattern', pattern:'solid', fgColor:{argb:'FFDDE5F2'} };
+      xlBorder(c);
+      if(i===11||i===12) xlMoney(c);
+    });
+
+    // ---------- 2) LN01~LN09 单笔附表 ----------
+    loans.forEach(function(l, idx){
+      var sheetName = 'LN' + String(idx+1).padStart(2,'0') + '_' + BANK_SHORT[idx];
+      var ws2 = wb.addWorksheet(sheetName);
+      [14,25,14,12,21,16,27,14,12,14,18,21].forEach(function(w,i){ ws2.getColumn(i+1).width = w; });
+      xlTitle(ws2, '【单笔贷款附表】' + l.id + ' - ' + BANK_SHORT[idx] + ' 流贷还本付息与利息计提明细表', 'L');
+      ws2.mergeCells('A2:I2');
+      var sub2 = ws2.getCell('A2');
+      sub2.value = '计息标准: PBOC Actual/360 | 结息机制: 按季结息（季末月20日）到期还本 | 重定价: 按年重定价';
+      sub2.font = { size:9, color:{argb:'FFE2E8F0'} };
+      sub2.fill = { type:'pattern', pattern:'solid', fgColor:{argb:'FF2E5B88'} };
+      sub2.alignment = { horizontal:'center', vertical:'middle' };
+      ws2.mergeCells('J2:L2');
+      var back = ws2.getCell('J2');
+      back.value = { text: '🔙 返回集团贷款汇总总表', hyperlink: "#'集团贷款汇总总表'!A1" };
+      back.font = { color:{argb:'FF0563C1'}, underline:true };
+
+      ws2.mergeCells('B4:D4');
+      var s1 = ws2.getCell('B4'); s1.value = '一、贷款核心合同要素 (Contract Terms)'; s1.font = { bold:true, size:11, color:{argb:'FF1B365D'} };
+      ws2.mergeCells('G4:K4');
+      var s2 = ws2.getCell('G4'); s2.value = '二、每年利率调整 (Annual Repricing) 规则与多年度基准'; s2.font = { bold:true, size:11, color:{argb:'FF1B365D'} };
+
+      var contract = [
+        ['B5','C5','合同本金规模', l.principal],
+        ['B6','C6','借款起息日期', xlDate(l.start)],
+        ['B7','C7','合同到期日期', xlDate(l.end)],
+        ['B8','C8','贷款总期限 (月)', 12],
+        ['B9','C9','首年基准利率 (1Y LPR)', 0.031],
+        ['B10','C10','合同浮动利差 (bps)', l.spread],
+        ['B11','C11','首年执行年利率', {formula:'C9+C10/10000'}],
+        ['B12','C12','重定价周期规范', '按年重定价 (每年按最新1Y LPR调整)']
+      ];
+      contract.forEach(function(row){
+        var lab = ws2.getCell(row[0]); lab.value = row[2]; lab.font = { bold:true, size:10 };
+        var c = ws2.getCell(row[1]); c.value = row[3]; xlBorder(c);
+        if(row[1]==='C5') xlMoney(c);
+        if(row[1]==='C6'||row[1]==='C7') c.numFmt = 'yyyy-mm-dd';
+        if(row[1]==='C9'||row[1]==='C11') xlPct4(c);
       });
-      XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(rows), '还本付息排程');
-      XLSX.writeFile(wb, 'AI-Treasury-Debt-Schedule-' + ymd(today).replace(/-/g,'') + '.xlsx');
-      toast('已导出 Excel：台账 + 排程两个工作表');
+
+      var repricing = [
+        ['G5','H5','每年重定价触发机制','借款每满一整年（Anniversary Date）按最新 1Y LPR 重新确定执行利率'],
+        ['G6','H6','首年基准利率 (2026年)', 0.031],
+        ['G7','H7','次年预测基准 (2027年)', 0.03],
+        ['G8','H8','合同浮动利差', l.spread],
+        ['G9','H9','首年执行年利率 (2026年)', {formula:'C11'}],
+        ['G10','H10','次年执行年利率 (2027年)', {formula:'H7+H8/10000'}],
+        ['G11','H11','利率变动处理原则','按季结息采用分段计息 (Split Period) Actual/360 精确核算'],
+        ['G12','H12','到期还本方式','到期一次性还本（按季付息、到期还本）']
+      ];
+      repricing.forEach(function(row){
+        var lab = ws2.getCell(row[0]); lab.value = row[2]; lab.font = { bold:true, size:10 };
+        var c = ws2.getCell(row[1]); c.value = row[3]; xlBorder(c);
+        if(row[1]==='H6'||row[1]==='H7'||row[1]==='H9'||row[1]==='H10') xlPct4(c);
+      });
+
+      ws2.getCell('B13').value = '2026年度实付利息合计';
+      ws2.getCell('C13').value = { formula: 'SUMIF(C19:C23,"<="&DATE(2026,12,31),J19:J23)' };
+      xlMoney(ws2.getCell('C13'));
+      ws2.getCell('B14').value = '全周期利息总额合计';
+      ws2.getCell('C14').value = { formula: 'SUM(J19:J23)' };
+      xlMoney(ws2.getCell('C14'));
+      ws2.getCell('B15').value = '当前履约核销状态';
+      ws2.getCell('C15').value = '正常付息 (履约中)';
+
+      ws2.mergeCells('A17:L17');
+      var sec3 = ws2.getCell('A17');
+      sec3.value = '三、还本付息与利息计提排程明细表 (按季结息 Actual/360 穿透台账)';
+      sec3.font = { bold:true, size:11, color:{argb:'FF1B365D'} };
+      sec3.fill = { type:'pattern', pattern:'solid', fgColor:{argb:'FFE8EEF7'} };
+      xlHead(ws2, 18, ['期次','计息起日','计息止日','实际天数','在贷本金基数 (元)','适用基准 LPR','浮动点差 (bps)','执行年利率','日基准利率','当期应付利息 (元)','本期还本金额 (元)','现金流出合计 (元)']);
+
+      var sch = buildSchedule(l);
+      sch.forEach(function(row, i){
+        var r = 19 + i;
+        ws2.getCell(r,1).value = '第' + (i+1) + '期';
+        ws2.getCell(r,2).value = xlDate(ymd((i === 0) ? parseYmd(l.start) : sch[i-1].date)); ws2.getCell(r,2).numFmt = 'yyyy-mm-dd';
+        ws2.getCell(r,3).value = xlDate(ymd(row.depositDate)); ws2.getCell(r,3).numFmt = 'yyyy-mm-dd';
+        ws2.getCell(r,4).value = { formula: 'C' + r + '-B' + r };
+        ws2.getCell(r,5).value = l.principal; xlMoney(ws2.getCell(r,5));
+        var base = (row.rate === l.rate2) ? 0.03 : 0.031;
+        ws2.getCell(r,6).value = base; xlPct4(ws2.getCell(r,6));
+        ws2.getCell(r,7).value = l.spread;
+        ws2.getCell(r,8).value = { formula: 'F' + r + '+G' + r + '/10000' }; xlPct4(ws2.getCell(r,8));
+        ws2.getCell(r,9).value = { formula: 'H' + r + '/360' }; ws2.getCell(r,9).numFmt = '0.000000';
+        ws2.getCell(r,10).value = { formula: 'ROUND(E' + r + '*I' + r + '*D' + r + ',2)' }; xlMoney(ws2.getCell(r,10));
+        ws2.getCell(r,11).value = row.principal; xlMoney(ws2.getCell(r,11));
+        ws2.getCell(r,12).value = { formula: 'J' + r + '+K' + r }; xlMoney(ws2.getCell(r,12));
+        for(var c=1;c<=12;c++){ xlBorder(ws2.getCell(r,c)); }
+      });
+      var tr = 19 + sch.length;
+      var totalVals = ['全周期合计','','', {formula:'SUM(D19:D'+(tr-1)+')'}, '', '', '', '', '', {formula:'SUM(J19:J'+(tr-1)+')'}, {formula:'SUM(K19:K'+(tr-1)+')'}, {formula:'SUM(L19:L'+(tr-1)+')'}];
+      totalVals.forEach(function(v,i){
+        var c = ws2.getCell(tr, i+1);
+        c.value = v; c.font = { bold:true, size:10 };
+        c.fill = { type:'pattern', pattern:'solid', fgColor:{argb:'FFDDE5F2'} };
+        xlBorder(c);
+        if(i===9||i===10||i===11) xlMoney(c);
+      });
+    });
+
+    // ---------- 3) 参数配置与敏感性测算 ----------
+    var ws3 = wb.addWorksheet('参数配置与敏感性测算');
+    [17,40,18,40,18,21,21,23].forEach(function(w,i){ ws3.getColumn(i+1).width = w; });
+    xlTitle(ws3, '集团贷款利息计算基准参数与 LPR 敏感性压力测试', 'H');
+    xlSub(ws3, '基准利率口径: 中国人民银行 1年期 LPR | 计息标准: PBOC Actual/360 | 结息: 按季结息（季末月20日）| 演示为合成数据', 'H');
+
+    ws3.mergeCells('A4:D4');
+    var s4 = ws3.getCell('A4'); s4.value = '一、核心基准金融参数表 (Benchmark Settings)'; s4.font = { bold:true, size:11, color:{argb:'FF1B365D'} };
+    xlHead(ws3, 5, ['参数项目代码','参数全称与业务释义','基准设定值','计量单位 / 规则说明']);
+    var params = [
+      ['PAR_LPR_1Y','全国银行间同业拆借中心 1年期贷款市场报价利率 (LPR) 首年', 0.031,'基准年利率 3.10%'],
+      ['PAR_LPR_NEXT','次年预测 1年期 LPR（年度重定价后）', 0.03,'预测年利率 3.00%'],
+      ['PAR_DAY_COUNT','国内央行流贷计息天数基准 (Actual/360)', 360,'年计息基准 360 天（日利率 = 年利率/360）'],
+      ['PAR_SETTLE_CYCLE','商业银行流贷结息周期规范','按季结息','季末月 20 日结息，21 日扣款'],
+      ['PAR_CORP_TAX','企业所得税法定税率 (利息费用税盾测算)', 0.15,'高新技术企业 / 新能源汽车主机厂优惠税率 15%'],
+      ['PAR_DEBT_CAP','集团流动资金贷款额度上限规模', 500000000,'综合授信流贷敞口上限 5.00 亿元']
+    ];
+    params.forEach(function(p, i){
+      var r = 6 + i;
+      ws3.getCell(r,1).value = p[0];
+      ws3.getCell(r,2).value = p[1];
+      ws3.getCell(r,3).value = p[2];
+      ws3.getCell(r,4).value = p[3];
+      if(i===0||i===1||i===4) xlPct4(ws3.getCell(r,3));
+      if(i===5) xlMoney(ws3.getCell(r,3));
+      for(var c=1;c<=4;c++){ xlBorder(ws3.getCell(r,c)); }
+    });
+
+    ws3.mergeCells('A13:H13');
+    var s13 = ws3.getCell('A13'); s13.value = '二、LPR 利率波动对集团年度财务费用影响之敏感性压力测试 (Sensitivity Matrix)'; s13.font = { bold:true, size:11, color:{argb:'FF1B365D'} }; s13.fill = { type:'pattern', pattern:'solid', fgColor:{argb:'FFE8EEF7'} };
+    xlHead(ws3, 14, ['情景编号','测试情景设定','LPR 浮动 (bps)','测算 1Y LPR','加权平均年利率','年度利息总额 (元)','较基准变动额 (元)','税后净利润影响 (元)']);
+    var scen = [
+      ['SCEN-01','超预期大幅降息情景',-50],
+      ['SCEN-02','中度降息周期情景',-25],
+      ['SCEN-03','基准情景 (当前现行)',0],
+      ['SCEN-04','温和加息承压情景',25],
+      ['SCEN-05','紧缩周期加息情景',50],
+      ['SCEN-06','极端流动性紧缩情景',100]
+    ];
+    scen.forEach(function(sc, i){
+      var r = 15 + i;
+      ws3.getCell(r,1).value = sc[0];
+      ws3.getCell(r,2).value = sc[1];
+      ws3.getCell(r,3).value = sc[2];
+      ws3.getCell(r,4).value = { formula: '$C$6+C' + r + '/10000' }; xlPct4(ws3.getCell(r,4));
+      ws3.getCell(r,5).value = { formula: "'集团贷款汇总总表'!J19+C" + r + "/10000" }; xlPct4(ws3.getCell(r,5));
+      ws3.getCell(r,6).value = { formula: "'集团贷款汇总总表'!D19*E" + r }; xlMoney(ws3.getCell(r,6));
+      ws3.getCell(r,7).value = { formula: 'F' + r + '-$F$17' }; xlMoney(ws3.getCell(r,7));
+      ws3.getCell(r,8).value = { formula: '-G' + r + '*(1-$C$9)' }; xlMoney(ws3.getCell(r,8));
+      for(var c=1;c<=8;c++){ xlBorder(ws3.getCell(r,c)); }
+    });
+
+    return wb;
+  }
+
+  document.getElementById('btnExport').addEventListener('click', function(){
+    if(typeof ExcelJS === 'undefined'){ toast('Excel 组件（ExcelJS）加载失败，请检查网络后重试', 'err'); return; }
+    try{
+      var wb = buildTemplateWorkbook();
+      wb.xlsx.writeBuffer().then(function(buf){
+        var name = '某大型新能源整车制造企业_集团贷款还款总表(动态穿透版)_合成演示数据.xlsx';
+        var blob = new Blob([buf], { type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        if(window.navigator && window.navigator.msSaveOrOpenBlob){ window.navigator.msSaveOrOpenBlob(blob, name); }
+        else {
+          var a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = name;
+          document.body.appendChild(a); a.click();
+          setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+        }
+        toast('已导出模板结构 Excel：汇总总表 + 9 名单笔附表 + 参数敏感性（11 个 sheet）');
+      }).catch(function(err){ toast('导出失败：' + err.message, 'err'); });
     }catch(err){ toast('导出失败：' + err.message, 'err'); }
   });
 
