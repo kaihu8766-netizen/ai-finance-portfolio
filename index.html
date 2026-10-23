@@ -118,6 +118,7 @@ body::after{
 .hero-cta a:focus-visible{outline:2px solid #a5b0ff;outline-offset:3px}
 @media(max-width:600px){.hero-cta{flex-direction:column}.hero-cta a{width:100%}}
 /* v7.11：移动端首屏把 CTA 提前（避免全部掉出首屏）；口径注提升对比度 */
+/* v7.12：Agent 协作升四层机器分工 + 外部评审 AI 第五角色；统计回填 79/60 */
 @media(max-width:600px){.hero{display:flex;flex-direction:column}.hero>.tag{order:0}.hero>h1{order:1}.hero>.sub{order:2}.hero>.hero-cta{order:3}.hero>.stats{order:4}.hero>p[style*="font-size:11px"]{order:5}}
 /* v7.1 导航激活态 */
 .nav a{position:relative;transition:color .2s}
@@ -1495,7 +1496,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
 <div class="hero">
   <div class="tag"><span class="pulse"></span>AI × FINANCE PORTFOLIO · 2026</div>
   <h1>从财务一线痛点出发，<br>用 <span class="accent">精算建模和 AI 工具</span> 解决实际问题</h1>
-  <p class="sub">精算学（辅修金融）本科 + 金融与投资学（专业会计）硕士复合背景，头部新能源整车企业 · 财务资金部实习，独立负责子公司流贷全流程。实习中观察到利率判断靠"看新闻猜方向"的效率痛点，开始探索 AI 在财务场景的应用：独立完成 LPR 走势预测与融资成本压力测试交互式财务原型并部署上线；随后沿同一方向继续产品化尝试：独立完成「AI 集团贷款还本付息动态排程与利息计提系统」（银行级 Actual/360 精算 + AI 合同解析 + 司库决策助手）。实践"执行 Agent + 独立复核 Agent + 复核 AI"多 Agent 协作模式（人拍板、机器闸门兜底），目标是成为"懂业务+懂数据+懂 AI"的财务数字化人才。</p>
+  <p class="sub">精算学（辅修金融）本科 + 金融与投资学（专业会计）硕士复合背景，头部新能源整车企业 · 财务资金部实习，独立负责子公司流贷全流程。实习中观察到利率判断靠"看新闻猜方向"的效率痛点，开始探索 AI 在财务场景的应用：独立完成 LPR 走势预测与融资成本压力测试交互式财务原型并部署上线；随后沿同一方向继续产品化尝试：独立完成「AI 集团贷款还本付息动态排程与利息计提系统」（银行级 Actual/360 精算 + AI 合同解析 + 司库决策助手）。实践"执行 Agent + 独立复核 Agent + 多模型评审（复核 AI + 外部评审 AI）"多 Agent 协作模式（人拍板、机器闸门兜底），目标是成为"懂业务+懂数据+懂 AI"的财务数字化人才。</p>
   <div class="stats">
     <div class="stat"><div class="v">2</div><div class="l">旗舰作品</div></div>
     <div class="stat"><div class="v">4</div><div class="l">指标分析框架</div></div>
@@ -1864,7 +1865,16 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     <div class="tl-item tl-latest">
       <div class="tl-dot"></div>
       <div class="tl-content">
-        <div class="tl-head"><span class="tl-ver">v7.11</span><span class="tl-date">2026.10</span><span class="tl-badge">当前版本</span><span class="tl-pulse"></span></div>
+        <div class="tl-head"><span class="tl-ver">v7.12</span><span class="tl-date">2026.10</span><span class="tl-badge">当前版本</span><span class="tl-pulse"></span></div>
+        <div class="tl-title">外部评审 AI 加入协作契约</div>
+        <div class="tl-desc">协作契约升 v1.2：新增第 10/11 条，把 Gemini 定位为外部评审通道（多模态视觉 + 长文逻辑 + 英文润色；无仓库权限、无盖章权、结论为输入、不参与门禁），规定 A 类默认调用 + 用户点名、输入脱敏与截图 EXIF 干净、重试 1 次降级、结论冲突转人裁决。主页 Agent 协作机制升「四层机器分工 + 人」（第五角色），Hero 子导语 / KB 角色与话术同步；统计回填 79 轮复核 / 60 条批准基线；附带修复助手 KB JSON 缺闭合（v7.0 起解析失败，KB 从未生效）</div>
+        <div class="tl-tags"><span>契约 v1.2</span><span>外部评审</span><span>统计回填</span></div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-head"><span class="tl-ver">v7.11</span><span class="tl-date">2026.10</span></div>
         <div class="tl-title">Gemini 外部评审修正</div>
         <div class="tl-desc">按 Gemini 视觉/逻辑评审修正：① 应用 KPI「当月利息计提」误用重定价后利率（814,306 → 877,833，按今日适用利率计提）；② 图表脚注删除「未建模重定价」旧口径，改为「年度重定价已建模（3.10%→3.00%）」；③ 台账重排（7 列、去冗余计量法列、日期/状态不换行），1440 视口不再横向截断；④ 移动端首屏 CTA 提前到统计区之前；⑤ 口径注字号/对比度提升</div>
         <div class="tl-tags"><span>Gemini 评审</span><span>计提口径</span><span>响应式修正</span></div>
@@ -1985,9 +1995,9 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
 <!-- 方法论 -->
 <!-- 方法论 -->
 <div class="sec reveal" id="pipeline">
-  <div class="sec-head"><span class="idx">02</span><h2>Agent 协作机制</h2><span class="en">EXECUTOR · REVIEWER · REVIEW-AI · HUMAN</span></div>
+  <div class="sec-head"><span class="idx">02</span><h2>Agent 协作机制</h2><span class="en">EXECUTOR · REVIEWER · REVIEW-AI · EXTERNAL-REVIEW · HUMAN</span></div>
 
-  <p style="font-size:14px;color:#9ba3b7;line-height:1.9;margin-bottom:20px">单一 AI 有幻觉、确认偏误、自我盲区。财务场景对准确性要求极高，一个错误可能导致严重后果。这套机制不是两个模型互聊，而是三层机器分工 + 人拍板：<b>执行 Agent</b>（带工具：写代码、跑门禁、浏览器实测、提交）+ <b>独立复核 Agent</b>（带工具：独立拉仓、复测复算、写评审档案、盖章、发布）+ <b>复核 AI</b>（异模型独立评审，产出评审条件）。<b>人</b>负责定方向、拍板与分歧裁决。开工前先对齐方案（复述理解、提异议，人拍板再动手）；复核方只看 commit 与证据、不看执行方自述；机器闸门兜底（未盖章 commit 的 Review gate 必红、Deploy 拦截）；复核 AI 的结论是输入不是判决（误判会被执行方或人拦下并留档）。</p>
+  <p style="font-size:14px;color:#9ba3b7;line-height:1.9;margin-bottom:20px">单一 AI 有幻觉、确认偏误、自我盲区。财务场景对准确性要求极高，一个错误可能导致严重后果。这套机制不是两个模型互聊，而是四层机器分工 + 人拍板：<b>执行 Agent</b>（带工具：写代码、跑门禁、浏览器实测、提交）+ <b>独立复核 Agent</b>（带工具：独立拉仓、复测复算、写评审档案、盖章、发布）+ <b>复核 AI</b>（异模型独立评审，产出评审条件）+ <b>外部评审 AI</b>（Gemini：多模态视觉审查、长文逻辑交叉、英文润色；无仓库权限、无盖章权，结论为输入）。四层是互补而非堆叠：写代码、复测盖章、异模型评审、外部视觉/英文各管一段，每层都有明确产物与权限边界。<b>人</b>负责定方向、拍板与分歧裁决。开工前先对齐方案（复述理解、提异议，人拍板再动手）；复核方只看 commit 与证据、不看执行方自述；机器闸门兜底（未盖章 commit 的 Review gate 必红、Deploy 拦截）；复核 AI 的结论是输入不是判决（误判会被执行方或人拦下并留档）。</p>
 
   <div class="about-grid" style="margin-top:18px">
     <div class="about-card">
@@ -1997,10 +2007,11 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
       <span style="display:inline-block;width:17px;height:17px;line-height:17px;text-align:center;border-radius:5px;background:#1b2f4a;color:#67e8f9;font-size:12px;vertical-align:-2px;margin-right:4px">⚙</span><b>执行 Agent（DSH 内 DeepSeek，带工具）</b>：读需求写代码、跑 preflight/pytest/coverage、浏览器实测、commit/push<br>
       <span style="display:inline-block;width:17px;height:17px;line-height:17px;text-align:center;border-radius:5px;background:#2a2438;color:#f0a8ff;font-size:12px;vertical-align:-2px;margin-right:4px">🔍</span><b>独立复核 Agent（豆包云电脑，带工具）</b>：独立 pull、复测复算、axe、写 RV 档案、REVIEW_STAMP 盖章、发布、线上验证<br>
       <span style="display:inline-block;width:17px;height:17px;line-height:17px;text-align:center;border-radius:5px;background:#2b2b1f;color:#fbbf24;font-size:12px;vertical-align:-2px;margin-right:4px">🧠</span><b>复核 AI（DS API，异模型）</b>：独立评审 diff、产出 RV 条件；<b>结论是输入，不是判决</b><br>
+      <span style="display:inline-block;width:17px;height:17px;line-height:17px;text-align:center;border-radius:5px;background:#1f2a12;color:#a3e635;font-size:12px;vertical-align:-2px;margin-right:4px">🛰</span><b>外部评审 AI（Gemini，多模态）</b>：视觉审查、长文逻辑交叉、英文润色；<b>无仓库权限、无盖章权，结论是输入</b><br>
       <span style="color:#6d7cff">执行类工具（TRAE/Codex/Kimi 等）按场景选用，属工具层，不参与复核</span>
       </p>
       <div style="margin-top:10px;font-size:12px;color:var(--dim);background:rgba(109,124,255,0.06);padding:8px 12px;border-radius:8px">
-      🔄 <b>怎么协作的</b>：A 类（新作品/定位/用户可见叙事/口径数字）先出对齐单 → 复核方补挑刺 → 人拍板 → 落档 → 执行 → 三件套自检 → 复核方独立复测 + 复核 AI 评审 → 盖章 → 发布 → 线上验证；B 类（bugfix/样式/文案小改）直接做、事后复核（由独立复核 Agent 复测盖章，不调用复核 AI；A 类才调复核 AI）。每一步都有产物（对齐单 / commit / RV 档案 / 印章），出了问题能查到当时是怎么想的。
+      🔄 <b>怎么协作的</b>：A 类（新作品/定位/用户可见叙事/口径数字）先出对齐单 → 复核方补挑刺 → 人拍板 → 落档 → 执行 → 三件套自检 → 复核方独立复测 + 复核 AI 评审 → 盖章 → 发布 → 线上验证；B 类（bugfix/样式/文案小改）直接做、事后复核（由独立复核 Agent 复测盖章，不调用复核 AI；A 类才调复核 AI；A 类涉视觉/长文/英文时并联外部评审 AI，结论并入评审输入）。每一步都有产物（对齐单 / commit / RV 档案 / 印章），出了问题能查到当时是怎么想的。
       </div>
     </div>
 
@@ -2019,7 +2030,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
       <p style="font-size:12px;line-height:2">
       <span class="hl">风险自动定级</span>：按文件类型、改动规模、关键词自动定高/中/低风险，高风险强制复核——防止为省事把自己判成低风险<br>
       <span class="hl">讨论有触发条件</span>：不是每步都调复核 AI——高风险、结论不一致、执行方自报不确定、人明确要求时才发起<br>
-      <span class="hl">结论复用</span>：复核 AI 的结论作为评审输入；B 类不调用复核 AI，避免两层各出一套结论、责任边界不清<br>
+      <span class="hl">结论复用</span>：复核 AI 与外部评审 AI 的结论都只作为评审输入；B 类不调用复核 AI、也不调外部评审 AI，避免多层各出一套结论、责任边界不清<br>
       <span class="hl">自我完善机制</span>：问题随手记进错误日志，每周一与每月奇数日自动执行一致性/积压/完整性检查，新增问题进入汇总讨论
       </p>
       <div style="margin-top:10px;font-size:12px;color:var(--dim);background:rgba(251,191,36,0.06);padding:8px 12px;border-radius:8px">
@@ -2039,11 +2050,11 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     </div>
     <div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap">
       <div style="flex:1;min-width:100px;text-align:center;background:rgba(109,124,255,0.08);padding:10px;border-radius:8px">
-        <div style="font-size:20px;font-weight:700;color:#6d7cff">77</div>
+        <div style="font-size:20px;font-weight:700;color:#6d7cff">79</div>
         <div style="font-size:12px;color:#9ba3b7">轮复核</div>
       </div>
       <div style="flex:1;min-width:100px;text-align:center;background:rgba(52,211,153,0.08);padding:10px;border-radius:8px">
-        <div style="font-size:20px;font-weight:700;color:#34d399">58</div>
+        <div style="font-size:20px;font-weight:700;color:#34d399">60</div>
         <div style="font-size:12px;color:#9ba3b7">条批准基线</div>
       </div>
       <div style="flex:1;min-width:100px;text-align:center;background:rgba(251,191,36,0.08);padding:10px;border-radius:8px">
@@ -2068,7 +2079,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
       <b>已落地的防御机制：</b><br>
       • <b>preflight 自动体检</b>（10 项检查，含图片完整性）→ 提交前自动扫描编码乱码、结构错误、敏感信息<br>
       • <b>CI 闸门</b>（2 步）→ 复核凭据不匹配就合不进去，PR #1 已实证生效<br>
-      • <b>复核凭据</b>（REVIEW_STAMP.md）→ 58 条批准基线 + 3 条违规记录，内容相等判据，可追溯<br>
+      • <b>复核凭据</b>（REVIEW_STAMP.md）→ 60 条批准基线 + 3 条违规记录，内容相等判据，可追溯<br>
       • <b>事前对齐</b> → A 类改动先过方案评审，人拍板后再开发；对齐单与 RV 档案留痕<br>
       • <b>强制规则</b>（4 条）→ 触发复核、先核实再动手、Windows 文本编码、hotfix 白名单<br>
       • <b>门禁兜底</b> → 未盖章 commit 的 Review gate 必红、Deploy 前拦截（当前流程）<br>
@@ -2086,7 +2097,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
   <span><b>方向</b> 财务 × AI</span>
 </div>
 <button class="back-to-top" id="backToTop" aria-label="回到顶部">↑</button>
-<div class="footer">胡凯 · AI × Finance Portfolio · v7.11 · 全部数据经人工核验 · 2026.10 · AI 协作方法探索</div>
+<div class="footer">胡凯 · AI × Finance Portfolio · v7.12 · 全部数据经人工核验 · 2026.10 · AI 协作方法探索</div>
 
 </div>
 
@@ -2242,7 +2253,8 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
 { "id": "w04", "name": "AI 司库还本付息系统", "layer": "产品", "desc": "Actual/360 精算·9笔集团流贷(4.15亿)·按季结息20日·年度重定价·4大KPI·12个月排程·AI合同解析·AI司库Copilot·ExcelJS 11-sheet动态穿透导出·单文件纯前端",
 "summary": "AI 集团贷款还本付息动态排程与利息计提系统：银行级 Actual/360 逐日计提（当月利息 = 借款余额 × 年利率/360 × 当月实际天数，结息日遇周末顺延至周一），9 笔车企大行流贷样本（合计 4.15 亿）、按季结息还本付息台账与 12 个月本金/利息排程、单月还款超 5,000 万自动预警；AI 合同解析 0.5 秒提取银行/本金/起止日/LPR 加点/结息方式并回填表单，AI 司库 Copilot 流式生成资金洞察报告，ExcelJS 复刻 11-sheet「动态穿透版」台账一键导出（汇总 + 9 单笔附表 + 参数敏感性）。",
 "tags": ["AI 司库", "贷款排程", "利息计提", "Actual/360", "合同解析", "Copilot"],
-"highlights": ["Actual/360 银行级精算", "AI 合同解析自动回填", "AI 司库决策报告", "12 个月排程预警", "Excel 导出"] },
+"highlights": ["Actual/360 银行级精算", "AI 合同解析自动回填", "AI 司库决策报告", "12 个月排程预警", "Excel 导出"] }
+  ],
   "prototypes": [],
   "keyNumbers": {},
   "techStack": "原生HTML+CSS+JS·ECharts5.5按需打包·本地知识库检索（默认）·可选接入用户自备Key的真实大模型（演示模式）·多Agent协作体系(人+3AI信箱通信)·RAG检索增强·Python蒙特卡洛Demo(纯标准库)",
@@ -2263,14 +2275,15 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     "⑭轻量RAG政策检索(5文档条款+关键词打分+回答附出处)",
     "⑮抽屉背景滚动锁定+作品加载提示"
   ],
-  "versions": "v1基础 → v2.1体积优化 → v2.2安全修复 → v2.3接入真实AI → v2.4数据底座 → v2.5拷问修复 → v2.6异常全流程 → v2.7内置助手 → v3.0打字机/批量处理/pytest/RAG/体验优化 → v3.2整合SOX控制测试工作台为第6作品 → v3.3双Agent协作实战展示 → v3.4作品矩阵分级布局 → v3.5数据修正+面试速览 → v3.6角色升级Manager+Specialist+图标 → v3.7称呼统一+能力全景+协作技术栈 → v3.8去审计化重定位+工具链分层+技术栈分组 → v3.9协作技术栈术语升级 → v3.10商业化深度(G2N/CCC/死信队列+审计日志) → v3.11 AI助手彻头彻尾大更新 → v4.0 作品集第四代·AI助手四方向大更新 → v4.1 LPR预测替换收入核算 → v4.2 LPR精算增强(理论视角+情景概率+蒙特卡洛) → v4.3 未来5年预测区间带 → v4.4 图表1全宽大图+5Y双期限 → v4.4.1 Demo可靠性加固 → v4.4.2 数据时效更新 → v4.5 精算复合背景升级：新增现金流压力测试(w07)+LPR融资成本压力测试+SmartRecon精算风险引擎 → v5.0 精简聚焦：删除智对账(w04)+月结优化(w02)，双Agent升级为四角色协作体系 → v5.1 四角色区域专业化重写+AI助手知识库自动同步+SOX升级Agent工作流v5.0 → v5.2 w03新增蒙特卡洛可交互Demo+AI利率分析工作流 + w05新增现金流压力测试可交互Demo → v5.3 供应链模拟器逻辑修复+proto2原型V2.0+CHANGELOG → v5.3.3 手机端media适配+preflight体检工具+iframe竞态修复 → v5.5.0 业务化大改造（5作品改为业务叙事：摘要→痛点→洞察→应用→技术→局限）+全站措辞业务化+双Agent协作展示 → v5.6.0 主页作品卡片新增显眼Demo入口（3宽卡「在线 Demo ↗」按钮+mini卡 Demo tag+研究型标注；卡片div化解嵌套链接）+版本基线更新 → v5.6.1 AI协作经验章节更新（双Agent机制升级三阶段闭环：事前对齐方案→独立复核→机器闸门兜底；关键规矩增至6条；数据更新43轮复核/26条批准基线；去内部词） → v5.7.0 作品01替换为发票合规预审（镜像产品演示页：三通道解析+规则引擎R1-R11+证据链；公开渠道去内部词/环境变量名/样本细节，数据全合成） → v5.7.1 作品01加图表（系统流水线HTML/CSS+规则引擎覆盖ECharts横向堆叠条形，数据来自产品RULES_META真实定义）+文案口径修正（10条规则/未见异常） → v6.1 精简聚焦：恢复v5.7.1设计质感，仅保留作品01发票合规预审+作品07现金流压力测试，删除LPR/供应链/SOX/资金智算四个作品及对应知识库条目 → v6.2 细节打磨：Hero统计口径统一（2核心交互Demo）、双Agent企业级角色术语、学历口径对齐简历、资金调度建议呼应协定存款 → v7.0 单作品重构：只留 LPR（删除发票/现金流，恢复 LPR 完整详情页，全站口径同步） → v7.1 首屏 CTA + 导航激活态 + 蒙特卡洛口径统一 10,000 + 中英空格统一 + Demo 口径统一 → v7.2 移除面试模式（用户拍板），助手专注导览与改进建议 → v7.3 AI 协作叙述更新（双 Agent+工具化复核、70 轮/51 基线）+ LPR 模型假设与局限小节 → v7.3.1 标题层级修正（iframe 内 H2→H3）+ 统计标签精确化 → v7.4 新增第二旗舰作品：AI 司库还本付息系统（Actual/360 + AI 合同解析 + Copilot）→ v7.5 司库与 LPR 同权（Hero 双等权入口 + 两卡同权标识）、产品页补动机/口径/数据来源小节 → v7.6 司库上移 + page-04 详情页 + 9 笔模板口径 + ExcelJS 11-sheet 导出 → v7.7 详情页去内嵌（截图+入口）+ 全站公司/品牌脱敏 → v7.8 主页文字全量校对（统计 75/56、2 在线应用、审计机构脱敏、门禁表述） → v7.9 Agent 协作机制更新（执行 Agent + 独立复核 Agent + 复核 AI + 人） → v7.10 逻辑口径修正（统计 77/58、基准 vs 执行利率、主推/研究主线、台账到期日） → v7.11 Gemini 外部评审修正（计提利率 bug、重定价脚注、台账重排、移动端 CTA、对比度）",
+  "versions": "v1基础 → v2.1体积优化 → v2.2安全修复 → v2.3接入真实AI → v2.4数据底座 → v2.5拷问修复 → v2.6异常全流程 → v2.7内置助手 → v3.0打字机/批量处理/pytest/RAG/体验优化 → v3.2整合SOX控制测试工作台为第6作品 → v3.3双Agent协作实战展示 → v3.4作品矩阵分级布局 → v3.5数据修正+面试速览 → v3.6角色升级Manager+Specialist+图标 → v3.7称呼统一+能力全景+协作技术栈 → v3.8去审计化重定位+工具链分层+技术栈分组 → v3.9协作技术栈术语升级 → v3.10商业化深度(G2N/CCC/死信队列+审计日志) → v3.11 AI助手彻头彻尾大更新 → v4.0 作品集第四代·AI助手四方向大更新 → v4.1 LPR预测替换收入核算 → v4.2 LPR精算增强(理论视角+情景概率+蒙特卡洛) → v4.3 未来5年预测区间带 → v4.4 图表1全宽大图+5Y双期限 → v4.4.1 Demo可靠性加固 → v4.4.2 数据时效更新 → v4.5 精算复合背景升级：新增现金流压力测试(w07)+LPR融资成本压力测试+SmartRecon精算风险引擎 → v5.0 精简聚焦：删除智对账(w04)+月结优化(w02)，双Agent升级为四角色协作体系 → v5.1 四角色区域专业化重写+AI助手知识库自动同步+SOX升级Agent工作流v5.0 → v5.2 w03新增蒙特卡洛可交互Demo+AI利率分析工作流 + w05新增现金流压力测试可交互Demo → v5.3 供应链模拟器逻辑修复+proto2原型V2.0+CHANGELOG → v5.3.3 手机端media适配+preflight体检工具+iframe竞态修复 → v5.5.0 业务化大改造（5作品改为业务叙事：摘要→痛点→洞察→应用→技术→局限）+全站措辞业务化+双Agent协作展示 → v5.6.0 主页作品卡片新增显眼Demo入口（3宽卡「在线 Demo ↗」按钮+mini卡 Demo tag+研究型标注；卡片div化解嵌套链接）+版本基线更新 → v5.6.1 AI协作经验章节更新（双Agent机制升级三阶段闭环：事前对齐方案→独立复核→机器闸门兜底；关键规矩增至6条；数据更新43轮复核/26条批准基线；去内部词） → v5.7.0 作品01替换为发票合规预审（镜像产品演示页：三通道解析+规则引擎R1-R11+证据链；公开渠道去内部词/环境变量名/样本细节，数据全合成） → v5.7.1 作品01加图表（系统流水线HTML/CSS+规则引擎覆盖ECharts横向堆叠条形，数据来自产品RULES_META真实定义）+文案口径修正（10条规则/未见异常） → v6.1 精简聚焦：恢复v5.7.1设计质感，仅保留作品01发票合规预审+作品07现金流压力测试，删除LPR/供应链/SOX/资金智算四个作品及对应知识库条目 → v6.2 细节打磨：Hero统计口径统一（2核心交互Demo）、双Agent企业级角色术语、学历口径对齐简历、资金调度建议呼应协定存款 → v7.0 单作品重构：只留 LPR（删除发票/现金流，恢复 LPR 完整详情页，全站口径同步） → v7.1 首屏 CTA + 导航激活态 + 蒙特卡洛口径统一 10,000 + 中英空格统一 + Demo 口径统一 → v7.2 移除面试模式（用户拍板），助手专注导览与改进建议 → v7.3 AI 协作叙述更新（双 Agent+工具化复核、70 轮/51 基线）+ LPR 模型假设与局限小节 → v7.3.1 标题层级修正（iframe 内 H2→H3）+ 统计标签精确化 → v7.4 新增第二旗舰作品：AI 司库还本付息系统（Actual/360 + AI 合同解析 + Copilot）→ v7.5 司库与 LPR 同权（Hero 双等权入口 + 两卡同权标识）、产品页补动机/口径/数据来源小节 → v7.6 司库上移 + page-04 详情页 + 9 笔模板口径 + ExcelJS 11-sheet 导出 → v7.7 详情页去内嵌（截图+入口）+ 全站公司/品牌脱敏 → v7.8 主页文字全量校对（统计 75/56、2 在线应用、审计机构脱敏、门禁表述） → v7.9 Agent 协作机制更新（执行 Agent + 独立复核 Agent + 复核 AI + 人） → v7.10 逻辑口径修正（统计 77/58、基准 vs 执行利率、主推/研究主线、台账到期日） → v7.11 Gemini 外部评审修正（计提利率 bug、重定价脚注、台账重排、移动端 CTA、对比度） → v7.12 外部评审契约 v1.2 + 第五角色（四层机器分工 + 人，统计回填 79/60）",
   "dualAgentCollab": {
-    "description": "执行 Agent（DSH 内 DeepSeek，带工具）写代码并提交、独立复核 Agent（豆包云电脑，带工具）独立复测并盖章、复核 AI（DS API，异模型）产出评审条件、人在分歧点裁决；每次分歧沉淀为可复用规则",
+    "description": "执行 Agent（DSH 内 DeepSeek，带工具）写代码并提交、独立复核 Agent（豆包云电脑，带工具）独立复测并盖章、复核 AI（DS API，异模型）产出评审条件、外部评审 AI（Gemini）做视觉/英文/长文交叉评审（结论为输入）、人在分歧点裁决；每次分歧沉淀为可复用规则",
     "roles": [
       {"name": "胡凯", "role": "Decision Maker", "duty": "最终目标制定、重大决策拍板、定版、角色争议仲裁"},
       {"name": "执行 Agent（DSH 内 DeepSeek，带工具）", "role": "Executor Agent", "duty": "读需求、写代码、跑 preflight/pytest/coverage、浏览器实测、commit/push"},
       {"name": "独立复核 Agent（豆包云电脑，带工具）", "role": "Review Agent", "duty": "独立 pull、复测复算、axe、写 RV 档案、REVIEW_STAMP 盖章、发布、线上验证"},
-      {"name": "复核 AI（DS API，异模型）", "role": "Review AI", "duty": "独立评审 diff、产出 RV 条件；结论是输入非判决"}
+      {"name": "复核 AI（DS API，异模型）", "role": "Review AI", "duty": "独立评审 diff、产出 RV 条件；结论是输入非判决"},
+      {"name": "外部评审 AI（Gemini）", "role": "External Reviewer", "duty": "多模态视觉审查、长文逻辑交叉、英文润色；无仓库权限、无盖章权，结论是输入非判决"}
     ],
     "mechanism": "重要任务写下来，AI做完先复述理解，确认了再动手，做完有人验收，每步都留记录",
     "case": "LPR 蒙特卡洛模型从初版到 v7.0 迭代多轮，中间发现过 Vasicek 参数校准口径不一致、预测区间偏窄等问题，都是靠这套方法查出来的"
@@ -2296,8 +2309,8 @@ window.SmartReconAI = {
       { kw: ['功能','结构','有哪些','哪些作品','作品集','几个作品','作品矩阵','导览','介绍'], reply: '这个作品集围绕两件旗舰作品展开：①主页（个人介绍 + 精算/财务/AI 能力全景）②LPR 走势预测与融资成本压力测试系统（研究：四指标框架 + 蒙特卡洛概率预测 + 深度详情页）③AI 集团贷款还本付息动态排程与利息计提系统（产品：Actual/360 精算 + AI 合同解析 + 司库 Copilot，在线应用）④AI 协作经验（双 Agent 机制）<div class="tool-call">portfolio_kb → home ✓</div>' },
       { kw: ['缺陷','问题','修复','bug','历史'], reply: '已修复的缺陷（列举）：①聊天输入XSS ②ECharts全量1004KB→按需打包691KB ③证据链元素用br无法显示→改div ④证据链浅底浅字看不清→改深色文字 ⑤Agent只回固定话术→接入真实DeepSeek API ⑥API失败直接降级→加重试 ⑦数据底座缺月度资金流→补12个月数据 ⑧离线关键词跨场景劫持→场景分离 ⑨人设漂移/逻辑缺陷→persona增强+资金全景 ⑩异常中心按钮无状态流转→完整全流程。<div class="tool-call">portfolio_kb → defect_log ✓</div>' },
       { kw: ['迭代','版本','更新','演进'], reply: '作品集演进历史：v1 基础版→v2.1 ECharts按需打包→v2.2 安全修复→v2.3 接入真实DeepSeek AI→v2.4 数据底座升级→v2.5 AI拷问测试修复→v2.6 异常处理全流程→v2.7 内置作品集助手→v3.2 整合SOX工作台→v3.3 协作实战展示→v3.4 作品矩阵分级→v5.0 双Agent复核机制→v5.3 手机端适配+preflight体检→v5.5.0 业务化大改造+全站措辞业务化→v5.6.0 主页Demo入口显眼化→v5.6.1 AI协作经验章节更新（三阶段闭环+规矩6条+数据更新）→v5.7.0 作品01替换为发票合规预审（可运行Demo）→v5.7.1 作品01加系统流水线图+规则覆盖图，文案口径修正→v6.1 精简聚焦：仅保留作品01+作品07，删除LPR/供应链/SOX/资金智算。<div class="tool-call">portfolio_kb → versions ✓</div>' },
-      { kw: ['双Agent','复核机制','协作体系','怎么运作','如何运作','multi-agent','多智能体','团队','豆包','2.1 Turbo','DeepSeek','主力AI','复核AI','四角色'], reply: '我实践了一套"执行 Agent + 独立复核 Agent + 复核 AI"的三层协作机制，闭环拉满：<br><br>① <b>开工前先对齐方案</b>：AI先复述理解、提异议，人拍板后再动手<br>② <b>执行 Agent 提方案并执行</b>：任务拆解、方案设计、代码实现、文档撰写<br>③ <b>独立复核 Agent 独立审查</b>：不是检查，而是平等讨论——边界测试、根因分析、提出异议<br>④ <b>人在分歧点裁决</b>：两个AI有分歧时，人做最终决策<br>⑤ <b>机器闸门兜底</b>：没复核的改动提交时会被拦下来，每一次分歧都沉淀为规则<br><br>比如主力AI三次"先push后复核"，复核AI发现违规后双AI讨论，落地了复核凭证+CI闸门，PR #1实证：不补凭证就合不进去。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
-      { kw: ['复核凭证','CI闸门','闸门','批准基线'], reply: '复核凭证 = 批准基线的机读记录（REVIEW_STAMP.md），记录每次通过DeepSeek复核、允许合并的内容基线。CI闸门 = PR上自动比对最新批准基线，内容不一致直接红，合不进去。目前有58条批准基线+3条违规记录，PR #1已实证生效。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
+      { kw: ['双Agent','复核机制','协作体系','怎么运作','如何运作','multi-agent','多智能体','团队','豆包','2.1 Turbo','DeepSeek','主力AI','复核AI','外部评审','Gemini','四角色'], reply: '我实践了一套"执行 Agent + 独立复核 Agent + 复核 AI + 外部评审 AI"的四层机器分工，闭环拉满：<br><br>① <b>开工前先对齐方案</b>：AI先复述理解、提异议，人拍板后再动手<br>② <b>执行 Agent 提方案并执行</b>：任务拆解、方案设计、代码实现、文档撰写<br>③ <b>独立复核 Agent 独立审查</b>：不是检查，而是平等讨论——边界测试、根因分析、提出异议<br>④ <b>人在分歧点裁决</b>：AI 有分歧时，人做最终决策<br>⑤ <b>外部评审 AI（Gemini）</b>：视觉/长文/英文交叉评审，无仓库权限、不盖章，结论是输入不是判决<br>⑥ <b>机器闸门兜底</b>：没复核的改动提交时会被拦下来，每一次分歧都沉淀为规则<br><br>比如主力AI三次"先push后复核"，复核AI发现违规后双AI讨论，落地了复核凭证+CI闸门，PR #1实证：不补凭证就合不进去。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
+      { kw: ['复核凭证','CI闸门','闸门','批准基线'], reply: '复核凭证 = 批准基线的机读记录（REVIEW_STAMP.md），记录每次通过DeepSeek复核、允许合并的内容基线。CI闸门 = PR上自动比对最新批准基线，内容不一致直接红，合不进去。目前有60条批准基线+3条违规记录，PR #1已实证生效。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
       { kw: ['强制规则','体检','preflight','检查10','分支保护','几项检查'], reply: '防御体系包括：①4条强制规则（触发复核、先核实再动手、Windows文本编码、hotfix白名单）②10项preflight自动体检（第10项=图片完整性，防止二进制被当文本写坏）③CI闸门2步（preflight+凭证校验）④门禁兜底（未盖章 commit 的 Review gate 失败、Deploy 拦截）。<div class="tool-call">portfolio_kb → dual_agent_collab ✓</div>' },
       { kw: ['作者','你是谁','胡凯','背景','个人','介绍'], reply: '作者胡凯，2001年生，浙江宁波人。教育：精算学（辅修金融）本科（惠灵顿维多利亚大学）+ 金融与投资学（专业会计）硕士（宁波诺丁汉大学，2025.09-2027.07）。实习：头部新能源整车企业财务资金部（2026.05-至今）+ 会计师事务所（宁波）审计（2025.12-2026.03）。定位：懂业务+懂数据+懂AI的财务数字化人才。<div class="tool-call">portfolio_kb → author ✓</div>' },
       { kw: ['教育','学历','学校','大学','专业','硕士','本科'], reply: '教育背景：<br>• <b>硕士</b>：宁波诺丁汉大学，金融与投资学（专业会计），2025.09-2027.07<br>• <b>本科</b>：新西兰惠灵顿维多利亚大学，精算学（辅修金融）<br><br>精算本科打下数学建模和风险量化基础，金融会计硕士补充财务和投资知识，形成"量化+财务"复合背景。<div class="tool-call">portfolio_kb → author ✓</div>' },
@@ -2305,7 +2318,7 @@ window.SmartReconAI = {
       { kw: ['技能','能力','会什么','技术栈','工具','python','sql','sap'], reply: '核心技能：<br>• <b>财务专业</b>：资金管理、财务报表、审计底稿、SOX内控、精算建模<br>• <b>数据工具</b>：Python(Pandas/NumPy/Matplotlib)、SQL、Excel高级函数、SAP<br>• <b>AI应用</b>：大语言模型API调用、Agent工作流设计、RAG检索增强、提示词工程<br>• <b>建模能力</b>：蒙特卡洛模拟、均值回归模型(Vasicek)、利率风险与融资成本建模<br><br>技术栈：原生HTML+CSS+JS、ECharts可视化、DeepSeek API、多Agent协作体系。<div class="tool-call">portfolio_kb → techStack ✓</div>' },
       { kw: ['求职','方向','目标','岗位','职业','规划','找工作'], reply: '求职方向：2027届秋招，聚焦财务数字化、资金管理、AI+财务复合岗位。目标岗位：字节跳动RFT AI Builder、头部电商平台管培生（财务/资金方向）、美的/比亚迪财务数字化/资金岗、银行资金运营/国际财税。<br><br>职业规划：短期成为"懂业务+懂数据+懂AI"的复合型财务人才，长期探索AI在财务领域的深度应用。<div class="tool-call">portfolio_kb → purpose ✓</div>' },
       { kw: ['为什么','做这个','动机','初衷','想法','来源'], reply: '这个作品集的核心作品，来自实习中的观察和深度思考：<br>• 在 头部新能源整车企业做资金实习时，发现资金经理判断利率靠"看新闻猜方向"，没有可验证的分析框架，于是做了 LPR 走势预测与融资成本压力测试<br><br>我是实习生，这个作品没有落地到公司实际业务中，但体现了我从业务问题出发、用精算方法和 AI 工具尝试解决问题的思考过程。<div class="tool-call">portfolio_kb → purpose ✓</div>' },
-      { kw: ['核心','亮点','优势','特长','厉害'], reply: '核心亮点：<br>① <b>复合背景</b>：精算本科+金融会计硕士+资金/审计实习<br>② <b>从业务出发</b>：所有作品都来自真实实习场景的观察和思考<br>③ <b>动手能力</b>：从想法到可交互Demo全部独立完成<br>④ <b>AI协作方法</b>：实践出"执行 Agent + 独立复核 Agent + 复核 AI"的三层协作机制<br>⑤ <b>持续迭代</b>：从v1到v6.2，多轮复核和修复。<div class="tool-call">portfolio_kb → keyNumbers ✓</div>' },
+      { kw: ['核心','亮点','优势','特长','厉害'], reply: '核心亮点：<br>① <b>复合背景</b>：精算本科+金融会计硕士+资金/审计实习<br>② <b>从业务出发</b>：所有作品都来自真实实习场景的观察和思考<br>③ <b>动手能力</b>：从想法到可交互Demo全部独立完成<br>④ <b>AI协作方法</b>：实践出"执行 Agent + 独立复核 Agent + 多模型评审（复核 AI + 外部评审 AI）"的四层机器分工<br>⑤ <b>持续迭代</b>：从v1到v6.2，多轮复核和修复。<div class="tool-call">portfolio_kb → keyNumbers ✓</div>' },
             { kw: ['w03','lpr','利率','预测','蒙特卡洛','融资成本','贷款定价','净息差','MLF','社融','CPI'], reply: '旗舰作品：LPR 走势预测与融资成本压力测试。<br><br>方法：四指标分析框架（MLF政策利率/银行净息差/社融/CPI）+ 利率均值回归模型（Vasicek）+ 蒙特卡洛模拟（10,000条路径）+ 1Y/5Y双期限建模 + 融资成本敏感性分析。<br><br>产出：未来60个月LPR预测区间（10%/50%/90%分位数）、5年后LPR概率分布、情景概率（基准60%/偏鸽25%/持稳15%）、不同利率情景下的融资成本压力测试。<br><br>特点：参数诚实标注为"演示设定，非市场校准"，模型公式和Python源码全部公开可复现。<div class="tool-call">portfolio_kb → works[0] ✓</div>' },
                   { kw: ['局限','不足','结论','口径','研究结论','局限性'], reply: '关于作品的局限和结论，整体说明：<br><br>• <b>结论</b>：LPR 短期（6个月内）持稳概率大（净息差 1.41% 历史低位限制让利空间），中期（1-3年）温和下行，5Y 会比 1Y 降得更快（地产政策定向引导）<br>• <b>局限</b>：参数（θ/κ/σ）为演示设定非市场校准；宏观情景概率基于公开数据推断；模型假设变量线性相关，极端情景可能失效<br>• <b>建议</b>：预测用于决策参考，重大融资决策仍需结合公司敞口与银行报价复核。<div class="tool-call">portfolio_kb → works[0] ✓</div>' },
       { kw: ['数据','真实','真的吗','编造','模拟','来源','可靠','可信','误差','落地','应用','实际使用'], reply: '关于数据真实性，我分三类说明：<br><br>• <b>公开数据</b>：页面标注来源的宏观/市场数据来自公开渠道<br>• <b>模拟数据</b>：LPR 蒙特卡洛预测的具体数值是演示用模拟数据，参数和口径在每个作品的"数据口径与假设说明"里写清楚了<br>• <b>方法论真实</b>：模型公式（Vasicek、蒙特卡洛）、精算方法都是真实的，Python源码公开可复现<br><br>我是实习生，没有权限使用公司真实数据，所以用模拟数据验证方法的可行性。这一点我在作品集里反复强调，不夸大。<div class="tool-call">portfolio_kb → keyNumbers ✓</div>' },
@@ -2383,7 +2396,7 @@ window.SmartReconAI = {
   portfolioPersona: function() {
     var kb = this.portfolioKB;
     if(!kb){ return '你是作品集助手。'; }
-    return '你是"作品集助手"——胡凯 AI×财务作品集的自我认知 AI。你的职责：向用户（胡凯本人或访客）介绍这个作品集的一切细节，并帮助发现可改进点。回答专业、简洁、结构化，中文回复，控制在 220 字以内，可用换行分点。\n\n【作品集知识库——回答必须基于以下信息，不要编造】\n作者：' + kb.author + '；定位：' + kb.purpose + '\n结构：' + JSON.stringify(kb.structure) + '\n原型：' + JSON.stringify(kb.prototypes) + '\n关键数据：' + JSON.stringify(kb.keyNumbers) + '\n技术栈：' + kb.techStack + '\n缺陷日志（已修复）：' + kb.defectLog.join('；') + '\n版本演进：' + kb.versions + '\nAI协作方法（用户问怎么和AI协作时用这个）：' + JSON.stringify(kb.dualAgentCollab) + '\n\n【行为准则】①用户问"双Agent复核机制/怎么运作/多智能体团队"→必须用dualAgentCollab信息回答，明确是胡凯(Decision Maker) + 执行 Agent(DSH 内 DeepSeek，带工具，Executor) + 独立复核 Agent(豆包云电脑，带工具，Reviewer) + 复核 AI(DS API，异模型，Review AI) 的三层协作机制；复核 AI 结论是输入非判决，不要混淆资金智算原型里的Manager+Specialist①用户问"有什么功能/介绍作品"→按 structure+prototypes 导览 ②问"怎么实现的/技术"→引用 techStack+keyNumbers ③问"缺陷/修复历史"→列 defectLog ④问"迭代/版本"→列 versions ⑤问"还能怎么改进"→基于 defectLog 和当前架构给 2-3 条具体建议（如：接真实RAG、加pytest测试、数据脱敏后真实数据测试、ECharts进一步瘦身）⑥若收到【实时联网搜索结果】，先判断相关性——相关则基于结果回答，无关则忽略并直接用自己的知识回答（不要在开头提"网络搜索/搜索词"）⑦若没有搜索结果且问题是作品集外的一般问题，可直接用你的知识简要回答（不必强调"知识库未覆盖"），最后自然带一句"如需了解作品集可以问我"⑧被要求讲笑话/闲聊等非业务内容时：轻松幽默回应（可讲财务梗），简短即可，不硬切功能清单⑨用户负面反馈/质疑：先共情再理性回应，不防御性辩解。';
+    return '你是"作品集助手"——胡凯 AI×财务作品集的自我认知 AI。你的职责：向用户（胡凯本人或访客）介绍这个作品集的一切细节，并帮助发现可改进点。回答专业、简洁、结构化，中文回复，控制在 220 字以内，可用换行分点。\n\n【作品集知识库——回答必须基于以下信息，不要编造】\n作者：' + kb.author + '；定位：' + kb.purpose + '\n结构：' + JSON.stringify(kb.structure) + '\n原型：' + JSON.stringify(kb.prototypes) + '\n关键数据：' + JSON.stringify(kb.keyNumbers) + '\n技术栈：' + kb.techStack + '\n缺陷日志（已修复）：' + kb.defectLog.join('；') + '\n版本演进：' + kb.versions + '\nAI协作方法（用户问怎么和AI协作时用这个）：' + JSON.stringify(kb.dualAgentCollab) + '\n\n【行为准则】①用户问"双Agent复核机制/怎么运作/多智能体团队"→必须用dualAgentCollab信息回答，明确是胡凯(Decision Maker) + 执行 Agent(DSH 内 DeepSeek，带工具，Executor) + 独立复核 Agent(豆包云电脑，带工具，Reviewer) + 复核 AI(DS API，异模型，Review AI) + 外部评审 AI(Gemini，多模态，External Reviewer) 的四层机器分工；复核 AI 与外部评审 AI 的结论都只是输入非判决、不参与门禁，不要混淆资金智算原型里的Manager+Specialist①用户问"有什么功能/介绍作品"→按 structure+prototypes 导览 ②问"怎么实现的/技术"→引用 techStack+keyNumbers ③问"缺陷/修复历史"→列 defectLog ④问"迭代/版本"→列 versions ⑤问"还能怎么改进"→基于 defectLog 和当前架构给 2-3 条具体建议（如：接真实RAG、加pytest测试、数据脱敏后真实数据测试、ECharts进一步瘦身）⑥若收到【实时联网搜索结果】，先判断相关性——相关则基于结果回答，无关则忽略并直接用自己的知识回答（不要在开头提"网络搜索/搜索词"）⑦若没有搜索结果且问题是作品集外的一般问题，可直接用你的知识简要回答（不必强调"知识库未覆盖"），最后自然带一句"如需了解作品集可以问我"⑧被要求讲笑话/闲聊等非业务内容时：轻松幽默回应（可讲财务梗），简短即可，不硬切功能清单⑨用户负面反馈/质疑：先共情再理性回应，不防御性辩解。';
   },
 
   // ===== 知识库自动同步：从页面DOM提取最新作品信息，避免手动维护 =====

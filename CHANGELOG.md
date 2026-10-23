@@ -3,6 +3,22 @@
 
 
 
+## [v7.12] 2026-10-24 外部评审 AI 加入协作契约（第五角色）
+
+### 修改
+- **协作契约 v1.2**：新增第 10 条（外部评审 AI/Gemini 定位：多模态视觉 + 长文逻辑 + 英文润色；无仓库权限、无盖章权，结论为输入非判决，不参与门禁）与第 11 条（A 类默认调用 + 用户点名随时调；输入脱敏与截图 EXIF 干净；输出 P0–P2 + 证据；原文留痕 out/review/gemini/；与 DS API/豆包分工不重复；结论冲突转人裁决；重试上限 1 次后跳过不阻塞）
+- **主页 Agent 协作机制**：升为「四层机器分工 + 人拍板」（执行 / 独立复核 / 复核 AI / 外部评审 AI + 人），EN 副标题加 EXTERNAL-REVIEW，新增第五角色卡并明示无工具/无盖章权；补「多模型互补而非堆叠」叙事
+- **Hero 子导语**：改为「执行 Agent + 独立复核 Agent + 多模型评审（复核 AI + 外部评审 AI）」
+- **统计回填（P0）**：77 轮复核 / 58 条批准基线 → **79 轮复核 / 60 条批准基线**（统计区、防御清单、KB 话术三处同步）
+- **KB/话术**：dualAgentCollab 角色 5 条、description 与 quickQ 同步（「三层协作机制」零残留）
+- 版本号：footer v7.12、时间线新增 v7.12、kb.versions 追加
+- **附带修复（P1，独立发现）**：`portfolioKB-data` JSON 结构数组缺闭合 `]` 且末项多逗号，自 v7.0 起 `JSON.parse` 静默失败（`portfolioKB` 长期为 null，助手 KB 上下文与 dualAgentCollab 从未生效）；已补齐闭合，复测 JSON 可解析（keys=10 / roles=5）且助手离线问答正常
+
+### 验证
+- preflight 10/10；coverage 100%；pytest 21 passed
+- axe 0；390/1440 无横滚；console 0
+- Gemini 复核 v7.12 英文/视觉；豆包 RV-80 adopted + 盖章第八十轮
+
 ## [v7.11] 2026-10-23 Gemini 外部评审修正
 
 ### 修改
