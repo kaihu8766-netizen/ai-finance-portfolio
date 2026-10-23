@@ -3,6 +3,19 @@
 
 
 
+## [v7.12.1] 2026-10-24 文案打磨与口径收紧
+
+### 修改
+- EN 副标题：`EXTERNAL-REVIEW` → `EXTERNAL-REVIEW-AI`（与 `REVIEW-AI` 同为名词复合，Gemini P1-1）
+- 导语补「异构多模态」叙事（Gemini P2-2）
+- 按用户拍板移除联系方式中的「意向城市」（联系方式 PII 保持现状）
+- 助手 KB 求职目标公司名泛化为方向表述：头部科技企业 AI Builder / 制造企业财务数字化·资金岗 / 银行资金运营
+- 版本号：footer v7.12.1、时间线新增 v7.12.1、kb.versions 追加
+
+### 验证
+- preflight 10/10 + coverage 100%；pytest 由豆包侧执行
+- smoke/axe 一次（双端无横滚 + console 0）
+
 ## [v7.12] 2026-10-24 外部评审 AI 加入协作契约（第五角色）
 
 ### 修改
