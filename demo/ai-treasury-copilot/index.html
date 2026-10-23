@@ -105,9 +105,17 @@
   /* 台账 */
   .ledger{margin-top:14px}
   .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px}
-  table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:920px}
-  th{background:rgba(15,27,51,.85);color:var(--muted);font-weight:600;text-align:left;padding:10px 12px;white-space:nowrap;border-bottom:1px solid var(--line)}
-  td{padding:11px 12px;border-bottom:1px solid rgba(148,163,184,.08);white-space:nowrap}
+  table{width:100%;border-collapse:collapse;font-size:12px;min-width:100%;table-layout:fixed}
+table th:nth-child(1),table td:nth-child(1){width:16%}
+table th:nth-child(2),table td:nth-child(2){width:19%}
+table th:nth-child(3),table td:nth-child(3){width:14%}
+table th:nth-child(4),table td:nth-child(4){width:15%}
+table th:nth-child(5),table td:nth-child(5){width:12%}
+table th:nth-child(6),table td:nth-child(6){width:12%}
+table th:nth-child(7),table td:nth-child(7){width:12%}
+  th{background:rgba(15,27,51,.85);color:var(--muted);font-weight:600;text-align:left;padding:8px 8px;white-space:normal;border-bottom:1px solid var(--line)}
+  td{padding:8px 8px;border-bottom:1px solid rgba(148,163,184,.08);white-space:normal;overflow-wrap:anywhere}
+td.mono,td .pill{white-space:nowrap}
   tbody tr:hover{background:rgba(56,189,248,.04)}
   td.mono,.mono{font-family:var(--mono)}
   .pill{font-size:11px;padding:2px 8px;border-radius:999px;border:1px solid var(--line)}
@@ -225,7 +233,7 @@
             </div>
           </div>
           <div class="chart-wrap"><canvas id="chart" aria-label="未来12个月还本付息对比柱状图" role="img"></canvas></div>
-          <div style="font-size:11.5px;color:var(--dim);margin-top:8px">口径：日利率 = 年利率 / 360，当月利息 = 借款余额 × 日利率 × 当月实际天数（依据人行《人民币利率管理规定》对公贷款按 360 天计息、实际天数计息，非平摊 /12）；结息日仅周末顺延至周一（不含法定节假日）；未建模 LPR 重定价条款。</div>
+          <div style="font-size:11.5px;color:var(--dim);margin-top:8px">口径：日利率 = 年利率 / 360，当月利息 = 借款余额 × 日利率 × 当月实际天数（依据人行《人民币利率管理规定》对公贷款按 360 天计息、实际天数计息，非平摊 /12）；结息日仅周末顺延至周一（不含法定节假日）；年度重定价已建模（首年基准 LPR 3.10% → 次年 3.00%，执行利率 = 基准 + 加点）。</div>
         </section>
 
         <section class="card ledger" id="ledgerCard">
@@ -239,7 +247,7 @@
           <div class="table-wrap" tabindex="0">
             <table>
               <caption class="sr-only">集团贷款还本付息台账，含借款银行、本金余额、执行利率、下一结息日与计提状态</caption>
-              <thead><tr><th>借款类型</th><th>银行 / 机构</th><th>本金余额</th><th>执行利率 (LPR+)</th><th>到期日</th><th>下一结息日</th><th>状态</th><th>计量法</th></tr></thead>
+              <thead><tr><th>借款类型</th><th>银行 / 机构</th><th>本金余额</th><th>执行利率</th><th>到期日</th><th>下一结息日</th><th>状态</th></tr></thead>
               <tbody id="ledgerBody"></tbody>
             </table>
           </div>
@@ -291,7 +299,7 @@
     <section class="card" id="dataNote" style="margin-top:14px">
       <div class="card-head"><h2>数据来源与假设 <span class="tag">DATA &amp; ASSUMPTIONS</span></h2></div>
       <div style="font-size:12px;color:var(--muted);line-height:1.9">
-        ① 9 笔贷款为**合成演示样本**（按用户提供的集团贷款台账模板结构脱敏，非真实客户/合同）；② 首年 LPR 3.10%、次年 3.00%（年度重定价）为演示基准；③ 利率加点、金额、起止日为演示假设；④ Actual/360 依据人行对公贷款利率管理规定，按季结息（季末月 20 日）、结息日仅周末顺延；⑤ 导出为 ExcelJS 生成（11 个 sheet），桌面 Chromium 已验证，iOS Safari Blob 兼容性未真机验证；⑥ 全部数据不构成融资建议。
+        ① 9 笔贷款为**合成演示样本**（按用户提供的集团贷款台账模板结构脱敏，非真实客户/合同）；② 首年 LPR 3.10%、次年 3.00%（年度重定价）为演示基准；③ 利率加点、金额、起止日为演示假设；④ Actual/360 依据人行对公贷款利率管理规定，按季结息（季末月 20 日）、结息日仅周末顺延；年度重定价按周年日切换（首年基准 3.10% → 次年 3.00%）；⑤ 导出为 ExcelJS 生成（11 个 sheet），桌面 Chromium 已验证，iOS Safari Blob 兼容性未真机验证；⑥ 全部数据不构成融资建议。
       </div>
     </section>
     <div style="margin-top:18px;font-size:11.5px;color:var(--dim);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
@@ -472,7 +480,7 @@
     schedules.forEach(function(sc){
       var from = new Date(Math.max(parseYmd(sc.loan.start), ms));
       var to = new Date(Math.min(today, parseYmd(sc.loan.end)));
-      if(to > from) accrual += sc.loan.principal * rateAt(sc.loan, new Date(Math.max(from.getTime(), sc.loan.anniversary.getTime()))) / 360 * days(from, to);
+      if(to > from) accrual += sc.loan.principal * rateAt(sc.loan, today) / 360 * days(from, to);
     });
 
     // 30 天现金流出
@@ -565,16 +573,15 @@
       var nx = nextSettlement(l);
       var inDays = nx ? days(today, nx.date) : 999;
       var statusCls = inDays <= 30 ? 'accrued' : 'scheduled';
-      var status = inDays <= 30 ? 'Accrued 计提中' : 'Scheduled 待结息';
+      var status = inDays <= 30 ? '计提中' : '待结息';
       return '<tr>' +
         '<td>' + l.type + '<div style="font-size:10.5px;color:var(--dim)" class="mono">' + l.id + '</div></td>' +
         '<td>' + l.bank + '</td>' +
         '<td class="mono">' + money(l.principal) + '</td>' +
-        '<td>LPR+' + l.spread + 'bp <span style="color:var(--dim)">(' + pct(l.rate1) + ' 首年 → ' + pct(l.rate2) + ' 次年)</span></td>' +
+        '<td>LPR+' + l.spread + 'bp <span style="color:var(--dim)">(' + pct(l.rate1) + '→' + pct(l.rate2) + ')</span></td>' +
         '<td class="mono">' + l.end + '</td>' +
         '<td class="mono">' + (nx ? ymd(nx.date) : '—') + '</td>' +
-        '<td><span class="pill ' + statusCls + '">' + status + '</span></td>' +
-        '<td class="mono">' + l.convention + '</td></tr>';
+        '<td><span class="pill ' + statusCls + '">' + status + '</span></td></tr>';
     }).join('');
     document.getElementById('ledgerCount').textContent = '共 ' + list.length + ' 笔贷款 · Actual/360';
   }
