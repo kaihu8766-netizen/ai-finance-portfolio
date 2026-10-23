@@ -105,7 +105,7 @@
   /* 台账 */
   .ledger{margin-top:14px}
   .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px}
-  table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:820px}
+  table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:920px}
   th{background:rgba(15,27,51,.85);color:var(--muted);font-weight:600;text-align:left;padding:10px 12px;white-space:nowrap;border-bottom:1px solid var(--line)}
   td{padding:11px 12px;border-bottom:1px solid rgba(148,163,184,.08);white-space:nowrap}
   tbody tr:hover{background:rgba(56,189,248,.04)}
@@ -239,7 +239,7 @@
           <div class="table-wrap" tabindex="0">
             <table>
               <caption class="sr-only">集团贷款还本付息台账，含借款银行、本金余额、执行利率、下一结息日与计提状态</caption>
-              <thead><tr><th>借款类型</th><th>银行 / 机构</th><th>本金余额</th><th>执行利率 (LPR+)</th><th>下一结息日</th><th>状态</th><th>计量法</th></tr></thead>
+              <thead><tr><th>借款类型</th><th>银行 / 机构</th><th>本金余额</th><th>执行利率 (LPR+)</th><th>到期日</th><th>下一结息日</th><th>状态</th><th>计量法</th></tr></thead>
               <tbody id="ledgerBody"></tbody>
             </table>
           </div>
@@ -571,6 +571,7 @@
         '<td>' + l.bank + '</td>' +
         '<td class="mono">' + money(l.principal) + '</td>' +
         '<td>LPR+' + l.spread + 'bp <span style="color:var(--dim)">(' + pct(l.rate1) + ' 首年 → ' + pct(l.rate2) + ' 次年)</span></td>' +
+        '<td class="mono">' + l.end + '</td>' +
         '<td class="mono">' + (nx ? ymd(nx.date) : '—') + '</td>' +
         '<td><span class="pill ' + statusCls + '">' + status + '</span></td>' +
         '<td class="mono">' + l.convention + '</td></tr>';
