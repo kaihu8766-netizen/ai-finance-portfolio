@@ -1965,9 +1965,9 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
 <!-- 方法论 -->
 <!-- 方法论 -->
 <div class="sec reveal" id="pipeline">
-  <div class="sec-head"><span class="idx">02</span><h2>Agent 协作机制</h2><span class="en">EXECUTOR · REVIEWER · REVIEW-AI</span></div>
+  <div class="sec-head"><span class="idx">02</span><h2>Agent 协作机制</h2><span class="en">EXECUTOR · REVIEWER · REVIEW-AI · HUMAN</span></div>
 
-  <p style="font-size:14px;color:#9ba3b7;line-height:1.9;margin-bottom:20px">单一 AI 有幻觉、确认偏误、自我盲区。财务场景对准确性要求极高，一个错误可能导致严重后果。这套机制不是两个模型互聊，而是三层分工：<b>执行 Agent</b>（带工具：写代码、跑门禁、浏览器实测、提交）+ <b>独立复核 Agent</b>（带工具：独立拉仓、复测复算、写评审档案、盖章、发布）+ <b>复核 AI</b>（异模型独立评审，产出评审条件）。<b>人</b>负责定方向、拍板与分歧裁决。开工前先对齐方案（复述理解、提异议，人拍板再动手）；复核方只看 commit 与证据、不看执行方自述；机器闸门兜底（未盖章 commit 的 Review gate 必红、Deploy 拦截）；复核 AI 的结论是输入不是判决（误判会被执行方或人拦下并留档）。</p>
+  <p style="font-size:14px;color:#9ba3b7;line-height:1.9;margin-bottom:20px">单一 AI 有幻觉、确认偏误、自我盲区。财务场景对准确性要求极高，一个错误可能导致严重后果。这套机制不是两个模型互聊，而是三层机器分工 + 人拍板：<b>执行 Agent</b>（带工具：写代码、跑门禁、浏览器实测、提交）+ <b>独立复核 Agent</b>（带工具：独立拉仓、复测复算、写评审档案、盖章、发布）+ <b>复核 AI</b>（异模型独立评审，产出评审条件）。<b>人</b>负责定方向、拍板与分歧裁决。开工前先对齐方案（复述理解、提异议，人拍板再动手）；复核方只看 commit 与证据、不看执行方自述；机器闸门兜底（未盖章 commit 的 Review gate 必红、Deploy 拦截）；复核 AI 的结论是输入不是判决（误判会被执行方或人拦下并留档）。</p>
 
   <div class="about-grid" style="margin-top:18px">
     <div class="about-card">
@@ -1980,7 +1980,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
       <span style="color:#6d7cff">执行类工具（TRAE/Codex/Kimi 等）按场景选用，属工具层，不参与复核</span>
       </p>
       <div style="margin-top:10px;font-size:12px;color:var(--dim);background:rgba(109,124,255,0.06);padding:8px 12px;border-radius:8px">
-      🔄 <b>怎么协作的</b>：A 类（新作品/定位/用户可见叙事/口径数字）先出对齐单 → 复核方补挑刺 → 人拍板 → 落档 → 执行 → 三件套自检 → 复核方独立复测 + 复核 AI 评审 → 盖章 → 发布 → 线上验证；B 类（bugfix/样式/文案小改）直接做、事后复核。每一步都有产物（对齐单 / commit / RV 档案 / 印章），出了问题能查到当时是怎么想的。
+      🔄 <b>怎么协作的</b>：A 类（新作品/定位/用户可见叙事/口径数字）先出对齐单 → 复核方补挑刺 → 人拍板 → 落档 → 执行 → 三件套自检 → 复核方独立复测 + 复核 AI 评审 → 盖章 → 发布 → 线上验证；B 类（bugfix/样式/文案小改）直接做、事后复核（由独立复核 Agent 复测盖章，不调用复核 AI；A 类才调复核 AI）。每一步都有产物（对齐单 / commit / RV 档案 / 印章），出了问题能查到当时是怎么想的。
       </div>
     </div>
 
