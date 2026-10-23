@@ -1801,7 +1801,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
       <div class="tl-content">
         <div class="tl-head"><span class="tl-ver">v7.4</span><span class="tl-date">2026.10</span></div>
         <div class="tl-title">第二件旗舰作品：AI 司库还本付息系统</div>
-        <div class="tl-desc">新增「AI 集团贷款还本付息动态排程与利息计提系统」：银行级 Actual/360 精算 + 4 大 KPI + 12 个月还本付息排程 + 5,000 万流动性预警 + AI 合同解析（0.5 秒自动回填）+ AI 司库 Copilot 流式洞察 + SheetJS 导出；作品集定位升级为双旗舰（研究 + 产品），Hero 统计/口径/30 秒速览/作品卡同步，助手知识库新增作品条目</div>
+        <div class="tl-desc">新增「AI 集团贷款还本付息动态排程与利息计提系统」：银行级 Actual/360 精算 + 4 大 KPI + 12 个月还本付息排程 + 5,000 万流动性预警 + AI 合同解析（0.5 秒自动回填）+ AI 司库 Copilot 流式洞察 + SheetJS 导出（v7.6 起升级为 ExcelJS 11-sheet 动态穿透模板导出）；作品集定位升级为双旗舰（研究 + 产品），Hero 统计/口径/30 秒速览/作品卡同步，助手知识库新增作品条目</div>
         <div class="tl-tags"><span>双旗舰</span><span>AI 司库</span><span>Actual/360</span></div>
       </div>
     </div>
@@ -2188,8 +2188,8 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
       "summary": "基于 MLF 政策利率、银行净息差、社融、CPI 四指标框架预测 LPR 调整方向与幅度：净息差 Q1 触底 1.40%、Q2 微升 1.41%（四年来首次环比回升），银行让利空间有限；蒙特卡洛 10,000 条路径输出 5 年区间带（10%/50%/90% 分位数）与情景概率（基准 60%/偏鸽 25%/持稳 15%），直接服务新增贷款定价、存量重定价、再融资择时三个决策场景",
       "tags": ["LPR", "利率预测", "净息差", "贷款定价", "宏观分析", "MLF", "社融", "CPI"],
       "highlights": ["四指标分析框架", "LPR 2019 改革历史走势", "蒙特卡洛5年预测区间带", "企业融资成本压力测试（VaR）", "贷款定价决策建议"] },
-{ "id": "w04", "name": "AI 司库还本付息系统", "layer": "产品", "desc": "Actual/360 精算·4大KPI·12个月还本付息排程·AI合同解析·AI司库Copilot·Excel导出·单文件纯前端",
-"summary": "AI 集团贷款还本付息动态排程与利息计提系统：银行级 Actual/360 逐日计提（当月利息 = 借款余额 × 年利率/360 × 当月实际天数，结息日遇周末顺延至周一），4 笔车企大行流贷样本、还本付息台账与 12 个月本金/利息排程、单月还款超 5,000 万自动预警；AI 合同解析 0.5 秒提取银行/本金/起止日/LPR 加点/结息方式并回填表单，AI 司库 Copilot 流式生成资金洞察报告，SheetJS 一键导出台账与排程。",
+{ "id": "w04", "name": "AI 司库还本付息系统", "layer": "产品", "desc": "Actual/360 精算·9笔集团流贷(4.15亿)·按季结息20日·年度重定价·4大KPI·12个月排程·AI合同解析·AI司库Copilot·ExcelJS 11-sheet动态穿透导出·单文件纯前端",
+"summary": "AI 集团贷款还本付息动态排程与利息计提系统：银行级 Actual/360 逐日计提（当月利息 = 借款余额 × 年利率/360 × 当月实际天数，结息日遇周末顺延至周一），9 笔车企大行流贷样本（合计 4.15 亿）、按季结息还本付息台账与 12 个月本金/利息排程、单月还款超 5,000 万自动预警；AI 合同解析 0.5 秒提取银行/本金/起止日/LPR 加点/结息方式并回填表单，AI 司库 Copilot 流式生成资金洞察报告，ExcelJS 复刻 11-sheet「动态穿透版」台账一键导出（汇总 + 9 单笔附表 + 参数敏感性）。",
 "tags": ["AI 司库", "贷款排程", "利息计提", "Actual/360", "合同解析", "Copilot"],
 "highlights": ["Actual/360 银行级精算", "AI 合同解析自动回填", "AI 司库决策报告", "12 个月排程预警", "Excel 导出"] },
   "prototypes": [],
@@ -2240,7 +2240,7 @@ window.SmartReconAI = {
   offlineReplies: {
     // 作品集助手场景（portfolio-assistant）
     portfolio: [
-      { kw: ['司库', '还本付息', '贷款排程', '利息计提', 'Actual/360', 'treasury', 'amortization', '合同解析'], reply: 'AI 集团贷款还本付息动态排程与利息计提系统：银行级 Actual/360 逐日计提 + 4 大 KPI + 12 个月还本付息排程 + 单月超 5,000 万流动性预警；AI 合同一键解析（0.5 秒自动回填银行/本金/起止日/LPR 加点/结息方式）+ AI 司库 Copilot 流式洞察报告 + SheetJS 一键导出。单文件纯前端，打开即用。<div class="tool-call">portfolio_kb → works[1] ✓</div>' },
+      { kw: ['司库', '还本付息', '贷款排程', '利息计提', 'Actual/360', 'treasury', 'amortization', '合同解析'], reply: 'AI 集团贷款还本付息动态排程与利息计提系统：银行级 Actual/360 逐日计提 + 9 笔集团流贷台账（4.15 亿）+ 4 大 KPI + 12 个月还本付息排程 + 单月超 5,000 万流动性预警；AI 合同一键解析（0.5 秒自动回填银行/本金/起止日/LPR 加点/结息方式）+ AI 司库 Copilot 流式洞察报告 + ExcelJS 复刻 11-sheet 动态穿透模板导出。单文件纯前端，打开即用。<div class="tool-call">portfolio_kb → works[1] ✓</div>' },
       { kw: ['功能','结构','有哪些','哪些作品','作品集','几个作品','作品矩阵','导览','介绍'], reply: '这个作品集围绕两件旗舰作品展开：①主页（个人介绍 + 精算/财务/AI 能力全景）②LPR 走势预测与融资成本压力测试系统（研究：四指标框架 + 蒙特卡洛概率预测 + 深度详情页）③AI 集团贷款还本付息动态排程与利息计提系统（产品：Actual/360 精算 + AI 合同解析 + 司库 Copilot，在线应用）④AI 协作经验（双 Agent 机制）<div class="tool-call">portfolio_kb → home ✓</div>' },
       { kw: ['缺陷','问题','修复','bug','历史'], reply: '已修复的缺陷（列举）：①聊天输入XSS ②ECharts全量1004KB→按需打包691KB ③证据链元素用br无法显示→改div ④证据链浅底浅字看不清→改深色文字 ⑤Agent只回固定话术→接入真实DeepSeek API ⑥API失败直接降级→加重试 ⑦数据底座缺月度资金流→补12个月数据 ⑧离线关键词跨场景劫持→场景分离 ⑨人设漂移/逻辑缺陷→persona增强+资金全景 ⑩异常中心按钮无状态流转→完整全流程。<div class="tool-call">portfolio_kb → defect_log ✓</div>' },
       { kw: ['迭代','版本','更新','演进'], reply: '作品集演进历史：v1 基础版→v2.1 ECharts按需打包→v2.2 安全修复→v2.3 接入真实DeepSeek AI→v2.4 数据底座升级→v2.5 AI拷问测试修复→v2.6 异常处理全流程→v2.7 内置作品集助手→v3.2 整合SOX工作台→v3.3 协作实战展示→v3.4 作品矩阵分级→v5.0 双Agent复核机制→v5.3 手机端适配+preflight体检→v5.5.0 业务化大改造+全站措辞业务化→v5.6.0 主页Demo入口显眼化→v5.6.1 AI协作经验章节更新（三阶段闭环+规矩6条+数据更新）→v5.7.0 作品01替换为发票合规预审（可运行Demo）→v5.7.1 作品01加系统流水线图+规则覆盖图，文案口径修正→v6.1 精简聚焦：仅保留作品01+作品07，删除LPR/供应链/SOX/资金智算。<div class="tool-call">portfolio_kb → versions ✓</div>' },
