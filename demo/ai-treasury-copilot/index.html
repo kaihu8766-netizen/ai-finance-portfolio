@@ -7,6 +7,7 @@
 <meta name="description" content="AI 集团贷款还本付息动态排程与利息计提系统：Actual/360 银行级精算、AI 合同解析、AI 司库决策助手">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+<script src="export-style.js"></script>
 <style>
   :root{
     --bg:#0B132B; --bg2:#0F1B33; --panel:#111C33; --panel2:#152241;
@@ -300,7 +301,7 @@ td.mono,td .pill{white-space:nowrap}
     <section class="card" id="dataNote" style="margin-top:14px">
       <div class="card-head"><h2>数据来源与假设 <span class="tag">DATA &amp; ASSUMPTIONS</span></h2></div>
       <div style="font-size:12px;color:var(--muted);line-height:1.9">
-        ① 9 笔贷款为**合成演示样本**（按用户提供的集团贷款台账模板结构脱敏，非真实客户/合同）；② 首年 LPR 3.10%、次年 3.00%（年度重定价）为演示基准；③ 利率加点、金额、起止日为演示假设；④ Actual/360 依据人行对公贷款利率管理规定，按季结息（季末月 20 日）、结息日仅周末顺延；年度重定价日 = 放款周年日（Anniversary Date），加点固定、仅调整 1Y LPR 基准（首年 3.10% → 次年 3.00%）；⑤ 导出为 ExcelJS 生成（11 个 sheet），桌面 Chromium 已验证，iOS Safari Blob 兼容性未真机验证；⑥ 全部数据不构成融资建议。
+        ① 9 笔贷款为**合成演示样本**（按用户提供的集团贷款台账模板结构脱敏，非真实客户/合同）；② 首年 LPR 3.10%、次年 3.00%（年度重定价）为演示基准；③ 利率加点、金额、起止日为演示假设；④ Actual/360 依据人行对公贷款利率管理规定，按季结息（季末月 20 日）、结息日仅周末顺延；年度重定价日 = 放款周年日（Anniversary Date），加点固定、仅调整 1Y LPR 基准（首年 3.10% → 次年 3.00%）；⑤ 导出为 ExcelJS 生成（11 个 sheet），样式与模板逐像素对齐（列宽/行高/合并/字体/填充/边框/数字格式），桌面 Chromium 已验证，iOS Safari Blob 兼容性未真机验证；⑥ 全部数据不构成融资建议。
       </div>
     </section>
     <div style="margin-top:18px;font-size:11.5px;color:var(--dim);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
@@ -969,6 +970,18 @@ td.mono,td .pill{white-space:nowrap}
       if(i===11||i===12) xlMoney(c);
     });
 
+    // 汇总页 KPI 说明行（与模板 A6/D6/G6/J6/M6 对齐；数值随数据刷新）
+    var endYears = {};
+    loans.forEach(function(l){ endYears[parseYmd(l.end).getFullYear()] = 1; });
+    var kpiNotes = [
+      loans.length + '笔流贷全部在贷提款 (¥' + (sums.principal / 1e8).toFixed(2) + '亿元)',
+      '基准1Y LPR(' + (loans[0].rate * 100).toFixed(2) + '%) + 浮动利差',
+      '按季结息实际资金流出汇总',
+      loans.length + '笔贷款全周期利息总成本',
+      '本金于' + Object.keys(endYears).join('/') + '年陆续到期置换'
+    ];
+    ['A6', 'D6', 'G6', 'J6', 'M6'].forEach(function(addr, i){ ws.getCell(addr).value = kpiNotes[i]; });
+
     // ---------- 2) LN01~LN09 单笔附表 ----------
     loans.forEach(function(l, idx){
       var sheetName = 'LN' + String(idx+1).padStart(2,'0') + '_' + BANK_SHORT[idx];
@@ -1125,10 +1138,137 @@ td.mono,td .pill{white-space:nowrap}
     return wb;
   }
 
+
+  /* ===== 模板样式套用（数据见 export-style.js，由 tools/v714_gen.py 从模板生成） ===== */
+  function xlColNum(letter){
+    var n = 0;
+    for(var i = 0; i < letter.length; i++){ n = n * 26 + letter.charCodeAt(i) - 64; }
+    return n;
+  }
+  function xlColLetter(n){
+    var s = '';
+    while(n){ var m = (n - 1) % 26; s = String.fromCharCode(65 + m) + s; n = Math.floor((n - 1) / 26); }
+    return s;
+  }
+  function xlRange(rg){
+    var p = rg.split(':'), a = p[0], b = p[1];
+    return [xlColNum(a.match(/^[A-Z]+/)[0]), +a.match(/[0-9]+$/)[0],
+            xlColNum(b.match(/^[A-Z]+/)[0]), +b.match(/[0-9]+$/)[0]];
+  }
+  function xlMergedSlaves(ranges){
+    var set = {};
+    ranges.forEach(function(rg){
+      var r = xlRange(rg), r1 = r[1], r2 = r[3], c1 = r[0], c2 = r[2];
+      for(var rr = r1; rr <= r2; rr++){
+        for(var cc = c1; cc <= c2; cc++){
+          if(rr === r1 && cc === c1) continue;
+          set[rr + ':' + cc] = 1;
+        }
+      }
+    });
+    return set;
+  }
+  function xlAlign(v){ return v === 'center' ? 'middle' : (v || undefined); }
+  function xlTemplateStyle(idx){
+    var T = window.TREASURY_EXPORT_STYLES;
+    if(idx < 0 || !T) return null;
+    var s = T.s[idx], f = s[1] >= 0 ? T.f[s[1]] : null,
+        fl = s[2] >= 0 ? T.fl[s[2]] : null,
+        bd = s[3] >= 0 ? T.b[s[3]] : null,
+        al = s[4] >= 0 ? T.a[s[4]] : null;
+    var st = { numFmt: s[0] >= 0 ? T.nf[s[0]] : 'General' };
+    if(f){
+      st.font = { name: T.fn[f[0]], size: f[1], bold: !!f[2], italic: !!f[3],
+                  underline: f[4] || undefined,
+                  color: f[5] >= 0 ? { argb: T.c[f[5]] } : undefined };
+    }
+    st.fill = fl ? { type: 'pattern', pattern: 'solid', fgColor: { argb: T.c[fl[0]] } }
+                 : { type: 'pattern', pattern: 'none' };
+    if(bd){
+      var names = ['left', 'right', 'top', 'bottom'], border = {};
+      for(var k = 0; k < 4; k++){
+        var side = bd[k];
+        if(side && side[0] >= 0){ border[names[k]] = { style: T.bs[side[0]], color: { argb: T.c[side[1]] } }; }
+      }
+      st.border = border;
+    } else {
+      st.border = {};
+    }
+    st.alignment = al ? { horizontal: al[0] || undefined, vertical: xlAlign(al[1]),
+                          wrapText: !!al[2], indent: al[3] || undefined } : {};
+    return st;
+  }
+  function applyTemplateStyles(wb){
+    var T = window.TREASURY_EXPORT_STYLES;
+    if(!T){ return false; }
+    wb.worksheets.forEach(function(ws){
+      var meta = null;
+      for(var i = 0; i < T.sh.length; i++){ if(T.sh[i][0] === ws.name){ meta = T.sh[i]; break; } }
+      if(!meta) return;
+      var lay = T.l[meta[1]], slaves = xlMergedSlaves(lay.m), grids = T.g[meta[2]];
+      var rowMap = {}, specMax = 0;
+      grids.forEach(function(row){ rowMap[row[0]] = row; if(row[0] > specMax) specMax = row[0]; });
+      // 导出实际数据末行（排除仅设了行高的空行）
+      var maxCol = 0;
+      grids.forEach(function(row){
+        for(var k = 1; k < row.length; k += 3){ if(row[k + 1] > maxCol) maxCol = row[k + 1]; }
+      });
+      var expMax = 0;
+      for(var probe = ws.rowCount; probe > 0; probe--){
+        var hasVal = false;
+        for(var pc = 1; pc <= maxCol; pc++){
+          var pv = ws.getRow(probe).getCell(pc).value;
+          if(pv !== null && pv !== undefined && pv !== ''){ hasVal = true; break; }
+        }
+        if(hasVal){ expMax = probe; break; }
+      }
+      var extended = expMax > specMax;
+      // 行号映射：表头/要素块（≤18 行）× 原样；数据区按底部对齐（排程行→模板排程行，合计行→模板合计行）
+      function srcRow(r){
+        if(!extended || r <= 18){ return r; }
+        return (r < expMax) ? 19 : specMax;
+      }
+      var lastRow = Math.max(specMax, expMax);
+      // 1) 单元格样式（先于合并；跳过合并从属格，避免回写主格）
+      for(var tr = 1; tr <= lastRow; tr++){
+        var gridRow = rowMap[srcRow(tr)];
+        if(!gridRow){ continue; }
+        for(var k = 1; k < gridRow.length; k += 3){
+          var st = xlTemplateStyle(gridRow[k + 2]);
+          if(!st){ continue; }
+          for(var c = gridRow[k]; c <= gridRow[k + 1]; c++){
+            if(slaves[tr + ':' + c]){ continue; }
+            var cell = ws.getCell(tr, c);
+            cell.numFmt = st.numFmt;
+            if(st.font){ cell.font = st.font; }
+            cell.fill = st.fill;
+            cell.border = st.border;
+            cell.alignment = st.alignment;
+          }
+        }
+      }
+      // 2) 合并单元格
+      lay.m.forEach(function(rg){
+        if(!ws.getCell(rg.split(':')[0]).isMerged){ ws.mergeCells(rg); }
+      });
+      // 3) 列宽 / 行高（模板未定义列宽的列回退默认宽度）
+      for(var col = 1; col <= maxCol; col++){
+        var w = lay.w[xlColLetter(col)];
+        ws.getColumn(col).width = (w === undefined ? undefined : w);
+      }
+      for(var hr = 1; hr <= lastRow; hr++){
+        var hh = lay.h[String(srcRow(hr))];
+        if(hh){ ws.getRow(hr).height = hh; }
+      }
+    });
+    return true;
+  }
+
   document.getElementById('btnExport').addEventListener('click', function(){
     if(typeof ExcelJS === 'undefined'){ toast('Excel 组件（ExcelJS）加载失败，请检查网络后重试', 'err'); return; }
     try{
       var wb = buildTemplateWorkbook();
+      applyTemplateStyles(wb);
       wb.xlsx.writeBuffer().then(function(buf){
         var name = '某大型新能源整车制造企业_集团贷款还款总表(动态穿透版)_合成演示数据.xlsx';
         var blob = new Blob([buf], { type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
