@@ -3511,208 +3511,35 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
 <!-- 方法论 -->
 
 <div class="sec reveal" id="pipeline">
-
-  <div class="sec-head"><span class="idx">02</span><h2>Agent 协作机制</h2><span class="en">EXECUTOR · REVIEWER · REVIEW-AI · EXTERNAL-REVIEW-AI · HUMAN</span></div>
-
-
-
-  <p style="font-size:14px;color:#9ba3b7;line-height:1.9;margin-bottom:20px">单一 AI 有幻觉、确认偏误、自我盲区。财务场景对准确性要求极高，一个错误可能导致严重后果。这套机制不是两个模型互聊，而是四层机器分工 + 人拍板：<b>执行 Agent</b>（带工具：写代码、跑门禁、浏览器实测、提交）+ <b>独立复核 Agent</b>（带工具：独立拉仓、复测复算、写评审档案、盖章、发布）+ <b>复核 AI</b>（异模型独立评审，产出评审条件）+ <b>外部评审 AI</b>（Gemini：多模态视觉审查、长文逻辑交叉、英文润色；无仓库权限、无盖章权，结论为输入）。四层是互补而非堆叠：写代码、复测盖章、异模型评审、异构多模态的外部视觉/英文交叉各管一段，每层都有明确产物与权限边界。<b>人</b>负责定方向、拍板与分歧裁决。开工前先对齐方案（复述理解、提异议，人拍板再动手）；复核方只看 commit 与证据、不看执行方自述；机器闸门兜底（未盖章 commit 的 Review gate 必红、Deploy 拦截）；复核 AI 的结论是输入不是判决（误判会被执行方或人拦下并留档）。</p>
-
-
-
-  <div class="about-grid" style="margin-top:18px">
-
-    <div class="about-card">
-
-      <h4>怎么分工的</h4>
-
-      <p style="font-size:12px;line-height:2.2">
-
-      <span style="display:inline-block;width:17px;height:17px;line-height:17px;text-align:center;border-radius:5px;background:var(--bg2);color:#fff;font-size:12px;font-weight:700;vertical-align:-2px;margin-right:4px">H</span><b>人（胡凯）</b>：定方向、拍板、最终确认——<b>分歧裁决自己来</b><br>
-
-      <span style="display:inline-block;width:17px;height:17px;line-height:17px;text-align:center;border-radius:5px;background:#1b2f4a;color:#67e8f9;font-size:12px;vertical-align:-2px;margin-right:4px">⚙</span><b>执行 Agent（DSH 内 DeepSeek，带工具）</b>：读需求写代码、跑 preflight/pytest/coverage、浏览器实测、commit/push<br>
-
-      <span style="display:inline-block;width:17px;height:17px;line-height:17px;text-align:center;border-radius:5px;background:#2a2438;color:#f0a8ff;font-size:12px;vertical-align:-2px;margin-right:4px">🔍</span><b>独立复核 Agent（豆包云电脑，带工具）</b>：独立 pull、复测复算、axe、写 RV 档案、REVIEW_STAMP 盖章、发布、线上验证<br>
-
-      <span style="display:inline-block;width:17px;height:17px;line-height:17px;text-align:center;border-radius:5px;background:#2b2b1f;color:#fbbf24;font-size:12px;vertical-align:-2px;margin-right:4px">🧠</span><b>复核 AI（DS API，异模型）</b>：独立评审 diff、产出 RV 条件；<b>结论是输入，不是判决</b><br>
-
-      <span style="display:inline-block;width:17px;height:17px;line-height:17px;text-align:center;border-radius:5px;background:#1f2a12;color:#a3e635;font-size:12px;vertical-align:-2px;margin-right:4px">🛰</span><b>外部评审 AI（Gemini，多模态）</b>：视觉审查、长文逻辑交叉、英文润色；<b>无仓库权限、无盖章权，结论是输入</b><br>
-
-      <span style="color:#6d7cff">执行类工具（TRAE/Codex/Kimi 等）按场景选用，属工具层，不参与复核</span>
-
-      </p>
-
-      <div style="margin-top:10px;font-size:12px;color:var(--dim);background:rgba(109,124,255,0.06);padding:8px 12px;border-radius:8px">
-
-      🔄 <b>怎么协作的</b>：A 类（新作品/定位/用户可见叙事/口径数字）先出对齐单 → 复核方补挑刺 → 人拍板 → 落档 → 执行 → 三件套自检 → 复核方独立复测 + 复核 AI 评审 → 盖章 → 发布 → 线上验证；B 类（bugfix/样式/文案小改）直接做、事后复核（由独立复核 Agent 复测盖章，不调用复核 AI；A 类才调复核 AI；A 类涉视觉/长文/英文时并联外部评审 AI，结论并入评审输入）。每一步都有产物（对齐单 / commit / RV 档案 / 印章），出了问题能查到当时是怎么想的。
-
+    <div class="sec-head"><span class="idx">02</span><h2>数字化开发中的质量控制机制</h2><span class="en">QUALITY CONTROL</span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:8px">
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(130,150,255,0.12);border-radius:14px;padding:20px 22px">
+        <div style="font-size:12px;color:#94a3b8;letter-spacing:.6px;margin-bottom:10px">为什么这样做</div>
+        <div style="font-size:13.5px;color:#cbd5e1;line-height:1.85">
+          财务与资金管理对数据准确性零容忍。为防范大模型在复杂金融测算中的潜在幻觉，我把金融机构经典的「经办 — 复核 — 审批（Maker-Checker）」机制搬到数据建模里：<b style="color:#e2e8f0">不盲信任何单一模型的首次输出</b>。
+        </div>
       </div>
-
-    </div>
-
-
-
-    <div class="about-card">
-
-      <h4>几个关键规矩</h4>
-
-      <p style="font-size:12px;color:#6d7cff;font-weight:500;margin-bottom:6px;letter-spacing:0.5px">协作规矩</p>
-
-      <p style="font-size:12px;line-height:2;margin-bottom:10px">
-
-      <span class="hl">任务写清楚</span>：AI 经常理解偏差，所以重要的事都写下来，动手前先让它复述一遍，确认没理解错再做<br>
-
-      <span class="hl">开工先对齐</span>：动工前先讨论方案，AI 先提异议、人拍板后再动手——事前对齐比事后补救便宜得多<br>
-
-      <span class="hl">问题分轻重</span>：数据错了立刻停，功能有问题优先修，样式小问题记下来以后改<br>
-
-      <span class="hl">做完有人查</span>：执行方不能自己说完成，必须由独立复核方看 commit 与证据再放行<br>
-
-      <span class="hl">机器闸门兜底</span>：没盖章的改动 Review gate 必红、Deploy 前被拦下——不靠自觉，靠机制<br>
-
-      <span class="hl">每步都记录</span>：对齐单、commit、RV 档案、印章都留档，以后回看能知道当时为什么这么做
-
-      </p>
-
-      <p style="font-size:12px;color:#fbbf24;font-weight:500;margin-bottom:6px;letter-spacing:0.5px">机制保障（在自己的项目里实践）</p>
-
-      <p style="font-size:12px;line-height:2">
-
-      <span class="hl">风险自动定级</span>：按文件类型、改动规模、关键词自动定高/中/低风险，高风险强制复核——防止为省事把自己判成低风险<br>
-
-      <span class="hl">讨论有触发条件</span>：不是每步都调复核 AI——高风险、结论不一致、执行方自报不确定、人明确要求时才发起<br>
-
-      <span class="hl">结论复用</span>：复核 AI 与外部评审 AI 的结论都只作为评审输入；B 类不调用复核 AI、也不调外部评审 AI，避免多层各出一套结论、责任边界不清<br>
-
-      <span class="hl">自我完善机制</span>：问题随手记进错误日志，每周一与每月奇数日自动执行一致性/积压/完整性检查，新增问题进入汇总讨论
-
-      </p>
-
-<p style="font-size:12px;color:#a3e635;font-weight:500;margin:12px 0 6px;letter-spacing:0.5px">外部评审 AI（Gemini）触发条件</p>
-
-<table style="width:100%;border-collapse:collapse;font-size:11.5px;line-height:1.75;color:#9ba3b7">
-
-<thead><tr><th style="text-align:left;padding:4px 6px;border-bottom:1px solid rgba(148,163,184,.18);font-weight:500;color:#c9d2e3">场景</th><th style="text-align:left;padding:4px 6px;border-bottom:1px solid rgba(148,163,184,.18);font-weight:500;color:#c9d2e3">处理</th></tr></thead>
-
-<tbody>
-
-<tr><td style="padding:4px 6px">A 类 · 涉及用户可见视觉 / 长文 / 英文</td><td style="padding:4px 6px">默认调用：P0–P2 + 证据，原文留档</td></tr>
-
-<tr><td style="padding:4px 6px">B 类 · 样式 / 文案小改</td><td style="padding:4px 6px">不调用（用户点名除外）</td></tr>
-
-<tr><td style="padding:4px 6px">用户点名</td><td style="padding:4px 6px">随时调用</td></tr>
-
-<tr><td style="padding:4px 6px">失败 / 超时</td><td style="padding:4px 6px">重试 1 次后跳过并记录，不阻塞闭环</td></tr>
-
-</tbody></table>
-
-      <div style="margin-top:10px;font-size:12px;color:var(--dim);background:rgba(251,191,36,0.06);padding:8px 12px;border-radius:8px">
-
-      💡 想法很简单：AI 适合干重复活，人适合做判断。我做的事情就是把这两件事分开。
-
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(130,150,255,0.12);border-radius:14px;padding:20px 22px">
+        <div style="font-size:12px;color:#94a3b8;letter-spacing:.6px;margin-bottom:10px">三步闭环</div>
+        <div style="font-size:13.5px;color:#cbd5e1;line-height:1.85">
+          <b style="color:#38bdf8">① 经办</b>：按 Actual/360 等计息惯例，由 AI 生成还本付息与蒙特卡洛计算代码；<br>
+          <b style="color:#34d399">② 复核</b>：换另一个模型独立验算现金流与折现结果，交叉比对边界异常；<br>
+          <b style="color:#a78bfa">③ 裁决</b>：本人核验勾稽关系与数据口径后放行。
+        </div>
       </div>
-
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(130,150,255,0.12);border-radius:14px;padding:20px 22px">
+        <div style="font-size:12px;color:#94a3b8;letter-spacing:.6px;margin-bottom:10px">与财务内控的对应</div>
+        <div style="font-size:13.5px;color:#cbd5e1;line-height:1.85">
+          这套逻辑与金融机构的「<b style="color:#e2e8f0">前后台制衡、四眼原则（Four-Eyes）</b>」一致：经办与复核分离，分歧沉淀为规则；对外交付的测算报表要求逻辑闭环、全流程可追溯。
+        </div>
+      </div>
     </div>
-
+    <div style="margin-top:16px;font-size:13px;color:#94a3b8;line-height:1.85">
+      善用工具效率，恪守专业底线：把 AI 当作提升运算与排程效率的辅助工具，把财务常识与风控底线作为不可让渡的验收准绳。
+    </div>
   </div>
 
-
-
-  <div class="glass" style="margin-top:20px;background:var(--card-solid);border:1px solid rgba(109,124,255,0.18);border-radius:16px;padding:20px 24px">
-
-    <h4 style="font-size:14px;color:#6d7cff;margin-bottom:12px">🔄 协作闭环：一个真实案例（v6.2 早期）</h4>
-
-    <div style="font-size:12px;color:#9ba3b7;line-height:2">
-
-      <b>执行方提方案</b>：完成修改后自认为没问题，准备 push 上线<br>
-
-      <b>复核方独立审查</b>：发现"先 push 后复核"违规，分析根因是"用户在等时把给用户看效果和 push 上线绑成一件事"<br>
-
-      <b>双方讨论</b>：复核方建议 hotfix 白名单机制，执行方补充"改文字随便改，改结构必复核"<br>
-
-      <b>人裁决</b>：采纳双方意见，落地复核凭证 + CI 闸门 + hotfix 白名单<br>
-
-      <b>沉淀规则</b>：写入 PROJECT_BRIEF.md 强制规则，PR #1 实证：不补凭证就合不进去
-
-    </div>
-
-    <div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap">
-
-      <div style="flex:1;min-width:100px;text-align:center;background:rgba(109,124,255,0.08);padding:10px;border-radius:8px">
-
-        <div style="font-size:20px;font-weight:700;color:#6d7cff">84</div>
-
-        <div style="font-size:12px;color:#9ba3b7">轮复核</div>
-
-      </div>
-
-      <div style="flex:1;min-width:100px;text-align:center;background:rgba(52,211,153,0.08);padding:10px;border-radius:8px">
-
-        <div style="font-size:20px;font-weight:700;color:#34d399">65</div>
-
-        <div style="font-size:12px;color:#9ba3b7">条批准基线</div>
-
-      </div>
-
-      <div style="flex:1;min-width:100px;text-align:center;background:rgba(251,191,36,0.08);padding:10px;border-radius:8px">
-
-        <div style="font-size:20px;font-weight:700;color:#fbbf24">10+2</div>
-
-        <div style="font-size:12px;color:#9ba3b7">preflight 10 项 + CI 2 闸门</div>
-
-      </div>
-
-      <div style="flex:1;min-width:100px;text-align:center;background:rgba(34,211,238,0.08);padding:10px;border-radius:8px">
-
-        <div style="font-size:20px;font-weight:700;color:#22d3ee">100%</div>
-
-        <div style="font-size:12px;color:#9ba3b7">决策可追溯（评审 + 印章全量留档）</div>
-
-      </div>
-
-    </div>
-
-    <div style="margin-top:14px;font-size:12px;color:#9ba3b7;line-height:1.9">
-
-      <b style="color:#6d7cff">⚡ 核心价值</b>：不是简单地"用 AI"，而是让执行、复核、评审各司其职、互相制衡，人保留最终裁决权；每一次分歧都沉淀为可复用的规则。这和 SOX 内控测试是同一个思路——把容易出错的环节，变成有记录、有复核、有拦截的流程。2026-10 的一轮里，工具化复核方一次性提出 7 条发布阻塞（口径残留、无障碍对比度、锚点遮挡等），逐条闭环并附 commit 级证据后才允许盖章发布。
-
-    </div>
-
-  </div>
-
-
-
-  <div class="glass" style="margin-top:20px;background:var(--card-solid);border:1px solid rgba(52,211,153,0.15);border-radius:16px;padding:20px 24px">
-
-    <h4 style="font-size:14px;color:#34d399;margin-bottom:12px">🛡️ AI 犯错是常态，关键是工程化防御</h4>
-
-    <div style="font-size:12px;color:#9ba3b7;line-height:2">
-
-      执行方容易犯的错：确认偏误、自我盲区、急于交付。复核方的价值：独立视角、边界测试、根因分析，以及把结论落成可执行的修复清单。
-
-      <br><br>
-
-      <b>已落地的防御机制：</b><br>
-
-      • <b>preflight 自动体检</b>（10 项检查，含图片完整性）→ 提交前自动扫描编码乱码、结构错误、敏感信息<br>
-
-      • <b>CI 闸门</b>（2 步）→ 复核凭据不匹配就合不进去，PR #1 已实证生效<br>
-
-      • <b>复核凭据</b>（REVIEW_STAMP.md）→ 65 条批准基线 + 3 条违规记录，内容相等判据，可追溯<br>
-
-      • <b>事前对齐</b> → A 类改动先过方案评审，人拍板后再开发；对齐单与 RV 档案留痕<br>
-
-      • <b>强制规则</b>（4 条）→ 触发复核、先核实再动手、Windows 文本编码、hotfix 白名单<br>
-
-      • <b>门禁兜底</b> → 未盖章 commit 的 Review gate 必红、Deploy 前拦截（当前流程）<br>
-
-      不是说 AI 有多厉害，而是<span class="hl">我知道 AI 容易在哪出错，并且把它们变成了工程化的闸门</span>。
-
-    </div>
-
-  </div>
-
-</div>
+  
 
 
 
@@ -3932,41 +3759,13 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
 
     </div>
 
-    <button class="ai-head-gear" id="assistantGear" title="设置">⚙</button>
+    
 
     <button class="ai-head-close" id="assistantClose">✕</button>
 
   </div>
 
-  <div class="ai-settings" id="assistantSettings">
-
-    <div class="ai-settings-title">AI 设置</div>
-
-    <div class="ai-settings-desc">🔒 <b>隐私保护模式</b>：当前所有回答基于本地作品集知识库，不发送任何网络请求。<br><br>📊 离线导览助手在 41 题回归测试集上有效作答率 <b>100%</b>，回答均来自知识库原文，不编造。<br><br>如需体验真实大模型对话，可输入你的 DeepSeek API Key：<br>• Key 仅存储在浏览器内存（sessionStorage），刷新或关闭页面立即清除<br>• 所有请求直接从你的浏览器发送到 DeepSeek 官方 API，不经过任何第三方服务器<br>• 本网站不会保存、上传或共享你的 Key</div>
-
-    <input type="password" class="ai-key-input" id="assistantKeyInput" placeholder="sk-xxxxxxxxxxxxxxxx" autocomplete="off">
-
-    <button class="ai-key-save" id="assistantKeySave">保存并启用</button>
-
-    <div class="ai-settings-tip">获取 Key：<a href="https://platform.deepseek.com/" target="_blank" style="color:#6d7cff">platform.deepseek.com</a> · 新用户赠送免费额度</div>
-
-    <div style="border-top:1px solid rgba(130,150,255,0.1);margin:10px 0 8px"></div>
-
-    <div class="ai-settings-title" style="font-size:12px">📝 未命中问题（仅本地记录）</div>
-
-    <div class="ai-settings-desc" style="margin-bottom:8px">助手答不上来的问题会自动记录在你的浏览器本地，不上传任何服务器。可导出用于后续优化话术库。</div>
-
-    <div style="display:flex;gap:8px">
-
-      <button class="ai-key-save" id="exportMisses" style="flex:1;font-size:12px;padding:6px">导出未命中</button>
-
-      <button class="ai-key-save" id="clearMisses" style="flex:1;font-size:12px;padding:6px;background:rgba(239,68,68,0.15);color:#f87171;border-color:rgba(239,68,68,0.3)">清除记录</button>
-
-    </div>
-
-    <div class="ai-settings-tip" id="missesCount" style="margin-top:6px">当前记录：0 条</div>
-
-  </div>
+  
 
   <div class="ai-body" id="assistantBody">
 
