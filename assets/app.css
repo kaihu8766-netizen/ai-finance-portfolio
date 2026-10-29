@@ -2300,31 +2300,9 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
 
 .wrap .sec::-webkit-scrollbar-thumb{background:rgba(109,124,255,0.3);border-radius:2px}
 
-/* 手机端表格横滑提示 */
 
-@media (max-width: 768px){
 
-  .wrap .sec:has(table)::after{
-
-    content:'← 左右滑动查看完整表格 →';
-
-    position:sticky;
-
-    display:block;
-
-    text-align:center;
-
-    font-size:12px;
-
-    color:rgba(165,176,255,0.6);
-
-    padding:4px 0 8px;
-
-    pointer-events:none;
-
-  }
-
-}
+@media (max-width: 768px){}
 
 .wrap .sec .callout{border-radius:12px;margin:10px 0}
 
