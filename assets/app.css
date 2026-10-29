@@ -3262,3 +3262,11 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
 @media (max-width: 768px) {
   .wrap .sec table { min-width: 0 !important; width: 100% !important; font-size: 12px !important; }
 }
+
+
+/* about-only-cards（2026-10-29）：关于我里仅剩折叠卡时的布局 */
+.about-hero { display: block !important; }
+.about-fold .about-grid { display: grid !important; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 768px) {
+  .about-fold .about-grid { grid-template-columns: 1fr !important; }
+}
