@@ -3197,3 +3197,16 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
 '+appStyle.textContent+'
 
 '+pageStyle.textContent+'/* Mobile: moved to app-style for iframe injection */
+
+/* P2：关于我里的能力卡——手机折叠、桌面展开 */
+.about-fold > summary {
+  cursor: pointer; list-style: none; font-size: 13px; color: #7dd3fc;
+  padding: 10px 14px; border: 1px solid rgba(130,150,255,0.25); border-radius: 10px;
+  background: rgba(255,255,255,0.03); margin-bottom: 14px;
+}
+.about-fold > summary::-webkit-details-marker { display: none; }
+.about-fold > summary::after { content: " ▾"; }
+.about-fold[open] > summary::after { content: " ▴"; }
+@media (min-width: 769px) {
+  .about-fold > summary { display: none !important; }
+}

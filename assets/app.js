@@ -2223,3 +2223,14 @@ if (document.readyState === 'loading') {
 window.addEventListener('scroll',function(){var y=window.scrollY||0;var nearBottom=(window.innerHeight+y)>=document.documentElement.scrollHeight*0.9;var down=y>lastY+6;
 
 if(down&&nearBottom){fab.classList.add('is-tucked');}else if(y<=lastY-6){fab.classList.remove('is-tucked');}lastY=y;},{passive:true});})();
+
+/* P2：关于我能力卡，桌面自动展开、手机默认收起 */
+(function () {
+  var d = document.querySelector('.about-fold');
+  if (!d) return;
+  var mq = window.matchMedia('(min-width: 769px)');
+  var sync = function () { d.open = mq.matches; };
+  sync();
+  if (mq.addEventListener) mq.addEventListener('change', sync);
+  else if (mq.addListener) mq.addListener(sync);
+})();
