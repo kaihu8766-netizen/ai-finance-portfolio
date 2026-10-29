@@ -2294,7 +2294,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
 
 .wrap .sec table{margin:10px 0;border-radius:10px;overflow:hidden;min-width:640px}
 
-.wrap .sec{overflow-x:auto;position:relative}
+.wrap .sec{overflow-x:clip;position:relative}
 
 .wrap .sec::-webkit-scrollbar{height:4px}
 
@@ -3254,4 +3254,11 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
   .hero-bullets li span:last-child { font-size: 12.5px !important; line-height: 1.6 !important; }
   .hero-cta { margin-top: 16px !important; }
   .hero-cta a { min-height: 40px !important; padding: 10px 18px !important; font-size: 14px !important; }
+}
+
+
+/* sec-noswipe（2026-10-29 用户反馈）：区块不再横向滑动；表格自身保留滚动容器 */
+.wrap .sec { overflow-x: clip !important; }
+@media (max-width: 768px) {
+  .wrap .sec table { min-width: 0 !important; width: 100% !important; font-size: 12px !important; }
 }
