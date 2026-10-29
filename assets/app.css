@@ -3290,3 +3290,17 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
     padding-top: 0 !important;
   }
 }
+
+
+/* table-card-mobile（2026-10-29）：手机端表格改卡片式，避免挤压与横滑 */
+@media (max-width: 768px) {
+  .wrap .sec table { display: block !important; width: 100% !important; border: none !important; font-size: 12.5px !important; }
+  .wrap .sec table thead { display: none !important; }
+  .wrap .sec table tbody, .wrap .sec table tr { display: block !important; width: 100% !important; }
+  .wrap .sec table tr { padding: 10px 0 12px !important; border-bottom: 1px solid rgba(148,163,184,0.18) !important; }
+  .wrap .sec table td { display: block !important; width: 100% !important; border: none !important; padding: 2px 0 !important; text-align: left !important; }
+  .wrap .sec table td:first-child { font-weight: 600 !important; color: #e2e8f0 !important; font-size: 13.5px !important; margin-bottom: 4px; }
+  .wrap .sec table td:nth-child(2)::before { content: "数据来源："; color: #94a3b8; }
+  .wrap .sec table td:nth-child(3)::before { content: "是否公司项目："; color: #94a3b8; }
+  .wrap .sec table td:nth-child(4)::before { content: "已知局限："; color: #94a3b8; }
+}
