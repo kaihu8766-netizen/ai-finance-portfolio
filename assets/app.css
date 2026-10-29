@@ -3270,3 +3270,13 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
 @media (max-width: 768px) {
   .about-fold .about-grid { grid-template-columns: 1fr !important; }
 }
+
+
+/* about-mobile-single（2026-10-29）：手机端关于我单列，避免文字被挤到右边 */
+@media (max-width: 768px) {
+  .about-grid, .about-grid-2col { grid-template-columns: 1fr !important; display: grid !important; }
+  .about-grid > div { width: 100% !important; }
+  .about-grid .about-grid-inner-timeline,
+  .about-grid div[style*="grid-template-columns:118px"] { grid-template-columns: 86px 1fr !important; gap: 10px !important; }
+  .about-grid div[style*="font-size:12.5px"] { word-break: break-word; }
+}
