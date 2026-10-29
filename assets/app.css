@@ -3210,3 +3210,21 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
 @media (min-width: 769px) {
   .about-fold > summary { display: none !important; }
 }
+
+
+/* Hero 身份区（2026-10-29）：头像 + 姓名 + 身份方向 */
+.hero-id { display: flex; align-items: center; gap: 16px; margin-bottom: 18px; }
+.hero-avatar {
+  width: 76px; height: 76px; border-radius: 50%; object-fit: cover; flex: 0 0 76px;
+  border: 2px solid rgba(130,150,255,0.45); box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+}
+.hero-name { font-size: 22px; font-weight: 700; letter-spacing: 1px; color: var(--text); line-height: 1.2; }
+.hero-name span { font-size: 12px; font-weight: 500; color: #7dd3fc; letter-spacing: 1.5px; margin-left: 6px; }
+.hero-role { font-size: 13px; color: #cbd5e1; margin-top: 6px; line-height: 1.6; }
+.hero-dir { font-size: 12.5px; color: #94a3b8; margin-top: 3px; }
+@media (max-width: 600px) {
+  .hero-id { gap: 12px; margin-bottom: 14px; }
+  .hero-avatar { width: 60px; height: 60px; flex-basis: 60px; }
+  .hero-name { font-size: 19px; }
+  .hero-role { font-size: 12px; }
+}
