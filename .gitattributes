@@ -1,4 +1,5 @@
-# 让仓库语言统计反映真实技术栈：HTML/CSS 是作品集呈现层，不是代码主体
+# 仓库语言统计口径：html/css/js 是作品集展示层，核心代码在 tools/ 下（Python）
 *.html linguist-documentation=true
 *.css linguist-documentation=true
+*.js linguist-documentation=true
 *.md linguist-documentation=true
