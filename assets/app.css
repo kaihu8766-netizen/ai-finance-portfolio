@@ -3306,23 +3306,7 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
 }
 
 
-/* Portfolio overview and role entry points */
-.portfolio-routes {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
-  gap: 12px;
-  margin: 18px 0 22px;
-}
-.portfolio-routes > div {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 12px 14px;
-  border: 1px solid rgba(130, 150, 255, .2);
-  border-radius: 10px;
-  font-size: 14px;
-}
-.portfolio-routes a { color: #a5d9ff; text-underline-offset: 3px; }
+/* Portfolio project overview */
 .portfolio-case-lead { margin: 8px 0 14px; color: #e2e8f0; }
 .portfolio-case-facts { display: grid; gap: 8px; margin: 0; }
 .portfolio-case-facts > div { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 8px; }
