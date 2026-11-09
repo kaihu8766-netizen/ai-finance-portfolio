@@ -52,7 +52,6 @@
   <div class="nav" id="nav">
         <a href="#works">作品</a>
         <a href="#about">关于我</a>
-        <a href="#pipeline">质量控制</a>
       </div>
 
 </div>
@@ -150,8 +149,9 @@
       </article>
       <article class="work portfolio-case" id="agent-project">
         <h4 class="title">cc-Harness · 开源 AI Agent 工具</h4>
-        <p>为 DeepSeek Harness 扩展工具网关、任务断点和安装自检，验证状态隔离与跨会话接续。</p>
+        <p>为 DeepSeek Harness 扩展工具网关、任务断点和安装自检。回归测试验证自检成功或失败时，用户原有断点均保持不变。</p>
         <a class="demo-entry" href="https://github.com/kaihu8766-netizen/cc-Harness" target="_blank" rel="noopener noreferrer">查看 GitHub ↗</a>
+        <a class="demo-entry case-detail" href="https://github.com/kaihu8766-netizen/cc-Harness/actions/runs/42507047354" target="_blank" rel="noopener noreferrer">查看回归记录 ↗</a>
       </article>
     </div>
   </div>
@@ -284,46 +284,6 @@
 <!-- 方法论 -->
 
 <!-- 方法论 -->
-
-<div class="sec reveal" id="pipeline">
-    <div class="sec-head"><span class="idx">02</span><h2>数字化开发中的质量控制机制</h2><span class="en">QUALITY CONTROL</span></div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:8px">
-      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(130,150,255,0.12);border-radius:14px;padding:20px 22px">
-        <div style="font-size:12px;color:#94a3b8;letter-spacing:.6px;margin-bottom:10px">为什么这样做</div>
-        <div style="font-size:13.5px;color:#cbd5e1;line-height:1.85">
-          财务与资金管理对数据准确性零容忍。为防范大模型在复杂金融测算中的潜在幻觉，我把金融机构经典的「经办 — 复核 — 审批（Maker-Checker）」机制搬到数据建模里：<b style="color:#e2e8f0">不盲信任何单一模型的首次输出</b>。
-        </div>
-      </div>
-      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(130,150,255,0.12);border-radius:14px;padding:20px 22px">
-        <div style="font-size:12px;color:#94a3b8;letter-spacing:.6px;margin-bottom:10px">三步校验</div>
-        <div style="font-size:13.5px;color:#cbd5e1;line-height:1.85">
-          <b style="color:#38bdf8">① 经办</b>：按 Actual/360 等计息惯例，由 AI 生成还本付息与蒙特卡洛计算代码；<br>
-          <b style="color:#34d399">② 复核</b>：换另一个模型独立验算现金流与折现结果，交叉比对边界异常；<br>
-          <b style="color:#a78bfa">③ 裁决</b>：本人核验勾稽关系与数据口径后放行。
-        </div>
-      </div>
-      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(130,150,255,0.12);border-radius:14px;padding:20px 22px">
-        <div style="font-size:12px;color:#94a3b8;letter-spacing:.6px;margin-bottom:10px">与财务内控的对应</div>
-        <div style="font-size:13.5px;color:#cbd5e1;line-height:1.85">
-          这套逻辑与金融机构的「<b style="color:#e2e8f0">前后台制衡、四眼原则（Four-Eyes）</b>」一致：经办与复核分离，分歧沉淀为规则；对外交付的测算报表要求勾稽可复核、全流程可追溯。
-        </div>
-      </div>
-    </div>
-    <div style="margin-top:16px;font-size:13px;color:#94a3b8;line-height:1.85">
-      善用工具效率，恪守专业底线：把 AI 当作提升运算与排程效率的辅助工具，把财务常识与风控底线作为不可让渡的验收准绳。
-    </div>
-  </div>
-
-  
-
-
-  
-
-
-
-
-
-
 
 <div class="contact">
 
