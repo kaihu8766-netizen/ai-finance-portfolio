@@ -3304,3 +3304,36 @@ body{min-height:100vh;background:var(--bg);overflow:visible}
   .wrap .sec table td:nth-child(3)::before { content: "是否公司项目："; color: #94a3b8; }
   .wrap .sec table td:nth-child(4)::before { content: "已知局限："; color: #94a3b8; }
 }
+
+
+/* Portfolio overview and role entry points */
+.portfolio-routes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+  gap: 12px;
+  margin: 18px 0 22px;
+}
+.portfolio-routes > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 14px;
+  border: 1px solid rgba(130, 150, 255, .2);
+  border-radius: 10px;
+  font-size: 14px;
+}
+.portfolio-routes a { color: #a5d9ff; text-underline-offset: 3px; }
+.portfolio-case-lead { margin: 8px 0 14px; color: #e2e8f0; }
+.portfolio-case-facts { display: grid; gap: 8px; margin: 0; }
+.portfolio-case-facts > div { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 8px; }
+.portfolio-case-facts dt { color: #aebbd0; font-size: 13px; }
+.portfolio-case-facts dd { margin: 0; color: #cbd5e1; font-size: 14px; line-height: 1.65; }
+.portfolio-case-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.work .case-detail { cursor: pointer; border: 1px solid rgba(130, 150, 255, .45); background: rgba(109, 124, 255, .15); font-family: inherit; }
+.portfolio-related { margin-top: 26px; }
+.portfolio-related h3 { margin-bottom: 12px; }
+.portfolio-related .portfolio-case p { color: #cbd5e1; font-size: 14px; line-height: 1.65; }
+.portfolio-case { scroll-margin-top: 85px; }
+@media (max-width: 420px) {
+  .portfolio-case-facts > div { grid-template-columns: 1fr; gap: 2px; }
+}

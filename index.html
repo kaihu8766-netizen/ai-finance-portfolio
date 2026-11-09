@@ -65,34 +65,34 @@
       <div class="hero-id-text">
         <div class="hero-name">胡凯 <span>KAI HU</span></div>
         <div class="hero-role">2027 届 · 金融与投资（专业会计）硕士 ｜ 精算学本科（辅修金融）</div>
-        <div class="hero-dir">求职方向：集团资金 / 司库 · 财务分析 · 财务数字化</div>
+        <div class="hero-dir">求职方向：资金管理 · 财务管培 · 金融管培 · AI 财务</div>
       </div>
     </div>
     
-    <h1 style="text-align:left;letter-spacing:0">聚焦企业资金与财务分析实务，<br>用精算建模与数字化工具解决具体业务问题</h1>
+    <h1 style="text-align:left;letter-spacing:0">企业资金与财务分析<br>从融资、现金流到风险量化与 AI 应用</h1>
     <p class="sub" style="text-align:left;max-width:760px;margin-left:0">
-      smart 汽车资金部实习（流贷授信 · 账户头寸 · 跨境付汇）｜ 中审众环（Mazars）审计实习
+      smart 汽车（奔驰 × 吉利）集团资金部实习｜中审众环（Mazars）审计实习
     </p>
 
     <ul class="sub-bullets hero-bullets" style="text-align:left;margin:26px 0 0;padding:0;list-style:none">
       <li style="display:grid;grid-template-columns:132px 1fr;gap:14px;padding:12px 0;border-top:1px solid rgba(148,163,184,0.14)">
         <span style="color:#38bdf8;font-weight:600;font-size:13.5px">资金与精算建模</span>
-        <span style="font-size:14px;color:#cbd5e1;line-height:1.75">四指标框架 + 10,000 路径蒙特卡洛判断利率方向，服务贷款定价与再融资择时</span>
+        <span style="font-size:14px;color:#cbd5e1;line-height:1.75">用公开数据和 10,000 条蒙特卡洛路径，推演不同利率情景下的融资成本</span>
       </li>
       <li style="display:grid;grid-template-columns:132px 1fr;gap:14px;padding:12px 0;border-top:1px solid rgba(148,163,184,0.14)">
         <span style="color:#34d399;font-weight:600;font-size:13.5px">工具落地能力</span>
-        <span style="font-size:14px;color:#cbd5e1;line-height:1.75">交付了还本付息排程与利息计提系统（AI 协作实现），覆盖 9 笔 4.15 亿流贷，网页打开即用</span>
+        <span style="font-size:14px;color:#cbd5e1;line-height:1.75">把贷款结息、重定价和偿付规则做成可交互的排程原型，支持复算和 Excel 导出</span>
       </li>
       <li style="display:grid;grid-template-columns:132px 1fr;gap:14px;padding:12px 0;border-top:1px solid rgba(148,163,184,0.14);border-bottom:1px solid rgba(148,163,184,0.14)">
         <span style="color:#a78bfa;font-weight:600;font-size:13.5px">质量控制方式</span>
-        <span style="font-size:14px;color:#cbd5e1;line-height:1.75">人机协同：自主把控业务规则、指标口径与勾稽核验，借力 AI 工具完成编码与测试</span>
+        <span style="font-size:14px;color:#cbd5e1;line-height:1.75">梳理业务规则和指标口径，用 AI 辅助实现，再通过样例复算与边界测试核验结果</span>
       </li>
     </ul>
 
     <div class="hero-cta" style="margin-top:22px;justify-content:flex-start">
       <a class="cta-primary" href="#works">查看旗舰作品</a>
+      <a class="cta-secondary" href="demo/ai-treasury-copilot/index.html" target="_blank" rel="noopener noreferrer">司库在线 Demo ↗</a>
       <a class="cta-secondary" href="demo/LPR蒙特卡洛预测模拟器.html" target="_blank" rel="noopener noreferrer">LPR 在线 Demo ↗</a>
-      <a class="cta-secondary" href="demo/ai-treasury-copilot/index.html" target="_blank" rel="noopener noreferrer">✦ AI 司库在线应用 ↗</a>
     </div>
   </div>
 
@@ -106,73 +106,60 @@
 
   <div class="sec-head"><span class="idx">01</span><h2>旗舰作品</h2><span class="en">ACTUARIAL RISK → AI SYSTEM → DECISION</span></div>
 
-  <p class="work-lead" style="margin:0 0 18px;font-size:14px;color:#9ba3b7;line-height:1.9;">两件作品来自实习中观察到的真实场景：业务流程、计息规则与数据口径由我梳理，原型与代码借助 AI 工具完成，计算逻辑与结论可逐项核对。</p>
+  <p class="work-lead">两件旗舰作品都源自实习中的业务观察。业务规则与数据口径由我梳理，原型借助 AI 工具实现，计算过程可复核。</p>
+  <div class="portfolio-routes" aria-label="按求职方向浏览">
+    <div><strong>资金管理</strong><a href="#treasury-case">偿付排程与流动性预警</a></div>
+    <div><strong>财务管培</strong><a href="#treasury-case">利息计提与台账导出</a><a href="#about">审计经历</a></div>
+    <div><strong>金融管培</strong><a href="#lpr-case">利率风险与融资成本</a><a href="#valuation-project">公司金融分析</a></div>
+    <div><strong>AI 财务</strong><a href="#treasury-case">司库应用原型</a><a href="#agent-project">Agent 工程实践</a></div>
+  </div>
 
   <div class="works">
-    <div class="work wide " onclick="showWork('04');return false;" style="cursor:pointer">
-      <div style="flex:1;min-width:0">
-        <div class="title">AI 集团贷款还本付息动态排程与利息计提系统</div>
-        <div class="work-meta"><span class="meta-chip" style="color:#38bdf8;border-color:rgba(56,189,248,0.4)">TREASURY CASH FLOW ENGINE</span><span class="meta-chip">集团流贷计息与还本付息排程</span></div>
-
-        <div style="margin-top:14px;display:grid;gap:10px">
-          <div class="work-fourrow" style="display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:start">
-            <span style="font-size:12px;color:#94a3b8;letter-spacing:.5px">问题</span>
-            <span style="font-size:13.5px;color:#cbd5e1;line-height:1.75">集团 9 笔流动资金贷款，结息日与利率重定价日各不相同；每月手工测算利息与兑付排程要花半天，且容易出现利息计提尾差与排程更新滞后。</span>
-          </div>
-          <div class="work-fourrow" style="display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:start">
-            <span style="font-size:12px;color:#94a3b8;letter-spacing:.5px">做法</span>
-            <span style="font-size:13.5px;color:#cbd5e1;line-height:1.75">按银行计息规则（Actual/360、按季结息季末月 20 日、年度重定价）建台账模型，自动生成 12 个月还本付息排程与利息计提；叠加单月 5,000 万以上兑付的流动性预警；提炼借款核心要素（起息日、重定价机制、浮动利差）建立参数化台账；一键导出 11 个 sheet 的穿透式台账。</span>
-          </div>
-          <div class="work-fourrow" style="display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:start">
-            <span style="font-size:12px;color:#94a3b8;letter-spacing:.5px">结果</span>
-            <span style="font-size:13.5px;color:#e2e8f0;line-height:1.75">单次测算由半天缩短到约 30 分钟；覆盖 9 笔、合计 4.15 亿流贷；到期兑付与超 5,000 万兑付自动提示。</span>
-          </div>
-          <div class="work-fourrow" style="display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:start">
-            <span style="font-size:12px;color:#94a3b8;letter-spacing:.5px">局限</span>
-            <span style="font-size:12.5px;color:#94a3b8;line-height:1.75">数据为按实习所见台账结构构造的演示数据，计息规则依据公开的银行惯例；作品未在公司业务中投入使用。</span>
-          </div>
+    <article class="work wide portfolio-case" id="treasury-case">
+      <div>
+        <h3 class="title">集团贷款还本付息与利息计提</h3>
+        <p class="portfolio-case-lead">未来 12 个月，哪些月份的还本付息压力最大？</p>
+        <dl class="portfolio-case-facts">
+          <div><dt>可以体验</dt><dd>查看贷款台账、月度偿付排程和流动性预警，并导出可复算的 Excel 台账。</dd></div>
+          <div><dt>我的工作</dt><dd>梳理 Actual/360 计息、按季结息和重定价规则，定义台账参数和核验口径。</dd></div>
+          <div><dt>结果与边界</dt><dd>用模拟贷款组合演示。合同解析使用规则引擎，洞察使用模板，应用未在公司业务中投入使用。</dd></div>
+        </dl>
+        <div class="portfolio-case-actions">
+          <button type="button" class="demo-entry case-detail" data-work="04">看司库案例</button>
+          <a class="demo-entry" href="demo/ai-treasury-copilot/index.html" target="_blank" rel="noopener noreferrer">打开 Demo ↗</a>
         </div>
-
-        <div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap;align-items:center">
-          <span style="font-size:11.5px;color:#64748b">数据来源</span><span style="font-size:11.5px;color:#94a3b8;border:1px solid rgba(148,163,184,0.3);border-radius:10px;padding:2px 9px">实习观察</span><span style="font-size:11.5px;color:#94a3b8;border:1px solid rgba(148,163,184,0.3);border-radius:10px;padding:2px 9px">构造演示数据</span><span style="font-size:11.5px;color:#94a3b8;border:1px solid rgba(148,163,184,0.3);border-radius:10px;padding:2px 9px">公开规则</span>
-        </div>
-
-        <a class="demo-entry" href="demo/ai-treasury-copilot/index.html" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" style="margin-top:12px;display:inline-block">✦ 在线应用 ↗</a>
       </div>
-      <span class="core-flag" style="background:var(--bg2)">在线可交互</span>
-    </div>
-
-    <div class="work wide actuarial-core" onclick="showWork('03');return false;" style="cursor:pointer">
-      <div style="flex:1;min-width:0">
-        <div class="title">LPR 走势预测与融资成本压力测试系统</div>
-        <div class="work-meta"><span class="meta-chip" style="color:#34d399;border-color:rgba(52,211,153,0.4)">ACTUARIAL · RATE RISK MODEL</span><span class="meta-chip">研究型 · 精算核心</span></div>
-
-        <div style="margin-top:14px;display:grid;gap:10px">
-          <div class="work-fourrow" style="display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:start">
-            <span style="font-size:12px;color:#94a3b8;letter-spacing:.5px">问题</span>
-            <span style="font-size:13.5px;color:#cbd5e1;line-height:1.75">资金团队每月都要在负债久期配置与再融资择时上做判断：新增借款怎么定价、存量贷款是否置换、再融资什么时候做。过去主要依赖定性研判与银行单方报价，缺少多情景定量测算。</span>
-          </div>
-          <div class="work-fourrow" style="display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:start">
-            <span style="font-size:12px;color:#94a3b8;letter-spacing:.5px">做法</span>
-            <span style="font-size:13.5px;color:#cbd5e1;line-height:1.75">把利率判断拆成四指标框架（MLF、净息差、社融、CPI），用蒙特卡洛生成 10,000 条路径，输出未来 5 年 LPR 区间带与情景概率；配套一个可交互模拟器，参数可自行调整。</span>
-          </div>
-          <div class="work-fourrow" style="display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:start">
-            <span style="font-size:12px;color:#94a3b8;letter-spacing:.5px">结果</span>
-            <span style="font-size:13.5px;color:#e2e8f0;line-height:1.75">量化输出不同宏观预期下的资金成本区间与尾部风险概率，形成辅助新增借款定价与负债置换决策的情景推演底稿；模拟器可直接调整参数复算。</span>
-          </div>
-          <div class="work-fourrow" style="display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:start">
-            <span style="font-size:12px;color:#94a3b8;letter-spacing:.5px">局限</span>
-            <span style="font-size:12.5px;color:#94a3b8;line-height:1.75">LPR 与宏观指标取公开数据；均值回复等模型参数需按真实业务重新校准；未覆盖政策突变等极端情景。</span>
-          </div>
+    </article>
+    <article class="work wide actuarial-core portfolio-case" id="lpr-case">
+      <div>
+        <h3 class="title">LPR 情景分析与融资成本压力测试</h3>
+        <p class="portfolio-case-lead">利率变动会怎样影响新增借款与存量债务的融资成本？</p>
+        <dl class="portfolio-case-facts">
+          <div><dt>可以体验</dt><dd>调整模拟参数，查看 1 年期和 5 年期 LPR 的情景分布。</dd></div>
+          <div><dt>我的工作</dt><dd>梳理利率分析框架与模型假设，用 10,000 条蒙特卡洛路径展示不确定性。</dd></div>
+          <div><dt>结果与边界</dt><dd>宏观指标来自公开数据，模型参数用于演示，实务使用前需重新校准。</dd></div>
+        </dl>
+        <div class="portfolio-case-actions">
+          <button type="button" class="demo-entry case-detail" data-work="03">看利率案例</button>
+          <a class="demo-entry" href="demo/LPR蒙特卡洛预测模拟器.html" target="_blank" rel="noopener noreferrer">打开 Demo ↗</a>
         </div>
-
-        <div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap;align-items:center">
-          <span style="font-size:11.5px;color:#64748b">数据来源</span><span style="font-size:11.5px;color:#94a3b8;border:1px solid rgba(148,163,184,0.3);border-radius:10px;padding:2px 9px">公开数据</span><span style="font-size:11.5px;color:#94a3b8;border:1px solid rgba(148,163,184,0.3);border-radius:10px;padding:2px 9px">研究型模型</span><span style="font-size:11.5px;color:#94a3b8;border:1px solid rgba(148,163,184,0.3);border-radius:10px;padding:2px 9px">参数需重校准</span>
-        </div>
-
-        <a class="demo-entry" href="demo/LPR蒙特卡洛预测模拟器.html" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" style="margin-top:12px;display:inline-block">🚀 在线 Demo ↗</a>
       </div>
-      <span class="core-flag" style="background:var(--bg2)">公开数据驱动</span>
+    </article>
+  </div>
+
+  <div class="portfolio-related">
+    <h3>相关项目</h3>
+    <div class="works">
+      <article class="work portfolio-case" id="valuation-project">
+        <h4 class="title">公司金融与估值课程项目</h4>
+        <p>从上市公司财务分析延伸到资本成本、现金流折现与估值敏感性。</p>
+        <a class="demo-entry" href="https://kaihu8766-netizen.github.io/busi4543-tsla-team/" target="_blank" rel="noopener noreferrer">查看课程项目 ↗</a>
+      </article>
+      <article class="work portfolio-case" id="agent-project">
+        <h4 class="title">cc-Harness · 开源 AI Agent 工具</h4>
+        <p>为 DeepSeek Harness 扩展工具网关、任务断点和安装自检，验证状态隔离与跨会话接续。</p>
+        <a class="demo-entry" href="https://github.com/kaihu8766-netizen/cc-Harness" target="_blank" rel="noopener noreferrer">查看 GitHub ↗</a>
+      </article>
     </div>
   </div>
 
@@ -205,7 +192,7 @@
       </table>
     </div>
     <p style="margin:12px 0 0;font-size:12px;color:#64748b;line-height:1.8">
-      两件作品均不含任何真实客户信息、真实发票或公司内部数据；
+      两件旗舰作品均使用公开数据或构造的演示数据。
     
       
     </p>
@@ -248,7 +235,7 @@
         <div>
           <div style="font-size:14px;font-weight:600;color:var(--text);line-height:1.6">智马达 smart 汽车（奔驰 × 吉利合资）· 资金部</div>
           <div style="font-size:12.5px;color:#7dd3fc;margin:2px 0 6px">财务实习生（资金管理方向）</div>
-          <div style="font-size:13px;color:#cbd5e1;line-height:1.8">经办 9 家大行数亿元级流贷的授信材料、提款与贷后管理；基于 SAP 监控 30+ 子公司与 100+ 银行账户流动性头寸；多币种跨境付汇与外汇申报。</div>
+          <div style="font-size:13px;color:#cbd5e1;line-height:1.8">参与流动资金贷款授信材料准备、提款与贷后流程；使用 SAP 核对银行账户现金头寸，处理多币种跨境结算与外汇申报。</div>
         </div>
       </div>
       <div style="display:grid;grid-template-columns:118px 1fr;gap:14px;padding:14px 0;border-top:1px solid rgba(148,163,184,0.14)">
@@ -473,13 +460,13 @@
 
       "highlights": ["四指标分析框架", "LPR 2019 改革历史走势", "蒙特卡洛5年预测区间带", "企业融资成本压力测试（VaR）", "贷款定价决策建议"] },
 
-{ "id": "w04", "name": "AI 司库还本付息系统", "layer": "产品", "desc": "Actual/360 精算·9笔集团流贷(4.15亿)·按季结息20日·年度重定价·4大KPI·12个月排程·AI合同解析·AI司库Copilot·ExcelJS 11-sheet动态穿透导出·单文件纯前端",
+{ "id": "w04", "name": "AI 司库还本付息系统", "layer": "产品", "desc": "贷款计息、偿付排程、流动性预警与 Excel 导出；以模拟贷款组合演示",
 
-"summary": "AI 集团贷款还本付息动态排程与利息计提系统：银行级 Actual/360 逐日计提（当月利息 = 借款余额 × 年利率/360 × 当月实际天数，结息日遇周末顺延至周一），9 笔车企大行流贷样本（合计 4.15 亿）、按季结息还本付息台账与 12 个月本金/利息排程、单月还款超 5,000 万自动预警；AI 合同解析 0.5 秒提取银行/本金/起止日/LPR 加点/结息方式并回填表单，AI 司库 Copilot 流式生成资金洞察报告，ExcelJS 复刻 11-sheet「动态穿透版」台账一键导出（汇总 + 9 单笔附表 + 参数敏感性）。",
+"summary": "使用模拟贷款组合演示 Actual/360 计息、按季结息、年度重定价、12 个月偿付排程和流动性预警。合同解析使用前端规则引擎，洞察使用模板，支持 Excel 导出。",
 
 "tags": ["AI 司库", "贷款排程", "利息计提", "Actual/360", "合同解析", "Copilot"],
 
-"highlights": ["Actual/360 银行级精算", "AI 合同解析自动回填", "AI 司库决策报告", "12 个月排程预警", "Excel 导出"] }
+"highlights": ["Actual/360 银行级精算", "规则解析合同并回填", "模板生成司库洞察", "12 个月排程预警", "Excel 导出"] }
 
   ],
 
@@ -1537,7 +1524,7 @@ window.addEventListener('resize', function() {
 
       <div class="glass" style="padding:14px 16px"><div style="font-size:22px;font-weight:700;color:#67e8f9">9 笔</div><div style="font-size:12px;color:#8fa3c0">集团流贷台账样本</div></div>
 
-      <div class="glass" style="padding:14px 16px"><div style="font-size:22px;font-weight:700;color:#67e8f9">¥4.15 亿</div><div style="font-size:12px;color:#8fa3c0">集团流贷总规模</div></div>
+      <div class="glass" style="padding:14px 16px"><div style="font-size:22px;font-weight:700;color:#67e8f9">¥4.15 亿</div><div style="font-size:12px;color:#8fa3c0">模拟贷款组合规模</div></div>
 
       <div class="glass" style="padding:14px 16px"><div style="font-size:22px;font-weight:700;color:#67e8f9">Actual/360</div><div style="font-size:12px;color:#8fa3c0">逐日计提 · 按季结息</div></div>
 
