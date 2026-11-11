@@ -616,25 +616,25 @@
 
   </div>
 
-  <div class="chart-grid">
+  <div class="chart-grid" style="grid-template-columns:minmax(0,1fr)">
 
-    <div class="chart-box">
+    <div class="chart-box" style="min-width:0">
 
       <h3>四指标联动：为什么 LPR 按兵不动</h3>
 
-      <div id="chart2" class="chart-echarts" style="height:260px;"></div>
+      <div id="chart2" class="chart-echarts" style="height:280px;"></div>
 
-      <div class="chart-note">因果链：净息差 Q1 触底 1.40% → Q2 微升 1.41%（四年首现回升）→ 银行让利压力边际缓解但仍紧 → 报价行缺主动降点动力 → LPR 持稳；社融偏弱 + CPI 温和 → 宽松有空间但节奏审慎</div>
+      <div class="chart-note" style="color:#cbd5e1;font-family:inherit;font-size:13px">柱长为定性影响的示意评分。净息差 Q1 触底 1.40% → Q2 微升 1.41%（四年首现回升）→ 银行让利压力边际缓解但仍紧 → 报价行缺主动降点动力 → LPR 持稳；社融偏弱 + CPI 温和 → 宽松有空间但节奏审慎</div>
 
     </div>
 
     <div class="chart-box">
 
-      <h3>期限利差：5Y-1Y 从 0.5% 收窄，但期限溢价不倒挂</h3>
+      <h3>期限利差：5 年期与 1 年期 LPR 之差</h3>
 
-      <div id="chart3" class="chart-echarts" style="height:260px;"></div>
+      <div id="chart3" class="chart-echarts" style="height:340px;"></div>
 
-      <div class="chart-note">5Y-1Y 利差：2022-01 高点 0.90% → 当前 0.50% → 预测中位数收窄至 ~0.26%（5Y 降幅 0.36pct 快于 1Y 的 0.12pct，「更快下行」来自距中枢更远 + 回复更快，θ5=3.0%>θ1=2.7% 保证期限溢价为正）；区间带 = 10-90% 分位差组合，预测段同为叙事假设</div>
+      <div class="chart-note" style="color:#cbd5e1;font-family:inherit;font-size:13px">5Y-1Y 利差：2022-01 高点 0.90% → 当前 0.50% → 预测中位数收窄至 ~0.26%（5Y 降幅 0.36pct 快于 1Y 的 0.12pct，「更快下行」来自距中枢更远 + 回复更快，θ5=3.0%>θ1=2.7% 保证期限溢价为正）；区间带 = 10-90% 分位差组合，预测段同为叙事假设</div>
 
     </div>
 
@@ -1265,36 +1265,25 @@ var chart1 = safeInit('chart1', {
 // ===== 图表2 四指标联动（净息差 → 报价行 → LPR 因果） =====
 
 var chart2 = safeInit('chart2', {
-
-  tooltip: tooltipDark,
-
-  legend: { top:0, textStyle:{color:axisText,fontSize:11}, icon:'roundRect', itemWidth:14, itemHeight:8 },
-
-  grid: { left:20, right:20, top:36, bottom:24, containLabel:true },
-
-  xAxis: { type:'category', data:['政策利率\n1.40% 稳','净息差\n1.41% 微升','社融\n+7.4% 贷款负增','CPI\n+0.5% 核心 0.9%'], axisLabel:{color:axisText,fontSize:11,fontWeight:500,lineHeight:16}, axisLine:{lineStyle:{color:axisLine}}, axisTick:{show:false} },
-
-  yAxis: { type:'value', name:'影响方向', nameTextStyle:{color:axisText,fontSize:10}, axisLabel:{color:axisText,fontSize:10}, splitLine:{lineStyle:{color:splitLine,type:'dashed'}}, axisLine:{show:false}, axisTick:{show:false} },
-
-  series: [
-
-    { name:'支撑持稳', type:'bar', stack:'t', data:[8,0,4,3], barWidth:44,
-
-      itemStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#4fd1c5'},{offset:1,color:'#2a9d8f'}]),borderRadius:[0,0,6,6]},
-
-      label:{show:true,position:'top',color:'#c5d4f5',fontSize:10.5,fontWeight:600,formatter:function(p){return p.value?['政策稳→缺降息基础','','宽松空间','降息不迫切'][p.dataIndex]:''}} },
-
-    { name:'制约降点', type:'bar', stack:'t', data:[0,9,0,0], barWidth:44,
-
-      itemStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#f87171'},{offset:1,color:'#dc2626'}]),borderRadius:[6,6,0,0]},
-
-      label:{show:true,position:'top',color:'#f87171',fontSize:10.5,fontWeight:600,formatter:function(p){return p.value?'回升微弱→仍不愿降点':''}} }
-
-  ]
-
+  baseOption: {
+    tooltip: tooltipDark,
+    legend: { top:0, textStyle:{color:'#dbe6fa',fontSize:13}, itemWidth:16, itemHeight:9 },
+    grid: { left:128, right:24, top:42, bottom:44 },
+    xAxis: { type:'value', min:0, max:10, interval:2, name:'影响评分（示意）', nameLocation:'middle', nameGap:26,
+      nameTextStyle:{color:'#cbd5e1',fontSize:12}, axisLabel:{color:'#cbd5e1',fontSize:12}, splitLine:{lineStyle:{color:'rgba(165,180,210,0.2)',type:'dashed'}} },
+    yAxis: { type:'category', inverse:true, data:['政策利率 1.40%','净息差 1.41%','社融 +7.4%','CPI +0.5%'],
+      axisLabel:{color:'#e2e8f0',fontSize:13}, axisLine:{show:false}, axisTick:{show:false} },
+    series: [
+      { name:'支撑持稳', type:'bar', stack:'impact', data:[8,null,4,3], barMaxWidth:22,
+        itemStyle:{color:'#45c9bb',borderRadius:[0,5,5,0]} },
+      { name:'制约降点', type:'bar', stack:'impact', data:[null,9,null,null], barMaxWidth:22,
+        itemStyle:{color:'#fa8585',borderRadius:[0,5,5,0]} }
+    ]
+  },
+  media: [{ query:{maxWidth:420}, option:{
+    grid:{left:105,right:12}, yAxis:{axisLabel:{fontSize:11}}, legend:{textStyle:{fontSize:12}}
+  } }]
 });
-
-
 
 // ===== 图表3 期限利差：5Y-1Y 历史收敛 + 未来预测 =====
 
@@ -1314,7 +1303,7 @@ var sprLow = futPad(spreadLow()), sprHigh = futPad(spreadHigh());
 
 var sprDelta = sprHigh.map(function(v,i){ return (v==null||sprLow[i]==null)?null:Math.round((v-sprLow[i])*100)/100; });
 
-var chart3 = safeInit('chart3', {
+var chart3 = safeInit('chart3', { baseOption: {
 
   tooltip: Object.assign({}, tooltipDark, { formatter: function(ps){
 
@@ -1326,97 +1315,67 @@ var chart3 = safeInit('chart3', {
 
       if (p.value == null) return;
 
-      if (p.seriesName === '预测利差区间 (10%-90%)') { band.push(p.value); return; }
+      if (p.seriesName === '预测区间（10%–90%）') { band.push(p.value); return; }
 
-      out += '<br/>' + p.marker + p.seriesName + '：<b>' + p.value + 'pct</b>';
+      out += '<br/>' + p.marker + p.seriesName + '：<b>' + p.value + ' 个百分点</b>';
 
     });
 
-    if (band.length === 2) out += '<br/> 预测利差区间 (10%-90%)：<b>' + Math.min(band[0],band[1]) + ' ~ ' + Math.max(band[0],band[1]) + 'pct</b>';
+    if (band.length === 2) out += '<br/> 预测区间（10%–90%）：<b>' + Math.min(band[0],band[1]) + ' ~ ' + Math.max(band[0],band[1]) + ' 个百分点</b>';
 
     return out;
 
   }}),
 
-  legend: { bottom:0, textStyle:{color:axisText,fontSize:11}, icon:'roundRect', itemWidth:14, itemHeight:8, padding:[0,0,4,0] },
+  legend: { top:0, textStyle:{color:'#dbe6fa',fontSize:13}, itemWidth:16, itemHeight:9 },
 
-  grid: { left:24, right:30, top:16, bottom:74, containLabel:true },
+  grid: { left:58, right:24, top:54, bottom:34 },
 
   xAxis: { type:'category', data:catAll, boundaryGap:false,
 
-    axisLabel:{ color:axisText, fontSize:10, fontWeight:500, rotate:30,
+    axisLabel:{ color:'#cbd5e1', fontSize:12, hideOverlap:true,
+      interval:function(idx){ return [0,11,36,60,71].indexOf(idx) !== -1; } },
+    axisLine:{lineStyle:{color:'#52617d'}}, axisTick:{show:false} },
 
-      interval: function(idx){ var keep = [0,4,8,11,24,36,48,60,71]; return keep.indexOf(idx) !== -1; },
-
-      formatter: function(v, idx){ var keep = [0,4,8,11,24,36,48,60,71]; return keep.indexOf(idx) !== -1 ? v : ''; } },
-
-    axisLine:{lineStyle:{color:axisLine}}, axisTick:{show:false} },
-
-  yAxis: { type:'value', name:'利差 (5Y-1Y)', min:0, max:1.0,
-
-    nameTextStyle:{color:axisText,fontSize:10,padding:[0,0,0,0]}, axisLabel:{color:axisText,fontSize:10,formatter:'{value}'}, splitLine:{lineStyle:{color:splitLine,type:'dashed'}}, axisLine:{show:false}, axisTick:{show:false} },
+  yAxis: { type:'value', name:'百分点', min:0, max:1.0,
+    nameTextStyle:{color:'#cbd5e1',fontSize:12}, axisLabel:{color:'#cbd5e1',fontSize:12},
+    splitLine:{lineStyle:{color:'rgba(165,180,210,0.2)',type:'dashed'}}, axisLine:{show:false}, axisTick:{show:false} },
 
   series: [
 
     // 未来段：区间带填充（stack：底座 spreadLow + 增量，填色只在带内，silent 不进 tooltip）
 
-    { name:'预测利差区间 (10%-90%)', type:'line', stack:'sprBand', data:sprLow, symbol:'none', lineStyle:{opacity:0}, silent:true, z:0 },
+    { name:'预测区间（10%–90%）', type:'line', stack:'sprBand', data:sprLow, symbol:'none', lineStyle:{opacity:0}, silent:true, z:0 },
 
-    { name:'预测利差区间 (10%-90%)', type:'line', stack:'sprBand', data:sprDelta, symbol:'none', lineStyle:{opacity:0}, silent:true, z:0,
+    { name:'预测区间（10%–90%）', type:'line', stack:'sprBand', data:sprDelta, symbol:'none', lineStyle:{opacity:0}, silent:true, z:0,
 
-      areaStyle:{color:'rgba(167,139,250,0.15)'} },
+      areaStyle:{color:'rgba(167,139,250,0.26)'} },
 
     // 未来段：区间带边界线
 
-    { name:'预测利差区间 (10%-90%)', type:'line', data:sprHigh, symbol:'none', lineStyle:{width:1,color:'rgba(167,139,250,0.45)'}, itemStyle:{color:'rgba(167,139,250,0.45)'}, z:2 },
+    { name:'预测区间（10%–90%）', type:'line', data:sprHigh, symbol:'none', lineStyle:{width:1,color:'rgba(196,174,255,0.7)'}, itemStyle:{color:'rgba(196,174,255,0.7)'}, z:2 },
 
-    { name:'预测利差区间 (10%-90%)', type:'line', data:sprLow, symbol:'none', lineStyle:{width:1,color:'rgba(167,139,250,0.45)'}, itemStyle:{color:'rgba(167,139,250,0.45)'}, z:2,
+    { name:'预测区间（10%–90%）', type:'line', data:sprLow, symbol:'none', lineStyle:{width:1,color:'rgba(196,174,255,0.7)'}, itemStyle:{color:'rgba(196,174,255,0.7)'}, z:2,
 
       markLine: { symbol:'none', silent:true,
 
         lineStyle:{color:'rgba(151,163,190,0.55)',type:'dashed',width:1},
 
-        label:{color:'#e2e8f0',fontSize:10,position:'end',rotate:0,align:'center',formatter:'今天 · 预测起点'},
+        label:{show:false},
 
         data:[{xAxis:11}] } },
 
-    { name:'预测利差中位数', type:'line', data:futPad(spreadMed()), symbol:'none',
-
-      lineStyle:{width:2,color:'#a78bfa',type:'dashed'}, itemStyle:{color:'#a78bfa'}, z:3, clip:false,
-
-      markPoint:{clip:false,symbol:'circle',symbolSize:4,itemStyle:{color:'#a78bfa'},label:{show:true,position:'right',distance:6,offset:[0,-14],color:'#a78bfa',fontSize:10,formatter:function(p){return p.value;}},data:[{xAxis:catAll.length-1,yAxis:spreadMed()[spreadMed().length-1],value:'利差 '+spreadMed()[spreadMed().length-1]+'pct'}],z:5} },
-
-    { name:'历史利差 (5Y-1Y)', type:'line', smooth:true, data:spreadHist(), symbol:'circle', symbolSize:6,
-
-      lineStyle:{width:2.5,color:'#a78bfa'}, itemStyle:{color:'#a78bfa'}, z:4,
-
-      label:{show:false},
-
-      markPoint:{ clip:false, silent:true, symbol:'circle', symbolSize:7, z:5,
-
-        data:[
-
-          // index 0 = 0.6pct (左下起点)，顶部
-
-          {coord:[0,  spreadHist()[0]],  value:spreadHist()[0]+'pct',  itemStyle:{color:'#a78bfa'}, label:{position:[12, -10], color:'#e9d5ff', fontSize:11, fontWeight:600}},
-
-          // index 4 = 0.75pct (最高点)，左侧
-
-          {coord:[4,  spreadHist()[4]],  value:spreadHist()[4]+'pct',  itemStyle:{color:'#a78bfa'}, label:{position:'left',   distance:8,  color:'#e9d5ff', fontSize:11, fontWeight:600}},
-
-          // index 11 = 0.5pct (今天点)，右下避让 markLine
-
-          {coord:[11, spreadHist()[11]], value:spreadHist()[11]+'pct', itemStyle:{color:'#a78bfa'}, label:{position:'right',  distance:10, color:'#e9d5ff', fontSize:11, fontWeight:600}}
-
-        ]
-
-      } }
-
+    { name:'预测中位数', type:'line', data:futPad(spreadMed()), symbol:'none',
+      lineStyle:{width:2.5,color:'#67e8f9',type:'dashed'}, itemStyle:{color:'#67e8f9'}, z:3 },
+    { name:'历史利差', type:'line', smooth:true, data:spreadHist(), symbol:'circle', symbolSize:5,
+      lineStyle:{width:2.5,color:'#c4aeff'}, itemStyle:{color:'#c4aeff'}, z:4 }
   ]
-
-});
-
-
+}, media:[{ query:{maxWidth:420}, option:{
+  grid:{left:43,right:18,top:68,bottom:36},
+  legend:{textStyle:{fontSize:11}},
+  xAxis:{axisLabel:{fontSize:10,interval:function(idx){ return [0,11,36,71].indexOf(idx) !== -1; }}},
+  yAxis:{axisLabel:{fontSize:11}}
+} }] });
 
 window.addEventListener('resize', function() {
 
