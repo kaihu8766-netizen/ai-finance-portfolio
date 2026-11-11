@@ -1784,17 +1784,12 @@ function showWork(id){
 
   setTimeout(function(){ if(loadTip) loadTip.style.display='none'; if(wf) wf.style.opacity='1'; }, 400);
 
-  var appStyle=document.getElementById('app-style');
-
-  var pageStyle=document.getElementById('page-style');
-
   var baseUrl=window.location.href.substring(0,window.location.href.lastIndexOf('/')+1);
 
   var styleHtml='<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><base href="'+baseUrl+'">';
 
-  if(appStyle) styleHtml+='<style>'+appStyle.textContent+'</style>';
-
-  if(pageStyle) styleHtml+='<style>'+pageStyle.textContent+'/* Mobile: moved to app-style for iframe injection */</style>';
+  // The detail iframe has its own document and must load the shared styles.
+  styleHtml+='<link rel="stylesheet" href="assets/app.css">';
 
   // echarts loaded via external script in iframe
 
