@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LPR 蒙特卡洛预测模拟器 | 胡凯作品集</title>
+<title>LPR 均值回归示意分布模拟器 | 胡凯作品集</title>
 <script src="../echarts.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -27,10 +27,10 @@ body{background:#0a0d16;color:#e8eaf0;font-family:-apple-system,BlinkMacSystemFo
 .kpi .l{font-size:11px;color:#8fa3c0;margin-top:4px}
 .kpi.green .v{color:#34d399}
 .kpi.orange .v{color:#fbbf24}
-.charts{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.chart-box{background:rgba(109,124,255,0.04);border:1px solid rgba(109,124,255,0.1);border-radius:12px;padding:16px}
+.charts{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.chart-box{min-width:0;overflow:hidden;background:rgba(109,124,255,0.04);border:1px solid rgba(109,124,255,0.1);border-radius:12px;padding:16px}
 .chart-box h4{font-size:13px;color:#a5b0ff;margin-bottom:10px}
-.chart{width:100%;height:300px}
+.chart{width:100%;max-width:100%;min-width:0;height:300px}
 .note{font-size:11px;color:#5b6070;line-height:1.7;margin-top:12px;padding:10px 14px;background:rgba(251,191,36,0.06);border-left:3px solid #fbbf24;border-radius:0 8px 8px 0}
 .btn{display:inline-block;background:linear-gradient(135deg,#6d7cff,#4f5bd5);color:#fff;padding:10px 24px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .2s;margin-top:12px}
 .btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(109,124,255,0.35)}
@@ -45,9 +45,9 @@ body{background:#0a0d16;color:#e8eaf0;font-family:-apple-system,BlinkMacSystemFo
 <body>
 <div class="container">
   <div class="header">
-    <h1>📈 LPR 蒙特卡洛预测模拟器</h1>
-    <p>基于 Vasicek 均值回复模型：r<sub>t+1</sub> = r<sub>t</sub> + κ(θ - r<sub>t</sub>)Δt + σ√Δt · ε<br>调整参数，实时观察未来利率走势的概率分布</p>
-  </div>
+    <h1>📈 LPR 均值回归示意分布模拟器</h1>
+    <p>基于 Vasicek 均值回复模型：r<sub>t+1</sub> = r<sub>t</sub> + κ(θ - r<sub>t</sub>)Δt + σ√Δt · ε<br>研究基准日：2026-08 · 均值回归假设下的示意分布</p>
+  <p class="note">本工具在给定均值回归与波动假设下，演示利率路径和条件分位数。LPR 实际调整具有离散性和政策驱动特征；这些模拟概率不代表未来政策调整的真实发生概率。宏观情景权重另由作者设定。</p></div>
 
   <div class="panel">
     <h3>⚙️ 参数设置</h3>
@@ -63,19 +63,19 @@ body{background:#0a0d16;color:#e8eaf0;font-family:-apple-system,BlinkMacSystemFo
         <div class="hint">越大→回归越快，利率越稳定</div>
       </div>
       <div class="control">
-        <label>1Y 波动率 σ <span class="val" id="sigmaVal">0.35%</span></label>
-        <input type="range" id="sigma" min="0.05" max="1.00" step="0.05" value="0.35">
-        <div class="hint">由2019改革后1Y LPR历史调整估计</div>
+        <label>1Y 演示扩散参数 σ <span class="val" id="sigmaVal">0.111%</span></label>
+        <input type="range" id="sigma" min="0.05" max="1.00" step="any" value="0.11096868741576088">
+        <div class="hint">演示扩散参数，单位：百分点/√年；非统计校准</div>
       </div>
       <div class="control">
         <label>模拟年数 <span class="val" id="yearsVal">5年</span></label>
         <input type="range" id="years" min="1" max="10" step="1" value="5">
-        <div class="hint">预测时间跨度</div>
+        <div class="hint">假设实验时间跨度</div>
       </div>
       <div class="control">
         <label>模拟路径数 <span class="val" id="pathsVal">3000</span></label>
         <input type="range" id="paths" min="500" max="10000" step="500" value="3000">
-        <div class="hint">越多越精确，计算越慢</div>
+        <div class="hint">默认3,000条，可调500–10,000条；更多路径降低抽样误差</div>
       </div>
       <div class="control">
         <label>5Y 利差假设 <span class="val" id="spreadVal">0.3%</span></label>
@@ -94,7 +94,7 @@ body{background:#0a0d16;color:#e8eaf0;font-family:-apple-system,BlinkMacSystemFo
       <div class="chart" id="chart1"></div>
     </div>
     <div class="chart-box">
-      <h4>📉 期末概率分布</h4>
+      <h4>📉 期末条件分布（给定假设）</h4>
       <div class="chart" id="chart2"></div>
     </div>
   </div>
@@ -104,9 +104,9 @@ body{background:#0a0d16;color:#e8eaf0;font-family:-apple-system,BlinkMacSystemFo
     <div class="glossary">
       <div class="glossary-item"><b>Vasicek 模型</b>：经典的均值回复利率模型，假设利率会围绕长期中枢θ波动，偏离越远回归力越强</div>
       <div class="glossary-item"><b>均值回复（Mean Reversion）</b>：利率不会无限上涨或下跌，长期会回到合理水平——这是利率模型与股票模型的核心区别</div>
-      <div class="glossary-item"><b>蒙特卡洛模拟</b>：通过随机生成几千条可能的利率路径，用统计方法估计未来利率的概率分布，而不是给一个单点预测</div>
+      <div class="glossary-item"><b>蒙特卡洛模拟</b>：浏览器默认3,000条，可调500–10,000条；Python固定10,000条。只展示给定假设下的示意分布，不代表政策发生概率</div>
       <div class="glossary-item"><b>分位数区间</b>：10%分位表示"有10%的概率利率低于这个值"，90%分位表示"有90%的概率低于这个值"——区间越宽，不确定性越大</div>
-      <div class="glossary-item"><b>诚实标注</b>：本模拟器的θ/κ为演示设定参数，非市场校准结果；σ由历史LPR调整序列近似估计。结果仅演示精算方法，不构成投资建议</div>
+      <div class="glossary-item"><b>诚实标注</b>：θ/κ/σ均为演示设定；默认1Y θ=2.7%、κ=0.10、σ≈0.11097，5Y θ=3.0%、κ=0.25、σ=0.22，与Python基准一致。滑块是独立假设实验：θ5=θ+spread，κ5=2.5κ，σ5按基准比例联动。浏览器随机抽样与固定种子脚本不逐条相同；长期中枢差不约束每条路径的利差符号</div>
     </div>
   </div>
 </div>
@@ -135,11 +135,11 @@ function runSim(){
   const N = parseInt(document.getElementById('paths').value);
   const spread = parseFloat(document.getElementById('spread').value);
 
-  const r0 = 3.0; // 当前1Y LPR
-  const r0_5 = 3.5; // 当前5Y LPR
+  const r0 = 3.0; // 2026-08研究快照1Y基准
+  const r0_5 = 3.5; // 2026-08研究快照5Y基准
   const theta5 = theta + spread;
-  const kappa5 = kappa * 1.5; // 5Y回复更快
-  const sigma5 = sigma * 0.8; // 5Y波动略小
+  const kappa5 = kappa * 2.5; // 基准κ5=0.25，随滑块按比例实验
+  const sigma5 = 0.22 * sigma / 0.11096868741576088; // 基准σ5=0.22
   const dt = 1/12;
   const steps = years * 12;
 
@@ -180,10 +180,10 @@ function runSim(){
 
   // KPI
   document.getElementById('kpis').innerHTML = `
-    <div class="kpi"><div class="v">${mean1.toFixed(2)}%</div><div class="l">${years}年后1Y期望</div></div>
-    <div class="kpi green"><div class="v">${mean5.toFixed(2)}%</div><div class="l">${years}年后5Y期望</div></div>
-    <div class="kpi orange"><div class="v">${p_lt25.toFixed(1)}%</div><div class="l">P(1Y < 2.5%)</div></div>
-    <div class="kpi"><div class="v">${p_gt30.toFixed(1)}%</div><div class="l">P(1Y ≥ 3.0%)</div></div>
+    <div class="kpi"><div class="v">${mean1.toFixed(2)}%</div><div class="l">${years}年后1Y条件均值</div></div>
+    <div class="kpi green"><div class="v">${mean5.toFixed(2)}%</div><div class="l">${years}年后5Y条件均值</div></div>
+    <div class="kpi orange"><div class="v">${p_lt25.toFixed(1)}%</div><div class="l">模拟比例(1Y < 2.5%)</div></div>
+    <div class="kpi"><div class="v">${p_gt30.toFixed(1)}%</div><div class="l">模拟比例(1Y ≥ 3.0%)</div></div>
   `;
 
   // 路径图
@@ -199,8 +199,8 @@ function runSim(){
     series:[
       ...samplePaths.map((p,i)=>({type:'line',data:p,showSymbol:false,lineStyle:{width:0.5,color:'rgba(109,124,255,0.15)'},silent:true})),
       {name:'中位数',type:'line',data:q50_1.map((v,i)=>[i/12,v]),showSymbol:false,lineStyle:{width:2,color:'#6d7cff'}},
-      {name:'10-90%区间',type:'line',data:q90_1.map((v,i)=>[i/12,v]),showSymbol:false,lineStyle:{opacity:0},stack:'band1',areaStyle:{color:'rgba(109,124,255,0.1)'}},
-      {name:'10-90%区间',type:'line',data:q10_1.map((v,i)=>[i/12,v]),showSymbol:false,lineStyle:{opacity:0},stack:'band1'},
+      {name:'10-90%区间',type:'line',data:q10_1.map((v,i)=>[i/12,v]),showSymbol:false,lineStyle:{opacity:0},stack:'band1',silent:true},
+      {name:'10-90%区间',type:'line',data:q90_1.map((v,i)=>[i/12,v-q10_1[i]]),showSymbol:false,lineStyle:{opacity:0},stack:'band1',silent:true,areaStyle:{color:'rgba(109,124,255,0.1)'}},
       {name:'长期中枢',type:'line',data:[[0,theta],[years,theta]],showSymbol:false,lineStyle:{type:'dashed',color:'#f87171',width:1.5}}
     ]
   });
@@ -218,7 +218,7 @@ function runSim(){
 
   chart2.setOption({
     backgroundColor:'transparent',
-    tooltip:{trigger:'axis',formatter:p=>`LPR=${p[0].name}%<br/>1Y: ${p[0].value}条<br/>5Y: ${p[1].value}条`},
+    tooltip:{trigger:'axis',formatter:p=>p.length?`LPR=${p[0].name}%`+p.map(x=>`<br/>${x.seriesName}: ${x.value}条`).join(''):''},
     legend:{data:['1Y LPR','5Y LPR'],textStyle:{color:'#8fa3c0',fontSize:11},top:0},
     grid:{left:50,right:20,top:40,bottom:40},
     xAxis:{type:'category',data:xData,name:'LPR(%)',nameTextStyle:{color:'#5b6070'},axisLine:{lineStyle:{color:'#2a3045'}},axisLabel:{color:'#5b6070',interval:4}},
@@ -235,7 +235,7 @@ function runSim(){
   document.getElementById(id).addEventListener('input',function(){
     const v = this.value;
     const suffix = id==='theta'||id==='sigma'||id==='spread'?'%':(id==='years'?'年':'');
-    document.getElementById(id+'Val').textContent = v + suffix;
+    document.getElementById(id+'Val').textContent = (id==='sigma'?Number(v).toFixed(3):v) + suffix;
   });
 });
 

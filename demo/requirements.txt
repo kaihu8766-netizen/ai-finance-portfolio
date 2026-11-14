@@ -1,4 +1,4 @@
-# 全部 Demo 依赖（一键运行蒙特卡洛.bat 会自检并可选自动安装）
+# Python Demo依赖（从仓库根目录安装：python -m pip install -r demo/requirements.txt）
 # 安装：pip install -r requirements.txt
 numpy>=1.24
 matplotlib>=3.7
