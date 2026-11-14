@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LPR 均值回归示意分布模拟器 | 胡凯作品集</title>
 <script src="../echarts.min.js"></script>
+<script src="lpr-scenarios.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0a0d16;color:#e8eaf0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;padding:20px;min-height:100vh}
@@ -109,6 +110,19 @@ body{background:#0a0d16;color:#e8eaf0;font-family:-apple-system,BlinkMacSystemFo
       <div class="glossary-item"><b>诚实标注</b>：θ/κ/σ均为演示设定；默认1Y θ=2.7%、κ=0.10、σ≈0.11097，5Y θ=3.0%、κ=0.25、σ=0.22，与Python基准一致。滑块是独立假设实验：θ5=θ+spread，κ5=2.5κ，σ5按基准比例联动。浏览器随机抽样与固定种子脚本不逐条相同；长期中枢差不约束每条路径的利差符号</div>
     </div>
   </div>
+  <section class="panel" id="loanBridge">
+    <h3>🔗 固定脚本分位数 → 贷款条件测算</h3>
+    <p style="font-size:12px;line-height:1.8;color:#8fa3c0">连接依据是脚本生成的同一份 <a href="lpr_mc_quantiles.csv" download style="color:#a5b0ff">lpr_mc_quantiles.csv</a>（研究快照2026-08）。本区读取固定基准，与上方滑块的临时抽样实验分开；滑块不会改写CSV或贷款情景。</p>
+    <div id="bridgeStatus" class="note" role="status">正在读取本地CSV…</div>
+    <div id="bridgeQuantiles" style="font-size:12px;line-height:1.8;margin-top:12px"></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a class="btn" data-loan-scenario="P10" href="ai-treasury-copilot/?scenario=P10" aria-disabled="true">P10 → 贷款测算</a>
+      <a class="btn" data-loan-scenario="P50" href="ai-treasury-copilot/?scenario=P50" aria-disabled="true">P50 → 贷款测算</a>
+      <a class="btn" data-loan-scenario="P90" href="ai-treasury-copilot/?scenario=P90" aria-disabled="true">P90 → 贷款测算</a>
+    </div>
+    <p class="note">P10/P50/P90是各月利率的条件分位数序列，拼接后作为确定性的利率情景；不是一条随机路径，也不是贷款利息的10%/50%/90%分位数。宏观60%/25%/15%为另行设定的主观情景权重，不用于给本区三档加权。贷款结果仅为该情景下的条件测算。</p>
+    <label style="display:block;font-size:11px;color:#8fa3c0;margin-top:12px">本地文件方式打开或CSV加载失败时，选择同一份脚本CSV：<input id="bridgeCsvFile" type="file" accept=".csv,text/csv" style="display:block;max-width:100%;margin-top:8px"></label>
+  </section>
 </div>
 
 <script>
@@ -250,6 +264,28 @@ let debounce;
 
 initCharts();
 runSim();
+
+// 只读共享CSV桥梁；不修改上方Vasicek模拟及其参数。
+(function(){
+  var status=document.getElementById('bridgeStatus'),quotes=document.getElementById('bridgeQuantiles');
+  function setReady(ready){document.querySelectorAll('[data-loan-scenario]').forEach(function(a){a.setAttribute('aria-disabled',String(!ready));});}
+  document.querySelectorAll('[data-loan-scenario]').forEach(function(a){a.addEventListener('click',function(e){if(a.getAttribute('aria-disabled')==='true')e.preventDefault();});});
+  function ready(table){
+    var last=table.rows[table.rows.length-1];
+    status.textContent='CSV已加载：'+table.first+' 至 '+table.last+'，60个月；贷款按周年重定价月份取对应1Y分位值。';
+    quotes.textContent=last.month+' 的1Y条件分位数：P10 '+(last.q10*100).toFixed(4)+'% / P50 '+(last.q50*100).toFixed(4)+'% / P90 '+(last.q90*100).toFixed(4)+'%。';
+    setReady(true);
+  }
+  function failed(error){setReady(false);quotes.textContent='';status.textContent='CSV未就绪：'+error.message+'。可用本地HTTP服务，或手动选择同一份CSV。';}
+  document.getElementById('bridgeCsvFile').addEventListener('change',function(){
+    var file=this.files[0];if(!file)return;
+    if(typeof LprScenarios==='undefined'){failed(new Error('共享CSV组件加载失败'));return;}
+    file.text().then(function(text){return LprScenarios.parse(text);}).then(ready).catch(failed);
+  });
+  if(typeof LprScenarios==='undefined')failed(new Error('共享CSV组件加载失败'));
+  else LprScenarios.load('lpr_mc_quantiles.csv').then(ready).catch(failed);
+})();
+
 </script>
 </body>
 </html>
