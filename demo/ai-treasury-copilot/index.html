@@ -243,18 +243,19 @@ td.mono,td .pill{white-space:nowrap}
 
     <section class="card scenario-panel" id="scenarioCard" style="margin-bottom:16px">
       <div class="card-head"><h2>不同利率情景下的未来利息成本</h2>
-        <label class="display-date">利率情景 <select id="scenarioSel" class="select" disabled><option value="P10">P10 · 较低利率</option><option value="P50" selected>P50 · 中位利率</option><option value="P90">P90 · 较高利率</option></select></label>
+        <label class="display-date">利率情景 <select id="scenarioSel" class="select" disabled><option value="P10">乐观情景（利率偏低）</option><option value="P50" selected>中间情景（默认）</option><option value="P90">悲观情景（利率偏高）</option></select></label>
       </div>
+      <p class="scenario-copy" id="scenarioExplanation">三档来自 10,000 条模拟：乐观情景取模拟中较低的利率水平（约 10% 的结果比它更低），中间情景取中间值，悲观情景取较高的利率水平（约 10% 的结果比它更高）。利率越高利息越多，乐观最便宜，悲观最贵。示意分布，不是预测。</p>
       <p class="scenario-copy">唯一利率数据源：<a href="../lpr_mc_quantiles.csv" download>lpr_mc_quantiles.csv</a>（2026-08研究快照）。首年合同基准仍为3.10%；之后每个放款周年日取对应月份的1Y分位值，并锁定至下一周年日。没有月内插值，覆盖期外不外推。</p>
       <p class="scenario-copy"><b>原9笔12个月合同保持不变：</b>首次周年重定价日就是到期日，到期前未发生重定价，故情景利率不影响其利息，三档成本相同。这是合同结构决定的正确结果。</p>
       <label class="scenario-copy scenario-toggle"><input type="checkbox" id="includeScenarioDemo" checked> 包含“为验证利率情景而新增的演示贷款”：100万元、3年期、2026-08-01至2029-08-01、加点20bp；与原9笔分开列示。</label>
       <p id="scenarioStatus" class="scenario-status" role="status">正在读取本地情景CSV…</p>
       <div class="table-wrap scenario-table" tabindex="0" aria-label="利率情景成本对照，左右滚动查看"><table><caption class="sr-only">原9笔与新增演示贷款的未来利息成本对照</caption>
-        <thead><tr><th>合同分组</th><th>P10（元）</th><th>P50（元）</th><th>P90（元）</th><th>三档结果范围（元）</th><th>原固定口径（元）</th><th>P50减原口径（元）</th></tr></thead>
+        <thead><tr><th>合同分组</th><th>乐观情景（利率偏低）（元）</th><th>中间情景（默认）（元）</th><th>悲观情景（利率偏高）（元）</th><th>三档结果范围（元）</th><th>原固定口径（元）</th><th>中间情景减原口径（元）</th></tr></thead>
         <tbody id="scenarioCostBody"></tbody></table></div>
       <p id="scenarioComparison" class="scenario-copy"></p>
       <p class="scenario-copy">“未来利息成本”按展示日（含）至各合同到期日（不含）的尚未发生利息、沿用原分段及分币舍入计算；不是未来扣款额（后者可能包含展示日前已计提利息）。原固定口径仅作复算对照：首年3.10%、后续年3.00%，不用于本次CSV情景定价。</p>
-      <p class="scenario-copy">P10/P50/P90是各月利率条件分位数序列构成的三档确定性情景，不是利息的分位数或置信区间；结果是<b>该情景下的条件测算，不是预测</b>。宏观60%/25%/15%为另行设定的主观情景权重，非模型输出、未经统计校准，不在这里加权。本组合不混用LPR页“1亿元、5年期、人为示例金额”的压力测试。</p>
+      <p class="scenario-copy">这三档利率情景由各月利率条件分位数序列构成，是确定性情景，不是利息的分位数或置信区间；结果是<b>该情景下的条件测算，不是预测</b>。宏观60%/25%/15%为另行设定的主观情景权重，非模型输出、未经统计校准，不在这里加权。本组合不混用LPR页“1亿元、5年期、人为示例金额”的压力测试。</p>
       <label class="scenario-copy">CSV加载失败或直接打开本地文件时，可选择同一份脚本CSV：<input id="scenarioCsvFile" type="file" accept=".csv,text/csv"></label>
       <a class="scenario-copy" href="../LPR蒙特卡洛预测模拟器.html">查看LPR示意分布及CSV来源 ↗</a>
     </section>
@@ -431,6 +432,10 @@ td.mono,td .pill{white-space:nowrap}
   /* ================= 基础工具 ================= */
   var LPR_BASE = 3.10;               // 首年 1Y LPR（按季结息基准）
   var LEGACY_REFERENCE_NEXT = 3.00; // 仅用于复算上一版固定口径，不参与CSV情景定价。
+  // Presentation labels only: internal scenario keys and pricing remain unchanged.
+  var SCENARIO_LABELS={P10:'乐观情景（利率偏低）',P50:'中间情景（默认）',P90:'悲观情景（利率偏高）'};
+  function scenarioLabel(key){return SCENARIO_LABELS[key];}
+  function scenarioMessage(message){return String(message).replace(/\bP(?:10|50|90)\b/g,function(key){return scenarioLabel(key);});}
   var requestedScenario=new URLSearchParams(location.search).get('scenario');
   var scenarioState={key:['P10','P50','P90'].indexOf(requestedScenario)>=0?requestedScenario:'P50',table:null,source:'../lpr_mc_quantiles.csv',error:'',loading:true};
   var DAY = 86400000;
@@ -647,7 +652,7 @@ td.mono,td .pill{white-space:nowrap}
     document.getElementById('kpiOutflow').textContent = compact(agg.outflow30);
     document.getElementById('kpiOutflowHint').textContent = agg.outflow30 > 0 ? ('含本金与利息 · ' + ymd(today) + ' 起 30 天') : ('未来 30 天无到期 · 下次结息 ' + (function(){ var nx=null; loans.forEach(function(l){ var s2=buildSchedule(l); s2.forEach(function(r){ if(r.date>=today && (!nx || r.date<nx)) nx=r.date; }); }); return nx?ymd(nx):'—'; })());
     document.getElementById('kpiWacd').textContent = pct(agg.wacd);
-    document.getElementById('kpiWacdHint').textContent = scenarioState.key+' 条件测算 · 存续本金与展示日适用年利率加权；首年合同基准3.10%';
+    document.getElementById('kpiWacdHint').textContent = scenarioLabel(scenarioState.key)+' 条件测算 · 存续本金与展示日适用年利率加权；首年合同基准3.10%';
   }
 
   function renderChart(agg){
@@ -711,7 +716,7 @@ td.mono,td .pill{white-space:nowrap}
         '<td>' + escapeHtml(l.type) + (l.origin==='scenario-demo'?'<div class="scenario-loan-tag">为验证利率情景新增</div>':'') + '<div style="font-size:10.5px;color:var(--dim)" class="mono">' + escapeHtml(l.id) + '</div></td>' +
         '<td>' + escapeHtml(l.bank) + '</td>' +
         '<td class="mono">' + money(l.principal) + '</td>' +
-        '<td>首年 '+pct(l.rate1)+'；LPR+'+l.spread+'bp<div style="color:var(--dim)">'+(firstResetInfo(l)?'首次周年后 '+pct(firstResetInfo(l).rate+l.spread/10000)+'（'+scenarioState.key+'）':'到期前无重定价')+'</div></td>' +
+        '<td>首年 '+pct(l.rate1)+'；LPR+'+l.spread+'bp<div style="color:var(--dim)">'+(firstResetInfo(l)?'首次周年后 '+pct(firstResetInfo(l).rate+l.spread/10000)+'（'+scenarioLabel(scenarioState.key)+'）':'到期前无重定价')+'</div></td>' +
         '<td class="mono">' + escapeHtml(l.end) + '</td>' +
         '<td class="mono">' + (nx ? ymd(nx.date) : '—') + '</td>' +
         '<td><span class="pill ' + statusCls + '">' + status + '</span></td></tr>';
@@ -772,7 +777,7 @@ td.mono,td .pill{white-space:nowrap}
       return '<tr><td>'+escapeHtml(g.name)+'<div class="scenario-copy">'+g.rows.length+'笔 · '+escapeHtml(g.note)+'</div></td>'+['P10','P50','P90'].map(function(k){return '<td class="mono '+(k===scenarioState.key?'scenario-selected':'')+'">'+preciseMoney(v[k])+'</td>';}).join('')+'<td class="mono">'+preciseMoney(v.P10)+' ～ '+preciseMoney(v.P90)+'</td><td class="mono">'+preciseMoney(v.reference)+'</td><td class="mono">'+preciseMoney(v.P50-v.reference)+'</td></tr>';
     }).join('');
     var totals=sumCosts(costs),original=sumCosts(groups[0].rows),added=sumCosts(groups[1].rows);
-    document.getElementById('scenarioComparison').textContent='当前选择 '+scenarioState.key+'。P50复算：原9笔 '+preciseMoney(original.P50)+'，与旧固定口径差 '+preciseMoney(original.P50-original.reference)+'；新增演示贷款 '+preciseMoney(added.P50)+'，与旧固定口径差 '+preciseMoney(added.P50-added.reference)+'；组合P50 '+preciseMoney(totals.P50)+'，旧口径 '+preciseMoney(totals.reference)+'，差额 '+preciseMoney(totals.P50-totals.reference)+'。';
+    document.getElementById('scenarioComparison').textContent='当前选择 '+scenarioLabel(scenarioState.key)+'。中间情景复算：原9笔 '+preciseMoney(original.P50)+'，与旧固定口径差 '+preciseMoney(original.P50-original.reference)+'；新增演示贷款 '+preciseMoney(added.P50)+'，与旧固定口径差 '+preciseMoney(added.P50-added.reference)+'；组合中间情景 '+preciseMoney(totals.P50)+'，旧口径 '+preciseMoney(totals.reference)+'，差额 '+preciseMoney(totals.P50-totals.reference)+'。';
   }
   function renderAll(){
     if(!scenarioState.table){
@@ -947,7 +952,7 @@ td.mono,td .pill{white-space:nowrap}
     var high = agg.active.slice().sort(function(a,b){ return b.spread-a.spread; })[0];
     var saving = high ? high.principal * (high.spread-15)/10000 : 0;
     var lines = [];
-    lines.push('【条件测算资金报告 · '+ymd(today)+' · '+scenarioState.key+'】');
+    lines.push('【条件测算资金报告 · '+ymd(today)+' · '+scenarioLabel(scenarioState.key)+'】');
     lines.push('');
     if(peak){
       lines.push('1) 流动性峰值：' + peak.full + ' 单月还本付息 ' + money(peak.principal+peak.interest) + '，超出 5,000 万预警线 ' + compact(peak.principal+peak.interest-ALERT_THRESHOLD) + '。');
@@ -962,7 +967,7 @@ td.mono,td .pill{white-space:nowrap}
     lines.push('3) 到期结构：最大单笔为 ' + (top? top.bank.replace(/\s+/g,'') + '（' + compact(top.principal) + '，' + top.end + ' 到期）' : '—') + '，占比 ' + (top && agg.balance? (top.principal/agg.balance*100).toFixed(1) : 0) + '%。');
     lines.push(top?'   → 结合存续合同集中度，评估到期日分散安排。':'   → 展示日无存续合同；不生成存续贷款集中度建议。');
     lines.push('4) 计息合规：全部按 Actual/360 逐日计提（当月利息 = 余额 × 年利率/360 × 实际天数），结息日计入当期、次日扣款；仅扣款日遇周末顺延，实际合同与法定节假日需另行核对。');
-    lines.push('5) 未来 12 个月利息支出合计 ' + compact(agg.annualInterest) + '，本金到期 ' + compact(agg.annualPrincipal) + '；建议按季度复核合同适用的 LPR 基准与利息缓冲（本演示首年 ' + LPR_BASE.toFixed(2) + '%；后续周年日读取CSV '+scenarioState.key+'，非预测）。');
+    lines.push('5) 未来 12 个月利息支出合计 ' + compact(agg.annualInterest) + '，本金到期 ' + compact(agg.annualPrincipal) + '；建议按季度复核合同适用的 LPR 基准与利息缓冲（本演示首年 ' + LPR_BASE.toFixed(2) + '%；后续周年日读取CSV '+scenarioLabel(scenarioState.key)+'，非预测）。');
     lines.push('');
     lines.push('—— 以上由 Treasury Copilot 基于当前台账数据生成，供决策参考。');
     return lines.join('\n');
@@ -1071,7 +1076,7 @@ td.mono,td .pill{white-space:nowrap}
     [18,18,18,18,18,18,18].forEach(function(w,i){source.getColumn(i+1).width=w;});
     xlTitle(source,'唯一利率源：脚本生成的lpr_mc_quantiles.csv','G');
     xlSub(source,'读取 '+scenarioState.source+' | '+scenarioState.table.first+'至'+scenarioState.table.last+' | CSV百分点已换为小数年利率；保留1Y/5Y原始分位值','G');
-    xlHead(source,3,['月份','1Y P10','1Y P50','1Y P90','5Y P10','5Y P50','5Y P90']);
+    xlHead(source,3,['月份','1年期乐观情景','1年期中间情景','1年期悲观情景','5年以上乐观情景','5年以上中间情景','5年以上悲观情景']);
     scenarioState.table.rows.forEach(function(row,i){
       var values=[xlDate(row.month+'-01'),row.q10,row.q50,row.q90,row.q10_5y,row.q50_5y,row.q90_5y];
       values.forEach(function(value,j){var c=source.getCell(i+4,j+1);c.value=value;xlBorder(c);if(j)xlPct4(c);else c.numFmt='yyyy-mm';});
@@ -1081,11 +1086,11 @@ td.mono,td .pill{white-space:nowrap}
     xlTitle(ws,'不同利率情景下的未来利息成本 · 条件测算，不是预测','I');
     xlSub(ws,'利率源：lpr_mc_quantiles.csv（2026-08研究快照）；原9笔12个月合同与新增演示贷款分开。导出是所选情景的快照，切换请在页面重新导出。','I');
     ws.getRow(2).height=36;
-    ws.getCell('A4').value='所选利率情景';ws.getCell('B4').value=scenarioState.key;
+    ws.getCell('A4').value='所选利率情景';ws.getCell('B4').value=scenarioLabel(scenarioState.key);
     ws.getCell('D4').value='展示日期';ws.getCell('E4').value=xlDate(ymd(today));ws.getCell('E4').numFmt='yyyy-mm-dd';
     var notes=[['A5','B5','唯一数据源',scenarioState.source+'；'+scenarioState.table.first+'至'+scenarioState.table.last],['A6','B6','三档口径','逐月利率分位数序列构成确定性情景；不是利息分位数或置信区间；结果为给定情景的条件测算'],['A7','B7','主观情景权重','宏观60%/25%/15%由作者另行设定，非模型输出、未经统计校准；不用于本三档加权'],['A8','B8','原9笔合同','首年3.10%，12个月期限不变；首次周年日即到期日，到期前未重定价，故三档相同'],['A9','B9','未来成本与对照','展示日（含）至到期日（不含）尚未发生利息；旧固定口径首年3.10%、后续3.00%仅作对照；不混用1亿元5年期人为示例']];
     notes.forEach(function(n){ws.getCell(n[0]).value=n[2];ws.mergeCells(n[1]+':I'+n[1].slice(1));ws.getCell(n[1]).value=n[3];ws.getCell(n[1]).alignment={wrapText:true};ws.getRow(+n[1].slice(1)).height=30;});
-    xlHead(ws,11,['贷款编号','分组/银行','P10未来利息','P50未来利息','P90未来利息','三档下界','三档上界','旧固定口径','P50减旧口径']);
+    xlHead(ws,11,['贷款编号','分组/银行','乐观情景未来利息','中间情景未来利息','悲观情景未来利息','三档下界','三档上界','旧固定口径','中间情景减旧口径']);
     var costs=scenarioCosts(),scenarioColumn={P10:3,P50:4,P90:5};
     costs.forEach(function(cost,i){
       var r=12+i,l=cost.loan,group=l.origin==='original'?'原9笔':(l.origin==='scenario-demo'?'情景验证新增演示':'手动新增演示');
@@ -1121,7 +1126,7 @@ td.mono,td .pill{white-space:nowrap}
 
     var ws=wb.addWorksheet('集团贷款汇总总表');
     xlTitle(ws,'集团贷款还本付息汇总 · 合成演示数据','N');
-    xlSub(ws,'条件测算 '+scenarioState.key+' | 展示日 '+ymd(today)+' | 全部合同口径 | 首年3.10%，后续每个周年日读取本地CSV；非预测','N');
+    xlSub(ws,'条件测算 '+scenarioLabel(scenarioState.key)+' | 展示日 '+ymd(today)+' | 全部合同口径 | 首年3.10%，后续每个周年日读取本地CSV；非预测','N');
     [16,30,18,18,15,15,12,14,12,16,28,20,20,22].forEach(function(v,i){ws.getColumn(i+1).width=v;});
     var labels=['合同本金合计','首年本金加权执行利率',year+'年度实付利息','全周期利息合计',year+'年度实付本金'];
     var labelRanges=['A4:C4','D4:F4','G4:I4','J4:L4','M4:N4'];
@@ -1143,7 +1148,7 @@ td.mono,td .pill{white-space:nowrap}
       var r=10+i,sheet=loanSheetName(l,i),sc=schedules[i].rows;
       var ai=sc.filter(function(x){return x.date.getFullYear()===year;}).reduce(function(v,x){return v+x.interest;},0);
       var ti=sc.reduce(function(v,x){return v+x.interest;},0);
-      var vals=[l.id,{text:l.bank,hyperlink:"#'"+sheet+"'!A1"},l.type,formula("'"+sheet+"'!C5",l.principal),xlDate(l.start),xlDate(l.end),formula("'"+sheet+"'!C8",loanMonths(l)),formula("'"+sheet+"'!C9",LPR_BASE/100),formula("'"+sheet+"'!C10",l.spread),formula("'"+sheet+"'!C11",l.rate1),'周年日锁定CSV '+scenarioState.key+'；非预测',formula("'"+sheet+"'!C13",ai),formula("'"+sheet+"'!C14",ti),{text:'查看付息排程',hyperlink:"#'"+sheet+"'!A1"}];
+      var vals=[l.id,{text:l.bank,hyperlink:"#'"+sheet+"'!A1"},l.type,formula("'"+sheet+"'!C5",l.principal),xlDate(l.start),xlDate(l.end),formula("'"+sheet+"'!C8",loanMonths(l)),formula("'"+sheet+"'!C9",LPR_BASE/100),formula("'"+sheet+"'!C10",l.spread),formula("'"+sheet+"'!C11",l.rate1),'周年日锁定CSV '+scenarioLabel(scenarioState.key)+'；非预测',formula("'"+sheet+"'!C13",ai),formula("'"+sheet+"'!C14",ti),{text:'查看付息排程',hyperlink:"#'"+sheet+"'!A1"}];
       vals.forEach(function(v,j){var c=ws.getCell(r,j+1);c.value=v;xlBorder(c);});
       [4,12,13].forEach(function(c){xlMoney(ws.getCell(r,c));});
       [8,10].forEach(function(c){xlPct4(ws.getCell(r,c));});
@@ -1157,7 +1162,7 @@ td.mono,td .pill{white-space:nowrap}
       var ws2=wb.addWorksheet(loanSheetName(l,idx));
       [16,18,18,12,21,16,16,16,16,20,20,22,18,18,22].forEach(function(v,i){ws2.getColumn(i+1).width=v;});
       xlTitle(ws2,l.id+' · '+l.bank+' · 计息与扣款排程（合成演示）','N');
-      ws2.mergeCells('A2:I2');ws2.getCell('A2').value=scenarioState.key+'条件测算 | Actual/360 | '+SETTLEMENT_LABELS[l.settle]+' | 结息日计入当期，次日扣款；到期日不计息；扣款日仅周末顺延';
+      ws2.mergeCells('A2:I2');ws2.getCell('A2').value=scenarioLabel(scenarioState.key)+'条件测算 | Actual/360 | '+SETTLEMENT_LABELS[l.settle]+' | 结息日计入当期，次日扣款；到期日不计息；扣款日仅周末顺延';
       ws2.getCell('A2').alignment={wrapText:true};ws2.getRow(2).height=32;
       ws2.mergeCells('J2:L2');ws2.getCell('J2').value={text:'返回集团汇总',hyperlink:"#'集团贷款汇总总表'!A1"};
       ws2.mergeCells('B4:D4');ws2.getCell('B4').value='一、合同要素';
@@ -1166,7 +1171,7 @@ td.mono,td .pill{white-space:nowrap}
       var resetInfo=firstResetInfo(l);
       ws2.getCell('M3').value='展示日期';ws2.getCell('N3').value=xlDate(ymd(today));ws2.getCell('N3').numFmt='yyyy-mm-dd';
       ws2.getCell('M4').value=l.origin==='original'?'原9笔12个月合同':(l.origin==='scenario-demo'?'为验证利率情景新增的演示贷款':'手动新增演示合同');
-      var repricing=[['G5','H5','首次重定价日',xlDate(ymd(l.anniversary))],['G6','H6','首年演示基准',LPR_BASE/100],['G7','H7','首次重定价CSV '+scenarioState.key,resetInfo?resetInfo.rate:'不适用：到期前无重定价'],['G8','H8','合同加点（bp）',l.spread],['G9','H9','首年执行年利率',formula('C11',l.rate1)],['G10','H10','首次重定价后执行利率',resetInfo?formula('H7+H8/10000',resetInfo.rate+l.spread/10000):'不适用：到期前无重定价'],['G11','H11','计息边界','左闭右开，按周年日切段'],['G12','H12','付款规则','结息次日/到期日扣款，遇周末顺延']];
+      var repricing=[['G5','H5','首次重定价日',xlDate(ymd(l.anniversary))],['G6','H6','首年演示基准',LPR_BASE/100],['G7','H7','首次重定价基准',resetInfo?resetInfo.rate:'不适用：到期前无重定价'],['G8','H8','合同加点（bp）',l.spread],['G9','H9','首年执行年利率',formula('C11',l.rate1)],['G10','H10','首次重定价后执行利率',resetInfo?formula('H7+H8/10000',resetInfo.rate+l.spread/10000):'不适用：到期前无重定价'],['G11','H11','计息边界','左闭右开，按周年日切段'],['G12','H12','付款规则','结息次日/到期日扣款，遇周末顺延']];
       contract.concat(repricing).forEach(function(v){ws2.getCell(v[0]).value=v[2];ws2.getCell(v[0]).font={bold:true};ws2.getCell(v[1]).value=v[3];xlBorder(ws2.getCell(v[1]));});
       ['C5'].forEach(function(a){xlMoney(ws2.getCell(a));});
       ['C6','C7','H5'].forEach(function(a){ws2.getCell(a).numFmt='yyyy-mm-dd';});
@@ -1201,7 +1206,7 @@ td.mono,td .pill{white-space:nowrap}
     xlSub(ws3,'恒定本金 × 年利率的年度敏感性；不等同于逐日排程现金流 | Actual/360 排程另见附表','H');
     ws3.mergeCells('A4:D4');ws3.getCell('A4').value='一、演示参数';
     xlHead(ws3,5,['参数代码','说明','设定值','单位/规则']);
-    var params=[['PAR_LPR_1Y','首年演示基准 LPR',LPR_BASE/100,'非当前市场报价'],['PAR_LPR_SCENARIO','周年日重定价情景',scenarioState.key,'按日期读取LPR分位数来源表；不是固定次年利率'],['PAR_DAY_COUNT','排程计息基准',360,'Actual/360'],['PAR_SETTLE_CYCLE','默认样本结息方式','按季结息','季末月20日结息，21日扣款；扣款日仅周末顺延'],['PAR_CORP_TAX','演示所得税率',0.15,'优惠税率演示假设'],['PAR_DEBT_CAP','演示额度上限',500000000,'元']];
+    var params=[['PAR_LPR_1Y','首年演示基准 LPR',LPR_BASE/100,'非当前市场报价'],['PAR_LPR_SCENARIO','周年日重定价情景',scenarioLabel(scenarioState.key),'按日期读取LPR分位数来源表；不是固定次年利率'],['PAR_DAY_COUNT','排程计息基准',360,'Actual/360'],['PAR_SETTLE_CYCLE','默认样本结息方式','按季结息','季末月20日结息，21日扣款；扣款日仅周末顺延'],['PAR_CORP_TAX','演示所得税率',0.15,'优惠税率演示假设'],['PAR_DEBT_CAP','演示额度上限',500000000,'元']];
     params.forEach(function(v,i){v.forEach(function(x,j){var c=ws3.getCell(i+6,j+1);c.value=x;xlBorder(c);});if(i===0||i===1||i===4)xlPct4(ws3.getCell(i+6,3));});
     ws3.mergeCells('A13:H13');ws3.getCell('A13').value='二、全部合同本金 × 首年执行利率，统一平移 LPR 的年度敏感性';
     xlHead(ws3,14,['情景编号','情景','LPR变化（bp）','演示1Y LPR','加权执行年利率','年度利息（元）','较基准变化（元）','税后利润影响（元）']);
@@ -1350,7 +1355,7 @@ td.mono,td .pill{white-space:nowrap}
       var wb = buildTemplateWorkbook();
       applyTemplateStyles(wb);
       wb.xlsx.writeBuffer().then(function(buf){
-        var name='集团贷款条件测算_'+exportScenario+'_'+exportDate+'_合成演示数据.xlsx';
+        var name='集团贷款条件测算_'+scenarioLabel(exportScenario)+'_'+exportDate+'_合成演示数据.xlsx';
         var blob = new Blob([buf], { type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
         if(window.navigator && window.navigator.msSaveOrOpenBlob){ window.navigator.msSaveOrOpenBlob(blob, name); }
         else {
@@ -1360,7 +1365,7 @@ td.mono,td .pill{white-space:nowrap}
           document.body.appendChild(a); a.click();
           setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1500);
         }
-        toast('已导出 '+exportScenario+' 条件测算：'+exportLoanCount+'张贷款附表、参数敏感性、CSV来源与情景成本（'+wb.worksheets.length+'个sheet）');
+        toast('已导出 '+scenarioLabel(exportScenario)+' 条件测算：'+exportLoanCount+'张贷款附表、参数敏感性、CSV来源与情景成本（'+wb.worksheets.length+'个sheet）');
       }).catch(function(err){ toast('导出失败：' + err.message, 'err'); });
     }catch(err){ toast('导出失败：' + err.message, 'err'); }
   });
@@ -1381,23 +1386,23 @@ td.mono,td .pill{white-space:nowrap}
     scenarioSelect.disabled=!ready;document.getElementById('btnSave').disabled=!ready;
     document.getElementById('btnReport').disabled=!ready;document.getElementById('btnActions').disabled=!ready;
     exportBtn.disabled=!ready;
-    exportBtn.textContent=!ready?(scenarioState.loading?'情景CSV加载中…':'CSV未就绪 · 暂不导出'):(typeof ExcelJS==='undefined'?'Excel组件未就绪 · 点击查看提示':exportLabel+' · '+scenarioState.key);
+    exportBtn.textContent=!ready?(scenarioState.loading?'情景CSV加载中…':'CSV未就绪 · 暂不导出'):(typeof ExcelJS==='undefined'?'Excel组件未就绪 · 点击查看提示':exportLabel+' · '+scenarioLabel(scenarioState.key));
   }
   function acceptScenarioTable(table,source){
     loans.forEach(function(l){requireCoverage(l,table);});
     scenarioState.table=table;scenarioState.source=source;scenarioState.loading=false;scenarioState.error='';
-    document.getElementById('scenarioStatus').textContent='CSV已加载：'+table.first+' 至 '+table.last+'，60个月；'+scenarioState.key+' · 仅本地数据。原9笔到期前无重定价；新增3年期演示贷款用于验证情景影响。';
+    document.getElementById('scenarioStatus').textContent='CSV已加载：'+table.first+' 至 '+table.last+'，60个月；'+scenarioLabel(scenarioState.key)+' · 仅本地数据。原9笔到期前无重定价；新增3年期演示贷款用于验证情景影响。';
     updateReadiness();renderAll();
   }
   function scenarioFailed(error){
     scenarioState.table=null;scenarioState.loading=false;scenarioState.error=error.message;
-    document.getElementById('scenarioStatus').textContent='CSV加载失败：'+error.message+'。请通过本地HTTP服务打开，或选择同一份脚本CSV。';
+    document.getElementById('scenarioStatus').textContent='CSV加载失败：'+scenarioMessage(error.message)+'。请通过本地HTTP服务打开，或选择同一份脚本CSV。';
     updateReadiness();renderAll();
   }
   scenarioSelect.addEventListener('change',function(){
     if(['P10','P50','P90'].indexOf(this.value)<0)return;
     scenarioState.key=this.value;
-    document.getElementById('scenarioStatus').textContent='CSV已加载：'+scenarioState.table.first+' 至 '+scenarioState.table.last+' · 当前 '+scenarioState.key+'；原9笔无重定价暴露，新增演示贷款按该情景重算。';
+    document.getElementById('scenarioStatus').textContent='CSV已加载：'+scenarioState.table.first+' 至 '+scenarioState.table.last+' · 当前 '+scenarioLabel(scenarioState.key)+'；原9笔无重定价暴露，新增演示贷款按该情景重算。';
     if(reportTimer){clearInterval(reportTimer);reportTimer=null;document.getElementById('btnReport').textContent='✦ 生成 AI 资金洞察报告';}
     updateReadiness();renderAll();
   });

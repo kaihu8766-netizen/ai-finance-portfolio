@@ -116,11 +116,11 @@ body{background:#0a0d16;color:#e8eaf0;font-family:-apple-system,BlinkMacSystemFo
     <div id="bridgeStatus" class="note" role="status">正在读取本地CSV…</div>
     <div id="bridgeQuantiles" style="font-size:12px;line-height:1.8;margin-top:12px"></div>
     <div style="display:flex;gap:10px;flex-wrap:wrap">
-      <a class="btn" data-loan-scenario="P10" href="ai-treasury-copilot/?scenario=P10" aria-disabled="true">P10 → 贷款测算</a>
-      <a class="btn" data-loan-scenario="P50" href="ai-treasury-copilot/?scenario=P50" aria-disabled="true">P50 → 贷款测算</a>
-      <a class="btn" data-loan-scenario="P90" href="ai-treasury-copilot/?scenario=P90" aria-disabled="true">P90 → 贷款测算</a>
+      <a class="btn" data-loan-scenario="P10" href="ai-treasury-copilot/?scenario=P10" aria-disabled="true">乐观情景（利率偏低）→ 贷款测算</a>
+      <a class="btn" data-loan-scenario="P50" href="ai-treasury-copilot/?scenario=P50" aria-disabled="true">中间情景（默认）→ 贷款测算</a>
+      <a class="btn" data-loan-scenario="P90" href="ai-treasury-copilot/?scenario=P90" aria-disabled="true">悲观情景（利率偏高）→ 贷款测算</a>
     </div>
-    <p class="note">P10/P50/P90是各月利率的条件分位数序列，拼接后作为确定性的利率情景；不是一条随机路径，也不是贷款利息的10%/50%/90%分位数。宏观60%/25%/15%为另行设定的主观情景权重，不用于给本区三档加权。贷款结果仅为该情景下的条件测算。</p>
+    <p class="note">这三档利率情景是各月利率的条件分位数序列，拼接后作为确定性的利率情景；不是一条随机路径，也不是贷款利息的10%/50%/90%分位数。宏观60%/25%/15%为另行设定的主观情景权重，不用于给本区三档加权。贷款结果仅为该情景下的条件测算。</p>
     <label style="display:block;font-size:11px;color:#8fa3c0;margin-top:12px">本地文件方式打开或CSV加载失败时，选择同一份脚本CSV：<input id="bridgeCsvFile" type="file" accept=".csv,text/csv" style="display:block;max-width:100%;margin-top:8px"></label>
   </section>
 </div>
@@ -273,10 +273,10 @@ runSim();
   function ready(table){
     var last=table.rows[table.rows.length-1];
     status.textContent='CSV已加载：'+table.first+' 至 '+table.last+'，60个月；贷款按周年重定价月份取对应1Y分位值。';
-    quotes.textContent=last.month+' 的1Y条件分位数：P10 '+(last.q10*100).toFixed(4)+'% / P50 '+(last.q50*100).toFixed(4)+'% / P90 '+(last.q90*100).toFixed(4)+'%。';
+    quotes.textContent=last.month+' 的1Y条件分位数：乐观情景 '+(last.q10*100).toFixed(4)+'% / 中间情景 '+(last.q50*100).toFixed(4)+'% / 悲观情景 '+(last.q90*100).toFixed(4)+'%。';
     setReady(true);
   }
-  function failed(error){setReady(false);quotes.textContent='';status.textContent='CSV未就绪：'+error.message+'。可用本地HTTP服务，或手动选择同一份CSV。';}
+  function failed(error){setReady(false);quotes.textContent='';status.textContent='CSV未就绪：'+String(error.message).replace(/\bP(?:10|50|90)\b/g,function(key){return {P10:'乐观情景',P50:'中间情景',P90:'悲观情景'}[key];})+'。可用本地HTTP服务，或手动选择同一份CSV。';}
   document.getElementById('bridgeCsvFile').addEventListener('change',function(){
     var file=this.files[0];if(!file)return;
     if(typeof LprScenarios==='undefined'){failed(new Error('共享CSV组件加载失败'));return;}
