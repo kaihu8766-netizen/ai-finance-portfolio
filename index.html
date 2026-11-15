@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="zh-CN" class="dark">
+<html lang="zh-CN" class="letter-root">
 
 <head>
 
@@ -10,7 +10,7 @@
 
     <meta name="description" content="胡凯 · 能力作品集：把业务问题拆成数据与流程问题并用工具落地——资金与财务实务、数据建模与治理、自动化与 AI 提效。2027 届 · 金融与投资学（专业会计）硕士 · 精算本科。">
 
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%236d7cff'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3E%E8%83%A1%3C/text%3E%3C/svg%3E">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23a33b32'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3E%E8%83%A1%3C/text%3E%3C/svg%3E">
 
     <title>胡凯 · AI × 财务 作品集</title>
 
@@ -25,6 +25,7 @@
     
 
     <link rel="stylesheet" href="assets/app.css">
+    <link rel="stylesheet" href="assets/home-letter.css">
 
 
 
@@ -33,279 +34,169 @@
 
 </head>
 
-<body>
-
-<div class="bg-grid"></div>
-
-<div class="wrap">
-
-
-
-<div class="scroll-progress" id="scrollProgress"></div>
-
-<div class="topbar">
-
-  <div class="logo"><span class="dot"></span>胡凯 <b>KAI HU</b></div>
-
-  <button class="menu-btn" id="menuBtn" aria-label="菜单"><span></span></button>
-
-  <div class="nav" id="nav">
-        <a href="#works">作品</a>
-        <a href="#about">关于我</a>
-      </div>
-
-</div>
-
-
-
-<div class="sec hero" style="text-align:left;padding:34px 36px;margin:24px 0 44px">
-    <div class="hero-id">
-      <img class="hero-avatar" src="assets/avatar.jpg" alt="胡凯本人照片">
-      <div class="hero-id-text">
-        <div class="hero-name">胡凯 <span>KAI HU</span></div>
-        <div class="hero-role">2027 届 · 金融与投资（专业会计）硕士 ｜ 精算学本科（辅修金融）</div>
-        <div class="hero-dir">求职方向：资金管理 · 财务管培 · 金融管培 · AI 财务</div>
-      </div>
+<body class="letter-home">
+<a class="letter-skip" href="#letter">跳到正文</a>
+<header class="letter-nav-shell">
+  <a class="letter-nav-name" href="#letter">一封求职信</a>
+  <nav class="letter-nav" id="nav" aria-label="信件导航">
+    <a href="#works">作品</a><a href="#about">履历</a><a href="#contact">联系</a>
+  </nav>
+</header>
+<main class="letter" id="letter">
+  <header class="letter-heading">
+    <div class="letter-heading-copy">
+      <p class="letter-eyebrow">致招聘团队</p>
+      <h1>胡凯 <span>· AI × 财务作品集</span></h1>
+      <p class="letter-education">2027 届 · 金融与投资（专业会计）硕士 ｜ 精算学本科（辅修金融）</p>
+      <p class="letter-direction">求职方向：资金管理 · 财务管培 · 金融管培 · AI 财务</p>
     </div>
-    
-    <h1 style="text-align:left;letter-spacing:0">企业资金与财务分析<br>从融资、现金流到风险量化与 AI 应用</h1>
-    <p class="sub" style="text-align:left;max-width:760px;margin-left:0">
-      smart 汽车（奔驰 × 吉利）集团资金部实习｜中审众环（Mazars）审计实习
-    </p>
+    <img class="letter-photo" src="assets/avatar.jpg" alt="胡凯本人照片" width="76" height="92" decoding="async" fetchpriority="high">
+  </header>
 
-    <ul class="sub-bullets hero-bullets" style="text-align:left;margin:26px 0 0;padding:0;list-style:none">
-      <li style="display:grid;grid-template-columns:132px 1fr;gap:14px;padding:12px 0;border-top:1px solid rgba(148,163,184,0.14)">
-        <span style="color:#38bdf8;font-weight:600;font-size:13.5px">资金与精算建模</span>
-        <span style="font-size:14px;color:#cbd5e1;line-height:1.75">研究基准日：2026-08 · 用公开数据与均值回归假设下的示意分布，练习融资成本情景分析（脚本10,000条；浏览器默认3,000条）</span>
-      </li>
-      <li style="display:grid;grid-template-columns:132px 1fr;gap:14px;padding:12px 0;border-top:1px solid rgba(148,163,184,0.14)">
-        <span style="color:#34d399;font-weight:600;font-size:13.5px">工具落地能力</span>
-        <span style="font-size:14px;color:#cbd5e1;line-height:1.75">把贷款结息、重定价和偿付规则做成可交互的排程原型，支持复算和 Excel 导出</span>
-      </li>
-      <li style="display:grid;grid-template-columns:132px 1fr;gap:14px;padding:12px 0;border-top:1px solid rgba(148,163,184,0.14);border-bottom:1px solid rgba(148,163,184,0.14)">
-        <span style="color:#a78bfa;font-weight:600;font-size:13.5px">质量控制方式</span>
-        <span style="font-size:14px;color:#cbd5e1;line-height:1.75">梳理业务规则和指标口径，用 AI 辅助实现，再通过样例复算与边界测试核验结果</span>
-      </li>
-    </ul>
+  <section class="letter-opening" aria-label="信的开头">
+    <p class="letter-salutation">招聘团队，您好：</p>
+    <p>我是胡凯，2027 届金融与投资（专业会计）硕士在读，拥有精算学（辅修金融）本科背景。我关注企业资金与财务分析，希望从融资、现金流到风险量化与 AI 应用，把业务规则落到可交互、可复核的工具中。</p>
+    <p>在 smart 汽车（奔驰 × 吉利）集团资金部，我参与贷款授信、提款与贷后流程，以及现金头寸核对与跨境结算。</p>
+    <p>在中审众环（Mazars），我编制审计底稿、执行函证与凭证测试，并用 Python / SQL 做多科目交叉核验。</p>
+  </section>
 
-    <div class="hero-cta" style="margin-top:22px;justify-content:flex-start">
-      <a class="cta-primary" href="#works">查看旗舰作品</a>
-      <a class="cta-secondary" href="demo/ai-treasury-copilot/index.html" target="_blank" rel="noopener noreferrer">司库在线 Demo ↗</a>
-      <a class="cta-secondary" href="demo/LPR蒙特卡洛预测模拟器.html" target="_blank" rel="noopener noreferrer">LPR 在线 Demo ↗</a>
-    </div>
-  </div>
-
-
-
-
-
-  <!-- 关于我 -->
-
-<div class="sec reveal" id="works">
-
-  <div class="sec-head"><span class="idx">01</span><h2>旗舰作品</h2><span class="en">ACTUARIAL RISK → AI SYSTEM → DECISION</span></div>
-
-  <p class="work-lead">两件旗舰作品都源自实习中的业务观察。业务规则与数据口径由我梳理，原型借助 AI 工具实现，计算过程可复核。</p>
-  <div class="works">
-    <article class="work wide portfolio-case" id="treasury-case">
-      <div>
-        <h3 class="title">集团贷款还本付息与利息计提</h3>
-        <p class="portfolio-case-lead">未来 12 个月，哪些月份的还本付息压力最大？</p>
-        <dl class="portfolio-case-facts">
-          <div><dt>可以体验</dt><dd>查看贷款台账、月度偿付排程和流动性预警，并导出可复算的 Excel 台账。</dd></div>
-          <div><dt>我的工作</dt><dd>梳理 Actual/360 计息、按季结息和重定价规则，定义台账参数和核验口径。</dd></div>
-          <div><dt>结果与边界</dt><dd>用模拟贷款组合演示。合同解析使用规则引擎，洞察使用模板，应用未在公司业务中投入使用。</dd></div>
-        </dl>
-        <div class="portfolio-case-actions">
-          <button type="button" class="demo-entry case-detail" data-work="04">看司库案例</button>
-          <a class="demo-entry" href="demo/ai-treasury-copilot/index.html" target="_blank" rel="noopener noreferrer">打开 Demo ↗</a>
-        </div>
-      </div>
-    </article>
-    <article class="work wide actuarial-core portfolio-case" id="lpr-case">
-      <div>
-        <h3 class="title">LPR 情景分析与融资成本压力测试</h3>
-        <p class="portfolio-case-lead">利率变动会怎样影响新增借款与存量债务的融资成本？</p>
-        <dl class="portfolio-case-facts">
-          <div><dt>可以体验</dt><dd>调整参数查看示意分布；将固定脚本CSV的三档利率情景接到贷款周年重定价，查看条件利息成本。</dd></div>
-          <div><dt>我的工作</dt><dd>梳理利率分析框架与模型假设，用 10,000 条蒙特卡洛路径展示不确定性。</dd></div>
-          <div><dt>结果与边界</dt><dd>宏观指标来自公开数据，模型参数用于演示，实务使用前需重新校准。</dd></div>
-        </dl>
-        <div class="portfolio-case-actions">
-          <button type="button" class="demo-entry case-detail" data-work="03">看利率案例</button>
-          <a class="demo-entry" href="demo/LPR蒙特卡洛预测模拟器.html" target="_blank" rel="noopener noreferrer">打开 Demo ↗</a>
-        </div>
-      </div>
-    </article>
-  </div>
-
-  <div class="portfolio-related">
-    <h3>相关项目</h3>
-    <div class="works">
-      <article class="work portfolio-case" id="valuation-project">
-        <h4 class="title">公司金融与估值课程项目</h4>
-        <p>从上市公司财务分析延伸到资本成本、现金流折现与估值敏感性。</p>
-        <a class="demo-entry" href="https://kaihu8766-netizen.github.io/busi4543-tsla-team/" target="_blank" rel="noopener noreferrer">查看课程项目 ↗</a>
+  <section class="letter-section letter-reveal" id="works" aria-labelledby="works-title">
+    <h2 id="works-title">随信附上两件作品</h2>
+    <p class="letter-section-intro">两件旗舰作品都源自实习中的业务观察。业务规则与数据口径由我梳理，原型借助 AI 工具实现，计算过程可复核。</p>
+    <div class="letter-attachments">
+      <article class="letter-work" id="treasury-case">
+        <span class="letter-work-number" aria-hidden="true">01</span>
+        <h3>集团贷款还本付息与利息计提</h3>
+        <p class="letter-question">未来 12 个月，哪些月份的还本付息压力最大？</p>
+        <p class="letter-result">查看贷款台账、月度偿付排程和流动性预警，并导出可复算的 Excel 台账。</p>
+        <p class="letter-boundary">用模拟贷款组合演示。合同解析使用规则引擎，洞察使用模板，应用未在公司业务中投入使用。</p>
+        <a class="letter-link letter-experience" href="demo/ai-treasury-copilot/index.html" target="_blank" rel="noopener noreferrer">进去体验 <span aria-hidden="true">↗</span><span class="letter-sr-only">集团贷款还本付息与利息计提（新窗口）</span></a>
       </article>
-      <article class="work portfolio-case" id="agent-project">
-        <h4 class="title">cc-Harness · 开源 AI Agent 工具</h4>
-        <p>为 DeepSeek Harness 扩展工具网关、任务断点和安装自检。回归测试验证自检成功或失败时，用户原有断点均保持不变。</p>
-        <a class="demo-entry" href="https://github.com/kaihu8766-netizen/cc-Harness/releases/tag/v0.1.0-preview.1" target="_blank" rel="noopener noreferrer">查看开发者预览版 ↗</a>
-        <a class="demo-entry case-detail" href="https://github.com/kaihu8766-netizen/cc-Harness" target="_blank" rel="noopener noreferrer">查看源码 ↗</a>
-        <a class="demo-entry case-detail" href="https://github.com/kaihu8766-netizen/cc-Harness/actions/runs/42660699630" target="_blank" rel="noopener noreferrer">查看回归记录 ↗</a>
+      <article class="letter-work" id="lpr-case">
+        <span class="letter-work-number" aria-hidden="true">02</span>
+        <h3>LPR 情景分析与融资成本压力测试</h3>
+        <p class="letter-question">利率变动会怎样影响新增借款与存量债务的融资成本？</p>
+        <p class="letter-result">调整参数查看示意分布；将固定脚本CSV的三档利率情景接到贷款周年重定价，查看条件利息成本。</p>
+        <p class="letter-boundary">宏观指标来自公开数据，模型参数用于演示，实务使用前需重新校准。</p>
+        <a class="letter-link letter-experience" href="demo/LPR蒙特卡洛预测模拟器.html" target="_blank" rel="noopener noreferrer">进去体验 <span aria-hidden="true">↗</span><span class="letter-sr-only">LPR 情景分析与融资成本压力测试（新窗口）</span></a>
       </article>
     </div>
-  </div>
+  </section>
 
-  <div class="sec reveal" style="margin-top:26px">
-    <div class="sec-title">数据与局限说明</div>
-    <div style="overflow-x:auto">
-      <table style="width:100%;border-collapse:collapse;font-size:13px;color:#cbd5e1">
+  <aside class="letter-method letter-reveal" aria-label="方法与可信度">
+    <p>公开数据与构造的演示数据，口径可复核；AI 辅助实现，结论由我负责。</p>
+    <details class="letter-notes">
+      <summary>随信附注：数据来源、局限与相关项目</summary>
+      <div class="letter-notes-body">
+        <h3>数据与局限说明</h3>
+        <div class="letter-source-scroll" tabindex="0" role="region" aria-label="数据来源表，可横向滚动"><table>
         <thead>
-          <tr style="color:#94a3b8;font-size:12px;text-align:left">
-            <th style="padding:8px 10px;border-bottom:1px solid rgba(148,163,184,0.2)">作品</th>
-            <th style="padding:8px 10px;border-bottom:1px solid rgba(148,163,184,0.2)">数据来源</th>
-            <th style="padding:8px 10px;border-bottom:1px solid rgba(148,163,184,0.2)">是否公司项目</th>
-            <th style="padding:8px 10px;border-bottom:1px solid rgba(148,163,184,0.2)">已知局限</th>
+          <tr>
+            <th>作品</th>
+            <th>数据来源</th>
+            <th>是否公司项目</th>
+            <th>已知局限</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td style="padding:9px 10px;border-bottom:1px solid rgba(148,163,184,0.12)">AI 司库还本付息系统</td>
-            <td style="padding:9px 10px;border-bottom:1px solid rgba(148,163,184,0.12)">构造演示数据 + 公开计息规则</td>
-            <td style="padding:9px 10px;border-bottom:1px solid rgba(148,163,184,0.12)">否，实习观察后的个人尝试</td>
-            <td style="padding:9px 10px;border-bottom:1px solid rgba(148,163,184,0.12)">非企业生产系统，仅作为业务逻辑验证与排程推演原型</td>
+            <td>AI 司库还本付息系统</td>
+            <td>构造演示数据 + 公开计息规则</td>
+            <td>否，实习观察后的个人尝试</td>
+            <td>非企业生产系统，仅作为业务逻辑验证与排程推演原型</td>
           </tr>
           <tr>
-            <td style="padding:9px 10px;border-bottom:1px solid rgba(148,163,184,0.12)">LPR 示意分布与压力测试</td>
-            <td style="padding:9px 10px;border-bottom:1px solid rgba(148,163,184,0.12)">公开数据（LPR、7天逆回购、净息差、社融、CPI）</td>
-            <td style="padding:9px 10px;border-bottom:1px solid rgba(148,163,184,0.12)">否，研究型个人项目</td>
-            <td style="padding:9px 10px;border-bottom:1px solid rgba(148,163,184,0.12)">参数需按真实业务校准，不构成投资或融资建议</td>
+            <td>LPR 示意分布与压力测试</td>
+            <td>公开数据（LPR、7天逆回购、净息差、社融、CPI）</td>
+            <td>否，研究型个人项目</td>
+            <td>参数需按真实业务校准，不构成投资或融资建议</td>
           </tr>
         </tbody>
-      </table>
-    </div>
-    <p style="margin:12px 0 0;font-size:12px;color:#64748b;line-height:1.8">
-      两件旗舰作品均使用公开数据或构造的演示数据。
-    
-      
-    </p>
-  </div>
-
-</div>
-
-  <div class="sec reveal" id="about">
-    <div class="sec-head"><span class="idx">00</span><h2>关于我</h2><span class="en">ABOUT</span></div>
-    
-
-    <div class="about-hero">
-      
-      <details class="about-fold"><summary>核心技能：Python/SQL 财务建模 · Actual/360 计息规则 · 账表勾稽校验（点击展开完整工具链）</summary><div class="about-grid">
-        <div class="about-card">
+      </table></div>
+        <p>两件旗舰作品均使用公开数据或构造的演示数据。</p>
+        <p class="letter-case-links">案例与复算口径：<button type="button" class="letter-text-button" data-work="04">看司库案例</button><button type="button" class="letter-text-button" data-work="03">看利率案例</button></p>
+        <p>梳理 Actual/360 计息、按季结息和重定价规则，定义台账参数和核验口径。</p>
+        <p>梳理利率分析框架与模型假设，用 10,000 条蒙特卡洛路径展示不确定性。</p>
+        <h3>研究与核验口径</h3><ul class="letter-rules">
+      <li>
+        <span>资金与精算建模</span>
+        <span>研究基准日：2026-08 · 用公开数据与均值回归假设下的示意分布，练习融资成本情景分析（脚本10,000条；浏览器默认3,000条）</span>
+      </li>
+      <li>
+        <span>工具落地能力</span>
+        <span>把贷款结息、重定价和偿付规则做成可交互的排程原型，支持复算和 Excel 导出</span>
+      </li>
+      <li>
+        <span>质量控制方式</span>
+        <span>梳理业务规则和指标口径，用 AI 辅助实现，再通过样例复算与边界测试核验结果</span>
+      </li>
+    </ul>
+        <h3>核心技能：Python/SQL 财务建模 · Actual/360 计息规则 · 账表勾稽校验</h3><div class="letter-notes-grid">
+        <div class="letter-note-block">
           <h4>系统架构与数据建模</h4>
-          <p class="list">
+          <p class="letter-note-list">
             <span><b>产品设计</b>：① LPR 均值回归示意分布与情景分析（研究）② AI 司库还本付息系统</span>
             <span><b>数据分析</b>：Python / SQL / Power BI 做财务数据建模与蒙特卡洛模拟（AI 辅助实现，口径与结论由我负责）</span>
             <span><b>技术实现</b>：抽象业务规则与数据流向 → 拆解功能模块并驱动 AI 生成代码 → 设定边界测试用例，逐项核验计算口径与勾稽结果</span>
           </p>
         </div>
-        <div class="about-card">
+        <div class="letter-note-block">
           <h4>AI 工具链</h4>
-          <p class="list">
+          <p class="letter-note-list">
             <span><b>LLM 应用与提示工程</b>：指标清洗、报告初稿、方案评审与文档校对；合同要素解析采用前端规则引擎实现（未调用外部 API）</span>
             <span><b>Agent 系统设计</b>：多 Agent 协作方法 · 任务拆解与验收机制 · 自动化质检流程</span>
             <span><b>AI 开发能力</b>：需求拆解与规格编写 · 提示词工程 · AI 生成代码与调试 · 输出验收与返工 · DeepSeek API 接入</span>
             <span><b>数据与原型</b>：Python（pandas / numpy / 蒙特卡洛）· SQL · Power BI · AI 生成的可交互前端原型</span>
           </p>
         </div>
-      </div></details>
-    </div>
-
-    <div class="about-grid" style="margin-top:26px;grid-template-columns:1fr">
-      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(130,150,255,0.12);border-radius:14px;padding:22px 24px">
-        <div style="font-size:12px;color:#94a3b8;letter-spacing:.6px;margin-bottom:6px">经历时间轴（最近在前）</div>
-      <div style="display:grid;grid-template-columns:118px 1fr;gap:14px;padding:14px 0;border-top:1px solid rgba(148,163,184,0.14)">
-        <div style="font-size:12.5px;color:#94a3b8;font-variant-numeric:tabular-nums;padding-top:2px">2026.05 – 2026.10</div>
-        <div>
-          <div style="font-size:14px;font-weight:600;color:var(--text);line-height:1.6">智马达 smart 汽车（奔驰 × 吉利合资）· 资金部</div>
-          <div style="font-size:12.5px;color:#7dd3fc;margin:2px 0 6px">财务实习生（资金管理方向）</div>
-          <div style="font-size:13px;color:#cbd5e1;line-height:1.8">参与流动资金贷款授信材料准备、提款与贷后流程；使用 SAP 核对银行账户现金头寸，处理多币种跨境结算与外汇申报。</div>
-        </div>
-      </div>
-      <div style="display:grid;grid-template-columns:118px 1fr;gap:14px;padding:14px 0;border-top:1px solid rgba(148,163,184,0.14)">
-        <div style="font-size:12.5px;color:#94a3b8;font-variant-numeric:tabular-nums;padding-top:2px">2025.12 – 2026.03</div>
-        <div>
-          <div style="font-size:14px;font-weight:600;color:var(--text);line-height:1.6">中审众环会计师事务所（Mazars 中国成员所）· 业务部</div>
-          <div style="font-size:12.5px;color:#7dd3fc;margin:2px 0 6px">审计实习生</div>
-          <div style="font-size:13px;color:#cbd5e1;line-height:1.8">独立编制货币资金、往来款、固定资产等核心科目底稿；完成银行及往来函证、凭证抽检与收入截止测试；用 Python / SQL 做多科目交叉核验。</div>
-        </div>
-      </div>
-      <div style="display:grid;grid-template-columns:118px 1fr;gap:14px;padding:14px 0;border-top:1px solid rgba(148,163,184,0.14)">
-        <div style="font-size:12.5px;color:#94a3b8;font-variant-numeric:tabular-nums;padding-top:2px">2025.09 – 2027.07</div>
-        <div>
-          <div style="font-size:14px;font-weight:600;color:var(--text);line-height:1.6">宁波诺丁汉大学 · 金融与投资（专业会计）硕士</div>
-          <div style="font-size:12.5px;color:#7dd3fc;margin:2px 0 6px">2027 届 · 在读</div>
-          <div style="font-size:13px;color:#cbd5e1;line-height:1.8">研究方向：公司金融与估值分析（资本结构、WACC、DCF 与并购估值）。</div>
-        </div>
-      </div>
-      <div style="display:grid;grid-template-columns:118px 1fr;gap:14px;padding:14px 0;border-top:1px solid rgba(148,163,184,0.14)">
-        <div style="font-size:12.5px;color:#94a3b8;font-variant-numeric:tabular-nums;padding-top:2px">2021.02 – 2025.02</div>
-        <div>
-          <div style="font-size:14px;font-weight:600;color:var(--text);line-height:1.6">惠灵顿维多利亚大学 · 精算学（辅修金融）学士</div>
-          <div style="font-size:12.5px;color:#7dd3fc;margin:2px 0 6px">GPA 专业前 10% · 澳新精算师协会认证专业</div>
-          <div style="font-size:13px;color:#cbd5e1;line-height:1.8">数理统计、精算风险建模、金融数学与企业融资；辅修金融。</div>
-        </div>
-      </div>
-      </div>
+      </div>  <div>
+    <h3>相关项目</h3>
+    <div>
+      <article id="valuation-project">
+        <h4>公司金融与估值课程项目</h4>
+        <p>从上市公司财务分析延伸到资本成本、现金流折现与估值敏感性。</p>
+        <a href="https://kaihu8766-netizen.github.io/busi4543-tsla-team/" target="_blank" rel="noopener noreferrer">查看课程项目 ↗</a>
+      </article>
+      <article id="agent-project">
+        <h4>cc-Harness · 开源 AI Agent 工具</h4>
+        <p>为 DeepSeek Harness 扩展工具网关、任务断点和安装自检。回归测试验证自检成功或失败时，用户原有断点均保持不变。</p>
+        <a href="https://github.com/kaihu8766-netizen/cc-Harness/releases/tag/v0.1.0-preview.1" target="_blank" rel="noopener noreferrer">查看开发者预览版 ↗</a>
+        <a href="https://github.com/kaihu8766-netizen/cc-Harness" target="_blank" rel="noopener noreferrer">查看源码 ↗</a>
+        <a href="https://github.com/kaihu8766-netizen/cc-Harness/actions/runs/42660699630" target="_blank" rel="noopener noreferrer">查看回归记录 ↗</a>
+      </article>
     </div>
   </div>
 
-  
 
+      </div>
+    </details>
+  </aside>
 
+  <section class="letter-section letter-history letter-reveal" id="about" aria-labelledby="history-title">
+    <h2 id="history-title">我的履历</h2>
+    <p class="letter-history-caption">经历时间轴（最近在前）</p>
+    <ol class="letter-history-list"><li><div class="letter-period">2026.05 – 2026.10</div><div><h3>智马达 smart 汽车（奔驰 × 吉利合资）· 资金部</h3><p class="letter-position">财务实习生（资金管理方向）</p><p>参与流动资金贷款授信材料准备、提款与贷后流程；使用 SAP 核对银行账户现金头寸，处理多币种跨境结算与外汇申报。</p></div></li>
+<li><div class="letter-period">2025.12 – 2026.03</div><div><h3>中审众环会计师事务所（Mazars 中国成员所）· 业务部</h3><p class="letter-position">审计实习生</p><p>独立编制货币资金、往来款、固定资产等核心科目底稿；完成银行及往来函证、凭证抽检与收入截止测试；用 Python / SQL 做多科目交叉核验。</p></div></li>
+<li><div class="letter-period">2025.09 – 2027.07</div><div><h3>宁波诺丁汉大学 · 金融与投资（专业会计）硕士</h3><p class="letter-position">2027 届 · 在读</p><p>研究方向：公司金融与估值分析（资本结构、WACC、DCF 与并购估值）。</p></div></li>
+<li><div class="letter-period">2021.02 – 2025.02</div><div><h3>惠灵顿维多利亚大学 · 精算学（辅修金融）学士</h3><p class="letter-position">GPA 专业前 10% · 澳新精算师协会认证专业</p><p>数理统计、精算风险建模、金融数学与企业融资；辅修金融。</p></div></li></ol>
+  </section>
 
+  <section class="letter-closing letter-reveal" id="contact" aria-label="结尾与联系方式">
+    <p>感谢您阅读这封信。如果这些作品与岗位需要相契合，期待有机会进一步交流。</p>
+    <p class="letter-signature">胡凯</p>
+    <address class="letter-contact">
+      <span><b>邮箱</b> <a class="letter-link" href="mailto:bixkh3@nottingham.edu.cn">bixkh3@nottingham.edu.cn</a></span>
+      <span><b>微信</b> HH_KK09141820</span>
+      <span><b>方向</b> 财务 × AI</span>
+    </address>
+  </section>
 
-
-
-
-
-
-<!-- 作品 -->
-
-
-
-
-
-<!-- 协作技术栈 -->
-
-
-
-
-
-<!-- 方法论 -->
-
-<!-- 方法论 -->
-
-<div class="contact">
-
-  <span><b>微信</b> HH_KK09141820</span>
-
-  <span><b>邮箱</b> bixkh3@nottingham.edu.cn</span>
-
-  <span><b>方向</b> 财务 × AI</span>
-
-</div>
-
-<button class="back-to-top" id="backToTop" aria-label="回到顶部">↑</button>
-
-<p style="max-width:1100px;margin:20px auto;padding:0 24px;color:#94a3b8;font-size:12px">借鉴职责分离与独立复核原则，不等同于银行模型风险管理中的独立模型验证，也不代表监管意义上的审批。</p>
-<div class="footer">胡凯 · AI × Finance Portfolio · v7.14 · 全部数据经人工核验 · 2026.10 · AI 协作方法探索</div>
-
-
-
-</div>
-
-
+  <footer class="letter-footer">
+    <p class="letter-disclosure">说明：本页作品均来自实习中的观察与个人尝试，<b>未在公司业务中投入使用</b>；数据为公开数据与构造的演示数据，不含真实客户信息。</p>
+    <p class="letter-disclosure">借鉴职责分离与独立复核原则，不等同于银行模型风险管理中的独立模型验证，也不代表监管意义上的审批。</p>
+    <p class="letter-version">胡凯 · AI × Finance Portfolio · v7.15 · 全部数据经人工核验 · 2026.10 · AI 协作方法探索</p>
+  </footer>
+</main>
 
 <!-- ===== 作品集助手（悬浮 AI 助手 · v3.11 界面重设计）===== -->
 
@@ -1702,9 +1593,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 
 
-<footer style="margin:48px 0 16px;padding-top:18px;border-top:1px solid rgba(148,163,184,0.14);font-size:12px;color:#94a3b8;line-height:1.9;text-align:center">
-      说明：本页作品均来自实习中的观察与个人尝试，<b style="color:#cbd5e1">未在公司业务中投入使用</b>；数据为公开数据与构造的演示数据，不含真实客户信息。
-    </footer>
+
     </body>
 
 </html>

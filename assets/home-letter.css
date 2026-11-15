@@ -1,0 +1,244 @@
+/* Homepage only. Embedded case studies keep assets/app.css and their original theme. */
+html.letter-root { color-scheme: light; background: #f1eee8; scroll-padding-top: 24px; }
+.letter-home {
+  --paper: #fffdf8;
+  --ink: #292723;
+  --quiet: #6c675f;
+  --rule: #ded8ce;
+  --seal: #a33b32;
+  --bg: var(--paper);
+  --bg2: #f4f0e9;
+  --text: var(--ink);
+  --muted: var(--quiet);
+  --dim: var(--quiet);
+  --hk-primary: var(--seal);
+  --hk-primary-300: var(--seal);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.9;
+  color: var(--ink);
+  background: #f1eee8;
+  overflow-x: visible;
+}
+.letter-home::before, .letter-home::after { content: none; }
+.letter-home ::selection { color: var(--ink); background: #e7e1d8; }
+.letter-home a { color: inherit; }
+.letter-home a:focus-visible, .letter-home button:focus-visible,
+.letter-home summary:focus-visible, .letter-source-scroll:focus-visible {
+  outline: 2px solid var(--seal); outline-offset: 5px;
+}
+.letter-home h1, .letter-home h2, .letter-work h3, .letter-signature {
+  font-family: "Songti SC", "STSong", "SimSun", "Noto Serif CJK SC", serif;
+  font-weight: 600;
+}
+.letter-skip { position: absolute; top: -100px; left: 20px; z-index: 10000; padding: 8px 16px; background: var(--paper); }
+.letter-skip:focus { top: 12px; }
+.letter-nav-shell {
+  max-width: 924px; margin: 0 auto; padding: 24px 12px 18px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  font-size: 12px; color: var(--quiet);
+}
+.letter-nav-name { letter-spacing: .12em; text-decoration: none; }
+.letter-nav { display: flex; align-items: center; gap: 28px; }
+.letter-nav a { display: inline-flex; align-items: center; min-height: 36px; }
+.letter-nav a, .letter-link, .letter-notes a, .letter-text-button {
+  position: relative; text-decoration: none; text-underline-offset: 5px;
+  background-image: linear-gradient(var(--seal), var(--seal));
+  background-size: 0 1px; background-repeat: no-repeat; background-position: left bottom;
+  transition: color .18s ease, background-size .22s ease;
+}
+.letter-nav a:hover, .letter-link:hover, .letter-notes a:hover, .letter-text-button:hover {
+  color: var(--seal); background-size: 100% 1px;
+}
+.letter-nav a[aria-current] { color: var(--seal); }
+.letter {
+  width: min(900px, calc(100% - 48px)); margin: 0 auto 56px;
+  padding: 52px 66px 32px; background: var(--paper); border: 1px solid var(--rule);
+}
+.letter > *, .letter-heading-copy, .letter-work, .letter-history-list li > div { min-width: 0; }
+.letter-heading {
+  display: grid; grid-template-columns: minmax(0, 1fr) 76px; gap: 28px;
+  align-items: center; padding-bottom: 28px; border-bottom: 1px solid var(--seal);
+}
+.letter-eyebrow { margin-bottom: 14px; color: var(--quiet); font-size: 12px; letter-spacing: .16em; }
+.letter-heading h1 { font-size: clamp(26px, 3.5vw, 34px); line-height: 1.45; letter-spacing: .025em; }
+.letter-heading h1 span { white-space: nowrap; }
+.letter-education { margin-top: 14px; font-size: 12px; line-height: 1.85; color: var(--quiet); }
+.letter-direction { margin-top: 5px; font-size: 12px; color: var(--quiet); }
+.letter-photo { display: block; width: 76px; height: 92px; object-fit: cover; object-position: center 25%; border: 1px solid var(--rule); }
+.letter-opening { padding-top: 32px; }
+.letter-opening p + p { margin-top: 14px; }
+.letter-salutation { margin-bottom: 20px; font-weight: 500; }
+.letter-section { margin-top: 40px; scroll-margin-top: 24px; }
+.letter-section h2 { font-size: 23px; line-height: 1.55; letter-spacing: .04em; }
+.letter-section-intro { margin-top: 12px; color: var(--quiet); font-size: 13px; }
+.letter-attachments { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 24px; }
+.letter-work {
+  display: flex; flex-direction: column; align-items: flex-start;
+  border: 1px solid var(--rule); padding: 22px 24px 20px;
+  transition: transform .2s ease, border-color .2s ease;
+}
+.letter-work-number { color: var(--seal); font-family: Georgia, "Times New Roman", serif; font-size: 17px; line-height: 1; margin-bottom: 16px; }
+.letter-work h3 { font-size: 21px; line-height: 1.6; margin-bottom: 12px; }
+.letter-question { line-height: 1.85; font-size: 14px; }
+.letter-result { margin-top: 12px; color: var(--quiet); font-size: 13px; line-height: 1.85; }
+.letter-boundary { margin: 14px 0 20px; color: var(--quiet); font-size: 11.5px; line-height: 1.85; }
+.letter-experience { display: inline-block; margin-top: auto; padding: 3px 0; font-size: 13px; font-weight: 600; }
+.letter-experience > span[aria-hidden] { margin-left: 8px; }
+.letter-method { margin-top: 26px; font-size: 12px; color: var(--quiet); }
+.letter-notes { margin-top: 10px; }
+.letter-notes > summary { width: fit-content; max-width: 100%; cursor: pointer; font-size: 12px; padding: 3px 0; }
+.letter-notes > summary:hover { color: var(--seal); }
+.letter-notes-body { padding: 18px 0 10px; font-size: 12px; line-height: 1.9; }
+.letter-notes-body h3 { margin: 22px 0 10px; font-weight: 600; font-size: 14px; color: var(--ink); }
+.letter-notes-body h3:first-child { margin-top: 0; }
+.letter-notes-body h4 { margin: 14px 0 5px; font-size: 13px; font-weight: 600; color: var(--ink); }
+.letter-notes-body p { margin-top: 9px; }
+.letter-notes-body article { border-top: 1px solid var(--rule); margin-top: 14px; padding-top: 4px; }
+.letter-notes-body article a { display: inline-block; margin: 10px 14px 0 0; }
+.letter-source-scroll { width: 100%; max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+.letter-source-scroll table { width: 100%; min-width: 600px; border-collapse: collapse; font-size: 11.5px; text-align: left; }
+.letter-source-scroll th, .letter-source-scroll td { padding: 9px 12px 9px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.letter-source-scroll th { color: var(--ink); font-weight: 500; }
+.letter-case-links { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px; }
+.letter-text-button { font: inherit; color: var(--ink); border: 0; padding: 0; cursor: pointer; }
+.letter-rules { list-style: none; }
+.letter-rules li { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--rule); }
+.letter-rules li > span:first-child { color: var(--ink); font-weight: 500; }
+.letter-notes-grid { display: grid; gap: 12px; }
+.letter-note-list > span { display: block; margin-bottom: 8px; }
+.letter-history-caption { margin-top: 8px; font-size: 12px; color: var(--quiet); }
+.letter-history-list { list-style: none; margin-top: 18px; }
+.letter-history-list li { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 16px; padding: 17px 0; border-top: 1px solid var(--rule); }
+.letter-period { padding-top: 3px; color: var(--quiet); font-size: 11.5px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.letter-history-list h3 { font-family: inherit; font-weight: 600; font-size: 13px; line-height: 1.8; }
+.letter-history-list p { font-size: 12px; line-height: 1.85; color: var(--quiet); }
+.letter-history-list .letter-position { margin: 2px 0 5px; color: var(--ink); }
+.letter-closing { margin-top: 30px; padding-top: 24px; border-top: 1px solid var(--rule); scroll-margin-top: 24px; }
+.letter-signature { font-size: 25px; margin: 14px 0 18px; }
+.letter-contact { display: flex; flex-wrap: wrap; column-gap: 24px; row-gap: 6px; font-style: normal; font-size: 12px; overflow-wrap: anywhere; }
+.letter-contact b { font-weight: 400; color: var(--quiet); margin-right: 6px; }
+.letter-footer { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--rule); color: var(--quiet); font-size: 10.5px; line-height: 1.9; }
+.letter-disclosure + .letter-disclosure { margin-top: 8px; }
+.letter-disclosure b { font-weight: 500; color: var(--ink); }
+.letter-version { margin-top: 16px; font-size: 10px; }
+.letter-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+/* Keep the existing assistant available, with a quiet paper/ink presentation. */
+.letter-home .ai-fab { background: var(--paper); border: 1px solid var(--rule); border-radius: 50%; box-shadow: none; width: 44px; height: 44px; right: 20px; bottom: 20px; }
+.letter-home .ai-fab::before, .letter-home .ai-fab::after { content: none; }
+.letter-home .ai-fab:hover { border-color: var(--seal); box-shadow: none; }
+.letter-home .ai-fab svg { stroke: var(--quiet); width: 18px; height: 18px; }
+.letter-home .fab-badge { color: var(--paper); background: var(--quiet); border-color: var(--paper); box-shadow: none; }
+.letter-home .ai-panel { background: var(--paper); color: var(--ink); border-color: var(--rule); box-shadow: 0 10px 40px #2927231a; }
+.letter-home .ai-head, .letter-home .ai-input-area, .letter-home .ai-settings { background: #f4f0e9; border-color: var(--rule); }
+.letter-home .ai-head-icon, .letter-home .qi-icon, .letter-home .nv-tag { background: #eae4da; color: var(--ink); }
+.letter-home .ai-head-icon svg { stroke: var(--ink); }
+.letter-home .ai-head-title, .letter-home .aw-greeting, .letter-home .ai-settings-title { color: var(--ink); }
+.letter-home .aw-greeting .accent { background: none; -webkit-text-fill-color: currentColor; color: var(--ink); }
+.letter-home .aw-desc, .letter-home .aw-section-title, .letter-home .ai-head-sub, .letter-home .ai-footer-hint,
+.letter-home .ai-settings-desc, .letter-home .ai-settings-tip { color: var(--quiet); }
+.letter-home .aw-section-title::after { background: var(--rule); }
+.letter-home .quick-item, .letter-home .nav-card, .letter-home .msg-bubble, .letter-home .ai-input, .letter-home .ai-key-input {
+  background: var(--paper); color: var(--ink); border-color: var(--rule);
+}
+.letter-home .msg-row.user .msg-bubble, .letter-home .quick-item:hover, .letter-home .nav-card:hover { background: #f4f0e9; border-color: var(--rule); }
+.letter-home .msg-bubble .jump-btn { background: #f4f0e9; color: var(--ink); border-color: var(--rule); }
+.letter-home .ai-send, .letter-home .ai-key-save { background: var(--ink); color: var(--paper); }
+.letter-home .ai-send:hover { box-shadow: none; }
+.letter-home #assistantStateDot { background: var(--quiet) !important; box-shadow: none !important; }
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .letter-work:hover { transform: translateY(-3px); border-color: #bdb5a9; }
+}
+/* Progressive CSS scroll animation: content stays readable without JS or support. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .letter-reveal { animation: letter-arrive linear both; animation-timeline: view(); animation-range: entry 0% entry 80%; }
+  }
+}
+@keyframes letter-arrive { from { opacity: .35; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (max-width: 700px) {
+  .letter { padding: 36px 30px 26px; }
+  .letter-heading { gap: 20px; }
+  .letter-heading h1 { font-size: 28px; }
+  .letter-heading h1 span { white-space: normal; }
+  .letter-attachments { gap: 14px; }
+  .letter-work { padding: 20px; }
+  .letter-work h3 { font-size: 19px; }
+  .letter-history-list li { grid-template-columns: 1fr; gap: 6px; }
+}
+@media (max-width: 520px) {
+  .letter-nav-shell { padding: 18px 22px 14px; font-size: 11px; }
+  .letter-nav { gap: 22px; }
+  .letter { width: calc(100% - 24px); margin-bottom: 12px; padding: 28px 22px 24px; }
+  .letter-heading { grid-template-columns: minmax(0, 1fr) 54px; gap: 12px; align-items: start; padding-bottom: 22px; }
+  .letter-photo { width: 54px; height: 66px; margin-top: 4px; }
+  .letter-eyebrow { font-size: 11px; margin-bottom: 12px; }
+  .letter-heading h1 { font-size: 26px; }
+  .letter-heading h1 span { display: block; font-size: 20px; margin-top: 3px; }
+  .letter-education { margin-top: 12px; font-size: 11px; }
+  .letter-direction { font-size: 11px; }
+  .letter-opening { padding-top: 26px; font-size: 14px; line-height: 2; }
+  .letter-section { margin-top: 32px; }
+  .letter-section h2 { font-size: 22px; }
+  .letter-attachments { grid-template-columns: minmax(0, 1fr); gap: 16px; margin-top: 20px; }
+  .letter-work { padding: 22px; }
+  .letter-work h3 { font-size: 22px; }
+  .letter-experience { padding: 8px 0; }
+  .letter-contact { flex-direction: column; gap: 8px; }
+  .letter-history-list li { padding: 16px 0; }
+  .letter-history-list h3 { font-size: 13px; }
+  .letter-rules li { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .letter-home .ai-fab { right: 12px; bottom: 12px; width: 38px; height: 38px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.letter-root { scroll-behavior: auto; }
+  .letter-home *, .letter-home *::before, .letter-home *::after { animation: none !important; transition: none !important; }
+}
+@page { size: A4; margin: 12mm 14mm; }
+@media print {
+  html.letter-root, .letter-home { background: white; color: black; }
+  .letter-home { font-size: 9pt; line-height: 1.45; min-height: auto; }
+  .letter-nav-shell, .letter-skip, .letter-notes, .letter-home .ai-fab, .letter-home .ai-panel,
+  .letter-home #workFrame, .letter-home #workOverlay, .letter-home #loadTip { display: none !important; }
+  .letter { width: 100%; padding: 0; margin: 0; border: 0; }
+  .letter-reveal { animation: none; opacity: 1; transform: none; }
+  .letter-heading { grid-template-columns: minmax(0, 1fr) 48px; padding-bottom: 12px; gap: 16px; }
+  .letter-eyebrow { margin-bottom: 5px; font-size: 8pt; }
+  .letter-heading h1 { font-size: 20pt; }
+  .letter-heading h1 span { display: inline; font-size: inherit; white-space: nowrap; }
+  .letter-photo { width: 48px; height: 58px; margin: 0; }
+  .letter-education { margin-top: 5px; font-size: 8pt; line-height: 1.5; }
+  .letter-direction { margin-top: 2px; font-size: 8pt; }
+  .letter-opening { padding-top: 12px; font-size: 9pt; line-height: 1.55; }
+  .letter-opening p + p { margin-top: 5px; }
+  .letter-salutation { margin-bottom: 8px; }
+  .letter-section { margin-top: 12px; }
+  .letter-section h2 { font-size: 14pt; }
+  .letter-section-intro { margin-top: 5px; font-size: 8pt; }
+  .letter-attachments { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 10px; gap: 12px; }
+  .letter-work { padding: 10px 12px; break-inside: avoid; }
+  .letter-work-number { font-size: 10pt; margin-bottom: 5px; }
+  .letter-work h3 { font-size: 12pt; line-height: 1.4; margin-bottom: 5px; }
+  .letter-question { font-size: 9pt; line-height: 1.5; }
+  .letter-result { font-size: 8pt; line-height: 1.6; margin-top: 6px; }
+  .letter-boundary { font-size: 7.5pt; line-height: 1.5; margin: 6px 0; }
+  .letter-experience { font-size: 8pt; padding: 2px 0; }
+  .letter-method { margin-top: 10px; font-size: 8pt; }
+  .letter-history-caption { font-size: 7.5pt; margin-top: 3px; }
+  .letter-history-list { margin-top: 6px; }
+  .letter-history-list li { grid-template-columns: 108px minmax(0, 1fr); gap: 12px; padding: 5px 0; break-inside: avoid; }
+  .letter-period { font-size: 7.5pt; padding-top: 1px; }
+  .letter-history-list h3 { font-size: 8.5pt; line-height: 1.4; }
+  .letter-history-list p { font-size: 8pt; line-height: 1.4; }
+  .letter-history-list .letter-position { margin: 1px 0 2px; }
+  .letter-closing { margin-top: 8px; padding-top: 10px; font-size: 8.5pt; break-inside: avoid; }
+  .letter-signature { font-size: 17pt; margin: 4px 0 5px; }
+  .letter-contact { flex-direction: row; column-gap: 20px; row-gap: 3px; font-size: 8pt; }
+  .letter-footer { margin-top: 8px; padding-top: 8px; font-size: 7pt; line-height: 1.6; break-inside: avoid; }
+  .letter-disclosure + .letter-disclosure { margin-top: 4px; }
+  .letter-version { font-size: 7pt; margin-top: 6px; }
+  .letter a { text-decoration: none; background: none; }
+}
