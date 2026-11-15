@@ -25,7 +25,7 @@
     
 
     <link rel="stylesheet" href="assets/app.css">
-    <link rel="stylesheet" href="assets/home-letter.css?v=717">
+    <link rel="stylesheet" href="assets/home-letter.css?v=718">
 
 
 
@@ -35,58 +35,11 @@
 </head>
 
 <body class="letter-home">
-<dialog class="letter-envelope" id="letterEnvelope" aria-labelledby="envelopeRecipient" hidden>
+<dialog class="letter-envelope" id="letterEnvelope" aria-label="作品集信件封面" hidden>
   <div class="envelope-stage">
     <button class="envelope-open" id="envelopeOpen" type="button" aria-label="开启胡凯的作品集信件">
-      <span class="envelope-back" aria-hidden="true"></span>
-      <span class="envelope-paper" aria-hidden="true"><span class="envelope-sheet"><span></span><span></span><span></span></span></span>
-      <span class="envelope-front">
-        <svg class="envelope-creases" viewBox="0 0 420 262.5" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-          <path d="M1 261L203 141M217 141L419 261" fill="none" stroke="#baa98c" stroke-width=".8" opacity=".55"/>
-          <path d="M1 259.5L202 139.5M218 139.5L419 259.5" fill="none" stroke="#fffdf6" stroke-width="1" opacity=".9"/>
-        </svg>
-        <span class="envelope-recipient" id="envelopeRecipient">致招聘团队</span>
-      </span>
-      <span class="envelope-flap" aria-hidden="true"></span>
-      <span class="envelope-seal" aria-hidden="true">
-        <svg class="envelope-wax" viewBox="0 0 160 160" focusable="false">
-          <defs>
-            <linearGradient id="wax-rim-717" x1="18%" y1="0%" x2="80%" y2="100%">
-              <stop stop-color="#e97760"/><stop offset=".16" stop-color="#ad2b22"/>
-              <stop offset=".48" stop-color="#73100f"/><stop offset=".76" stop-color="#bd3529"/><stop offset="1" stop-color="#5b0d0d"/>
-            </linearGradient>
-            <radialGradient id="wax-face-717" cx="36%" cy="28%" r="76%">
-              <stop stop-color="#c84c3c"/><stop offset=".48" stop-color="#9d251f"/>
-              <stop offset=".83" stop-color="#7b1413"/><stop offset=".94" stop-color="#570d0e"/><stop offset="1" stop-color="#c54a38"/>
-            </radialGradient>
-            <linearGradient id="wax-ring-717" x1="15%" y1="0%" x2="80%" y2="100%">
-              <stop stop-color="#ef9d7c"/><stop offset=".28" stop-color="#67100f"/>
-              <stop offset=".64" stop-color="#d4644b"/><stop offset="1" stop-color="#3d080a"/>
-            </linearGradient>
-            <linearGradient id="wax-monogram-717" x1="0%" y1="0%" x2="55%" y2="100%">
-              <stop stop-color="#fff4d8"/><stop offset=".48" stop-color="#eed6b0"/><stop offset="1" stop-color="#c9986f"/>
-            </linearGradient>
-          </defs>
-          <path d="M80 7C96 4 103 14 116 19C129 22 134 32 137 45C143 57 151 63 149 78C152 91 143 104 140 115C135 129 123 132 111 140C100 149 88 146 75 149C62 150 51 140 39 138C24 134 23 122 17 111C8 100 10 88 8 75C8 61 17 53 20 40C23 27 38 24 48 16C59 8 67 11 80 7Z" fill="url(#wax-rim-717)" stroke="#711613" stroke-width="1.2"/>
-          <circle cx="80" cy="80" r="62" fill="url(#wax-face-717)" stroke="url(#wax-ring-717)" stroke-width="5"/>
-          <circle cx="80" cy="80" r="55.5" fill="none" stroke="#4f0b0c" stroke-width="2" opacity=".85"/>
-          <circle cx="80" cy="80" r="52.5" fill="none" stroke="#e38161" stroke-width=".9" opacity=".45"/>
-          <circle cx="80" cy="80" r="48.5" fill="none" stroke="#e9b18b" stroke-width=".8" stroke-dasharray=".7 5.65" stroke-linecap="round" opacity=".4"/>
-          <path d="M21 62C25 38 33 31 50 26C65 19 72 12 85 15M140 88C135 119 119 134 94 139" fill="none" stroke="#fff2dd" stroke-width="3.6" stroke-linecap="round" opacity=".8"/>
-          <path d="M26 48C29 37 37 32 47 29M133 106C127 120 113 130 99 133" fill="none" stroke="#fff0d5" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>
-          <g fill="none" stroke="#e8b291" stroke-width=".9" opacity=".5">
-            <path d="M71 32Q80 23 89 32M76 31Q80 38 84 31M71 130Q80 139 89 130M76 131Q80 124 84 131M31 71Q23 80 31 89M31 76Q38 80 31 84M130 71Q139 80 130 89M131 76Q124 80 131 84"/>
-            <circle cx="80" cy="29" r="1.7"/><circle cx="80" cy="133" r="1.7"/>
-          </g>
-          <g class="envelope-monogram" fill="url(#wax-monogram-717)" stroke="#681915" stroke-width=".8" stroke-linejoin="round">
-            <path d="M47 42H73V46C65 46 64 49 64 57V78L90 53C95 48 94 45 86 45V42H111V45C104 46 100 48 95 53L77 72L102 108C106 114 109 116 116 116V120H88V116C95 116 96 113 92 107L68 79L64 83V105C64 114 66 116 74 116V120H47V116C55 116 56 114 56 105V57C56 49 54 46 47 46Z"/>
-            <path d="M61 44C51 36 38 37 37 47C36 55 47 57 49 49C50 44 44 42 42 46M91 52C99 39 117 38 120 49C123 60 110 63 108 55C107 50 114 47 116 52M56 98C39 97 31 109 39 117C46 124 55 119 51 113C49 109 44 111 45 115M96 106C99 126 117 128 122 116C125 107 116 101 112 109C110 114 117 118 119 113" fill="none" stroke="url(#wax-monogram-717)" stroke-width="2.9" stroke-linecap="round"/>
-          </g>
-        </svg>
-      </span>
+      <img class="envelope-cover" id="envelopeCover" src="assets/envelope-cover.webp" alt="" width="1440" height="960" decoding="async" fetchpriority="high">
     </button>
-    <p class="envelope-caption">胡凯 · AI × 财务作品集</p>
-    <p class="envelope-prompt">点击开启</p>
   </div>
   <a class="envelope-skip letter-link" id="envelopeSkip" href="#letter">直接阅读</a>
 </dialog>
@@ -95,6 +48,7 @@
 (function () {
   var cover = document.getElementById('letterEnvelope');
   var button = document.getElementById('envelopeOpen');
+  var image = document.getElementById('envelopeCover');
   var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   var storageKey = 'portfolio-letter-opened';
   var opening = false, timer = null;
@@ -108,7 +62,7 @@
     remember();
     cover.close();
     cover.hidden = true;
-    document.documentElement.classList.remove('envelope-active');
+    document.documentElement.classList.remove('envelope-active', 'envelope-opening');
     var letter = document.getElementById('letter');
     if (letter) letter.focus({ preventScroll: true });
   }
@@ -118,9 +72,13 @@
     remember();
     button.disabled = true;
     cover.classList.add('is-opening');
+    document.documentElement.classList.add('envelope-opening');
     // CSS performs the motion; the timer only guarantees dismissal if no event fires.
     timer = setTimeout(finish, 1100);
   }
+  image.addEventListener('error', finish);
+  if (image.complete && image.naturalWidth === 0) return;
+  cover.addEventListener('keydown', function () { cover.classList.add('keyboard-navigation'); });
   button.addEventListener('click', openLetter);
   document.getElementById('envelopeSkip').addEventListener('click', function (event) { event.preventDefault(); finish(); });
   cover.addEventListener('cancel', function (event) { event.preventDefault(); finish(); });
@@ -297,7 +255,7 @@
   <footer class="letter-footer">
     <p class="letter-disclosure">说明：本页作品均来自实习中的观察与个人尝试，<b>未在公司业务中投入使用</b>；数据为公开数据与构造的演示数据，不含真实客户信息。</p>
     <p class="letter-disclosure">借鉴职责分离与独立复核原则，不等同于银行模型风险管理中的独立模型验证，也不代表监管意义上的审批。</p>
-    <p class="letter-version">胡凯 · AI × Finance Portfolio · v7.17 · 全部数据经人工核验 · 2026.10 · AI 协作方法探索</p>
+    <p class="letter-version">胡凯 · AI × Finance Portfolio · v7.18 · 全部数据经人工核验 · 2026.10 · AI 协作方法探索</p>
   </footer>
 </main>
 
