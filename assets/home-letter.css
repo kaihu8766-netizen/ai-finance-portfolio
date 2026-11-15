@@ -107,6 +107,7 @@ html.envelope-active, html.envelope-active body { overflow: hidden; }
 .is-opening .envelope-moving-letter { animation: letter-extract 2.8s linear both; }
 .is-opening .envelope-stage, .is-opening .envelope-top { animation: envelope-slide-away 2.8s linear both; }
 .letter-envelope.is-opening { animation: envelope-finish 2.8s linear both; }
+.is-opening .envelope-skip { animation: envelope-skip-away 2.8s linear both; }
 @keyframes envelope-unseal { 0% { opacity: 0; } 5%, 100% { opacity: 1; } }
 @keyframes envelope-flap-open {
   0%, 4% { transform: rotateZ(var(--hinge-tilt)) rotateX(0deg) rotateZ(calc(-1 * var(--hinge-tilt))); animation-timing-function: ease-in-out; }
@@ -137,7 +138,9 @@ html.envelope-active, html.envelope-active body { overflow: hidden; }
   0%, 68% { transform: translateY(0); opacity: 1; animation-timing-function: ease-in-out; }
   100% { transform: translateY(105%); opacity: 0; }
 }
-@keyframes envelope-finish { 0%, 88% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes envelope-skip-away { 0%, 68% { opacity: 1; } 90%, 100% { opacity: 0; } }
+/* Fade the cover background, keeping the extracted letter opaque through handoff. */
+@keyframes envelope-finish { 0%, 68% { background-color: #cfc4b8; } 100% { background-color: transparent; } }
 @media (max-width: 520px) { .letter-envelope .envelope-skip { top: 18px; right: 24px; } }
 .letter-home ::selection { color: var(--ink); background: #e7e1d8; }
 .letter-home a { color: inherit; }
