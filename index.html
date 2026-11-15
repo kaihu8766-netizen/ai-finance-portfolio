@@ -25,7 +25,7 @@
     
 
     <link rel="stylesheet" href="assets/app.css">
-    <link rel="stylesheet" href="assets/home-letter.css?v=719">
+    <link rel="stylesheet" href="assets/home-letter.css?v=720">
 
 
 
@@ -38,10 +38,19 @@
 <dialog class="letter-envelope" id="letterEnvelope" aria-label="作品集信件封面" hidden>
   <div class="envelope-stage">
     <button class="envelope-open" id="envelopeOpen" type="button" aria-label="开启胡凯的作品集信件">
-      <img class="envelope-cover" id="envelopeCover" src="assets/envelope-cover.webp?v=719" alt="" width="1440" height="960" decoding="async" fetchpriority="high">
+      <picture>
+        <source media="(max-width: 768px) and (orientation: portrait)" srcset="assets/envelope-cover-mobile.webp?v=720" width="1080" height="1920">
+        <img class="envelope-cover" id="envelopeCover" src="assets/envelope-cover.webp?v=720" alt="" width="1440" height="960" decoding="async" fetchpriority="high">
+      </picture>
     </button>
+    <div class="envelope-underlay" aria-hidden="true"><div class="envelope-art"><div class="envelope-cavity"></div><div class="envelope-wax-clean"></div></div></div>
   </div>
   <div class="envelope-extraction" id="envelopeExtraction" aria-hidden="true" inert></div>
+  <div class="envelope-top" aria-hidden="true" inert><div class="envelope-art">
+    <div class="envelope-flap-turn"><div class="envelope-flap-face"><div class="envelope-wax-clean"></div></div><div class="envelope-flap-back"></div></div>
+    <div class="envelope-wax-half envelope-wax-left"><div class="envelope-wax-crop"><div class="envelope-wax-fragment"></div></div></div>
+    <div class="envelope-wax-half envelope-wax-right"><div class="envelope-wax-crop"><div class="envelope-wax-fragment"></div></div></div>
+  </div></div>
   <a class="envelope-skip letter-link" id="envelopeSkip" href="#letter">直接阅读</a>
 </dialog>
 <script>
@@ -75,8 +84,22 @@
     var letter = document.getElementById('letter');
     if (letter) letter.focus({ preventScroll: true });
   }
+  function syncArtwork() {
+    if (!image.naturalWidth || !image.naturalHeight) return;
+    var portrait = image.currentSrc.indexOf('envelope-cover-mobile.webp') !== -1;
+    cover.classList.toggle('envelope-portrait', portrait);
+    var rect = cover.getBoundingClientRect();
+    var scale = Math.max(rect.width / image.naturalWidth, rect.height / image.naturalHeight);
+    var width = image.naturalWidth * scale, height = image.naturalHeight * scale;
+    cover.style.setProperty('--art-width', width + 'px');
+    cover.style.setProperty('--art-height', height + 'px');
+    cover.style.setProperty('--art-left', (rect.width - width) * (portrait ? .5 : .48) + 'px');
+    cover.style.setProperty('--art-top', (rect.height - height) * (portrait ? .5 : .6) + 'px');
+    cover.style.setProperty('--art-image', 'url("' + image.currentSrc + '")');
+  }
   function openLetter() {
-    if (opening) return;
+    if (opening || !image.complete || !image.naturalWidth) return;
+    syncArtwork();
     var letter = document.getElementById('letter');
     if (!letter) { finish(); return; }
     var rect = letter.getBoundingClientRect();
@@ -93,8 +116,9 @@
     cover.classList.add('is-opening');
     document.documentElement.classList.add('envelope-opening');
     // CSS performs the motion; the timer only guarantees dismissal if no event fires.
-    timer = setTimeout(finish, 2150);
+    timer = setTimeout(finish, 2950);
   }
+  image.addEventListener('load', syncArtwork);
   image.addEventListener('error', finish);
   if (image.complete && image.naturalWidth === 0) return;
   cover.addEventListener('keydown', function () { cover.classList.add('keyboard-navigation'); });
@@ -108,12 +132,13 @@
   if (motion.addEventListener) motion.addEventListener('change', reduceMotion);
   else if (motion.addListener) motion.addListener(reduceMotion);
   window.addEventListener('beforeprint', finish);
-  window.addEventListener('resize', function () { if (opening) finish(); });
+  window.addEventListener('resize', function () { if (opening) finish(); else if (cover.open) syncArtwork(); });
   window.addEventListener('pagehide', function () { if (opening) finish(); });
   try {
     cover.hidden = false;
     cover.showModal();
     document.documentElement.classList.add('envelope-active');
+    syncArtwork();
   } catch (e) { cover.hidden = true; }
 })();
 </script>
@@ -275,7 +300,7 @@
   <footer class="letter-footer">
     <p class="letter-disclosure">说明：本页作品均来自实习中的观察与个人尝试，<b>未在公司业务中投入使用</b>；数据为公开数据与构造的演示数据，不含真实客户信息。</p>
     <p class="letter-disclosure">借鉴职责分离与独立复核原则，不等同于银行模型风险管理中的独立模型验证，也不代表监管意义上的审批。</p>
-    <p class="letter-version">胡凯 · AI × Finance Portfolio · v7.19 · 全部数据经人工核验 · 2026.10 · AI 协作方法探索</p>
+    <p class="letter-version">胡凯 · AI × Finance Portfolio · v7.20 · 全部数据经人工核验 · 2026.10 · AI 协作方法探索</p>
   </footer>
 </main>
 
