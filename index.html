@@ -25,7 +25,7 @@
     
 
     <link rel="stylesheet" href="assets/app.css">
-    <link rel="stylesheet" href="assets/home-letter.css?v=718">
+    <link rel="stylesheet" href="assets/home-letter.css?v=719">
 
 
 
@@ -41,6 +41,7 @@
       <img class="envelope-cover" id="envelopeCover" src="assets/envelope-cover.webp" alt="" width="1440" height="960" decoding="async" fetchpriority="high">
     </button>
   </div>
+  <div class="envelope-extraction" id="envelopeExtraction" aria-hidden="true" inert></div>
   <a class="envelope-skip letter-link" id="envelopeSkip" href="#letter">直接阅读</a>
 </dialog>
 <script>
@@ -52,6 +53,8 @@
   var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   var storageKey = 'portfolio-letter-opened';
   var opening = false, timer = null;
+  var movingLetter = null, letterMarker = null;
+  var extraction = document.getElementById('envelopeExtraction');
   function remember() { try { sessionStorage.setItem(storageKey, '1'); } catch (e) {} }
   try { if (sessionStorage.getItem(storageKey) === '1') return; } catch (e) { return; }
   if (motion.matches) { remember(); return; }
@@ -60,6 +63,12 @@
     if (!cover.open) return;
     clearTimeout(timer);
     remember();
+    if (movingLetter) {
+      movingLetter.classList.remove('envelope-moving-letter');
+      if (letterMarker && letterMarker.parentNode) letterMarker.replaceWith(movingLetter);
+      movingLetter = null;
+      letterMarker = null;
+    }
     cover.close();
     cover.hidden = true;
     document.documentElement.classList.remove('envelope-active', 'envelope-opening');
@@ -68,13 +77,23 @@
   }
   function openLetter() {
     if (opening) return;
+    var letter = document.getElementById('letter');
+    if (!letter) { finish(); return; }
+    var rect = letter.getBoundingClientRect();
+    extraction.style.setProperty('--letter-width', rect.width + 'px');
+    extraction.style.setProperty('--letter-top', rect.top + 'px');
+    letterMarker = document.createComment('letter-home-position');
+    letter.before(letterMarker);
+    movingLetter = letter;
+    letter.classList.add('envelope-moving-letter');
+    extraction.appendChild(letter);
     opening = true;
     remember();
     button.disabled = true;
     cover.classList.add('is-opening');
     document.documentElement.classList.add('envelope-opening');
     // CSS performs the motion; the timer only guarantees dismissal if no event fires.
-    timer = setTimeout(finish, 1100);
+    timer = setTimeout(finish, 2150);
   }
   image.addEventListener('error', finish);
   if (image.complete && image.naturalWidth === 0) return;
@@ -82,13 +101,15 @@
   button.addEventListener('click', openLetter);
   document.getElementById('envelopeSkip').addEventListener('click', function (event) { event.preventDefault(); finish(); });
   cover.addEventListener('cancel', function (event) { event.preventDefault(); finish(); });
-  cover.addEventListener('transitionend', function (event) {
-    if (opening && event.target === cover && event.propertyName === 'opacity') finish();
+  cover.addEventListener('animationend', function (event) {
+    if (opening && event.target === cover && event.animationName === 'envelope-finish') finish();
   });
   function reduceMotion(event) { if (event.matches) finish(); }
   if (motion.addEventListener) motion.addEventListener('change', reduceMotion);
   else if (motion.addListener) motion.addListener(reduceMotion);
   window.addEventListener('beforeprint', finish);
+  window.addEventListener('resize', function () { if (opening) finish(); });
+  window.addEventListener('pagehide', function () { if (opening) finish(); });
   try {
     cover.hidden = false;
     cover.showModal();
@@ -98,7 +119,7 @@
 </script>
 <a class="letter-skip" href="#letter">跳到正文</a>
 <header class="letter-nav-shell">
-  <a class="letter-nav-name" href="#letter">一封求职信</a>
+  <a class="letter-nav-name" href="#letter">一封信</a>
   <nav class="letter-nav" id="nav" aria-label="信件导航">
     <a href="#works">作品</a><a href="#about">履历</a><a href="#contact">联系</a>
   </nav>
@@ -106,16 +127,15 @@
 <main class="letter" id="letter" tabindex="-1">
   <header class="letter-heading">
     <div class="letter-heading-copy">
-      <p class="letter-eyebrow">致招聘团队</p>
       <h1>胡凯 <span>· AI × 财务作品集</span></h1>
       <p class="letter-education">2027 届 · 金融与投资（专业会计）硕士 ｜ 精算学本科（辅修金融）</p>
-      <p class="letter-direction">求职方向：资金管理 · 财务管培 · 金融管培 · AI 财务</p>
+      <p class="letter-direction">关注方向：资金管理 · 财务管培 · 金融管培 · AI 财务</p>
     </div>
     <img class="letter-photo" src="assets/avatar.jpg" alt="胡凯本人照片" width="92" height="112" decoding="async" fetchpriority="high">
   </header>
 
   <section class="letter-opening" aria-label="信的开头">
-    <p class="letter-salutation">招聘团队，您好：</p>
+    <p class="letter-salutation">你好：</p>
     <p>我是胡凯，2027 届金融与投资（专业会计）硕士在读，拥有精算学（辅修金融）本科背景。我关注企业资金与财务分析，希望从融资、现金流到风险量化与 AI 应用，把业务规则落到可交互、可复核的工具中。</p>
     <p>在 smart 汽车（奔驰 × 吉利）集团资金部，我参与贷款授信、提款与贷后流程，以及现金头寸核对与跨境结算。</p>
     <p>在中审众环（Mazars），我编制审计底稿、执行函证与凭证测试，并用 Python / SQL 做多科目交叉核验。</p>
@@ -255,7 +275,7 @@
   <footer class="letter-footer">
     <p class="letter-disclosure">说明：本页作品均来自实习中的观察与个人尝试，<b>未在公司业务中投入使用</b>；数据为公开数据与构造的演示数据，不含真实客户信息。</p>
     <p class="letter-disclosure">借鉴职责分离与独立复核原则，不等同于银行模型风险管理中的独立模型验证，也不代表监管意义上的审批。</p>
-    <p class="letter-version">胡凯 · AI × Finance Portfolio · v7.18 · 全部数据经人工核验 · 2026.10 · AI 协作方法探索</p>
+    <p class="letter-version">胡凯 · AI × Finance Portfolio · v7.19 · 全部数据经人工核验 · 2026.10 · AI 协作方法探索</p>
   </footer>
 </main>
 

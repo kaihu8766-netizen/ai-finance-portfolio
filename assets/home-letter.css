@@ -27,38 +27,56 @@ html.envelope-active, html.envelope-active body { overflow: hidden; }
 #letter:focus { outline: none; }
 .letter-envelope[hidden], .letter-envelope:not([open]) { display: none !important; }
 .letter-envelope {
-  position: fixed; inset: 0; width: 100%; height: 100vh; height: 100dvh;
-  max-width: none; max-height: none; margin: 0; padding: 32px;
-  display: grid; place-items: center; overflow: hidden; border: 0;
-  background: #d0c4b9; color: var(--ink); opacity: 1;
-  font: inherit; text-align: center;
-  transition: opacity .4s ease .6s;
+  position: fixed; inset: 0; width: 100vw; height: 100vh; height: 100dvh;
+  max-width: none; max-height: none; margin: 0; padding: 0;
+  display: block; overflow: hidden; border: 0;
+  background: #cfc4b8; color: var(--ink); opacity: 1;
+  font: inherit;
 }
 .letter-envelope::backdrop { background: transparent; }
-.envelope-stage { width: min(720px, 100%, calc(150vh - 144px)); }
+.envelope-stage, .envelope-open { width: 100%; height: 100%; }
 .envelope-open {
-  position: relative; display: block; width: 100%; padding: 0; border: 0;
+  position: relative; display: block; padding: 0; border: 0;
   background: transparent; color: inherit; font: inherit; cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
 .letter-home .envelope-open:focus-visible { outline: none; }
-.letter-home .keyboard-navigation .envelope-open:focus-visible { outline: 2px solid var(--quiet); outline-offset: 4px; }
+.letter-home .keyboard-navigation .envelope-open:focus-visible { outline: 2px solid var(--quiet); outline-offset: -6px; }
 .envelope-open:disabled { opacity: 1; color: inherit; cursor: default; }
-.envelope-cover {
-  display: block; width: 100%; height: auto; aspect-ratio: 3 / 2;
-  transition: transform .7s cubic-bezier(.22,.65,.3,1) .1s, opacity .5s ease .25s;
+.letter-envelope .envelope-cover {
+  display: block; width: 100%; height: 100% !important; max-width: none !important;
+  object-fit: cover; object-position: 48% 60%;
 }
-.letter-envelope .envelope-skip { position: absolute; top: 28px; right: 32px; padding: 6px 0; font-size: 13px; color: var(--quiet); }
-.letter-envelope.is-opening { opacity: 0; }
-.is-opening .envelope-cover { transform: translateY(-7%) scale(.98); opacity: 0; }
-/* Reveal the existing letter itself; no second envelope or paper illustration. */
-html.envelope-active .letter {
-  opacity: 0; transform: translateY(72px) scale(.96, .94); transform-origin: center top;
-  transition: transform .85s cubic-bezier(.22,.65,.3,1) .1s, opacity .45s ease .35s;
+.letter-envelope .envelope-skip { position: absolute; z-index: 3; top: 28px; right: 32px; padding: 6px 0; font-size: 13px; color: var(--quiet); }
+/* The real letter slides through this aperture while the photo stays stationary. */
+.envelope-extraction { position: absolute; z-index: 2; inset: 0; overflow: hidden; pointer-events: none; clip-path: inset(0 0 64% 0); }
+.letter-envelope .envelope-moving-letter {
+  position: absolute; left: 50%; top: 36%; width: var(--letter-width); margin: 0;
+  text-align: start; transform: translateX(-50%) scale(.82); transform-origin: center top;
+  box-shadow: 0 8px 28px #29272326;
 }
-html.envelope-active.envelope-opening .letter { opacity: 1; transform: none; }
+.is-opening .envelope-extraction { animation: envelope-aperture 2s linear both; }
+.is-opening .envelope-moving-letter { animation: letter-extract 2s linear both; }
+.is-opening .envelope-cover { animation: envelope-slide-away 2s linear both; }
+.letter-envelope.is-opening { animation: envelope-finish 2s linear both; }
+@keyframes letter-extract {
+  0% { top: 36%; transform: translateX(-50%) scale(.82); animation-timing-function: cubic-bezier(.4,0,.2,1); }
+  52%, 58% { top: 6%; transform: translateX(-50%) scale(.82); animation-timing-function: cubic-bezier(.3,0,.2,1); }
+  100% { top: var(--letter-top); transform: translateX(-50%) scale(1); box-shadow: none; }
+}
+@keyframes envelope-aperture {
+  0%, 55% { clip-path: inset(0 0 64% 0); animation-timing-function: ease-in-out; }
+  100% { clip-path: inset(0); }
+}
+@keyframes envelope-slide-away {
+  0%, 55% { transform: translateY(0); opacity: 1; animation-timing-function: ease-in-out; }
+  100% { transform: translateY(105%); opacity: 0; }
+}
+@keyframes envelope-finish {
+  0%, 85% { opacity: 1; }
+  100% { opacity: 0; }
+}
 @media (max-width: 520px) {
-  .letter-envelope { padding: 0; }
   .letter-envelope .envelope-skip { top: 18px; right: 24px; }
 }
 .letter-home ::selection { color: var(--ink); background: #e7e1d8; }
