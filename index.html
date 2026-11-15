@@ -25,7 +25,7 @@
     
 
     <link rel="stylesheet" href="assets/app.css">
-    <link rel="stylesheet" href="assets/home-letter.css">
+    <link rel="stylesheet" href="assets/home-letter.css?v=716">
 
 
 
@@ -35,6 +35,68 @@
 </head>
 
 <body class="letter-home">
+<dialog class="letter-envelope" id="letterEnvelope" aria-labelledby="envelopeRecipient" hidden>
+  <div class="envelope-stage">
+    <button class="envelope-open" id="envelopeOpen" type="button" aria-label="开启胡凯的作品集信件">
+      <span class="envelope-back" aria-hidden="true"></span>
+      <span class="envelope-paper" aria-hidden="true"><span class="envelope-sheet"><span></span><span></span><span></span></span></span>
+      <span class="envelope-front"><span class="envelope-recipient" id="envelopeRecipient">致招聘团队</span></span>
+      <span class="envelope-flap" aria-hidden="true"></span>
+      <span class="envelope-seal" aria-hidden="true">胡</span>
+    </button>
+    <p class="envelope-caption">胡凯 · AI × 财务作品集</p>
+    <p class="envelope-prompt">点击开启</p>
+  </div>
+  <a class="envelope-skip letter-link" id="envelopeSkip" href="#letter">直接阅读</a>
+</dialog>
+<script>
+/* Only activate the cover when the browser can offer a dismissible modal. */
+(function () {
+  var cover = document.getElementById('letterEnvelope');
+  var button = document.getElementById('envelopeOpen');
+  var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var storageKey = 'portfolio-letter-opened';
+  var opening = false, timer = null;
+  function remember() { try { sessionStorage.setItem(storageKey, '1'); } catch (e) {} }
+  try { if (sessionStorage.getItem(storageKey) === '1') return; } catch (e) { return; }
+  if (motion.matches) { remember(); return; }
+  if (typeof cover.showModal !== 'function') return;
+  function finish() {
+    if (!cover.open) return;
+    clearTimeout(timer);
+    remember();
+    cover.close();
+    cover.hidden = true;
+    document.documentElement.classList.remove('envelope-active');
+    var letter = document.getElementById('letter');
+    if (letter) letter.focus({ preventScroll: true });
+  }
+  function openLetter() {
+    if (opening) return;
+    opening = true;
+    remember();
+    button.disabled = true;
+    cover.classList.add('is-opening');
+    // CSS performs the motion; the timer only guarantees dismissal if no event fires.
+    timer = setTimeout(finish, 1100);
+  }
+  button.addEventListener('click', openLetter);
+  document.getElementById('envelopeSkip').addEventListener('click', function (event) { event.preventDefault(); finish(); });
+  cover.addEventListener('cancel', function (event) { event.preventDefault(); finish(); });
+  cover.addEventListener('transitionend', function (event) {
+    if (opening && event.target === cover && event.propertyName === 'opacity') finish();
+  });
+  function reduceMotion(event) { if (event.matches) finish(); }
+  if (motion.addEventListener) motion.addEventListener('change', reduceMotion);
+  else if (motion.addListener) motion.addListener(reduceMotion);
+  window.addEventListener('beforeprint', finish);
+  try {
+    cover.hidden = false;
+    cover.showModal();
+    document.documentElement.classList.add('envelope-active');
+  } catch (e) { cover.hidden = true; }
+})();
+</script>
 <a class="letter-skip" href="#letter">跳到正文</a>
 <header class="letter-nav-shell">
   <a class="letter-nav-name" href="#letter">一封求职信</a>
@@ -42,7 +104,7 @@
     <a href="#works">作品</a><a href="#about">履历</a><a href="#contact">联系</a>
   </nav>
 </header>
-<main class="letter" id="letter">
+<main class="letter" id="letter" tabindex="-1">
   <header class="letter-heading">
     <div class="letter-heading-copy">
       <p class="letter-eyebrow">致招聘团队</p>
@@ -50,7 +112,7 @@
       <p class="letter-education">2027 届 · 金融与投资（专业会计）硕士 ｜ 精算学本科（辅修金融）</p>
       <p class="letter-direction">求职方向：资金管理 · 财务管培 · 金融管培 · AI 财务</p>
     </div>
-    <img class="letter-photo" src="assets/avatar.jpg" alt="胡凯本人照片" width="76" height="92" decoding="async" fetchpriority="high">
+    <img class="letter-photo" src="assets/avatar.jpg" alt="胡凯本人照片" width="92" height="112" decoding="async" fetchpriority="high">
   </header>
 
   <section class="letter-opening" aria-label="信的开头">
@@ -194,7 +256,7 @@
   <footer class="letter-footer">
     <p class="letter-disclosure">说明：本页作品均来自实习中的观察与个人尝试，<b>未在公司业务中投入使用</b>；数据为公开数据与构造的演示数据，不含真实客户信息。</p>
     <p class="letter-disclosure">借鉴职责分离与独立复核原则，不等同于银行模型风险管理中的独立模型验证，也不代表监管意义上的审批。</p>
-    <p class="letter-version">胡凯 · AI × Finance Portfolio · v7.15 · 全部数据经人工核验 · 2026.10 · AI 协作方法探索</p>
+    <p class="letter-version">胡凯 · AI × Finance Portfolio · v7.16 · 全部数据经人工核验 · 2026.10 · AI 协作方法探索</p>
   </footer>
 </main>
 

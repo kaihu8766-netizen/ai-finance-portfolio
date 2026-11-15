@@ -22,6 +22,73 @@ html.letter-root { color-scheme: light; background: #f1eee8; scroll-padding-top:
   overflow-x: visible;
 }
 .letter-home::before, .letter-home::after { content: none; }
+/* JS alone activates the cover. The letter is the default, including no-JS visits. */
+html.envelope-active, html.envelope-active body { overflow: hidden; }
+#letter:focus { outline: none; }
+.letter-envelope[hidden], .letter-envelope:not([open]) { display: none !important; }
+.letter-envelope {
+  position: fixed; inset: 0; width: 100%; height: 100vh; height: 100dvh;
+  max-width: none; max-height: none; margin: 0; padding: 32px;
+  display: grid; place-items: center; overflow: hidden; border: 0;
+  background: #f1eee8; color: var(--ink); opacity: 1;
+  font: inherit; text-align: center;
+  transition: opacity .2s ease .8s;
+}
+.letter-envelope::backdrop { background: transparent; }
+.envelope-stage { width: min(420px, calc(100vw - 64px)); }
+.envelope-open {
+  position: relative; display: block; width: 100%; aspect-ratio: 1.6;
+  padding: 0; border: 0; background: transparent; color: inherit;
+  font: inherit; cursor: pointer; perspective: 1000px; isolation: isolate;
+  -webkit-tap-highlight-color: transparent;
+}
+.letter-home .envelope-open:focus-visible { outline: none; }
+.envelope-open:focus-visible .envelope-seal { outline: 2px solid var(--seal); outline-offset: 6px; }
+.envelope-open:disabled { opacity: 1; color: inherit; cursor: default; }
+.envelope-back, .envelope-front, .envelope-flap, .envelope-paper, .envelope-sheet, .envelope-seal { position: absolute; display: block; }
+.envelope-back { inset: 0; z-index: 1; background: #e5dbcc; border: 1px solid #d6ccbc; box-shadow: 0 12px 26px #2927230d; }
+.envelope-paper { z-index: 2; left: 8%; top: 12%; width: 84%; height: 82%; transform: translateY(0); transition: transform .5s cubic-bezier(.22,.65,.3,1) .2s; }
+.envelope-sheet { inset: 0; padding: 14% 12%; background: var(--paper); border: 1px solid var(--rule); transform: scale(1); transform-origin: center bottom; transition: transform .35s cubic-bezier(.22,.65,.3,1) .5s; }
+.envelope-sheet span { display: block; height: 1px; margin-bottom: 14%; background: var(--rule); }
+.envelope-sheet span:first-child { width: 32%; background: var(--seal); }
+.envelope-sheet span:last-child { width: 72%; }
+.envelope-front { inset: 0; z-index: 4; background: #ede5d8; border: 1px solid #d6ccbc; clip-path: polygon(0 0, 50% 52%, 100% 0, 100% 100%, 0 100%); }
+.envelope-front::before, .envelope-front::after { content: ''; position: absolute; inset: 0; background: #e8dfd0; }
+.envelope-front::before { clip-path: polygon(0 0, 52% 53%, 0 100%); }
+.envelope-front::after { clip-path: polygon(100% 0, 48% 53%, 100% 100%); }
+.envelope-recipient { position: absolute; top: 78%; left: 0; width: 100%; z-index: 1; color: var(--quiet); font-size: 12px; letter-spacing: .14em; }
+.envelope-flap { z-index: 5; top: 0; left: 0; width: 100%; height: 56%; background: #e1d6c5; clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: center top; transform: rotateX(0deg); transition: transform .28s ease, z-index 0s .2s; }
+.envelope-seal {
+  z-index: 6; top: 55%; left: 50%; width: 58px; height: 58px;
+  transform: translate(-50%, -50%); display: grid; place-items: center;
+  border-radius: 48% 52% 49% 51% / 51% 47% 53% 49%;
+  background: var(--seal); color: var(--paper); box-shadow: inset 0 1px 3px #29272326, 0 2px 3px #2927231a;
+  font: 600 29px/1 "Songti SC", "STSong", "SimSun", "Noto Serif CJK SC", serif;
+}
+.envelope-seal::after { content: ''; position: absolute; inset: 6px; border: 1px solid #fffdf84d; border-radius: 50%; }
+.envelope-caption { margin-top: 32px; font-size: 14px; letter-spacing: .06em; }
+.envelope-prompt { margin-top: 7px; font-size: 12px; color: var(--quiet); }
+.envelope-caption, .envelope-prompt { transition: opacity .15s ease .1s; }
+.letter-envelope .envelope-skip { position: absolute; top: 28px; right: 32px; padding: 6px 0; font-size: 13px; color: var(--quiet); }
+.envelope-back, .envelope-front, .envelope-flap, .envelope-seal { transition: opacity .25s ease .6s; }
+.envelope-flap { transition: transform .28s ease, z-index 0s .2s, opacity .25s ease .6s; }
+.letter-envelope.is-opening { opacity: 0; }
+.is-opening .envelope-flap { transform: rotateX(-180deg); z-index: 1; }
+.is-opening .envelope-paper { transform: translateY(-80%); }
+.is-opening .envelope-sheet { transform: scale(1.2, 1.25); }
+.is-opening .envelope-back, .is-opening .envelope-front, .is-opening .envelope-flap, .is-opening .envelope-seal,
+.is-opening .envelope-caption, .is-opening .envelope-prompt { opacity: 0; }
+@media (max-width: 520px) {
+  .letter-envelope { padding: 24px; }
+  .envelope-seal { width: 48px; height: 48px; font-size: 25px; }
+  .envelope-recipient { font-size: 11px; }
+  .envelope-caption { font-size: 12px; margin-top: 26px; }
+  .letter-envelope .envelope-skip { top: 18px; right: 24px; }
+}
+@media (max-height: 520px) {
+  .envelope-stage { width: min(340px, calc(100vw - 64px), calc(160vh - 320px)); }
+  .envelope-caption { margin-top: 18px; }
+}
 .letter-home ::selection { color: var(--ink); background: #e7e1d8; }
 .letter-home a { color: inherit; }
 .letter-home a:focus-visible, .letter-home button:focus-visible,
@@ -58,7 +125,7 @@ html.letter-root { color-scheme: light; background: #f1eee8; scroll-padding-top:
 }
 .letter > *, .letter-heading-copy, .letter-work, .letter-history-list li > div { min-width: 0; }
 .letter-heading {
-  display: grid; grid-template-columns: minmax(0, 1fr) 76px; gap: 28px;
+  display: grid; grid-template-columns: minmax(0, 1fr) 92px; gap: 28px;
   align-items: center; padding-bottom: 28px; border-bottom: 1px solid var(--seal);
 }
 .letter-eyebrow { margin-bottom: 14px; color: var(--quiet); font-size: 12px; letter-spacing: .16em; }
@@ -66,7 +133,7 @@ html.letter-root { color-scheme: light; background: #f1eee8; scroll-padding-top:
 .letter-heading h1 span { white-space: nowrap; }
 .letter-education { margin-top: 14px; font-size: 12px; line-height: 1.85; color: var(--quiet); }
 .letter-direction { margin-top: 5px; font-size: 12px; color: var(--quiet); }
-.letter-photo { display: block; width: 76px; height: 92px; object-fit: cover; object-position: center 25%; border: 1px solid var(--rule); }
+.letter-photo { display: block; width: 92px; height: 112px !important; object-fit: cover; object-position: center 25%; border: 1px solid var(--rule); }
 .letter-opening { padding-top: 32px; }
 .letter-opening p + p { margin-top: 14px; }
 .letter-salutation { margin-bottom: 20px; font-weight: 500; }
@@ -173,8 +240,8 @@ html.letter-root { color-scheme: light; background: #f1eee8; scroll-padding-top:
   .letter-nav-shell { padding: 18px 22px 14px; font-size: 11px; }
   .letter-nav { gap: 22px; }
   .letter { width: calc(100% - 24px); margin-bottom: 12px; padding: 28px 22px 24px; }
-  .letter-heading { grid-template-columns: minmax(0, 1fr) 54px; gap: 12px; align-items: start; padding-bottom: 22px; }
-  .letter-photo { width: 54px; height: 66px; margin-top: 4px; }
+  .letter-heading { grid-template-columns: minmax(0, 1fr) 64px; gap: 12px; align-items: start; padding-bottom: 22px; }
+  .letter-photo { width: 64px; height: 78px !important; margin-top: 4px; }
   .letter-eyebrow { font-size: 11px; margin-bottom: 12px; }
   .letter-heading h1 { font-size: 26px; }
   .letter-heading h1 span { display: block; font-size: 20px; margin-top: 3px; }
@@ -195,11 +262,14 @@ html.letter-root { color-scheme: light; background: #f1eee8; scroll-padding-top:
 }
 @media (prefers-reduced-motion: reduce) {
   html.letter-root { scroll-behavior: auto; }
+  .letter-envelope, .letter-envelope::backdrop { display: none !important; }
   .letter-home *, .letter-home *::before, .letter-home *::after { animation: none !important; transition: none !important; }
 }
 @page { size: A4; margin: 12mm 14mm; }
 @media print {
   html.letter-root, .letter-home { background: white; color: black; }
+  html.envelope-active, html.envelope-active body { overflow: visible; }
+  .letter-envelope, .letter-envelope::backdrop { display: none !important; }
   .letter-home { font-size: 9pt; line-height: 1.45; min-height: auto; }
   .letter-nav-shell, .letter-skip, .letter-notes, .letter-home .ai-fab, .letter-home .ai-panel,
   .letter-home #workFrame, .letter-home #workOverlay, .letter-home #loadTip { display: none !important; }
@@ -209,7 +279,7 @@ html.letter-root { color-scheme: light; background: #f1eee8; scroll-padding-top:
   .letter-eyebrow { margin-bottom: 5px; font-size: 8pt; }
   .letter-heading h1 { font-size: 20pt; }
   .letter-heading h1 span { display: inline; font-size: inherit; white-space: nowrap; }
-  .letter-photo { width: 48px; height: 58px; margin: 0; }
+  .letter-photo { width: 48px; height: 58px !important; margin: 0; }
   .letter-education { margin-top: 5px; font-size: 8pt; line-height: 1.5; }
   .letter-direction { margin-top: 2px; font-size: 8pt; }
   .letter-opening { padding-top: 12px; font-size: 9pt; line-height: 1.55; }
