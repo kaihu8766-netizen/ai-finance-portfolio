@@ -31,11 +31,11 @@ html.envelope-active .letter-nav-shell { visibility: hidden; }
   --letter-opening: 0;
   --turn-t: clamp(0, calc((var(--letter-opening) - .05) / .55), 1);
   --turn: calc(var(--turn-t) * var(--turn-t) * (3 - 2 * var(--turn-t)));
-  --lift-t: clamp(0, calc((var(--letter-opening) - .22) / .56), 1);
+  --lift-t: clamp(0, calc((var(--letter-opening) - .05) / .57), 1);
   --lift: calc(var(--lift-t) * var(--lift-t) * (3 - 2 * var(--lift-t)));
   --unfold-t: clamp(0, calc((var(--letter-opening) - .7) / .3), 1);
   --unfold: calc(var(--unfold-t) * var(--unfold-t) * (3 - 2 * var(--unfold-t)));
-  --retreat-t: clamp(0, calc((var(--letter-opening) - .66) / .34), 1);
+  --retreat-t: clamp(0, calc((var(--letter-opening) - .60) / .40), 1);
   --retreat: calc(var(--retreat-t) * var(--retreat-t) * (3 - 2 * var(--retreat-t)));
   --envelope-drop: calc(var(--retreat) * 105dvh);
   position: fixed; inset: 0; width: 100vw; height: 100vh; height: 100dvh;
@@ -55,9 +55,13 @@ html.envelope-active .letter-nav-shell { visibility: hidden; }
   object-fit: cover; object-position: 48% 60%;
 }
 .envelope-portrait .envelope-cover { object-position: 50% 50%; }
-.envelope-photo-layer { display: none; position: absolute; inset: 0; pointer-events: none; transform: translateY(var(--envelope-drop)); opacity: calc(1 - clamp(0, calc((var(--letter-opening) - .72) / .28), 1)); }
+.envelope-photo-layer { display: none; position: absolute; inset: 0; pointer-events: none; transform: translateY(var(--envelope-drop)); opacity: calc(1 - clamp(0, calc((var(--letter-opening) - .60) / .30), 1)); }
 .envelope-art { position: absolute; width: var(--art-width); height: var(--art-height); left: var(--art-left); top: var(--art-top); background-size: 100% 100%; background-repeat: no-repeat; }
 .envelope-back-layer { z-index: 0; }
+/* The pocket mouth is its own layer: a narrow dark slot along the hinge that
+   fades in only as the flap turns, so it can never sit there as a second flap. */
+.envelope-cavity-layer { z-index: 1; }
+.envelope-cavity { opacity: calc(clamp(0, calc((var(--letter-opening) - .05) / .3), 1)); }
 .envelope-texture { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; pointer-events: none; }
 .envelope-front-layer { z-index: 3; }
 
@@ -69,7 +73,7 @@ html.envelope-active .letter-nav-shell { visibility: hidden; }
 
 .envelope-flap-back { transform: rotateY(180deg); }
 .envelope-flap-back > div { transform: scaleX(-1); filter: brightness(1.06); }
-.envelope-wax-upper { transform: translateZ(.5px); }
+.envelope-wax-upper { transform: translateZ(.5px); opacity: calc(1 - clamp(0, calc((var(--turn) - .45) / .15), 1)); }
 .envelope-wax-layer { z-index: 5; }
 .envelope-wax-lower { transform: none; }
 /* Its lower portion stays behind the front pocket; the aperture is a straight line at the hinge, so no diagonal edge can cut its text. */
@@ -77,8 +81,8 @@ html.envelope-active .letter-nav-shell { visibility: hidden; }
 .letter-envelope .envelope-moving-letter {
   position: absolute; left: 50%; width: var(--letter-width); margin: 0; text-align: start;
   top: calc(var(--letter-start) + (var(--letter-rise) - var(--letter-start)) * var(--lift) + (var(--letter-top) - var(--letter-rise)) * var(--unfold));
-  transform: translateX(-50%) scale(calc(.82 + .18 * var(--unfold))); transform-origin: center top;
-  opacity: clamp(0, calc((var(--letter-opening) - .22) / .08), 1);
+  transform: translateX(-50%); transform-origin: center top;
+  opacity: clamp(0, calc((var(--letter-opening) - .05) / .08), 1);
   box-shadow: 0 8px 28px rgba(41,39,35,calc(.12 * (1 - var(--unfold))));
 }
 .letter-envelope .envelope-skip { position: absolute; z-index: 10; top: 28px; right: 32px; padding: 6px 0; font-size: 13px; color: var(--quiet); opacity: calc(1 - var(--unfold)); }

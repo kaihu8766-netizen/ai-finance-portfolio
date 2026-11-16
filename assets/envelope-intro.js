@@ -86,14 +86,6 @@
     var clean=canvas(w,h), cc=clean.getContext('2d'); cc.drawImage(original,0,0); cc.drawImage(replacement,0,0);
     // The cavity, paper and front pocket occupy one set of source-image coordinates.
     var back=canvas(w,h), bc=back.getContext('2d'); bc.drawImage(clean,0,0);
-    // The pocket interior, not a second flap: once the flap lifts, the hole
-    // must read as dark cavity with the letter rising out of it, so the eye
-    // cannot mistake it for the flap snapping back and freezing.
-    bc.save(); polygon(bc,flap); bc.clip();
-    var tipY=Math.max.apply(null,flap.map(function(p){return p[1];}));
-    var interior=bc.createLinearGradient(0,flap[0][1],0,tipY);
-    interior.addColorStop(0,'rgba(52,36,22,0.62)'); interior.addColorStop(1,'rgba(52,36,22,0.38)');
-    bc.fillStyle=interior; bc.fillRect(0,0,w,h); bc.restore();
     var front=canvas(w,h), fc=front.getContext('2d'); fc.drawImage(clean,0,0);
     fc.globalCompositeOperation='destination-in';
     polygon(fc,(portrait?[[.1324,.113],[.868,.113],[.873,.89],[.125,.89]]:[[.166,.071],[.894,.176],[.85,.937],[.093,.813]]).map(function(p){return [p[0]*w,p[1]*h];}));fc.fill();
@@ -112,6 +104,15 @@
     // (mirrored by the scaleX(-1) on its container) instead of a photo strip
     // stretched flat, so the flipped flap keeps its paper grain.
     reverseCtx.drawImage(face,0,0);
+    // The pocket mouth: a narrow dark slot along the hinge, not the flap's
+    // shape. It lives on its own layer and fades in only as the flap turns.
+    var cavity=canvas(w,h), kc=cavity.getContext('2d');
+    var slotDepth=Math.ceil(depth*.32);
+    var slot=[a,b,[b[0]-sn*slotDepth,b[1]+cs*slotDepth],[a[0]-sn*slotDepth,a[1]+cs*slotDepth]];
+    polygon(kc,slot);
+    var mouth=kc.createLinearGradient(a[0],a[1],a[0]-sn*slotDepth,a[1]+cs*slotDepth);
+    mouth.addColorStop(0,'rgba(52,36,22,0.78)'); mouth.addColorStop(1,'rgba(52,36,22,0)');
+    kc.fillStyle=mouth; kc.fill();
     // A torn horizontal seam: the upper wax rides the flap, the lower wax slips down.
     var seam=top+box[3]*.51, upper=canvas(w,h), uc=upper.getContext('2d');
     uc.drawImage(original,0,0); uc.globalCompositeOperation='destination-in'; uc.drawImage(mask,0,0);
@@ -122,7 +123,7 @@
     var upperLocal=canvas(length,depth), ul=upperLocal.getContext('2d');
     ul.setTransform(cs,-sn,sn,cs,-a[0]*cs-a[1]*sn,a[0]*sn-a[1]*cs); ul.drawImage(upper,0,0);
     return { source:image.currentSrc, w:w,h:h,flap:flap,hinge:a,angle:angle,length:length,depth:depth,seal:[left+box[2]/2,seam],
-      back:back,front:front,face:face,reverse:reverseFace,upper:upperLocal,lower:lower };
+      back:back,front:front,face:face,reverse:reverseFace,upper:upperLocal,lower:lower,cavity:cavity };
   }
   function syncArtwork() {
     if (!image.naturalWidth || !image.naturalHeight) return;
@@ -130,7 +131,7 @@
       var portrait=image.currentSrc.indexOf('envelope-cover-mobile.webp')!==-1;
       if (!artwork || artwork.source!==image.currentSrc) {
         artwork=buildArtwork(portrait);
-        var selectors={back:'.envelope-back',front:'.envelope-front',face:'.envelope-flap-face',upper:'.envelope-wax-upper',lower:'.envelope-wax-lower'};
+        var selectors={back:'.envelope-back',cavity:'.envelope-cavity',front:'.envelope-front',face:'.envelope-flap-face',upper:'.envelope-wax-upper',lower:'.envelope-wax-lower'};
         Object.keys(selectors).forEach(function(key){var node=artwork[key];node.className='envelope-texture';document.querySelector(selectors[key]).replaceChildren(node);});
         var reverse=artwork.reverse;reverse.className='envelope-texture';
         document.querySelector('.envelope-flap-back > div').replaceChildren(reverse);
