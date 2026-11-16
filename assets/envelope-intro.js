@@ -86,7 +86,14 @@
     var clean=canvas(w,h), cc=clean.getContext('2d'); cc.drawImage(original,0,0); cc.drawImage(replacement,0,0);
     // The cavity, paper and front pocket occupy one set of source-image coordinates.
     var back=canvas(w,h), bc=back.getContext('2d'); bc.drawImage(clean,0,0);
-    bc.save(); polygon(bc,flap); bc.clip(); bc.fillStyle='rgba(88,62,35,.22)'; bc.fillRect(0,0,w,h); bc.restore();
+    // The pocket interior, not a second flap: once the flap lifts, the hole
+    // must read as dark cavity with the letter rising out of it, so the eye
+    // cannot mistake it for the flap snapping back and freezing.
+    bc.save(); polygon(bc,flap); bc.clip();
+    var tipY=Math.max.apply(null,flap.map(function(p){return p[1];}));
+    var interior=bc.createLinearGradient(0,flap[0][1],0,tipY);
+    interior.addColorStop(0,'rgba(52,36,22,0.62)'); interior.addColorStop(1,'rgba(52,36,22,0.38)');
+    bc.fillStyle=interior; bc.fillRect(0,0,w,h); bc.restore();
     var front=canvas(w,h), fc=front.getContext('2d'); fc.drawImage(clean,0,0);
     fc.globalCompositeOperation='destination-in';
     polygon(fc,(portrait?[[.1324,.113],[.868,.113],[.873,.89],[.125,.89]]:[[.166,.071],[.894,.176],[.85,.937],[.093,.813]]).map(function(p){return [p[0]*w,p[1]*h];}));fc.fill();
@@ -101,8 +108,10 @@
     faceCtx.setTransform(cs,-sn,sn,cs,-a[0]*cs-a[1]*sn,a[0]*sn-a[1]*cs); faceCtx.drawImage(clean,0,0);
     var reverseFace=canvas(length,depth), reverseCtx=reverseFace.getContext('2d');
     polygon(reverseCtx,localFlap);reverseCtx.clip();
-    var sample=portrait?[220,260,620,380]:[460,190,470,100];
-    reverseCtx.drawImage(original,sample[0],sample[1],sample[2],sample[3],0,0,length,depth);
+    // The back of a paper flap is the same paper: reuse the flap face itself
+    // (mirrored by the scaleX(-1) on its container) instead of a photo strip
+    // stretched flat, so the flipped flap keeps its paper grain.
+    reverseCtx.drawImage(face,0,0);
     // A torn horizontal seam: the upper wax rides the flap, the lower wax slips down.
     var seam=top+box[3]*.51, upper=canvas(w,h), uc=upper.getContext('2d');
     uc.drawImage(original,0,0); uc.globalCompositeOperation='destination-in'; uc.drawImage(mask,0,0);
