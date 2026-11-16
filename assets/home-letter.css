@@ -29,16 +29,14 @@ html.envelope-active .letter-nav-shell { visibility: hidden; }
 .letter-envelope[hidden], .letter-envelope:not([open]) { display: none !important; }
 .letter-envelope {
   --letter-opening: 0;
-  --turn-t: clamp(0, calc(var(--letter-opening) / .62), 1);
+  --turn-t: clamp(0, calc((var(--letter-opening) - .05) / .55), 1);
   --turn: calc(var(--turn-t) * var(--turn-t) * (3 - 2 * var(--turn-t)));
-  --lift-t: clamp(0, calc((var(--letter-opening) - .18) / .55), 1);
+  --lift-t: clamp(0, calc((var(--letter-opening) - .22) / .56), 1);
   --lift: calc(var(--lift-t) * var(--lift-t) * (3 - 2 * var(--lift-t)));
-  --unfold-t: clamp(0, calc((var(--letter-opening) - .64) / .36), 1);
+  --unfold-t: clamp(0, calc((var(--letter-opening) - .7) / .3), 1);
   --unfold: calc(var(--unfold-t) * var(--unfold-t) * (3 - 2 * var(--unfold-t)));
-  --retreat-t: clamp(0, calc((var(--letter-opening) - .58) / .42), 1);
+  --retreat-t: clamp(0, calc((var(--letter-opening) - .66) / .34), 1);
   --retreat: calc(var(--retreat-t) * var(--retreat-t) * (3 - 2 * var(--retreat-t)));
-  --crack-t: clamp(0, calc(var(--letter-opening) / .18), 1);
-  --crack: calc(var(--crack-t) * var(--crack-t) * (3 - 2 * var(--crack-t)));
   --envelope-drop: calc(var(--retreat) * 105dvh);
   position: fixed; inset: 0; width: 100vw; height: 100vh; height: 100dvh;
   max-width: none; max-height: none; margin: 0; padding: 0;
@@ -64,30 +62,30 @@ html.envelope-active .letter-nav-shell { visibility: hidden; }
 .envelope-front-layer { z-index: 3; }
 
 /* The hinge is a local rectangle whose entire top edge is the real photo seam. */
-.envelope-hinge-layer { z-index: calc(4 - clamp(0, calc((var(--letter-opening) - .332) * 200), 3)); }
+.envelope-hinge-layer { z-index: calc(4 - clamp(0, calc((var(--letter-opening) - .6) * 200), 3)); }
 .envelope-hinge { position: absolute; left: var(--hinge-left); top: var(--hinge-top); width: var(--hinge-width); height: var(--hinge-depth); transform: rotate(var(--hinge-angle)); transform-origin: 0 0; perspective: 1800px; perspective-origin: 50% 0; }
 .envelope-flap-turn { position: absolute; inset: 0; transform-origin: 50% 0; transform-style: preserve-3d; transform: rotateX(calc(var(--turn) * -158deg)); }
 .envelope-flap-face, .envelope-flap-back, .envelope-flap-back > div, .envelope-wax-upper { position: absolute; inset: 0; background-size: 100% 100%; background-repeat: no-repeat; backface-visibility: hidden; }
 
 .envelope-flap-back { transform: rotateY(180deg); }
 .envelope-flap-back > div { transform: scaleX(-1); filter: brightness(1.06); }
-.envelope-wax-upper { transform: translateY(calc(-10px * clamp(0, calc(var(--letter-opening) / .18), 1))) translateZ(.5px); opacity: calc(1 - clamp(0, calc((var(--letter-opening) - .35) / .2), 1)); }
+.envelope-wax-upper { transform: translateZ(.5px); }
 .envelope-wax-layer { z-index: 5; }
-.envelope-wax-lower { transform-origin: var(--seal-x) var(--seal-y); transform: translate(calc(24px * var(--crack)),calc(var(--seal-clearance) * var(--crack) + 40px * var(--turn))) rotate(calc(12deg * var(--turn))); opacity: calc(1 - clamp(0, calc((var(--letter-opening) - .3) / .3), 1)); }
-/* Its lower portion stays behind the V-shaped front fold, never a horizontal card crop. */
+.envelope-wax-lower { transform: none; }
+/* Its lower portion stays behind the front pocket; the aperture is a straight line at the hinge, so no diagonal edge can cut its text. */
 .envelope-extraction { position: absolute; z-index: 2; inset: 0; overflow: hidden; pointer-events: none; clip-path: var(--mouth-clip); }
 .letter-envelope .envelope-moving-letter {
   position: absolute; left: 50%; width: var(--letter-width); margin: 0; text-align: start;
   top: calc(var(--letter-start) + (var(--letter-rise) - var(--letter-start)) * var(--lift) + (var(--letter-top) - var(--letter-rise)) * var(--unfold));
   transform: translateX(-50%) scale(calc(.82 + .18 * var(--unfold))); transform-origin: center top;
-  opacity: clamp(0, calc((var(--letter-opening) - .18) / .06), 1);
+  opacity: clamp(0, calc((var(--letter-opening) - .22) / .08), 1);
   box-shadow: 0 8px 28px rgba(41,39,35,calc(.12 * (1 - var(--unfold))));
 }
 .letter-envelope .envelope-skip { position: absolute; z-index: 10; top: 28px; right: 32px; padding: 6px 0; font-size: 13px; color: var(--quiet); opacity: calc(1 - var(--unfold)); }
 .is-opening .envelope-stage { visibility: hidden; }
 .is-opening .envelope-photo-layer { display: block; }
 /* One eased clock drives the overlapping motions and all shared occlusion boundaries. */
-.letter-envelope.is-opening { animation: envelope-open-scene 3s cubic-bezier(.45,0,.55,1) both; }
+.letter-envelope.is-opening { animation: envelope-open-scene 3.4s linear both; }
 @keyframes envelope-open-scene { from { --letter-opening: 0; } to { --letter-opening: 1; } }
 @media (max-width: 520px) { .letter-envelope .envelope-skip { top: 18px; right: 24px; } }
 .letter-home ::selection { color: var(--ink); background: #e7e1d8; }

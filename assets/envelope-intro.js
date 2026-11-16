@@ -135,12 +135,10 @@
       set('hinge-width',artwork.length*scale+'px');set('hinge-depth',artwork.depth*scale+'px');set('hinge-angle',artwork.angle+'rad');
       set('seal-x',artwork.seal[0]*scale+'px');set('seal-y',artwork.seal[1]*scale+'px');
       set('seal-clearance',(Math.max.apply(null,artwork.flap.map(function(p){return p[1];}))-artwork.seal[1]+artwork.h*.06)*scale+20+'px');
-      // This V-shaped aperture travels with the pocket; no horizontal edge cuts the seal.
-      var edge=[artwork.flap[1]].concat(artwork.flap.slice(2)).concat([artwork.flap[0]]);
-      function vertex(p) {return (l+p[0]*scale)+'px calc('+(t+p[1]*scale)+'px + var(--envelope-drop))';}
-      var mouth=['0 0','100% 0','100% calc('+(t+edge[0][1]*scale)+'px + var(--envelope-drop))']
-        .concat(edge.map(vertex)).concat(['0 calc('+(t+artwork.hinge[1]*scale)+'px + var(--envelope-drop))']);
-      set('mouth-clip','polygon('+mouth.join(',')+')');
+      // Straight aperture at the hinge line: the letter rises behind the front
+      // pocket and appears line by line, so no diagonal edge can cut its text.
+      var mouthY=(t+((artwork.flap[0][1]+artwork.flap[1][1])/2)*scale)+'px';
+      set('mouth-clip','polygon(0 0, 100% 0, 100% calc('+mouthY+' + var(--envelope-drop)), 0 calc('+mouthY+' + var(--envelope-drop)))');
       set('letter-start',(t+(artwork.hinge[1]+artwork.h*.25)*scale)+'px');
     } catch (e) { finish(); }
   }
@@ -154,7 +152,7 @@
     marker=document.createComment('letter-home-position');letter.before(marker);movingLetter=letter;
     letter.classList.add('envelope-moving-letter');extraction.appendChild(letter);
     opening=true;remember();button.disabled=true;cover.classList.add('is-opening');
-    document.documentElement.classList.add('envelope-opening');timer=setTimeout(finish,3250);
+    document.documentElement.classList.add('envelope-opening');timer=setTimeout(finish,3650);
   }
   image.addEventListener('load',syncArtwork);image.addEventListener('error',finish);
   if (image.complete && !image.naturalWidth) return;
