@@ -69,11 +69,13 @@ html.envelope-active .letter-nav-shell { visibility: hidden; }
 .envelope-hinge-layer { z-index: calc(4 - clamp(0, calc((var(--letter-opening) - .6) * 200), 3)); }
 .envelope-hinge { position: absolute; left: var(--hinge-left); top: var(--hinge-top); width: var(--hinge-width); height: var(--hinge-depth); transform: rotate(var(--hinge-angle)); transform-origin: 0 0; perspective: 1800px; perspective-origin: 50% 0; }
 .envelope-flap-turn { position: absolute; inset: 0; transform-origin: 50% 0; transform-style: preserve-3d; transform: rotateX(calc(var(--turn) * -158deg)); }
-.envelope-flap-face, .envelope-flap-back, .envelope-flap-back > div, .envelope-wax-upper { position: absolute; inset: 0; background-size: 100% 100%; background-repeat: no-repeat; backface-visibility: hidden; }
+.envelope-flap-face, .envelope-flap-back, .envelope-flap-back > div { position: absolute; inset: 0; background-size: 100% 100%; background-repeat: no-repeat; backface-visibility: hidden; }
 
 .envelope-flap-back { transform: rotateY(180deg); }
-.envelope-flap-back > div { transform: scaleX(-1); filter: brightness(1.06); }
-.envelope-wax-upper { transform: translateZ(.5px); opacity: calc(1 - clamp(0, calc((var(--turn) - .45) / .15), 1)); }
+.envelope-flap-back > div { transform: scaleX(-1); filter: brightness(1.04) contrast(1.07); }
+/* The wax rides the flap and slides toward the tip as it turns, so it stays
+   visible around the edge instead of vanishing at 90 degrees. */
+.envelope-wax-upper { transform: translateZ(.5px) translateY(calc(var(--turn) * 16px)); }
 .envelope-wax-layer { z-index: 5; }
 .envelope-wax-lower { transform: none; }
 /* Its lower portion stays behind the front pocket; the aperture is a straight line at the hinge, so no diagonal edge can cut its text. */

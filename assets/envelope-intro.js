@@ -86,6 +86,27 @@
     var clean=canvas(w,h), cc=clean.getContext('2d'); cc.drawImage(original,0,0); cc.drawImage(replacement,0,0);
     // The cavity, paper and front pocket occupy one set of source-image coordinates.
     var back=canvas(w,h), bc=back.getContext('2d'); bc.drawImage(clean,0,0);
+    // The photo's own flap must not show through the front hole, or it reads as
+    // a second, frozen flap. Repaint the flap region with the body's own paper
+    // tones, sampled off-centre (clear of the seal and the title), so the hole
+    // is invisible and the pocket reads as real interior.
+    var hingeY=Math.min(flap[0][1],flap[1][1]);
+    var tipY=Math.max.apply(null,flap.map(function(p){return p[1];}));
+    var depthV=tipY-hingeY, cx=Math.round((flap[0][0]+flap[1][0])/2), off=Math.round(w*.24);
+    function avgTone(pts){ var s=[0,0,0]; pts.forEach(function(p){ var c=paperColour(p[0],p[1]); for(var k=0;k<3;k++)s[k]+=c[k]; }); return s.map(function(v){return v/pts.length;}); }
+    var y1=Math.round(tipY+depthV*.08), y2=Math.round(tipY+depthV*.38);
+    var t1=avgTone([[cx-off,y1],[cx+off,y1]]), t2=avgTone([[cx-off,y2],[cx+off,y2]]);
+    var slope=t1.map(function(v,i){ return (v-t2[i])/(y2-y1); });
+    var topTone=t1.map(function(v,i){ return Math.max(0,Math.min(255,Math.round(v+slope[i]*(y1-hingeY)))); });
+    var tipTone=t1.map(function(v,i){ return Math.max(0,Math.min(255,Math.round(v+slope[i]*(y1-tipY)))); });
+    function rgb(c){ return 'rgb('+c[0]+','+c[1]+','+c[2]+')'; }
+    bc.save(); polygon(bc,flap); bc.clip();
+    var paperGrad=bc.createLinearGradient(0,hingeY,0,tipY);
+    paperGrad.addColorStop(0,rgb(topTone)); paperGrad.addColorStop(1,rgb(tipTone));
+    bc.fillStyle=paperGrad; bc.fillRect(0,0,w,h); bc.restore();
+    // A patch of the body's own paper, for grain on the flap's back.
+    var patch=canvas(120,120), pc=patch.getContext('2d');
+    pc.drawImage(clean,cx+off,y1,120,120,0,0,120,120);
     var front=canvas(w,h), fc=front.getContext('2d'); fc.drawImage(clean,0,0);
     fc.globalCompositeOperation='destination-in';
     polygon(fc,(portrait?[[.1324,.113],[.868,.113],[.873,.89],[.125,.89]]:[[.166,.071],[.894,.176],[.85,.937],[.093,.813]]).map(function(p){return [p[0]*w,p[1]*h];}));fc.fill();
@@ -104,6 +125,10 @@
     // (mirrored by the scaleX(-1) on its container) instead of a photo strip
     // stretched flat, so the flipped flap keeps its paper grain.
     reverseCtx.drawImage(face,0,0);
+    // The wax reconstruction under the seal is smooth, so give the flap's back
+    // real paper grain from the body's own paper.
+    var pat=reverseCtx.createPattern(patch,'repeat');
+    if(pat){ reverseCtx.save(); reverseCtx.globalAlpha=.3; reverseCtx.globalCompositeOperation='overlay'; reverseCtx.fillStyle=pat; reverseCtx.fillRect(0,0,length,depth); reverseCtx.restore(); }
     // The pocket mouth: a narrow dark slot along the hinge, not the flap's
     // shape. It lives on its own layer and fades in only as the flap turns.
     var cavity=canvas(w,h), kc=cavity.getContext('2d');
