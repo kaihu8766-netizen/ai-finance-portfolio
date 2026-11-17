@@ -1,206 +1,138 @@
-/* Homepage cover only. The original photographs stay unchanged on disk. */
+/* Homepage video only. The real letter stays in the document and is never moved. */
 (function () {
   'use strict';
   var cover = document.getElementById('letterEnvelope');
-  var button = document.getElementById('envelopeOpen');
-  var image = document.getElementById('envelopeCover');
-  var extraction = document.getElementById('envelopeExtraction');
+  var video = document.getElementById('envelopeVideo');
   var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var desktop = window.matchMedia('(min-width: 769px) and (orientation: landscape)');
   var storageKey = 'portfolio-letter-opened';
-  var opening = false, timer, movingLetter, marker, artwork;
-  function remember() { try { sessionStorage.setItem(storageKey, '1'); } catch (e) {} }
   try { if (sessionStorage.getItem(storageKey) === '1') return; } catch (e) { return; }
+  function remember() { try { sessionStorage.setItem(storageKey, '1'); } catch (e) {} }
   if (motion.matches) { remember(); return; }
-  if (!cover.showModal || !window.CSS || !CSS.registerProperty) return;
-  try { CSS.registerProperty({ name: '--letter-opening', syntax: '<number>', inherits: true, initialValue: '0' }); }
-  catch (e) { return; }
+  // No sources are attached on narrow/portrait screens or without JS.
+  if (!desktop.matches || typeof cover.showModal !== 'function') return;
+
+  var state = 'loading', source = '', loadTimer, stallTimer, fadeTimer, wallTimer, frame;
+  var fadeSeconds = .5;
   function finish() {
-    if (!cover.open) return;
-    clearTimeout(timer);
+    if (state === 'done') return;
+    state = 'done';
+    [loadTimer, stallTimer, fadeTimer, wallTimer].forEach(clearTimeout);
+    cancelAnimationFrame(frame);
     remember();
-    if (movingLetter) {
-      movingLetter.classList.remove('envelope-moving-letter');
-      if (marker && marker.parentNode) marker.replaceWith(movingLetter);
-      movingLetter = marker = null;
-    }
-    cover.close();
+    var wasOpen = cover.open;
+    if (wasOpen) cover.close();
     cover.hidden = true;
-    document.documentElement.classList.remove('envelope-active', 'envelope-opening');
-    var letter = document.getElementById('letter');
-    if (letter) letter.focus({ preventScroll: true });
-  }
-  function canvas(w, h) {
-    var c = document.createElement('canvas'); c.width = Math.ceil(w); c.height = Math.ceil(h); return c;
-  }
-  function polygon(ctx, points) {
-    ctx.beginPath();
-    points.forEach(function (p, i) { if (i) ctx.lineTo(p[0], p[1]); else ctx.moveTo(p[0], p[1]); });
-    ctx.closePath();
-  }
-  function buildArtwork(portrait) {
-    var w = image.naturalWidth, h = image.naturalHeight;
-    var flap = (portrait ? [[.1324,.113],[.868,.113],[.855,.185],[.67,.48],[.5,.54],[.32,.47],[.15,.24],[.14,.18]] :
-      [[.166,.071],[.894,.176],[.872,.28],[.59,.498],[.5,.535],[.398,.458],[.192,.216],[.174,.17]])
-      .map(function (p) { return [p[0]*w, p[1]*h]; });
-    var box = portrait ? [370,760,345,350] : [566,299,308,309];
-    var original = canvas(w,h), ctx = original.getContext('2d', { willReadFrequently: true });
-    ctx.drawImage(image,0,0); var pixels = ctx.getImageData(0,0,w,h);
-    // Isolate the red wax, fill the lettering holes, and retain its uneven outline.
-    var mask = canvas(w,h), mc = mask.getContext('2d'), alpha = mc.createImageData(w,h);
-    var left = box[0], top = box[1], right = left+box[2], bottom = top+box[3];
-    for (var y=top; y<bottom; y++) {
-      var first=-1, last=-1;
-      for (var x=left; x<right; x++) {
-        var i=(y*w+x)*4, r=pixels.data[i], g=pixels.data[i+1], b=pixels.data[i+2];
-        if (r>45 && r>g*1.28 && r>b*1.3) { if (first<0) first=x; last=x; }
-      }
-      if (first>=0) for (x=first; x<=last; x++) {
-        i=(y*w+x)*4; alpha.data[i]=alpha.data[i+1]=alpha.data[i+2]=255; alpha.data[i+3]=255;
-      }
+    document.documentElement.classList.remove('envelope-active');
+    video.pause();
+    video.removeAttribute('src');
+    video.load();
+    // A failed background preload must not steal focus from the readable page.
+    if (wasOpen) {
+      var letter = document.getElementById('letter');
+      if (letter) letter.focus({ preventScroll: true });
     }
-    mc.putImageData(alpha,0,0);
-    // Reconstruct the paper under the seal, with local colour and photographic grain.
-    // Only the animated layers use this in-memory composite; both WebPs remain original.
-    var replacement = canvas(w,h), rc = replacement.getContext('2d'), paper = rc.createImageData(w,h);
-    function paperColour(cx,cy) {
-      var colour=[0,0,0],n=0;
-      for(var dy=-12;dy<=12;dy+=3) for(var dx=-12;dx<=12;dx+=3){
-        var at=((cy+dy)*w+cx+dx)*4;
-        for(var k=0;k<3;k++)colour[k]+=pixels.data[at+k];n++;
-      }
-      return colour.map(function(c){return c/n;});
-    }
-    var corners=[paperColour(left-65,top-65),paperColour(right+65,top-65),paperColour(left-65,bottom+65),paperColour(right+65,bottom+65)];
-    for (y=top-65;y<bottom+65;y++) for(x=left-65;x<right+65;x++) {
-      i=(y*w+x)*4;
-      var u=(x-left+65)/(box[2]+130),v=(y-top+65)/(box[3]+130);
-      var sample=((portrait?340+(y-top+65)%300:y)*w+(portrait?x:360+(x-left+65)%120))*4;
-      var grain=(pixels.data[sample]+pixels.data[sample+1]+pixels.data[sample+2])/3;
-      for(var k=0;k<3;k++)paper.data[i+k]=(corners[0][k]*(1-u)+corners[1][k]*u)*(1-v)+(corners[2][k]*(1-u)+corners[3][k]*u)*v+Math.max(-2,Math.min(2,(grain-205)*.1));
-      // Replace the entire old wax shadow, then feather into the surrounding paper.
-      var distance=Math.max(left-15-x,x-right-15,top-15-y,y-bottom-15,0)/50;
-      distance=Math.max(0,Math.min(1,distance));
-      paper.data[i+3]=255*(1-distance*distance*(3-2*distance));
-    }
-    rc.putImageData(paper,0,0);
-    var clean=canvas(w,h), cc=clean.getContext('2d'); cc.drawImage(original,0,0); cc.drawImage(replacement,0,0);
-    // The cavity, paper and front pocket occupy one set of source-image coordinates.
-    var back=canvas(w,h), bc=back.getContext('2d'); bc.drawImage(clean,0,0);
-    // The photo's own flap must not show through the front hole, or it reads as
-    // a second, frozen flap. Repaint the flap region with the body's own paper
-    // tones, sampled off-centre (clear of the seal and the title), so the hole
-    // is invisible and the pocket reads as real interior.
-    var hingeY=Math.min(flap[0][1],flap[1][1]);
-    var tipY=Math.max.apply(null,flap.map(function(p){return p[1];}));
-    var depthV=tipY-hingeY, cx=Math.round((flap[0][0]+flap[1][0])/2), off=Math.round(w*.24);
-    function avgTone(pts){ var s=[0,0,0]; pts.forEach(function(p){ var c=paperColour(p[0],p[1]); for(var k=0;k<3;k++)s[k]+=c[k]; }); return s.map(function(v){return v/pts.length;}); }
-    var y1=Math.round(tipY+depthV*.08), y2=Math.round(tipY+depthV*.38);
-    var t1=avgTone([[cx-off,y1],[cx+off,y1]]), t2=avgTone([[cx-off,y2],[cx+off,y2]]);
-    var slope=t1.map(function(v,i){ return (v-t2[i])/(y2-y1); });
-    var topTone=t1.map(function(v,i){ return Math.max(0,Math.min(255,Math.round(v+slope[i]*(y1-hingeY)))); });
-    var tipTone=t1.map(function(v,i){ return Math.max(0,Math.min(255,Math.round(v+slope[i]*(y1-tipY)))); });
-    function rgb(c){ return 'rgb('+c[0]+','+c[1]+','+c[2]+')'; }
-    bc.save(); polygon(bc,flap); bc.clip();
-    var paperGrad=bc.createLinearGradient(0,hingeY,0,tipY);
-    paperGrad.addColorStop(0,rgb(topTone)); paperGrad.addColorStop(1,rgb(tipTone));
-    bc.fillStyle=paperGrad; bc.fillRect(0,0,w,h); bc.restore();
-    // A patch of the body's own paper, for grain on the flap's back.
-    var patch=canvas(120,120), pc=patch.getContext('2d');
-    pc.drawImage(clean,cx+off,y1,120,120,0,0,120,120);
-    var front=canvas(w,h), fc=front.getContext('2d'); fc.drawImage(clean,0,0);
-    fc.globalCompositeOperation='destination-in';
-    polygon(fc,(portrait?[[.1324,.113],[.868,.113],[.873,.89],[.125,.89]]:[[.166,.071],[.894,.176],[.85,.937],[.093,.813]]).map(function(p){return [p[0]*w,p[1]*h];}));fc.fill();
-    fc.globalCompositeOperation='destination-out'; polygon(fc,flap); fc.fill();
-    // A real local hinge: both top corners have y=0 in this coordinate system.
-    var a=flap[0], b=flap[1], angle=Math.atan2(b[1]-a[1],b[0]-a[0]);
-    var cs=Math.cos(angle), sn=Math.sin(angle), length=Math.hypot(b[0]-a[0],b[1]-a[1]);
-    function local(p) { var dx=p[0]-a[0],dy=p[1]-a[1];return [dx*cs+dy*sn,-dx*sn+dy*cs]; }
-    var localFlap=flap.map(local), depth=Math.ceil(Math.max.apply(null,localFlap.map(function(p){return p[1];}))+4);
-    var face=canvas(length,depth), faceCtx=face.getContext('2d');
-    polygon(faceCtx,localFlap); faceCtx.clip();
-    faceCtx.setTransform(cs,-sn,sn,cs,-a[0]*cs-a[1]*sn,a[0]*sn-a[1]*cs); faceCtx.drawImage(clean,0,0);
-    var reverseFace=canvas(length,depth), reverseCtx=reverseFace.getContext('2d');
-    polygon(reverseCtx,localFlap);reverseCtx.clip();
-    // The back of a paper flap is the same paper: reuse the flap face itself
-    // (mirrored by the scaleX(-1) on its container) instead of a photo strip
-    // stretched flat, so the flipped flap keeps its paper grain.
-    reverseCtx.drawImage(face,0,0);
-    // The wax reconstruction under the seal is smooth, so give the flap's back
-    // real paper grain from the body's own paper.
-    var pat=reverseCtx.createPattern(patch,'repeat');
-    if(pat){ reverseCtx.save(); reverseCtx.globalAlpha=.3; reverseCtx.globalCompositeOperation='overlay'; reverseCtx.fillStyle=pat; reverseCtx.fillRect(0,0,length,depth); reverseCtx.restore(); }
-    // The pocket mouth: a narrow dark slot along the hinge, not the flap's
-    // shape. It lives on its own layer and fades in only as the flap turns.
-    var cavity=canvas(w,h), kc=cavity.getContext('2d');
-    var slotDepth=Math.ceil(depth*.32);
-    var slot=[a,b,[b[0]-sn*slotDepth,b[1]+cs*slotDepth],[a[0]-sn*slotDepth,a[1]+cs*slotDepth]];
-    polygon(kc,slot);
-    var mouth=kc.createLinearGradient(a[0],a[1],a[0]-sn*slotDepth,a[1]+cs*slotDepth);
-    mouth.addColorStop(0,'rgba(52,36,22,0.78)'); mouth.addColorStop(1,'rgba(52,36,22,0)');
-    kc.fillStyle=mouth; kc.fill();
-    // A torn horizontal seam: the upper wax rides the flap, the lower wax slips down.
-    var seam=top+box[3]*.51, upper=canvas(w,h), uc=upper.getContext('2d');
-    uc.drawImage(original,0,0); uc.globalCompositeOperation='destination-in'; uc.drawImage(mask,0,0);
-    uc.globalCompositeOperation='destination-in';
-    polygon(uc,[[0,0],[w,0],[w,seam],[left+box[2]*.8,seam+5],[left+box[2]*.65,seam-4],[left+box[2]*.5,seam+5],[left+box[2]*.35,seam-4],[left,seam],[0,seam]]);uc.fill();
-    var lower=canvas(w,h), lc=lower.getContext('2d'); lc.drawImage(original,0,0);
-    lc.globalCompositeOperation='destination-in'; lc.drawImage(mask,0,0); lc.globalCompositeOperation='destination-out'; lc.drawImage(upper,0,0);
-    var upperLocal=canvas(length,depth), ul=upperLocal.getContext('2d');
-    ul.setTransform(cs,-sn,sn,cs,-a[0]*cs-a[1]*sn,a[0]*sn-a[1]*cs); ul.drawImage(upper,0,0);
-    return { source:image.currentSrc, w:w,h:h,flap:flap,hinge:a,angle:angle,length:length,depth:depth,seal:[left+box[2]/2,seam],
-      back:back,front:front,face:face,reverse:reverseFace,upper:upperLocal,lower:lower,cavity:cavity };
   }
-  function syncArtwork() {
-    if (!image.naturalWidth || !image.naturalHeight) return;
+  function reveal() {
+    if (state !== 'playing') return;
+    state = 'fading';
+    clearTimeout(stallTimer);
+    cover.classList.add('is-leaving');
+    fadeTimer = setTimeout(finish, fadeSeconds * 1000);
+  }
+  function checkTail() {
+    if (state === 'playing' && Number.isFinite(video.duration) && video.duration > 0 &&
+        video.currentTime >= Math.max(0, video.duration - fadeSeconds)) reveal();
+  }
+  function watch() {
+    checkTail();
+    if (state === 'playing') frame = requestAnimationFrame(watch);
+  }
+  function showCover() {
+    if (state === 'done' || !desktop.matches || motion.matches) { finish(); return false; }
+    if (!cover.open) {
+      try {
+        cover.hidden = false;
+        cover.showModal();
+        document.documentElement.classList.add('envelope-active');
+      } catch (e) { finish(); return false; }
+    }
+    return true;
+  }
+  function start() {
+    if (state !== 'loading' || !showCover()) return;
+    var attempt = source;
     try {
-      var portrait=image.currentSrc.indexOf('envelope-cover-mobile.webp')!==-1;
-      if (!artwork || artwork.source!==image.currentSrc) {
-        artwork=buildArtwork(portrait);
-        var selectors={back:'.envelope-back',cavity:'.envelope-cavity',front:'.envelope-front',face:'.envelope-flap-face',upper:'.envelope-wax-upper',lower:'.envelope-wax-lower'};
-        Object.keys(selectors).forEach(function(key){var node=artwork[key];node.className='envelope-texture';document.querySelector(selectors[key]).replaceChildren(node);});
-        var reverse=artwork.reverse;reverse.className='envelope-texture';
-        document.querySelector('.envelope-flap-back > div').replaceChildren(reverse);
-      }
-      cover.classList.toggle('envelope-portrait',portrait);
-      var r=cover.getBoundingClientRect(), scale=Math.max(r.width/artwork.w,r.height/artwork.h);
-      var w=artwork.w*scale,h=artwork.h*scale,l=(r.width-w)*(portrait?.5:.48),t=(r.height-h)*(portrait?.5:.6);
-      function set(name,value) { cover.style.setProperty('--'+name,value); }
-      set('art-width',w+'px');set('art-height',h+'px');set('art-left',l+'px');set('art-top',t+'px');
-      set('hinge-left',artwork.hinge[0]*scale+'px');set('hinge-top',artwork.hinge[1]*scale+'px');
-      set('hinge-width',artwork.length*scale+'px');set('hinge-depth',artwork.depth*scale+'px');set('hinge-angle',artwork.angle+'rad');
-      set('seal-x',artwork.seal[0]*scale+'px');set('seal-y',artwork.seal[1]*scale+'px');
-      set('seal-clearance',(Math.max.apply(null,artwork.flap.map(function(p){return p[1];}))-artwork.seal[1]+artwork.h*.06)*scale+20+'px');
-      // Straight aperture at the hinge line: the letter rises behind the front
-      // pocket and appears line by line, so no diagonal edge can cut its text.
-      var mouthY=(t+((artwork.flap[0][1]+artwork.flap[1][1])/2)*scale)+'px';
-      set('mouth-clip','polygon(0 0, 100% 0, 100% calc('+mouthY+' + var(--envelope-drop)), 0 calc('+mouthY+' + var(--envelope-drop)))');
-      set('letter-start',(t+(artwork.hinge[1]+artwork.h*.25)*scale)+'px');
+      var playing = video.play();
+      if (playing && playing.catch) playing.catch(function (error) {
+        if (state === 'done' || source !== attempt) return;
+        if (error && error.name === 'NotSupportedError') mediaError(); else finish();
+      });
     } catch (e) { finish(); }
   }
-  function openLetter() {
-    if (opening || !image.complete || !image.naturalWidth) return;
-    syncArtwork(); if (!artwork || !cover.open) return;
-    var letter=document.getElementById('letter'); if (!letter) { finish();return; }
-    var rect=letter.getBoundingClientRect();
-    cover.style.setProperty('--letter-width',rect.width+'px');cover.style.setProperty('--letter-top',rect.top+'px');
-    cover.style.setProperty('--letter-rise',Math.min(rect.top,innerHeight*.08)+'px');
-    marker=document.createComment('letter-home-position');letter.before(marker);movingLetter=letter;
-    letter.classList.add('envelope-moving-letter');extraction.appendChild(letter);
-    opening=true;remember();button.disabled=true;cover.classList.add('is-opening');
-    document.documentElement.classList.add('envelope-opening');timer=setTimeout(finish,3650);
+  function load(file) {
+    source = file;
+    video.src = 'assets/' + file + '?v=727';
+    video.load();
   }
-  image.addEventListener('load',syncArtwork);image.addEventListener('error',finish);
-  if (image.complete && !image.naturalWidth) return;
-  button.addEventListener('click',openLetter);
-  cover.addEventListener('keydown',function(){cover.classList.add('keyboard-navigation');});
-  document.getElementById('envelopeSkip').addEventListener('click',function(e){e.preventDefault();finish();});
-  cover.addEventListener('cancel',function(e){e.preventDefault();finish();});
-  cover.addEventListener('animationend',function(e){if(opening&&e.target===cover&&e.animationName==='envelope-open-scene')finish();});
-  function reduceMotion(e){if(e.matches)finish();}
-  if(motion.addEventListener)motion.addEventListener('change',reduceMotion);else if(motion.addListener)motion.addListener(reduceMotion);
-  window.addEventListener('beforeprint',finish);
-  window.addEventListener('resize',function(){if(opening)finish();else if(cover.open)syncArtwork();});
-  window.addEventListener('pagehide',function(){if(opening)finish();});
-  try {cover.hidden=false;cover.showModal();document.documentElement.classList.add('envelope-active');syncArtwork();}
-  catch(e){cover.hidden=true;}
+  function mediaError() {
+    if (state === 'done') return;
+    // Some systems advertise HEVC but lack a usable hardware decoder.
+    if (source === 'envelope-intro.mp4' && state === 'loading') {
+      load('envelope-intro-h264.mp4');
+    } else finish();
+  }
+  function stalled() {
+    clearTimeout(stallTimer);
+    if (state === 'playing') {
+      var at = video.currentTime;
+      stallTimer = setTimeout(function () {
+        if (state === 'playing' && video.currentTime <= at + .1) finish();
+      }, 2000);
+    }
+  }
+
+  video.muted = video.defaultMuted = true;
+  video.volume = 0;
+  video.playsInline = true;
+  video.preload = 'auto';
+  video.addEventListener('loadeddata', start);
+  video.addEventListener('playing', function () {
+    if (state === 'done' || state === 'fading') return;
+    if (!showCover()) return;
+    clearTimeout(loadTimer);
+    clearTimeout(stallTimer);
+    if (state === 'playing') return;
+    state = 'playing';
+    remember();
+    wallTimer = setTimeout(finish, (Number.isFinite(video.duration) ? video.duration : 8) * 1000 + 2000);
+    watch();
+  });
+  video.addEventListener('timeupdate', checkTail);
+  video.addEventListener('ended', finish); // Never hold on the final blank-paper frame.
+  video.addEventListener('error', mediaError);
+  video.addEventListener('waiting', stalled);
+  video.addEventListener('stalled', stalled);
+  video.addEventListener('pause', function () { if (state === 'playing') finish(); });
+  cover.addEventListener('transitionend', function (e) {
+    if (state === 'fading' && e.target === cover && e.propertyName === 'opacity') finish();
+  });
+  document.getElementById('envelopeSkip').addEventListener('click', function (e) { e.preventDefault(); finish(); });
+  cover.addEventListener('cancel', function (e) { e.preventDefault(); finish(); });
+  window.addEventListener('beforeprint', finish);
+  window.addEventListener('pagehide', finish);
+  document.addEventListener('visibilitychange', function () { if (document.hidden) finish(); });
+  function preferenceChanged() { if (motion.matches || !desktop.matches) finish(); }
+  [motion, desktop].forEach(function (query) {
+    if (query.addEventListener) query.addEventListener('change', preferenceChanged);
+    else if (query.addListener) query.addListener(preferenceChanged);
+  });
+  // While the video preloads, the letter remains readable and interactive.
+  // If the visitor starts reading, a late load must not interrupt them.
+  function readingStarted() { if (state === 'loading' && !cover.open) finish(); }
+  document.addEventListener('pointerdown', readingStarted, { capture: true, passive: true });
+  document.addEventListener('keydown', readingStarted, true);
+  document.addEventListener('wheel', readingStarted, { passive: true });
+  loadTimer = setTimeout(finish, 3000);
+  load(video.canPlayType('video/mp4; codecs="hvc1.1.6.L93.B0"') ? 'envelope-intro.mp4' : 'envelope-intro-h264.mp4');
 })();
