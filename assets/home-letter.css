@@ -22,78 +22,26 @@ html.letter-root { color-scheme: light; background: #f1eee8; scroll-padding-top:
   overflow-x: visible;
 }
 .letter-home::before, .letter-home::after { content: none; }
-/* JS alone activates the cover. The letter is the default, including no-JS visits. */
+/* JS alone attaches a video source and activates the cover after it is ready. */
 html.envelope-active, html.envelope-active body { overflow: hidden; }
-html.envelope-active .letter-nav-shell { visibility: hidden; }
 #letter:focus { outline: none; }
 .letter-envelope[hidden], .letter-envelope:not([open]) { display: none !important; }
 .letter-envelope {
-  --letter-opening: 0;
-  --turn-t: clamp(0, calc((var(--letter-opening) - .05) / .55), 1);
-  --turn: calc(var(--turn-t) * var(--turn-t) * (3 - 2 * var(--turn-t)));
-  --lift-t: clamp(0, calc((var(--letter-opening) - .05) / .57), 1);
-  --lift: calc(var(--lift-t) * var(--lift-t) * (3 - 2 * var(--lift-t)));
-  --unfold-t: clamp(0, calc((var(--letter-opening) - .7) / .3), 1);
-  --unfold: calc(var(--unfold-t) * var(--unfold-t) * (3 - 2 * var(--unfold-t)));
-  --retreat-t: clamp(0, calc((var(--letter-opening) - .60) / .40), 1);
-  --retreat: calc(var(--retreat-t) * var(--retreat-t) * (3 - 2 * var(--retreat-t)));
-  --envelope-drop: calc(var(--retreat) * 105dvh);
   position: fixed; inset: 0; width: 100vw; height: 100vh; height: 100dvh;
-  max-width: none; max-height: none; margin: 0; padding: 0;
-  display: block; overflow: hidden; border: 0;
-  background: rgba(207,196,184,calc(1 - var(--retreat))); color: var(--ink); font: inherit;
+  max-width: none; max-height: none; margin: 0; padding: 0; border: 0;
+  display: block; overflow: hidden; background: #d5cabb; color: var(--ink); font: inherit;
+  opacity: 1; transition: opacity .5s ease;
 }
 .letter-envelope::backdrop { background: transparent; }
-.envelope-stage, .envelope-open, .envelope-open picture { display: block; width: 100%; height: 100%; }
-.envelope-stage { position: relative; }
-.envelope-open { position: relative; padding: 0; border: 0; background: transparent; color: inherit; font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
-.letter-home .envelope-open:focus-visible { outline: none; }
-.letter-home .keyboard-navigation .envelope-open:focus-visible { outline: 2px solid var(--quiet); outline-offset: -6px; }
-.envelope-open:disabled { opacity: 1; color: inherit; cursor: default; }
-.letter-envelope .envelope-cover {
-  display: block; width: 100%; height: 100% !important; max-width: none !important;
-  object-fit: cover; object-position: 48% 60%;
+.envelope-video { display: block; width: 100%; height: 100%; object-fit: contain; background: #d5cabb; }
+.letter-envelope.is-leaving { opacity: 0; }
+.letter-envelope .envelope-skip {
+  position: absolute; z-index: 1; top: 28px; right: 32px; padding: 6px 0;
+  font-size: 13px; color: var(--quiet);
 }
-.envelope-portrait .envelope-cover { object-position: 50% 50%; }
-.envelope-photo-layer { display: none; position: absolute; inset: 0; pointer-events: none; transform: translateY(var(--envelope-drop)); opacity: calc(1 - clamp(0, calc((var(--letter-opening) - .60) / .30), 1)); }
-.envelope-art { position: absolute; width: var(--art-width); height: var(--art-height); left: var(--art-left); top: var(--art-top); background-size: 100% 100%; background-repeat: no-repeat; }
-.envelope-back-layer { z-index: 0; }
-/* The pocket mouth is its own layer: a narrow dark slot along the hinge that
-   fades in only as the flap turns, so it can never sit there as a second flap. */
-.envelope-cavity-layer { z-index: 1; }
-.envelope-cavity { opacity: calc(clamp(0, calc((var(--letter-opening) - .05) / .3), 1)); }
-.envelope-texture { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; pointer-events: none; }
-.envelope-front-layer { z-index: 3; }
-
-/* The hinge is a local rectangle whose entire top edge is the real photo seam. */
-.envelope-hinge-layer { z-index: calc(4 - clamp(0, calc((var(--letter-opening) - .6) * 200), 3)); }
-.envelope-hinge { position: absolute; left: var(--hinge-left); top: var(--hinge-top); width: var(--hinge-width); height: var(--hinge-depth); transform: rotate(var(--hinge-angle)); transform-origin: 0 0; perspective: 1800px; perspective-origin: 50% 0; }
-.envelope-flap-turn { position: absolute; inset: 0; transform-origin: 50% 0; transform-style: preserve-3d; transform: rotateX(calc(var(--turn) * -158deg)); }
-.envelope-flap-face, .envelope-flap-back, .envelope-flap-back > div { position: absolute; inset: 0; background-size: 100% 100%; background-repeat: no-repeat; backface-visibility: hidden; }
-
-.envelope-flap-back { transform: rotateY(180deg); }
-.envelope-flap-back > div { transform: scaleX(-1); filter: brightness(1.04) contrast(1.07); }
-/* The wax rides the flap and slides toward the tip as it turns, so it stays
-   visible around the edge instead of vanishing at 90 degrees. */
-.envelope-wax-upper { transform: translateZ(.5px) translateY(calc(var(--turn) * 16px)); }
-.envelope-wax-layer { z-index: 5; }
-.envelope-wax-lower { transform: none; }
-/* Its lower portion stays behind the front pocket; the aperture is a straight line at the hinge, so no diagonal edge can cut its text. */
-.envelope-extraction { position: absolute; z-index: 2; inset: 0; overflow: hidden; pointer-events: none; clip-path: var(--mouth-clip); }
-.letter-envelope .envelope-moving-letter {
-  position: absolute; left: 50%; width: var(--letter-width); margin: 0; text-align: start;
-  top: calc(var(--letter-start) + (var(--letter-rise) - var(--letter-start)) * var(--lift) + (var(--letter-top) - var(--letter-rise)) * var(--unfold));
-  transform: translateX(-50%); transform-origin: center top;
-  opacity: clamp(0, calc((var(--letter-opening) - .05) / .08), 1);
-  box-shadow: 0 8px 28px rgba(41,39,35,calc(.12 * (1 - var(--unfold))));
+@media (max-width: 768px), (orientation: portrait) {
+  .letter-envelope, .letter-envelope::backdrop { display: none !important; }
 }
-.letter-envelope .envelope-skip { position: absolute; z-index: 10; top: 28px; right: 32px; padding: 6px 0; font-size: 13px; color: var(--quiet); opacity: calc(1 - var(--unfold)); }
-.is-opening .envelope-stage { visibility: hidden; }
-.is-opening .envelope-photo-layer { display: block; }
-/* One eased clock drives the overlapping motions and all shared occlusion boundaries. */
-.letter-envelope.is-opening { animation: envelope-open-scene 3.4s linear both; }
-@keyframes envelope-open-scene { from { --letter-opening: 0; } to { --letter-opening: 1; } }
-@media (max-width: 520px) { .letter-envelope .envelope-skip { top: 18px; right: 24px; } }
 .letter-home ::selection { color: var(--ink); background: #e7e1d8; }
 .letter-home a { color: inherit; }
 .letter-home a:focus-visible, .letter-home button:focus-visible,
