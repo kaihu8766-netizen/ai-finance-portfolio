@@ -115,6 +115,11 @@
     triggerOpen();
   });
 
+  // Clicking anywhere on the cover opens the letter.
+  cover.addEventListener('click', function () {
+    triggerOpen();
+  });
+
   if (skipBtn) {
     skipBtn.addEventListener('click', function (e) {
       e.preventDefault();
