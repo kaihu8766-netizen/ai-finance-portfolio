@@ -79,9 +79,6 @@ html.envelope-opening .letter {
   background: rgba(255, 253, 248, .72); border: 1px solid rgba(108, 103, 95, .2);
   border-radius: 999px; backdrop-filter: blur(4px);
 }
-@media (max-width: 768px), (orientation: portrait) {
-  .letter-envelope, .letter-envelope::backdrop { display: none !important; }
-}
 .letter-home ::selection { color: var(--ink); background: #e7e1d8; }
 .letter-home a { color: inherit; }
 .letter-home a:focus-visible, .letter-home button:focus-visible,

@@ -8,7 +8,7 @@
   if (!cover || !openBtn || !image) return;
 
   var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var desktop = window.matchMedia('(min-width: 769px) and (orientation: landscape)');
+  var portrait = window.matchMedia('(orientation: portrait)');
   var storageKey = 'portfolio-letter-opened';
 
   try {
@@ -26,8 +26,15 @@
     return;
   }
 
-  // No image is fetched on narrow/portrait screens or browsers without <dialog>.
-  if (!desktop.matches || typeof cover.showModal !== 'function') return;
+  // No image is fetched on browsers without <dialog>.
+  if (typeof cover.showModal !== 'function') return;
+
+  // Portrait screens get the tall mobile cover; landscape gets the desktop cover.
+  function pickCover() {
+    return portrait.matches
+      ? { src: 'assets/envelope-cover-mobile.webp?v=729', width: 1080, height: 1920 }
+      : { src: 'assets/envelope-cover.webp?v=729', width: 1440, height: 960 };
+  }
 
   var state = 'loading'; // 'loading' -> 'ready' -> 'fading' -> 'done'
   var loadTimer = null;
@@ -75,7 +82,7 @@
   }
 
   function showCover() {
-    if (state !== 'loading' || !desktop.matches || motion.matches) {
+    if (state !== 'loading' || motion.matches) {
       finish();
       return;
     }
@@ -130,12 +137,21 @@
   window.addEventListener('pagehide', finish);
 
   function preferenceChanged() {
-    if (motion.matches || !desktop.matches) finish();
+    if (motion.matches) finish();
   }
-  [motion, desktop].forEach(function (query) {
-    if (query.addEventListener) query.addEventListener('change', preferenceChanged);
-    else if (query.addListener) query.addListener(preferenceChanged);
-  });
+  if (motion.addEventListener) motion.addEventListener('change', preferenceChanged);
+  else if (motion.addListener) motion.addListener(preferenceChanged);
+
+  // If the visitor rotates before the cover finishes loading, swap to the matching cover.
+  function orientationChanged() {
+    if (state !== 'loading') return;
+    var choice = pickCover();
+    image.width = choice.width;
+    image.height = choice.height;
+    image.src = choice.src;
+  }
+  if (portrait.addEventListener) portrait.addEventListener('change', orientationChanged);
+  else if (portrait.addListener) portrait.addListener(orientationChanged);
 
   // If the visitor starts reading before the image finishes loading, do not interrupt them.
   function readingStarted() {
@@ -147,5 +163,8 @@
 
   // Fallback timeout: if image takes longer than 2.5s, go straight to the letter
   loadTimer = setTimeout(finish, 2500);
-  image.src = 'assets/envelope-cover.webp?v=728';
+  var initial = pickCover();
+  image.width = initial.width;
+  image.height = initial.height;
+  image.src = initial.src;
 })();
