@@ -22,7 +22,9 @@ html.letter-root { color-scheme: light; background: #f1eee8; scroll-padding-top:
   overflow-x: visible;
 }
 .letter-home::before, .letter-home::after { content: none; }
-/* JS alone attaches the cover image and activates the dialog after it is ready. */
+/* The head script prevents letter flash while JS prepares the cover dialog. */
+html.envelope-pending, html.envelope-pending body { background: #dbd3c5; overflow: hidden; }
+html.envelope-pending body > *:not(#letterEnvelope) { visibility: hidden; }
 html.envelope-active, html.envelope-active body { overflow: hidden; }
 #letter:focus { outline: none; }
 .letter-envelope[hidden], .letter-envelope:not([open]) { display: none !important; }
@@ -268,6 +270,8 @@ html.envelope-opening .letter {
 @page { size: A4; margin: 12mm 14mm; }
 @media print {
   html.letter-root, .letter-home { background: white; color: black; }
+  html.envelope-pending, html.envelope-pending body { overflow: visible; }
+  html.envelope-pending body > *:not(#letterEnvelope) { visibility: visible; }
   html.envelope-active, html.envelope-active body { overflow: visible; }
   .letter-envelope, .letter-envelope::backdrop { display: none !important; }
   .letter-home { font-size: 9pt; line-height: 1.45; min-height: auto; }

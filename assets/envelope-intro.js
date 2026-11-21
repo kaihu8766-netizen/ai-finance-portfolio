@@ -1,19 +1,30 @@
 /* Homepage envelope cover only. The real letter stays in the document and is never moved. */
 (function () {
   'use strict';
+  function clearPending() {
+    document.documentElement.classList.remove('envelope-pending');
+  }
+
   var cover = document.getElementById('letterEnvelope');
   var openBtn = document.getElementById('envelopeOpen');
   var image = document.getElementById('envelopeImage');
   var skipBtn = document.getElementById('envelopeSkip');
-  if (!cover || !openBtn || !image) return;
+  if (!cover || !openBtn || !image) {
+    clearPending();
+    return;
+  }
 
   var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   var portrait = window.matchMedia('(orientation: portrait)');
   var storageKey = 'portfolio-letter-opened';
 
   try {
-    if (sessionStorage.getItem(storageKey) === '1') return;
+    if (sessionStorage.getItem(storageKey) === '1') {
+      clearPending();
+      return;
+    }
   } catch (e) {
+    clearPending();
     return;
   }
 
@@ -22,12 +33,16 @@
   }
 
   if (motion.matches) {
+    clearPending();
     remember();
     return;
   }
 
-  // No image is fetched on browsers without <dialog>.
-  if (typeof cover.showModal !== 'function') return;
+  // Browsers without <dialog> go straight to the letter.
+  if (typeof cover.showModal !== 'function') {
+    clearPending();
+    return;
+  }
 
   // Portrait screens get the tall mobile cover; landscape gets the desktop cover.
   function pickCover() {
@@ -48,6 +63,7 @@
 
   // Immediate teardown (used on skip, Esc, load error, or after fade completes)
   function finish() {
+    clearPending();
     if (state === 'done') return;
     state = 'done';
     clearTimeout(loadTimer);
@@ -82,7 +98,9 @@
   }
 
   function showCover() {
-    if (state !== 'loading' || motion.matches) {
+    // The head-script safety timeout may already have released the letter.
+    if (state !== 'loading' || motion.matches ||
+        !document.documentElement.classList.contains('envelope-pending')) {
       finish();
       return;
     }
@@ -90,6 +108,7 @@
     try {
       cover.hidden = false;
       cover.showModal();
+      clearPending();
       document.documentElement.classList.add('envelope-active');
       state = 'ready';
       openBtn.focus({ preventScroll: true });
